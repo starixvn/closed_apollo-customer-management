@@ -114,10 +114,6 @@ namespace Fanex.ApolloCMS.Core.Services
                     MenuItem menu = menuList.FirstOrDefault<MenuItem>(m => m.Url.StartsWith(menuURL));
                     return menu;
                 }
-                else
-                {
-                    return null;
-                }
             }
             catch (Exception ex)
             {
@@ -142,10 +138,6 @@ namespace Fanex.ApolloCMS.Core.Services
                 {
                     MenuItem menu = AppSession.CurrentUserMenu.FirstOrDefault<MenuItem>(m => m.Url.StartsWith(menuURL));
                     return menu.Name;
-                }
-                else
-                {
-                    return null;
                 }
             }
             catch (Exception ex)

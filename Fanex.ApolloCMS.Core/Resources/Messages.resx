@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ChangedPassword" xml:space="preserve">
-    <value>The password was changed successfully!</value>
+    <value>The password has been changed successfully!</value>
   </data>
   <data name="ChangedProfile" xml:space="preserve">
-    <value>The profile was changed successfully!</value>
+    <value>The profile has been changed successfully!</value>
   </data>
   <data name="ConfirmPasswordCannotEmpty" xml:space="preserve">
     <value>Confirm password cannot be empty.</value>
@@ -132,7 +132,7 @@
   <data name="InvalidEmail" xml:space="preserve">
     <value>Invalid email.</value>
   </data>
-  <data name="NewPasswordConnotEmpty" xml:space="preserve">
+  <data name="NewPasswordCannotEmpty" xml:space="preserve">
     <value>New password cannot be empty.</value>
   </data>
   <data name="NoInformationAvailable" xml:space="preserve">
@@ -144,7 +144,7 @@
   <data name="PasswordDoesNotMatch" xml:space="preserve">
     <value>The confirm password does not match with the new password.</value>
   </data>
-  <data name="PassWordMinLengthError" xml:space="preserve">
+  <data name="PasswordMinLengthError" xml:space="preserve">
     <value>The password must have at least 6 characters.</value>
   </data>
   <data name="WelcomeMessage" xml:space="preserve">

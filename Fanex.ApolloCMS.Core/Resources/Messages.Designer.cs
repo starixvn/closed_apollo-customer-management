@@ -61,7 +61,7 @@ namespace Fanex.ApolloCMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The password was changed successfully!.
+        ///   Looks up a localized string similar to The password has been changed successfully!.
         /// </summary>
         public static string ChangedPassword {
             get {
@@ -70,7 +70,7 @@ namespace Fanex.ApolloCMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The profile was changed successfully!.
+        ///   Looks up a localized string similar to The profile has been changed successfully!.
         /// </summary>
         public static string ChangedProfile {
             get {
@@ -108,9 +108,9 @@ namespace Fanex.ApolloCMS.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to New password cannot be empty..
         /// </summary>
-        public static string NewPasswordConnotEmpty {
+        public static string NewPasswordCannotEmpty {
             get {
-                return ResourceManager.GetString("NewPasswordConnotEmpty", resourceCulture);
+                return ResourceManager.GetString("NewPasswordCannotEmpty", resourceCulture);
             }
         }
         
@@ -144,9 +144,9 @@ namespace Fanex.ApolloCMS.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The password must have at least 6 characters..
         /// </summary>
-        public static string PassWordMinLengthError {
+        public static string PasswordMinLengthError {
             get {
-                return ResourceManager.GetString("PassWordMinLengthError", resourceCulture);
+                return ResourceManager.GetString("PasswordMinLengthError", resourceCulture);
             }
         }
         

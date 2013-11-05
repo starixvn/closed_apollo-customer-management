@@ -28,11 +28,11 @@ namespace Fanex.ApolloCMS.Core.Constants
         public const string TwoDecimalDigitPercentFormat = ".00%";
         public const string SpParamsSeperator = ",";
         public const string ViewIPVN = "ViewIPVN";
-        public const string CurrentLogInUser = "Fanex.ApolloParlayRMS.Core.Contants.AppSession.CurrentLogInUser";
-        public const string CurrentUserMenu = "Fanex.ApolloParlayRMS.Core.Contants.AppSession.CurrentUserMenu";
-        public const string CurrentUserRoleAcess = "Fanex.ApolloParlayRMS.Core.Contants.AppSession.CurrentUserRoleAccess";
-        public const string CurrentWorkingOnMenu = "Fanex.ApolloParlayRMS.Core.Contants.AppSession.CurrentWorkingOnMenu";
-        public const string IsTackedMenu = "Fanex.ApolloParlayRMS.Core.Contants.AppSession.IsTrackedMenu";
-        public const string CurrentActionName = "Fanex.ApolloParlayRMS.Core.Contants.AppSession.CurrentActionName";
+        public const string CurrentLogInUser = "Fanex.ApolloCMS.Core.Contants.AppSession.CurrentLogInUser";
+        public const string CurrentUserMenu = "Fanex.ApolloCMS.Core.Contants.AppSession.CurrentUserMenu";
+        public const string CurrentUserRoleAcess = "Fanex.ApolloCMS.Core.Contants.AppSession.CurrentUserRoleAccess";
+        public const string CurrentWorkingOnMenu = "Fanex.ApolloCMS.Core.Contants.AppSession.CurrentWorkingOnMenu";
+        public const string IsTackedMenu = "Fanex.ApolloCMS.Core.Contants.AppSession.IsTrackedMenu";
+        public const string CurrentActionName = "Fanex.ApolloCMS.Core.Contants.AppSession.CurrentActionName";
     }
 }
