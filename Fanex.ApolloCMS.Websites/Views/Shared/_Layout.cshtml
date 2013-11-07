@@ -105,11 +105,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-xs-9 col-sm-9 col-md-9 mainContent"></div>
+			<div class="col-xs-9 col-sm-9 col-md-9 mainContent">
+				@RenderBody()
+			</div>
 		</div>
 	</div>
 	
-	@RenderBody()
+	
 	@Html.Hidden("RootURL", Url.Content("~/"))
 	@Scripts.Render("~/scripts/commonJS")
 	@RenderSection("Foot", false)
