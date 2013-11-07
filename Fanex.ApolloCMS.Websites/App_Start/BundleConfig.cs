@@ -8,109 +8,89 @@
 
 namespace Fanex.ApolloCMS.Websites
 {
-    using System.Diagnostics.CodeAnalysis;
-    using System.Web;
-    using System.Web.Optimization;
-    using BundleTransformer.Core.Orderers;
-    using BundleTransformer.Core.Transformers;
+	using System.Diagnostics.CodeAnalysis;
+	using System.Web;
+	using System.Web.Optimization;
+	using BundleTransformer.Core.Orderers;
+	using BundleTransformer.Core.Transformers;
 
-    /// <summary>
-    /// Bundle Configuration.
-    /// </summary>
-    public class BundleConfig
-    {
-        /// <summary>
-        /// Registers the bundles.
-        /// </summary>
-        /// <param name="bundles">The bundle collections.</param>
-        public static void RegisterBundles(BundleCollection bundles)
-        {
-            RegisterCommonBundles(bundles);
-        }
+	/// <summary>
+	/// Bundle Configuration.
+	/// </summary>
+	public class BundleConfig
+	{
+		/// <summary>
+		/// Registers the bundles.
+		/// </summary>
+		/// <param name="bundles">The bundle collections.</param>
+		public static void RegisterBundles(BundleCollection bundles)
+		{
+			RegisterCommonBundles(bundles);
+		}
 
-        /// <summary>
-        /// Registers the common bundles.
-        /// </summary>
-        /// <param name="bundles">The bundle collection.</param>
-        private static void RegisterCommonBundles(BundleCollection bundles)
-        {
-            bundles.AddAndInclude(
-                "~/Themes/Styles",
-                "~/Content/themes/reset.css",
-                "~/Content/themes/jquery-ui/jquery-ui-1.8.23.smoothness.css",
-                "~/Scripts/lib/tipsy/tipsy-1.0.0.css",
-                "~/Scripts/lib/msgbox/msgbox-0.0.1.css",
-                "~/Scripts/lib/Fanex.Grid/Fanex.Grid.css",
-                "~/Scripts/lib/Fanex.Grid/Fanex.Pagination.css",
-                "~/Scripts/lib/Multiselect/jquery.multiselect.css");
+		/// <summary>
+		/// Registers the common bundles.
+		/// </summary>
+		/// <param name="bundles">The bundle collection.</param>
+		private static void RegisterCommonBundles(BundleCollection bundles)
+		{
+			bundles.AddAndInclude(
+				"~/site/layout",
+				"~/content/bootstrap/css/bootstrap.css",
+				"~/content/site/layout.less");
 
-            bundles.AddAndInclude(
-                "~/Themes/Layout",
-                "~/Content/themes/layout/layout.less");
-            bundles.Add(new ScriptBundle("~/Scripts/Jquery").Include(
-                "~/Scripts/lib/html5-libs/head.js",
-                "~/Scripts/lib/jQuery/jquery-1.8.2.js"));
+			bundles.Add(new ScriptBundle("~/scripts/headjs").Include(
+				"~/scripts/lib/html5-libs/head.js"));
 
-            bundles.Add(new ScriptBundle("~/Scripts/CommonJS").Include(
-                "~/Scripts/lib/html5-libs/head.js",
-                "~/Scripts/lib/jQuery/jquery-1.8.2.js",
-                "~/Scripts/lib/jQuery/jquery.easing.1.3.js",
-                "~/Scripts/lib/jQuery/jquery-ui-1.8.24.js",
-                "~/Scripts/lib/jQuery/jquery.unobtrusive-ajax.js",
-                "~/Scripts/lib/jQuery/jquery.validate*",
-                "~/Scripts/lib/jQuery/jquery.cookie.js",
-                "~/Scripts/lib/tipsy/tipsy-1.0.0.js",
-                "~/Scripts/lib/msgbox/msgbox-0.0.1.js",
-                "~/Scripts/lib/Namespace.js",
-                "~/Scripts/ParlayRMS.js",
-                "~/Scripts/_Layout.js",
-                "~/Scripts/Validator.js",
-                "~/Scripts/lib/Fanex.Grid/moment.js",
-                "~/Scripts/lib/Fanex.Grid/numeral.js",
-                "~/Scripts/lib/Fanex.Grid/Fanex.Grid.js",
-                "~/Scripts/lib/Fanex.Grid/Fanex.Pagination.js",
-                "~/Scripts/lib/Multiselect/jquery.multiselect.js"));
-        }
-    }
+			bundles.Add(new ScriptBundle("~/scripts/commonJS").Include(
+				"~/scripts/lib/jQuery/jquery-1.8.2.js",
+				"~/scripts/lib/jQuery/jquery.easing.1.3.js",
+				"~/scripts/lib/jQuery/jquery-ui-1.8.24.js",
+				"~/scripts/lib/jQuery/jquery.unobtrusive-ajax.js",
+				"~/scripts/lib/jQuery/jquery.validate*",
+				"~/scripts/lib/jQuery/jquery.cookie.js",
+				"~/content/bootstrap/js/bootstrap.js"));
+		}
+	}
 
-    /// <summary>
-    /// Bundle Collection extension.
-    /// </summary>
-    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification = "Need to review here.")]
-    internal static class BundleExtensions
-    {
-        /// <summary>
-        /// Creates a bundle, include the virtual paths to the created bundle, 
-        /// and add it to the bundle collection.
-        /// </summary>
-        /// <param name="bundles">The bundle collection which the virtual paths are included.</param>
-        /// <param name="bundleVirtualPath">Virtual path of the created bundle.</param>
-        /// <param name="virtualPaths">The virtual paths that needed to add to bundle collection.</param>
-        public static void AddAndInclude(
-            this BundleCollection bundles,
-            string bundleVirtualPath,
-            params string[] virtualPaths)
-        {
-            bundles.Add(new Bundle(bundleVirtualPath)
-            {
-                Transforms = { new CssTransformer(), new CssMinify() },
-                Orderer = new NullOrderer()
-            }.Include(virtualPaths));
-        }
+	/// <summary>
+	/// Bundle Collection extension.
+	/// </summary>
+	[SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification = "Need to review here.")]
+	internal static class BundleExtensions
+	{
+		/// <summary>
+		/// Creates a bundle, include the virtual paths to the created bundle, 
+		/// and add it to the bundle collection.
+		/// </summary>
+		/// <param name="bundles">The bundle collection which the virtual paths are included.</param>
+		/// <param name="bundleVirtualPath">Virtual path of the created bundle.</param>
+		/// <param name="virtualPaths">The virtual paths that needed to add to bundle collection.</param>
+		public static void AddAndInclude(
+			this BundleCollection bundles,
+			string bundleVirtualPath,
+			params string[] virtualPaths)
+		{
+			bundles.Add(new Bundle(bundleVirtualPath)
+			{
+				Transforms = { new CssTransformer(), new CssMinify() },
+				Orderer = new NullOrderer()
+			}.Include(virtualPaths));
+		}
 
-        /// <summary>
-        /// Gets relative path from absolute path.
-        /// </summary>
-        /// <param name="context">The context using to get the path.</param>
-        /// <param name="path">The absolute path.</param>
-        /// <returns>The relative path.</returns>
-        public static string RelativeFromAbsolutePath(this HttpContextBase context, string path)
-        {
-            var request = context.Request;
-            var applicationPath = request.PhysicalApplicationPath;
-            var virtualDir = request.ApplicationPath;
-            virtualDir = virtualDir == "/" ? virtualDir : (virtualDir + "/");
-            return path.Replace(applicationPath, virtualDir).Replace(@"\", "/");
-        }
-    }
+		/// <summary>
+		/// Gets relative path from absolute path.
+		/// </summary>
+		/// <param name="context">The context using to get the path.</param>
+		/// <param name="path">The absolute path.</param>
+		/// <returns>The relative path.</returns>
+		public static string RelativeFromAbsolutePath(this HttpContextBase context, string path)
+		{
+			var request = context.Request;
+			var applicationPath = request.PhysicalApplicationPath;
+			var virtualDir = request.ApplicationPath;
+			virtualDir = virtualDir == "/" ? virtualDir : (virtualDir + "/");
+			return path.Replace(applicationPath, virtualDir).Replace(@"\", "/");
+		}
+	}
 }

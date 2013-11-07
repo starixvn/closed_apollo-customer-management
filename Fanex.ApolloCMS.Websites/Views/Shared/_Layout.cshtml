@@ -13,50 +13,105 @@
 	<link rel="shortcut icon" href="~/favicon.ico" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<!--[if lt IE 9]><script src="~/Scripts/lib/html5-libs/html5shiv.min.js" type="text/javascript"></script><![endif]-->
-	@Styles.Render("~/Themes/Styles")
-	@Styles.Render("~/Themes/Layout")
-	@Scripts.Render("~/Scripts/Jquery")
 	
+	@Styles.Render("~/site/layout")
+	@Scripts.Render("~/scripts/headjs")
 	@if (ViewBag.ViewFlags != null && ViewBag.ViewFlags.IsReCheckin)
-	{
+ {
 		<script src="~/Areas/UserLogin/scripts/ReCheckIn.js" type="text/javascript"></script>
-	}
+ }
 	@RenderSection("Head", false)
 </head>
 <body>
-	<header class="header">
-		<div class="logo">
-			<a href="~/?ref=logo">@ViewLang.CMS</a>
-			@if (ViewBag.ViewFlags != null && !ViewBag.ViewFlags.IsLive)
-			{ <div class="uat"> {@ViewResources.UAT} </div> }
-		</div>
-		@Html.Action("_Menu", new RouteValueDictionary(new { controller = "Home", area = "" }))
-		<div class="user-info">
-			<div class="greeting">
-				<h2>Howdy, @HttpContext.Current.User.Identity.Name
-					<i class="icon-chevron-down"></i>
-				</h2>
-				<ul>
-					<li>@Html.ActionLink(ViewResources.Profile, "UserProfile", "User", new { Area = "UserControl" }, new { })</li>
-					<li>@Html.ActionLink(ViewResources.Change_Password, "ChangePassword", "User", new { Area = "UserControl" }, new { })</li>
-					<li>@Html.ActionLink(ViewResources.Sign_Out, "LogOut", "Login", new { Area = "UserLogin" }, new { })</li>
+	<div class="container page">
+		<div class="row header">
+			<div class="col-xs-3 col-sm-3 col-md-3 search">
+				<ul class="row searc-container list-unstyled">
+					<li class="selType">
+						<select>
+							<option value="0">Agent</option>
+							<option value="0">Member</option>
+						</select>
+					</li>
+					<li>
+						<input type="text" class="txtSearch" name="username" placeholder="Input an username..."/>
+					</li>
+					<li>
+						<div class="col-md-2 treeview"><span class="icon-treeview"></span></div>
+					</li>
 				</ul>
 			</div>
+			<div class="col-xs-9 col-sm-9 col-md-9 rightHeader">
+				<div class="col-sm-9 col-md-9">
+					<ul class="mainMenu list-unstyled">
+						<li><a href="#">Message</a></li>
+						<li>Shareholder Bet Limit</li>
+						<li><a href="#">Check User By IP</a></li>
+						<li><a href="#">View Log</a></li>
+					</ul>
+				</div>
+				<div class="col-sm-3 col-md-3">
+					<div class="userInfo pull-right">
+						<div class="user"> Useraccount001 <span class="icon-config"></span>
+							<ul class="list-unstyled list-config">
+								<li><a href="#"><span class="glyphicon glyphicon-edit icon-changePass"></span>Change password</a></li>
+								<li><a href="#"><span class="glyphicon glyphicon-off"></span>Sign out</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-	</header>
-
-	<section id="headline">
-		@RenderSection("Headline", false)
-	</section>
-	<section id="body">
-		<div class="content">
-			@RenderBody()
+		<div class="row content">
+			<div class="col-xs-3 col-sm-3 col-md-3 leftContent">
+				<div class="row item">
+					<div class="col-sm-6 col-md-6 text-left">Agent</div>
+					<div class="col-sm-6 col-md-6 text-right"><a href="#">51111 <span class="glyphicon glyphicon-home icon-link-home"></span></a></div>
+				</div>
+				<div class="row item no-border">
+					<div class="col-sm-6 col-md-6 text-left">Upline Agent</div>
+					<div class="col-sm-6 col-md-6 text-right"><a href="#">5111 <span class="glyphicon glyphicon-home icon-link-home"></span></a></div>
+				</div>
+				<div class="row list-btn">
+					<div class="col-sm-6 col-md-6">
+						<a href="#" class="btn-link">Agents</a>
+					</div>
+					<div class="col-sm-6 col-md-6">
+						<a href="#" class="btn-link">Members</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12 col-md-12">
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs">
+						  <li class="active"><a href="#home" data-toggle="tab">Settings</a></li>
+						  <li><a href="#profile" data-toggle="tab">Agents </a></li>
+						  <li><a href="#messages" data-toggle="tab">Members</a></li>
+						</ul>
+						<!-- Tab panes -->
+						<div class="tab-content">
+						  <div class="tab-pane active" id="home">
+							<ul class="super-menu list-unstyled">
+								<li><a href="#"><span class="icon-row-right"></span>Share Setting</a></li>
+								<li><a href="#"><span class="icon-row-right"></span>Bet and Comm Setting</a></li>
+								<li><a href="#"><span class="icon-row-right"></span>Share Hierachy</a></li>
+								<li><a href="#"><span class="icon-row-right"></span>Comm Hierachy</a></li>
+								<li><a href="#"><span class="icon-row-right"></span>User Log</a></li>
+							</ul>
+						  </div>
+						  <div class="tab-pane" id="profile">Agents</div>
+						  <div class="tab-pane" id="messages">Members</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-9 col-sm-9 col-md-9 mainContent"></div>
 		</div>
-	</section>    
+	</div>
 	
-	@Html.Hidden("ClientURL", Url.Content("~/ParlayRMS/"))
+	@RenderBody()
 	@Html.Hidden("RootURL", Url.Content("~/"))
-	@Scripts.Render("~/Scripts/CommonJS")
+	@Scripts.Render("~/scripts/commonJS")
 	@RenderSection("Foot", false)
 </body>
 </html>
