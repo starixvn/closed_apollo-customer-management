@@ -9,7 +9,6 @@
 
 namespace Fanex.ApolloCMS.Core.Services
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Fanex.ApolloCMS.Core.Web;
@@ -56,20 +55,15 @@ namespace Fanex.ApolloCMS.Core.Services
         /// <returns>Menu item.</returns>
         public MenuItem GetMenuById(int menuId)
         {
-            try
+            if (AppSession.CurrentUserMenu != null)
             {
-                if (AppSession.CurrentUserMenu != null)
-                {
-                    MenuItem menu = AppSession.CurrentUserMenu.FirstOrDefault<MenuItem>(m => m.Id == menuId);
-                    return menu;
-                }
+                MenuItem menu = AppSession.CurrentUserMenu.FirstOrDefault<MenuItem>(m => m.Id == menuId);
+                return menu;
             }
-            catch (Exception ex)
+            else
             {
-                HandleException(ex);
+                return null;
             }
-
-            return null;
         }
 
         /// <summary>
@@ -79,22 +73,17 @@ namespace Fanex.ApolloCMS.Core.Services
         /// <returns>Menu item.</returns>
         public MenuItem GetMenuByURL(string menuURL)
         {
-            try
+            if (!string.IsNullOrEmpty(menuURL)
+                && !string.Equals(menuURL, UrlSeparator.ToString())
+                && (AppSession.CurrentUserMenu != null))
             {
-                if (!string.IsNullOrEmpty(menuURL)
-                    && !string.Equals(menuURL, UrlSeparator.ToString())
-                    && (AppSession.CurrentUserMenu != null))
-                {
-                    MenuItem menu = AppSession.CurrentUserMenu.FirstOrDefault<MenuItem>(m => m.Url.StartsWith(menuURL));
-                    return menu;
-                }
+                MenuItem menu = AppSession.CurrentUserMenu.FirstOrDefault<MenuItem>(m => m.Url.StartsWith(menuURL));
+                return menu;
             }
-            catch (Exception ex)
+            else
             {
-                HandleException(ex);
+                return null;
             }
-
-            return null;
         }
 
         /// <summary>
@@ -105,22 +94,17 @@ namespace Fanex.ApolloCMS.Core.Services
         /// <returns>Menu item.</returns>
         public MenuItem GetMenuByURL(string menuURL, IList<MenuItem> menuList)
         {
-            try
+            if (!string.IsNullOrEmpty(menuURL)
+                && !string.Equals(menuURL, UrlSeparator.ToString())
+                && (AppSession.CurrentUserMenu != null))
             {
-                if (!string.IsNullOrEmpty(menuURL)
-                    && !string.Equals(menuURL, UrlSeparator.ToString())
-                    && (AppSession.CurrentUserMenu != null))
-                {
-                    MenuItem menu = menuList.FirstOrDefault<MenuItem>(m => m.Url.StartsWith(menuURL));
-                    return menu;
-                }
+                MenuItem menu = menuList.FirstOrDefault<MenuItem>(m => m.Url.StartsWith(menuURL));
+                return menu;
             }
-            catch (Exception ex)
+            else
             {
-                HandleException(ex);
+                return null;
             }
-
-            return null;
         }
 
         /// <summary>
@@ -130,22 +114,17 @@ namespace Fanex.ApolloCMS.Core.Services
         /// <returns>Name of menu.</returns>
         public string GetMenuNameByURL(string menuURL)
         {
-            try
+            if (!string.IsNullOrEmpty(menuURL)
+                && !string.Equals(menuURL, UrlSeparator.ToString())
+                && (AppSession.CurrentUserMenu != null))
             {
-                if (!string.IsNullOrEmpty(menuURL)
-                    && !string.Equals(menuURL, UrlSeparator.ToString())
-                    && (AppSession.CurrentUserMenu != null))
-                {
-                    MenuItem menu = AppSession.CurrentUserMenu.FirstOrDefault<MenuItem>(m => m.Url.StartsWith(menuURL));
-                    return menu.Name;
-                }
+                MenuItem menu = AppSession.CurrentUserMenu.FirstOrDefault<MenuItem>(m => m.Url.StartsWith(menuURL));
+                return menu.Name;
             }
-            catch (Exception ex)
+            else
             {
-                HandleException(ex);
+                return null;
             }
-
-            return null;
         }
     }
 }

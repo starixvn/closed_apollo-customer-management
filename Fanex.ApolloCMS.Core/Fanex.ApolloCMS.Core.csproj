@@ -101,7 +101,6 @@
     </Compile>
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\CacheRef.cs" />
-    <Compile Include="Services\LoggingHandler.cs" />
     <Compile Include="Services\MenuService.cs" />
     <Compile Include="Web\AppSession.cs" />
     <Compile Include="Web\CacheManager.cs" />

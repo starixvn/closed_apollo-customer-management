@@ -34,31 +34,5 @@ namespace Fanex.ApolloCMS.Core.Services
                 };
             }
         }
-
-        /// <summary>
-        /// Handles Exception.
-        /// </summary>
-        /// <param name="ex">Occurred Exception.</param>
-        public void HandleException(Exception ex)
-        {
-            LoggingHandler.Log(ex);
-        }
-
-        /// <summary>
-        /// Gets the criteria which are used to identify the user and the machine that update the data to the database.
-        /// </summary>
-        /// <returns>LogExecSPCriteria object.</returns>
-        public LogExecSpCriteria GetLogExecSpCriteria()
-        {
-            Check.Argument.IsNotNull(this.ServiceContext, "ServiceContext");
-
-            return new LogExecSpCriteria
-            {
-                CurrentUserId = this.ServiceContext.UserId,
-                CurrentSiteId = this.ServiceContext.SiteId,
-                LogDate = DateTime.Now,
-                LoginIp = this.ServiceContext.Ip
-            };
-        }
     }
 }
