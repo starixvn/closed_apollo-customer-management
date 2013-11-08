@@ -11,13 +11,21 @@ var Layout = function ($) {
                 collapseExpand = $('#collapseExpand');
             collapseExpand.on('click', function () {
                 if (collapseExpand.hasClass('icon-collapse')) {
-                    collapseExpand.removeClass('icon-collapse').addClass('icon-expand');
-                    leftContent.hide();
-                    mainContent.removeClass().addClass('col-xs-12 col-sm-12 col-md-12 mainContent');
+                    leftContent.animate({
+                        width: "toggle"
+                    }, 100, function () {
+                        // Animation complete.
+                        collapseExpand.removeClass('icon-collapse').addClass('icon-expand');
+                        mainContent.removeClass().addClass('col-xs-12 col-sm-12 col-md-12 mainContent');
+                    });
                 } else {
-                    collapseExpand.removeClass('icon-expand').addClass('icon-collapse');
-                    leftContent.show();
-                    mainContent.removeClass().addClass('col-xs-9 col-sm-9 col-md-9 mainContent');
+                    leftContent.animate({
+                        width: "toggle"
+                    }, 100, function () {
+                        // Animation complete.
+                        collapseExpand.removeClass('icon-expand').addClass('icon-collapse');
+                        mainContent.removeClass().addClass('col-xs-9 col-sm-9 col-md-9 mainContent');
+                    });
                 }
             })
         }
