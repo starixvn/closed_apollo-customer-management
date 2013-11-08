@@ -46,7 +46,7 @@ var CMS = function ($) {
 			} else if (xhr.status == 404) {
 				CMS.headlineMsgBox.showErr('Resources not found!', { sticky: true });
 			} else {
-				CMS.headlineMsgBox.showErr('An unexpected error has occurred!', { sticky: true });
+	            CMS.headlineMsgBox.showErr('Sorry, an error occurred while processing your request, please notify the administrators.', { sticky: true });
 			}
 		},
 		showInfoMessage: function (message) {
