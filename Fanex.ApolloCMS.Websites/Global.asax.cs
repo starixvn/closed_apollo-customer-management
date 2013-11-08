@@ -15,8 +15,6 @@ namespace Fanex.ApolloCMS.Websites
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
-    using System.Web.Script.Serialization;
-    using Fanex.ApolloCMS.Core.Resources;
     using Fanex.Data.Configuration;
     using Fanex.Logging;
 
@@ -47,13 +45,8 @@ namespace Fanex.ApolloCMS.Websites
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception ex = Server.GetLastError().GetBaseException();
-            var jsonSerialiser = new JavaScriptSerializer();
-            var error = jsonSerialiser.Serialize(new
-            {
-                Code = 500,
-                Message = Messages.InternalError
-            });
 
+            // @@TODO: Need to create a custom error page.
             if (!Request.IsLocal)
             {
                 string message = string.Format(
@@ -68,10 +61,6 @@ namespace Fanex.ApolloCMS.Websites
 
                 LogService.Error(message);
             }
-
-            Response.Output.Write(error);
-            Response.Output.Close();
-            Server.ClearError();
         }
     }
 }
