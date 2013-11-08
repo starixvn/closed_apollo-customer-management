@@ -37,6 +37,7 @@ namespace Fanex.ApolloCMS.Websites
             bundles.AddAndInclude(
                 "~/site/layout",
                 "~/content/bootstrap/css/bootstrap.css",
+                "~/content/bootstrap/css/bootstrap-ie7.css",
                 "~/content/site/layout.less");
 
             bundles.Add(new ScriptBundle("~/scripts/headjs").Include(
@@ -49,7 +50,8 @@ namespace Fanex.ApolloCMS.Websites
                 "~/scripts/lib/jQuery/jquery.unobtrusive-ajax.js",
                 "~/scripts/lib/jQuery/jquery.validate*",
                 "~/scripts/lib/jQuery/jquery.cookie.js",
-                "~/content/bootstrap/js/bootstrap.js"));
+                "~/content/bootstrap/js/bootstrap.js",
+                "~/scripts/lib/respond.js"));
         }
     }
 

@@ -35,28 +35,25 @@ body {
 	.icon;
 	background-position: -137px 0;
 }
-/*
-.icon-changePass {
+
+.icon-collapse {
 	.icon;
-	background-position: -91px -21px;
+	background-position: -72px -22px;
 }
 
-.icon-signout {
+.icon-expand {
 	.icon;
-	background-position: -115px -21px;
+	background-position: -50px -22px;
 }
 
-.icon-link-home {
-	.icon;
-	background-position: -69px 0;
-}
-*/
 .icon-row-right {
 	.icon;
 	background-position: -13px 0;
 	height: 10px;
 }
 
+
+/**/
 /* Page */
 
 .container.page {
@@ -73,7 +70,7 @@ body {
 		color: #fff;
 		height: 47px;
 		border-bottom: 3px solid #0d5686;
-		position: fixed;
+		position: absolute;
 		left: 0;
 		right: 0;
 		z-index: 199;
@@ -155,6 +152,9 @@ body {
 					border-left: 1px solid #44a0dc;
 					border-right: 1px solid #0D5686;
 					padding: 13px 17px;
+					position: relative;
+					font-weight: bold;
+					cursor: pointer;
 
 					&:hover {
 						background: #fff;
@@ -163,11 +163,53 @@ body {
 						a {
 							color: @primary-color;
 						}
+
+						.subMenu {
+							display: block;
+						}
 					}
 
 					a {
 						color: #fff;
 						text-decoration: none;
+					}
+
+					.subMenu {
+						background-color: #fff;
+						box-shadow: 0px 2px 2px #ccc;
+						position: absolute;
+						left: 0;
+						top: 44px;
+						min-width: 153px;
+						padding: 3px;
+						display: none;
+						z-index: 200;
+
+						li {
+							height: 30px;
+							padding: 8px;
+							line-height: 14px;
+							border: none;
+							width: 100%;
+
+							a {
+								text-decoration: none;
+								margin-left: 5px;
+								font-weight: normal;
+								color: @primary-color;
+								span {
+									margin-right: 5px;
+								}
+							}
+
+							&:hover {
+								background-color: @primary-color;
+
+								a {
+									color: #fff;
+								}
+							}
+						}
 					}
 				}
 			}
@@ -186,7 +228,7 @@ body {
 						right: 0;        
 					}
 
-					&:hover .list-config{
+					&:hover .list-config {
 						display: block;
 					}
 
@@ -361,13 +403,30 @@ body {
 
 		.mainContent {
 			background: #fff;
-			height: 100%; 
+			height: 100%;
+			position: relative;
+
+			.collapse-expand {
+				position: absolute;
+				top: 314px;
+				left: 0;
+			}
 		}
 	}
 }
 
-@media (max-width: 790px) {
+@media(max-width: 992px) {
 	.container.page {
-		width: 790px;
+		.header .rightHeader .mainMenu li {
+			padding: 13px 5px;
+		}
 	}
 }
+
+@media (max-width: 750px) {
+	.container.page {
+		width: 750px;
+	}
+}
+
+/* IE */
