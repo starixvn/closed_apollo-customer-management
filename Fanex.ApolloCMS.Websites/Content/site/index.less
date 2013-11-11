@@ -52,6 +52,10 @@ body {
     height: 10px;
 }
 
+.icon-row-down {
+    .icon;
+    background-position: 2px 0;
+}
 
 /* Mixins */
 .childMenu {
@@ -114,8 +118,8 @@ body {
             height: 100%;
             border-right: 1px solid #0D5686;
 
-            .searc-container {
-                margin: 10px 1% 0;
+            .search-container {
+                margin: 9px 1% 0;
                 display: table;
                 width: 98%;
 
@@ -129,14 +133,13 @@ body {
                 }
 
                 .selType {
-                    width: 80px;
+                    width: 85px;
                 }
 
                 .selType select {
-                    height: 26px;
+                    height: 27px;
                     margin-left: 2%;
                     padding: 4px 2px;
-                    width: 95%;
                     color: @primary-color;
 
                     option {
@@ -154,18 +157,48 @@ body {
                     border: none;
                     padding: 1%;
                     height: 26px;
-                    width: 99%;
+                    width: 99.5%;
                     color: #b2b2b2;
                     font-style: italic;
-                    background: #fff url(img/icon-search.png) no-repeat right center;
+                    margin-right: 2px;
+                }
+
+                .search, .treeview {
+                    width: 100%;
+                    height: 28px;
+                    background-color: #fff;
+                    cursor: pointer;
+                    border: 1px solid @primary-color;
+
+                    &:hover {
+                        height: 26px;
+                        background: @primary-color;
+                        border: 1px solid #fff;
+                    }
                 }
 
                 .treeview {
-                    width: 100%;
-                    height: 26px;
+                    .icon-treeview {
+                        margin: 3px 14% 0;
+                    }
 
-                    .icon-treeview { 
-                        margin: 3px 0 0 6px;
+                    &:hover {
+                        .icon-treeview {
+                            background-position: -158px -2px;
+                        }
+                    }
+                }
+
+                .search {
+                    .icon-search {
+                        margin: 3px 15% 0 22%;
+                        color: @primary-color;
+                    }
+
+                    &:hover {
+                        .icon-search {
+                            color: #fff;
+                        }
                     }
                 }
             }
@@ -241,7 +274,7 @@ body {
                         margin: 4px 0 0 6px;
                         position: absolute;
                         top: 5px;
-                        right: 0;        
+                        right: 0;
                     }
 
                     &:hover .list-config {
@@ -303,6 +336,7 @@ body {
                 border: 1px solid @border-color;
                 min-height: 30px;
                 background-color: #fff;
+                padding-right: 1.4%;
 
                 .btn-link {
                     background-color: @primary-color;
@@ -312,7 +346,7 @@ body {
                     padding: 4px 3%;
                     text-align: center;
                     width: 96%;
-                    margin: 3%;
+                    margin: 2.5% 3%;
                     .border-radius(2px); 
                     font-weight: bold;
 
@@ -423,4 +457,49 @@ body {
             min-width: 150px;
         }
     }
+}
+
+/* Customize */
+.selectboxit-container {
+    .selectboxit {
+        .border-radius(0);
+        border: none;
+        background: #fff;
+        margin-right: 2px;
+    }
+
+    span, .selectboxit-options a {
+        height: 26px;
+        line-height: 24px;
+    }
+
+    .selectboxit-options, .selectboxit-option-first, .selectboxit-option-last {
+        .border-radius(0);
+    }
+
+    .selectboxit-text {
+        color: @primary-color;
+        font-size: @font-size + 1;
+    }
+
+    .selectboxit .selectboxit-arrow-container .selectboxit-arrow {
+        .icon-row-down;
+        border: none;
+        top: 40%;
+    }
+    .selectboxit-btn.selectboxit-enabled:hover,
+    .selectboxit-btn.selectboxit-enabled:focus,
+    .selectboxit-btn.selectboxit-enabled:active {
+        background-color: #fff;
+        color: @primary-color;
+    }
+
+    .childMenu li:hover {
+        background-color: @primary-color;
+    }
+}
+
+.container.page .header .search .search-container .selectboxit-options li {
+    display: block;
+    border-color: @border-color;
 }
