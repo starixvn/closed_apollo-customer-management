@@ -4,7 +4,7 @@
 	var lvl0MenuItemList = menuItemList.Where(m => m.Parent == null).OrderBy(m => m.DisplayOrder).ToList();
 }
 <nav>
-	<ul class="menu">
+	<ul class="mainMenu list-unstyled">
 	@for (int i = 0; i < lvl0MenuItemList.Count; i++)
 	{
 		var menuItem = lvl0MenuItemList[i];
@@ -13,19 +13,19 @@
 
 		if (lvl1MenuItemList.Any())
 		{
-			<li mid="@menuItem.Id" class="has-kids">
+			<li id="@menuItem.Id">
 				<a href="javascript:;">@menuItem.Name</a>
-				<ul>
+				<ul class="list-unstyled subMenu">
 				@foreach (var subMenuItem in lvl1MenuItemList)
 				{
-						<li mid="@subMenuItem.Id"><a href="@Url.Content(subMenuItem.GetValidUrl())">@subMenuItem.Name</a></li>
+						<li id="@subMenuItem.Id"><a href="@Url.Content(subMenuItem.GetValidUrl())">@subMenuItem.Name</a></li>
 				}
 				</ul>
 			</li>
 		}
 		else
 		{
-			<li mid="@menuItem.Id"><a href="@Url.Content(menuItem.GetValidUrl())">@menuItem.Name</a></li>
+			<li id="@menuItem.Id"><a href="@Url.Content(menuItem.GetValidUrl())">@menuItem.Name</a></li>
 		}
 	}
 	</ul>
