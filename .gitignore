@@ -1,2 +1,9 @@
 /Fanex.ApolloCMS.suo
 /Fanex.ApolloCMS.sln.docstates.suo
+
+/Fanex.ApolloCMS.Message/StyleCop.Cache
+/Fanex.ApolloCMS.Message/bin
+/Fanex.ApolloCMS.Message/obj
+/Fanex.ApolloCMS.Message/obj
+/Fanex.ApolloCMS.Message/bin
+*.Cache
