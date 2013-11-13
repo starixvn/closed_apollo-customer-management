@@ -76,9 +76,24 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Criteria\" />
-    <Folder Include="Models\" />
-    <Folder Include="Services\" />
+    <Folder Include="Criteria\MessageList\" />
+    <Folder Include="Criteria\PrivateMessage\" />
+    <Folder Include="Criteria\PublicMessage\" />
+    <Folder Include="Models\MessageList\" />
+    <Folder Include="Models\PrivateMessage\" />
+    <Folder Include="Models\PublicMessage\" />
+    <Folder Include="Repositories\Implements\MessageList\" />
+    <Folder Include="Repositories\Implements\PrivateMessage\" />
+    <Folder Include="Repositories\Implements\PublicMessage\" />
+    <Folder Include="Repositories\Interfaces\MessageList\" />
+    <Folder Include="Repositories\Interfaces\PrivateMessage\" />
+    <Folder Include="Repositories\Interfaces\PublicMessage\" />
+    <Folder Include="Services\Implements\MessageList\" />
+    <Folder Include="Services\Implements\PrivateMessage\" />
+    <Folder Include="Services\Implements\PublicMessage\" />
+    <Folder Include="Services\Interfaces\MessageList\" />
+    <Folder Include="Services\Interfaces\PrivateMessage\" />
+    <Folder Include="Services\Interfaces\PublicMessage\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.ApolloCMS.Core\Fanex.ApolloCMS.Core.csproj">
