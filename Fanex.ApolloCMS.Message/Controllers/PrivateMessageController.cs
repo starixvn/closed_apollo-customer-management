@@ -20,6 +20,10 @@ namespace Fanex.ApolloCMS.Message.Controllers
     /// </summary>
     public class PrivateMessageController : BaseController
     {
+        /// <summary>
+        /// Redirect index page.
+        /// </summary>
+        /// <returns>Index view.</returns>
         public ActionResult Index()
         {
             return View();
