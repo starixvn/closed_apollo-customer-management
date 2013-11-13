@@ -7,3 +7,4 @@
 /Fanex.ApolloCMS.Message/obj
 /Fanex.ApolloCMS.Message/bin
 *.Cache
+/Fanex.ApolloCMS.Message/*.StyleCop
