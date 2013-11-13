@@ -35,12 +35,19 @@ namespace Fanex.ApolloCMS.Websites
         private static void RegisterCommonBundles(BundleCollection bundles)
         {
             bundles.AddAndInclude(
-                "~/site/layout",
+                "~/site/common",
                 "~/content/bootstrap/css/bootstrap.css",
                 "~/content/bootstrap/css/bootstrap-ie7.css",
                 "~/content/themes/jquery-ui/jquery-ui-1.9.1.custom.css",
-                "~/content/themes/jquery-ui/jquery.selectBoxIt.css",
+                "~/content/themes/jquery-ui/jquery.selectBoxIt.css");
+
+            bundles.AddAndInclude(
+                "~/site/layout",
                 "~/content/site/layout.less");
+
+            bundles.AddAndInclude(
+                "~/site/login",
+                "~/Areas/UserLogin/themes/layout.less");
 
             bundles.Add(new ScriptBundle("~/scripts/headjs").Include(
                 "~/scripts/lib/html5-libs/head.js"));
@@ -56,6 +63,15 @@ namespace Fanex.ApolloCMS.Websites
                 "~/content/bootstrap/js/bootstrap.js",
                 "~/scripts/lib/respond.js",
                 "~/scripts/_layout.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/loginJS").Include(
+                "~/scripts/lib/jQuery/jquery-1.8.2.js",
+                "~/scripts/lib/jQuery/jquery.validate*",
+                "~/scripts/lib/jQuery/jquery.cookie.js",
+                "~/content/bootstrap/js/bootstrap.js",
+                "~/scripts/lib/respond.js"));
+
+            bundles.FileSetOrderList.Clear();
         }
     }
 

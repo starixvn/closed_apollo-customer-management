@@ -7,6 +7,7 @@
     <title>@ViewBag.Title &mdash; @ViewLang.CMS</title>
     <link rel="shortcut icon" href="~/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @Styles.Render("~/site/common")
     @Styles.Render("~/site/layout")
     @Scripts.Render("~/scripts/headjs")
     @if (ViewBag.ViewFlags != null && ViewBag.ViewFlags.IsReCheckin)

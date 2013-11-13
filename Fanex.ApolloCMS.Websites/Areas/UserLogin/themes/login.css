@@ -149,7 +149,7 @@ body {
 
 /* --- NOT SUPPORTED BROWSERS --- */
 
-#not-supported-browser-panel {
+.not-supported-browser {
 	position: absolute;
 	right: 0px;
 	top: 0px;
@@ -160,7 +160,7 @@ body {
 	z-index: 9999;
 }
 
-#not-supported-browser-panel a {
+.not-supported-browser a {
 	font-size: 1.6em;
 	text-decoration: none;
 	color: #222;
@@ -168,7 +168,7 @@ body {
 	padding: 0 10px;
 }
 
-#not-supported-browser-panel a:hover {
+.not-supported-browser a:hover {
 	background-color: #0c0;
 	color: #fff;
 }
