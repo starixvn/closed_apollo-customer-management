@@ -7,14 +7,13 @@
     <ul class="mainMenu list-unstyled">
     @for (int i = 0; i < lvl0MenuItemList.Count; i++)
     {
-        var lastItemClass = i == (lvl0MenuItemList.Count - 1) ? "last-item" : string.Empty;
         var menuItem = lvl0MenuItemList[i];
         var lvl1MenuItemList = menuItemList.Where(x => x.Parent != null && x.Parent.Id == menuItem.Id)
             .OrderBy(x => x.DisplayOrder).ToList();
 
         if (lvl1MenuItemList.Any())
         {
-            <li id="@menuItem.Id" class="@lastItemClass">
+            <li id="@menuItem.Id">
                 <a href="javascript:;">@menuItem.Name</a>
                 <ul class="list-unstyled subMenu">
                 @foreach (var subMenuItem in lvl1MenuItemList)
@@ -26,7 +25,12 @@
         }
         else
         {
-            <li id="@menuItem.Id" class="@lastItemClass"><a href="@Url.Content(menuItem.GetValidUrl())">@menuItem.Name</a></li>
+            <li id="@menuItem.Id"><a href="@Url.Content(menuItem.GetValidUrl())">@menuItem.Name</a></li>
+        }
+
+        if (i == (lvl0MenuItemList.Count - 1))
+        { 
+            <li class="last-item"></li>
         }
     }
     </ul>
