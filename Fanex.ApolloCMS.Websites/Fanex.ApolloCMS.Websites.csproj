@@ -455,7 +455,9 @@
     <Content Include="Areas\UserControl\Views\User\ChangePassword.cshtml" />
     <Content Include="Areas\UserControl\Views\User\UserProfile.cshtml" />
     <Content Include="Areas\UserControl\Views\Web.config" />
-    <Content Include="Areas\Message\Views\Web.config" />
+    <Content Include="Areas\Message\Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\Message\Views\MessageList\Index.cshtml" />
     <Content Include="Areas\Message\Views\PrivateMessage\Index.cshtml" />
     <Content Include="Areas\Message\Views\PublicMessage\Index.cshtml" />

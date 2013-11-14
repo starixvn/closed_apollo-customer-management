@@ -67,33 +67,32 @@
     <Compile Include="Controllers\MessageListController.cs" />
     <Compile Include="Controllers\PrivateMessageController.cs" />
     <Compile Include="Controllers\PublicMessageController.cs" />
+    <Compile Include="Criteria\NewMessage\GetAllSitesCriteria.cs" />
+    <Compile Include="Criteria\NewMessage\GetRecipientInfoCriteria.cs" />
+    <Compile Include="Criteria\NewMessage\GetUplineByIdCriteria.cs" />
+    <Compile Include="Criteria\NewMessage\InsertMessageCriteria.cs" />
     <Compile Include="MessageAreaRegistration.cs" />
+    <Compile Include="Models\NewMessage\RecipientInfo.cs" />
+    <Compile Include="Models\NewMessage\Site.cs" />
+    <Compile Include="Models\NewMessage\Upline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Implements\NewMessageRepository.cs" />
+    <Compile Include="Repositories\Interfaces\INewMessageRepository.cs" />
     <Compile Include="Resources\Labels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Labels.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Implements\NewMessageService.cs" />
+    <Compile Include="Services\Interfaces\INewMessageService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Criteria\MessageList\" />
-    <Folder Include="Criteria\PrivateMessage\" />
-    <Folder Include="Criteria\PublicMessage\" />
     <Folder Include="Models\MessageList\" />
-    <Folder Include="Models\PrivateMessage\" />
-    <Folder Include="Models\PublicMessage\" />
     <Folder Include="Repositories\Implements\MessageList\" />
-    <Folder Include="Repositories\Implements\PrivateMessage\" />
-    <Folder Include="Repositories\Implements\PublicMessage\" />
     <Folder Include="Repositories\Interfaces\MessageList\" />
-    <Folder Include="Repositories\Interfaces\PrivateMessage\" />
-    <Folder Include="Repositories\Interfaces\PublicMessage\" />
     <Folder Include="Services\Implements\MessageList\" />
-    <Folder Include="Services\Implements\PrivateMessage\" />
-    <Folder Include="Services\Implements\PublicMessage\" />
     <Folder Include="Services\Interfaces\MessageList\" />
-    <Folder Include="Services\Interfaces\PrivateMessage\" />
-    <Folder Include="Services\Interfaces\PublicMessage\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.ApolloCMS.Core\Fanex.ApolloCMS.Core.csproj">
@@ -103,7 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Labels.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Labels.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

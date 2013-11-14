@@ -1,6 +1,68 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model Fanex.ApolloCMS.Message.Criteria.NewMessage.InsertMessageCriteria
 
-<h2>Add New Public Message</h2>
+<h2>@Labels.NewPublicMessage</h2>
+
+<div class="content">
+    <div id="divMajorLangue" class="language-group">
+        <div class="language-group-title">@Labels.MajorLanguage</div>
+        <div class="language-group-body">
+            <div class="group-row">
+                <div class="language-area">
+                    <div id="divEnglish" class="language-title">@Html.LabelFor(m => m.Content_En, Labels.English)</div>
+                    <div class="language-body">
+                        @Html.TextAreaFor(m => m.Content_En)
+                    </div>
+                </div>
+                <div class="language-area">
+                    <div class="language-title">@Html.LabelFor(m => m.Content_Ch, Labels.ChineseTraditional)</div>
+                    <div class="language-body">
+                        @Html.TextAreaFor(m => m.Content_Ch)
+                    </div>
+                </div>
+                <div class="language-area">
+                    <div class="language-title">@Html.LabelFor(m => m.Content_Cs, Labels.ChineseSimplified)</div>
+                    <div class="language-body">
+                        @Html.TextAreaFor(m => m.Content_Cs)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="language-group">
+        <div class="language-group-title">@Labels.OtherLanguage</div>
+        <div class="language-group-body">
+            <div class="group-row">
+                <div class="language-area">
+                    <div class="language-title">@Html.LabelFor(m => m.Content_Jp, Labels.Japanese)</div>
+                    <div class="language-body">
+                        @Html.TextAreaFor(m => m.Content_Jp)
+                    </div>
+                </div>
+                <div class="language-area">
+                    <div class="language-title">@Html.LabelFor(m => m.Content_Ko, Labels.Korean)</div>
+                    <div class="language-body">
+                        @Html.TextAreaFor(m => m.Content_Ko)
+                    </div>
+                </div>
+                <div class="language-area">
+                    <div class="language-title">@Html.LabelFor(m => m.Content_Th, Labels.Thai)</div>
+                    <div class="language-body">
+                        @Html.TextAreaFor(m => m.Content_Th)
+                    </div>
+                </div>
+            </div>
+            <div class="group-row">
+                <div class="language-area">
+                    <div class="language-title">@Html.LabelFor(m => m.Content_Vn, Labels.Vietnamese)</div>
+                    <div class="language-body">
+                        @Html.TextAreaFor(m => m.Content_Vn)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
