@@ -69,7 +69,8 @@ namespace Fanex.ApolloCMS.Websites
                 "~/scripts/lib/jQuery/jquery.validate*",
                 "~/scripts/lib/jQuery/jquery.cookie.js",
                 "~/content/bootstrap/js/bootstrap.js",
-                "~/scripts/lib/respond.js"));
+                "~/scripts/lib/respond.js",
+                "~/Areas/UserLogin/scripts/login.js"));
 
             bundles.FileSetOrderList.Clear();
         }
