@@ -167,8 +167,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ApolloCMSSPNames.xml" />
-    <Content Include="App_Data\NAPFrameworkSpNames.xml" />
+    <Content Include="App_Data\ApolloCMSSPNames.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\NAPFrameworkSpNames.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\SVRMSG.MsgDB.aplweb.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\Message\Views\MessageList\Message.less" />
     <Content Include="Areas\Message\Views\MessageList\Scripts\MessageList.js" />
     <Content Include="Areas\UserLogin\scripts\lib\jquery-1.8.0.min.js" />

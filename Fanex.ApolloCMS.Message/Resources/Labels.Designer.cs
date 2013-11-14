@@ -22,8 +22,7 @@ namespace Fanex.ApolloCMS.Message.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Labels
-    {
+    public class Labels {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -84,6 +83,36 @@ namespace Fanex.ApolloCMS.Message.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string No
+        {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Private.
+        /// </summary>
+        public static string Private
+        {
+            get {
+                return ResourceManager.GetString("Private", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Public.
+        /// </summary>
+        public static string Public
+        {
+            get {
+                return ResourceManager.GetString("Public", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Special.
         /// </summary>
         public static string Special
@@ -120,6 +149,16 @@ namespace Fanex.ApolloCMS.Message.Resources {
         {
             get {
                 return ResourceManager.GetString("Top_New_Messages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string Yes
+        {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

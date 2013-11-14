@@ -34,6 +34,11 @@ namespace Fanex.ApolloCMS.Websites
         /// <param name="bundles">The bundle collection.</param>
         private static void RegisterCommonBundles(BundleCollection bundles)
         {
+            bundles.Add(new StyleBundle("~/styles/fanexGrid").Include(
+                 "~/scripts/lib/Fanex.Grid/Fanex.Grid.css",
+                 "~/scripts/lib/Fanex.Grid/Fanex.Grid.less",
+                 "~/scripts/lib/Fanex.Grid/Fanex.Pagination.css"));
+
             bundles.AddAndInclude(
                 "~/site/layout",
                 "~/content/bootstrap/css/bootstrap.css",
@@ -56,6 +61,12 @@ namespace Fanex.ApolloCMS.Websites
                 "~/content/bootstrap/js/bootstrap.js",
                 "~/scripts/lib/respond.js",
                 "~/scripts/_layout.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/fanexGrid").Include(
+                "~/scripts/lib/Fanex.Grid/Fanex.Grid.js",
+                "~/scripts/lib/Fanex.Grid/Fanex.Pagination.js",
+                "~/scripts/lib/Fanex.Grid/moment.js",
+                "~/scripts/lib/Fanex.Grid/numeral.js"));
         }
     }
 

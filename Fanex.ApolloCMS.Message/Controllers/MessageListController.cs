@@ -15,12 +15,28 @@ namespace Fanex.ApolloCMS.Message.Controllers
     using System.Text;
     using System.Web.Mvc;
     using Fanex.ApolloCMS.Core.Controllers;
+    using Fanex.ApolloCMS.Message.Criteria.MessageList;
+    using Fanex.ApolloCMS.Message.Models.MessageList;
+    using Fanex.ApolloCMS.Message.Services.Implements;
+    using Fanex.ApolloCMS.Message.Services.Interfaces;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class MessageListController : BaseController
     {
+        private readonly IMessageService _messageService;
+
+        public MessageListController()
+            : this(null)
+        {
+        }
+
+        public MessageListController(IMessageService messageService)
+        {
+            this._messageService = messageService ?? new MessageService();
+        }
+
         /// <summary>
         /// Redirect index page.
         /// </summary>
@@ -28,6 +44,18 @@ namespace Fanex.ApolloCMS.Message.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        /// <summary>
+        /// Gets the message list.
+        /// </summary>
+        /// <param name="getMessageListCriteria">The get message list criteria.</param>
+        /// <returns>List Message.</returns>
+        [HttpPost]
+        public JsonResult GetMessageList(GetMessageListCriteria getMessageListCriteria)
+        {
+            var result = this._messageService.GetListMessage(getMessageListCriteria);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

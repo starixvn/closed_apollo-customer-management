@@ -123,6 +123,15 @@
   <data name="Message_Type" xml:space="preserve">
     <value>Message Type</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Private" xml:space="preserve">
+    <value>Private</value>
+  </data>
+  <data name="Public" xml:space="preserve">
+    <value>Public</value>
+  </data>
   <data name="Special" xml:space="preserve">
     <value>Special</value>
   </data>
@@ -134,5 +143,8 @@
   </data>
   <data name="Top_New_Messages" xml:space="preserve">
     <value>Top New Messages</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>
