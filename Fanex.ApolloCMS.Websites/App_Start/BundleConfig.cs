@@ -26,6 +26,9 @@ namespace Fanex.ApolloCMS.Websites
         public static void RegisterBundles(BundleCollection bundles)
         {
             RegisterCommonBundles(bundles);
+            RegisterLoginBundles(bundles);
+
+            bundles.FileSetOrderList.Clear();
         }
 
         /// <summary>
@@ -43,16 +46,12 @@ namespace Fanex.ApolloCMS.Websites
                 "~/site/common",
                 "~/content/bootstrap/css/bootstrap.css",
                 "~/content/bootstrap/css/bootstrap-ie7.css",
-                "~/content/themes/jquery-ui/jquery-ui-1.9.1.custom.css",
-                "~/content/themes/jquery-ui/jquery.selectBoxIt.css");
+                "~/content/lib/jquery-ui/jquery-ui-1.9.1.custom.css",
+                "~/content/lib/jquery-ui/jquery.selectBoxIt.css");
 
             bundles.AddAndInclude(
                 "~/site/layout",
                 "~/content/site/layout.less");
-
-            bundles.AddAndInclude(
-                "~/site/login",
-                "~/Areas/UserLogin/themes/layout.less");
 
             bundles.Add(new ScriptBundle("~/scripts/headjs").Include(
                 "~/scripts/lib/html5-libs/head.js"));
@@ -69,21 +68,31 @@ namespace Fanex.ApolloCMS.Websites
                 "~/scripts/lib/respond.js",
                 "~/scripts/_layout.js"));
 
-            bundles.Add(new ScriptBundle("~/scripts/loginJS").Include(
-                "~/scripts/lib/jQuery/jquery-1.8.2.js",
-                "~/scripts/lib/jQuery/jquery.validate*",
-                "~/scripts/lib/jQuery/jquery.cookie.js",
-                "~/content/bootstrap/js/bootstrap.js",                
-                "~/scripts/lib/respond.js",
-                "~/Areas/UserLogin/scripts/login.js"));
-
             bundles.Add(new ScriptBundle("~/scripts/fanexGrid").Include(
                 "~/scripts/lib/Fanex.Grid/Fanex.Grid.js",
                 "~/scripts/lib/Fanex.Grid/Fanex.Pagination.js",
                 "~/scripts/lib/Fanex.Grid/moment.js",
                 "~/scripts/lib/Fanex.Grid/numeral.js"));
+        }
 
-            bundles.FileSetOrderList.Clear();
+
+        /// <summary>
+        /// Registers bundles for login page.
+        /// </summary>
+        /// <param name="bundles">The bundle collection.</param>
+        private static void RegisterLoginBundles(BundleCollection bundles)
+        {
+            bundles.AddAndInclude(
+                "~/site/login",
+                "~/Areas/UserLogin/themes/layout.less");
+
+            bundles.Add(new ScriptBundle("~/scripts/loginJS").Include(
+                "~/scripts/lib/jQuery/jquery-1.8.2.js",
+                "~/scripts/lib/jQuery/jquery.validate*",
+                "~/scripts/lib/jQuery/jquery.cookie.js",
+                "~/content/bootstrap/js/bootstrap.js",
+                "~/scripts/lib/respond.js",
+                "~/Areas/UserLogin/scripts/login.js"));
         }
     }
 

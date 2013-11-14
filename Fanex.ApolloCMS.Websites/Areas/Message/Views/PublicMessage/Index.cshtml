@@ -66,6 +66,10 @@
         </div>
     </div>
     <div>
-        
+        @Html.LabelFor(m => m.Recipient, Labels.Recipient)
+        @Html.DropDownListFor(m => m.Recipient, (IEnumerable<SelectListItem>)ViewBag.Recipient)
+        @Html.CheckBoxFor(m => m.IsSpecialMsg)
+        @Html.LabelFor(m => m.IsSpecialMsg)
+        <input type="button" value="@ViewLang.Submit" />
     </div>
 </div>

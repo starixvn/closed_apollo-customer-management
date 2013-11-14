@@ -57,10 +57,8 @@ namespace Fanex.ApolloCMS.Message.Models.MessageList
                 {
                     case (int)MessageTypeConstants.Public:
                         return Labels.Public;
-                        break;
                     case (int)MessageTypeConstants.Private:
                         return Labels.Private;
-                        break;
                     default:
                         return string.Empty;
                 }
@@ -73,11 +71,11 @@ namespace Fanex.ApolloCMS.Message.Models.MessageList
             {
                 if (IsSpecial == true)
                 {
-                    return @Labels.Yes;
+                    return Labels.Yes;
                 }
                 else
                 {
-                    return @Labels.No;
+                    return Labels.No;
                 }
             }
         }

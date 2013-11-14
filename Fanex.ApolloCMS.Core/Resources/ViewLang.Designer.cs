@@ -61,11 +61,29 @@ namespace Fanex.ApolloCMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        public static string All {
+            get {
+                return ResourceManager.GetString("All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customer Management System.
         /// </summary>
         public static string CMS {
             get {
                 return ResourceManager.GetString("CMS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit.
+        /// </summary>
+        public static string Submit {
+            get {
+                return ResourceManager.GetString("Submit", resourceCulture);
             }
         }
     }
