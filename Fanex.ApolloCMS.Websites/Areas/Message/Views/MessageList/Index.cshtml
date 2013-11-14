@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head {
+    @Styles.Render("~/styles/fanexGrid")
     <link rel="stylesheet" type="text/css" href="~/Areas/Message/Views/MessageList/Message.less" />
 }
 
@@ -14,26 +15,26 @@
     <div class="filter-row">
         <div class="filter-item">
             <label>@Labels.Top_New_Messages</label>
-            <select>
-                <option>100</option>
-                <option>200</option>
-                <option>500</option>
+            <select id="ddlTopNewMessage">
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="500">500</option>
             </select>
         </div>
         <div class="filter-item">
             <label>@Labels.Message_Type</label>
-            <select>
-                <option>All Types</option>
-                <option>Public</option>
-                <option>Private</option>
+            <select id="ddlMessageType">
+                <option value="All">All Types</option>
+                <option value="3">Public</option>
+                <option value="1">Private</option>
             </select>
         </div>
         <div class="filter-item">
             <label>@Labels.Special</label>
-            <select>
-                <option>All</option>
-                <option>Yes</option>
-                <option>No</option>
+            <select id="ddlSpecial">
+                <option value="All">All</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
             </select>
         </div>
         <div class="clear"></div>
@@ -48,16 +49,17 @@
             <input type="text" id="dateTo"/>
         </div>
         <div class="filter-item">
-            <input type="button" value="@Labels.Submit"/>
+            <input id="btnGetListMessage" type="button" value="@Labels.Submit"/>
         </div>
         <div class="clear"></div>
     </div>
 </div>
 
-<div class="gridMessageContainer">
-    <div class="gridMessage"></div>
+<div class="gridMessageContainer display-none content-grid width-100percent" id="gridMessageContainer">
+    <div class="gridMessage freegrid" id="gridMessage"></div>
 </div>
 @section Foot {
+    @Scripts.Render("~/scripts/fanexGrid")
     <script type="text/javascript" src="~/Scripts/lib/Namespace.js"></script>
     <script type="text/javascript" src="~/Areas/Message/Views/MessageList/Scripts/MessageList.js"></script>
 }

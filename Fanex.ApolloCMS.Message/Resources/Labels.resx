@@ -143,9 +143,18 @@
   </data>
   <data name="NewPublicMessage" xml:space="preserve">
     <value>New Public Message</value>
+  </data>  
+  <data name="No" xml:space="preserve">
+    <value>No</value>
   </data>
   <data name="OtherLanguage" xml:space="preserve">
     <value>Other Language</value>
+  </data>
+  <data name="Private" xml:space="preserve">
+    <value>Private</value>
+  </data>  
+  <data name="Public" xml:space="preserve">
+    <value>Public</value>
   </data>
   <data name="Special" xml:space="preserve">
     <value>Special</value>
@@ -164,5 +173,8 @@
   </data>
   <data name="Vietnamese" xml:space="preserve">
     <value>Vietnamese</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>

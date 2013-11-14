@@ -140,6 +140,16 @@ namespace Fanex.ApolloCMS.Message.Resources {
                 return ResourceManager.GetString("NewPublicMessage", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string No
+        {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Other Language.
@@ -147,6 +157,25 @@ namespace Fanex.ApolloCMS.Message.Resources {
         public static string OtherLanguage {
             get {
                 return ResourceManager.GetString("OtherLanguage", resourceCulture);
+            }
+        }
+
+        ///   Looks up a localized string similar to Private.
+        /// </summary>
+        public static string Private
+        {
+            get {
+                return ResourceManager.GetString("Private", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Public.
+        /// </summary>
+        public static string Public
+        {
+            get {
+                return ResourceManager.GetString("Public", resourceCulture);
             }
         }
         
@@ -198,9 +227,20 @@ namespace Fanex.ApolloCMS.Message.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Vietnamese.
         /// </summary>
-        public static string Vietnamese {
+        public static string Vietnamese
+        {
             get {
                 return ResourceManager.GetString("Vietnamese", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string Yes
+        {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }
