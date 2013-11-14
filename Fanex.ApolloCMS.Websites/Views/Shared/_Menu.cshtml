@@ -1,31 +1,32 @@
 ﻿@using Fanex.NAP.Core.Model
 @{
-	var menuItemList = ViewBag.MenuItemList != null ? ViewBag.MenuItemList as List<MenuItem> : new List<MenuItem>();
-	var lvl0MenuItemList = menuItemList.Where(m => m.Parent == null).OrderBy(m => m.DisplayOrder).ToList();
+    var menuItemList = ViewBag.MenuItemList != null ? ViewBag.MenuItemList as List<MenuItem> : new List<MenuItem>();
+    var lvl0MenuItemList = menuItemList.Where(m => m.Parent == null).OrderBy(m => m.DisplayOrder).ToList();
 }
 
-	<ul class="mainMenu list-unstyled">
-	@for (int i = 0; i < lvl0MenuItemList.Count; i++)
-	{
-		var menuItem = lvl0MenuItemList[i];
-		var lvl1MenuItemList = menuItemList.Where(x => x.Parent != null && x.Parent.Id == menuItem.Id)
-			.OrderBy(x => x.DisplayOrder).ToList();
+    <ul class="mainMenu list-unstyled">
+    @for (int i = 0; i < lvl0MenuItemList.Count; i++)
+    {
+        var lastItemClass = i == (lvl0MenuItemList.Count - 1) ? "last-item" : string.Empty;
+        var menuItem = lvl0MenuItemList[i];
+        var lvl1MenuItemList = menuItemList.Where(x => x.Parent != null && x.Parent.Id == menuItem.Id)
+            .OrderBy(x => x.DisplayOrder).ToList();
 
-		if (lvl1MenuItemList.Any())
-		{
-			<li id="@menuItem.Id">
-				<a href="javascript:;">@menuItem.Name</a>
-				<ul class="list-unstyled subMenu">
-				@foreach (var subMenuItem in lvl1MenuItemList)
-				{
-						<li id="@subMenuItem.Id"><a href="@Url.Content(subMenuItem.GetValidUrl())">@subMenuItem.Name</a></li>
-				}
-				</ul>
-			</li>
-		}
-		else
-		{
-			<li id="@menuItem.Id"><a href="@Url.Content(menuItem.GetValidUrl())">@menuItem.Name</a></li>
-		}
-	}
-	</ul>
+        if (lvl1MenuItemList.Any())
+        {
+            <li id="@menuItem.Id" class="@lastItemClass">
+                <a href="javascript:;">@menuItem.Name</a>
+                <ul class="list-unstyled subMenu">
+                @foreach (var subMenuItem in lvl1MenuItemList)
+                {
+                        <li id="@subMenuItem.Id"><a href="@Url.Content(subMenuItem.GetValidUrl())">@subMenuItem.Name</a></li>
+                }
+                </ul>
+            </li>
+        }
+        else
+        {
+            <li id="@menuItem.Id" class="@lastItemClass"><a href="@Url.Content(menuItem.GetValidUrl())">@menuItem.Name</a></li>
+        }
+    }
+    </ul>
