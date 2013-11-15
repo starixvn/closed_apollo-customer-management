@@ -2,14 +2,14 @@
 $(document).ready(function () {
     var publicMessage = new Fanex.ApolloCMS.Message.PublicMessage();
 
-    publicMessage.InitPage(labels);
+    publicMessage.InitPage();
 });
 
 Namespace.Register("Fanex.ApolloCMS.Message.PublicMessage");
 Fanex.ApolloCMS.Message.PublicMessage = function () {
     var $this = this;
     var urls = {
-        AddNewMessage: ParlayRMS.resolveRootUrl('PublicMessage/AddNewMessage')
+        AddNewMessage: CMS.resolveRootUrl('PublicMessage/AddNewMessage')
     };
     var params = {
         ContentEn: null,
@@ -34,15 +34,15 @@ Fanex.ApolloCMS.Message.PublicMessage = function () {
         $this.DOMInstance.chkIsSpecialMsg = $('#chkIsSpecialMsg');
         $this.DOMInstance.btnSubmit = $('#btnSubmit');
         $this.DOMInstance.divEnglish = $('#divEnglish');
-        $this.DOMInstance.spnOtherLanguage = $('#spnOtherLanguage');
+        $this.DOMInstance.spnOtherLanguage = $('.other-lag');
         $this.DOMInstance.divOtherLanguage = $('#divOtherLanguage');
     };
     var initFields = function () {
         $this.DOMInstance.spnOtherLanguage.bind('click', function () {
-            $this.DOMInstance.divOtherLanguage.toggle();
+            $this.DOMInstance.divOtherLanguage.toggle('slow');
         });
 
-        $this.DOMInstance.btnSearch.bind('click', function () {
+        $this.DOMInstance.btnSubmit.bind('click', function () {
             getParamValues();
             $this.AddNewMessage();
         });
@@ -100,7 +100,7 @@ Fanex.ApolloCMS.Message.PublicMessage = function () {
         spnOtherLanguage: null,
         divOtherLanguage: null
     };
-    $this.InitPage = function (labels) {
+    $this.InitPage = function () {
         cacheDOM();
         initFields();
     };

@@ -27,6 +27,7 @@ namespace Fanex.ApolloCMS.Websites
         {
             RegisterCommonBundles(bundles);
             RegisterLoginBundles(bundles);
+            RegisterNewMessageBundles(bundles);
 
             bundles.FileSetOrderList.Clear();
         }
@@ -57,24 +58,19 @@ namespace Fanex.ApolloCMS.Websites
                 "~/site/messageList",
                 "~/areas/message/resources/messagelist/layout.less");
 
-            bundles.AddAndInclude(
-                "~/site/newMessage",
-                "~/areas/message/resources/newmessage/layout.less");
-
             bundles.Add(new ScriptBundle("~/scripts/headjs").Include(
                 "~/scripts/lib/html5-libs/head.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/commonJS").Include(
                 "~/scripts/lib/jQuery/jquery-1.8.2.js",
-                "~/scripts/lib/jQuery/jquery.easing.1.3.js",
                 "~/scripts/lib/jQuery/jquery-ui-1.8.24.js",
-                "~/scripts/lib/jQuery/jquery.unobtrusive-ajax.js",
-                "~/scripts/lib/jQuery/jquery.validate*",
-                "~/scripts/lib/jQuery/jquery.selectBoxIt.js",
-                "~/scripts/lib/jQuery/jquery.cookie.js",
+                "~/scripts/lib/jquery/jquery.selectBoxIt.js",
                 "~/content/bootstrap/js/bootstrap.js",
+                "~/scripts/lib/msgbox/msgbox-0.0.1.js",
                 "~/scripts/lib/respond.js",
-                "~/scripts/_layout.js"));
+                "~/scripts/lib/namespace.js",
+                "~/scripts/_layout.js",
+                "~/scripts/cms.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/fanexGrid").Include(
                 "~/scripts/lib/Fanex.Grid/Fanex.Grid.js",
@@ -100,6 +96,24 @@ namespace Fanex.ApolloCMS.Websites
                 "~/content/bootstrap/js/bootstrap.js",
                 "~/scripts/lib/respond.js",
                 "~/Areas/UserLogin/scripts/login.js"));
+        }
+
+
+        /// <summary>
+        /// Registers bundles for new message page.
+        /// </summary>
+        /// <param name="bundles">The bundle collection.</param>
+        private static void RegisterNewMessageBundles(BundleCollection bundles)
+        {
+            bundles.AddAndInclude(
+                "~/site/newMessage",
+                "~/areas/message/resources/newmessage/layout.less");
+
+            bundles.Add(new ScriptBundle("~/scripts/newPrivateMessage").Include(
+                "~/Areas/Message/Views/PrivateMessage/Scripts/PrivateMessage.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/newPublicMessage").Include(
+                "~/Areas/Message/Views/PublicMessage/Scripts/PublicMessage.js"));
         }
     }
 

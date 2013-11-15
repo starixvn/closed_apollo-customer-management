@@ -10,6 +10,7 @@
 namespace Fanex.ApolloCMS.Message.Services.Implements
 {
     using System.Collections.Generic;
+    using System.Text;
     using Fanex.ApolloCMS.Core.Services;
     using Fanex.ApolloCMS.Message.Criteria.NewMessage;
     using Fanex.ApolloCMS.Message.Models.NewMessage;
@@ -17,7 +18,6 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
     using Fanex.ApolloCMS.Message.Repositories.Interfaces;
     using Fanex.ApolloCMS.Message.Services.Interfaces;
     using Fanex.NAP.Framework.Data;
-    using System.Text;
 
     /// <summary>
     /// New message service.
