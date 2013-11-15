@@ -98,7 +98,6 @@ namespace Fanex.ApolloCMS.Websites
                 "~/Areas/UserLogin/scripts/login.js"));
         }
 
-
         /// <summary>
         /// Registers bundles for new message page.
         /// </summary>
