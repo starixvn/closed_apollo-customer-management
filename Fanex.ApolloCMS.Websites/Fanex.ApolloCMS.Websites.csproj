@@ -362,7 +362,7 @@
     <Content Include="Areas\Message\Views\PublicMessage\Index.cshtml" />
     <Content Include="Areas\Message\Resources\MessageList\layout.less" />
     <Content Include="Areas\Message\Resources\NewMessage\layout.less" />
-    <Content Include="Areas\Message\Resources\NewMessage\publicMessage.less" />
+    <Content Include="Areas\Message\Resources\NewMessage\newMessage.less" />
     <None Include="Areas\UserLogin\themes\layout.less" />
     <None Include="Areas\UserLogin\themes\login.less" />
     <None Include="Areas\UserLogin\themes\fonts\Abel.woff" />
