@@ -101,7 +101,8 @@ namespace Fanex.ApolloCMS.Websites
             bundles.Add(new StyleBundle("~/styles/fanexGrid").Include(
                  "~/scripts/lib/Fanex.Grid/Fanex.Grid.css",
                  "~/scripts/lib/Fanex.Grid/Fanex.Grid.less",
-                 "~/scripts/lib/Fanex.Grid/Fanex.Pagination.css"));
+                 "~/scripts/lib/Fanex.Grid/Fanex.Pagination.css",
+                 "~/content/site/customFanexGrid.less"));
 
             bundles.Add(new ScriptBundle("~/scripts/fanexGrid").Include(
                 "~/scripts/lib/Fanex.Grid/Fanex.Grid.js",
