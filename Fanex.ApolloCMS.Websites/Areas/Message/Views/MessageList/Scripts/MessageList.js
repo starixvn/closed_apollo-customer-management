@@ -152,7 +152,8 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                 MessageId: _params.getMessageByIdParam.messageId
             }),
             success: function (html) {
-                $("#editMessageContent").html(html);
+                //$("#editMessageContent").html(html);
+                CMS.popup("Edit Message", html);
             },
             error: function (error) {
                 console.log(error);

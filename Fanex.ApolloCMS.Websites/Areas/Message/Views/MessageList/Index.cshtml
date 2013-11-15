@@ -7,6 +7,7 @@
 @section Head {
     @Styles.Render("~/styles/fanexGrid")
     @Styles.Render("~/site/messageList")
+    @Styles.Render("~/site/newMessage")
 }
 
 <h5 class="row title">Message List</h5>
@@ -79,6 +80,7 @@
 <div id="editMessageContent"></div>
 @section Foot {
     @Scripts.Render("~/scripts/fanexGrid")
+    <script type="text/javascript" src="~/Scripts/CMS.js"></script>
     <script type="text/javascript" src="~/Scripts/lib/Namespace.js"></script>
     <script type="text/javascript" src="~/Areas/Message/Views/MessageList/Scripts/MessageList.js"></script>
 }
