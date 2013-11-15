@@ -2,73 +2,61 @@
     ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section Head {
+    @Styles.Render("~/site/newMessage")
+}
 @model Fanex.ApolloCMS.Message.Criteria.NewMessage.InsertMessageCriteria
-
-<h5 class="title">@Labels.NewPublicMessage</h5>
-<div class="content">
-    <div id="divMajorLangue" class="language-group">
-        <div class="language-group-title">@Labels.MajorLanguage</div>
-        <div class="language-group-body">
-            <div class="group-row">
-                <div class="language-area">
-                    <div id="divEnglish" class="language-title">@Html.LabelFor(m => m.Content_En, Labels.English)</div>
-                    <div class="language-body">
-                        @Html.TextAreaFor(m => m.Content_En)
-                    </div>
-                </div>
-                <div class="language-area">
-                    <div class="language-title">@Html.LabelFor(m => m.Content_Ch, Labels.ChineseTraditional)</div>
-                    <div class="language-body">
-                        @Html.TextAreaFor(m => m.Content_Ch)
-                    </div>
-                </div>
-                <div class="language-area">
-                    <div class="language-title">@Html.LabelFor(m => m.Content_Cs, Labels.ChineseSimplified)</div>
-                    <div class="language-body">
-                        @Html.TextAreaFor(m => m.Content_Cs)
-                    </div>
-                </div>
+<h5 class="row title">@Labels.NewPublicMessage</h5>
+<div id="divMajorLangue" class="row language-group">
+    <div class="col-xs-12 col-sm-12 col-md-12 language-group-title">@Labels.MajorLanguage</div>
+    <div class="col-xs-12 col-sm-12 col-md-12 language-group-body">
+        <div class="row group-row">
+            <div class="col-sm-4 col-md-4 language-area">
+                @Html.LabelFor(m => m.Content_En, Labels.English, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title noborder-right" })
+                @Html.TextAreaFor(m => m.Content_En, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
+            </div>
+            <div class="col-sm-4 col-md-4 language-area">
+                @Html.LabelFor(m => m.Content_Ch, Labels.ChineseTraditional, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title noborder-right" })
+                @Html.TextAreaFor(m => m.Content_Ch, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
+            </div>
+            <div class="col-sm-4 col-md-4 language-area">
+                @Html.LabelFor(m => m.Content_Cs, Labels.ChineseSimplified, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title" })
+                @Html.TextAreaFor(m => m.Content_Cs, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
             </div>
         </div>
     </div>
-    <div class="language-group">
-        <div class="language-group-title">@Labels.OtherLanguage</div>
-        <div class="language-group-body">
-            <div class="group-row">
-                <div class="language-area">
-                    <div class="language-title">@Html.LabelFor(m => m.Content_Jp, Labels.Japanese)</div>
-                    <div class="language-body">
-                        @Html.TextAreaFor(m => m.Content_Jp)
-                    </div>
-                </div>
-                <div class="language-area">
-                    <div class="language-title">@Html.LabelFor(m => m.Content_Ko, Labels.Korean)</div>
-                    <div class="language-body">
-                        @Html.TextAreaFor(m => m.Content_Ko)
-                    </div>
-                </div>
-                <div class="language-area">
-                    <div class="language-title">@Html.LabelFor(m => m.Content_Th, Labels.Thai)</div>
-                    <div class="language-body">
-                        @Html.TextAreaFor(m => m.Content_Th)
-                    </div>
-                </div>
+</div>
+<div class="row language-group">
+    <div class="col-xs-12 col-sm-12 col-md-12 language-group-title other-lag">@Labels.OtherLanguage</div>
+    <div class="col-xs-12 col-sm-12 col-md-12 language-group-body">
+        <div class="row group-row">
+            <div class="col-sm-4 col-md-4 language-area">
+                @Html.LabelFor(m => m.Content_Jp, Labels.Japanese, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title noborder-right" })
+                @Html.TextAreaFor(m => m.Content_Jp, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
             </div>
-            <div class="group-row">
-                <div class="language-area">
-                    <div class="language-title">@Html.LabelFor(m => m.Content_Vn, Labels.Vietnamese)</div>
-                    <div class="language-body">
-                        @Html.TextAreaFor(m => m.Content_Vn, new { id = "txtContentVn" })
-                    </div>
-                </div>
+            <div class="col-sm-4 col-md-4 language-area">
+                @Html.LabelFor(m => m.Content_Ko, Labels.Korean, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title noborder-right" })
+                @Html.TextAreaFor(m => m.Content_Ko, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
+            </div>
+            <div class="col-sm-4 col-md-4 language-area">
+                @Html.LabelFor(m => m.Content_Th, Labels.Thai, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title" })
+                @Html.TextAreaFor(m => m.Content_Th, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
+            </div>
+        </div>
+        <div class="row group-row">
+            <div class="col-sm-4 col-md-4 language-area end-area">@Html.LabelFor(m => m.Content_Vn, Labels.Vietnamese, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title" })
+                @Html.TextAreaFor(m => m.Content_Vn, new { id = "txtContentVn", @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
             </div>
         </div>
     </div>
-    <div>
-        @Html.LabelFor(m => m.Recipient, Labels.Recipient)
+</div>
+<div class="row group-action">
+    <div class="pull-left">
+        @Html.LabelFor(m => m.Recipient, Labels.Recipient, new { @class="lbl-recipient"})
         @Html.DropDownListFor(m => m.Recipient, (IEnumerable<SelectListItem>)ViewBag.Recipient)
-        @Html.CheckBoxFor(m => m.IsSpecialMsg)
-        @Html.LabelFor(m => m.IsSpecialMsg, Labels.SpecialMessage)
-        <input type="button" value="@ViewLang.Submit" />
     </div>
+    <div class="pull-left checkbox">
+        <label>@Html.CheckBoxFor(m => m.IsSpecialMsg) @Labels.SpecialMessage</label>
+    </div>
+    <input type="button" class="btn pull-left" value="@ViewLang.Submit" />
 </div>
