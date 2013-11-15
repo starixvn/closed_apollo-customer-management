@@ -51,7 +51,11 @@ namespace Fanex.ApolloCMS.Websites
 
             bundles.AddAndInclude(
                 "~/site/messageList",
-                "~/areas/message/views/messageList/content/layout.less");
+                "~/areas/message/resources/messagelist/layout.less");
+
+            bundles.AddAndInclude(
+                "~/site/newMessage",
+                "~/areas/message/resources/newmessage/layout.less");
 
             bundles.Add(new ScriptBundle("~/scripts/headjs").Include(
                 "~/scripts/lib/html5-libs/head.js"));

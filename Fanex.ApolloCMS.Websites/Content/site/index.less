@@ -26,6 +26,24 @@ body {
     margin: 0;
 }
 
+input[type="text"], input[type="submit"], input[type="button"] {
+    height: 26px;
+}
+
+.btn {
+    padding: 1px 15px 3px;
+    .border-radius(2px);
+    background-color: @primary-color;
+    border: none;
+    color: #fff;
+    font-size: @font-size;
+
+    &:hover {
+        background-color: #4A9CD2;
+        color: #fff;
+    }
+}
+
 /* Icon */
 .icon {
     background: url(img/icons.png) no-repeat;
@@ -400,6 +418,7 @@ body {
                     display: table-cell;
                     float: none;
                     border-left: 1px solid @border-color;
+                    background-color: #ededed;
                     
                     a {
                         color: @gray-color;
@@ -464,7 +483,7 @@ body {
             }
 
             .container-content {
-                padding: 20px;
+                padding: 10px 20px;
 
                 .title {
                     font-weight: bold;
@@ -515,16 +534,6 @@ body {
                                 width: auto;
                             }
 
-                            .btn {
-                                padding: 1px 15px 3px;
-
-                                &.btn-submit {
-                                    background-color: @primary-color;
-                                    border: none;
-                                    color: #fff;
-                                }
-                            }
-
                             .ui-datepicker-trigger {
                                 cursor: pointer;
                                 position: absolute;
@@ -534,10 +543,6 @@ body {
 
                             .hasDatepicker {
                                 width: 90px;
-                            }
-
-                            input {
-                                height: 26px;
                             }
                         }
                     }
@@ -567,6 +572,31 @@ body {
 
                 .content-grid {
                     float: left;
+                }
+
+                .tbl {
+                    margin-bottom: 7px;
+
+                    thead {
+                        th {
+                            background-color: @primary-color;
+                            font-weight: normal;
+                            color: #fff;
+                            text-align: center;
+                        }
+                    }
+
+                    tbody {
+                        td {
+                            height: 20px;
+                            padding: 5px;
+                            border-color: #c7e1f2;
+                        }
+                    }
+
+                    .width-100 {
+                        width: 100px;
+                    }
                 }
             }
         }

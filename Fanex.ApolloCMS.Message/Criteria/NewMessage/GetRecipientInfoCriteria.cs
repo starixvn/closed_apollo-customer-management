@@ -16,6 +16,10 @@ namespace Fanex.ApolloCMS.Message.Criteria.NewMessage
     /// </summary>
     public class GetRecipientInfoCriteria : CriteriaBase
     {
+        public bool IsAgent { get; set; }
+
+        public string UserName { get; set; }
+
         /// <summary>
         /// Get Setting Key.
         /// </summary>

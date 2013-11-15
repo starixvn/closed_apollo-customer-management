@@ -1,0 +1,112 @@
+﻿@import "../../../../Content/site/variables.less";
+@import "../../../../Content/site/mixins.less";
+
+.language-group {
+    margin: 10px 0;
+    border: 1px solid darken(@border-color, 10%);
+    padding: 5px;
+    .border-radius(2px);
+
+    .language-group-title {
+        background-color: #9fcfee;
+        border: 1px solid @primary-color;
+        color: #fff;
+        padding: 5px 10px;
+        color: #000;
+
+        &.other-lag {
+            cursor: pointer;
+        }
+
+        .glyphicon-plus {
+            color: #0D5686;
+            margin-right: 3px;
+        }
+    }
+
+    .body-otherLanguage {
+        display: none;
+    }
+
+    .group-row {
+        .language-title {
+            display: block;
+            padding: 3px 10px;
+            font-weight: normal;
+            border: 1px solid darken(@border-color, 10%);
+            background-color: #ededed;
+            margin: 3px 0;
+
+            &.noborder-right {
+                border-right: 0;
+            }
+        }
+
+        .language-body {
+            min-height: 130px;
+        }
+    }
+}
+.group-action {
+    margin: 15px 0;
+
+    &.addMessage {
+        background-color: #F6F6F6;
+        border: 1px solid @border-color;
+        padding: 10px 10px 5px;
+        .border-radius(2px);
+        margin: 10px 0 7px;
+
+        .txtUserName {
+            margin: 0 5px 0 10px;
+        }
+
+        .btn {
+            margin-left: 20px;
+        }
+    }
+
+    .selectboxit-container {
+        .selectboxit {
+            border: 1px solid @border-color;
+            .border-radius(2px);
+        }
+
+        .selectboxit-text {
+            color: @text-color;
+            font-size: @font-size;
+        }
+
+        .selectboxit-options {
+            .box-shadow(0);
+            border: 1px solid @border-color;
+        }
+    }
+
+    label {
+        font-weight: normal;
+        vertical-align: middle;
+
+        &.lbl-recipient {
+            margin-top: 3px;
+        }
+    }
+    
+    .checkbox {
+        margin: 5px 10px;
+
+        input {
+            margin-top: 2px;
+        }
+    }
+}
+
+.rowLimit {
+    margin-top: 4px;
+}
+
+.alert {
+    .border-radius(2px);
+    margin: 10px 0 0;
+    padding: 7px 10px;
+}

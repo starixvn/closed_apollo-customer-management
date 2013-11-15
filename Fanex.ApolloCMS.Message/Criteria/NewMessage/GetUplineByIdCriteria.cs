@@ -16,6 +16,10 @@ namespace Fanex.ApolloCMS.Message.Criteria.NewMessage
     /// </summary>
     public class GetUplineByIdCriteria : CriteriaBase
     {
+        public int Id { get; set; }
+
+        public bool IsAgent { get; set; }
+
         /// <summary>
         /// Get Setting Key.
         /// </summary>
