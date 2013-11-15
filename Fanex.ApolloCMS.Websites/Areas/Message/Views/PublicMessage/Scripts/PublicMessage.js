@@ -39,7 +39,7 @@ Fanex.ApolloCMS.Message.PublicMessage = function () {
     };
     var initFields = function () {
         $this.DOMInstance.spnOtherLanguage.bind('click', function () {
-            $this.DOMInstance.divOtherLanguage.toggle('slow');
+            $this.DOMInstance.divOtherLanguage.slideToggle('slow');
         });
 
         $this.DOMInstance.btnSubmit.bind('click', function () {
