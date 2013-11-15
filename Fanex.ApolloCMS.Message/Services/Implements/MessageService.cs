@@ -98,7 +98,6 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
             return result;
         }
 
-
         /// <summary>
         /// Updates the message.
         /// </summary>

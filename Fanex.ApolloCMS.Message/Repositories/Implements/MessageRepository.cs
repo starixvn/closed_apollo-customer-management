@@ -89,7 +89,6 @@ namespace Fanex.ApolloCMS.Message.Repositories.Implements
         /// Updates the message.
         /// </summary>
         /// <param name="updateMessageCriteria">The update message criteria.</param>
-        /// <returns>Message update.</returns>
         public void UpdateMessage(UpdateMessageCriteria updateMessageCriteria)
         {
             using (var db = new ObjectDb(updateMessageCriteria.GetSettingKey()))
@@ -100,11 +99,10 @@ namespace Fanex.ApolloCMS.Message.Repositories.Implements
             }
         }
 
-
         /// <summary>
         /// Deletes the message.
         /// </summary>
-        /// <param name="deleteMessageCriterial">The delete message criteria.</param>
+        /// <param name="deleteMessageCriteria">The delete message criteria.</param>
         public void DeleteMessage(DeleteMessageCriteria deleteMessageCriteria)
         {
             using (var db = new ObjectDb(deleteMessageCriteria.GetSettingKey()))
