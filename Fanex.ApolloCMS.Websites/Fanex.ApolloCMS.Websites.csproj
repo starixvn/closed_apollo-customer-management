@@ -392,6 +392,7 @@
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Shared\_PageLayout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Content\site\custom.less" />
     <None Include="Content\site\grid.less" />
   </ItemGroup>
   <ItemGroup>

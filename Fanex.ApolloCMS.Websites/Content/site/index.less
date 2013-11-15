@@ -33,14 +33,14 @@ input[type="text"], input[type="submit"], input[type="button"] {
 .btn {
     padding: 1px 15px 3px;
     .border-radius(2px);
-    background-color: @primary-color;
+    background-color: @button-background;
     border: none;
-    color: #fff;
+    color: @button-color;
     font-size: @font-size;
 
     &:hover {
-        background-color: #4A9CD2;
-        color: #fff;
+        background-color: @button-background-hover;
+        color: @button-color;
     }
 }
 
@@ -537,8 +537,8 @@ input[type="text"], input[type="submit"], input[type="button"] {
                             .ui-datepicker-trigger {
                                 cursor: pointer;
                                 position: absolute;
-                                right: 4px;
-                                top: 4px;
+                                right: 5px;
+                                top: 6px;
                             }
 
                             .hasDatepicker {
@@ -566,7 +566,7 @@ input[type="text"], input[type="submit"], input[type="button"] {
 
                     label {
                         font-weight: normal;
-                        margin-right: 10px;
+                        margin: 3px 10px 0 0;
                     }
                 }
 
@@ -626,55 +626,4 @@ input[type="text"], input[type="submit"], input[type="button"] {
             min-width: 150px;
         }
     }
-}
-
-/* Customize */
-.selectboxit-container {
-    .selectboxit {
-        .border-radius(0);
-        border: none;
-        background: #fff;
-        margin-right: 2px;
-    }
-
-    span, .selectboxit-options a {
-        height: 26px;
-        line-height: 24px;
-    }
-
-    .selectboxit-options {
-        .box-shadow(-1px 3px 2px #ccc);
-        border: none;
-    }
-
-    .selectboxit-options, .selectboxit-option-first, .selectboxit-option-last {
-        .border-radius(0);
-    }
-
-    .selectboxit-text {
-        color: @primary-color;
-        font-size: @font-size + 1;
-    }
-
-    .selectboxit .selectboxit-arrow-container .selectboxit-arrow {
-        .icon-row-down;
-        border: none;
-        top: 40%;
-        height: 8px;
-    }
-    .selectboxit-btn.selectboxit-enabled:hover,
-    .selectboxit-btn.selectboxit-enabled:focus,
-    .selectboxit-btn.selectboxit-enabled:active {
-        background: #fff;
-        color: @primary-color;
-    }
-
-    .selectboxit-list > .selectboxit-focus > .selectboxit-option-anchor {
-        background: @primary-color;
-    }
-}
-
-.container.page .header .search .search-container .selectboxit-options li {
-    display: block;
-    border-color: @border-color;
 }
