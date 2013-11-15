@@ -21,23 +21,21 @@ namespace Fanex.ApolloCMS.Message.Models.MessageList
     /// </summary>
     public class Message
     {
-        public long? RowNumber { get; set; }
+        public DateTime? PostTime { get; set; }
 
-        public DateTime? PostDate { get; set; }
+        public string ContentCh { get; set; }
 
-        public string Content_CH { get; set; }
+        public string ContentCs { get; set; }
 
-        public string Content_CS { get; set; }
+        public string ContentEn { get; set; }
 
-        public string Content_EN { get; set; }
+        public string ContentJp { get; set; }
 
-        public string Content_JP { get; set; }
+        public string ContentKo { get; set; }
 
-        public string Content_KO { get; set; }
+        public string ContentTh { get; set; }
 
-        public string Content_TH { get; set; }
-
-        public string Content_VN { get; set; }
+        public string ContentVn { get; set; }
 
         public byte? MsgType { get; set; }
 
@@ -48,6 +46,16 @@ namespace Fanex.ApolloCMS.Message.Models.MessageList
         public int TargetId { get; set; }
 
         public string Recipient { get; set; }
+
+        public int MessageId { get; set; }
+
+        public string PostDate
+        {
+            get
+            {
+                return PostTime.ToString();
+            }
+        }
 
         public string MessageType
         {

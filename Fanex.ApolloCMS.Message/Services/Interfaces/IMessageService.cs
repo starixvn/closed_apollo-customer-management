@@ -20,5 +20,11 @@ namespace Fanex.ApolloCMS.Message.Services.Interfaces
     public interface IMessageService
     {
         List<Message> GetListMessage(GetMessageListCriteria getMessageListCriteria);
+
+        Message GetMessageById(GetMessageByIdCriteria getMessageByIdCriteria);
+
+        void UpdateMessage(UpdateMessageCriteria updateMessageCriteria);
+
+        void DeleteMessage(DeleteMessageCriteria deleteMessageCriteria);
     }
 }

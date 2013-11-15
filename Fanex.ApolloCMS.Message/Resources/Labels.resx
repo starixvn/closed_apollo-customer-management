@@ -126,6 +126,9 @@
   <data name="ChineseTraditional" xml:space="preserve">
     <value>Chinese Traditional</value>
   </data>
+  <data name="EditMessage" xml:space="preserve">
+    <value>Edit Message</value>
+  </data>
   <data name="English" xml:space="preserve">
     <value>* English</value>
   </data>

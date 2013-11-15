@@ -361,6 +361,7 @@
     <Content Include="Areas\Message\Views\PrivateMessage\Index.cshtml" />
     <Content Include="Areas\Message\Views\PublicMessage\Index.cshtml" />
     <Content Include="Areas\Message\Resources\MessageList\layout.less" />
+    <Content Include="Areas\Message\Views\MessageList\EditMessage.cshtml" />
     <Content Include="Areas\Message\Resources\NewMessage\layout.less" />
     <Content Include="Areas\Message\Resources\NewMessage\newMessage.less" />
     <None Include="Areas\UserLogin\themes\layout.less" />

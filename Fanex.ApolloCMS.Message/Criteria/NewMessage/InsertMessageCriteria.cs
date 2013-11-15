@@ -9,7 +9,9 @@
 
 namespace Fanex.ApolloCMS.Message.Criteria.NewMessage
 {
-    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using Fanex.ApolloCMS.Message.Models.NewMessage;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
@@ -27,19 +29,23 @@ namespace Fanex.ApolloCMS.Message.Criteria.NewMessage
 
         public string Recipient { get; set; }
 
-        public string Content_En { get; set; }
+        [Required]
+        public string ContentEn { get; set; }
 
-        public string Content_Ch { get; set; }
+        public string ContentCh { get; set; }
 
-        public string Content_Cs { get; set; }
+        public string ContentCs { get; set; }
 
-        public string Content_Th { get; set; }
+        public string ContentTh { get; set; }
 
-        public string Content_Jp { get; set; }
+        public string ContentJp { get; set; }
 
-        public string Content_Ko { get; set; }
+        public string ContentKo { get; set; }
 
-        public string Content_Vn { get; set; }
+        public string ContentVn { get; set; }
+
+        [SpParam(Ignored = true)]
+        public IEnumerable<Recipient> RecipientList { get; set; }
 
         /// <summary>
         /// Get Setting Key.

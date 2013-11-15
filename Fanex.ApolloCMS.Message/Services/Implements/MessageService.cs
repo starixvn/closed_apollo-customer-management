@@ -66,24 +66,54 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
             {
                 var messageInfo = new Message()
                 {
-                    RowNumber = row.RowNumber,
-                    PostDate = row.PostDate,
-                    Content_CH = row.Content_CH,
-                    Content_CS = row.Content_CS,
-                    Content_EN = row.Content_EN,
-                    Content_JP = row.Content_JP,
-                    Content_KO = row.Content_KO,
-                    Content_TH = row.Content_TH,
-                    Content_VN = row.Content_VN,
+                    PostTime = row.PostTime,
+                    ContentCh = row.ContentCh,
+                    ContentCs = row.ContentCs,
+                    ContentEn = row.ContentEn,
+                    ContentJp = row.ContentJp,
+                    ContentKo = row.ContentKo,
+                    ContentTh = row.ContentTh,
+                    ContentVn = row.ContentVn,
                     MsgType = row.MsgType,
                     IsSpecial = row.IsSpecial,
                     Creator = row.Creator,
-                    TargetId = row.TargetId 
+                    TargetId = row.TargetId,
+                    MessageId = row.MessageId
                 };
                 result.Add(messageInfo);
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Gets the message by identifier.
+        /// </summary>
+        /// <param name="getMessageByIdCriteria">The get message by identifier criteria.</param>
+        /// <returns>The message.</returns>
+        public Message GetMessageById(GetMessageByIdCriteria getMessageByIdCriteria)
+        {
+            var result = new Message();
+            result = this._messageRepository.GetMessageById(getMessageByIdCriteria);
+            return result;
+        }
+
+        /// <summary>
+        /// Updates the message.
+        /// </summary>
+        /// <param name="updateMessageCriteria">The update message criteria.</param>
+        public void UpdateMessage(UpdateMessageCriteria updateMessageCriteria)
+        {
+            this._messageRepository.UpdateMessage(updateMessageCriteria);
+        }
+
+        /// <summary>
+        /// Deletes the message.
+        /// </summary>
+        /// <param name="deleteMessageCriteria">The delete message criteria.</param>
+        public void DeleteMessage(DeleteMessageCriteria deleteMessageCriteria)
+        {
+            this._messageRepository.DeleteMessage(deleteMessageCriteria);
         }
     }
 }

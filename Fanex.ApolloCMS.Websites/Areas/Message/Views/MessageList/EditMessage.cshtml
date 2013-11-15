@@ -1,0 +1,52 @@
+﻿@model Fanex.ApolloCMS.Message.Models.MessageList.Message
+
+<h5 class="row title">@Labels.EditMessage</h5>
+<div id="divMajorLangue" class="row language-group">
+	<div class="col-xs-12 col-sm-12 col-md-12 language-group-title">@Labels.MajorLanguage</div>
+	<div class="col-xs-12 col-sm-12 col-md-12 language-group-body">
+		<div class="row group-row">
+			<div class="col-sm-4 col-md-4 language-area">
+				@Html.LabelFor(m => m.ContentEn, Labels.English, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title noborder-right" })
+				@Html.TextAreaFor(m => m.ContentEn, new { id = "txtContentEn", @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
+			</div>
+			<div class="col-sm-4 col-md-4 language-area">
+				@Html.LabelFor(m => m.ContentCh, Labels.ChineseTraditional, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title noborder-right" })
+				@Html.TextAreaFor(m => m.ContentCh, new { id = "txtContentCh", @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
+			</div>
+			<div class="col-sm-4 col-md-4 language-area">
+				@Html.LabelFor(m => m.ContentCs, Labels.ChineseSimplified, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title" })
+				@Html.TextAreaFor(m => m.ContentCs, new { id = "txtContentCs", @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row language-group">
+	<div class="col-xs-12 col-sm-12 col-md-12 language-group-title other-lag">
+		<span class="glyphicon glyphicon-plus"></span>@Labels.OtherLanguage
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-12 language-group-body">
+		<div class="row group-row">
+			<div class="col-sm-4 col-md-4 language-area">
+				@Html.LabelFor(m => m.ContentJp, Labels.Japanese, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title noborder-right" })
+				@Html.TextAreaFor(m => m.ContentJp, new { id = "txtContentJp", @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
+			</div>
+			<div class="col-sm-4 col-md-4 language-area">
+				@Html.LabelFor(m => m.ContentKo, Labels.Korean, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title noborder-right" })
+				@Html.TextAreaFor(m => m.ContentKo, new { id = "txtContentKo", @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
+			</div>
+			<div class="col-sm-4 col-md-4 language-area">
+				@Html.LabelFor(m => m.ContentTh, Labels.Thai, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title" })
+				@Html.TextAreaFor(m => m.ContentTh, new { id = "txtContentTh", @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
+			</div>
+		</div>
+		<div class="row group-row">
+			<div class="col-sm-4 col-md-4 language-area end-area">
+				@Html.LabelFor(m => m.ContentVn, Labels.Vietnamese, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title" })
+				@Html.TextAreaFor(m => m.ContentVn, new { id = "txtContentVn", @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row group-action">
+	<input type="button" class="btn pull-left" value="@ViewLang.Submit" />
+</div>

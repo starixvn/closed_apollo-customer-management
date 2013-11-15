@@ -10,10 +10,12 @@
 namespace Fanex.ApolloCMS.Message.Repositories.Implements
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
     using System.Text;
+    using Fanex.ApolloCMS.Core.Repositories;
     using Fanex.ApolloCMS.Message.Criteria.MessageList;
     using Fanex.ApolloCMS.Message.Models.MessageList;
     using Fanex.ApolloCMS.Message.Repositories.Interfaces;
@@ -23,7 +25,7 @@ namespace Fanex.ApolloCMS.Message.Repositories.Implements
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class MessageRepository : IMessageRepository
+    public class MessageRepository : BaseRepository, IMessageRepository
     {
         /// <summary>
         /// Gets the list message.
@@ -31,7 +33,7 @@ namespace Fanex.ApolloCMS.Message.Repositories.Implements
         /// <param name="getMessageListCriteria">The get message list criteria.</param>
         /// <param name="outputParam">The output parameter.</param>
         /// <returns>List message.</returns>
-        public List<Message> GetListMessage(GetMessageListCriteria getMessageListCriteria, ref System.Collections.Hashtable outputParam)
+        public List<Message> GetListMessage(GetMessageListCriteria getMessageListCriteria, ref Hashtable outputParam)
         {
             DataSet result = null;
 
@@ -48,24 +50,67 @@ namespace Fanex.ApolloCMS.Message.Repositories.Implements
             {
                 messageList.Add(new Message()
                 {
-                    RowNumber = (long)Convert.ToDouble(row["RowNumber"]),
-                    PostDate = Converter.ToDateTime(row["PostTime"]),
-                    Content_CH = Converter.ToString2(row["Content_ch"]),
-                    Content_CS = Converter.ToString2(row["Content_cs"]),
-                    Content_EN = Converter.ToString2(row["Content_en"]),
-                    Content_JP = Converter.ToString2(row["Content_jp"]),
-                    Content_KO = Converter.ToString2(row["Content_ko"]),
-                    Content_TH = Converter.ToString2(row["Content_th"]),
-                    Content_VN = Converter.ToString2(row["Content_vn"]),
+                    PostTime = Converter.ToDateTime(row["PostTime"]),
+                    ContentCh = Converter.ToString2(row["Content_ch"]),
+                    ContentCs = Converter.ToString2(row["Content_cs"]),
+                    ContentEn = Converter.ToString2(row["Content_en"]),
+                    ContentJp = Converter.ToString2(row["Content_jp"]),
+                    ContentKo = Converter.ToString2(row["Content_ko"]),
+                    ContentTh = Converter.ToString2(row["Content_th"]),
+                    ContentVn = Converter.ToString2(row["Content_vn"]),
                     Creator = Converter.ToString2(row["CreatorName"]),
                     IsSpecial = Converter.ToBool(row["IsSpecial"]),
                     MsgType = Convert.ToByte(row["MsgType"]),
                     Recipient = Converter.ToString2(row["Recipient"]),
                     TargetId = Converter.ToInt(row["TargetId"]),
+                    MessageId = Converter.ToInt(row["MessageId"])
                 });
             }
 
             return messageList;
+        }
+
+        /// <summary>
+        /// Gets the message by identifier.
+        /// </summary>
+        /// <param name="getMessageByIdCriteria">The get message by identifier criteria.</param>
+        /// <returns>The message.</returns>
+        public Message GetMessageById(GetMessageByIdCriteria getMessageByIdCriteria)
+        {
+            using (var db = new ObjectDb(getMessageByIdCriteria.GetSettingKey()))
+            {
+                var param = getMessageByIdCriteria.GetSpParams();
+                
+                return db.QueryEntity<Message>(param);
+            }
+        }
+
+        /// <summary>
+        /// Updates the message.
+        /// </summary>
+        /// <param name="updateMessageCriteria">The update message criteria.</param>
+        public void UpdateMessage(UpdateMessageCriteria updateMessageCriteria)
+        {
+            using (var db = new ObjectDb(updateMessageCriteria.GetSettingKey()))
+            {
+                var param = updateMessageCriteria.GetSpParams();
+
+                db.ExecuteNonQuery(param);
+            }
+        }
+
+        /// <summary>
+        /// Deletes the message.
+        /// </summary>
+        /// <param name="deleteMessageCriteria">The delete message criteria.</param>
+        public void DeleteMessage(DeleteMessageCriteria deleteMessageCriteria)
+        {
+            using (var db = new ObjectDb(deleteMessageCriteria.GetSettingKey()))
+            {
+                var param = deleteMessageCriteria.GetSpParams();
+
+                db.ExecuteNonQuery(param);
+            }
         }
     }
 }

@@ -23,19 +23,19 @@ namespace Fanex.ApolloCMS.Message.Criteria.MessageList
 
         public string UserLoginName { get; set; }
 
-        public string Content_en { get; set; }
+        public string ContentEn { get; set; }
 
-        public string Content_ch { get; set; }
+        public string ContentCh { get; set; }
 
-        public string Content_cs { get; set; }
+        public string ContentCs { get; set; }
 
-        public string Content_th { get; set; }
+        public string ContentTh { get; set; }
 
-        public string Content_jp { get; set; }
+        public string ContentJp { get; set; }
 
-        public string Content_ko { get; set; }
+        public string ContentKo { get; set; }
 
-        public string Content_vn { get; set; }
+        public string ContentVn { get; set; }
 
         public override bool IsValid()
         {
