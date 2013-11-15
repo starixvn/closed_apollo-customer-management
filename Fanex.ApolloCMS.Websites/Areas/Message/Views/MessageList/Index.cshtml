@@ -6,52 +6,70 @@
 }
 @section Head {
     @Styles.Render("~/styles/fanexGrid")
-    <link rel="stylesheet" type="text/css" href="~/Areas/Message/Views/MessageList/Message.less" />
+    @Styles.Render("~/site/messageList")
 }
 
-<h2>Message List</h2>
-
-<div class="filter-form">
-    <div class="filter-row">
+<h5 class="title">Message List</h5>
+<div class="filter-form clearfix">
+    <div class="filter-row clearfix">
         <div class="filter-item">
-            <label>@Labels.Top_New_Messages</label>
-            <select id="ddlTopNewMessage">
-                <option value="100">100</option>
-                <option value="200">200</option>
-                <option value="500">500</option>
-            </select>
+            <div class="lbl lbl-large">
+                <label>@Labels.Top_New_Messages</label>
+            </div>
+            <div class="txt width-auto">
+                <select id="ddlTopNewMessage" class="topMessage">
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                    <option value="500">500</option>
+                </select>
+            </div>
         </div>
         <div class="filter-item">
-            <label>@Labels.Message_Type</label>
-            <select id="ddlMessageType">
-                <option value="All">All Types</option>
-                <option value="3">Public</option>
-                <option value="1">Private</option>
-            </select>
+            <div class="lbl lbl-small">
+                <label>@Labels.From</label>
+            </div>
+            <div class="txt width-auto">
+                <input type="text" id="dateFrom"/>
+            </div>
         </div>
-        <div class="filter-item">
-            <label>@Labels.Special</label>
-            <select id="ddlSpecial">
-                <option value="All">All</option>
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-            </select>
+        <div class="filter-item dateTo">
+            <div class="lbl width-auto">
+                <label>@Labels.To</label>
+            </div>
+            <div class="txt width-auto">
+                <input type="text" id="dateTo"/>
+            </div>
         </div>
-        <div class="clear"></div>
+        
     </div>
-    <div class="filter-row">
+    <div class="filter-row clearfix">
         <div class="filter-item">
-            <label>@Labels.From</label>
-            <input type="text" id="dateFrom"/>
+            <div class="lbl lbl-large">
+                <label>@Labels.Message_Type</label>
+            </div>
+            <div class="txt width-auto">
+                <select id="ddlMessageType" class="messageType">
+                    <option value="All">All Types</option>
+                    <option value="3">Public</option>
+                    <option value="1">Private</option>
+                </select>
+            </div>
         </div>
         <div class="filter-item">
-            <label>@Labels.To</label>
-            <input type="text" id="dateTo"/>
+            <div class="lbl lbl-small">
+                <label>@Labels.Special</label>
+            </div>
+            <div class="txt width-auto">
+                <select id="ddlSpecial" class="sel-special">
+                    <option value="All">All</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
         </div>
         <div class="filter-item">
-            <input id="btnGetListMessage" type="button" value="@Labels.Submit"/>
+            <input id="btnGetListMessage" type="button" class="btn btn-default btn-submit" value="@Labels.Submit"/>
         </div>
-        <div class="clear"></div>
     </div>
 </div>
 

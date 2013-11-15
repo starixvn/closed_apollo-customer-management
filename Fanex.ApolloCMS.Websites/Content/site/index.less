@@ -1,5 +1,14 @@
 @import "variables.less";
 @import "mixins.less";
+@import "grid.less";
+
+/********************************************************/
+/*                     Semantic Grid                    */
+/********************************************************/
+
+@columns: 24;
+@column-width: 42;
+@gutter-width: 6;
 
 body {
     font-family: @font-family;
@@ -453,6 +462,113 @@ body {
                 top: 314px;
                 left: 0;
             }
+
+            .container-content {
+                padding: 20px;
+
+                .title {
+                    font-weight: bold;
+                    color: #248fd3;
+                    border-bottom: 1px solid #248fd3;
+                    padding-bottom: 7px;
+                    margin-top: 0;
+                    text-transform: uppercase;
+                }
+
+                .filter-form {
+                    margin-top: 10px;
+                    float: left;
+
+                    .filter-row {
+                        display: block;
+
+                        .filter-item {
+                            float: left;
+                            display: inline;
+                            margin-bottom: 10px;
+                            margin-right: 20px;
+
+                            .lbl, .txt {
+                                float: left;
+                            }
+
+                            .lbl {
+                                //width: 90px;
+                                .column(2);
+
+                                &.lbl-large {
+                                     .column(3);
+                                }
+
+                                &.lbl-small {
+                                     .column(1);
+                                }
+                            }
+
+                            .txt {
+                                width: 110px;
+                                position: relative;
+                                .column(3);
+                            }
+
+                            .width-auto {
+                                width: auto;
+                            }
+
+                            .btn {
+                                padding: 1px 15px 3px;
+
+                                &.btn-submit {
+                                    background-color: @primary-color;
+                                    border: none;
+                                    color: #fff;
+                                }
+                            }
+
+                            .ui-datepicker-trigger {
+                                cursor: pointer;
+                                position: absolute;
+                                right: 4px;
+                                top: 4px;
+                            }
+
+                            .hasDatepicker {
+                                width: 90px;
+                            }
+
+                            input {
+                                height: 26px;
+                            }
+                        }
+                    }
+
+                    .selectboxit-container {
+                        .selectboxit {
+                            border: 1px solid @border-color;
+                            .border-radius(2px);
+                        }
+
+                        .selectboxit-text {
+                            color: @text-color;
+                            font-size: @font-size;
+                        }
+
+                        .selectboxit-options {
+                            .box-shadow(0);
+                            border: 1px solid @border-color;
+                        }
+                    }
+
+                    label {
+                        font-weight: normal;
+                        margin-right: 10px;
+                    }
+                }
+
+                .content-grid {
+                    float: left;
+                }
+            }
         }
     }
 }
@@ -514,6 +630,7 @@ body {
         .icon-row-down;
         border: none;
         top: 40%;
+        height: 8px;
     }
     .selectboxit-btn.selectboxit-enabled:hover,
     .selectboxit-btn.selectboxit-enabled:focus,

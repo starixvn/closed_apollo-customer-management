@@ -179,7 +179,7 @@
     <Content Include="App_Data\SVRMSG.MsgDB.aplweb.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\Message\Views\MessageList\Message.less" />
+    <Content Include="Areas\Message\Views\MessageList\css\Message.less" />
     <Content Include="Areas\Message\Views\MessageList\Scripts\MessageList.js" />
     <Content Include="Areas\UserLogin\scripts\login.js" />
     <Content Include="Areas\UserLogin\scripts\lib\jquery-1.8.0.min.js" />
@@ -202,6 +202,7 @@
     <Content Include="Content\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\site\img\icon-cal.jpg" />
     <Content Include="Content\site\img\icon-search.png" />
     <Content Include="Content\site\img\icons.png" />
     <Content Include="Content\lib\jquery-ui\images\ui-bg_flat_60_4264ac_40x100.png" />
@@ -357,6 +358,7 @@
     <Content Include="Areas\Message\Views\MessageList\Index.cshtml" />
     <Content Include="Areas\Message\Views\PrivateMessage\Index.cshtml" />
     <Content Include="Areas\Message\Views\PublicMessage\Index.cshtml" />
+    <Content Include="Areas\Message\Views\MessageList\css\layout.less" />
     <None Include="Areas\UserLogin\themes\layout.less" />
     <None Include="Areas\UserLogin\themes\login.less" />
     <None Include="Areas\UserLogin\themes\fonts\Abel.woff" />
@@ -386,6 +388,7 @@
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Shared\_PageLayout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <None Include="Content\site\grid.less" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.ApolloCMS.Core\Fanex.ApolloCMS.Core.csproj">
