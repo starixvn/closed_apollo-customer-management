@@ -64,10 +64,11 @@ namespace Fanex.ApolloCMS.Message.Controllers
         /// <param name="getMessageByIdCriteria">The get message by identifier criteria.</param>
         /// <returns>The message.</returns>
         [HttpPost]
-        public JsonResult GetMessageById(GetMessageByIdCriteria getMessageByIdCriteria)
+        public ActionResult GetMessageById(GetMessageByIdCriteria getMessageByIdCriteria)
         {
             var result = this._messageService.GetMessageById(getMessageByIdCriteria);
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return PartialView("EditMessage", result);
+            //return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

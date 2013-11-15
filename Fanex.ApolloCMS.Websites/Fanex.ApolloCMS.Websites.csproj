@@ -361,6 +361,7 @@
     <Content Include="Areas\Message\Views\PrivateMessage\Index.cshtml" />
     <Content Include="Areas\Message\Views\PublicMessage\Index.cshtml" />
     <Content Include="Areas\Message\Views\MessageList\Content\layout.less" />
+    <Content Include="Areas\Message\Views\MessageList\EditMessage.cshtml" />
     <None Include="Areas\UserLogin\themes\layout.less" />
     <None Include="Areas\UserLogin\themes\login.less" />
     <None Include="Areas\UserLogin\themes\fonts\Abel.woff" />

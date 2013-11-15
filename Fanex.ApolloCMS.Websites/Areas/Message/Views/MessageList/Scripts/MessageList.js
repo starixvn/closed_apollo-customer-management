@@ -86,17 +86,20 @@ Fanex.ApolloCMS.Message.MessageList = function () {
             }),
             success: function (rs) {
                 self.renderGrid(rs);
+            },
+            error: function (error) {
+                console.log(error);
             }
         });
-    }
+    };
 
     self.renderGrid = function (rs) {
         _tables.gridMessageContainer.removeClass("display-none");
         var bodyData = [];
         var columns = [
-                    { HeaderText: "Posted Date", Width: 200, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMMM Do YYYY" },
+                    { HeaderText: "Posted Date", Width: 200, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Message English", Width: 300, Name: "MessageContent", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell) {
-                        return '<div class="link editBtn" onclick="editMessage(' + currentCell.Value.MessageId + ')">Edit</div><div class="messageContent">' + currentCell.Value.Content_EN + '</div><div class="clear"></div>';
+                        return '<div class="link editBtn" onclick="editMessage(' + currentCell.Value.MessageId + ')">Edit</div><div class="messageContent">' + currentCell.Value.ContentEn + '</div><div class="clear"></div>';
                     }
                     },
                     { HeaderText: "Type", Width: 80, Name: "MessageType", HeaderAlign: "center", CellAlign: "center" },
@@ -144,19 +147,22 @@ Fanex.ApolloCMS.Message.MessageList = function () {
             type: "POST",
             url: "Message/MessageList/GetMessageById",
             contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            dataType: "html",
             data: JSON.stringify({
-                MessageId:_params.getMessageByIdParam.messageId
+                MessageId: _params.getMessageByIdParam.messageId
             }),
-            success: function (rs) {
-                console.log(rs);
+            success: function (html) {
+                $("#editMessageContent").html(html);
+            },
+            error: function (error) {
+                console.log(error);
             }
         });
-    }
+    };
 
     editMessage = function (id) {
         self.getMessageById(id);
-    }
+    };
 
     self.bindingEvents = function () {
         $("#btnGetListMessage").click(function () {

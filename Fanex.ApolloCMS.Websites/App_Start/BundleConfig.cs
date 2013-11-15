@@ -67,12 +67,6 @@ namespace Fanex.ApolloCMS.Websites
                 "~/content/bootstrap/js/bootstrap.js",
                 "~/scripts/lib/respond.js",
                 "~/scripts/_layout.js"));
-
-            bundles.Add(new ScriptBundle("~/scripts/fanexGrid").Include(
-                "~/scripts/lib/Fanex.Grid/Fanex.Grid.js",
-                "~/scripts/lib/Fanex.Grid/Fanex.Pagination.js",
-                "~/scripts/lib/Fanex.Grid/moment.js",
-                "~/scripts/lib/Fanex.Grid/numeral.js"));
         }
 
         /// <summary>
@@ -106,6 +100,11 @@ namespace Fanex.ApolloCMS.Websites
                  "~/scripts/lib/Fanex.Grid/Fanex.Grid.less",
                  "~/scripts/lib/Fanex.Grid/Fanex.Pagination.css"));
 
+            bundles.Add(new ScriptBundle("~/scripts/fanexGrid").Include(
+                "~/scripts/lib/Fanex.Grid/Fanex.Grid.js",
+                "~/scripts/lib/Fanex.Grid/Fanex.Pagination.js",
+                "~/scripts/lib/Fanex.Grid/moment.js",
+                "~/scripts/lib/Fanex.Grid/numeral.js"));
         }
     }
 

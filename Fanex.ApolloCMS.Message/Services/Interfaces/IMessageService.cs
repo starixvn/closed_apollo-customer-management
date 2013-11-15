@@ -22,5 +22,9 @@ namespace Fanex.ApolloCMS.Message.Services.Interfaces
         List<Message> GetListMessage(GetMessageListCriteria getMessageListCriteria);
 
         Message GetMessageById(GetMessageByIdCriteria getMessageByIdCriteria);
+
+        void UpdateMessage(UpdateMessageCriteria updateMessageCriteria);
+
+        void DeleteMessage(DeleteMessageCriteria deleteMessageCriteria);
     }
 }

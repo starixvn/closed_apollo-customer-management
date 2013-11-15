@@ -23,8 +23,8 @@ namespace Fanex.ApolloCMS.Message.Repositories.Interfaces
 
         Message GetMessageById(GetMessageByIdCriteria getMessageByIdCriteria);
 
-        // Message UpdateMessage(UpdateMessageCriteria updateMessageCriteria);
+        void UpdateMessage(UpdateMessageCriteria updateMessageCriteria);
 
-        // Message DeleteMessage(DeleteMessageCriteria deleteMessageCriterial);
+        void DeleteMessage(DeleteMessageCriteria deleteMessageCriteria);
     }
 }
