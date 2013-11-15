@@ -179,7 +179,7 @@
     <Content Include="App_Data\SVRMSG.MsgDB.aplweb.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\Message\Views\MessageList\css\Message.less" />
+    <Content Include="Areas\Message\Views\MessageList\Content\Message.less" />
     <Content Include="Areas\Message\Views\MessageList\Scripts\MessageList.js" />
     <Content Include="Areas\UserLogin\scripts\login.js" />
     <Content Include="Areas\UserLogin\scripts\lib\jquery-1.8.0.min.js" />
@@ -358,7 +358,7 @@
     <Content Include="Areas\Message\Views\MessageList\Index.cshtml" />
     <Content Include="Areas\Message\Views\PrivateMessage\Index.cshtml" />
     <Content Include="Areas\Message\Views\PublicMessage\Index.cshtml" />
-    <Content Include="Areas\Message\Views\MessageList\css\layout.less" />
+    <Content Include="Areas\Message\Views\MessageList\Content\layout.less" />
     <None Include="Areas\UserLogin\themes\layout.less" />
     <None Include="Areas\UserLogin\themes\login.less" />
     <None Include="Areas\UserLogin\themes\fonts\Abel.woff" />
