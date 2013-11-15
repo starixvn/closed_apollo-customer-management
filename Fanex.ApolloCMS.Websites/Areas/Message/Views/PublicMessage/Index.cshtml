@@ -4,8 +4,7 @@
 }
 @model Fanex.ApolloCMS.Message.Criteria.NewMessage.InsertMessageCriteria
 
-<h2>@Labels.NewPublicMessage</h2>
-
+<h5 class="title">@Labels.NewPublicMessage</h5>
 <div class="content">
     <div id="divMajorLangue" class="language-group">
         <div class="language-group-title">@Labels.MajorLanguage</div>
@@ -59,13 +58,17 @@
                 <div class="language-area">
                     <div class="language-title">@Html.LabelFor(m => m.Content_Vn, Labels.Vietnamese)</div>
                     <div class="language-body">
-                        @Html.TextAreaFor(m => m.Content_Vn)
+                        @Html.TextAreaFor(m => m.Content_Vn, new { id = "txtContentVn" })
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div>
-        
+        @Html.LabelFor(m => m.Recipient, Labels.Recipient)
+        @Html.DropDownListFor(m => m.Recipient, (IEnumerable<SelectListItem>)ViewBag.Recipient)
+        @Html.CheckBoxFor(m => m.IsSpecialMsg)
+        @Html.LabelFor(m => m.IsSpecialMsg, Labels.SpecialMessage)
+        <input type="button" value="@ViewLang.Submit" />
     </div>
 </div>

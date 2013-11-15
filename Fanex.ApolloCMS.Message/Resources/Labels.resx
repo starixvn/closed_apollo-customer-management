@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AlsoInformUpline" xml:space="preserve">
+    <value>Also Inform Upline</value>
+  </data>
   <data name="ChineseSimplified" xml:space="preserve">
     <value>Chinese Simplified</value>
   </data>
@@ -129,6 +132,9 @@
   <data name="From" xml:space="preserve">
     <value>From</value>
   </data>
+  <data name="InformUpline" xml:space="preserve">
+    <value>Inform Upline</value>
+  </data>
   <data name="Japanese" xml:space="preserve">
     <value>Japanese</value>
   </data>
@@ -138,26 +144,41 @@
   <data name="MajorLanguage" xml:space="preserve">
     <value>Major Language</value>
   </data>
+  <data name="MaxRowsLimit" xml:space="preserve">
+    <value>Max Rows Limit:</value>
+  </data>
   <data name="Message_Type" xml:space="preserve">
     <value>Message Type</value>
   </data>
+  <data name="NewPrivateMessage" xml:space="preserve">
+    <value>New Private Message</value>
+  </data>
   <data name="NewPublicMessage" xml:space="preserve">
     <value>New Public Message</value>
-  </data>  
+  </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
+  </data>
+  <data name="NoMember" xml:space="preserve">
+    <value>There is no member.</value>
   </data>
   <data name="OtherLanguage" xml:space="preserve">
     <value>Other Language</value>
   </data>
   <data name="Private" xml:space="preserve">
     <value>Private</value>
-  </data>  
+  </data>
   <data name="Public" xml:space="preserve">
     <value>Public</value>
   </data>
+  <data name="Recipient" xml:space="preserve">
+    <value>Recipient</value>
+  </data>
   <data name="Special" xml:space="preserve">
     <value>Special</value>
+  </data>
+  <data name="SpecialMessage" xml:space="preserve">
+    <value>Special Message</value>
   </data>
   <data name="Submit" xml:space="preserve">
     <value>Submit</value>

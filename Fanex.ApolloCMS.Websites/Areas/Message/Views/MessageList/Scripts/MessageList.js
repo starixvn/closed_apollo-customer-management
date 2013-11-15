@@ -37,7 +37,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
 
         $("#dateFrom").datepicker({
             showOn: "button",
-            buttonImage: "../../../../Content/themes/img/smoothness/calendar.gif",
+            buttonImage: "../../../../content/site/img/icon-cal-orange.jpg",
             buttonImageOnly: true,
             changeMonth: true,
             onClose: function (selectedDate) {
@@ -49,7 +49,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
 
         $("#dateTo").datepicker({
             showOn: "button",
-            buttonImage: "../../../../Content/themes/img/smoothness/calendar.gif",
+            buttonImage: "../../../../content/site/img/icon-cal-orange.jpg",
             buttonImageOnly: true,
             changeMonth: true,
             maxDate: dateFrom + "3M",

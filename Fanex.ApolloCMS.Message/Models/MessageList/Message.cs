@@ -73,11 +73,11 @@ namespace Fanex.ApolloCMS.Message.Models.MessageList
             {
                 if (IsSpecial == true)
                 {
-                    return @Labels.Yes;
+                    return Labels.Yes;
                 }
                 else
                 {
-                    return @Labels.No;
+                    return Labels.No;
                 }
             }
         }
