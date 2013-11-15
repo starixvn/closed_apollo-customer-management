@@ -30,7 +30,7 @@
 	<div class="col-xs-12 col-sm-12 col-md-12 language-group-title other-lag">
 		<span class="glyphicon glyphicon-plus"></span>@Labels.OtherLanguage
 	</div>
-	<div class="col-xs-12 col-sm-12 col-md-12 language-group-body">
+	<div id="divOtherLanguage" class="col-xs-12 col-sm-12 col-md-12 language-group-body body-otherLanguage">
 		<div class="row group-row">
 			<div class="col-sm-4 col-md-4 language-area">
 				@Html.LabelFor(m => m.ContentJp, Labels.Japanese, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title noborder-right" })
@@ -64,5 +64,5 @@
 	<input type="button" class="btn pull-left" value="@ViewLang.Submit" />
 </div>
 @section Foot {
-	@Scripts.Render("~/Scripts/Tools/SimilarBets")
+	@Scripts.Render("~/scripts/newPublicMessage")
 }
