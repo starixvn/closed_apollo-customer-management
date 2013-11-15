@@ -203,7 +203,10 @@
     <Content Include="Content\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\site\img\icon-cal-orange.jpg" />
     <Content Include="Content\site\img\icon-cal.jpg" />
+    <Content Include="Content\site\img\icon-row-left.png" />
+    <Content Include="Content\site\img\icon-row-right.png" />
     <Content Include="Content\site\img\icon-search.png" />
     <Content Include="Content\site\img\icons.png" />
     <Content Include="Content\lib\jquery-ui\images\ui-bg_flat_60_4264ac_40x100.png" />
@@ -361,7 +364,6 @@
     <Content Include="Areas\Message\Views\PrivateMessage\Index.cshtml" />
     <Content Include="Areas\Message\Views\PublicMessage\Index.cshtml" />
     <Content Include="Areas\Message\Resources\MessageList\layout.less" />
-    <Content Include="Areas\Message\Views\MessageList\EditMessage.cshtml" />
     <Content Include="Areas\Message\Resources\NewMessage\layout.less" />
     <Content Include="Areas\Message\Resources\NewMessage\newMessage.less" />
     <None Include="Areas\UserLogin\themes\layout.less" />
