@@ -2,9 +2,10 @@
 @import "../../../../Content/site/mixins.less";
 
 .language-group {
-    margin-top: 20px;
+    margin: 10px 0;
     border: 1px solid darken(@border-color, 10%);
     padding: 5px;
+    .border-radius(2px);
 
     .language-group-title {
         background-color: #9fcfee;
@@ -16,6 +17,15 @@
         &.other-lag {
             cursor: pointer;
         }
+
+        .glyphicon-plus {
+            color: #0D5686;
+            margin-right: 3px;
+        }
+    }
+
+    .body-otherLanguage {
+        display: none;
     }
 
     .group-row {
@@ -39,6 +49,22 @@
 }
 .group-action {
     margin: 15px 0;
+
+    &.addMessage {
+        background-color: #F6F6F6;
+        border: 1px solid @border-color;
+        padding: 10px 10px 5px;
+        .border-radius(2px);
+        margin: 10px 0 7px;
+
+        .txtUserName {
+            margin: 0 5px 0 10px;
+        }
+
+        .btn {
+            margin-left: 20px;
+        }
+    }
 
     .selectboxit-container {
         .selectboxit {
@@ -73,4 +99,14 @@
             margin-top: 2px;
         }
     }
+}
+
+.rowLimit {
+    margin-top: 4px;
+}
+
+.alert {
+    .border-radius(2px);
+    margin: 10px 0 0;
+    padding: 7px 10px;
 }
