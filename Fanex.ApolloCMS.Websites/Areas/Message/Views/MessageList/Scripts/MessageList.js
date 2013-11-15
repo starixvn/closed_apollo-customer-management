@@ -15,6 +15,9 @@ Fanex.ApolloCMS.Message.MessageList = function () {
             Special: null,
             FromDate: null,
             ToDate: null
+        },
+        getMessageByIdParam: {
+            messageId: null
         }
     };
 
@@ -31,32 +34,30 @@ Fanex.ApolloCMS.Message.MessageList = function () {
 
     self.renderDatePicker = function () {
         var dateFrom = null;
-        var currentDate = new Date();
 
         $("#dateFrom").datepicker({
             showOn: "button",
             buttonImage: "../../../../Content/themes/img/smoothness/calendar.gif",
             buttonImageOnly: true,
             changeMonth: true,
-            setDate: currentDate,
             onClose: function (selectedDate) {
                 dateFrom = selectedDate;
                 $("#dateTo").datepicker("option", "minDate", selectedDate);
                 _params.getListMessageParam.FromDate = selectedDate;
             }
-        });
+        }).datepicker('setDate', 'today');
+
         $("#dateTo").datepicker({
             showOn: "button",
             buttonImage: "../../../../Content/themes/img/smoothness/calendar.gif",
             buttonImageOnly: true,
             changeMonth: true,
-            setDate: currentDate,
             maxDate: dateFrom + "3M",
             onClose: function (selectedDate) {
                 _params.getListMessageParam.ToDate = selectedDate;
                 $("#dateFrom").datepicker("option", "maxDate", selectedDate);
             }
-        });
+        }).datepicker('setDate', 'today');
     };
 
     self.getListMessage = function () {
@@ -94,11 +95,18 @@ Fanex.ApolloCMS.Message.MessageList = function () {
         var bodyData = [];
         var columns = [
                     { HeaderText: "Posted Date", Width: 200, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: "MMMM Do YYYY" },
-                    { HeaderText: "Message English", Width: 250, Name: "MessageContent", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "Message English", Width: 300, Name: "MessageContent", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell) {
+                        return '<div class="link editBtn" onclick="editMessage(' + currentCell.Value.MessageId + ')">Edit</div><div class="messageContent">' + currentCell.Value.Content_EN + '</div><div class="clear"></div>';
+                    }
+                    },
                     { HeaderText: "Type", Width: 80, Name: "MessageType", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Is Specical", Width: 80, Name: "Special", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Creator", Width: 150, Name: "Creator", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: "Recipient", Width: 150, Name: "Recipient", HeaderAlign: "center", CellAlign: "center" }
+                    { HeaderText: "Recipient", Width: 80, Name: "Recipient", HeaderAlign: "center", CellAlign: "center" },
+                    { HeaderText: "Remove", Width: 150, Name: "Remove", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (currentCell) {
+                        return '<div class="link" onclick="removeMessage(' + currentCell.Value + ')">Remove</div>';
+                    }
+                    }
                 ];
 
         if (rs) {
@@ -110,11 +118,12 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                 bodyData.push({
                     Columns: [
                                 { Name: "PostedDate", Value: currentMessage.PostDate },
-                                { Name: "MessageContent", Value: currentMessage.Content_EN },
+                                { Name: "MessageContent", Value: currentMessage },
                                 { Name: "MessageType", Value: currentMessage.MessageType },
                                 { Name: "Special", Value: currentMessage.MessageIsSpecial },
                                 { Name: "Creator", Value: currentMessage.Creator },
-                                { Name: "Recipient", Value: currentMessage.Recipient }
+                                { Name: "Recipient", Value: currentMessage.Recipient },
+                                { Name: "Remove", Value: currentMessage.TargetId }
                             ]
                 });
             }
@@ -127,6 +136,27 @@ Fanex.ApolloCMS.Message.MessageList = function () {
 
         _tables.gridMessage.fanexGrid(gridOptions);
     };
+
+    self.getMessageById = function (id) {
+        _params.getMessageByIdParam.messageId = id;
+
+        $.ajax({
+            type: "POST",
+            url: "Message/MessageList/GetMessageById",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({
+                MessageId:_params.getMessageByIdParam.messageId
+            }),
+            success: function (rs) {
+                console.log(rs);
+            }
+        });
+    }
+
+    editMessage = function (id) {
+        self.getMessageById(id);
+    }
 
     self.bindingEvents = function () {
         $("#btnGetListMessage").click(function () {

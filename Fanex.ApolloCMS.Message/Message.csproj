@@ -69,6 +69,7 @@
     <Compile Include="Controllers\MessageListController.cs" />
     <Compile Include="Controllers\PrivateMessageController.cs" />
     <Compile Include="Controllers\PublicMessageController.cs" />
+    <Compile Include="Criteria\MessageList\GetMessageByIdCriteria.cs" />
     <Compile Include="Criteria\NewMessage\GetAllSitesCriteria.cs" />
     <Compile Include="Criteria\NewMessage\GetRecipientInfoCriteria.cs" />
     <Compile Include="Criteria\NewMessage\GetUplineByIdCriteria.cs" />

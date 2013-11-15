@@ -26,6 +26,7 @@ namespace Fanex.ApolloCMS.Websites
         public static void RegisterBundles(BundleCollection bundles)
         {
             RegisterCommonBundles(bundles);
+            RegisterFanexGridBundles(bundles);
         }
 
         /// <summary>
@@ -34,11 +35,6 @@ namespace Fanex.ApolloCMS.Websites
         /// <param name="bundles">The bundle collection.</param>
         private static void RegisterCommonBundles(BundleCollection bundles)
         {
-            bundles.Add(new StyleBundle("~/styles/fanexGrid").Include(
-                 "~/scripts/lib/Fanex.Grid/Fanex.Grid.css",
-                 "~/scripts/lib/Fanex.Grid/Fanex.Grid.less",
-                 "~/scripts/lib/Fanex.Grid/Fanex.Pagination.css"));
-
             bundles.AddAndInclude(
                 "~/site/common",
                 "~/content/bootstrap/css/bootstrap.css",
@@ -77,13 +73,25 @@ namespace Fanex.ApolloCMS.Websites
                 "~/scripts/lib/respond.js",
                 "~/Areas/UserLogin/scripts/login.js"));
 
+            bundles.FileSetOrderList.Clear();
+        }
+
+        /// <summary>
+        /// Registers the grid bundles.
+        /// </summary>
+        /// <param name="bundles">The bundles collection.</param>
+        private static void RegisterFanexGridBundles(BundleCollection bundles)
+        {
+            bundles.Add(new StyleBundle("~/styles/fanexGrid").Include(
+                 "~/scripts/lib/Fanex.Grid/Fanex.Grid.css",
+                 "~/scripts/lib/Fanex.Grid/Fanex.Grid.less",
+                 "~/scripts/lib/Fanex.Grid/Fanex.Pagination.css"));
+
             bundles.Add(new ScriptBundle("~/scripts/fanexGrid").Include(
                 "~/scripts/lib/Fanex.Grid/Fanex.Grid.js",
                 "~/scripts/lib/Fanex.Grid/Fanex.Pagination.js",
                 "~/scripts/lib/Fanex.Grid/moment.js",
                 "~/scripts/lib/Fanex.Grid/numeral.js"));
-
-            bundles.FileSetOrderList.Clear();
         }
     }
 

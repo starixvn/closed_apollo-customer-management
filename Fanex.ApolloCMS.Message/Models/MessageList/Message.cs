@@ -49,6 +49,8 @@ namespace Fanex.ApolloCMS.Message.Models.MessageList
 
         public string Recipient { get; set; }
 
+        public int MessageId { get; set; }
+
         public string MessageType
         {
             get
@@ -57,10 +59,8 @@ namespace Fanex.ApolloCMS.Message.Models.MessageList
                 {
                     case (int)MessageTypeConstants.Public:
                         return Labels.Public;
-                        break;
                     case (int)MessageTypeConstants.Private:
                         return Labels.Private;
-                        break;
                     default:
                         return string.Empty;
                 }

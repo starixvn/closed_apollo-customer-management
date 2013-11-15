@@ -78,11 +78,19 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
                     MsgType = row.MsgType,
                     IsSpecial = row.IsSpecial,
                     Creator = row.Creator,
-                    TargetId = row.TargetId 
+                    TargetId = row.TargetId,
+                    MessageId = row.MessageId
                 };
                 result.Add(messageInfo);
             }
 
+            return result;
+        }
+
+        public Message GetMessageById(GetMessageByIdCriteria getMessageByIdCriteria)
+        {
+            var result = new Message();
+            result = this._messageRepository.GetMessageById(getMessageByIdCriteria);
             return result;
         }
     }

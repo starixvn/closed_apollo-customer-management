@@ -2,6 +2,7 @@
 <Functions>
   <Function Name="Message - Message List">
     <Setting Key="Message_MessageList_GetListMessage" SpName="Acc_Msg_GetListMessage" DbName="SVRMSG.MsgDB.aplweb" />
+    <Setting Key="Message_MessageList_GetMessageById" SpName="Acc_Msg_GetMessageById" DbName="SVRMSG.MsgDB.aplweb" />
     <Setting Key="Message_MessageList_UpdateMessage" SpName="Acc_Msg_UpdateMessage" DbName="SVRMSG.MsgDB.aplweb" />
     <Setting Key="Message_MessageList_DeleteMessage" SpName="Acc_Msg_DeleteMessage" DbName="SVRMSG.MsgDB.aplweb" />
   </Function>

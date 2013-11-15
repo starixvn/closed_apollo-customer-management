@@ -14,6 +14,7 @@ namespace Fanex.ApolloCMS.Message.Repositories.Implements
     using System.Data;
     using System.Linq;
     using System.Text;
+    using Fanex.ApolloCMS.Core.Repositories;
     using Fanex.ApolloCMS.Message.Criteria.MessageList;
     using Fanex.ApolloCMS.Message.Models.MessageList;
     using Fanex.ApolloCMS.Message.Repositories.Interfaces;
@@ -23,7 +24,7 @@ namespace Fanex.ApolloCMS.Message.Repositories.Implements
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class MessageRepository : IMessageRepository
+    public class MessageRepository : BaseRepository, IMessageRepository
     {
         /// <summary>
         /// Gets the list message.
@@ -62,10 +63,21 @@ namespace Fanex.ApolloCMS.Message.Repositories.Implements
                     MsgType = Convert.ToByte(row["MsgType"]),
                     Recipient = Converter.ToString2(row["Recipient"]),
                     TargetId = Converter.ToInt(row["TargetId"]),
+                    MessageId = Converter.ToInt(row["MessageId"])
                 });
             }
 
             return messageList;
+        }
+
+        public Message GetMessageById(GetMessageByIdCriteria getMessageByIdCriteria)
+        {
+            using (var db = new ObjectDb(getMessageByIdCriteria.GetSettingKey()))
+            {
+                var param = getMessageByIdCriteria.GetSpParams();
+                
+                return db.QueryEntity<Message>(param);
+            }
         }
     }
 }

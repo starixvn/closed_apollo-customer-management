@@ -20,5 +20,11 @@ namespace Fanex.ApolloCMS.Message.Repositories.Interfaces
     public interface IMessageRepository
     {
         List<Message> GetListMessage(GetMessageListCriteria getMessageListCriteria, ref Hashtable outputParam);
+
+        Message GetMessageById(GetMessageByIdCriteria getMessageByIdCriteria);
+
+        // Message UpdateMessage(UpdateMessageCriteria updateMessageCriteria);
+
+        // Message DeleteMessage(DeleteMessageCriteria deleteMessageCriterial);
     }
 }
