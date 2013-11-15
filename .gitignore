@@ -8,3 +8,6 @@
 /Fanex.ApolloCMS.Message/bin
 *.Cache
 /Fanex.ApolloCMS.Message/*.StyleCop
+/Fanex.ApolloCMS.Message/Message.csproj.user
+/Fanex.ApolloCMS.Core/Fanex.ApolloCMS.Core.csproj.user
+/Fanex.ApolloCMS.Websites/Fanex.ApolloCMS.Websites.csproj.user
