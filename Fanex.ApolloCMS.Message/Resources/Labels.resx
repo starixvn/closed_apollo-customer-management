@@ -177,6 +177,9 @@
   <data name="Recipient" xml:space="preserve">
     <value>Recipient</value>
   </data>
+  <data name="RequireEnglishContent" xml:space="preserve">
+    <value>English content is required!</value>
+  </data>
   <data name="Special" xml:space="preserve">
     <value>Special</value>
   </data>

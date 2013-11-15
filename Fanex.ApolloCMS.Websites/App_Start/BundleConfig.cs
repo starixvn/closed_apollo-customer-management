@@ -27,7 +27,7 @@ namespace Fanex.ApolloCMS.Websites
         {
             RegisterCommonBundles(bundles);
             RegisterLoginBundles(bundles);
-            RegisterFanexGridBundles(bundles);
+            RegisterMessageListBundles(bundles);
             RegisterNewMessageBundles(bundles);
 
             bundles.FileSetOrderList.Clear();
@@ -44,15 +44,13 @@ namespace Fanex.ApolloCMS.Websites
                 "~/content/bootstrap/css/bootstrap.css",
                 "~/content/bootstrap/css/bootstrap-ie7.css",
                 "~/content/lib/jquery-ui/jquery-ui-1.9.1.custom.css",
-                "~/content/lib/jquery-ui/jquery.selectBoxIt.css");
+                "~/content/lib/jquery-ui/jquery.selectBoxIt.css",
+                "~/scripts/lib/msgbox/msgbox-0.0.1.css",            
+                "~/scripts/lib/tipsy/tipsy-1.0.0.css");
 
             bundles.AddAndInclude(
                 "~/site/layout",
                 "~/content/site/layout.less");
-
-            bundles.AddAndInclude(
-                "~/site/messageList",
-                "~/areas/message/resources/messagelist/layout.less");
 
             bundles.Add(new ScriptBundle("~/scripts/headjs").Include(
                 "~/scripts/lib/html5-libs/head.js"));
@@ -63,6 +61,7 @@ namespace Fanex.ApolloCMS.Websites
                 "~/scripts/lib/jquery/jquery.selectBoxIt.js",
                 "~/content/bootstrap/js/bootstrap.js",
                 "~/scripts/lib/msgbox/msgbox-0.0.1.js",
+                "~/scripts/lib/tipsy/tipsy-1.0.0.js",
                 "~/scripts/lib/respond.js",
                 "~/scripts/lib/namespace.js",
                 "~/scripts/_layout.js",
@@ -90,11 +89,15 @@ namespace Fanex.ApolloCMS.Websites
         }
 
         /// <summary>
-        /// Registers the grid bundles.
+        /// Registers bundles for message list function.
         /// </summary>
         /// <param name="bundles">The bundles collection.</param>
-        private static void RegisterFanexGridBundles(BundleCollection bundles)
+        private static void RegisterMessageListBundles(BundleCollection bundles)
         {
+            bundles.AddAndInclude(
+                "~/site/messageList",
+                "~/areas/message/resources/messagelist/layout.less");
+
             bundles.Add(new StyleBundle("~/styles/fanexGrid").Include(
                  "~/scripts/lib/Fanex.Grid/Fanex.Grid.css",
                  "~/scripts/lib/Fanex.Grid/Fanex.Grid.less",

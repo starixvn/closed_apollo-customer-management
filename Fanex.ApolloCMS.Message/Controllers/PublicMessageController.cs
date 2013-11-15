@@ -14,6 +14,7 @@ namespace Fanex.ApolloCMS.Message.Controllers
     using System.Web.Mvc;
     using Fanex.ApolloCMS.Core.Controllers;
     using Fanex.ApolloCMS.Core.Resources;
+    using Fanex.ApolloCMS.Message.Constants;
     using Fanex.ApolloCMS.Message.Criteria.NewMessage;
     using Fanex.ApolloCMS.Message.Services.Implements;
     using Fanex.ApolloCMS.Message.Services.Interfaces;
@@ -76,8 +77,9 @@ namespace Fanex.ApolloCMS.Message.Controllers
             {
                 criteria.UserLoginId = this.CurrentSession.UserId;
                 criteria.UserLoginName = this.CurrentSession.Username;
+                criteria.MsgType = (byte)MessageTypeConstants.Public;
 
-                return Json(null);
+                return Json(this._newMessageService.InsertMessage(criteria));
             }
         }
     }

@@ -12,6 +12,7 @@ namespace Fanex.ApolloCMS.Message.Criteria.NewMessage
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Fanex.ApolloCMS.Message.Models.NewMessage;
+    using Fanex.ApolloCMS.Message.Resources;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
@@ -29,7 +30,7 @@ namespace Fanex.ApolloCMS.Message.Criteria.NewMessage
 
         public string Recipient { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Labels), ErrorMessageResourceName = "RequireEnglishContent")]
         public string ContentEn { get; set; }
 
         public string ContentCh { get; set; }

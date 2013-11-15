@@ -23,15 +23,15 @@ Fanex.ApolloCMS.Message.PublicMessage = function () {
         IsSpecialMsg: null
     };
     var cacheDOM = function () {
-        $this.DOMInstance.txtContentEn = $('#txtContentEn');
-        $this.DOMInstance.txtContentCh = $('#txtContentCh');
-        $this.DOMInstance.txtContentCs = $('#txtContentCs');
-        $this.DOMInstance.txtContentJp = $('#txtContentJp');
-        $this.DOMInstance.txtContentKo = $('#txtContentKo');
-        $this.DOMInstance.txtContentTh = $('#txtContentTh');
-        $this.DOMInstance.txtContentVn = $('#txtContentVn');
-        $this.DOMInstance.ddlRecipient = $('#ddlRecipient');
-        $this.DOMInstance.chkIsSpecialMsg = $('#chkIsSpecialMsg');
+        $this.DOMInstance.txtContentEn = $('#ContentEn');
+        $this.DOMInstance.txtContentCh = $('#ContentCh');
+        $this.DOMInstance.txtContentCs = $('#ContentCs');
+        $this.DOMInstance.txtContentJp = $('#ContentJp');
+        $this.DOMInstance.txtContentKo = $('#ContentKo');
+        $this.DOMInstance.txtContentTh = $('#ContentTh');
+        $this.DOMInstance.txtContentVn = $('#ContentVn');
+        $this.DOMInstance.ddlRecipient = $('#Recipient');
+        $this.DOMInstance.chkIsSpecialMsg = $('#IsSpecialMsg');
         $this.DOMInstance.btnSubmit = $('#btnSubmit');
         $this.DOMInstance.divEnglish = $('#divEnglish');
         $this.DOMInstance.spnOtherLanguage = $('.other-lag');
@@ -43,13 +43,33 @@ Fanex.ApolloCMS.Message.PublicMessage = function () {
         });
 
         $this.DOMInstance.btnSubmit.bind('click', function () {
-            getParamValues();
-            $this.AddNewMessage();
+            if (validateForm()) {
+                getParamValues();
+                $this.AddNewMessage();
+            }
         });
+    };
+    var validateForm = function () {
+        var contentEnValue = $.trim($this.DOMInstance.txtContentEn.val());
+        var label = $this.DOMInstance.txtContentEn.prev();
+
+        label.tipsy('hide');
+        if (!contentEnValue) {
+            var errorMsg = $this.DOMInstance.txtContentEn.attr('data-val-required');
+
+            label.attr('title', errorMsg);
+            label.tipsy({ trigger: 'manual', gravity: 'sw' });
+            label.tipsy('show');
+            $this.DOMInstance.txtContentEn.focus();
+
+            return false;
+        } else {
+            return true;
+        }
     };
     var getParamValues = function () {
         var selectedRecipientId = $this.DOMInstance.ddlRecipient.val();
-        var selectedRecipientName = $('option:selected', $this.DOMInstance.ddlRecipient);
+        var selectedRecipientName = $('option:selected', $this.DOMInstance.ddlRecipient).text();
         var recipients = [];
 
         if (selectedRecipientId == 'null') {
@@ -112,16 +132,16 @@ Fanex.ApolloCMS.Message.PublicMessage = function () {
             dataType: "json",
             data: JSON.stringify(params),
             beforeSend: function () {
-                ParlayRMS.loadingBox.show();
+                CMS.loadingBox.show();
             },
             success: function (result) {
                 //@@TODO: Display info message and reload page
             },
             error: function (xhr, status, err) {
-                ParlayRMS.handleAjaxError(xhr, status, err);
+                CMS.handleAjaxError(xhr, status, err);
             },
             complete: function () {
-                ParlayRMS.loadingBox.close();
+                CMS.loadingBox.close();
             }
         });
     };

@@ -94,7 +94,7 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
                                   recipientNode,
                                   item.TargetId,
                                   item.TargetName,
-                                  item.IsAgent);
+                                  item.IsAgent == true ? 1 : 0);
 
                 if (item.ConfirmUpline)
                 {
@@ -110,7 +110,7 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
                                   recipientNode,
                                   upline.TargetId,
                                   upline.TargetName,
-                                  true);
+                                  1);
                     }
                 }
             }
