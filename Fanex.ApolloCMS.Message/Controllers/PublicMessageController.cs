@@ -5,23 +5,21 @@
 // -----------------------------------------------------------------------
 // <history>
 //   <change who="Franklin.Nguyen" date="2013.11.12">Created</change>
+//   <change who="Jason.Ly" date="2013.11.14">Implement</change>
 // </history>
 
 namespace Fanex.ApolloCMS.Message.Controllers
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Web.Mvc;
     using Fanex.ApolloCMS.Core.Controllers;
-using Fanex.ApolloCMS.Message.Services.Interfaces;
-    using Fanex.ApolloCMS.Message.Services.Implements;
-    using Fanex.ApolloCMS.Message.Criteria.NewMessage;
     using Fanex.ApolloCMS.Core.Resources;
+    using Fanex.ApolloCMS.Message.Criteria.NewMessage;
+    using Fanex.ApolloCMS.Message.Services.Implements;
+    using Fanex.ApolloCMS.Message.Services.Interfaces;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// New public message controller.
     /// </summary>
     public class PublicMessageController : BaseController
     {
@@ -50,12 +48,14 @@ using Fanex.ApolloCMS.Message.Services.Interfaces;
                 Value = obj.SiteId
             }).ToList();
 
-            recipients.Insert(0, new SelectListItem
-            {
-                Text = ViewLang.All,
-                Value = "null",
-                Selected = true
-            });
+            recipients.Insert(
+                           0, 
+                           new SelectListItem
+                           {
+                               Text = ViewLang.All,
+                               Value = "null",
+                               Selected = true
+                           });
 
             ViewBag.Recipient = recipients;
             return View();

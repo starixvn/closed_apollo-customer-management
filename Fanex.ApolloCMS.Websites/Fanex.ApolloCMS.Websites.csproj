@@ -181,6 +181,7 @@
     </Content>
     <Content Include="Areas\Message\Views\MessageList\Message.less" />
     <Content Include="Areas\Message\Views\MessageList\Scripts\MessageList.js" />
+    <Content Include="Areas\Message\Views\PublicMessage\Scripts\PublicMessage.js" />
     <Content Include="Areas\UserLogin\scripts\login.js" />
     <Content Include="Areas\UserLogin\scripts\lib\jquery-1.8.0.min.js" />
     <Content Include="Areas\UserLogin\scripts\Plugin\jquery-1.6.2.js" />
@@ -224,6 +225,7 @@
     <Content Include="Content\lib\jquery-ui\jquery-ui-1.9.1.custom.min.css" />
     <Content Include="Content\lib\jquery-ui\jquery.selectBoxIt.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Validator.js" />
     <Content Include="Scripts\CMS.js" />
     <Content Include="Scripts\lib\chosen\chosen-sprite.png" />
     <Content Include="Scripts\lib\chosen\chosen.css" />

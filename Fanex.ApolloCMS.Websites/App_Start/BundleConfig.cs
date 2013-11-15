@@ -75,7 +75,6 @@ namespace Fanex.ApolloCMS.Websites
                 "~/scripts/lib/Fanex.Grid/numeral.js"));
         }
 
-
         /// <summary>
         /// Registers bundles for login page.
         /// </summary>

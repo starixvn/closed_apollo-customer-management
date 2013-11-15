@@ -1,6 +1,95 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model Fanex.ApolloCMS.Message.Criteria.NewMessage.InsertMessageCriteria
 
-<h2>Add New Private Message</h2>
+<h2>@Labels.NewPrivateMessage</h2>
+
+<div class="content">
+    <div id="divMajorLangue" class="language-group">
+        <div class="language-group-title">@Labels.MajorLanguage</div>
+        <div class="language-group-body">
+            <div class="group-row">
+                <div class="language-area">
+                    <div id="divEnglish" class="language-title">@Html.LabelFor(m => m.Content_En, Labels.English)</div>
+                    <div class="language-body">
+                        @Html.TextAreaFor(m => m.Content_En)
+                    </div>
+                </div>
+                <div class="language-area">
+                    <div class="language-title">@Html.LabelFor(m => m.Content_Ch, Labels.ChineseTraditional)</div>
+                    <div class="language-body">
+                        @Html.TextAreaFor(m => m.Content_Ch)
+                    </div>
+                </div>
+                <div class="language-area">
+                    <div class="language-title">@Html.LabelFor(m => m.Content_Cs, Labels.ChineseSimplified)</div>
+                    <div class="language-body">
+                        @Html.TextAreaFor(m => m.Content_Cs)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="language-group">
+        <div class="language-group-title">@Labels.OtherLanguage</div>
+        <div class="language-group-body">
+            <div class="group-row">
+                <div class="language-area">
+                    <div class="language-title">@Html.LabelFor(m => m.Content_Jp, Labels.Japanese)</div>
+                    <div class="language-body">
+                        @Html.TextAreaFor(m => m.Content_Jp)
+                    </div>
+                </div>
+                <div class="language-area">
+                    <div class="language-title">@Html.LabelFor(m => m.Content_Ko, Labels.Korean)</div>
+                    <div class="language-body">
+                        @Html.TextAreaFor(m => m.Content_Ko)
+                    </div>
+                </div>
+                <div class="language-area">
+                    <div class="language-title">@Html.LabelFor(m => m.Content_Th, Labels.Thai)</div>
+                    <div class="language-body">
+                        @Html.TextAreaFor(m => m.Content_Th)
+                    </div>
+                </div>
+            </div>
+            <div class="group-row">
+                <div class="language-area">
+                    <div class="language-title">@Html.LabelFor(m => m.Content_Vn, Labels.Vietnamese)</div>
+                    <div class="language-body">
+                        @Html.TextAreaFor(m => m.Content_Vn, new { id = "txtContentVn" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        @Html.DropDownList("ddlMemberType", (IEnumerable<SelectListItem>)ViewBag.MemberTypes)
+        @Html.TextBox("txtUserName")
+        @Html.CheckBox("chkInformUpline")
+        @Html.Label("chkInformUpline", Labels.AlsoInformUpline)
+        <input type="button" value="@ViewLang.Add" />
+    </div>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>@ViewLang.UserName</th>
+                    <th>@ViewLang.Level</th>
+                    <th>@Labels.InformUpline</th>
+                    <th>@ViewLang.Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td colspan="6">@Labels.NoMember</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <input type="button" value="@ViewLang.Submit" />
+        <span>@Labels.MaxRowsLimit @ViewBag.MaxRowsLimit</span>
+    </div>
+</div>

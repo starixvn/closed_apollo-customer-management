@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Functions>
-  <Function Name="Site">
+  <Function Name="NewMessage">
     <Setting Key="Acc_Msg_GetRecipientInfo" SpName="Acc_Msg_GetRecipientInfo" DbName="SVRCUST.CustDB.bodbAdminNet" />
     <Setting Key="Acc_Msg_GetUplineById" SpName="Acc_Msg_GetUplineById" DbName="SVRCUST.CustDB.bodbAdminNet" />
     <Setting Key="Acc_Msg_InsertMessage" SpName="Acc_Msg_InsertMessage" DbName="SVRMSG.MsgDB.aplweb" />
