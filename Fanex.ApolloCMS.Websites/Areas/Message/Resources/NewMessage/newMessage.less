@@ -1,0 +1,76 @@
+﻿@import "../../../../Content/site/variables.less";
+@import "../../../../Content/site/mixins.less";
+
+.language-group {
+    margin-top: 20px;
+    border: 1px solid darken(@border-color, 10%);
+    padding: 5px;
+
+    .language-group-title {
+        background-color: #9fcfee;
+        border: 1px solid @primary-color;
+        color: #fff;
+        padding: 5px 10px;
+        color: #000;
+
+        &.other-lag {
+            cursor: pointer;
+        }
+    }
+
+    .group-row {
+        .language-title {
+            display: block;
+            padding: 3px 10px;
+            font-weight: normal;
+            border: 1px solid darken(@border-color, 10%);
+            background-color: #ededed;
+            margin: 3px 0;
+
+            &.noborder-right {
+                border-right: 0;
+            }
+        }
+
+        .language-body {
+            min-height: 130px;
+        }
+    }
+}
+.group-action {
+    margin: 15px 0;
+
+    .selectboxit-container {
+        .selectboxit {
+            border: 1px solid @border-color;
+            .border-radius(2px);
+        }
+
+        .selectboxit-text {
+            color: @text-color;
+            font-size: @font-size;
+        }
+
+        .selectboxit-options {
+            .box-shadow(0);
+            border: 1px solid @border-color;
+        }
+    }
+
+    label {
+        font-weight: normal;
+        vertical-align: middle;
+
+        &.lbl-recipient {
+            margin-top: 3px;
+        }
+    }
+    
+    .checkbox {
+        margin: 5px 10px;
+
+        input {
+            margin-top: 2px;
+        }
+    }
+}
