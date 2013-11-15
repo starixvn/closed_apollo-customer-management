@@ -60,5 +60,25 @@ namespace Fanex.ApolloCMS.Message.Controllers
             ViewBag.Recipient = recipients;
             return View();
         }
+
+        /// <summary>
+        /// Adds the new public message.
+        /// </summary>
+        /// <param name="criteria">The criteria that contains the information of the new message.</param>
+        /// <returns>Whether or not the new public message is added successfully or not.</returns>
+        public JsonResult AddNewMessage(InsertMessageCriteria criteria)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.GetInvalidModelErrors();
+            }
+            else
+            {
+                criteria.UserLoginId = this.CurrentSession.UserId;
+                criteria.UserLoginName = this.CurrentSession.Username;
+
+                return Json(null);
+            }
+        }
     }
 }

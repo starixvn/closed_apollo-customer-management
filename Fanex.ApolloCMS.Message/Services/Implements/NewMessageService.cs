@@ -17,6 +17,7 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
     using Fanex.ApolloCMS.Message.Repositories.Interfaces;
     using Fanex.ApolloCMS.Message.Services.Interfaces;
     using Fanex.NAP.Framework.Data;
+    using System.Text;
 
     /// <summary>
     /// New message service.
@@ -72,7 +73,51 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
         /// <returns>CommandResult object indicates whether the new message is added successfully or not.</returns>
         public ICommandResult InsertMessage(InsertMessageCriteria criteria)
         {
+            criteria.Recipient = ConvertRecipientListToXml(criteria.RecipientList);
+
             return this._newMessageRepository.InsertMessage(criteria);
+        }
+
+        /// <summary>
+        /// Converts the recipient list to XML.
+        /// </summary>
+        /// <param name="recipients">The recipient list.</param>
+        /// <returns>XML string represents the recipient list.</returns>
+        private string ConvertRecipientListToXml(IEnumerable<Recipient> recipients)
+        {
+            StringBuilder stringBuilder = new StringBuilder("<ROOT>");
+            string recipientNode = "<Recipient TargetId=\"{0}\" TargetName=\"{1}\" IsAgent=\"{2}\"></Recipient>";
+
+            foreach (var item in recipients)
+            {
+                stringBuilder.AppendFormat(
+                                  recipientNode,
+                                  item.TargetId,
+                                  item.TargetName,
+                                  item.IsAgent);
+
+                if (item.ConfirmUpline)
+                {
+                    var uplines = this.GetUplineById(new GetUplineByIdCriteria
+                    {
+                        Id = item.TargetId,
+                        IsAgent = item.IsAgent
+                    });
+
+                    foreach (var upline in uplines)
+                    {
+                        stringBuilder.AppendFormat(
+                                  recipientNode,
+                                  upline.TargetId,
+                                  upline.TargetName,
+                                  true);
+                    }
+                }
+            }
+
+            stringBuilder.Append("</ROOT>");
+
+            return stringBuilder.ToString();
         }
     }
 }
