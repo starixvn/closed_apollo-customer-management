@@ -4,7 +4,7 @@
     var lvl0MenuItemList = menuItemList.Where(m => m.Parent == null).OrderBy(m => m.DisplayOrder).ToList();
 }
 
-    <ul class="mainMenu list-unstyled">
+<ul class="mainMenu list-unstyled">
     @for (int i = 0; i < lvl0MenuItemList.Count; i++)
     {
         var menuItem = lvl0MenuItemList[i];
@@ -33,4 +33,4 @@
             <li class="last-item"></li>
         }
     }
-    </ul>
+</ul>

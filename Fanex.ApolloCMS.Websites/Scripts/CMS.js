@@ -2,18 +2,14 @@
 var CMS = function ($) {
 
 	return {
-		ClientUrl: null,
-		RootUrl: null,
+	    rootUrl: null,
+	    unauthorizedRequestError: null,
+	    resourceNotFound: null,
+        internalError: null,
 		dialogMsg: null,
 		dialogPopup: null,
 		headlineMsgBox: null,
 		loadingBox: null,
-		alertCallback: null,
-		confirmCallback: null,
-		msieVersion: null,
-		agentIsOldIe: null,
-		agentIsApple: null,
-		agentIsMobile: null,
 
 		commonConstants: {
 			DateFormat: 'mm-dd-yy',
@@ -24,79 +20,27 @@ var CMS = function ($) {
 		},
 
 		initCoreValues: function () {
-			CMS.ClientUrl = $('#ClientURL').val();
-			CMS.RootUrl = $('#RootURL').val();
+		    CMS.rootUrl = $('#RootURL').val();
+		    CMS.unauthorizedRequestError = $('#UnAuthorizedRequestError').val();
+		    CMS.resourceNotFound = $('#ResourceNotFoundError').val();
+		    CMS.internalError = $('#InternalError').val();
 			CMS.dialogPopup = $('<div id="dialog-popup"></div>').appendTo('body');
-
-			CMS.msieVersion = CMS.getIeVersion();
-			CMS.agentIsOldIe = CMS.msieVersion != -1 && CMS.msieVersion < 9.0;
-			CMS.agentIsApple = CMS.agentIs('apple') != null;
-			CMS.agentIsMobile = CMS.agentIs('mobile') != null;
-		},
-		resolveClientUrl: function (relativeUrl) {
-			return CMS.ClientUrl + relativeUrl;
 		},
 		resolveRootUrl: function (relativeUrl) {
-			return CMS.RootUrl + relativeUrl;
+			return CMS.rootUrl + relativeUrl;
 		},
 		// Handles common error when making ajax request
 		handleAjaxError: function (xhr, status, err) {
 			if (xhr.status == 403) {
-				CMS.headlineMsgBox.showErr('Unauthorized request rejected!', { sticky: true });
+			    CMS.headlineMsgBox.showErr(CMS.unauthorizedRequestError, { sticky: true });
 			} else if (xhr.status == 404) {
-				CMS.headlineMsgBox.showErr('Resources not found!', { sticky: true });
+			    CMS.headlineMsgBox.showErr(CMS.resourceNotFound, { sticky: true });
 			} else {
-	            CMS.headlineMsgBox.showErr('Sorry, an error occurred while processing your request, please notify the administrators.', { sticky: true });
+			    CMS.headlineMsgBox.showErr(CMS.internalError, { sticky: true });
 			}
 		},
 		showInfoMessage: function (message) {
 			CMS.infoMsgBox.showInfo(message, { duration: 3000 });
-		},
-		getIeVersion: function () {
-			var version = -1; // Return value assumes failure.
-
-			if (window.navigator.userAgent.indexOf("MSIE") > 0) {
-				var usrAgent = navigator.userAgent;
-				var reg = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
-
-				if (reg.exec(usrAgent) != null) version = parseFloat(RegExp.$1);
-			}
-
-			return version;
-		},
-		agentIs: function (name) {
-			switch (name.toLowerCase()) {
-				case 'ipad':
-					return navigator.userAgent.match(/iPad/i);
-				case 'iphone':
-					return navigator.userAgent.match(/iPhone/i);
-				case 'ipod':
-					return navigator.userAgent.match(/iPod/i);
-				case 'apple':
-					return navigator.userAgent.match(/iPad/i) ||
-						navigator.userAgent.match(/iPhone/i) ||
-						navigator.userAgent.match(/iPod/i);
-				case 'mobile':
-					return
-					// Apple
-					navigator.userAgent.match(/iPad/i) ||
-						navigator.userAgent.match(/iPhone/i) ||
-						navigator.userAgent.match(/iPod/i) ||
-					// RIM
-						navigator.userAgent.match(/BlackBerry/i) ||
-						navigator.userAgent.match(/PlayBook/i)
-					// Windows Phone
-					navigator.userAgent.match(/Windows Phone/i);
-					// Android
-					navigator.userAgent.match(/Android/i);
-					// General
-					navigator.userAgent.match(/Touch/i);
-				default: return null;
-			}
-		},
-		alert: function (title, msg, callback) {
-		},
-		confirm: function (title, msg, callback) {
 		},
 		modal: function (title, html) {
 			CMS.dialogPopup.html(html).dialog({
@@ -166,22 +110,6 @@ var CMS = function ($) {
 		},
 		htmlDecode: function (value) {
 			return $('<div/>').html(value).text();
-		},
-		showSuccessMsg: function (msg, url, msec) {
-			var msgWrp = $('.validation-summary-valid');
-
-			msgWrp.addClass('success')
-				.find('li:first').html(CMS.htmlDecode(msg)).show();
-
-			CMS.showSuccessMsgCountDown(url, msec / 1000);
-		},
-		showSuccessMsgCountDown: function (url, msec) {
-			if (msec-- > 0) {
-				setTimeout('CMS.showSuccessMsgCountDown("' + url + '", ' + msec + ')', 1000);
-				$('.validation-summary-valid .msec').html(msec);
-			} else {
-				window.location.replace(NAP.resolveClientUrl(url));
-			}
 		},
 
 		encodeURI: function (str) {

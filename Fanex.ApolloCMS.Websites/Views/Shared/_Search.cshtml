@@ -1,0 +1,21 @@
+﻿@using Fanex.ApolloCMS.Core.Resources
+<div class="col-xs-3 col-sm-3 col-md-3 search">
+    <ul class="row search-container list-unstyled">
+        <li class="selType">
+            @Html.DropDownList("ddlMemberTypes", (IEnumerable<SelectListItem>)ViewBag.MemberTypes)
+        </li>
+        <li>
+            <input type="text" class="txtSearch" name="username" placeholder="@ViewLang.InputUserName" />
+        </li>
+        <li>
+            <div class="search">
+                <span class="glyphicon glyphicon-search icon-search"></span>
+            </div>
+        </li>
+        <li>
+            <div class="treeview">
+                <span class="icon-treeview"></span>
+            </div>
+        </li>
+    </ul>
+</div>
