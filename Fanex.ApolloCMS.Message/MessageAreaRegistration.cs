@@ -32,21 +32,9 @@ namespace Fanex.ApolloCMS.Message
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-            name: "Publish_message",
-            url: "Message/AddNewPublicMessage",
-            defaults: new { controller = "PublicMessage", action = "Index", id = UrlParameter.Optional },
-            namespaces: new[] { "Fanex.ApolloCMS.Message.Controllers" });
-
-            context.MapRoute(
-            name: "Private_message",
-            url: "Message/AddNewPrivateMessage",
-            defaults: new { controller = "PrivateMessage", action = "Index", id = UrlParameter.Optional },
-            namespaces: new[] { "Fanex.ApolloCMS.Message.Controllers" });
-
-            context.MapRoute(
-                "Message_list",
+                "Message_default",
                 "Message/{controller}/{action}/{id}",
-                new { controller = "MessageList", action = "Index", id = UrlParameter.Optional },
+                new { action = "Index", id = UrlParameter.Optional },
                 new[] { "Fanex.ApolloCMS.Message.Controllers" });
         }
     }
