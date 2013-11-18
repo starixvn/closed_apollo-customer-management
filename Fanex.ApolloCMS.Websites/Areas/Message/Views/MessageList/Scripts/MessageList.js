@@ -152,10 +152,10 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                     }
                     },
                     { HeaderText: "Type", Width: 80, Name: "MessageType", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: "Is Specical", Width: 80, Name: "Special", HeaderAlign: "center", CellAlign: "center" },
+                    { HeaderText: "Is Specical", Width: 50, Name: "Special", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Creator", Width: 150, Name: "Creator", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Recipient", Width: 80, Name: "Recipient", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: "Remove", Width: 150, Name: "Remove", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (currentCell) {
+                    { HeaderText: "Remove", Width: 80, Name: "Remove", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (currentCell) {
                         return '<div class="link" onclick="removeMessage(' + currentCell.Value.MessageId + ',' + currentCell.Value.TargetId + ' )">Remove</div>';
                     }
                     }
