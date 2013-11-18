@@ -129,11 +129,17 @@
   <data name="ConfirmPasswordCannotEmpty" xml:space="preserve">
     <value>Confirm password cannot be empty.</value>
   </data>
+  <data name="ExistingUserNameError" xml:space="preserve">
+    <value>User name is already exists!</value>
+  </data>
   <data name="InternalError" xml:space="preserve">
     <value>Sorry, an error occurred while processing your request, please notify the administrators.</value>
   </data>
   <data name="InvalidEmail" xml:space="preserve">
     <value>Invalid email.</value>
+  </data>
+  <data name="InvalidUserName" xml:space="preserve">
+    <value>Invalid user name!</value>
   </data>
   <data name="NewPasswordCannotEmpty" xml:space="preserve">
     <value>New password cannot be empty.</value>
@@ -149,6 +155,9 @@
   </data>
   <data name="PasswordMinLengthError" xml:space="preserve">
     <value>The password must have at least 6 characters.</value>
+  </data>
+  <data name="RequiredMemberError" xml:space="preserve">
+    <value>At least one customer is required!</value>
   </data>
   <data name="ResourceNotFoundError" xml:space="preserve">
     <value>Resources not found!</value>

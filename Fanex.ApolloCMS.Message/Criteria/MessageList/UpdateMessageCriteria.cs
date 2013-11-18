@@ -44,7 +44,7 @@ namespace Fanex.ApolloCMS.Message.Criteria.MessageList
 
         public override string GetSettingKey()
         {
-            return "Message_MessageList_UpdateMessage";
+            return "Acc_Msg_UpdateMessage";
         }
     }
 }

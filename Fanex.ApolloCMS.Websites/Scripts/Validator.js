@@ -1,7 +1,7 @@
 ﻿/* File Created: November 14, 2013 */
 var Validator = function ($) {
     return {
-        showTooltip: function ($obj, message) {
+        showTooltip: function ($obj, message, gravity) {
             if ($obj.is(':hidden')) {
                 $obj = $obj.parent();
             }
@@ -9,7 +9,8 @@ var Validator = function ($) {
             $obj.attr('title', message);
             $obj.tipsy(
             {
-                trigger: 'manual'
+                trigger: 'manual', 
+                gravity: gravity ? gravity : 's'
             });
             $obj.tipsy('show');
             $obj.focus();
