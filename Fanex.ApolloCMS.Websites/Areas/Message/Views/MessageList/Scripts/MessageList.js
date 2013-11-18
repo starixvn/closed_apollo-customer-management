@@ -16,8 +16,9 @@ Fanex.ApolloCMS.Message.MessageList = function () {
             FromDate: null,
             ToDate: null
         },
-        getMessageByIdParam: {
-            messageId: null
+        getMessageDetailParam: {
+            messageId: null,
+            targetId: null
         }
     };
 
@@ -141,7 +142,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
     };
 
     self.getMessageById = function (id) {
-        _params.getMessageByIdParam.messageId = id;
+        _params.getMessageDetailParam.messageId = id;
 
         $.ajax({
             type: "POST",
@@ -149,7 +150,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
             contentType: "application/json; charset=utf-8",
             dataType: "html",
             data: JSON.stringify({
-                MessageId: _params.getMessageByIdParam.messageId
+                MessageId: _params.getMessageDetailParam.messageId
             }),
             success: function (html) {
                 //$("#editMessageContent").html(html);
@@ -163,6 +164,9 @@ Fanex.ApolloCMS.Message.MessageList = function () {
 
     editMessage = function (id) {
         self.getMessageById(id);
+    };
+
+    self.updateMessage = function () {
     };
 
     self.bindingEvents = function () {

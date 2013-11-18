@@ -77,7 +77,7 @@ namespace Fanex.ApolloCMS.Message.Controllers
             {
                 criteria.UserLoginId = this.CurrentSession.UserId;
                 criteria.UserLoginName = this.CurrentSession.Username;
-                criteria.MsgType = (byte)MessageTypeConstants.Public;
+                criteria.MsgType = (byte)MessageTypes.Public;
 
                 return Json(this._newMessageService.InsertMessage(criteria));
             }

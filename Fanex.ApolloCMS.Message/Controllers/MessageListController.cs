@@ -69,5 +69,19 @@ namespace Fanex.ApolloCMS.Message.Controllers
             var result = this._messageService.GetMessageById(getMessageByIdCriteria);
             return PartialView("EditMessage", result);
         }
+
+        /// <summary>
+        /// Updates the message.
+        /// </summary>
+        /// <param name="updateMessageCriteria">The update message criteria.</param>
+        /// <returns>Success message.</returns>
+        [HttpPost]
+        public ActionResult UpdateMessage(UpdateMessageCriteria updateMessageCriteria)
+        {
+            updateMessageCriteria.UserLoginName = this.CurrentSession.Username;
+            updateMessageCriteria.UserLoginId = this.CurrentSession.UserId;
+            this._messageService.UpdateMessage(updateMessageCriteria);
+            return Json(new { success = true });
+        }
     }
 }
