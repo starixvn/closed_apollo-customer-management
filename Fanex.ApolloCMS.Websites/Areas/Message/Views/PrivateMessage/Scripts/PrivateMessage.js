@@ -125,7 +125,7 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
         var rowFormat = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td class="text-center">{3}</td><td class="text-center">{4}</td></tr>';
         var no = params.RecipientList.length + 1;
         var level = isAgent ? labels.Agent : labels.Member;
-        var upline = informUpline ? '<input type="checkbox" checked />' : '';
+        var upline = informUpline ? '<span class="icon-checked" />' : '<span class="icon-unchecked" />';
         var remove = '<a href="#" onclick="removeRow({0})">Remove</a>'.format(no - 1);
 
         if (isAgent) {
