@@ -26,7 +26,7 @@ body {
     margin: 0;
 }
 
-input[type="text"], input[type="submit"], input[type="button"] {
+input[type="text"], input[type="submit"], input[type="button"], input[type="password"] {
     height: 26px;
 }
 
@@ -106,12 +106,15 @@ input[type="text"], input[type="submit"], input[type="button"] {
 
     li {
         height: 30px;
-        padding: 8px;
-        line-height: 14px;
+        line-height: 17px;
 
         a {
             text-decoration: none;
             margin-left: 5px;
+            display: block;
+            height: 100%;
+            padding: 5px;
+
             span {
                 margin-right: 5px;
             }
@@ -280,7 +283,6 @@ input[type="text"], input[type="submit"], input[type="button"] {
                     a {
                         color: #fff;
                         text-decoration: none;
-                        display: block;
                     }
 
                     &.last-item {
@@ -302,10 +304,9 @@ input[type="text"], input[type="submit"], input[type="button"] {
                             border: none;
                             width: 100%;
                             padding: 0;
+
                              a {
                                 font-weight: normal;
-                                height: 30px;
-                                padding: 8px;
                                 margin: 0;
                              }
                         }
@@ -334,10 +335,6 @@ input[type="text"], input[type="submit"], input[type="button"] {
                     .list-config {
                         .childMenu;
                         padding: 5px 0;
-
-                        li {
-                            padding: 5px;
-                        }
                     }
                 }
             }
@@ -603,6 +600,33 @@ input[type="text"], input[type="submit"], input[type="button"] {
                         width: 100px;
                     }
                 }
+
+               // Popup message
+                /*.alert {
+                    position: fixed;
+                    top: 76px;
+                    z-index: 333;
+                    width: 71.8%;
+                }*/
+                
+                .frm {
+                    margin-top: 20px;
+
+                    .form-control {
+                        .border-radius(2px);
+                    }
+
+                    .control-label {
+                        margin-right: 10px;
+                        font-weight: normal;
+                        padding-top: 3px;
+
+                    }
+
+                    .btn-left {
+                        margin-left: 10px;
+                    }
+                }
             }
         }
     }
@@ -619,6 +643,9 @@ input[type="text"], input[type="submit"], input[type="button"] {
 @media (max-width: 750px) {
     .container.page {
         width: 750px;
+        .form-group {
+            margin-left: 0;
+        }
     }
 }
 

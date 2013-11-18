@@ -18,7 +18,7 @@
 </head>
 <body>
     <div class="container page">
-        <div class="row header">            
+        <div class="row header">
             @Html.Action("_Search", new RouteValueDictionary(new { Controller = "Home", Area = "" }))
             <div class="col-xs-9 col-sm-9 col-md-9 rightHeader">
                 <div class="col-xs-9 col-sm-9 col-md-9">
@@ -29,21 +29,15 @@
                         <div class="user">
                             @HttpContext.Current.User.Identity.Name <span class="icon-config"></span>
                             <ul class="list-unstyled list-config">
-                                <li>
-                                    <a href="@Url.Action("UserProfile", "User", new { Area = "UserControl" })">
-                                        <span class="glyphicon glyphicon-edit icon-changePass"></span>@ViewResources.Profile
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("ChangePassword", "User", new { Area = "UserControl" })">
-                                        <span class="glyphicon glyphicon-edit icon-changePass"></span>@ViewResources.Change_Password
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("LogOut", "Login", new { Area = "UserLogin" })">
-                                        <span class="glyphicon glyphicon-off"></span>@ViewResources.Sign_Out
-                                    </a>
-                                </li>
+                                <li><a href="@Url.Action("UserProfile", "User", new { Area = "UserControl" })"><span
+                                    class="glyphicon glyphicon-edit icon-changePass"></span>@ViewResources.Profile
+                                </a></li>
+                                <li><a href="@Url.Action("ChangePassword", "User", new { Area = "UserControl" })"><span
+                                    class="glyphicon glyphicon-edit icon-changePass"></span>@ViewResources.Change_Password
+                                </a></li>
+                                <li><a href="@Url.Action("LogOut", "Login", new { Area = "UserLogin" })"><span class="glyphicon glyphicon-off">
+                                </span>@ViewResources.Sign_Out
+                                </a></li>
                             </ul>
                         </div>
                     </div>
@@ -55,12 +49,8 @@
             <div id="mainContent" class="col-xs-9 col-sm-9 col-md-9 mainContent">
                 <span id="collapseExpand" class="collapse-expand icon-collapse"></span>
                 <div class="row container-content">
-                    <section id="headline">
-		                @RenderSection("Headline", false)
-	                </section>
-	                <section id="body">
-			            @RenderBody()
-	                </section>
+                    @RenderSection("Headline", false)
+                    @RenderBody()
                 </div>
             </div>
         </div>
