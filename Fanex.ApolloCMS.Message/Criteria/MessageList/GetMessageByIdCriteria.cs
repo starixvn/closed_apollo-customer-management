@@ -26,7 +26,7 @@ namespace Fanex.ApolloCMS.Message.Criteria.MessageList
 
         public override string GetSettingKey()
         {
-            return "Message_MessageList_GetMessageById";
+            return "Acc_Msg_GetMessageById";
         }
     }
 }

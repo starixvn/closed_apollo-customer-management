@@ -30,7 +30,7 @@ namespace Fanex.ApolloCMS.Message.Criteria.MessageList
 
         public override string GetSettingKey()
         {
-            return "Message_MessageList_DeleteMessage";
+            return "Acc_Msg_DeleteMessage";
         }
     }
 }

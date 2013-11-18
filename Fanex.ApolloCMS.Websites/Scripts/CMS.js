@@ -2,10 +2,10 @@
 var CMS = function ($) {
 
 	return {
-	    rootUrl: null,
-	    unauthorizedRequestError: null,
-	    resourceNotFound: null,
-        internalError: null,
+		rootUrl: null,
+		unauthorizedRequestError: null,
+		resourceNotFound: null,
+		internalError: null,
 		dialogMsg: null,
 		dialogPopup: null,
 		headlineMsgBox: null,
@@ -20,10 +20,10 @@ var CMS = function ($) {
 		},
 
 		initCoreValues: function () {
-		    CMS.rootUrl = $('#RootURL').val();
-		    CMS.unauthorizedRequestError = $('#UnAuthorizedRequestError').val();
-		    CMS.resourceNotFound = $('#ResourceNotFoundError').val();
-		    CMS.internalError = $('#InternalError').val();
+			CMS.rootUrl = $('#RootURL').val();
+			CMS.unauthorizedRequestError = $('#UnAuthorizedRequestError').val();
+			CMS.resourceNotFound = $('#ResourceNotFoundError').val();
+			CMS.internalError = $('#InternalError').val();
 			CMS.dialogPopup = $('<div id="dialog-popup"></div>').appendTo('body');
 		},
 		resolveRootUrl: function (relativeUrl) {
@@ -32,11 +32,11 @@ var CMS = function ($) {
 		// Handles common error when making ajax request
 		handleAjaxError: function (xhr, status, err) {
 			if (xhr.status == 403) {
-			    CMS.headlineMsgBox.showErr(CMS.unauthorizedRequestError, { sticky: true });
+				CMS.headlineMsgBox.showErr(CMS.unauthorizedRequestError, { sticky: true });
 			} else if (xhr.status == 404) {
-			    CMS.headlineMsgBox.showErr(CMS.resourceNotFound, { sticky: true });
+				CMS.headlineMsgBox.showErr(CMS.resourceNotFound, { sticky: true });
 			} else {
-			    CMS.headlineMsgBox.showErr(CMS.internalError, { sticky: true });
+				CMS.headlineMsgBox.showErr(CMS.internalError, { sticky: true });
 			}
 		},
 		showInfoMessage: function (message) {
