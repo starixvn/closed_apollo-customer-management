@@ -65,8 +65,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\MessageSpecialConstants.cs" />
-    <Compile Include="Constants\MessageTypeConstants.cs" />
+    <Compile Include="Constants\MessageSpecial.cs" />
+    <Compile Include="Constants\MessageTypes.cs" />
     <Compile Include="Controllers\MessageListController.cs" />
     <Compile Include="Controllers\PrivateMessageController.cs" />
     <Compile Include="Controllers\PublicMessageController.cs" />

@@ -63,9 +63,9 @@ namespace Fanex.ApolloCMS.Message.Models.MessageList
             {
                 switch ((int)MsgType)
                 {
-                    case (int)MessageTypeConstants.Public:
+                    case (int)MessageTypes.Public:
                         return Labels.Public;
-                    case (int)MessageTypeConstants.Private:
+                    case (int)MessageTypes.Private:
                         return Labels.Private;
                     default:
                         return string.Empty;
