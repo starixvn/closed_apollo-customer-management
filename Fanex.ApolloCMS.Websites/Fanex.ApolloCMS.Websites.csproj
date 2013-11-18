@@ -181,6 +181,7 @@
     </Content>
     <Content Include="Areas\Message\Resources\MessageList\Message.less" />
     <Content Include="Areas\Message\Views\MessageList\Scripts\MessageList.js" />
+    <Content Include="Areas\Message\Views\PrivateMessage\Scripts\PrivateMessage.js" />
     <Content Include="Areas\Message\Views\PublicMessage\Scripts\PublicMessage.js" />
     <Content Include="Areas\UserLogin\scripts\login.js" />
     <Content Include="Areas\UserLogin\scripts\lib\jquery-1.8.0.min.js" />
