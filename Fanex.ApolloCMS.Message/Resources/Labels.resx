@@ -156,7 +156,7 @@
   <data name="MaxRowsLimit" xml:space="preserve">
     <value>Max Rows Limit:</value>
   </data>
-  <data name="Message_Type" xml:space="preserve">
+  <data name="MessageType" xml:space="preserve">
     <value>Message Type</value>
   </data>
   <data name="NewPrivateMessage" xml:space="preserve">
@@ -201,7 +201,7 @@
   <data name="To" xml:space="preserve">
     <value>To</value>
   </data>
-  <data name="Top_New_Messages" xml:space="preserve">
+  <data name="TopNewMessages" xml:space="preserve">
     <value>Top New Messages</value>
   </data>
   <data name="Vietnamese" xml:space="preserve">

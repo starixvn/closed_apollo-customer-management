@@ -1,6 +1,4 @@
-﻿@using Fanex.ApolloCMS.Message.Resources
-@using Fanex.ApolloCMS.Core.Web
-@{
+﻿@{
     ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -16,7 +14,7 @@
     <div class="filter-row clearfix">
         <div class="filter-item">
             <div class="lbl lbl-large">
-                <label>@Labels.Top_New_Messages</label>
+                <label>@Labels.TopNewMessages</label>
             </div>
             <div class="txt width-auto">
                 <select id="ddlTopNewMessage" class="topMessage">
@@ -47,7 +45,7 @@
     <div class="filter-row clearfix">
         <div class="filter-item">
             <div class="lbl lbl-large">
-                <label>@Labels.Message_Type</label>
+                <label>@Labels.MessageType</label>
             </div>
             <div class="txt width-auto">
                 <select id="ddlMessageType" class="messageType">

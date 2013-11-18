@@ -90,12 +90,6 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
 
             foreach (var item in recipients)
             {
-                stringBuilder.AppendFormat(
-                                  recipientNode,
-                                  item.TargetId,
-                                  item.TargetName,
-                                  item.IsAgent == true ? 1 : 0);
-
                 if (item.InformUpline)
                 {
                     var uplines = this.GetUplineById(new GetUplineByIdCriteria
@@ -107,11 +101,19 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
                     foreach (var upline in uplines)
                     {
                         stringBuilder.AppendFormat(
-                                  recipientNode,
-                                  upline.TargetId,
-                                  upline.TargetName,
-                                  1);
+                                          recipientNode,
+                                          upline.TargetId,
+                                          upline.TargetName,
+                                          1);
                     }
+                }
+                else
+                {
+                    stringBuilder.AppendFormat(
+                                      recipientNode,
+                                      item.TargetId,
+                                      item.TargetName,
+                                      item.IsAgent == true ? 1 : 0);
                 }
             }
 

@@ -176,9 +176,6 @@
     <Content Include="App_Data\NAPFrameworkSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\SVRMSG.MsgDB.aplweb.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Areas\Message\Resources\MessageList\Message.less" />
     <Content Include="Areas\Message\Views\MessageList\Scripts\MessageList.js" />
     <Content Include="Areas\Message\Views\PrivateMessage\Scripts\PrivateMessage.js" />

@@ -56,7 +56,7 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
         $this.DOMInstance.btnSubmit.bind('click', function () {
             if (validateMsgForm()) {
                 getParamValues();
-                //$this.AddNewMessage();
+                $this.AddNewMessage();
             }
         });
     };
@@ -163,7 +163,7 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
             params.RecipientList.splice(index, 1);
 
             if (params.RecipientList.length == 0) {
-                $this.DOMInstance.tblMemberListBody.append('<tr><td colspan="5">{0}</td></tr>'.format(labels.NoMember));
+                $this.DOMInstance.tblMemberListBody.append('<tr><td colspan="5" class="text-center">{0}</td></tr>'.format(labels.NoMember));
             } else if (params.RecipientList.length == 19) {
                 $this.DOMInstance.btnAdd.removeAttr('disabled');
             }

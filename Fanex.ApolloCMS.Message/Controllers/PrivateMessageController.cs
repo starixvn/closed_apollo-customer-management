@@ -14,6 +14,7 @@ namespace Fanex.ApolloCMS.Message.Controllers
     using Fanex.ApolloCMS.Core.Configurations;
     using Fanex.ApolloCMS.Core.Controllers;
     using Fanex.ApolloCMS.Core.Resources;
+    using Fanex.ApolloCMS.Message.Constants;
     using Fanex.ApolloCMS.Message.Criteria.NewMessage;
     using Fanex.ApolloCMS.Message.Services.Implements;
     using Fanex.ApolloCMS.Message.Services.Interfaces;
@@ -54,6 +55,27 @@ namespace Fanex.ApolloCMS.Message.Controllers
         public JsonResult GetRecipientInfo(GetRecipientInfoCriteria criteria)
         {
             return Json(this._newMessageService.GetRecipientInfo(criteria));
+        }
+
+        /// <summary>
+        /// Adds the new public message.
+        /// </summary>
+        /// <param name="criteria">The criteria that contains the information of the new message.</param>
+        /// <returns>Whether or not the new public message is added successfully or not.</returns>
+        public JsonResult AddNewMessage(InsertMessageCriteria criteria)
+        {
+            if (!ModelState.IsValid)
+            {
+                return this.GetInvalidModelErrors();
+            }
+            else
+            {
+                criteria.UserLoginId = this.CurrentSession.UserId;
+                criteria.UserLoginName = this.CurrentSession.Username;
+                criteria.MsgType = (byte)MessageTypes.Private;
+
+                return Json(this._newMessageService.InsertMessage(criteria));
+            }
         }
 
         /// <summary>
