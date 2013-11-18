@@ -96,7 +96,7 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
                                   item.TargetName,
                                   item.IsAgent == true ? 1 : 0);
 
-                if (item.ConfirmUpline)
+                if (item.InformUpline)
                 {
                     var uplines = this.GetUplineById(new GetUplineByIdCriteria
                     {

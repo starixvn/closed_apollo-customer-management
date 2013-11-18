@@ -122,9 +122,11 @@ namespace Fanex.ApolloCMS.Websites
                 "~/areas/message/resources/newmessage/layout.less");
 
             bundles.Add(new ScriptBundle("~/scripts/newPrivateMessage").Include(
+                "~/Scripts/Validator.js",
                 "~/Areas/Message/Views/PrivateMessage/Scripts/PrivateMessage.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/newPublicMessage").Include(
+                "~/Scripts/Validator.js",
                 "~/Areas/Message/Views/PublicMessage/Scripts/PublicMessage.js"));
         }
     }

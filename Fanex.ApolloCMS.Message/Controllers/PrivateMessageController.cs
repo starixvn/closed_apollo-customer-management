@@ -11,8 +11,10 @@ namespace Fanex.ApolloCMS.Message.Controllers
 {
     using System.Collections.Generic;
     using System.Web.Mvc;
+    using Fanex.ApolloCMS.Core.Configurations;
     using Fanex.ApolloCMS.Core.Controllers;
     using Fanex.ApolloCMS.Core.Resources;
+    using Fanex.ApolloCMS.Message.Criteria.NewMessage;
     using Fanex.ApolloCMS.Message.Services.Implements;
     using Fanex.ApolloCMS.Message.Services.Interfaces;
 
@@ -22,7 +24,6 @@ namespace Fanex.ApolloCMS.Message.Controllers
     public class PrivateMessageController : BaseController
     {
         private readonly INewMessageService _newMessageService;
-        private readonly int _maxRowsLimit = 20;
 
         public PrivateMessageController() :
             this(null)
@@ -41,8 +42,18 @@ namespace Fanex.ApolloCMS.Message.Controllers
         public ActionResult Index()
         {
             ViewBag.MemberTypes = CreateMemberTypes();
-            ViewBag.MaxRowsLimit = this._maxRowsLimit;
+            ViewBag.MaxRowsLimit = AppSettings.NewPrivateMessageMaxRowsLimit;
             return View();
+        }
+
+        /// <summary>
+        /// Gets the recipient information.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>JSON object contains recipient information.</returns>
+        public JsonResult GetRecipientInfo(GetRecipientInfoCriteria criteria)
+        {
+            return Json(this._newMessageService.GetRecipientInfo(criteria));
         }
 
         /// <summary>

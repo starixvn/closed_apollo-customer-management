@@ -20,6 +20,6 @@ namespace Fanex.ApolloCMS.Message.Models.NewMessage
 
         public bool IsAgent { get; set; }
 
-        public bool ConfirmUpline { get; set; }
+        public bool InformUpline { get; set; }
     }
 }

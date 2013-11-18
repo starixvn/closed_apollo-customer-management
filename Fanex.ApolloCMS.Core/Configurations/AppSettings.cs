@@ -17,6 +17,14 @@ namespace Fanex.ApolloCMS.Core.Configurations
     /// </summary>
     public static class AppSettings
     {
+        public static int NewPrivateMessageMaxRowsLimit
+        {
+            get
+            {
+                return Convert.ToInt32(GetValue("NewPrivateMessageMaxRowsLimit"));
+            }
+        }
+
         /// <summary>
         /// Gets the value from web configuration.
         /// </summary>
