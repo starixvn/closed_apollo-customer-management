@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="MessageTypeConstants.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="MessageSpecial.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -9,16 +9,16 @@
 
 namespace Fanex.ApolloCMS.Message.Constants
 {
-    public enum MessageTypeConstants
+    public enum MessageSpecial
     {
         /// <summary>
-        /// The public.
+        /// The message special.
         /// </summary>
-        Public = 3,
+        Yes = 1,
 
         /// <summary>
-        /// The private.
+        /// The message not special.
         /// </summary>
-        Private = 1
+        No = 0
     }
 }

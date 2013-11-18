@@ -77,6 +77,7 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
                     MsgType = row.MsgType,
                     IsSpecial = row.IsSpecial,
                     Creator = row.Creator,
+                    Recipient = row.Recipient,
                     TargetId = row.TargetId,
                     MessageId = row.MessageId
                 };
