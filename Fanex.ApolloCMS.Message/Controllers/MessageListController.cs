@@ -83,5 +83,18 @@ namespace Fanex.ApolloCMS.Message.Controllers
             this._messageService.UpdateMessage(updateMessageCriteria);
             return Json(new { success = true });
         }
+
+        /// <summary>
+        /// Deletes the message.
+        /// </summary>
+        /// <param name="deleteMessageCriteria">The delete message criteria.</param>
+        /// <returns>Success message.</returns>
+        [HttpPost]
+        public ActionResult DeleteMessage(DeleteMessageCriteria deleteMessageCriteria)
+        {
+            deleteMessageCriteria.UserLoginId = this.CurrentSession.UserId;
+            this._messageService.DeleteMessage(deleteMessageCriteria);
+            return Json(new { success = true });
+        }
     }
 }
