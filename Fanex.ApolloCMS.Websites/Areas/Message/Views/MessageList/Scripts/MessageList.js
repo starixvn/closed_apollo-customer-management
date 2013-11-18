@@ -148,7 +148,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
         var columns = [
                     { HeaderText: "Posted Date", Width: 200, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Message English", Width: 300, Name: "MessageContent", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell) {
-                        return '<div class="link editBtn" onclick="editMessage(' + currentCell.Value.MessageId + ')">Edit</div><div class="messageContent">' + currentCell.Value.ContentEn + '</div><div class="clear"></div>';
+                        return '<div class="link editBtn glyphicon glyphicon-pencil" onclick="editMessage(' + currentCell.Value.MessageId + ')"></div><div class="messageContent">' + currentCell.Value.ContentEn + '</div><div class="clear"></div>';
                     }
                     },
                     { HeaderText: "Type", Width: 80, Name: "MessageType", HeaderAlign: "center", CellAlign: "center" },
