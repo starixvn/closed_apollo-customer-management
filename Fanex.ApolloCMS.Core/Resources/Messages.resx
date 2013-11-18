@@ -150,6 +150,12 @@
   <data name="PasswordMinLengthError" xml:space="preserve">
     <value>The password must have at least 6 characters.</value>
   </data>
+  <data name="ResourceNotFoundError" xml:space="preserve">
+    <value>Resources not found!</value>
+  </data>
+  <data name="UnAuthorizedRequestError" xml:space="preserve">
+    <value>Unauthorized request rejected!</value>
+  </data>
   <data name="WelcomeMessage" xml:space="preserve">
     <value>Welcome to Customer Management System</value>
   </data>

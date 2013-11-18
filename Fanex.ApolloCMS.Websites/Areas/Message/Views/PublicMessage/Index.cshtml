@@ -1,12 +1,17 @@
-﻿@{
+﻿@model Fanex.ApolloCMS.Message.Criteria.NewMessage.InsertMessageCriteria
+@{
 	ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@section Head {
+@section Head 
+{
 	@Styles.Render("~/site/newMessage")
 }
-@model Fanex.ApolloCMS.Message.Criteria.NewMessage.InsertMessageCriteria
-<h5 class="row title">@Labels.NewPublicMessage</h5>
+@section Headline 
+{
+	<h5 class="row title">@Labels.NewPublicMessage</h5>
+}
+
 <div id="divMajorLangue" class="row language-group">
 	<div class="col-xs-12 col-sm-12 col-md-12 language-group-title">@Labels.MajorLanguage</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 language-group-body">
@@ -63,6 +68,7 @@
 	</div>
 	<input type="button" id="btnSubmit" class="btn pull-left" value="@ViewLang.Submit" />
 </div>
-@section Foot {
+@section Foot 
+{
 	@Scripts.Render("~/scripts/newPublicMessage")
 }

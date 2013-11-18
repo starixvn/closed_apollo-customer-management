@@ -1,12 +1,17 @@
-﻿@{
+﻿@model Fanex.ApolloCMS.Message.Criteria.NewMessage.InsertMessageCriteria
+@{
     ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model Fanex.ApolloCMS.Message.Criteria.NewMessage.InsertMessageCriteria
-@section Head {
+@section Head 
+{
     @Styles.Render("~/site/newMessage")
 }
-<h5 class="row title">@Labels.NewPrivateMessage</h5>
+@section Headline 
+{
+	<h5 class="row title">@Labels.NewPrivateMessage</h5>
+}
+
 <div class="row">
     <div class="col-md-12 alert alert-success">
         The message has been posted successfully!</div>
@@ -68,7 +73,7 @@
         <div class="checkbox pull-left">
             @Html.CheckBox("chkInformUpline") @Labels.AlsoInformUpline
         </div>
-        <input type="button" class="btn pull-left" value="@ViewLang.Add" />
+        <input type="button" id="btnAdd" class="btn pull-left" value="@ViewLang.Add" />
     </div>
     <div class="col-md-9 clearfix">
         <table class="table table-bordered tbl">
@@ -106,8 +111,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="5">@Labels.NoMember
-                    </td>
+                    <td colspan="5">@Labels.NoMember</td>
                 </tr>
             </tbody>
         </table>
@@ -117,3 +121,7 @@
         <span class="pull-right rowLimit">@Labels.MaxRowsLimit @ViewBag.MaxRowsLimit</span>
     </div>
 </div>
+@section Foot 
+{
+	@Scripts.Render("~/scripts/newPrivateMessage")
+}

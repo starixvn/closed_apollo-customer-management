@@ -132,6 +132,9 @@
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="InputUserName" xml:space="preserve">
+    <value>Input a username...</value>
+  </data>
   <data name="Level" xml:space="preserve">
     <value>Level</value>
   </data>
