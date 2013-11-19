@@ -40,7 +40,6 @@ namespace Fanex.ApolloCMS.Message.Repositories.Implements
             using (var db = new ObjectDb(getMessageListCriteria.GetSettingKey()))
             {
                 result = db.ExecuteDataSet(getMessageListCriteria.GetSpParams());
-                outputParam = db.GetOuputParams();
             }
 
             var messageListTable = result.Tables[0];

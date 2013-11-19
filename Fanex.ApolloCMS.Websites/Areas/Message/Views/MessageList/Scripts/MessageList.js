@@ -42,6 +42,13 @@ Fanex.ApolloCMS.Message.MessageList = function () {
         }
     };
 
+    var messageDetailParam = {
+        publicMessage: 3,
+        privateMessage: 1,
+        messageIspecial: true,
+        messageNotSpecial: false
+    };
+
     var cacheDOMElements = function () {
         _tables.gridMessageContainer = $("#gridMessageContainer");
         _tables.gridMessage = $("#gridMessage");
@@ -109,6 +116,28 @@ Fanex.ApolloCMS.Message.MessageList = function () {
         _params.updateMessageParam.ContentVn = $.trim(_tables.txtContentVn.val());
     };
 
+    self.getMessageType = function (msgType) {
+        var messageType = null;
+        if (msgType == messageDetailParam.publicMessage) {
+            messageType = publicMessage;
+        }
+        else {
+            messageType = privateMessage;
+        }
+        return messageType;
+    };
+
+    self.messageIsSpecial = function (isSpecial) {
+        var msgIsSpecial = null;
+        if (isSpecial == messageDetailParam.messageIspecial) {
+            msgIsSpecial = messageIsSpecial;
+        }
+        else {
+            msgIsSpecial = messageNotSpecial;
+        }
+        return msgIsSpecial;
+    };
+
     self.getListMessage = function () {
         _params.getListMessageParam.TopNewMsg = $("#ddlTopNewMessageSelectBoxItText").attr("data-val");
         _params.getListMessageParam.MsgType = $("#ddlMessageTypeSelectBoxItText").attr("data-val");
@@ -144,28 +173,43 @@ Fanex.ApolloCMS.Message.MessageList = function () {
 
     self.renderGrid = function (rs) {
         _tables.gridMessageContainer.removeClass("display-none");
+        var columns = [];
         var bodyData = [];
-        var columns = [
+
+        if (hasHostRight) {
+            columns = [
                     { HeaderText: "Posted Date", Width: 200, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Message English", Width: 300, Name: "MessageContent", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell) {
                         return '<div class="link editBtn glyphicon glyphicon-pencil" onclick="editMessage(' + currentCell.Value.MessageId + ')"></div><div class="messageContent">' + currentCell.Value.ContentEn + '</div><div class="clear"></div>';
                     }
                     },
                     { HeaderText: "Type", Width: 80, Name: "MessageType", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: "Is Specical", Width: 80, Name: "Special", HeaderAlign: "center", CellAlign: "center" },
+                    { HeaderText: "Is Specical", Width: 50, Name: "Special", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Creator", Width: 150, Name: "Creator", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Recipient", Width: 80, Name: "Recipient", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: "Remove", Width: 150, Name: "Remove", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (currentCell) {
+                    { HeaderText: "Remove", Width: 80, Name: "Remove", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (currentCell) {
                         return '<div title="Remove" class="glyphicon glyphicon-minus-sign" onclick="removeMessage(' + currentCell.Value.MessageId + ',' + currentCell.Value.TargetId + ' )"></div>';
                     }
                     }
                 ];
+        } else {
+            columns = [
+                { HeaderText: "Posted Date", Width: 200, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "Message English", Width: 300, Name: "MessageContent", HeaderAlign: "center", CellAlign: "left" },
+                { HeaderText: "Type", Width: 80, Name: "MessageType", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "Is Specical", Width: 50, Name: "Special", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "Creator", Width: 150, Name: "Creator", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "Recipient", Width: 80, Name: "Recipient", HeaderAlign: "center", CellAlign: "center" }
+            ];
+        }
 
         if (rs) {
             var messageLength = rs.length;
             var currentGroupId = 0;
             var currentItem = null;
             var totalMergeRow = 1;
+            var msgType = null;
+            var msgSpecial = null;
 
             $.each(rs, function (index, item) {
                 if (currentGroupId != item.MessageId) {
@@ -177,34 +221,67 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                 }
             });
 
-            for (var messageIndex = 0; messageIndex < messageLength; messageIndex++) {
-                var currentMessage = rs[messageIndex];
-                var row = [];
+            if (hasHostRight) {
+                for (var messageIndex = 0; messageIndex < messageLength; messageIndex++) {
+                    var currentMessage = rs[messageIndex];
+                    var row = [];
 
-                if (currentGroupId != currentMessage.MessageId) {
-                    currentGroupId = currentMessage.MessageId;
-                    row.push(
+                    msgSpecial = self.messageIsSpecial(currentMessage.IsSpecial);
+                    msgType = self.getMessageType(currentMessage.MsgType);
+
+                    if (currentGroupId != currentMessage.MessageId) {
+                        currentGroupId = currentMessage.MessageId;
+                        row.push(
                         { Name: "PostedDate", Value: currentMessage.PostDate, MergeRowNumber: currentMessage.NumOfElems },
                         { Name: "MessageContent", Value: currentMessage, MergeRowNumber: currentMessage.NumOfElems },
-                        { Name: "MessageType", Value: currentMessage.MessageType, MergeRowNumber: currentMessage.NumOfElems },
-                        { Name: "Special", Value: currentMessage.MessageIsSpecial, MergeRowNumber: currentMessage.NumOfElems },
+                        { Name: "MessageType", Value: msgType, MergeRowNumber: currentMessage.NumOfElems },
+                        { Name: "Special", Value: msgSpecial, MergeRowNumber: currentMessage.NumOfElems },
                         { Name: "Creator", Value: currentMessage.Creator, MergeRowNumber: currentMessage.NumOfElems }
                     );
-                }
-                row.push(
+                    }
+                    row.push(
                     { Name: "Recipient", Value: currentMessage.Recipient },
                     { Name: "Remove", Value: currentMessage }
                 );
 
-                bodyData.push({
-                    Columns: row
-                });
+                    bodyData.push({
+                        Columns: row
+                    });
+                }
+            } else {
+                for (var messageIndex = 0; messageIndex < messageLength; messageIndex++) {
+                    var currentMessage = rs[messageIndex];
+                    var row = [];
+
+                    msgSpecial = self.messageIsSpecial(currentMessage.IsSpecial);
+                    msgType = self.getMessageType(currentMessage.MsgType);
+
+                    if (currentGroupId != currentMessage.MessageId) {
+                        currentGroupId = currentMessage.MessageId;
+                        row.push(
+                        { Name: "PostedDate", Value: currentMessage.PostDate, MergeRowNumber: currentMessage.NumOfElems },
+                        { Name: "MessageContent", Value: currentMessage.ContentEn, MergeRowNumber: currentMessage.NumOfElems },
+                        { Name: "MessageType", Value: msgType, MergeRowNumber: currentMessage.NumOfElems },
+                        { Name: "Special", Value: msgSpecial, MergeRowNumber: currentMessage.NumOfElems },
+                        { Name: "Creator", Value: currentMessage.Creator, MergeRowNumber: currentMessage.NumOfElems }
+                    );
+                    }
+                    row.push(
+                    { Name: "Recipient", Value: currentMessage.Recipient }
+                );
+
+                    bodyData.push({
+                        Columns: row
+                    });
+                }
             }
+
         }
 
         var gridOptions = {
             columns: columns,
             bodyRows: bodyData,
+            gridExpandHeight: 250,
             showDistinctRow: false
         };
 

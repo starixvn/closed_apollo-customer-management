@@ -342,12 +342,12 @@
     <Content Include="Areas\Message\Resources\NewMessage\layout.less" />
     <Content Include="Areas\Message\Resources\NewMessage\newMessage.less" />
     <Content Include="Areas\Message\Views\MessageList\EditMessage.cshtml" />
-    <None Include="Areas\UserLogin\themes\layout.less" />
-    <None Include="Areas\UserLogin\themes\login.less" />
+    <Content Include="Areas\UserLogin\themes\layout.less" />
+    <Content Include="Areas\UserLogin\themes\login.less" />
     <None Include="Areas\UserLogin\themes\fonts\Abel.woff" />
     <None Include="Areas\UserLogin\themes\fonts\OpenSans.woff" />
     <None Include="Areas\UserLogin\themes\fonts\YanoneKaffeesatz.woff" />
-    <None Include="Areas\UserLogin\themes\select-site.less" />
+    <Content Include="Areas\UserLogin\themes\select-site.less" />
     <Content Include="Areas\UserLogin\Views\Common\AccessDenied.cshtml" />
     <Content Include="Areas\UserLogin\Views\Common\Offline.cshtml" />
     <Content Include="Areas\UserLogin\Views\Login\Index.cshtml" />
@@ -358,10 +358,10 @@
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Content\bootstrap\fonts\glyphicons-halflings-regular.eot" />
-    <None Include="Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
-    <None Include="Content\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
-    <None Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\site\layout.less" />
     <Content Include="Content\site\variables.less" />
     <Content Include="Content\site\mixins.less" />
@@ -373,7 +373,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Content\site\custom.less" />
     <Content Include="Content\site\customFanexGrid.less" />
-    <None Include="Content\site\grid.less" />
+    <Content Include="Content\site\grid.less" />
     <Content Include="Views\Shared\_Search.cshtml" />
     <Content Include="Views\Shared\_LeftPan.cshtml" />
   </ItemGroup>
