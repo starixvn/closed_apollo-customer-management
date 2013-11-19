@@ -55,6 +55,9 @@ namespace Fanex.ApolloCMS.Websites
             bundles.Add(new ScriptBundle("~/scripts/headjs").Include(
                 "~/scripts/lib/html5-libs/head.js"));
 
+            bundles.Add(new ScriptBundle("~/scripts/repondjs").Include(
+                "~/scripts/lib/respond.js"));
+
             bundles.Add(new ScriptBundle("~/scripts/commonJS").Include(
                 "~/scripts/lib/jQuery/jquery-1.8.2.js",
                 "~/scripts/lib/jQuery/jquery-ui-1.8.24.js",
@@ -62,7 +65,6 @@ namespace Fanex.ApolloCMS.Websites
                 "~/content/bootstrap/js/bootstrap.js",
                 "~/scripts/lib/msgbox/msgbox-0.0.1.js",
                 "~/scripts/lib/tipsy/tipsy-1.0.0.js",
-                "~/scripts/lib/respond.js",
                 "~/scripts/lib/namespace.js",
                 "~/scripts/_layout.js",
                 "~/scripts/cms.js"));
@@ -83,7 +85,6 @@ namespace Fanex.ApolloCMS.Websites
                 "~/scripts/lib/jQuery/jquery.validate*",
                 "~/scripts/lib/jQuery/jquery.cookie.js",
                 "~/content/bootstrap/js/bootstrap.js",
-                "~/scripts/lib/respond.js",
                 "~/Areas/UserLogin/scripts/login.js"));
             bundles.FileSetOrderList.Clear();
         }

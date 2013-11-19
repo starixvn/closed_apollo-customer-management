@@ -681,6 +681,7 @@ input[type="text"], input[type="submit"], input[type="button"], input[type="pass
 @media (max-width: 750px) {
     .container.page {
         width: 750px;
+
         .form-group {
             margin-left: 0;
         }
@@ -703,7 +704,7 @@ input[type="text"], input[type="submit"], input[type="button"], input[type="pass
                 }
 
                 .userInfo .user .list-config {
-
+                    border: 1px solid @border-color;
                 }
             }
 
@@ -713,28 +714,6 @@ input[type="text"], input[type="submit"], input[type="button"], input[type="pass
             .leftContent .item {
                 height: 35px;
                 min-height: auto;
-            }
-        }
-    }
-
-    
-
-    @media (min-width: 350px)  {
-        .container.page {
-            width: 100%;
-
-            .form-group {
-                margin-left: 0;
-            }
-        }
-    }
-
-    @media (min-width: 350px)  {
-        .container.page {
-            width: 750px;
-
-            .form-group {
-                margin-left: 0;
             }
         }
     }
