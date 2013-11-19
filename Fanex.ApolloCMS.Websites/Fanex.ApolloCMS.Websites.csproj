@@ -298,8 +298,6 @@
     <Content Include="Scripts\lib\msgbox\images\question.png" />
     <Content Include="Scripts\lib\msgbox\msgbox-0.0.1.css" />
     <Content Include="Scripts\lib\msgbox\msgbox-0.0.1.js" />
-    <Content Include="Scripts\lib\msgbox\msgbox-0.0.1.min.css" />
-    <Content Include="Scripts\lib\msgbox\msgbox-0.0.1.min.js" />
     <Content Include="Scripts\lib\Namespace.js" />
     <Content Include="Scripts\lib\respond.js" />
     <Content Include="Scripts\lib\tipsy\tipsy-1.0.0.css" />
