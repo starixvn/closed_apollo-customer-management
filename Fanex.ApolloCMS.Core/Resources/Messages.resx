@@ -133,7 +133,7 @@
     <value>[To] value must be greater than or equal to [From]</value>
   </data>
   <data name="ExistingUserNameError" xml:space="preserve">
-    <value>User name is already exists!</value>
+    <value>Username is already exists!</value>
   </data>
   <data name="InternalError" xml:space="preserve">
     <value>Sorry, an error occurred while processing your request, please notify the administrators.</value>
@@ -145,7 +145,7 @@
     <value>Invalid email.</value>
   </data>
   <data name="InvalidUserName" xml:space="preserve">
-    <value>Invalid user name!</value>
+    <value>Invalid username!</value>
   </data>
   <data name="NewPasswordCannotEmpty" xml:space="preserve">
     <value>New password cannot be empty.</value>

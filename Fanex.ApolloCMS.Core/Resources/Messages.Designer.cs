@@ -106,7 +106,7 @@ namespace Fanex.ApolloCMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User name is already exists!.
+        ///   Looks up a localized string similar to Username is already exists!.
         /// </summary>
         public static string ExistingUserNameError {
             get {
@@ -142,7 +142,7 @@ namespace Fanex.ApolloCMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid user name!.
+        ///   Looks up a localized string similar to Invalid username!.
         /// </summary>
         public static string InvalidUserName {
             get {
