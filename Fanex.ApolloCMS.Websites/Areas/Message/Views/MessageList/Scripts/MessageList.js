@@ -202,7 +202,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
             columns = [
                     { HeaderText: "Posted Date", Width: 150, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Message English", Width: 300, Name: "MessageContent", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell) {
-                        return '<div class="link editBtn glyphicon glyphicon-pencil" onclick="editMessage(' + currentCell.Value.MessageId + ')"></div><div class="messageContent" title="' + currentCell.Value.ContentEn + '">' + getSubMessageContent(currentCell.Value.ContentEn) + '</div><div class="clear"></div>';
+                        return '<div class="link editBtn glyphicon glyphicon-edit" title="Edit" onclick="editMessage(' + currentCell.Value.MessageId + ')"></div><div class="messageContent" title="' + currentCell.Value.ContentEn + '">' + getSubMessageContent(currentCell.Value.ContentEn) + '</div><div class="clear"></div>';
                     }
                     },
                     { HeaderText: "Type", Width: 60, Name: "MessageType", HeaderAlign: "center", CellAlign: "center" },
@@ -304,7 +304,6 @@ Fanex.ApolloCMS.Message.MessageList = function () {
         }
 
         var gridOptions = {
-            allowTruncate: true,
             columns: columns,
             bodyRows: bodyData,
             gridExpandHeight: 250,
