@@ -133,7 +133,7 @@
     <value>Edit</value>
   </data>
   <data name="InputUserName" xml:space="preserve">
-    <value>Input a username...</value>
+    <value>Username...</value>
   </data>
   <data name="Level" xml:space="preserve">
     <value>Level</value>

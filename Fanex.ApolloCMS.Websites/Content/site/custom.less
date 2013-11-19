@@ -17,6 +17,10 @@
 
 /* dropdown list */
 .selectboxit-container {
+
+    * {
+        font-size: @font-size;
+    }
     .selectboxit {
         .border-radius(0);
         border: none;
@@ -41,12 +45,13 @@
     .selectboxit-text {
         color: @primary-color;
         font-size: @font-size + 1;
+        width: 55px;
     }
 
     .selectboxit .selectboxit-arrow-container .selectboxit-arrow {
         .icon-row-down;
         border: none;
-        top: 40%;
+        top: 33%;
         height: 8px;
     }
     .selectboxit-btn.selectboxit-enabled:hover,
@@ -59,11 +64,19 @@
     .selectboxit-list > .selectboxit-focus > .selectboxit-option-anchor {
         background: @primary-color;
     }
+
+    .selectboxit-arrow-container {
+        width: 20px;
+    }
 }
 
 .container.page .header .search .search-container .selectboxit-options li {
     display: block;
     border-color: @border-color;
+}
+
+.selectboxit .selectboxit-option-icon-container {
+    margin-left: 3px;
 }
 
 /* Calendar */

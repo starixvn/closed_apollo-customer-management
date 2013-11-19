@@ -55,7 +55,8 @@ input[type="text"], input[type="submit"], input[type="button"], input[type="pass
 
 .icon-treeview {
     .icon;
-    background-position: -158px -22px;
+    background-position: -157px -22px;
+    width: 19px;
 }
 
 .icon-treeview-disabled {
@@ -195,13 +196,14 @@ input[type="text"], input[type="submit"], input[type="button"], input[type="pass
                 }
 
                 .selType {
-                    width: 85px;
+                    width: 75px;
                 }
+
 
                 .selType select {
                     height: 27px;
                     margin-left: 2%;
-                    padding: 4px 2px;
+                    padding: 4px 0;
                     color: @primary-color;
 
                     option {
@@ -212,61 +214,67 @@ input[type="text"], input[type="submit"], input[type="button"], input[type="pass
                             background-color: @primary-color;
                         }
                     }
-
                 }
 
-                .txtSearch {
-                    border: none;
-                    padding: 1%;
-                    height: 26px;
-                    width: 99.5%;
-                    color: #b2b2b2;
-                    font-style: italic;
-                    margin-right: 2px;
+                #ddlMemberTypesSelectBoxItContainer {
+                    .ddlMemberTypes {
+                        width: 75px !important;
+                    }
+
+                    .selectboxit-options {
+                        min-width: 75px !important;
+                    }
+
+                    .selectboxit-arrow-container .selectboxit-arrow {
+                        top: 40%;
+                    }
                 }
 
-                .search, .treeview {
+                .containSearch {
+                    .txtSearch {
+                        border: none;
+                        padding: 1% 22px 1% 1%;
+                        height: 26px;
+                        width: 99.1%;
+                        color: #b2b2b2;
+                        font-style: italic;
+                        margin-right: 2px;
+                    }
+
+                    .icon-search {
+                        position: absolute;
+                        top: 15px;
+                        right: 35px;
+                        color: @primary-color;
+                        cursor: pointer;
+                    }
+                }
+                
+
+                .treeview {
                     width: 100%;
                     height: 28px;
                     background-color: #fff;
                     cursor: pointer;
                     border: 1px solid @primary-color;
 
+                    .icon-treeview {
+                        margin: 3px 14% 0;
+                    }
+
                     &:hover {
-                        height: 26px;
                         background: @primary-color;
-                        border: 1px solid #fff;
+                        border-color: #fff;
+
+                        .icon-treeview {
+                            background-position: -157px -2px;
+                        }
                     }
 
                    &.disabled:hover {
                         border: 1px solid @primary-color;
                         background-color: #fff;
                         height: 28px;
-                    }
-                }
-
-                .treeview {
-                    .icon-treeview {
-                        margin: 3px 14% 0;
-                    }
-
-                    &:hover {
-                        .icon-treeview {
-                            background-position: -158px -2px;
-                        }
-                    }
-                }
-
-                .search {
-                    .icon-search {
-                        margin: 3px 15% 0 22%;
-                        color: @primary-color;
-                    }
-
-                    &:hover {
-                        .icon-search {
-                            color: #fff;
-                        }
                     }
                 }
             }
@@ -458,7 +466,7 @@ input[type="text"], input[type="submit"], input[type="button"], input[type="pass
                         margin: 0;
                         text-align: center;
                         border-bottom: 1px solid @border-color;
-                        padding: 4px 15px 6px;
+                        padding: 4px 9px 6px;
                         font-weight: bold;
                     }
 
