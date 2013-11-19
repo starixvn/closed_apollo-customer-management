@@ -3,14 +3,17 @@
 
 /* FANEX GRID */
 .freegrid {
-    border-color: @table-border;
-    .free-top-left table thead th, .col_header table thead th {
-        background: @table-header-background;
-        border-color: @table-header-border;
-        color: @table-header-color;
-    }
+	border-color: @table-border;
+	font-size: @font-size;
 
-    td, .grid-fixed-table td {
-        border-color: @table-border;
-    }
+	.free-top-left table thead th, .col_header table thead th {
+		background: @table-header-background;
+		border-color: @table-header-border;
+		color: @table-header-color;
+		font-weight: normal;
+	}
+
+	td, .grid-fixed-table td {
+		border-color: @table-border;
+	}
 }

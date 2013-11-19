@@ -49,8 +49,8 @@ input[type="text"], input[type="submit"], input[type="button"], input[type="pass
     background: url(img/icons.png) no-repeat;
     width: 15px;
     height: 20px;
-    display: block;
     cursor: pointer;
+    float: left;
 }
 
 .icon-treeview {
@@ -182,7 +182,7 @@ input[type="text"], input[type="submit"], input[type="button"], input[type="pass
             border-right: 1px solid #0D5686;
 
             .search-container {
-                margin: 9px 1% 0;
+                margin: 9px 2px 0 3px;
                 display: table;
                 width: 98%;
 
@@ -197,36 +197,35 @@ input[type="text"], input[type="submit"], input[type="button"], input[type="pass
 
                 .selType {
                     width: 75px;
-                }
 
+                    select {
+                        height: 27px;
+                        margin-left: 2%;
+                        padding: 4px 0;
+                        color: @primary-color;
 
-                .selType select {
-                    height: 27px;
-                    margin-left: 2%;
-                    padding: 4px 0;
-                    color: @primary-color;
+                        option {
+                            height: 22px;
+                            padding: 2px;
 
-                    option {
-                        height: 22px;
-                        padding: 2px;
-
-                        &:hover {
-                            background-color: @primary-color;
+                            &:hover {
+                                background-color: @primary-color;
+                            }
                         }
                     }
-                }
 
-                #ddlMemberTypesSelectBoxItContainer {
-                    .ddlMemberTypes {
-                        width: 75px !important;
-                    }
+                    #ddlMemberTypesSelectBoxItContainer {
+                        .ddlMemberTypes {
+                            width: 75px !important;
+                        }
 
-                    .selectboxit-options {
-                        min-width: 75px !important;
-                    }
+                        .selectboxit-options {
+                            min-width: 75px !important;
+                        }
 
-                    .selectboxit-arrow-container .selectboxit-arrow {
-                        top: 40%;
+                        .selectboxit-arrow-container .selectboxit-arrow {
+                            top: 40%;
+                        }
                     }
                 }
 
@@ -250,6 +249,9 @@ input[type="text"], input[type="submit"], input[type="button"], input[type="pass
                     }
                 }
                 
+                .containTreeview {
+                    width: 27px;
+                }
 
                 .treeview {
                     width: 100%;
@@ -536,7 +538,7 @@ input[type="text"], input[type="submit"], input[type="button"], input[type="pass
                 }
 
                 .filter-form {
-                    margin-top: 10px;
+                    margin-top: 15px;
                     float: left;
 
                     .filter-row {
@@ -693,17 +695,46 @@ input[type="text"], input[type="submit"], input[type="button"], input[type="pass
                 margin-left: 1px;
             }
 
-            .rightHeader .mainMenu li .subMenu {
-                border: 1px solid @border-color;
-                border-width: 0 1px 1px;
-                min-width: 150px;
+            .rightHeader {
+                .mainMenu li .subMenu {
+                    border: 1px solid @border-color;
+                    border-width: 0 1px 1px;
+                    min-width: 150px;
+                }
+
+                .userInfo .user .list-config {
+
+                }
             }
+
         }
 
         .content {
             .leftContent .item {
                 height: 35px;
                 min-height: auto;
+            }
+        }
+    }
+
+    
+
+    @media (min-width: 350px)  {
+        .container.page {
+            width: 100%;
+
+            .form-group {
+                margin-left: 0;
+            }
+        }
+    }
+
+    @media (min-width: 350px)  {
+        .container.page {
+            width: 750px;
+
+            .form-group {
+                margin-left: 0;
             }
         }
     }
