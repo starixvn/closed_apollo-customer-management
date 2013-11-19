@@ -123,7 +123,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
 
         $.ajax({
             type: "POST",
-            url: "Message/MessageList/GetMessageList",
+            url: "MessageList/GetMessageList",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify({
@@ -148,7 +148,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
         var columns = [
                     { HeaderText: "Posted Date", Width: 200, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Message English", Width: 300, Name: "MessageContent", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell) {
-                        return '<div class="link editBtn" onclick="editMessage(' + currentCell.Value.MessageId + ')">Edit</div><div class="messageContent">' + currentCell.Value.ContentEn + '</div><div class="clear"></div>';
+                        return '<div class="link editBtn glyphicon glyphicon-pencil" onclick="editMessage(' + currentCell.Value.MessageId + ')"></div><div class="messageContent">' + currentCell.Value.ContentEn + '</div><div class="clear"></div>';
                     }
                     },
                     { HeaderText: "Type", Width: 80, Name: "MessageType", HeaderAlign: "center", CellAlign: "center" },
@@ -156,7 +156,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                     { HeaderText: "Creator", Width: 150, Name: "Creator", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Recipient", Width: 80, Name: "Recipient", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Remove", Width: 80, Name: "Remove", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (currentCell) {
-                        return '<div class="link" onclick="removeMessage(' + currentCell.Value.MessageId + ',' + currentCell.Value.TargetId + ' )">Remove</div>';
+                        return '<div title="Remove" class="glyphicon glyphicon-minus-sign" onclick="removeMessage(' + currentCell.Value.MessageId + ',' + currentCell.Value.TargetId + ' )"></div>';
                     }
                     }
                 ];
@@ -216,7 +216,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
 
         $.ajax({
             type: "POST",
-            url: "Message/MessageList/GetMessageById",
+            url: "MessageList/GetMessageById",
             contentType: "application/json; charset=utf-8",
             dataType: "html",
             data: JSON.stringify({
@@ -239,7 +239,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
     self.updateMessage = function () {
         $.ajax({
             type: "POST",
-            url: "Message/MessageList/UpdateMessage",
+            url: "MessageList/UpdateMessage",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify(_params.updateMessageParam),
@@ -265,7 +265,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
         CMS.headlineMsgBox.confirm("Are you sure you want to remove the message?", function () {
             $.ajax({
                 type: "POST",
-                url: "Message/MessageList/DeleteMessage",
+                url: "MessageList/DeleteMessage",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 data: JSON.stringify(_params.removeMessageParam),

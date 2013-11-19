@@ -14,10 +14,14 @@ namespace Fanex.ApolloCMS.Message.Controllers
     using Fanex.ApolloCMS.Core.Configurations;
     using Fanex.ApolloCMS.Core.Controllers;
     using Fanex.ApolloCMS.Core.Resources;
+    using Fanex.ApolloCMS.Core.Web;
     using Fanex.ApolloCMS.Message.Constants;
     using Fanex.ApolloCMS.Message.Criteria.NewMessage;
     using Fanex.ApolloCMS.Message.Services.Implements;
     using Fanex.ApolloCMS.Message.Services.Interfaces;
+    using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Web.Attribute;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// New private message controller.
@@ -40,10 +44,13 @@ namespace Fanex.ApolloCMS.Message.Controllers
         /// Redirect index page.
         /// </summary>
         /// <returns>Index view.</returns>
+        [HttpGet]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.AddNewMessage, Policy = Constant.Policy.Host)]
         public ActionResult Index()
         {
             ViewBag.MemberTypes = CreateMemberTypes();
             ViewBag.MaxRowsLimit = AppSettings.NewPrivateMessageMaxRowsLimit;
+            ViewBag.HasHostRight = this.HasRight(ApolloCMSFunctionKeys.ViewMessageList, Constant.Policy.Host);
             return View();
         }
 
@@ -52,6 +59,8 @@ namespace Fanex.ApolloCMS.Message.Controllers
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>JSON object contains recipient information.</returns>
+        [HttpPost]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.AddNewMessage, Policy = Constant.Policy.Host)]
         public JsonResult GetRecipientInfo(GetRecipientInfoCriteria criteria)
         {
             return Json(this._newMessageService.GetRecipientInfo(criteria));
@@ -62,6 +71,8 @@ namespace Fanex.ApolloCMS.Message.Controllers
         /// </summary>
         /// <param name="criteria">The criteria that contains the information of the new message.</param>
         /// <returns>Whether or not the new public message is added successfully or not.</returns>
+        [HttpPost]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.AddNewMessage, Policy = Constant.Policy.Host)]
         public JsonResult AddNewMessage(InsertMessageCriteria criteria)
         {
             if (!ModelState.IsValid)
@@ -70,11 +81,24 @@ namespace Fanex.ApolloCMS.Message.Controllers
             }
             else
             {
+                ICommandResult result = null;
+
                 criteria.UserLoginId = this.CurrentSession.UserId;
                 criteria.UserLoginName = this.CurrentSession.Username;
                 criteria.MsgType = (byte)MessageTypes.Private;
 
-                return Json(this._newMessageService.InsertMessage(criteria));
+                result = this._newMessageService.InsertMessage(criteria);
+
+                if (result.Code == 0)
+                {
+                    result = new CommandResult
+                    {
+                        Message = Messages.PostMessageSuccessfully,
+                        Code = 0
+                    };
+                }
+
+                return Json(result);
             }
         }
 

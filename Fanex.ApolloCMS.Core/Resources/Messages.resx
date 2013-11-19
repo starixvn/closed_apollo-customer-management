@@ -156,6 +156,9 @@
   <data name="PasswordMinLengthError" xml:space="preserve">
     <value>The password must have at least 6 characters.</value>
   </data>
+  <data name="PostMessageSuccessfully" xml:space="preserve">
+    <value>The message has been posted successfully!</value>
+  </data>
   <data name="RequiredMemberError" xml:space="preserve">
     <value>At least one customer is required!</value>
   </data>
