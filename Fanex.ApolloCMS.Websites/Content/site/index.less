@@ -49,14 +49,14 @@ input[type="text"], input[type="submit"], input[type="button"], input[type="pass
     background: url(img/icons.png) no-repeat;
     width: 15px;
     height: 20px;
-    float: left;
+    display: block;
     cursor: pointer;
 }
 
 .icon-treeview {
     .icon;
-    background-position: -157px -22px;
-    width: 19px;
+    background-position: -153px -22px;
+    width: 25px;
 }
 
 .icon-treeview-disabled {
@@ -233,7 +233,7 @@ input[type="text"], input[type="submit"], input[type="button"], input[type="pass
                 .containSearch {
                     .txtSearch {
                         border: none;
-                        padding: 1% 22px 1% 1%;
+                        padding: 1% 22px 1% 2%;
                         height: 26px;
                         width: 99.1%;
                         color: #b2b2b2;
@@ -259,7 +259,7 @@ input[type="text"], input[type="submit"], input[type="button"], input[type="pass
                     border: 1px solid @primary-color;
 
                     .icon-treeview {
-                        margin: 3px 14% 0;
+                        margin: 3px 0 0;
                     }
 
                     &:hover {
@@ -267,7 +267,7 @@ input[type="text"], input[type="submit"], input[type="button"], input[type="pass
                         border-color: #fff;
 
                         .icon-treeview {
-                            background-position: -157px -2px;
+                            background-position: -153px -2px;
                         }
                     }
 
@@ -620,18 +620,21 @@ input[type="text"], input[type="submit"], input[type="button"], input[type="pass
 
                     thead {
                         th {
-                            background-color: @primary-color;
+                            background-color: @table-header-background;
                             font-weight: normal;
-                            color: #fff;
+                            color: @table-header-color;
                             text-align: center;
+                            border-color: @table-header-border;
+                            padding: 3px 5px;
+                            line-height: 25px;
                         }
                     }
 
                     tbody {
                         td {
-                            height: 20px;
+                            height: @table-height;
                             padding: 5px;
-                            border-color: #c7e1f2;
+                            border-color: @table-border;
                         }
                     }
 
@@ -639,20 +642,14 @@ input[type="text"], input[type="submit"], input[type="button"], input[type="pass
                         width: 100px;
                     }
                 }
-
-               // Popup message
-                /*.alert {
-                    position: fixed;
-                    top: 76px;
-                    z-index: 333;
-                    width: 71.8%;
-                }*/
                 
                 .frm {
                     margin-top: 20px;
 
                     .form-control {
                         .border-radius(2px);
+                        line-height: @line-height - 8px;
+                        padding: 6px;
                     }
 
                     .control-label {
@@ -691,10 +688,23 @@ input[type="text"], input[type="submit"], input[type="button"], input[type="pass
 /* IE */
 .eq-ie7, .eq-ie8 {
     .container.page {
-        .header .rightHeader .mainMenu li .subMenu {
-            border: 1px solid @border-color;
-            border-width: 0 1px 1px;
-            min-width: 150px;
+        .header {
+            .search .search-container .treeview {
+                margin-left: 1px;
+            }
+
+            .rightHeader .mainMenu li .subMenu {
+                border: 1px solid @border-color;
+                border-width: 0 1px 1px;
+                min-width: 150px;
+            }
+        }
+
+        .content {
+            .leftContent .item {
+                height: 35px;
+                min-height: auto;
+            }
         }
     }
 }
