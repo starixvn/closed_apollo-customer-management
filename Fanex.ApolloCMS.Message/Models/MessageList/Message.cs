@@ -11,6 +11,7 @@ namespace Fanex.ApolloCMS.Message.Models.MessageList
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Text;
     using Fanex.ApolloCMS.Message.Constants;
@@ -27,6 +28,7 @@ namespace Fanex.ApolloCMS.Message.Models.MessageList
 
         public string ContentCs { get; set; }
 
+        [Required(ErrorMessageResourceType = typeof(Labels), ErrorMessageResourceName = "RequireEnglishContent")]
         public string ContentEn { get; set; }
 
         public string ContentJp { get; set; }

@@ -99,6 +99,7 @@ namespace Fanex.ApolloCMS.Websites
                 "~/areas/message/resources/messagelist/layout.less");
 
             bundles.Add(new ScriptBundle("~/scripts/messageList").Include(
+                "~/Scripts/Validator.js",
                 "~/Areas/Message/Views/MessageList/Scripts/MessageList.js"));
 
             bundles.AddAndInclude(

@@ -116,6 +116,21 @@ Fanex.ApolloCMS.Message.MessageList = function () {
         _params.updateMessageParam.ContentVn = $.trim(_tables.txtContentVn.val());
     };
 
+    var validateForm = function () {
+        var contentEnValue = $.trim(_tables.txtContentEn.val());
+        var label = _tables.txtContentEn.prev();
+        var isValid = true;
+
+        label.tipsy('hide');
+        if (!contentEnValue) {
+            var errorMsg = _tables.txtContentEn.attr('data-val-required');
+
+            Validator.showTooltip(label, errorMsg, 'sw');
+            isValid = false;
+        }
+        return isValid;
+    };
+
     self.getMessageType = function (msgType) {
         var messageType = null;
         if (msgType == messageDetailParam.publicMessage) {
@@ -361,8 +376,10 @@ Fanex.ApolloCMS.Message.MessageList = function () {
             self.getListMessage();
         });
         $("#updateMessageBtn").live("click", function () {
-            getParamValues();
-            self.updateMessage();
+            if (validateForm()) {
+                getParamValues();
+                self.updateMessage();
+            }
         });
         $("#collapseExpand").click(function () {
             setTimeout(function () {
