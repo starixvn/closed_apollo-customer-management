@@ -55,6 +55,8 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
                 getMessageListCriteria.Special = null;
             }
 
+            getMessageListCriteria.ToDate = getMessageListCriteria.ToDate.AddDays(1).AddMilliseconds(-1);
+
             var rawData = _messageRepository.GetListMessage(getMessageListCriteria, ref outputParam);
 
             if (rawData == null)
