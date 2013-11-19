@@ -373,7 +373,9 @@ Fanex.ApolloCMS.Message.MessageList = function () {
 
     self.bindingEvents = function () {
         $("#btnGetListMessage").click(function () {
-            self.getListMessage();
+            if (Validator.validateForm($('.filter-form'))) {
+                self.getListMessage();
+            }
         });
         $("#updateMessageBtn").live("click", function () {
             if (validateForm()) {

@@ -29,7 +29,7 @@
                 <label>@Labels.From</label>
             </div>
             <div class="txt width-auto">
-                <input type="text" id="dateFrom"/>
+                <input type="text" id="dateFrom" data-val-required="@Messages.RequiredFieldError" data-val-date="@Messages.InvalidDateError" data-val-date-from="@string.Empty"/>
             </div>
         </div>
         <div class="filter-item dateTo">
@@ -37,7 +37,7 @@
                 <label>@Labels.To</label>
             </div>
             <div class="txt width-auto">
-                <input type="text" id="dateTo"/>
+                <input type="text" id="dateTo" data-val-required="@Messages.RequiredFieldError" data-val-date="@Messages.InvalidDateError" data-val-date-to="@Messages.DateRangeError"/>
             </div>
         </div>
         

@@ -9,7 +9,7 @@ var Validator = function ($) {
             $obj.attr('title', message);
             $obj.tipsy(
             {
-                trigger: 'manual', 
+                trigger: 'manual',
                 gravity: gravity ? gravity : 's'
             });
             $obj.tipsy('show');
@@ -18,10 +18,12 @@ var Validator = function ($) {
         clearErrorMessages: function (form) {
             form.find('[original-title]').each(function () {
                 $(this).tipsy('hide');
+                $(this).removeAttr('original-title');
             });
         },
-        validateRequiredFields: function (form, errorCounter) {
-            $('data-val-required', form).each(function () {
+        validateRequiredFields: function (form) {
+            var errorCounter = 0;
+            $('[data-val-required]', form).each(function () {
                 var eleObj = $(this);
                 var errMsg = eleObj.attr('data-val-required');
                 var value = $.trim(eleObj.val());
@@ -31,9 +33,12 @@ var Validator = function ($) {
                     errorCounter++;
                 }
             });
+
+            return errorCounter;
         },
-        validateNumberFields: function (form, errorCounter) {
-            $('data-val-number', form).each(function () {
+        validateNumberFields: function (form) {
+            var errorCounter = 0;
+            $('[data-val-number]', form).each(function () {
                 var eleObj = $(this);
                 if (!eleObj.attr('original-title')) {
                     var errMsg = eleObj.attr('data-val-number');
@@ -45,9 +50,12 @@ var Validator = function ($) {
                     }
                 }
             });
+
+            return errorCounter;
         },
-        validateDateFields: function (form, errorCounter) {
-            $('data-val-date', form).each(function () {
+        validateDateFields: function (form) {
+            var errorCounter = 0;
+            $('[data-val-date]', form).each(function () {
                 var eleObj = $(this);
                 if (!eleObj.attr('original-title')) {
                     var errMsg = eleObj.attr('data-val-date');
@@ -59,10 +67,13 @@ var Validator = function ($) {
                     }
                 }
             });
+
+            return errorCounter;
         },
-        validateDateRange: function (form, errorCounter) {
-            var dateFrom = $('data-val-date-from', form);
-            var dateTo = $('data-val-date-to', form);
+        validateDateRange: function (form) {
+            var errorCounter = 0;
+            var dateFrom = $('[data-val-date-from]', form);
+            var dateTo = $('[data-val-date-to]', form);
 
             if (dateFrom && !dateFrom.attr('original-title') &&
                 dateTo && !dateTo.attr('original-title')) {
@@ -73,32 +84,35 @@ var Validator = function ($) {
                 var displayObj = dateFrom;
 
                 if (errorMsg == '') {
-                    errorMsg = dateTo.attr('data-val-date-from');
+                    errorMsg = dateTo.attr('data-val-date-to');
                     displayObj = dateTo;
                 }
 
-                if ((dFromVal != '') && !moment(dFromVal, CMS.commonConstants.MomentDateFormat).isValid() &&
-                    (dToVal != '') && !moment(dToVal, CMS.commonConstants.MomentDateFormat).isValid()) {
+                if ((dFromVal != '') && moment(dFromVal, CMS.commonConstants.MomentDateFormat).isValid() &&
+                    (dToVal != '') && moment(dToVal, CMS.commonConstants.MomentDateFormat).isValid()) {
 
                     var fDate = new Date(moment(dFromVal));
                     var tDate = new Date(moment(dToVal));
 
                     if (fDate.getTime() > tDate.getTime()) {
-                        showTooltip(displayObj, errorMsg);
+                        Validator.showTooltip(displayObj, errorMsg);
                         errorCounter++;
                     }
                 }
             }
+
+            return errorCounter;
         },
         validateForm: function (form) {
             var errorCounter = 0;
 
-            Validator.validateRequiredFields(form, errorCounter);
-            Validator.validateNumberFields(form, errorCounter);
-            Validator.validateDateFields(form, errorCounter);
-            Validator.validateDateRange(form, errorCounter);
+            Validator.clearErrorMessages(form);
+            errorCounter += Validator.validateRequiredFields(form);
+            errorCounter += Validator.validateNumberFields(form);
+            errorCounter += Validator.validateDateFields(form);
+            errorCounter += Validator.validateDateRange(form);
 
-            return (errorCounter > 0);
+            return (errorCounter == 0);
         }
     };
 } (jQuery);

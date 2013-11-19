@@ -214,7 +214,7 @@ namespace Fanex.ApolloCMS.Message.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is no member..
+        ///   Looks up a localized string similar to There is no customer..
         /// </summary>
         public static string NoMember {
             get {

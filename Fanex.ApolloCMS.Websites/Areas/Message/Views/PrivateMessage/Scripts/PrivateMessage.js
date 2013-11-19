@@ -123,7 +123,7 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
     };
     var addRow = function (member, isAgent, informUpline) {
         var userId = member.CustId;
-        var rowFormat = '<tr><td>{0}</td><td>{1}</td><td>{2}</td><td class="text-center">{3}</td><td class="text-center">{4}</td></tr>';
+        var rowFormat = '<tr><td class="text-center">{0}</td><td>{1}</td><td class="text-center">{2}</td><td class="text-center">{3}</td><td class="text-center">{4}</td></tr>';
         var no = params.RecipientList.length + 1;
         var level = isAgent ? labels.Agent : labels.Member;
         var upline = informUpline ? '<span class="glyphicon glyphicon-ok" />' : '';
