@@ -1,5 +1,4 @@
-﻿
-// --------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------
 // <copyright file="BundleConfig.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -98,6 +97,10 @@ namespace Fanex.ApolloCMS.Websites
             bundles.AddAndInclude(
                 "~/site/messageList",
                 "~/areas/message/resources/messagelist/layout.less");
+
+            bundles.Add(new ScriptBundle("~/scripts/messageList").Include(
+                "~/Scripts/Validator.js",
+                "~/Areas/Message/Views/MessageList/Scripts/MessageList.js"));
 
             bundles.AddAndInclude(
                  "~/styles/fanexGrid",

@@ -97,6 +97,15 @@ namespace Fanex.ApolloCMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to [To] value must be greater than or equal to [From].
+        /// </summary>
+        public static string DateRangeError {
+            get {
+                return ResourceManager.GetString("DateRangeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User name is already exists!.
         /// </summary>
         public static string ExistingUserNameError {
@@ -111,6 +120,15 @@ namespace Fanex.ApolloCMS.Core.Resources {
         public static string InternalError {
             get {
                 return ResourceManager.GetString("InternalError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid date!.
+        /// </summary>
+        public static string InvalidDateError {
+            get {
+                return ResourceManager.GetString("InvalidDateError", resourceCulture);
             }
         }
         
@@ -183,6 +201,15 @@ namespace Fanex.ApolloCMS.Core.Resources {
         public static string PostMessageSuccessfully {
             get {
                 return ResourceManager.GetString("PostMessageSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This field is required!.
+        /// </summary>
+        public static string RequiredFieldError {
+            get {
+                return ResourceManager.GetString("RequiredFieldError", resourceCulture);
             }
         }
         
