@@ -123,7 +123,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
 
         $.ajax({
             type: "POST",
-            url: "Message/MessageList/GetMessageList",
+            url: "MessageList/GetMessageList",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify({
@@ -216,7 +216,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
 
         $.ajax({
             type: "POST",
-            url: "Message/MessageList/GetMessageById",
+            url: "MessageList/GetMessageById",
             contentType: "application/json; charset=utf-8",
             dataType: "html",
             data: JSON.stringify({
@@ -239,7 +239,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
     self.updateMessage = function () {
         $.ajax({
             type: "POST",
-            url: "Message/MessageList/UpdateMessage",
+            url: "MessageList/UpdateMessage",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify(_params.updateMessageParam),
@@ -265,7 +265,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
         CMS.headlineMsgBox.confirm("Are you sure you want to remove the message?", function () {
             $.ajax({
                 type: "POST",
-                url: "Message/MessageList/DeleteMessage",
+                url: "MessageList/DeleteMessage",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 data: JSON.stringify(_params.removeMessageParam),

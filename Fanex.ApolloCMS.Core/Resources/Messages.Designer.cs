@@ -178,6 +178,15 @@ namespace Fanex.ApolloCMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The message has been posted successfully!.
+        /// </summary>
+        public static string PostMessageSuccessfully {
+            get {
+                return ResourceManager.GetString("PostMessageSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to At least one customer is required!.
         /// </summary>
         public static string RequiredMemberError {

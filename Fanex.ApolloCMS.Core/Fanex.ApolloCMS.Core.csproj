@@ -103,6 +103,7 @@
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\CacheRef.cs" />
     <Compile Include="Services\MenuService.cs" />
+    <Compile Include="Web\ApolloCMSFunctionKeys.cs" />
     <Compile Include="Web\AppSession.cs" />
     <Compile Include="Web\CacheManager.cs" />
     <Compile Include="Web\SessionManager.cs" />

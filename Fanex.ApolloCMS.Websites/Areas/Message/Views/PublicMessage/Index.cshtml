@@ -70,5 +70,8 @@
 </div>
 @section Foot 
 {
+	<script type="text/javascript">
+		var hasHostRight = '@ViewBag.HasHostRight' == 'True';
+	</script>
 	@Scripts.Render("~/scripts/newPublicMessage")
 }

@@ -233,6 +233,7 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
             },
             success: function (result) {
                 //@@TODO: Display info message and reload page
+                CMS.showInfoMessage(result.Message);
             },
             error: function (xhr, status, err) {
                 CMS.handleAjaxError(xhr, status, err);
