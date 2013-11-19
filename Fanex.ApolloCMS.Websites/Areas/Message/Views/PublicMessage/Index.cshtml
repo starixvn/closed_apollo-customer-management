@@ -71,7 +71,10 @@
 @section Foot 
 {
 	<script type="text/javascript">
-		var hasHostRight = '@ViewBag.HasHostRight' == 'True';
+		var messages = {
+			PostMessageSuccessfully: '@Messages.PostMessageSuccessfully'
+		};
+		var hasViewMessageRight = '@ViewBag.HasViewMessageRight' == 'True';
 	</script>
 	@Scripts.Render("~/scripts/newPublicMessage")
 }

@@ -50,7 +50,7 @@ namespace Fanex.ApolloCMS.Message.Controllers
         {
             ViewBag.MemberTypes = CreateMemberTypes();
             ViewBag.MaxRowsLimit = AppSettings.NewPrivateMessageMaxRowsLimit;
-            ViewBag.HasHostRight = this.HasRight(ApolloCMSFunctionKeys.ViewMessageList, Constant.Policy.Host);
+            ViewBag.HasViewMessageRight = this.HasRight(ApolloCMSFunctionKeys.ViewMessageList, Constant.Policy.Read);
             return View();
         }
 
@@ -81,24 +81,11 @@ namespace Fanex.ApolloCMS.Message.Controllers
             }
             else
             {
-                ICommandResult result = null;
-
                 criteria.UserLoginId = this.CurrentSession.UserId;
                 criteria.UserLoginName = this.CurrentSession.Username;
                 criteria.MsgType = (byte)MessageTypes.Private;
 
-                result = this._newMessageService.InsertMessage(criteria);
-
-                if (result.Code == 0)
-                {
-                    result = new CommandResult
-                    {
-                        Message = Messages.PostMessageSuccessfully,
-                        Code = 0
-                    };
-                }
-
-                return Json(result);
+                return Json(this._newMessageService.InsertMessage(criteria));
             }
         }
 
