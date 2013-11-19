@@ -56,36 +56,5 @@ namespace Fanex.ApolloCMS.Message.Models.MessageList
                 return PostTime.ToString();
             }
         }
-
-        public string MessageType
-        {
-            get
-            {
-                switch ((int)MsgType)
-                {
-                    case (int)MessageTypes.Public:
-                        return Labels.Public;
-                    case (int)MessageTypes.Private:
-                        return Labels.Private;
-                    default:
-                        return string.Empty;
-                }
-            }
-        }
-
-        public string MessageIsSpecial
-        {
-            get
-            {
-                if (IsSpecial == true)
-                {
-                    return Labels.Yes;
-                }
-                else
-                {
-                    return Labels.No;
-                }
-            }
-        }
     }
 }

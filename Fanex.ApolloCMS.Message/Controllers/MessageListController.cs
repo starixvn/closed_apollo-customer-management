@@ -15,10 +15,13 @@ namespace Fanex.ApolloCMS.Message.Controllers
     using System.Text;
     using System.Web.Mvc;
     using Fanex.ApolloCMS.Core.Controllers;
+    using Fanex.ApolloCMS.Core.Web;
     using Fanex.ApolloCMS.Message.Criteria.MessageList;
     using Fanex.ApolloCMS.Message.Models.MessageList;
     using Fanex.ApolloCMS.Message.Services.Implements;
     using Fanex.ApolloCMS.Message.Services.Interfaces;
+    using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Web.Attribute;
 
     /// <summary>
     /// TODO: Update summary.
@@ -41,8 +44,10 @@ namespace Fanex.ApolloCMS.Message.Controllers
         /// Redirect index page.
         /// </summary>
         /// <returns>Index view.</returns>
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewMessageList, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
+            ViewBag.HasHostRight = this.HasRight(ApolloCMSFunctionKeys.ViewMessageList, Constant.Policy.Host);
             return View();
         }
 
@@ -52,6 +57,7 @@ namespace Fanex.ApolloCMS.Message.Controllers
         /// <param name="getMessageListCriteria">The get message list criteria.</param>
         /// <returns>List Message.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewMessageList, Policy = Constant.Policy.Read)]
         public JsonResult GetMessageList(GetMessageListCriteria getMessageListCriteria)
         {
             var result = this._messageService.GetListMessage(getMessageListCriteria);
@@ -64,6 +70,7 @@ namespace Fanex.ApolloCMS.Message.Controllers
         /// <param name="getMessageByIdCriteria">The get message by identifier criteria.</param>
         /// <returns>The edit message view.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewMessageList, Policy = Constant.Policy.Host)]
         public ActionResult GetMessageById(GetMessageByIdCriteria getMessageByIdCriteria)
         {
             var result = this._messageService.GetMessageById(getMessageByIdCriteria);
@@ -76,6 +83,7 @@ namespace Fanex.ApolloCMS.Message.Controllers
         /// <param name="updateMessageCriteria">The update message criteria.</param>
         /// <returns>Success message.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewMessageList, Policy = Constant.Policy.Host)]
         public ActionResult UpdateMessage(UpdateMessageCriteria updateMessageCriteria)
         {
             updateMessageCriteria.UserLoginName = this.CurrentSession.Username;
@@ -90,6 +98,7 @@ namespace Fanex.ApolloCMS.Message.Controllers
         /// <param name="deleteMessageCriteria">The delete message criteria.</param>
         /// <returns>Success message.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewMessageList, Policy = Constant.Policy.Host)]
         public ActionResult DeleteMessage(DeleteMessageCriteria deleteMessageCriteria)
         {
             deleteMessageCriteria.UserLoginId = this.CurrentSession.UserId;

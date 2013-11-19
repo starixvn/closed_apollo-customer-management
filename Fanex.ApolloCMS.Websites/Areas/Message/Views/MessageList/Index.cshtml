@@ -83,7 +83,12 @@
     <script type="text/javascript" src="~/Scripts/lib/Namespace.js"></script>
     <script type="text/javascript" src="~/Areas/Message/Views/MessageList/Scripts/MessageList.js"></script>
     <script type="text/javascript">
+        var publicMessage = '@Labels.Public';
+        var privateMessage = '@Labels.Private';
+        var messageIsSpecial = '@Labels.Yes';
+        var messageNotSpecial = '@Labels.No';
         var today = '@DateTime.Now.ToShortDateString()';
+        var hasHostRight = '@ViewBag.HasHostRight' == 'True';
     </script>
 }
 
