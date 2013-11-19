@@ -26,7 +26,7 @@ var Layout = function ($) {
                         // Animation complete.
                         collapseExpand.removeClass('icon-expand').addClass('icon-collapse');
                         collapseExpand.attr('title', 'Collapse')
-                        mainContent.removeClass().addClass('col-xs-9 col-sm-9 col-md-9 mainContent');
+                        mainContent.removeClass().addClass('col-xs-9 col-sm-9 col-md-10 mainContent');
                     });
                 }
             })
