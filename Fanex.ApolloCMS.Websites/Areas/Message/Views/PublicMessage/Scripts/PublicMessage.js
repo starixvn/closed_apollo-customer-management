@@ -9,7 +9,8 @@ Namespace.Register("Fanex.ApolloCMS.Message.PublicMessage");
 Fanex.ApolloCMS.Message.PublicMessage = function () {
     var $this = this;
     var urls = {
-        AddNewMessage: CMS.resolveRootUrl('PublicMessage/AddNewMessage')
+        AddNewMessage: CMS.resolveRootUrl('PublicMessage/AddNewMessage'),
+        ViewMessageList: CMS.resolveRootUrl('Message/MessageList')
     };
     var params = {
         ContentEn: null,
@@ -135,8 +136,14 @@ Fanex.ApolloCMS.Message.PublicMessage = function () {
                 CMS.loadingBox.show();
             },
             success: function (result) {
-                //@@TODO: Display info message and reload page
-                CMS.showInfoMessage(result.Message);
+                CMS.showInfoMessage(messages.PostMessageSuccessfully);
+                setTimeout(function () {
+                    if (hasViewMessageRight) {
+                        window.location.replace(urls.ViewMessageList);
+                    } else {
+                        window.location.reload(true);
+                    }
+                }, 3000);
             },
             error: function (xhr, status, err) {
                 CMS.handleAjaxError(xhr, status, err);

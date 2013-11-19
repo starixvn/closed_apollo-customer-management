@@ -115,7 +115,10 @@
 			Member: '@ViewLang.Member',
 			NoMember: '@Labels.NoMember'
 		};
-		var hasHostRight = '@ViewBag.HasHostRight' == 'True';
+		var messages = {
+			PostMessageSuccessfully: '@Messages.PostMessageSuccessfully'
+		};
+		var hasViewMessageRight = '@ViewBag.HasViewMessageRight' == 'True';
 	</script>
 	@Scripts.Render("~/scripts/newPrivateMessage")
 }
