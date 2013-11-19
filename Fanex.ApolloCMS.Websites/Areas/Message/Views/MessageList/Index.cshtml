@@ -79,9 +79,7 @@
 <div id="editMessageContent"></div>
 @section Foot {
     @Scripts.Render("~/scripts/fanexGrid")
-    <script type="text/javascript" src="~/Scripts/CMS.js"></script>
-    <script type="text/javascript" src="~/Scripts/lib/Namespace.js"></script>
-    <script type="text/javascript" src="~/Areas/Message/Views/MessageList/Scripts/MessageList.js"></script>
+    @Scripts.Render("~/scripts/messageList")
     <script type="text/javascript">
         var publicMessage = '@Labels.Public';
         var privateMessage = '@Labels.Private';

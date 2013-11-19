@@ -98,6 +98,9 @@ namespace Fanex.ApolloCMS.Websites
                 "~/site/messageList",
                 "~/areas/message/resources/messagelist/layout.less");
 
+            bundles.Add(new ScriptBundle("~/scripts/messageList").Include(
+                "~/Areas/Message/Views/MessageList/Scripts/MessageList.js"));
+
             bundles.AddAndInclude(
                  "~/styles/fanexGrid",
                  "~/scripts/lib/Fanex.Grid/Fanex.Grid.css",
