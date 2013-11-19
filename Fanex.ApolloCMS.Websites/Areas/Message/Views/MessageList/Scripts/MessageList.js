@@ -71,7 +71,10 @@ Fanex.ApolloCMS.Message.MessageList = function () {
     };
 
     var getSubMessageContent = function (content) {
-        return content.substring(0, 100);
+        if (content.length > 100) {
+            content = content.substring(0, 100) + '...';
+        }
+        return content;
     };
 
     self.renderDatePicker = function () {
@@ -216,7 +219,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                 { HeaderText: "Posted Date", Width: 150, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Message English", Width: 300, Name: "MessageContent", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell) {
                     return '<div class="messageContent" title="' + currentCell.Value.ContentEn + '">' + getSubMessageContent(currentCell.Value.ContentEn) + '</div>';
-                } 
+                }
                 },
                 { HeaderText: "Type", Width: 60, Name: "MessageType", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Is Specical", Width: 80, Name: "Special", HeaderAlign: "center", CellAlign: "center" },
@@ -301,6 +304,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
         }
 
         var gridOptions = {
+            allowTruncate: true,
             columns: columns,
             bodyRows: bodyData,
             gridExpandHeight: 250,
