@@ -34,38 +34,14 @@ namespace Fanex.ApolloCMS.Message.Repositories.Implements
         /// <returns>List message.</returns>
         public List<Message> GetListMessage(GetMessageListCriteria getMessageListCriteria)
         {
-            DataSet result = null;
+            IEnumerable<Message> result = null;
 
             using (var db = new ObjectDb(getMessageListCriteria.GetSettingKey()))
             {
-                result = db.ExecuteDataSet(getMessageListCriteria.GetSpParams());
+                result = db.Query<Message>(getMessageListCriteria.GetSpParams());
             }
 
-            var messageListTable = result.Tables[0];
-            var messageList = new List<Message>();
-
-            foreach (DataRow row in messageListTable.Rows)
-            {
-                messageList.Add(new Message()
-                {
-                    PostTime = Converter.ToDateTime(row["PostTime"]),
-                    ContentCh = Converter.ToString2(row["Content_ch"]),
-                    ContentCs = Converter.ToString2(row["Content_cs"]),
-                    ContentEn = Converter.ToString2(row["Content_en"]),
-                    ContentJp = Converter.ToString2(row["Content_jp"]),
-                    ContentKo = Converter.ToString2(row["Content_ko"]),
-                    ContentTh = Converter.ToString2(row["Content_th"]),
-                    ContentVn = Converter.ToString2(row["Content_vn"]),
-                    Creator = Converter.ToString2(row["CreatorName"]),
-                    IsSpecial = Converter.ToBool(row["IsSpecial"]),
-                    MsgType = Convert.ToByte(row["MsgType"]),
-                    Recipient = Converter.ToString2(row["Recipient"]),
-                    TargetId = Converter.ToInt(row["TargetId"]),
-                    MessageId = Converter.ToInt(row["MessageId"])
-                });
-            }
-
-            return messageList;
+            return result.ToList();
         }
 
         /// <summary>

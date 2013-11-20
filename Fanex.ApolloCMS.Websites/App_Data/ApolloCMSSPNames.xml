@@ -7,7 +7,15 @@
     <Setting Key="Acc_Msg_GetAllSite" SpName="Acc_Msg_GetAllSite" DbName="SVRMSG.MsgDB.aplweb" />
   </Function>
   <Function Name="MessageList">
-    <Setting Key="Acc_Msg_GetListMessage" SpName="Acc_Msg_GetListMessage" DbName="SVRMSG.MsgDB.aplweb" />
+    <Setting Key="Acc_Msg_GetListMessage" SpName="Acc_Msg_GetListMessage" DbName="SVRMSG.MsgDB.aplweb">
+      <Mapping DataField="Content_ch" ObjectProperty="ContentCh"/>
+      <Mapping DataField="Content_cs" ObjectProperty="ContentCs"/>
+      <Mapping DataField="Content_en" ObjectProperty="ContentEn"/>
+      <Mapping DataField="Content_jp" ObjectProperty="ContentJp"/>
+      <Mapping DataField="Content_ko" ObjectProperty="ContentKo"/>
+      <Mapping DataField="Content_th" ObjectProperty="ContentTh"/>
+      <Mapping DataField="Content_vn" ObjectProperty="ContentVn"/>
+    </Setting>
     <Setting Key="Acc_Msg_GetMessageById" SpName="Acc_Msg_GetMessageById" DbName="SVRMSG.MsgDB.aplweb">
       <Mapping DataField="Content_ch" ObjectProperty="ContentCh"/>
       <Mapping DataField="Content_cs" ObjectProperty="ContentCs"/>
