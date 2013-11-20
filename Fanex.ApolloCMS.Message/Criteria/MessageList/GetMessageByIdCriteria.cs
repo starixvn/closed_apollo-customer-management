@@ -13,7 +13,7 @@ namespace Fanex.ApolloCMS.Message.Criteria.MessageList
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Get message by identity.
     /// </summary>
     public class GetMessageByIdCriteria : CriteriaBase
     {

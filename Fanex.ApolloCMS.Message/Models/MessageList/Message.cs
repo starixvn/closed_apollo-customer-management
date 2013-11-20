@@ -18,7 +18,7 @@ namespace Fanex.ApolloCMS.Message.Models.MessageList
     using Fanex.ApolloCMS.Message.Resources;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Message model.
     /// </summary>
     public class Message
     {

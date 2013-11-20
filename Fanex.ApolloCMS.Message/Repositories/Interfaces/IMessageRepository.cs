@@ -14,9 +14,6 @@ namespace Fanex.ApolloCMS.Message.Repositories.Interfaces
     using Fanex.ApolloCMS.Message.Criteria.MessageList;
     using Fanex.ApolloCMS.Message.Models.MessageList;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public interface IMessageRepository
     {
         List<Message> GetListMessage(GetMessageListCriteria getMessageListCriteria);

@@ -23,7 +23,7 @@ namespace Fanex.ApolloCMS.Message.Repositories.Implements
     using Fanex.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Message repository.
     /// </summary>
     public class MessageRepository : BaseRepository, IMessageRepository
     {

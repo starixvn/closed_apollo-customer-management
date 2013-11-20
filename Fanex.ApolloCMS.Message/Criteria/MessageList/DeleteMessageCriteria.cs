@@ -13,7 +13,7 @@ namespace Fanex.ApolloCMS.Message.Criteria.MessageList
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Delete message criteria.
     /// </summary>
     public class DeleteMessageCriteria : CriteriaBase
     {

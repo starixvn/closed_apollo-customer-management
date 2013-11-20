@@ -19,7 +19,7 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
     using Fanex.Common;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Message services.
     /// </summary>
     public class MessageService : IMessageService
     {

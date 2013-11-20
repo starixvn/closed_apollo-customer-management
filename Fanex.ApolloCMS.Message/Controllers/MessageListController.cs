@@ -24,7 +24,7 @@ namespace Fanex.ApolloCMS.Message.Controllers
     using Fanex.NAP.Core.Web.Attribute;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Message list controller.
     /// </summary>
     public class MessageListController : BaseController
     {
