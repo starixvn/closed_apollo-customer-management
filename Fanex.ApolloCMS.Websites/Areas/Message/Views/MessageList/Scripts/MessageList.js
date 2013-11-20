@@ -85,7 +85,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
 
         $("#dateFrom").datepicker({
             showOn: "button",
-            buttonImage: "../../../../content/site/img/icon-cal-orange.jpg",
+            buttonImage: CMS.datePickerButtonUrl,
             buttonImageOnly: true,
             changeMonth: true,
             onSelect: function (selectedDate) {
@@ -102,7 +102,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
 
         $("#dateTo").datepicker({
             showOn: "button",
-            buttonImage: "../../../../content/site/img/icon-cal-orange.jpg",
+            buttonImage: CMS.datePickerButtonUrl,
             buttonImageOnly: true,
             changeMonth: true,
             onClose: function (selectedDate) {
@@ -152,10 +152,10 @@ Fanex.ApolloCMS.Message.MessageList = function () {
     self.messageIsSpecial = function (isSpecial) {
         var msgIsSpecial = null;
         if (isSpecial == messageDetailParam.messageIspecial) {
-            msgIsSpecial = messageIsSpecial;
+            msgIsSpecial = '<div><span class="glyphicon glyphicon-ok"></span></div>';
         }
         else {
-            msgIsSpecial = messageNotSpecial;
+            msgIsSpecial = '<div></div>';
         }
         return msgIsSpecial;
     };
@@ -200,31 +200,37 @@ Fanex.ApolloCMS.Message.MessageList = function () {
 
         if (hasHostRight) {
             columns = [
-                    { HeaderText: "Posted Date", Width: 150, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: "Message English", Width: 300, Name: "MessageContent", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell) {
+                    { HeaderText: postedDate, Width: 150, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center" },
+                    { HeaderText: messageEnglish, Width: 300, Name: "MessageContent", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell) {
                         return '<div class="link editBtn glyphicon glyphicon-edit" title="Edit" onclick="editMessage(' + currentCell.Value.MessageId + ')"></div><div class="messageContent" title="' + currentCell.Value.ContentEn + '">' + getSubMessageContent(currentCell.Value.ContentEn) + '</div><div class="clear"></div>';
                     }
                     },
-                    { HeaderText: "Type", Width: 60, Name: "MessageType", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: "Is Specical", Width: 80, Name: "Special", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: "Creator", Width: 80, Name: "Creator", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: "Recipient", Width: 80, Name: "Recipient", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: "Remove", Width: 60, Name: "Remove", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (currentCell) {
+                    { HeaderText: messageType, Width: 60, Name: "MessageType", HeaderAlign: "center", CellAlign: "center" },
+                    { HeaderText: isSpecial, Width: 80, Name: "Special", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (currentCell) {
+                        return self.messageIsSpecial(currentCell.Value.IsSpecial);
+                    }
+                    },
+                    { HeaderText: creator, Width: 80, Name: "Creator", HeaderAlign: "center", CellAlign: "center" },
+                    { HeaderText: recipient, Width: 80, Name: "Recipient", HeaderAlign: "center", CellAlign: "center" },
+                    { HeaderText: remove, Width: 60, Name: "Remove", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (currentCell) {
                         return '<div title="Remove" class="glyphicon glyphicon-minus-sign" onclick="removeMessage(' + currentCell.Value.MessageId + ',' + currentCell.Value.TargetId + ' )"></div>';
                     }
                     }
                 ];
         } else {
             columns = [
-                { HeaderText: "Posted Date", Width: 150, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center" },
-                { HeaderText: "Message English", Width: 300, Name: "MessageContent", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell) {
+                { HeaderText: postedDate, Width: 150, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: messageEnglish, Width: 300, Name: "MessageContent", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell) {
                     return '<div class="messageContent" title="' + currentCell.Value.ContentEn + '">' + getSubMessageContent(currentCell.Value.ContentEn) + '</div>';
                 }
                 },
-                { HeaderText: "Type", Width: 60, Name: "MessageType", HeaderAlign: "center", CellAlign: "center" },
-                { HeaderText: "Is Specical", Width: 80, Name: "Special", HeaderAlign: "center", CellAlign: "center" },
-                { HeaderText: "Creator", Width: 80, Name: "Creator", HeaderAlign: "center", CellAlign: "center" },
-                { HeaderText: "Recipient", Width: 80, Name: "Recipient", HeaderAlign: "center", CellAlign: "center" }
+                { HeaderText: messageType, Width: 60, Name: "MessageType", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: isSpecial, Width: 80, Name: "Special", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (currentCell) {
+                   return self.messageIsSpecial(currentCell.Value.IsSpecial);
+                } 
+                },
+                { HeaderText: creator, Width: 80, Name: "Creator", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: recipient, Width: 80, Name: "Recipient", HeaderAlign: "center", CellAlign: "center" }
             ];
         }
 
@@ -251,7 +257,6 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                     var currentMessage = rs[messageIndex];
                     var row = [];
 
-                    msgSpecial = self.messageIsSpecial(currentMessage.IsSpecial);
                     msgType = self.getMessageType(currentMessage.MsgType);
 
                     if (currentGroupId != currentMessage.MessageId) {
@@ -260,7 +265,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                         { Name: "PostedDate", Value: currentMessage.PostDate, MergeRowNumber: currentMessage.NumOfElems },
                         { Name: "MessageContent", Value: currentMessage, MergeRowNumber: currentMessage.NumOfElems },
                         { Name: "MessageType", Value: msgType, MergeRowNumber: currentMessage.NumOfElems },
-                        { Name: "Special", Value: msgSpecial, MergeRowNumber: currentMessage.NumOfElems },
+                        { Name: "Special", Value: currentMessage, MergeRowNumber: currentMessage.NumOfElems },
                         { Name: "Creator", Value: currentMessage.Creator, MergeRowNumber: currentMessage.NumOfElems }
                     );
                     }
@@ -287,7 +292,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                         { Name: "PostedDate", Value: currentMessage.PostDate, MergeRowNumber: currentMessage.NumOfElems },
                         { Name: "MessageContent", Value: currentMessage, MergeRowNumber: currentMessage.NumOfElems },
                         { Name: "MessageType", Value: msgType, MergeRowNumber: currentMessage.NumOfElems },
-                        { Name: "Special", Value: msgSpecial, MergeRowNumber: currentMessage.NumOfElems },
+                        { Name: "Special", Value: currentMessage, MergeRowNumber: currentMessage.NumOfElems },
                         { Name: "Creator", Value: currentMessage.Creator, MergeRowNumber: currentMessage.NumOfElems }
                     );
                     }
@@ -348,7 +353,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
             data: JSON.stringify(_params.updateMessageParam),
             success: function (rs) {
                 CMS.closePopup();
-                CMS.showInfoMessage("The message have been updated successfully!");
+                CMS.showInfoMessage(updateSuccessInform);
                 self.getListMessage();
             },
             error: function (xhr, status, err) {
@@ -360,12 +365,12 @@ Fanex.ApolloCMS.Message.MessageList = function () {
     removeMessage = function (messageId, targetId) {
         self.removeMessage(messageId, targetId);
     };
-
+ 
     self.removeMessage = function (messageId, targetId) {
         _params.removeMessageParam.MsgId = messageId;
         _params.removeMessageParam.TargetId = targetId;
 
-        CMS.headlineMsgBox.confirm("Are you sure you want to remove the message?", function () {
+        CMS.headlineMsgBox.confirm(removeMessageConfirm, function () {
             $.ajax({
                 type: "POST",
                 url: "MessageList/DeleteMessage",
