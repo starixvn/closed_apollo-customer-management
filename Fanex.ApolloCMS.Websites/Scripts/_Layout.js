@@ -1,9 +1,5 @@
 var Layout = function ($) {
     return {
-        filterBar: null,
-        pageBody: null,
-        page: null,
-        frmPage: null,
         collapseExpand: function () {
             var leftContent = $('#leftContent'),
                 mainContent = $('#mainContent'),
