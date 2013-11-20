@@ -205,6 +205,15 @@ namespace Fanex.ApolloCMS.Message.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Message List.
+        /// </summary>
+        public static string MessageList {
+            get {
+                return ResourceManager.GetString("MessageList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Message Type.
         /// </summary>
         public static string MessageType {

@@ -252,6 +252,8 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                 }
             });
 
+            currentGroupId = 0;
+
             if (hasHostRight) {
                 for (var messageIndex = 0; messageIndex < messageLength; messageIndex++) {
                     var currentMessage = rs[messageIndex];

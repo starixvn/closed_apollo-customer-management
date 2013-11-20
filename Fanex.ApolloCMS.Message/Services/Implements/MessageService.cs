@@ -56,34 +56,7 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
 
             getMessageListCriteria.ToDate = getMessageListCriteria.ToDate.AddDays(1).AddMilliseconds(-1);
 
-            var rawData = _messageRepository.GetListMessage(getMessageListCriteria);
-
-            if (rawData == null)
-            {
-                return result;
-            }
-
-            foreach (var row in rawData)
-            {
-                var messageInfo = new Message()
-                {
-                    PostTime = row.PostTime,
-                    ContentCh = row.ContentCh,
-                    ContentCs = row.ContentCs,
-                    ContentEn = row.ContentEn,
-                    ContentJp = row.ContentJp,
-                    ContentKo = row.ContentKo,
-                    ContentTh = row.ContentTh,
-                    ContentVn = row.ContentVn,
-                    MsgType = row.MsgType,
-                    IsSpecial = row.IsSpecial,
-                    Creator = row.Creator,
-                    Recipient = row.Recipient,
-                    TargetId = row.TargetId,
-                    MessageId = row.MessageId
-                };
-                result.Add(messageInfo);
-            }
+            result = _messageRepository.GetListMessage(getMessageListCriteria);
 
             return result;
         }
