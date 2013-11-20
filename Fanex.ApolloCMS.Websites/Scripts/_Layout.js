@@ -34,14 +34,10 @@ var Layout = function ($) {
 
             var isCollapse = localStorage.getItem('isCollapse');
             if (isCollapse == 'false') {
-                leftContent.animate({
-                    width: "toggle"
-                }, 50, function () {
-                    // Animation complete.
-                    collapseExpand.removeClass('icon-collapse').addClass('icon-expand');
-                    collapseExpand.attr('title', 'Expand');
-                    mainContent.removeClass().addClass('col-xs-12 col-sm-12 col-md-12 mainContent');
-                });
+                leftContent.css('display', 'none');
+                collapseExpand.removeClass('icon-collapse').addClass('icon-expand');
+                collapseExpand.attr('title', 'Expand');
+                mainContent.removeClass().addClass('col-xs-12 col-sm-12 col-md-12 mainContent');
             }
         },
         hideShowIconTreeview: function () {
