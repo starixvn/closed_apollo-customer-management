@@ -43,10 +43,12 @@ namespace Fanex.ApolloCMS.Message.Controllers
         /// <summary>
         /// Redirect index page.
         /// </summary>
+        /// <param name="isRedirected">Check whether the page is redirect from another page or not.</param>
         /// <returns>Index view.</returns>
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewMessageList, Policy = Constant.Policy.Read)]
-        public ActionResult Index()
+        public ActionResult Index(bool isRedirected = false)
         {
+            ViewBag.IsRedirected = isRedirected;
             ViewBag.HasHostRight = this.HasRight(ApolloCMSFunctionKeys.ViewMessageList, Constant.Policy.Host);
             return View();
         }

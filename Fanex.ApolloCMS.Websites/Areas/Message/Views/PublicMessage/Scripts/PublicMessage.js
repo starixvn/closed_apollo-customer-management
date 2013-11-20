@@ -10,7 +10,7 @@ Fanex.ApolloCMS.Message.PublicMessage = function () {
     var $this = this;
     var urls = {
         AddNewMessage: CMS.resolveRootUrl('PublicMessage/AddNewMessage'),
-        ViewMessageList: CMS.resolveRootUrl('Message/MessageList')
+        ViewMessageList: CMS.resolveRootUrl('Message/MessageList?isRedirected=true')
     };
     var params = {
         ContentEn: null,

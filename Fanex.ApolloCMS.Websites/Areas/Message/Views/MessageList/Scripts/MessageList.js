@@ -226,8 +226,8 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                 },
                 { HeaderText: messageType, Width: 60, Name: "MessageType", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: isSpecial, Width: 80, Name: "Special", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (currentCell) {
-                   return self.messageIsSpecial(currentCell.Value.IsSpecial);
-                } 
+                    return self.messageIsSpecial(currentCell.Value.IsSpecial);
+                }
                 },
                 { HeaderText: creator, Width: 80, Name: "Creator", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: recipient, Width: 80, Name: "Recipient", HeaderAlign: "center", CellAlign: "center" }
@@ -365,7 +365,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
     removeMessage = function (messageId, targetId) {
         self.removeMessage(messageId, targetId);
     };
- 
+
     self.removeMessage = function (messageId, targetId) {
         _params.removeMessageParam.MsgId = messageId;
         _params.removeMessageParam.TargetId = targetId;
@@ -406,6 +406,14 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                 }, 110);
             }
         });
+
+        $(".other-lag").live('click', function () {
+            $('#divOtherLanguage').slideToggle('slow');
+        });
+
+        if (isRedirected) {
+            $("#btnGetListMessage").click();
+        }
     };
 };
 

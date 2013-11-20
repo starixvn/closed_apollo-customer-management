@@ -11,7 +11,7 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
     var urls = {
         AddNewMessage: CMS.resolveRootUrl('PrivateMessage/AddNewMessage'),
         GetRecipientInfo: CMS.resolveRootUrl('PrivateMessage/GetRecipientInfo'),
-        ViewMessageList: CMS.resolveRootUrl('Message/MessageList')
+        ViewMessageList: CMS.resolveRootUrl('Message/MessageList?isRedirected=true')
     };
     var params = {
         ContentEn: null,
