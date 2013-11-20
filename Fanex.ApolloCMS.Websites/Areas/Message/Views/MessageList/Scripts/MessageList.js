@@ -395,9 +395,11 @@ Fanex.ApolloCMS.Message.MessageList = function () {
             }
         });
         $("#collapseExpand").click(function () {
-            setTimeout(function () {
-                $("#gridMessage").fanexGrid("resizeGrid");
-            }, 110);
+            if (!$('#gridMessageContainer').hasClass('display-none')) {
+                setTimeout(function () {
+                    $("#gridMessage").fanexGrid("resizeGrid");
+                }, 110);
+            }
         });
     };
 };
