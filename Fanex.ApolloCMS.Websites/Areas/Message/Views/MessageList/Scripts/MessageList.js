@@ -210,8 +210,14 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                         return self.messageIsSpecial(currentCell.Value.IsSpecial);
                     }
                     },
-                    { HeaderText: creator, Width: 80, Name: "Creator", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: recipient, Width: 80, Name: "Recipient", HeaderAlign: "center", CellAlign: "center" },
+                    { HeaderText: creator, Width: 80, Name: "Creator", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (currentCell) {
+                        return '<div class="userContent">' + currentCell.Value.Creator + '</div>';
+                    }
+                    },
+                    { HeaderText: recipient, Width: 80, Name: "Recipient", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (currentCell) {
+                        return '<div class="userContent">' + currentCell.Value.Recipient + '</div>';
+                    }
+                    },
                     { HeaderText: remove, Width: 60, Name: "Remove", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (currentCell) {
                         return '<div title="Remove" class="glyphicon glyphicon-minus-sign" onclick="removeMessage(' + currentCell.Value.MessageId + ',' + currentCell.Value.TargetId + ' )"></div>';
                     }
@@ -229,8 +235,14 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                     return self.messageIsSpecial(currentCell.Value.IsSpecial);
                 }
                 },
-                { HeaderText: creator, Width: 80, Name: "Creator", HeaderAlign: "center", CellAlign: "center" },
-                { HeaderText: recipient, Width: 80, Name: "Recipient", HeaderAlign: "center", CellAlign: "center" }
+                { HeaderText: creator, Width: 80, Name: "Creator", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (currentCell) {
+                    return '<div class="userContent">' + currentCell.Value.Creator + '</div>';
+                }
+                },
+                { HeaderText: recipient, Width: 80, Name: "Recipient", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (currentCell) {
+                    return '<div class="userContent">' + currentCell.Value.Recipient + '</div>';
+                }
+                }
             ];
         }
 
@@ -268,11 +280,11 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                         { Name: "MessageContent", Value: currentMessage, MergeRowNumber: currentMessage.NumOfElems },
                         { Name: "MessageType", Value: msgType, MergeRowNumber: currentMessage.NumOfElems },
                         { Name: "Special", Value: currentMessage, MergeRowNumber: currentMessage.NumOfElems },
-                        { Name: "Creator", Value: currentMessage.Creator, MergeRowNumber: currentMessage.NumOfElems }
+                        { Name: "Creator", Value: currentMessage, MergeRowNumber: currentMessage.NumOfElems }
                     );
                     }
                     row.push(
-                    { Name: "Recipient", Value: currentMessage.Recipient },
+                    { Name: "Recipient", Value: currentMessage },
                     { Name: "Remove", Value: currentMessage }
                 );
 
@@ -295,11 +307,11 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                         { Name: "MessageContent", Value: currentMessage, MergeRowNumber: currentMessage.NumOfElems },
                         { Name: "MessageType", Value: msgType, MergeRowNumber: currentMessage.NumOfElems },
                         { Name: "Special", Value: currentMessage, MergeRowNumber: currentMessage.NumOfElems },
-                        { Name: "Creator", Value: currentMessage.Creator, MergeRowNumber: currentMessage.NumOfElems }
+                        { Name: "Creator", Value: currentMessage, MergeRowNumber: currentMessage.NumOfElems }
                     );
                     }
                     row.push(
-                    { Name: "Recipient", Value: currentMessage.Recipient }
+                    { Name: "Recipient", Value: currentMessage }
                 );
 
                     bodyData.push({
