@@ -46,6 +46,12 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
             $this.DOMInstance.divOtherLanguage.slideToggle('slow');
         });
 
+        $this.DOMInstance.txtUserName.bind('keyup', function (event) {
+            if (event.keyCode == 13) {
+                $this.DOMInstance.btnAdd.click();
+            }
+        });
+
         $this.DOMInstance.btnAdd.bind('click', function () {
             var isAgent = $this.DOMInstance.ddlMemberType.val() == 'true';
             var userName = $.trim($this.DOMInstance.txtUserName.val());
@@ -127,7 +133,7 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
         var no = params.RecipientList.length + 1;
         var level = isAgent ? labels.Agent : labels.Member;
         var upline = informUpline ? '<span class="glyphicon glyphicon-ok" />' : '';
-        var remove = '<a href="#" onclick="removeRow({0})" class="glyphicon glyphicon-minus-sign" title="Remove"></a>'.format(no - 1);
+        var remove = '<a href="#" data-index="{0}" onclick="removeRow(this)" class="glyphicon glyphicon-minus-sign" title="Remove"></a>'.format(no - 1);
 
         if (isAgent) {
             userId = member.AgentId;
@@ -149,16 +155,15 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
             $this.DOMInstance.btnAdd.attr('disabled', 'true');
         }
     };
-    removeRow = function (index) {
+    removeRow = function (obj) {
         var numOfEles = params.RecipientList.length;
 
         if (numOfEles > 0) {
+            var index = $(obj).attr('data-index');
             $this.DOMInstance.tblMemberListBody.children().eq(index).remove();
             $this.DOMInstance.tblMemberListBody.children().each(function (eleIndex, eleValue) {
                 $('td:first-child', eleValue).text(eleIndex + 1);
-                $('td:last-child > a', eleValue).click(function () {
-                    removeRow(eleIndex);
-                });
+                $('td:last-child > a', eleValue).attr('data-index', eleIndex);
             });
 
             params.RecipientList.splice(index, 1);

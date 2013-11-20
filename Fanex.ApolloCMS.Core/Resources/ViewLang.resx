@@ -141,6 +141,9 @@
   <data name="Member" xml:space="preserve">
     <value>Member</value>
   </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
   <data name="Submit" xml:space="preserve">
     <value>Submit</value>
   </data>
