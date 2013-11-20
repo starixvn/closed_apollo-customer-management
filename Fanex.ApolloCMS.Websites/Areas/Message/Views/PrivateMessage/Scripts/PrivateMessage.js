@@ -152,6 +152,9 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
         });
 
         if (params.RecipientList.length >= 20) {
+            $this.DOMInstance.ddlMemberType.attr('disabled', 'true');
+            $this.DOMInstance.txtUserName.attr('disabled', 'true');
+            $this.DOMInstance.chkInformUpline.attr('disabled', 'true');
             $this.DOMInstance.btnAdd.attr('disabled', 'true');
         }
     };
@@ -171,6 +174,9 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
             if (params.RecipientList.length == 0) {
                 $this.DOMInstance.tblMemberListBody.append('<tr><td colspan="5" class="text-center">{0}</td></tr>'.format(labels.NoMember));
             } else if (params.RecipientList.length == 19) {
+                $this.DOMInstance.ddlMemberType.removeAttr('disabled');
+                $this.DOMInstance.txtUserName.removeAttr('disabled');
+                $this.DOMInstance.chkInformUpline.removeAttr('disabled');
                 $this.DOMInstance.btnAdd.removeAttr('disabled');
             }
         }

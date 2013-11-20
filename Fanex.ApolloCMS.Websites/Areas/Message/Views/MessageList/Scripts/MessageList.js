@@ -398,7 +398,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                     CMS.handleAjaxError(xhr, status, err);
                 }
             });
-        });
+        }, { modal: true });
     };
 
     self.bindingEvents = function () {
