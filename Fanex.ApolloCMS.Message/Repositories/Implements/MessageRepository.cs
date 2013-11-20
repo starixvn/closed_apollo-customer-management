@@ -31,9 +31,8 @@ namespace Fanex.ApolloCMS.Message.Repositories.Implements
         /// Gets the list message.
         /// </summary>
         /// <param name="getMessageListCriteria">The get message list criteria.</param>
-        /// <param name="outputParam">The output parameter.</param>
         /// <returns>List message.</returns>
-        public List<Message> GetListMessage(GetMessageListCriteria getMessageListCriteria, ref Hashtable outputParam)
+        public List<Message> GetListMessage(GetMessageListCriteria getMessageListCriteria)
         {
             DataSet result = null;
 

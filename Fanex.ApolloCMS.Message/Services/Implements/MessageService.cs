@@ -43,7 +43,6 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
         public List<Message> GetListMessage(GetMessageListCriteria getMessageListCriteria)
         {
             var result = new List<Message>();
-            var outputParam = new Hashtable();
 
             if (Converter.ToString2(getMessageListCriteria.MsgType) == "All")
             {
@@ -57,7 +56,7 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
 
             getMessageListCriteria.ToDate = getMessageListCriteria.ToDate.AddDays(1).AddMilliseconds(-1);
 
-            var rawData = _messageRepository.GetListMessage(getMessageListCriteria, ref outputParam);
+            var rawData = _messageRepository.GetListMessage(getMessageListCriteria);
 
             if (rawData == null)
             {
