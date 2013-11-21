@@ -13,9 +13,9 @@ var CMS = function ($) {
         datePickerButtonUrl: null,
 
         commonConstants: {
-            DateFormat: 'mm-dd-yy',
-            MomentDateFormat: 'MM-DD-YYYY',
-            MomentDateTimeFormat: 'MM-DD-YYYY hh:mm:ss A',
+            DateFormat: 'mm/dd/yy',
+            MomentDateFormat: 'MM/DD/YYYY',
+            MomentDateTimeFormat: 'MM/DD/YYYY hh:mm:ss A',
             DecimalFormat: '0,0.00',
             NumberFormat: '0,0'
         },
@@ -92,15 +92,15 @@ var CMS = function ($) {
         openWindow: function (url) {
             var popH = $(window).height(), popW = $(window).width();
             var formatter = new Array(
-				"resizable=no",
-				"scrollbars=yes",
-				"toolbar=no",
-				"menubar=no",
-				"location=no",
-				"addressbar=no",
-				"directories=no",
-				"status=yes"
-			).join(',');
+                "resizable=no",
+                "scrollbars=yes",
+                "toolbar=no",
+                "menubar=no",
+                "location=no",
+                "addressbar=no",
+                "directories=no",
+                "status=yes"
+            ).join(',');
 
             window.open(url, '_blank', '' + ',' + formatter);
         },
@@ -123,69 +123,69 @@ var CMS = function ($) {
 } (jQuery);
 
 $(document).ready(function () {
-	CMS.initCoreValues();
+    CMS.initCoreValues();
 
-	CMS.headlineMsgBox = $.msgbox({
-		message: '',
-		//containerId: 'msg-bar',
-		type: 'err',
-		modal: false,
-		position: ['top:130', 'center'],
-		theme: '',
-		zIndex: 9999,
-		useAnimation: false
-	});
+    CMS.headlineMsgBox = $.msgbox({
+        message: '',
+        //containerId: 'msg-bar',
+        type: 'err',
+        modal: false,
+        position: ['top:130', 'center'],
+        theme: '',
+        zIndex: 9999,
+        useAnimation: false
+    });
 
-	CMS.infoMsgBox = $.msgbox({
-		message: '',
-		type: 'info',
-		modal: false,
-		position: ['top:130', 'center'],
-		theme: '',
-		zIndex: 9999,
-		useAnimation: false
-	});
+    CMS.infoMsgBox = $.msgbox({
+        message: '',
+        type: 'info',
+        modal: false,
+        position: ['top:130', 'center'],
+        theme: '',
+        zIndex: 9999,
+        useAnimation: false
+    });
 
-	CMS.loadingBox = $.msgbox({
-		message: 'Loading...',
-		type: 'warn',
-		modal: true,
-		position: ['top:5', 'center'],
-		closeBtn: false,
-		theme: '',
-		zIndex: 9999,
-		sticky: true,
-		useAnimation: false
-	});
+    CMS.loadingBox = $.msgbox({
+        message: 'Loading...',
+        type: 'warn',
+        modal: true,
+        position: ['top:5', 'center'],
+        closeBtn: false,
+        theme: '',
+        zIndex: 9999,
+        sticky: true,
+        useAnimation: false
+    });
 });
 
 // -- Utilities -- //
 
 // String Format
 String.prototype.format = function () {
-	var args = arguments;
-	return this.replace(/{(\d+)}/g, function (match, number) {
-		return typeof args[number] != 'undefined' ? args[number]: match;
-	});
+    var args = arguments;
+    return this.replace(/{(\d+)}/g, function (match, number) {
+        return typeof args[number] != 'undefined' ? args[number]: match;
+    });
 };
 
 // Array Remove - By John Resig (MIT Licensed)
 Array.prototype.remove = function (from, to) {
-	var rest = this.slice((to || from) + 1 || this.length);
-	this.length = from < 0 ? this.length + from : from;
-	return this.push.apply(this, rest);
+    var rest = this.slice((to || from) + 1 || this.length);
+    this.length = from < 0 ? this.length + from : from;
+    return this.push.apply(this, rest);
 };
 
 // Array Remove All elements matched the criteria
 Array.prototype.removeAll = function (criteria) {
-	var length = this.length;
+    var length = this.length;
 
-	for (var i = 0; i < length; i++) {
-		var element = this[i];
+    for (var i = 0; i < length; i++) {
+        var element = this[i];
 
-		if (criteria(element)) {
-			this.splice(i--, 1);
-			length--;
-		}
-	}
+        if (criteria(element)) {
+            this.splice(i--, 1);
+            length--;
+        }
+    }
 };

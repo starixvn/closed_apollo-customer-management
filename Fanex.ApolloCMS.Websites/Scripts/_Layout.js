@@ -48,6 +48,24 @@ var Layout = function ($) {
                 treeview.removeClass('disabled');
                 iconTreeView.removeClass('icon-treeview-disabled').addClass('icon-treeview');
             }
+        },
+        createDatepicker: function ($obj, defaultValue, onSelectHandler, onCloseHandler) {
+            var defaultDate = defaultValue ? moment(defaultValue).format(CMS.commonConstants.DateFormat) : 'today';
+
+            $obj.datepicker({
+                dateFormat: CMS.commonConstants.DateFormat,
+                showOn: 'button',
+                buttonImage: CMS.datePickerButtonUrl,
+                buttonImageOnly: true,
+                changeMonth: true,
+                onSelect: onSelectHandler ? onSelectHandler : function () { },
+                onClose: onCloseHandler ? onCloseHandler : function () { }
+            }).datepicker('setDate', defaultDate);
+
+            $obj.attr('readonly', true);
+            $obj.focus(function () {
+                $obj.datepicker('show');
+            });
         }
     };
 } (jQuery);

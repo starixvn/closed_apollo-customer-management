@@ -151,7 +151,7 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
             InformUpline: informUpline
         });
 
-        if (params.RecipientList.length >= 20) {
+        if (params.RecipientList.length >= limitRows) {
             $this.DOMInstance.ddlMemberType.attr('disabled', 'true');
             $this.DOMInstance.txtUserName.attr('disabled', 'true');
             $this.DOMInstance.chkInformUpline.attr('disabled', 'true');

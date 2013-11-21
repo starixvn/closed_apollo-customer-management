@@ -20,8 +20,21 @@
 <body>
     <div class="container page">
         <div class="row header">
-            @Html.Action("_Search", new RouteValueDictionary(new { Controller = "Home", Area = "" }))
-            <div class="col-xs-9 col-sm-9 col-md-10 rightHeader">
+            @{
+                var leftContentStyle = string.Empty;
+                var hasPermission = (bool)ViewBag.HasAccountManagementPermission;
+                
+                if (hasPermission)
+                {
+                    leftContentStyle = "col-xs-9 col-sm-9 col-md-10";
+                    @Html.Action("_Search", new RouteValueDictionary(new { Controller = "Home", Area = "" }));
+                }
+                else
+                {
+                    leftContentStyle = "col-xs-12 col-sm-12 col-md-12";
+                }
+            }
+            <div class="@leftContentStyle rightHeader">
                 <div class="col-xs-9 col-sm-9 col-md-9">
                     @Html.Action("_Menu", new RouteValueDictionary(new { Controller = "Home", Area = "" }))
                 </div>
@@ -46,9 +59,15 @@
             </div>
         </div>
         <div class="row content">
-            @Html.Action("_LeftPan", new RouteValueDictionary(new { Controller = "Home", Area = "" }))
-            <div id="mainContent" class="col-xs-9 col-sm-9 col-md-10 mainContent">
-                <span id="collapseExpand" class="collapse-expand icon-collapse"></span>
+            @if (hasPermission == true)
+            {
+                @Html.Action("_LeftPanel", new RouteValueDictionary(new { Controller = "Home", Area = "" }));
+            }
+            <div id="mainContent" class="@leftContentStyle mainContent">
+                @if (hasPermission == true)
+                {
+                    <span id="collapseExpand" class="collapse-expand icon-collapse"></span>
+                }
                 <div class="row container-content">
                     @RenderSection("Headline", false)
                     @RenderBody()

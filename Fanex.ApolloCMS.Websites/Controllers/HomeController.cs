@@ -78,9 +78,9 @@ namespace Fanex.ApolloCMS.Websites.Controllers
         /// </summary>
         /// <returns>Partial menu view.</returns>
         [ChildActionOnly]
-        public PartialViewResult _LeftPan()
+        public PartialViewResult _LeftPanel()
         {
-            return PartialView("~/Views/Shared/_LeftPan.cshtml");
+            return PartialView("~/Views/Shared/_LeftPanel.cshtml");
         }
     }
 }

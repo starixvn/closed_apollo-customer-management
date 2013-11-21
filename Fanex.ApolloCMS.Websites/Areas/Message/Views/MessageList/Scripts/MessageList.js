@@ -83,33 +83,18 @@ Fanex.ApolloCMS.Message.MessageList = function () {
         _params.getListMessageParam.FromDate = today;
         _params.getListMessageParam.ToDate = today;
 
-        $("#dateFrom").datepicker({
-            showOn: "button",
-            buttonImage: CMS.datePickerButtonUrl,
-            buttonImageOnly: true,
-            changeMonth: true,
-            onSelect: function (selectedDate) {
+        Layout.createDatepicker($("#dateFrom"), null, null, function (selectedDate) {
+            var maxDate = new Date(selectedDate);
+            maxDate.setMonth(maxDate.getMonth() + 3);
+            $("#dateTo").datepicker("option", "minDate", selectedDate);
+            $("#dateTo").datepicker("option", "maxDate", maxDate);
+            _params.getListMessageParam.FromDate = selectedDate;
+        });
 
-            },
-            onClose: function (selectedDate) {
-                var maxDate = new Date(selectedDate);
-                maxDate.setMonth(maxDate.getMonth() + 3);
-                $("#dateTo").datepicker("option", "minDate", selectedDate);
-                $("#dateTo").datepicker("option", "maxDate", maxDate);
-                _params.getListMessageParam.FromDate = selectedDate;
-            }
-        }).datepicker('setDate', 'today');
-
-        $("#dateTo").datepicker({
-            showOn: "button",
-            buttonImage: CMS.datePickerButtonUrl,
-            buttonImageOnly: true,
-            changeMonth: true,
-            onClose: function (selectedDate) {
-                _params.getListMessageParam.ToDate = selectedDate;
-                $("#dateFrom").datepicker("option", "maxDate", selectedDate);
-            }
-        }).datepicker('setDate', 'today');
+        Layout.createDatepicker($("#dateTo"), null, null, function (selectedDate) {
+            _params.getListMessageParam.ToDate = selectedDate;
+            $("#dateFrom").datepicker("option", "maxDate", selectedDate);
+        });
     };
 
     var getParamValues = function () {

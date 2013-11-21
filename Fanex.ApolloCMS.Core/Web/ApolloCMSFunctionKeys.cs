@@ -7,7 +7,7 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 11/20/2013 1:11:48 PM
+// Lasted generated date: 11/21/2013 7:45:42 AM
 // </history>
 
 using System.Diagnostics.CodeAnalysis;
@@ -29,6 +29,8 @@ public static class ApolloCMSFunctionKeys
         public const string AssignFunctionToUser = "AssignFunctionToUser";
 
         public const string AssignSiteToUser = "AssignSiteToUser";
+
+        public const string ManageAccount = "ManageAccount";
 
         public const string ManageFunction = "ManageFunction";
 

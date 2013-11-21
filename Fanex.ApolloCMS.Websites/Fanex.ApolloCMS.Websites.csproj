@@ -372,7 +372,7 @@
     <Content Include="Content\site\customFanexGrid.less" />
     <Content Include="Content\site\grid.less" />
     <Content Include="Views\Shared\_Search.cshtml" />
-    <Content Include="Views\Shared\_LeftPan.cshtml" />
+    <Content Include="Views\Shared\_LeftPanel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.ApolloCMS.Core\Fanex.ApolloCMS.Core.csproj">
