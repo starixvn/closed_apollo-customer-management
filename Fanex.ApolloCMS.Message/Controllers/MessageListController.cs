@@ -10,14 +10,10 @@
 namespace Fanex.ApolloCMS.Message.Controllers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Web.Mvc;
+    using Fanex.ApolloCMS.Core.Configurations;
     using Fanex.ApolloCMS.Core.Controllers;
-    using Fanex.ApolloCMS.Core.Web;
     using Fanex.ApolloCMS.Message.Criteria.MessageList;
-    using Fanex.ApolloCMS.Message.Models.MessageList;
     using Fanex.ApolloCMS.Message.Services.Implements;
     using Fanex.ApolloCMS.Message.Services.Interfaces;
     using Fanex.NAP.Core.Business;
@@ -48,6 +44,7 @@ namespace Fanex.ApolloCMS.Message.Controllers
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewMessageList, Policy = Constant.Policy.Read)]
         public ActionResult Index(bool isRedirected = false)
         {
+            ViewBag.MinDate = DateTime.Now.AddMonths(AppSettings.MessageListMonthRange * -1).ToShortDateString();
             ViewBag.IsRedirected = isRedirected;
             ViewBag.HasHostRight = this.HasRight(ApolloCMSFunctionKeys.ViewMessageList, Constant.Policy.Host);
             return View();

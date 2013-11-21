@@ -66,6 +66,8 @@ var Layout = function ($) {
             $obj.focus(function () {
                 $obj.datepicker('show');
             });
+
+            return $obj;
         }
     };
 } (jQuery);

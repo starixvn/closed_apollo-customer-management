@@ -25,6 +25,14 @@ namespace Fanex.ApolloCMS.Core.Configurations
             }
         }
 
+        public static int MessageListMonthRange
+        {
+            get
+            {
+                return Convert.ToInt32(GetValue("MessageListMonthRange"));
+            }
+        }
+
         /// <summary>
         /// Gets the value from web configuration.
         /// </summary>

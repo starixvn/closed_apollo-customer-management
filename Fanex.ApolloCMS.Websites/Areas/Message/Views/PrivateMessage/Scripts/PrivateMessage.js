@@ -127,6 +127,24 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
         params.ContentTh = $.trim($this.DOMInstance.txtContentTh.val());
         params.ContentVn = $.trim($this.DOMInstance.txtContentVn.val());
     };
+    var disableForm = function () {
+        //Attention: this will not reset the form to enable when refreshing the page by pressing F5.
+
+        $this.DOMInstance.txtContentEn.attr('disabled', 'true');
+        $this.DOMInstance.txtContentCh.attr('disabled', 'true');
+        $this.DOMInstance.txtContentCs.attr('disabled', 'true');
+        $this.DOMInstance.txtContentJp.attr('disabled', 'true');
+        $this.DOMInstance.txtContentKo.attr('disabled', 'true');
+        $this.DOMInstance.txtContentTh.attr('disabled', 'true');
+        $this.DOMInstance.txtContentVn.attr('disabled', 'true');
+        $this.DOMInstance.ddlMemberType.attr('disabled', 'true');
+        $this.DOMInstance.txtUserName.attr('disabled', 'true');
+        $this.DOMInstance.chkInformUpline.attr('disabled', 'true');
+        $this.DOMInstance.btnAdd.attr('disabled', 'true');
+        $this.DOMInstance.btnSubmit.attr('disabled', 'true');
+
+        $('td:last-child > a', $this.DOMInstance.tblMemberListBody).removeAttr('onclick');
+    };
     var addRow = function (member, isAgent, informUpline) {
         var userId = member.CustId;
         var rowFormat = '<tr><td class="text-center">{0}</td><td>{1}</td><td class="text-center">{2}</td><td class="text-center">{3}</td><td class="text-center">{4}</td></tr>';
@@ -234,6 +252,8 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
         });
     };
     $this.AddNewMessage = function () {
+        disableForm();
+
         $.ajax({
             type: "POST",
             url: urls.AddNewMessage,

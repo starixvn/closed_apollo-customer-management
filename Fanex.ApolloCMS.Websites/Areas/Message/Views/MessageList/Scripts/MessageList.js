@@ -84,17 +84,14 @@ Fanex.ApolloCMS.Message.MessageList = function () {
         _params.getListMessageParam.ToDate = today;
 
         Layout.createDatepicker($("#dateFrom"), null, null, function (selectedDate) {
-            var maxDate = new Date(selectedDate);
-            maxDate.setMonth(maxDate.getMonth() + 3);
             $("#dateTo").datepicker("option", "minDate", selectedDate);
-            $("#dateTo").datepicker("option", "maxDate", maxDate);
             _params.getListMessageParam.FromDate = selectedDate;
-        });
+        }).datepicker('option', 'minDate', minDate).datepicker('option', 'maxDate', today);
 
         Layout.createDatepicker($("#dateTo"), null, null, function (selectedDate) {
             _params.getListMessageParam.ToDate = selectedDate;
             $("#dateFrom").datepicker("option", "maxDate", selectedDate);
-        });
+        }).datepicker('option', 'minDate', minDate).datepicker('option', 'maxDate', today);
     };
 
     var getParamValues = function () {

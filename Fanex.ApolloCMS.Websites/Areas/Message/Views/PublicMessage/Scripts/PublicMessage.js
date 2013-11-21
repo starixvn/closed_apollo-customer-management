@@ -105,6 +105,20 @@ Fanex.ApolloCMS.Message.PublicMessage = function () {
         params.IsSpecialMsg = $this.DOMInstance.chkIsSpecialMsg.is(':checked');
         params.RecipientList = recipients;
     };
+    var disableForm = function () {
+        //Attention: this will not reset the form to enable when refreshing the page by pressing F5.
+
+        $this.DOMInstance.txtContentEn.attr('disabled', 'true');
+        $this.DOMInstance.txtContentCh.attr('disabled', 'true');
+        $this.DOMInstance.txtContentCs.attr('disabled', 'true');
+        $this.DOMInstance.txtContentJp.attr('disabled', 'true');
+        $this.DOMInstance.txtContentKo.attr('disabled', 'true');
+        $this.DOMInstance.txtContentTh.attr('disabled', 'true');
+        $this.DOMInstance.txtContentVn.attr('disabled', 'true');
+        $this.DOMInstance.ddlRecipient.attr('disabled', 'true');
+        $this.DOMInstance.chkIsSpecialMsg.attr('disabled', 'true');
+        $this.DOMInstance.btnSubmit.attr('disabled', 'true');
+    };
 
     $this.DOMInstance = {
         txtContentEn: null,
@@ -126,6 +140,8 @@ Fanex.ApolloCMS.Message.PublicMessage = function () {
         initFields();
     };
     $this.AddNewMessage = function () {
+        disableForm();
+
         $.ajax({
             type: "POST",
             url: urls.AddNewMessage,
