@@ -1,131 +1,148 @@
 @import "../../../../Content/site/variables.less";
 @import "../../../../Content/site/mixins.less";
 
-.language-group {
-	margin: 10px 0;
-	border: 1px solid darken(@border-color, 10%);
-	padding: 5px;
-	.border-radius(2px);
+.panel {
+    .border-radius(2px 2px 0 0);
+    margin: 0 0 10px;
+    border-color: #ececec;
+     
+    .panel-heading {
+        background-color: #e9ecf1;
+        color: @primary-color;
+        padding: 6px 8px;
+        font-size: @font-size + 1;
+        position: relative;
 
-	.language-group-title {
-		background-color: #9fcfee;
-		border: 1px solid @primary-color;
-		color: #fff;
-		padding: 5px 10px;
-		color: #000;
+        label {
+            margin-bottom: 0;
+        }
 
-		&.other-lag {
-			cursor: pointer;
-		}
+        &.language-group-title {
+            background-color: @second-color;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-		.glyphicon-plus {
-			color: #0D5686;
-			margin-right: 3px;
-		}
+        .icon-colp-panel, .icon-exp-panel {
+            margin-right: 5px;
+        }
+    }
 
-		.icon-exp-panel, .icon-colp-panel {
-			margin-right: 5px;
-		}
-	}
+    .panel-body {
+        padding: 5px;
 
-	.body-otherLanguage {
-		display: none;
-	}
+        &.no-padding {
+            padding: 0;
+        }
 
-	.group-row {
-		.language-title {
-			display: block;
-			padding: 3px 10px;
-			font-weight: normal;
-			border: 1px solid darken(@border-color, 10%);
-			background-color: #ededed;
-			margin: 3px 0;
+        .language-body {
+            border: none;
+            padding: 5px;
+        }
+    }
 
-			&.noborder-right {
-				border-right: 0;
-			}
-		}
+    &.other-lag {
+        border-color: @border-color;
+        margin-bottom: 20px;
 
-		.language-body {
-			min-height: 130px;
-			resize: none;
-		}
-	}
-}
-.group-action {
-	margin: 15px 0;
+        .panel {
+            margin: 5px 0 0;
 
-	&.addMessage {
-		background-color: #F6F6F6;
-		border: 1px solid @border-color;
-		padding: 8px 10px 5px;
-		.border-radius(2px);
-		margin: 10px 0 7px;
+            &:first-child {
+                margin-top: 0;
+            }
+        }
 
-		.txtUserName {
-			margin: 0 5px 0 10px;
-		}
-
-		.btn {
-			margin-left: 20px;
-		}
-	}
-
-	.selectboxit-container {
-		.selectboxit {
-			border: 1px solid @border-color;
-			.border-radius(2px);
-		}
-
-		.selectboxit-text {
-			color: @text-color;
-			font-size: @font-size;
-		}
-
-		.selectboxit-options {
-			.box-shadow(0);
-			border: 1px solid @border-color;
-		}
-	}
-
-	label {
-		font-weight: normal;
-		vertical-align: middle;
-
-		&.lbl-recipient {
-			margin-top: 3px;
-		}
-	}
-	
-	.checkbox {
-		margin: 4px 10px;
-
-		input {
-			margin-top: 2px;
-		}
-	}
+        .body-otherLanguage {
+            display: none;
+        }
+    }
 }
 
-.rowLimit {
-	margin-top: 4px;
+.filter-form {
+    margin: 15px 0;
+
+    &.addMessage {
+        margin: 10px 0 15px;
+
+        .txtUserName {
+            margin: 0 5px 0 10px;
+        }
+
+        .btn {
+            margin-left: 20px;
+        }
+    }
+
+    .selectboxit-container {
+        .selectboxit {
+            border: 1px solid @border-color;
+            .border-radius(2px);
+        }
+
+        .selectboxit-text {
+            color: @text-color;
+            font-size: @font-size;
+        }
+
+        .selectboxit-options {
+            .box-shadow(0);
+            border: 1px solid @border-color;
+        }
+    }
+
+    label {
+        font-weight: normal;
+        vertical-align: middle;
+
+        &.lbl-recipient {
+            margin-top: 3px;
+        }
+    }
+    
+    .checkbox {
+        margin: 3px 10px;
+
+        input {
+            margin-top: 3px;
+        }
+    }
 }
 
 .alert {
-	.border-radius(2px);
-	margin: 10px 0 0;
-	padding: 7px 10px;
+    .border-radius(2px);
+    margin: 10px 0 0;
+    padding: 7px 10px;
 }
 
+.text-center {
+    a {
+        display: block;
+        float: none;
+        margin: auto;
+    }
+}
+/* Icon*/
 .glyphicon-ok {
-	color: @primary-color;
+    color: @primary-color;
 }
 
-.glyphicon-minus-sign {
-	color: #c74343;
-	cursor: pointer;
+.icon-important {
+    position: absolute;
+    right: 5px;
+    top: 2px;
+}
 
-	&:hover {
-		text-decoration: none;
-		color: #b80909;
-	}
+/* Button */
+.btn {
+    &.btn-primary {
+        background-color: @primary-color;
+        padding: 2px 27px 3px;
+    }
+
+    .btn-add {
+        padding: 6px 10px;
+        line-height: 20px;
+    }
 }

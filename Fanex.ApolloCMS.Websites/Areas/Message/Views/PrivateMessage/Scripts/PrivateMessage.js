@@ -133,7 +133,7 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
         var no = params.RecipientList.length + 1;
         var level = isAgent ? labels.Agent : labels.Member;
         var upline = informUpline ? '<span class="glyphicon glyphicon-ok" />' : '';
-        var remove = '<a href="#" data-index="{0}" onclick="removeRow(this)" class="glyphicon glyphicon-minus-sign" title="Remove"></a>'.format(no - 1);
+        var remove = '<a href="#" data-index="{0}" onclick="removeRow(this)" class="icon-remove" title="Remove"></a>'.format(no - 1);
 
         if (isAgent) {
             userId = member.AgentId;

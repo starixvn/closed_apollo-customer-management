@@ -13,7 +13,7 @@
 
         if (lvl1MenuItemList.Any())
         {
-            <li id="@menuItem.Id">
+            <li id="@menuItem.Id" class="active">
                 <a href="javascript:;">@menuItem.Name</a>
                 <ul class="list-unstyled subMenu">
                 @foreach (var subMenuItem in lvl1MenuItemList)
@@ -26,11 +26,6 @@
         else
         {
             <li id="@menuItem.Id"><a href="@Url.Content(menuItem.GetValidUrl())">@menuItem.Name</a></li>
-        }
-
-        if (i == (lvl0MenuItemList.Count - 1))
-        { 
-            <li class="last-item"></li>
         }
     }
 </ul>

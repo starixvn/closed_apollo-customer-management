@@ -12,54 +12,63 @@
     <h5 class="row title">@Labels.NewPrivateMessage</h5>
 }
 
-<div id="divMajorLangue" class="row language-group">
-    <div class="col-xs-12 col-sm-12 col-md-12 language-group-title">@Labels.MajorLanguage</div>
-    <div class="col-xs-12 col-sm-12 col-md-12 language-group-body">
-        <div class="row group-row">
-            <div class="col-sm-4 col-md-4 language-area">
-                @Html.LabelFor(m => m.ContentEn, Labels.English, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title noborder-right" })
-                @Html.TextAreaFor(m => m.ContentEn, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
-            </div>
-            <div class="col-sm-4 col-md-4 language-area">
-                @Html.LabelFor(m => m.ContentCh, Labels.ChineseTraditional, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title noborder-right" })
-                @Html.TextAreaFor(m => m.ContentCh, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
-            </div>
-            <div class="col-sm-4 col-md-4 language-area">
-                @Html.LabelFor(m => m.ContentCs, Labels.ChineseSimplified, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title" })
-                @Html.TextAreaFor(m => m.ContentCs, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
-            </div>
-        </div>
+<div class="panel">
+    <div class="panel-heading">
+        @Html.LabelFor(m => m.ContentEn, Labels.English, new { @class = "language-title" }) <span class="icon-important"></span></div>
+    <div class="panel-body no-padding">
+        @Html.TextAreaFor(m => m.ContentEn, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
     </div>
 </div>
-<div class="row language-group">
-    <div class="col-xs-12 col-sm-12 col-md-12 language-group-title other-lag">
-        <span class="icon-exp-panel"></span>@Labels.OtherLanguage
+<div class="panel">
+    <div class="panel-heading">
+        @Html.LabelFor(m => m.ContentCh, Labels.ChineseTraditional, new { @class = "language-title" })</div>
+    <div class="panel-body no-padding">
+        @Html.TextAreaFor(m => m.ContentCh, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
     </div>
-    <div id="divOtherLanguage" class="col-xs-12 col-sm-12 col-md-12 language-group-body body-otherLanguage">
-        <div class="row group-row">
-            <div class="col-sm-4 col-md-4 language-area">
-                @Html.LabelFor(m => m.ContentJp, Labels.Japanese, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title noborder-right" })
+</div>
+<div class="panel">
+    <div class="panel-heading">
+        @Html.LabelFor(m => m.ContentCs, Labels.ChineseSimplified, new { @class = "language-title" })</div>
+    <div class="panel-body no-padding">
+        @Html.TextAreaFor(m => m.ContentCs, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
+    </div>
+</div>
+<div class="panel other-lag">
+    <div class="panel-heading language-group-title">
+        <span class="icon-exp-panel"></span>@Labels.OtherLanguage</div>
+    <div id="divOtherLanguage" class="panel-body body-otherLanguage">
+        <div class="panel">
+            <div class="panel-heading">
+                @Html.LabelFor(m => m.ContentJp, Labels.Japanese, new { @class = "language-title noborder-right" })</div>
+            <div class="panel-body no-padding">
                 @Html.TextAreaFor(m => m.ContentJp, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
             </div>
-            <div class="col-sm-4 col-md-4 language-area">
-                @Html.LabelFor(m => m.ContentKo, Labels.Korean, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title noborder-right" })
+        </div>
+        <div class="panel">
+            <div class="panel-heading">
+                @Html.LabelFor(m => m.ContentKo, Labels.Korean, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title noborder-right" })</div>
+            <div class="panel-body no-padding">
                 @Html.TextAreaFor(m => m.ContentKo, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
             </div>
-            <div class="col-sm-4 col-md-4 language-area">
-                @Html.LabelFor(m => m.ContentTh, Labels.Thai, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title" })
+        </div>
+        <div class="panel">
+            <div class="panel-heading">
+                @Html.LabelFor(m => m.ContentTh, Labels.Thai, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title" })</div>
+            <div class="panel-body no-padding">
                 @Html.TextAreaFor(m => m.ContentTh, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
             </div>
         </div>
-        <div class="row group-row">
-            <div class="col-sm-4 col-md-4 language-area end-area">
-                @Html.LabelFor(m => m.ContentVn, Labels.Vietnamese, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title" })
+        <div class="panel">
+            <div class="panel-heading">
+                @Html.LabelFor(m => m.ContentVn, Labels.Vietnamese, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title" })</div>
+            <div class="panel-body no-padding">
                 @Html.TextAreaFor(m => m.ContentVn, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
             </div>
         </div>
     </div>
 </div>
 <div class="row">
-    <div class="col-md-9 group-action clearfix addMessage">
+    <div class="col-md-9 filter-form clearfix addMessage">
         <div class="pull-left">
             @Html.DropDownList("ddlMemberType", (IEnumerable<SelectListItem>)ViewBag.MemberTypes)
         </div>
@@ -77,7 +86,7 @@
             @Html.CheckBox("chkInformUpline")
             @Html.Label("chkInformUpline", Labels.AlsoInformUpline)
         </div>
-        <input type="button" id="btnAdd" class="btn pull-left" value="@ViewLang.Add" />
+        <button id="btnAdd" class="btn pull-left"><span class="icon-add"></span>@ViewLang.Add</button>
     </div>
     <div class="col-md-9 clearfix">
         <table id="tblMemberList" class="table table-bordered tbl">
@@ -98,14 +107,18 @@
             </thead>
             <tbody>
                 <tr>
-                    <td colspan="5" class="text-center">@Labels.NoMember</td>
+                    <td colspan="5" class="text-left">@Labels.NoMember</td>
                 </tr>
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5" class="text-right">@Labels.MaxRowsLimit @ViewBag.MaxRowsLimit</td>
+                </tr>
+            </tfoot>
         </table>
     </div>
     <div class="col-md-9 clearfix">
-        <input type="button" id="btnSubmit" class="btn" value="@ViewLang.Submit" />
-        <span class="pull-right rowLimit">@Labels.MaxRowsLimit @ViewBag.MaxRowsLimit</span>
+        <input type="button" id="btnSubmit" class="btn btn-primary" value="@ViewLang.Submit" />
     </div>
 </div>
 @section Foot 

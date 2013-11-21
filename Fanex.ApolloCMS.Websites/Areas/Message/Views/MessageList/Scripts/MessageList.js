@@ -187,7 +187,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
             columns = [
                     { HeaderText: postedDate, Width: 150, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: messageEnglish, Width: 300, Name: "MessageContent", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell) {
-                        return '<div class="link editBtn glyphicon glyphicon-edit" title="Edit" onclick="editMessage(' + currentCell.Value.MessageId + ')"></div><div class="messageContent" title="' + currentCell.Value.ContentEn + '">' + getSubMessageContent(currentCell.Value.ContentEn) + '</div><div class="clear"></div>';
+                        return '<div class="editBtn icon-edit" title="Edit" onclick="editMessage(' + currentCell.Value.MessageId + ')"></div><div class="messageContent" title="' + currentCell.Value.ContentEn + '">' + getSubMessageContent(currentCell.Value.ContentEn) + '</div><div class="clear"></div>';
                     }
                     },
                     { HeaderText: messageType, Width: 60, Name: "MessageType", HeaderAlign: "center", CellAlign: "center" },
@@ -204,7 +204,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                     }
                     },
                     { HeaderText: remove, Width: 60, Name: "Remove", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (currentCell) {
-                        return '<div title="Remove" class="glyphicon glyphicon-minus-sign" onclick="removeMessage(' + currentCell.Value.MessageId + ',' + currentCell.Value.TargetId + ' )"></div>';
+                        return '<div title="Remove" class="icon-remove" onclick="removeMessage(' + currentCell.Value.MessageId + ',' + currentCell.Value.TargetId + ' )"></div>';
                     }
                     }
                 ];
