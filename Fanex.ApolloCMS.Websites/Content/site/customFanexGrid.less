@@ -5,10 +5,10 @@
 .freegrid {
     border-color: @table-border;
     font-size: @font-size;
+    .box-sizing(content-box);
 
     *, *:before, *:after {
-        box-sizing: content-box;
-        -moz-box-sizing: content-box; /* Firefox */
+       .box-sizing(content-box);
     }
 
     .free-top-left table thead th, .col_header table thead th {

@@ -124,7 +124,7 @@ namespace Fanex.ApolloCMS.Message.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to * English.
+        ///   Looks up a localized string similar to English.
         /// </summary>
         public static string English {
             get {
