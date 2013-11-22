@@ -38,7 +38,7 @@
 </div>
 <div class="panel other-lag">
     <div id="divOtherLanguageTitle" class="panel-heading language-group-title">
-        <span class="icon-exp-panel"></span>@Labels.OtherLanguage</div>
+        <span id="spanOtherLanguage" class="icon-exp-panel"></span>@Labels.OtherLanguage</div>
     <div id="divOtherLanguage" class="panel-body body-otherLanguage">
         <div class="panel">
             <div class="panel-heading">
@@ -93,7 +93,7 @@
             @Html.CheckBox("chkInformUpline")
             @Html.Label("chkInformUpline", Labels.AlsoInformUpline)
         </div>
-        <button id="btnAdd" class="btn pull-left"><span class="icon-add"></span>@ViewLang.Add</button>
+        <button id="btnAdd" class="btn pull-left btn-add"><span class="icon-add"></span>@ViewLang.Add</button>
     </div>
     <div class="col-md-9 clearfix">
         <table id="tblMemberList" class="table table-bordered tbl">
@@ -114,7 +114,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td colspan="5" class="text-left">@Labels.NoMember</td>
+                    <td colspan="5" class="text-center">@Labels.NoMember</td>
                 </tr>
             </tbody>
             <tfoot>

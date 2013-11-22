@@ -1,7 +1,7 @@
 
 
    ----------------------------------------------------------------------
-              README file for Bundle Transformer: Core 1.8.9
+              README file for Bundle Transformer: Core 1.8.11
 
    ----------------------------------------------------------------------
 
@@ -37,7 +37,11 @@
    =============
    RELEASE NOTES
    =============
-   Fixed minor bugs.
+   1. From the `configuration\bundleTransformer\core` configuration 
+      element was removed a `useEnableOptimizationsProperty` attribute;
+   2. Added new configuration element - 
+      `configuration\bundleTransformer\core\assetHandler`, that responsible
+      for settings of the debugging HTTP handlers.
    
    =============
    DOCUMENTATION

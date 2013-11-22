@@ -46,11 +46,9 @@ namespace Fanex.ApolloCMS.Websites
                 "~/content/lib/jquery-ui/jquery-ui-1.9.1.custom.css",
                 "~/content/lib/jquery-ui/jquery.selectBoxIt.css",
                 "~/scripts/lib/msgbox/msgbox-0.0.1.css",            
-                "~/scripts/lib/tipsy/tipsy-1.0.0.css");
-
-            bundles.AddAndInclude(
-                "~/site/layout",
-                "~/content/site/layout.less");
+                "~/scripts/lib/tipsy/tipsy-1.0.0.css",
+                "~/content/site/custom.less",
+                "~/content/site/index.less");
 
             bundles.Add(new ScriptBundle("~/scripts/headjs").Include(
                 "~/scripts/lib/html5-libs/head.js"));
@@ -62,6 +60,7 @@ namespace Fanex.ApolloCMS.Websites
                 "~/scripts/lib/jQuery/jquery-1.8.2.js",
                 "~/scripts/lib/jQuery/jquery-ui-1.8.24.js",
                 "~/scripts/lib/jquery/jquery.selectBoxIt.js",
+                "~/scripts/lib/jquery/jquery.cookie.js",
                 "~/content/bootstrap/js/bootstrap.js",
                 "~/scripts/lib/msgbox/msgbox-0.0.1.js",
                 "~/scripts/lib/tipsy/tipsy-1.0.0.js",
@@ -78,7 +77,7 @@ namespace Fanex.ApolloCMS.Websites
         {
             bundles.AddAndInclude(
                 "~/site/login",
-                "~/Areas/UserLogin/themes/layout.less");
+                "~/Areas/UserLogin/themes/login.less");
 
             bundles.Add(new ScriptBundle("~/scripts/loginJS").Include(
                 "~/scripts/lib/jQuery/jquery-1.8.2.js",
@@ -97,7 +96,8 @@ namespace Fanex.ApolloCMS.Websites
         {
             bundles.AddAndInclude(
                 "~/site/messageList",
-                "~/areas/message/resources/messagelist/layout.less");
+                "~/content/site/customFanexGrid.less",
+                "~/areas/message/resources/messagelist/message.less");
 
             bundles.Add(new ScriptBundle("~/scripts/messageList").Include(
                 "~/Scripts/Validator.js",
@@ -123,7 +123,7 @@ namespace Fanex.ApolloCMS.Websites
         {
             bundles.AddAndInclude(
                 "~/site/newMessage",
-                "~/areas/message/resources/newmessage/layout.less");
+                "~/areas/message/resources/newmessage/newMessage.less");
 
             bundles.Add(new ScriptBundle("~/scripts/newPrivateMessage").Include(
                 "~/Scripts/Validator.js",

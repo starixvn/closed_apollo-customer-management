@@ -37,6 +37,7 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
         $this.DOMInstance.btnAdd = $('#btnAdd');
         $this.DOMInstance.btnSubmit = $('#btnSubmit');
         $this.DOMInstance.divEnglishLabel = $('#divEnglishLabel');
+        $this.DOMInstance.spanOtherLanguage = $('#spanOtherLanguage');
         $this.DOMInstance.divOtherLanguageTitle = $('#divOtherLanguageTitle');
         $this.DOMInstance.divOtherLanguage = $('#divOtherLanguage');
         $this.DOMInstance.tblMemberListBody = $('#tblMemberList > tbody');
@@ -44,6 +45,11 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
     var initFields = function () {
         $this.DOMInstance.divOtherLanguageTitle.bind('click', function () {
             $this.DOMInstance.divOtherLanguage.slideToggle('slow');
+//            if ($this.DOMInstance.divOtherLanguage.is(':visible')) {
+//                $this.DOMInstance.spanOtherLanguage.removeClass('icon-exp-panel').addClass('icon-col-panel');
+//            } else {
+//                $this.DOMInstance.spanOtherLanguage.removeClass('icon-col-panel').addClass('icon-exp-panel');
+//            }
         });
 
         $this.DOMInstance.txtUserName.bind('keyup', function (event) {
@@ -214,6 +220,7 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
         btnAdd: null,
         btnSubmit: null,
         divEnglishLabel: null,
+        spanOtherLanguage: null,
         divOtherLanguageTitle: null,
         divOtherLanguage: null,
         tblMemberListBody: null

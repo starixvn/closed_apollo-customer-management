@@ -73,16 +73,30 @@ var Layout = function ($) {
 } (jQuery);
 
 $(document).ready(function () {
-    $("select").selectBoxIt();
+    $('select').selectBoxIt();
     // show or hide icon Treeview
     Layout.hideShowIconTreeview();
-    var selType = $("select#type");
+    var selType = $('select#type');
     selType.bind({
-        "change": function (ev, obj) {
+        'change': function (ev, obj) {
             Layout.hideShowIconTreeview();
         }
     });
 
     // collpase or expand left content
     Layout.collapseExpand();
+    
+    // Set active menu css class
+    $('ul.mainMenu > li').on('click', function (event) {
+        var $this = $(this);
+        
+        $.cookie('menu-id', $this.attr('id'), { path: '/' });
+    }).each(function () {
+        var $this = $(this);
+        var menuId = $.cookie('menu-id');
+
+        if ($this.attr('id') == menuId) {
+            $this.addClass('active');
+        }
+    });
 });

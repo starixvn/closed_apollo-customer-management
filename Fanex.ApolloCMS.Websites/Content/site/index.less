@@ -43,9 +43,15 @@ input[type="text"].hasDatepicker {
     border: none;
     color: @button-color;
     font-size: @font-size;
+    height: 25px;
 
     &:hover {
         background-color: @button-background-hover;
+        color: @button-color;
+    }
+
+    &:focus {
+        outline: none;
         color: @button-color;
     }
 }
@@ -125,7 +131,9 @@ input[type="text"].hasDatepicker {
 
 .icon-add {
     .icon;
-    background-position: -242px 2px;
+    background-position: -239px 0;
+    width: 16px;
+    height: 17px;
 }
 
 .icon-important {
@@ -139,14 +147,12 @@ input[type="text"].hasDatepicker {
     .icon;
     background-position: -296px -4px;
     width: 19px;
-    height: 19px;
+    height: 17px;
 }
 
 .icon-remove {
-    .icon;
-    background-position: -317px 0;
-    width: 19px;
-    height: 22px;
+    .icon-edit;
+    background-position: -317px -5px;
 }
 
 /* Mixins */
