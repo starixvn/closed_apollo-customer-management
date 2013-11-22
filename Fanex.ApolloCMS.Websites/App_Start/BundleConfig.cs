@@ -42,7 +42,6 @@ namespace Fanex.ApolloCMS.Websites
             bundles.AddAndInclude(
                 "~/site/common",
                 "~/content/bootstrap/css/bootstrap.css",
-                "~/content/bootstrap/css/bootstrap-ie7.css",
                 "~/content/lib/jquery-ui/jquery-ui-1.9.1.custom.css",
                 "~/content/lib/jquery-ui/jquery.selectBoxIt.css",
                 "~/scripts/lib/msgbox/msgbox-0.0.1.css",            
