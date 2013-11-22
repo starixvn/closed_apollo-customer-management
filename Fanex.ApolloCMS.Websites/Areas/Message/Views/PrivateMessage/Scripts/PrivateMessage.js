@@ -44,12 +44,13 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
     };
     var initFields = function () {
         $this.DOMInstance.divOtherLanguageTitle.bind('click', function () {
+            if ($this.DOMInstance.spanOtherLanguage.hasClass('icon-exp-panel')) {
+                $this.DOMInstance.spanOtherLanguage.removeClass('icon-exp-panel').addClass('icon-colp-panel');
+            } else {
+                $this.DOMInstance.spanOtherLanguage.removeClass('icon-colp-panel').addClass('icon-exp-panel');
+            }
+
             $this.DOMInstance.divOtherLanguage.slideToggle('slow');
-//            if ($this.DOMInstance.divOtherLanguage.is(':visible')) {
-//                $this.DOMInstance.spanOtherLanguage.removeClass('icon-exp-panel').addClass('icon-col-panel');
-//            } else {
-//                $this.DOMInstance.spanOtherLanguage.removeClass('icon-col-panel').addClass('icon-exp-panel');
-//            }
         });
 
         $this.DOMInstance.txtUserName.bind('keyup', function (event) {

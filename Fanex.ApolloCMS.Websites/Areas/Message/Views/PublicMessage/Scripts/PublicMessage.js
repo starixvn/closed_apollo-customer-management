@@ -35,11 +35,18 @@ Fanex.ApolloCMS.Message.PublicMessage = function () {
         $this.DOMInstance.chkIsSpecialMsg = $('#IsSpecialMsg');
         $this.DOMInstance.btnSubmit = $('#btnSubmit');
         $this.DOMInstance.divEnglishLabel = $('#divEnglishLabel');
+        $this.DOMInstance.spanOtherLanguage = $('#spanOtherLanguage');
         $this.DOMInstance.divOtherLanguageTitle = $('#divOtherLanguageTitle');
         $this.DOMInstance.divOtherLanguage = $('#divOtherLanguage');
     };
     var initFields = function () {
         $this.DOMInstance.divOtherLanguageTitle.bind('click', function () {
+            if ($this.DOMInstance.spanOtherLanguage.hasClass('icon-exp-panel')) {
+                $this.DOMInstance.spanOtherLanguage.removeClass('icon-exp-panel').addClass('icon-colp-panel');
+            } else {
+                $this.DOMInstance.spanOtherLanguage.removeClass('icon-colp-panel').addClass('icon-exp-panel');
+            }
+
             $this.DOMInstance.divOtherLanguage.slideToggle('slow');
         });
 

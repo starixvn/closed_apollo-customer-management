@@ -404,6 +404,14 @@ Fanex.ApolloCMS.Message.MessageList = function () {
         });
 
         $("#divOtherLanguageTitle").live('click', function () {
+            var spanOtherLanguage = $('#spanOtherLanguage');
+
+            if (spanOtherLanguage.hasClass('icon-exp-panel')) {
+                spanOtherLanguage.removeClass('icon-exp-panel').addClass('icon-colp-panel');
+            } else {
+                spanOtherLanguage.removeClass('icon-colp-panel').addClass('icon-exp-panel');
+            }
+
             $('#divOtherLanguage').slideToggle('slow');
         });
 
