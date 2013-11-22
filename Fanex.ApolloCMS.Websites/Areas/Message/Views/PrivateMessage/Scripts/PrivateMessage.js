@@ -36,13 +36,13 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
         $this.DOMInstance.chkInformUpline = $('#chkInformUpline');
         $this.DOMInstance.btnAdd = $('#btnAdd');
         $this.DOMInstance.btnSubmit = $('#btnSubmit');
-        $this.DOMInstance.divEnglish = $('#divEnglish');
-        $this.DOMInstance.spnOtherLanguage = $('.other-lag');
+        $this.DOMInstance.divEnglishLabel = $('#divEnglishLabel');
+        $this.DOMInstance.divOtherLanguageTitle = $('#divOtherLanguageTitle');
         $this.DOMInstance.divOtherLanguage = $('#divOtherLanguage');
         $this.DOMInstance.tblMemberListBody = $('#tblMemberList > tbody');
     };
     var initFields = function () {
-        $this.DOMInstance.spnOtherLanguage.bind('click', function () {
+        $this.DOMInstance.divOtherLanguageTitle.bind('click', function () {
             $this.DOMInstance.divOtherLanguage.slideToggle('slow');
         });
 
@@ -69,7 +69,7 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
     };
     var validateMsgForm = function () {
         var contentEnValue = $.trim($this.DOMInstance.txtContentEn.val());
-        var label = $this.DOMInstance.txtContentEn.prev();
+        var label = $this.DOMInstance.divEnglishLabel;
         var isValid = true;
 
         label.tipsy('hide');
@@ -213,8 +213,8 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
         chkInformUpline: null,
         btnAdd: null,
         btnSubmit: null,
-        divEnglish: null,
-        spnOtherLanguage: null,
+        divEnglishLabel: null,
+        divOtherLanguageTitle: null,
         divOtherLanguage: null,
         tblMemberListBody: null
     };

@@ -303,8 +303,6 @@
     <Content Include="Scripts\lib\respond.js" />
     <Content Include="Scripts\lib\tipsy\tipsy-1.0.0.css" />
     <Content Include="Scripts\lib\tipsy\tipsy-1.0.0.js" />
-    <Content Include="Scripts\lib\tipsy\tipsy-1.0.0.min.css" />
-    <Content Include="Scripts\lib\tipsy\tipsy-1.0.0.min.js" />
     <Content Include="Scripts\_Layout.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

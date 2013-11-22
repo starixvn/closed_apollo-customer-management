@@ -44,23 +44,29 @@ var CMS = function ($) {
         showInfoMessage: function (message) {
             CMS.infoMsgBox.showInfo(message, { duration: 3000 });
         },
-        modal: function (title, html) {
+        modal: function (title, html, option) {
             CMS.dialogPopup.html(html).dialog({
                 width: 'auto',
                 modal: true,
-                position: ['center', 160]
+                position: ['center', 160],
+                title: title
             });
 
-            CMS.dialogPopup.dialog('option', { title: title });
+            if (option) {
+                CMS.dialogPopup.dialog('option', option);
+            }
         },
-        popup: function (title, html) {
+        popup: function (title, html, option) {
             CMS.dialogPopup.html(html).dialog({
                 width: 'auto',
                 modal: false,
-                position: ['center', 160]
+                position: ['center', 160],
+                title: title
             });
 
-            CMS.dialogPopup.dialog('option', { title: title });
+            if (option) {
+                CMS.dialogPopup.dialog('option', option);
+            }
         },
         closePopup: function () {
             CMS.dialogPopup.dialog('close');
