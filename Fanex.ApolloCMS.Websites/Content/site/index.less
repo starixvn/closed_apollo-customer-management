@@ -39,14 +39,14 @@ input[type="text"].hasDatepicker {
 .btn {
     padding: 2px 15px 3px;
     .border-radius(2px);
-    background-color: @button-background;
+    background-color: @button-bg;
     border: none;
     color: @button-color;
     font-size: @font-size;
     height: 25px;
 
     &:hover {
-        background-color: @button-background-hover;
+        background-color: @button-bg-hover;
         color: @button-color;
     }
 
@@ -354,7 +354,7 @@ input[type="text"].hasDatepicker {
                     }
 
                     &.active {
-                        background-color: @content-background;
+                        background-color: @content-bg;
                         font-weight: bold;
 
                         a {
@@ -482,8 +482,8 @@ input[type="text"].hasDatepicker {
                 padding-right: 1.4%;
 
                 .btn-link {
-                    background-color: @primary-color;
-                    color: #FFF;
+                    background-color: @second-button-bg;
+                    color: @second-button-color;
                     display: block;
                     height: 26px;
                     padding: 4px 3%;
@@ -494,7 +494,7 @@ input[type="text"].hasDatepicker {
                     font-weight: bold;
 
                     &:hover {
-                        background-color: #4a9cd2;
+                        background-color: @second-button-bg-hover;
                     }
                 }
             }
@@ -573,7 +573,7 @@ input[type="text"].hasDatepicker {
         }
 
         .mainContent {
-            background: @content-background;
+            background: @content-bg;
             height: 100%;
             position: relative;
             overflow: auto;
@@ -687,7 +687,7 @@ input[type="text"].hasDatepicker {
 
                     thead {
                         th {
-                            background-color: @table-header-background;
+                            background-color: @table-header-bg;
                             font-weight: normal;
                             color: @table-header-color;
                             text-align: center;
