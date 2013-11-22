@@ -55,13 +55,13 @@ Fanex.ApolloCMS.Message.MessageList = function () {
     };
 
     var cacheDOMContentElements = function () {
-        _tables.txtContentEn = $("#txtContentEn");
-        _tables.txtContentCh = $("#txtContentCh");
-        _tables.txtContentCs = $("#txtContentCs");
-        _tables.txtContentJp = $("#txtContentJp");
-        _tables.txtContentKo = $("#txtContentKo");
-        _tables.txtContentTh = $("#txtContentTh");
-        _tables.txtContentVn = $("#txtContentVn");
+        _tables.txtContentEn = $("#ContentEn");
+        _tables.txtContentCh = $("#ContentCh");
+        _tables.txtContentCs = $("#ContentCs");
+        _tables.txtContentJp = $("#ContentJp");
+        _tables.txtContentKo = $("#ContentKo");
+        _tables.txtContentTh = $("#ContentTh");
+        _tables.txtContentVn = $("#ContentVn");
     }
 
     self.InitPage = function () {
@@ -107,7 +107,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
 
     var validateForm = function () {
         var contentEnValue = $.trim(_tables.txtContentEn.val());
-        var label = _tables.txtContentEn.prev();
+        var label = _tables.txtContentEn.parent().prev();
         var isValid = true;
 
         label.tipsy('hide');
@@ -327,7 +327,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                 MessageId: _params.getMessageByIdParam.messageId
             }),
             success: function (html) {
-                CMS.modal("Edit Message", html);
+                CMS.modal("Edit Message", html, { position: ['center', 50] });
                 cacheDOMContentElements();
             },
             error: function (xhr, status, err) {
@@ -403,7 +403,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
             }
         });
 
-        $(".other-lag").live('click', function () {
+        $("#divOtherLanguageTitle").live('click', function () {
             $('#divOtherLanguage').slideToggle('slow');
         });
 

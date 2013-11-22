@@ -34,12 +34,12 @@ Fanex.ApolloCMS.Message.PublicMessage = function () {
         $this.DOMInstance.ddlRecipient = $('#Recipient');
         $this.DOMInstance.chkIsSpecialMsg = $('#IsSpecialMsg');
         $this.DOMInstance.btnSubmit = $('#btnSubmit');
-        $this.DOMInstance.divEnglish = $('#divEnglish');
-        $this.DOMInstance.spnOtherLanguage = $('.other-lag');
+        $this.DOMInstance.divEnglishLabel = $('#divEnglishLabel');
+        $this.DOMInstance.divOtherLanguageTitle = $('#divOtherLanguageTitle');
         $this.DOMInstance.divOtherLanguage = $('#divOtherLanguage');
     };
     var initFields = function () {
-        $this.DOMInstance.spnOtherLanguage.bind('click', function () {
+        $this.DOMInstance.divOtherLanguageTitle.bind('click', function () {
             $this.DOMInstance.divOtherLanguage.slideToggle('slow');
         });
 
@@ -52,7 +52,7 @@ Fanex.ApolloCMS.Message.PublicMessage = function () {
     };
     var validateForm = function () {
         var contentEnValue = $.trim($this.DOMInstance.txtContentEn.val());
-        var label = $this.DOMInstance.txtContentEn.prev();
+        var label = $this.DOMInstance.divEnglishLabel;
 
         label.tipsy('hide');
         if (!contentEnValue) {
@@ -131,8 +131,8 @@ Fanex.ApolloCMS.Message.PublicMessage = function () {
         ddlRecipient: null,
         chkIsSpecialMsg: null,
         btnSubmit: null,
-        divEnglish: null,
-        spnOtherLanguage: null,
+        divEnglishLabel: null,
+        divOtherLanguageTitle: null,
         divOtherLanguage: null
     };
     $this.InitPage = function () {
