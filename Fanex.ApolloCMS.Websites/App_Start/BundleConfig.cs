@@ -44,7 +44,7 @@ namespace Fanex.ApolloCMS.Websites
                 "~/content/bootstrap/css/bootstrap.css",
                 "~/content/lib/jquery-ui/jquery-ui-1.9.1.custom.css",
                 "~/content/lib/jquery-ui/jquery.selectBoxIt.css",
-                "~/scripts/lib/msgbox/msgbox-0.0.1.css",            
+                "~/scripts/lib/msgbox/msgbox-0.0.1.css",
                 "~/scripts/lib/tipsy/tipsy-1.0.0.css",
                 "~/content/site/custom.less",
                 "~/content/site/index.less");
@@ -58,6 +58,7 @@ namespace Fanex.ApolloCMS.Websites
             bundles.Add(new ScriptBundle("~/scripts/commonJS").Include(
                 "~/scripts/lib/jQuery/jquery-1.8.2.js",
                 "~/scripts/lib/jQuery/jquery-ui-1.8.24.js",
+                "~/scripts/lib/jQuery/jquery-migrate-1.2.1.js",
                 "~/scripts/lib/jquery/jquery.selectBoxIt.js",
                 "~/scripts/lib/jquery/jquery.cookie.js",
                 "~/content/bootstrap/js/bootstrap.js",

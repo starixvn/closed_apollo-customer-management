@@ -248,6 +248,7 @@
     <None Include="Noesis.Javascript\Noesis.Javascript.x86.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Scripts\lib\jQuery\jquery-migrate-1.2.1.js" />
     <Content Include="Scripts\Validator.js" />
     <Content Include="Scripts\CMS.js" />
     <Content Include="Scripts\lib\Fanex.Grid\Fanex.Grid.css" />

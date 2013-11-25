@@ -73,6 +73,19 @@ var Layout = function ($) {
 } (jQuery);
 
 $(document).ready(function () {
+    // check IE8 and resolution > 993px
+    if ($.browser.msie) {
+        var leftPanel = $('#searchPanel, #leftContent'),
+            rightPanel = $('#rightHeader, #mainContent');
+        if (screen.width > 993) {
+            leftPanel.addClass('width-ie8-20');
+            rightPanel.addClass('width-ie8-80');
+        } else {
+            leftPanel.removeClass('width-ie8-20');
+            rightPanel.removeClass('width-ie8-80');
+        }
+    }
+
     $('select').selectBoxIt();
     // show or hide icon Treeview
     Layout.hideShowIconTreeview();
@@ -85,11 +98,11 @@ $(document).ready(function () {
 
     // collpase or expand left content
     Layout.collapseExpand();
-    
+
     // Set active menu css class
     $('ul.mainMenu > li').on('click', function (event) {
         var $this = $(this);
-        
+
         $.cookie('menu-id', $this.attr('id'), { path: '/' });
     }).each(function () {
         var $this = $(this);
