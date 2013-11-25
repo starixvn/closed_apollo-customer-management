@@ -74,7 +74,8 @@ Fanex.ApolloCMS.Message.MessageList = function () {
         if (content.length > 100) {
             content = content.substring(0, 100) + '...';
         }
-        return content;
+
+        return CMS.htmlToText(content);
     };
 
     self.renderDatePicker = function () {
@@ -107,14 +108,14 @@ Fanex.ApolloCMS.Message.MessageList = function () {
 
     var validateForm = function () {
         var contentEnValue = $.trim(_tables.txtContentEn.val());
-        var label = _tables.txtContentEn.parent().prev();
+        var label = $('label.language-title', '#divEnglishLabel');
         var isValid = true;
 
         label.tipsy('hide');
         if (!contentEnValue) {
             var errorMsg = _tables.txtContentEn.attr('data-val-required');
 
-            Validator.showTooltip(label, errorMsg, 'sw');
+            Validator.showTooltip(label, errorMsg, 'w');
             isValid = false;
         }
         return isValid;

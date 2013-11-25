@@ -119,6 +119,9 @@ var CMS = function ($) {
         htmlDecode: function (value) {
             return $('<div/>').html(value).text();
         },
+        htmlToText: function (value) {
+            return value.replace(/[>]/g, '&gt;').replace(/[<]/g, '&lt;');
+        },
 
         encodeURI: function (str) {
             // ref: https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/encodeURI
