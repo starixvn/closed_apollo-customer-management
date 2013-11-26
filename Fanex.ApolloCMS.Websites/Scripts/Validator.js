@@ -10,7 +10,8 @@ var Validator = function ($) {
             $obj.tipsy(
             {
                 trigger: 'manual',
-                gravity: gravity ? gravity : 's'
+                gravity: gravity ? gravity : 's',
+                opacity: 0.97
             });
             $obj.tipsy('show');
             $obj.focus();

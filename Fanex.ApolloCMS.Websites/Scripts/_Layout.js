@@ -74,9 +74,9 @@ var Layout = function ($) {
 
 $(document).ready(function () {
     // check IE8 and resolution > 993px
-    if ($.browser.msie) {
+    if ($.browser.msie && $.browser.version == '8.0') {
         var leftPanel = $('#searchPanel, #leftContent'),
-            rightPanel = $('#rightHeader, #mainContent');
+            rightPanel = $('#rightHeader, #mainContent'); 
         if (screen.width > 993) {
             leftPanel.addClass('width-ie8-20');
             rightPanel.addClass('width-ie8-80');

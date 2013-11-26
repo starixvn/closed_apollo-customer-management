@@ -533,6 +533,7 @@ input[type="text"].hasDatepicker {
                             border-top: 2px solid @link-color;
                             color: @link-color;
                             font-weight: bold;
+                            padding: 4px 9px 6px;
                         }
                     }
                 }
@@ -755,9 +756,10 @@ input[type="text"].hasDatepicker {
     }
 }
 
-@media (max-width: 750px) {
+@media (max-width: 760px) {
     .container.page {
-        width: 750px;
+        width: 760px;
+        font-size: @font-size - 1 ;
 
         .form-group {
             margin-left: 0;
@@ -785,8 +787,16 @@ input[type="text"].hasDatepicker {
 .eq-ie7, .eq-ie8 {
     .container.page {
         .header {
-            .search .search-container .treeview {
-                margin-left: 1px;
+            .search {
+                .search-container .selType
+                 #ddlMemberTypesSelectBoxItContainer .selectboxit-options {
+                    border: 1px solid @border-color;
+                    border-width: 0 1px 1px;
+                 }
+
+                 .search-container .treeview {
+                    margin-left: 1px;
+                }
             }
 
             .rightHeader {
@@ -800,24 +810,32 @@ input[type="text"].hasDatepicker {
                     border: 1px solid @border-color;
                 }
             }
-
         }
 
         .content {
-            .leftContent .item {
-                height: 35px;
-                min-height: auto;
+            .leftContent {
+
+                .nav-tabs li {
+                    a {
+                        padding: 4px 2px 6px;
+                    }
+
+                    &.active,  &:hover {
+                        a, a:hover, a:focus {
+                            padding: 4px 2px 6px;
+                        }
+                    }
+                }
+
+                .item {
+                    height: 35px;
+                    min-height: auto;
+                }
             }
 
             input[type="text"], input[type="password"] {
                 border: 1px solid #DEDEDE;
             }
-        }
-    }
-
-    @media (max-width: 760px) {
-        .container.page {
-            width: 760px;
         }
     }
 }
