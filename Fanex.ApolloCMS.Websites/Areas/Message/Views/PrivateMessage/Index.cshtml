@@ -12,7 +12,7 @@
     <h5 class="row title">@Labels.NewPrivateMessage</h5>
 }
 
-<div class="panel">
+<div class="panel align-left">
     <div id="divEnglishLabel" class="panel-heading">
         @Html.LabelFor(m => m.ContentEn, Labels.English, new { @class = "language-title" }) <span class="icon-important"></span>
     </div>
@@ -75,7 +75,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-9 filter-form clearfix addMessage">
+    <div class="col-xs-12 col-sm-12 col-md-9 filter-form clearfix addMessage">
         <div class="pull-left">
             @Html.DropDownList("ddlMemberType", (IEnumerable<SelectListItem>)ViewBag.MemberTypes)
         </div>
@@ -95,7 +95,7 @@
         </div>
         <button id="btnAdd" class="btn pull-left btn-add">@ViewLang.Add</button>
     </div>
-    <div class="col-md-9 clearfix">
+    <div class="col-xs-12 col-sm-12 col-md-9 clearfix">
         <table id="tblMemberList" class="table table-bordered tbl">
             <thead>
                 <tr>
