@@ -84,6 +84,7 @@ Fanex.ApolloCMS.Message.PrivateMessage = function () {
             var errorMsg = $this.DOMInstance.txtContentEn.attr('data-val-required');
 
             Validator.showTooltip(label, errorMsg, 'sw');
+            $this.DOMInstance.txtContentEn.focus();
             isValid = false;
         }
 

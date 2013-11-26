@@ -114,13 +114,10 @@ var CMS = function ($) {
             window.open(url, '_blank');
         },
         htmlEncode: function (value) {
-            return $('<div/>').text(value).html();
+            return $('<div/>').text(value).html().replace(/"/g, "&quot;");
         },
         htmlDecode: function (value) {
             return $('<div/>').html(value).text();
-        },
-        htmlToText: function (value) {
-            return value.replace(/[>]/g, '&gt;').replace(/[<]/g, '&lt;');
         },
 
         encodeURI: function (str) {

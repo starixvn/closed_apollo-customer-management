@@ -65,9 +65,7 @@ Fanex.ApolloCMS.Message.PublicMessage = function () {
         if (!contentEnValue) {
             var errorMsg = $this.DOMInstance.txtContentEn.attr('data-val-required');
 
-            label.attr('title', errorMsg);
-            label.tipsy({ trigger: 'manual', gravity: 'sw' });
-            label.tipsy('show');
+            Validator.showTooltip(label, errorMsg, 'sw');
             $this.DOMInstance.txtContentEn.focus();
 
             return false;

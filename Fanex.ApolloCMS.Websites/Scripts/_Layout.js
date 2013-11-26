@@ -24,6 +24,7 @@ var Layout = function ($) {
                         collapseExpand.attr('title', 'Collapse');
                         mainContent.removeClass().addClass('col-xs-9 col-sm-9 col-md-10 mainContent');
                         localStorage.setItem('isCollapse', 'true');
+                        Layout.fixLaftPanelWidthForIE();
                     });
                 }
             });
@@ -34,6 +35,20 @@ var Layout = function ($) {
                 collapseExpand.removeClass('icon-collapse').addClass('icon-expand');
                 collapseExpand.attr('title', 'Expand');
                 mainContent.removeClass().addClass('col-xs-12 col-sm-12 col-md-12 mainContent');
+            }
+        },
+        fixLaftPanelWidthForIE: function () {
+            // check IE8 and resolution > 993px
+            if ($.browser.msie && $.browser.version == '8.0') {
+                var leftPanel = $('#searchPanel, #leftContent'),
+                    rightPanel = $('#rightHeader, #mainContent'); 
+                if (screen.width > 993) {
+                    leftPanel.addClass('width-ie8-20');
+                    rightPanel.addClass('width-ie8-80');
+                } else {
+                    leftPanel.removeClass('width-ie8-20');
+                    rightPanel.removeClass('width-ie8-80');
+                }
             }
         },
         hideShowIconTreeview: function () {
@@ -73,18 +88,7 @@ var Layout = function ($) {
 } (jQuery);
 
 $(document).ready(function () {
-    // check IE8 and resolution > 993px
-    if ($.browser.msie && $.browser.version == '8.0') {
-        var leftPanel = $('#searchPanel, #leftContent'),
-            rightPanel = $('#rightHeader, #mainContent'); 
-        if (screen.width > 993) {
-            leftPanel.addClass('width-ie8-20');
-            rightPanel.addClass('width-ie8-80');
-        } else {
-            leftPanel.removeClass('width-ie8-20');
-            rightPanel.removeClass('width-ie8-80');
-        }
-    }
+    Layout.fixLaftPanelWidthForIE();
 
     $('select').selectBoxIt();
     // show or hide icon Treeview

@@ -75,7 +75,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
             content = content.substring(0, 100) + '...';
         }
 
-        return CMS.htmlToText(content);
+        return CMS.htmlEncode(content);
     };
 
     self.renderDatePicker = function () {
@@ -185,7 +185,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
             columns = [
                     { HeaderText: postedDate, Width: 150, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: messageEnglish, Width: 300, Name: "MessageContent", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell) {
-                        return '<div class="editBtn icon-edit" title="Edit" onclick="editMessage(' + currentCell.Value.MessageId + ')"></div><div class="messageContent" title="' + currentCell.Value.ContentEn + '">' + getSubMessageContent(currentCell.Value.ContentEn) + '</div><div class="clear"></div>';
+                        return '<div class="editBtn icon-edit" title="Edit" onclick="editMessage(' + currentCell.Value.MessageId + ')"></div><div class="messageContent" title="' + CMS.htmlEncode(currentCell.Value.ContentEn) + '">' + getSubMessageContent(currentCell.Value.ContentEn) + '</div><div class="clear"></div>';
                     }
                     },
                     { HeaderText: messageType, Width: 60, Name: "MessageType", HeaderAlign: "center", CellAlign: "center" },
