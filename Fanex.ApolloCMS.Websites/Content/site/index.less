@@ -447,6 +447,7 @@ input[type="text"] {
         left: 0;
         right: 0;
         bottom: 0;
+        background: @content-bg;
 
         .leftContent {
             background: #f3f6f6;
@@ -585,7 +586,6 @@ input[type="text"] {
         }
 
         .mainContent {
-            background: @content-bg;
             height: 100%;
             position: relative;
             overflow: auto;
@@ -837,7 +837,6 @@ input[type="text"] {
                 .tab-content .super-menu li .icon-row-right {
                     margin-top: 5px;
                 }
-
             }
 
             input[type="text"], input[type="password"] {
@@ -850,6 +849,12 @@ input[type="text"] {
         .container.page {
             width: 800px;
         }
+    }
+}
+
+.eq-ie10 {
+    .container.page .content {
+        padding-bottom: 15px;
     }
 }
 
