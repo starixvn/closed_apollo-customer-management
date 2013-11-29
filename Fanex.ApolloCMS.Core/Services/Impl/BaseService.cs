@@ -9,8 +9,9 @@
 
 namespace Fanex.ApolloCMS.Core.Services.Impl
 {
+    using System;
+    using System.Collections;
     using System.Collections.Generic;
-    using Fanex.ApolloCMS.Core.Repositories;
     using Fanex.ApolloCMS.Core.Services.Interface;
     using Fanex.Common.Helper;
     using Fanex.Data;
@@ -19,7 +20,7 @@ namespace Fanex.ApolloCMS.Core.Services.Impl
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class BaseService : BaseRepository, IBaseService
+    public class BaseService : IBaseService
     {
         protected readonly IDynamicRepository DynamicRepository;
 
@@ -91,6 +92,23 @@ namespace Fanex.ApolloCMS.Core.Services.Impl
 
                 return GetCommandResult(param);
             }
+        }
+
+        /// <summary>
+        /// Gets the command result.
+        /// </summary>
+        /// <param name="hash">The hash table.</param>
+        /// <returns>CommandResult object contains error code and error message.</returns>
+        private CommandResult GetCommandResult(Hashtable hash)
+        {
+            var errCode = hash["errcode"];
+            var errMsg = hash["errmsg"];
+
+            return new CommandResult
+            {
+                Code = (errCode is DBNull) ? 0 : Convert.ToInt32(errCode),
+                Message = (errMsg is DBNull) ? string.Empty : Convert.ToString(errMsg)
+            };
         }
     }
 }
