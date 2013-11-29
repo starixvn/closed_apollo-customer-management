@@ -26,6 +26,11 @@ namespace Fanex.ApolloCMS.Websites
         public static void RegisterBundles(BundleCollection bundles)
         {
             RegisterCommonBundles(bundles);
+            RegisterLoginBundles(bundles);
+            RegisterMessageListBundles(bundles);
+            RegisterNewMessageBundles(bundles);
+
+            bundles.FileSetOrderList.Clear();
         }
 
         /// <summary>
@@ -35,27 +40,98 @@ namespace Fanex.ApolloCMS.Websites
         private static void RegisterCommonBundles(BundleCollection bundles)
         {
             bundles.AddAndInclude(
-                "~/site/layout",
+                "~/site/common",
                 "~/content/bootstrap/css/bootstrap.css",
-                "~/content/bootstrap/css/bootstrap-ie7.css",
-                "~/content/themes/jquery-ui/jquery-ui-1.9.1.custom.css",
-                "~/content/themes/jquery-ui/jquery.selectBoxIt.css",
-                "~/content/site/layout.less");
+                "~/content/lib/jquery-ui/jquery-ui-1.9.1.custom.css",
+                "~/content/lib/jquery-ui/jquery.selectBoxIt.css",
+                "~/scripts/lib/msgbox/msgbox-0.0.1.css",
+                "~/scripts/lib/tipsy/tipsy-1.0.0.css",
+                "~/content/site/custom.less",
+                "~/content/site/index.less");
 
             bundles.Add(new ScriptBundle("~/scripts/headjs").Include(
                 "~/scripts/lib/html5-libs/head.js"));
 
+            bundles.Add(new ScriptBundle("~/scripts/repondjs").Include(
+                "~/scripts/lib/respond.js"));
+
             bundles.Add(new ScriptBundle("~/scripts/commonJS").Include(
                 "~/scripts/lib/jQuery/jquery-1.8.2.js",
-                "~/scripts/lib/jQuery/jquery.easing.1.3.js",
                 "~/scripts/lib/jQuery/jquery-ui-1.8.24.js",
-                "~/scripts/lib/jQuery/jquery.unobtrusive-ajax.js",
+                "~/scripts/lib/jQuery/jquery-migrate-1.2.1.js",
+                "~/scripts/lib/jquery/jquery.selectBoxIt.js",
+                "~/scripts/lib/jquery/jquery.cookie.js",
+                "~/content/bootstrap/js/bootstrap.js",
+                "~/scripts/lib/msgbox/msgbox-0.0.1.js",
+                "~/scripts/lib/tipsy/tipsy-1.0.0.js",
+                "~/scripts/lib/namespace.js",
+                "~/scripts/_layout.js",
+                "~/scripts/cms.js"));
+        }
+
+        /// <summary>
+        /// Registers bundles for login page.
+        /// </summary>
+        /// <param name="bundles">The bundle collection.</param>
+        private static void RegisterLoginBundles(BundleCollection bundles)
+        {
+            bundles.AddAndInclude(
+                "~/site/login",
+                "~/Areas/UserLogin/themes/login.less");
+
+            bundles.Add(new ScriptBundle("~/scripts/loginJS").Include(
+                "~/scripts/lib/jQuery/jquery-1.8.2.js",
                 "~/scripts/lib/jQuery/jquery.validate*",
-                "~/scripts/lib/jQuery/jquery.selectBoxIt.js",
                 "~/scripts/lib/jQuery/jquery.cookie.js",
                 "~/content/bootstrap/js/bootstrap.js",
-                "~/scripts/lib/respond.js",
-                "~/scripts/_layout.js"));
+                "~/Areas/UserLogin/scripts/login.js"));
+            bundles.FileSetOrderList.Clear();
+        }
+
+        /// <summary>
+        /// Registers bundles for message list function.
+        /// </summary>
+        /// <param name="bundles">The bundles collection.</param>
+        private static void RegisterMessageListBundles(BundleCollection bundles)
+        {
+            bundles.AddAndInclude(
+                "~/site/messageList",
+                "~/content/site/customFanexGrid.less",
+                "~/areas/message/resources/messagelist/message.less");
+
+            bundles.Add(new ScriptBundle("~/scripts/messageList").Include(
+                "~/Scripts/Validator.js",
+                "~/Areas/Message/Views/MessageList/Scripts/MessageList.js"));
+
+            bundles.AddAndInclude(
+                 "~/styles/fanexGrid",
+                 "~/scripts/lib/Fanex.Grid/Fanex.Grid.css",
+                 "~/scripts/lib/Fanex.Grid/Fanex.Pagination.css");
+
+            bundles.Add(new ScriptBundle("~/scripts/fanexGrid").Include(
+                "~/scripts/lib/Fanex.Grid/Fanex.Grid.js",
+                "~/scripts/lib/Fanex.Grid/Fanex.Pagination.js",
+                "~/scripts/lib/Fanex.Grid/moment.js",
+                "~/scripts/lib/Fanex.Grid/numeral.js"));
+        }
+
+        /// <summary>
+        /// Registers bundles for new message page.
+        /// </summary>
+        /// <param name="bundles">The bundle collection.</param>
+        private static void RegisterNewMessageBundles(BundleCollection bundles)
+        {
+            bundles.AddAndInclude(
+                "~/site/newMessage",
+                "~/areas/message/resources/newmessage/newMessage.less");
+
+            bundles.Add(new ScriptBundle("~/scripts/newPrivateMessage").Include(
+                "~/Scripts/Validator.js",
+                "~/Areas/Message/Views/PrivateMessage/Scripts/PrivateMessage.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/newPublicMessage").Include(
+                "~/Scripts/Validator.js",
+                "~/Areas/Message/Views/PublicMessage/Scripts/PublicMessage.js"));
         }
     }
 

@@ -20,6 +20,13 @@
           transition: @transition;
 }
 
+// Box-sizing
+.box-sizing(@content) {
+    box-sizing: @content;
+    -moz-box-sizing: @content; /* Firefox */
+    -webkit-box-sizing: @content;
+}
+
 // Gradients
 #gradient {
   .horizontal(@startColor: #555, @endColor: #333) {

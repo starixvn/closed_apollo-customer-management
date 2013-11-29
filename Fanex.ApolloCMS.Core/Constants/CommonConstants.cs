@@ -32,7 +32,6 @@ namespace Fanex.ApolloCMS.Core.Constants
         public const string CurrentUserMenu = "Fanex.ApolloCMS.Core.Contants.AppSession.CurrentUserMenu";
         public const string CurrentUserRoleAcess = "Fanex.ApolloCMS.Core.Contants.AppSession.CurrentUserRoleAccess";
         public const string CurrentWorkingOnMenu = "Fanex.ApolloCMS.Core.Contants.AppSession.CurrentWorkingOnMenu";
-        public const string IsTackedMenu = "Fanex.ApolloCMS.Core.Contants.AppSession.IsTrackedMenu";
         public const string CurrentActionName = "Fanex.ApolloCMS.Core.Contants.AppSession.CurrentActionName";
     }
 }

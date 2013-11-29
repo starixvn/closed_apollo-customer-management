@@ -1,0 +1,90 @@
+﻿.container.page .content .mainContent .container-content {
+    .display-none {
+        display: none;
+    }
+    
+    .clear {
+        clear:both;
+    }
+
+    .filter-form {
+        width: 862px;
+
+        &.message-list {
+            padding-bottom: 0;
+        }
+
+        .filter-row  .filter-item {
+            .selectboxit-container {
+                .selectboxit-options {
+                    min-width: 90px !important;
+                }
+            }
+        }
+    }
+
+    .topMessage, .messageType, .sel-special {
+        width: 90px !important;
+    }
+    
+    .gridMessageContainer {
+        margin-top: 10px;
+        clear: both;
+        width: 100%;
+        
+        .grid-container.container {
+            padding:0;
+        }
+
+        .editBtn {
+            margin: 0 5px;
+        }
+    }
+}
+
+ .ui-dialog {
+    min-width: 800px;
+
+    .ui-dialog-content {
+        max-height: 700px;
+        min-width: 800px;
+    }
+}
+
+/* FANEX Grid */
+
+.freegrid {
+
+    .column-truncate {
+        white-space: normal;
+    }
+
+    .messageContent {
+        float: right;
+        max-width: 271px;
+        width: 271px !important;
+        word-wrap: break-word;
+    }
+
+    .userContent {
+        float: right;
+        max-width: 80px;
+        width: 80px !important;
+        word-wrap: break-word;
+    }
+
+    .icon-remove {
+        float: none;
+        margin: auto;
+    }
+}
+
+@media (max-width: 992px) {
+    .container.page {
+        .content .mainContent .container-content {
+            .filter-form.message-list {
+                width: 720px;
+            }
+        }
+    }
+}

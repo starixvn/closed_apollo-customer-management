@@ -1,0 +1,30 @@
+@import "variables.less";
+@import "mixins.less";
+
+/* FANEX GRID */
+.freegrid {
+    border-color: @table-border;
+    font-size: @font-size;
+    .box-sizing(content-box);
+
+    *, *:before, *:after {
+       .box-sizing(content-box);
+    }
+
+    .free-top-left table thead th, .col_header table thead th {
+        background: @table-header-bg;
+        border-color: @table-header-border;
+        color: @table-header-color;
+        font-weight: normal;
+    }
+
+    td, .grid-fixed-table td {
+        border-color: @table-border;
+        color: @table-text-color;
+    }
+
+    .no-data-not-frozen {
+        color: @table-text-color;
+        font-weight: normal;
+    }
+}

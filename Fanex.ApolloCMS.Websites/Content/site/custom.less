@@ -1,0 +1,240 @@
+@import "variables.less";
+@import "mixins.less";
+
+/* Icon */
+.icon {
+    background: url(img/icons.png) no-repeat;
+    width: 15px;
+    height: 20px;
+    float: left;
+    cursor: pointer;
+}
+
+.icon-row-down {
+    .icon;
+    background-position: 2px 0;
+}
+
+/* dropdown list */
+.selectboxit-container {
+
+    * {
+        font-size: @font-size;
+    }
+    .selectboxit {
+        .border-radius(0);
+        border: none;
+        background: #fff;
+        margin-right: 2px;
+    }
+
+    span, .selectboxit-options a {
+        height: 26px;
+        line-height: 24px;
+    }
+
+    .selectboxit-options {
+        .box-shadow(-1px 3px 2px #ccc);
+        border: none;
+    }
+
+    .selectboxit-options, .selectboxit-option-first, .selectboxit-option-last {
+        .border-radius(0);
+    }
+
+    .selectboxit-text {
+        color: @primary-color;
+        font-size: @font-size + 1;
+        width: 55px;
+    }
+
+    .selectboxit .selectboxit-arrow-container .selectboxit-arrow {
+        .icon-row-down;
+        border: none;
+        top: 33%;
+        height: 8px;
+    }
+    .selectboxit-btn.selectboxit-enabled:hover,
+    .selectboxit-btn.selectboxit-enabled:focus,
+    .selectboxit-btn.selectboxit-enabled:active {
+        background: #fff;
+        color: @primary-color;
+    }
+
+    .selectboxit-list > .selectboxit-focus > .selectboxit-option-anchor {
+        background: @primary-color;
+    }
+
+    .selectboxit-arrow-container {
+        width: 20px;
+    }
+}
+
+.container.page .header .search .search-container .selectboxit-options li {
+    display: block;
+    border-color: @border-color;
+}
+
+.selectboxit .selectboxit-option-icon-container {
+    margin-left: 3px;
+}
+
+/* Calendar */
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+    .border-radius(2px);
+}
+
+.ui-datepicker {
+    padding: 0;
+    width: 16em;
+
+    select.ui-datepicker-month, select.ui-datepicker-year {
+        height: 18px;
+        margin: 0 5px;
+        padding: 0;
+    }
+
+    .ui-widget-header {
+        background: @primary-color;
+        border: 0;
+        font-size: @font-size - 1;
+        padding: 5px 0;
+        .border-radius(2px 2px 0 0);
+    }
+
+    .ui-datepicker-title {
+        span {
+            font-weight: normal;
+            font-size: @font-size + 1;
+        }
+    }
+
+    table {
+        margin: 2%;
+        width: 96%;
+    }
+
+    th {
+        color: @primary-color;
+        font-weight: normal;
+    }
+
+    .ui-datepicker-next span {
+        background: url(img/icon-row-right.png) no-repeat center;
+    }
+
+    .ui-datepicker-prev span {
+        background: url(img/icon-row-left.png) no-repeat center;
+    }
+
+    .ui-datepicker-prev, .ui-datepicker-next {
+        top: 5px;
+    }
+
+    .ui-datepicker-prev-hover {
+        left: 2px;
+    }
+
+    .ui-datepicker-next-hover {
+        right: 2px;
+    }
+    .ui-state-hover, .ui-widget-content .ui-state-hover,
+    .ui-widget-header .ui-state-hover, .ui-state-focus,
+    .ui-widget-content .ui-state-focus,
+    .ui-widget-header .ui-state-focus {
+        background: none;
+        cursor: pointer;
+        opacity: 0.8;
+    }
+}
+
+.ui-widget-content {
+    background: #fafafa;
+    border-color: @border-color;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+    text-align: center;
+    background: none;
+    border: 0;
+    color: #505050;
+    .border-radius(2px);
+}
+
+.ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled {
+    color: #bfbfbf;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight,
+.ui-widget-header .ui-state-highlight {
+    background: #bbb;
+    text-align: center;
+    color: #fff;
+    border: 0;
+}
+
+.ui-state-default.ui-state-active {
+    background: #9FCFEE;
+    color: #fff;
+}
+
+/* Poup */
+
+.ui-widget-header {
+    background: none repeat scroll 0 0 @primary-color;
+    border: 1px solid #fff;
+}
+
+.ui-dialog .ui-dialog-content {
+    background-color: #F5F9FB;
+}
+
+/* Message info */
+
+.msgbox .msgbox-close {
+    background-position: -1px -35px;
+    border-radius: 0;
+    cursor: pointer;
+    border-width: 1px;
+    height: 14px;
+    right: 8px;
+    top: 11px;
+    width: 14px;
+
+    &:hover {
+         background-position: -1px -35px;
+         background-color: #ccc;
+    }
+}
+
+
+/* Tooltip */
+.tipsy {
+    z-index: 198;
+
+    .tipsy-inner {
+        background-color: @toolip-bg;
+        padding: 3px 8px 6px;
+        white-space: nowrap;
+        width: auto;
+        display: table;
+    }
+
+    .tipsy-arrow-s {
+        border-top-color: @toolip-bg;
+    }
+
+    .tipsy-arrow-w {
+        border-right-color: @toolip-bg;
+    }
+
+    .tipsy-arrow-e {
+        border-left-color: @toolip-bg;
+    }
+
+    tipsy-arrow-n {
+        border-bottom-color: @toolip-bg;
+    }
+}

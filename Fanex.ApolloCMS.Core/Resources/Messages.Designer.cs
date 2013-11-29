@@ -97,6 +97,24 @@ namespace Fanex.ApolloCMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to [To] value must be greater than or equal to [From].
+        /// </summary>
+        public static string DateRangeError {
+            get {
+                return ResourceManager.GetString("DateRangeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username is already exists!.
+        /// </summary>
+        public static string ExistingUserNameError {
+            get {
+                return ResourceManager.GetString("ExistingUserNameError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry, an error occurred while processing your request, please notify the administrators..
         /// </summary>
         public static string InternalError {
@@ -106,11 +124,29 @@ namespace Fanex.ApolloCMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid date!.
+        /// </summary>
+        public static string InvalidDateError {
+            get {
+                return ResourceManager.GetString("InvalidDateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid email..
         /// </summary>
         public static string InvalidEmail {
             get {
                 return ResourceManager.GetString("InvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid username!.
+        /// </summary>
+        public static string InvalidUserName {
+            get {
+                return ResourceManager.GetString("InvalidUserName", resourceCulture);
             }
         }
         
@@ -156,6 +192,51 @@ namespace Fanex.ApolloCMS.Core.Resources {
         public static string PasswordMinLengthError {
             get {
                 return ResourceManager.GetString("PasswordMinLengthError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The message has been posted successfully!.
+        /// </summary>
+        public static string PostMessageSuccessfully {
+            get {
+                return ResourceManager.GetString("PostMessageSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This field is required!.
+        /// </summary>
+        public static string RequiredFieldError {
+            get {
+                return ResourceManager.GetString("RequiredFieldError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At least one customer is required!.
+        /// </summary>
+        public static string RequiredMemberError {
+            get {
+                return ResourceManager.GetString("RequiredMemberError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resources not found!.
+        /// </summary>
+        public static string ResourceNotFoundError {
+            get {
+                return ResourceManager.GetString("ResourceNotFoundError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unauthorized request rejected!.
+        /// </summary>
+        public static string UnAuthorizedRequestError {
+            get {
+                return ResourceManager.GetString("UnAuthorizedRequestError", resourceCulture);
             }
         }
         

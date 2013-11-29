@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    @Styles.Render("~/styles/fanexGrid")
+    @Styles.Render("~/site/messageList")
+    @Styles.Render("~/site/newMessage")
+}
+@section HeadLine {
+    <h5 class="row title">@Labels.MessageList</h5>
+}
+<div class="row filter-form clearfix message-list" id="message-list">
+    <div class="filter-row clearfix">
+        <div class="filter-item">
+            <div class="lbl lbl-large">
+                <label>@Labels.TopNewMessages</label>
+            </div>
+            <div class="txt width-auto">
+                <select id="ddlTopNewMessage" class="topMessage">
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                    <option value="500">500</option>
+                </select>
+            </div>
+        </div>
+        <div class="filter-item">
+            <div class="lbl lbl-small">
+                <label>@Labels.From</label>
+            </div>
+            <div class="txt width-auto">
+                <input type="text" id="dateFrom" data-val-required="@Messages.RequiredFieldError" data-val-date="@Messages.InvalidDateError" data-val-date-from="@string.Empty"/>
+            </div>
+        </div>
+        <div class="filter-item dateTo">
+            <div class="lbl width-auto">
+                <label>@Labels.To</label>
+            </div>
+            <div class="txt width-auto">
+                <input type="text" id="dateTo" data-val-required="@Messages.RequiredFieldError" data-val-date="@Messages.InvalidDateError" data-val-date-to="@Messages.DateRangeError"/>
+            </div>
+        </div>
+        
+    </div>
+    <div class="filter-row clearfix">
+        <div class="filter-item">
+            <div class="lbl lbl-large">
+                <label>@Labels.MessageType</label>
+            </div>
+            <div class="txt width-auto">
+                <select id="ddlMessageType" class="messageType">
+                    <option value="All">@Labels.AllTypes</option>
+                    <option value="3">@Labels.Public</option>
+                    <option value="1">@Labels.Private</option>
+                </select>
+            </div>
+        </div>
+        <div class="filter-item">
+            <div class="lbl lbl-small">
+                <label>@Labels.Special</label>
+            </div>
+            <div class="txt width-auto">
+                <select id="ddlSpecial" class="sel-special">
+                    <option value="All">@Labels.All</option>
+                    <option value="1">@Labels.Yes</option>
+                    <option value="0">@Labels.No</option>
+                </select>
+            </div>
+        </div>
+        <div class="filter-item">
+            <input id="btnGetListMessage" type="button" class="btn btn-default btn-submit" value="@Labels.Submit"/>
+        </div>
+    </div>
+</div>
+
+<div class="row gridMessageContainer display-none content-grid width-100percent" id="gridMessageContainer">
+    <div class="gridMessage freegrid" id="gridMessage"></div>
+</div>
+<div id="editMessageContent"></div>
+@section Foot {
+    @Scripts.Render("~/scripts/fanexGrid")
+    @Scripts.Render("~/scripts/messageList")
+    <script type="text/javascript">
+        var publicMessage = '@Labels.Public';
+        var privateMessage = '@Labels.Private';
+        var messageIsSpecial = '@Labels.Yes';
+        var messageNotSpecial = '@Labels.No';
+        var postedDate = '@Labels.PostedDate';
+        var messageEnglish = '@Labels.MessageEnglish';
+        var messageType = '@Labels.Type';
+        var isSpecial = '@Labels.IsSpecical';
+        var creator = '@Labels.Creator';
+        var recipient = '@Labels.Recipient';
+        var remove = '@Labels.Remove';
+        var updateSuccessInform = '@Labels.UpdateMessageSuccessInform';
+        var removeMessageConfirm = '@Labels.RemoveMessageConfirm';
+        var today = '@DateTime.Now.ToShortDateString()';
+        var minDate = '@ViewBag.MinDate';
+        var hasHostRight = '@ViewBag.HasHostRight' == 'True';
+        var isRedirected = '@ViewBag.IsRedirected' == 'True';
+    </script>
+}
+
