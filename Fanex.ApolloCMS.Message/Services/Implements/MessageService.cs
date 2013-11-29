@@ -9,32 +9,20 @@
 
 namespace Fanex.ApolloCMS.Message.Services.Implements
 {
-    using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
+    using Fanex.ApolloCMS.Core.Services.Impl;
     using Fanex.ApolloCMS.Message.Criteria.MessageList;
     using Fanex.ApolloCMS.Message.Models.MessageList;
-    using Fanex.ApolloCMS.Message.Repositories.Implements;
-    using Fanex.ApolloCMS.Message.Repositories.Interfaces;
     using Fanex.ApolloCMS.Message.Services.Interfaces;
     using Fanex.Common;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// Message services.
     /// </summary>
-    public class MessageService : IMessageService
+    public class MessageService : BaseService, IMessageService
     {
-        private IMessageRepository _messageRepository;
-
-        public MessageService()
-            : this(null)
-        {
-        }
-
-        public MessageService(IMessageRepository messageRepository)
-        {
-            this._messageRepository = messageRepository ?? new MessageRepository();
-        }
-
         /// <summary>
         /// Gets the list message.
         /// </summary>
@@ -42,7 +30,7 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
         /// <returns>List message.</returns>
         public List<Message> GetListMessage(GetMessageListCriteria getMessageListCriteria)
         {
-            var result = new List<Message>();
+            IEnumerable<Message> result = null;
 
             if (Converter.ToString2(getMessageListCriteria.MsgType) == "All")
             {
@@ -56,9 +44,9 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
 
             getMessageListCriteria.ToDate = getMessageListCriteria.ToDate.AddDays(1).AddMilliseconds(-1);
 
-            result = _messageRepository.GetListMessage(getMessageListCriteria);
+            result = GetListData<Message>(getMessageListCriteria);
 
-            return result;
+            return result.ToList();
         }
 
         /// <summary>
@@ -69,7 +57,7 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
         public Message GetMessageById(GetMessageByIdCriteria getMessageByIdCriteria)
         {
             var result = new Message();
-            result = this._messageRepository.GetMessageById(getMessageByIdCriteria);
+            result = GetData<Message>(getMessageByIdCriteria);
             return result;
         }
 
@@ -77,18 +65,20 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
         /// Updates the message.
         /// </summary>
         /// <param name="updateMessageCriteria">The update message criteria.</param>
-        public void UpdateMessage(UpdateMessageCriteria updateMessageCriteria)
+        /// <returns>The query result.</returns>
+        public ICommandResult UpdateMessage(UpdateMessageCriteria updateMessageCriteria)
         {
-            this._messageRepository.UpdateMessage(updateMessageCriteria);
+            return UpdateData(updateMessageCriteria);
         }
 
         /// <summary>
         /// Deletes the message.
         /// </summary>
         /// <param name="deleteMessageCriteria">The delete message criteria.</param>
-        public void DeleteMessage(DeleteMessageCriteria deleteMessageCriteria)
+        /// <returns>The query result.</returns>
+        public ICommandResult DeleteMessage(DeleteMessageCriteria deleteMessageCriteria)
         {
-            this._messageRepository.DeleteMessage(deleteMessageCriteria);
+            return UpdateData(deleteMessageCriteria);
         }
     }
 }

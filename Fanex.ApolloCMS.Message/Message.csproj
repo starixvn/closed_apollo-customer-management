@@ -85,10 +85,6 @@
     <Compile Include="Models\NewMessage\Site.cs" />
     <Compile Include="Models\NewMessage\Upline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Implements\MessageRepository.cs" />
-    <Compile Include="Repositories\Implements\NewMessageRepository.cs" />
-    <Compile Include="Repositories\Interfaces\IMessageRepository.cs" />
-    <Compile Include="Repositories\Interfaces\INewMessageRepository.cs" />
     <Compile Include="Resources\Labels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

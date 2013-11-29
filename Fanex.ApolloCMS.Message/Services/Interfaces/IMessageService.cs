@@ -13,6 +13,7 @@ namespace Fanex.ApolloCMS.Message.Services.Interfaces
     using System.Collections.Generic;
     using Fanex.ApolloCMS.Message.Criteria.MessageList;
     using Fanex.ApolloCMS.Message.Models.MessageList;
+    using Fanex.NAP.Framework.Data;
 
     public interface IMessageService
     {
@@ -20,8 +21,8 @@ namespace Fanex.ApolloCMS.Message.Services.Interfaces
 
         Message GetMessageById(GetMessageByIdCriteria getMessageByIdCriteria);
 
-        void UpdateMessage(UpdateMessageCriteria updateMessageCriteria);
+        ICommandResult UpdateMessage(UpdateMessageCriteria updateMessageCriteria);
 
-        void DeleteMessage(DeleteMessageCriteria deleteMessageCriteria);
+        ICommandResult DeleteMessage(DeleteMessageCriteria deleteMessageCriteria);
     }
 }

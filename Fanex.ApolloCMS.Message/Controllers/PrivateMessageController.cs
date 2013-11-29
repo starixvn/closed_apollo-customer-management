@@ -37,7 +37,7 @@ namespace Fanex.ApolloCMS.Message.Controllers
 
         public PrivateMessageController(INewMessageService newMessageService)
         {
-            this._newMessageService = newMessageService ?? new NewMessageService { ServiceContext = this.ServiceContext };
+            this._newMessageService = newMessageService ?? new NewMessageService();
         }
 
         /// <summary>

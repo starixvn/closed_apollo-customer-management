@@ -17,7 +17,7 @@ namespace Fanex.ApolloCMS.Core.Services
     /// <summary>
     /// Menu Service.
     /// </summary>
-    public class MenuService : BaseService
+    public class MenuService
     {
         public const char UrlSeparator = '/';
 

@@ -101,8 +101,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ViewLang.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\CacheRef.cs" />
+    <Compile Include="Services\Impl\BaseService.cs" />
+    <Compile Include="Services\Interface\IBaseService.cs" />
     <Compile Include="Services\MenuService.cs" />
     <Compile Include="Web\ApolloCMSFunctionKeys.cs">
       <AutoGen>True</AutoGen>
@@ -133,6 +134,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
