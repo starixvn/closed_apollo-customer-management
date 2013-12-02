@@ -101,8 +101,8 @@
       <DependentUpon>ViewLang.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\CacheRef.cs" />
-    <Compile Include="Services\Impl\BaseService.cs" />
-    <Compile Include="Services\Interface\IBaseService.cs" />
+    <Compile Include="Services\Implements\BaseService.cs" />
+    <Compile Include="Services\Interfaces\IBaseService.cs" />
     <Compile Include="Services\MenuService.cs" />
     <Compile Include="Web\ApolloCMSFunctionKeys.cs">
       <AutoGen>True</AutoGen>

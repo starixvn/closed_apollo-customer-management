@@ -7,18 +7,18 @@
 //   <change who="Franklin.Nguyen" date="2013.11.29">Created</change>
 // </history>
 
-namespace Fanex.ApolloCMS.Core.Services.Impl
+namespace Fanex.ApolloCMS.Core.Services.Implements
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using Fanex.ApolloCMS.Core.Services.Interface;
+    using Fanex.ApolloCMS.Core.Services.Interfaces;
     using Fanex.Common.Helper;
     using Fanex.Data;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Base Service.
     /// </summary>
     public class BaseService : IBaseService
     {
