@@ -50,13 +50,5 @@ namespace Fanex.ApolloCMS.Message.Models.MessageList
         public string Recipient { get; set; }
 
         public int MessageId { get; set; }
-
-        public string PostDate
-        {
-            get
-            {
-                return PostTime.ToString();
-            }
-        }
     }
 }

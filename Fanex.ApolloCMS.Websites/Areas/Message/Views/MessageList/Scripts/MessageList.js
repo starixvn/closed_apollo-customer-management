@@ -194,7 +194,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
 
         if (hasHostRight) {
             columns = [
-                    { HeaderText: postedDate, Width: 150, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center" },
+                    { HeaderText: postedDate, Width: 150, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: CMS.commonConstants.MomentDateTimeFormat },
                     { HeaderText: messageEnglish, Width: 300, Name: "MessageContent", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell) {
                         return '<div class="editBtn icon-edit" title="Edit" onclick="editMessage(' + currentCell.Value.MessageId + ')"></div><div class="messageContent" title="' + CMS.htmlEncode(currentCell.Value.ContentEn) + '">' + getSubMessageContent(currentCell.Value.ContentEn) + '</div><div class="clear"></div>';
                     }
@@ -219,7 +219,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                 ];
         } else {
             columns = [
-                { HeaderText: postedDate, Width: 150, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: postedDate, Width: 150, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: CMS.commonConstants.MomentDateTimeFormat },
                 { HeaderText: messageEnglish, Width: 300, Name: "MessageContent", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell) {
                     return '<div class="messageContent" title="' + currentCell.Value.ContentEn + '">' + getSubMessageContent(currentCell.Value.ContentEn) + '</div>';
                 }
@@ -270,7 +270,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                     if (currentGroupId != currentMessage.MessageId) {
                         currentGroupId = currentMessage.MessageId;
                         row.push(
-                        { Name: "PostedDate", Value: currentMessage.PostDate, MergeRowNumber: currentMessage.NumOfElems },
+                        { Name: "PostedDate", Value: currentMessage.PostTime, MergeRowNumber: currentMessage.NumOfElems },
                         { Name: "MessageContent", Value: currentMessage, MergeRowNumber: currentMessage.NumOfElems },
                         { Name: "MessageType", Value: msgType, MergeRowNumber: currentMessage.NumOfElems },
                         { Name: "Special", Value: currentMessage, MergeRowNumber: currentMessage.NumOfElems },
@@ -297,7 +297,7 @@ Fanex.ApolloCMS.Message.MessageList = function () {
                     if (currentGroupId != currentMessage.MessageId) {
                         currentGroupId = currentMessage.MessageId;
                         row.push(
-                        { Name: "PostedDate", Value: currentMessage.PostDate, MergeRowNumber: currentMessage.NumOfElems },
+                        { Name: "PostedDate", Value: currentMessage.PostTime, MergeRowNumber: currentMessage.NumOfElems },
                         { Name: "MessageContent", Value: currentMessage, MergeRowNumber: currentMessage.NumOfElems },
                         { Name: "MessageType", Value: msgType, MergeRowNumber: currentMessage.NumOfElems },
                         { Name: "Special", Value: currentMessage, MergeRowNumber: currentMessage.NumOfElems },
