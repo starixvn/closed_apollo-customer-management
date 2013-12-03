@@ -276,7 +276,7 @@ input[type="text"] {
                 .containSearch {
                     .txtSearch {
                         border: none;
-                        padding: 1% 22px 1% 2%;
+                        padding: 1% 27px 1% 2%;
                         height: 26px;
                         width: 99.1%;
                         color: #b2b2b2;
@@ -287,10 +287,18 @@ input[type="text"] {
 
                     .icon-search {
                         position: absolute;
-                        top: 16px;
-                        right: 35px;
+                        top: 10px;
+                        right: 29px;
                         color: @primary-color;
                         cursor: pointer;
+                        text-align: center;
+                        width: 27px;
+                        height: 26px;
+                        padding: 6px 8px;
+
+                        &:hover {
+                            opacity: 0.7;
+                        }
                     }
                 }
                 
@@ -508,10 +516,11 @@ input[type="text"] {
             }
 
             .nav-tabs {
-                margin: 10px 1% 0;
+                margin: 10px 0 0;
                 border: 1px solid @border-color;
+                border-width: 1px 0 0;
                 display: table;
-                width: 98%;
+                width: 100%;
                 border-bottom: none;
                 height: 27px;
 
@@ -552,9 +561,9 @@ input[type="text"] {
             }
 
             .tab-content {
-                margin: 0 1%;
+                margin: 0;
                 border: 1px solid @border-color;
-                border-top: none;
+                border-width: 0 0 1px 0;
                 background-color: #fff;
 
                 .super-menu {
