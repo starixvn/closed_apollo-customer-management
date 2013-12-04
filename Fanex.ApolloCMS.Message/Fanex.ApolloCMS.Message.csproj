@@ -43,9 +43,6 @@
     <Reference Include="Fanex.Logging">
       <HintPath>..\Dependencies\Fanex\Fanex.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.MailDeliver.MailClient">
-      <HintPath>..\Dependencies\Fanex\Fanex.MailDeliver.MailClient.dll</HintPath>
-    </Reference>
     <Reference Include="Fanex.NAP.Core">
       <HintPath>..\Dependencies\Fanex\Fanex.NAP.Core.dll</HintPath>
     </Reference>

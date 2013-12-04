@@ -13,7 +13,7 @@ namespace Fanex.ApolloCMS.Message
     using System.Web.Mvc;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Registers message area.
     /// </summary>
     public class MessageAreaRegistration : AreaRegistration
     {

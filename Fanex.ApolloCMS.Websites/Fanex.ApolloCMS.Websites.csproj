@@ -245,6 +245,7 @@
     <Content Include="Content\lib\jquery-ui\jquery-ui-1.9.1.custom.min.css" />
     <Content Include="Content\lib\jquery-ui\jquery.selectBoxIt.css" />
     <Content Include="Global.asax" />
+    <Content Include="Areas\Account\Views\Web.config" />
     <None Include="Content\site\font\MyriadPro-Cond.eot" />
     <None Include="Content\site\font\MyriadPro-Cond.ttf" />
     <None Include="Content\site\font\MyriadPro-Cond.woff" />
@@ -345,6 +346,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Account\Resources\" />
     <Folder Include="Areas\UserControl\Models\" />
     <Folder Include="Areas\UserControl\Views\Shared\" />
   </ItemGroup>
@@ -397,6 +399,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fanex.ApolloCMS.Account\Fanex.ApolloCMS.Account.csproj">
+      <Project>{BACD6814-DE1E-435B-8CF6-39F6CC22768A}</Project>
+      <Name>Fanex.ApolloCMS.Account</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fanex.ApolloCMS.Core\Fanex.ApolloCMS.Core.csproj">
       <Project>{FCD8A1C1-0EFB-4AFD-B8D4-98B56125235B}</Project>
       <Name>Fanex.ApolloCMS.Core</Name>
