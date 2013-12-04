@@ -83,6 +83,29 @@ var Layout = function ($) {
             });
 
             return $obj;
+        },
+        showUplineAgent: function () {
+            var showUpline = $('#show-upline'),
+                agentList = $('#list-agent');
+
+            showUpline.click(function () {
+                agentList.slideToggle(function () {
+                    clearTimeout(Layout.uplineAgentTime);
+                    if (agentList.is(':visible')) {
+                        showUpline.find('.icon-upline').addClass('active');
+                    } else {
+                        showUpline.find('.icon-upline').removeClass('active');
+                    }
+                });
+            });
+
+            agentList.on('mouseover', function () {
+                clearTimeout(Layout.uplineAgentTime);
+            });
+
+            agentList.on('mouseout', function () {
+                Layout.uplineAgentTime = setTimeout('$("#list-agent").fadeOut("fast")', 10000);
+            });
         }
     };
 } (jQuery);
@@ -99,6 +122,9 @@ $(document).ready(function () {
             Layout.hideShowIconTreeview();
         }
     });
+
+    //show upline agent
+    Layout.showUplineAgent();
 
     // collpase or expand left content
     Layout.collapseExpand();
