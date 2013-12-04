@@ -161,6 +161,20 @@ input[type="text"] {
     background-position: -317px -5px;
 }
 
+.icon-upline {
+    .icon;
+    background-position: -238px -17px;
+
+    &.active {
+        background-position: -253px -17px;
+    }
+}
+
+.icon-super {
+    .icon;
+    background-position: -275px -22px;
+}
+
 /* Mixins */
 .childMenu {
     width: 142px;
@@ -483,15 +497,72 @@ input[type="text"] {
                     border: none;
                 }
 
-                a:hover {
+                a:hover, a:focus {
+                    text-decoration: none;
+                    outline: none;
+
                     .icon-link-home {
                         color: @primary-color;
+                    }
+                }
+
+                &.view-more {
+                    padding: 7px 10px;
+
+                    .upline-agent {
+                        position: relative;
+                        color: @link-color;
+                        z-index: 200;
+
+                        &:hover {
+                            .icon-upline {
+                                background-position: -253px -17px;
+                            }
+                        }
+
+                        .view-more {
+                            cursor: pointer;
+                        }
+
+                        .icon-upline {
+                            float: right;
+                            margin-left: 2px;
+                        }
+
+                        .list-agent {
+                            position: absolute;
+                            top: 19px;
+                            right: -5px;
+                            border: 1px solid #84b4d4;
+                            z-index: 205;
+                            background-color: #e9f2f8;
+                            min-width: 130px;
+                            display: table;
+                            display: none;
+
+                            li {
+                                border-top: 1px solid #d1d9df;
+                                padding: 5px 12px 22px;
+
+                                &:hover {
+                                    color: @text-color;
+                                }
+                            
+                                &:first-child {
+                                    border-top: none;
+                                }
+
+                                .level {
+                                    color: #3f3f3f;
+                                }
+                            }
+                        }
                     }
                 }
             }
 
             .list-btn {
-                margin: 10px 2% 15px;
+                margin: 0 2% 15px;
                 min-height: 30px;
 
                 .btn-link {
@@ -501,7 +572,7 @@ input[type="text"] {
                     height: 26px;
                     padding: 4px 3%;
                     text-align: center;
-                    margin: 2.5% 0 2.5% 3%;
+                    margin: 2.5% 2%;
                     .border-radius(2px); 
                     font-weight: bold;
 
@@ -512,6 +583,42 @@ input[type="text"] {
                     &.no-marginLeft {
                         margin-left: 0;
                     }
+
+                    &.only {
+                        margin-right: 0;
+                    }
+                }
+            }
+
+            .account-info {
+                background: #fff;
+                border: 1px solid @border-color;
+                border-width: 1px 0 1px 0;
+                margin-bottom: 5px;
+
+                .item-info {
+                    border-top: 1px dashed @border-color;
+                    padding: 7px 10px;
+
+                    &:first-child {
+                        border-top: none;
+                    }
+                }
+
+                .active {
+                    color: #1fbd41;
+                }
+
+                .clock, .stopped {
+                    color: #ff0000;
+                }
+
+                .locked {
+                    color: #ff6408;
+                }
+
+                .currency, .credit {
+                    color: @link-color;
                 }
             }
 
@@ -556,6 +663,19 @@ input[type="text"] {
 
                     &.active a {
                         font-weight: bold;
+                    }
+                }
+
+                &.search-member {
+                    border-top: none;
+                    border-bottom: 1px solid @border-color;
+
+                    li {
+                        float: left;
+
+                        &.setting {
+                            border-right: 1px solid @border-color;
+                        }
                     }
                 }
             }
@@ -779,7 +899,7 @@ input[type="text"] {
     .container.page {
         width: 770px;
 
-        .form-group {
+        .form-group, .content .leftContent .list-btn .btn-link {
             margin-left: 0;
         }
     }

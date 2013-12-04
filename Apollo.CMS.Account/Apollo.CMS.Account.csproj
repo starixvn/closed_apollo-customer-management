@@ -59,7 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountAreaRegistration.cs" />
-    <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\AccountInfoController.cs" />
     <Compile Include="Controllers\TreeViewController.cs" />
     <Compile Include="Criteria\TreeView\TreeViewCriteria.cs" />
     <Compile Include="Models\TreeView\TreeViewModel.cs" />

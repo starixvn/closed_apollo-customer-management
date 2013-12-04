@@ -29,7 +29,16 @@
     <Setting Key="Acc_Msg_UpdateMessage" SpName="Acc_Msg_UpdateMessage" DbName="SVRMSG.MsgDB.aplweb" />
     <Setting Key="Acc_Msg_DeleteMessage" SpName="Acc_Msg_DeleteMessage" DbName="SVRMSG.MsgDB.aplweb" />
   </Function>
-  <Function name="TreeView">
+<Function name="TreeView">
     <Setting Key="Acc_Agent_GetHierarchyById" SpName="Acc_Agent_GetHierarchyById" DbName="SVRCSD.RepDB.aplWeb" />    
+  </Function>
+  <Function Name="Account">
+    <Setting Key="Age_Agent_SuggestByUsername" SpName="Age_Agent_SuggestByUsername" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Age_Customer_GetByUsername" SpName="Age_Customer_GetByUsername" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Age_Agent_GetInfo" SpName="Age_Agent_GetInfo" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Age_Customer_GetInfo" SpName="Age_Customer_GetInfo" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Age_Agent_GetAgentUplinePath" SpName="Age_Agent_GetAgentUplinePath" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_Agent_GetAgentByParentId" SpName="Acc_Agent_GetAgentByParentId" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_Customer_GetCustomerByAgentId" SpName="Acc_Customer_GetCustomerByAgentId" DbName="SVRCSD.RepDB.aplWeb" />
   </Function>
 </Functions>

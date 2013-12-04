@@ -250,7 +250,8 @@
     <Content Include="Content\lib\jquery-ui\jquery.selectBoxIt.css" />
     <Content Include="Global.asax" />
     <Content Include="Areas\Account\Views\Web.config" />
-    <Content Include="Areas\Account\Views\TreeView\Index.cshtml" />
+    <Content Include="Areas\Account\Views\AccountInfo\LeftPanel.cshtml" />
+    <Content Include="Areas\Account\Views\AccountInfo\Search.cshtml" />
     <None Include="Content\site\font\MyriadPro-Cond.eot" />
     <None Include="Content\site\font\MyriadPro-Cond.ttf" />
     <None Include="Content\site\font\MyriadPro-Cond.woff" />
@@ -396,8 +397,6 @@
     <Content Include="Content\site\custom.less" />
     <Content Include="Content\site\customFanexGrid.less" />
     <Content Include="Content\site\grid.less" />
-    <Content Include="Views\Shared\_Search.cshtml" />
-    <Content Include="Views\Shared\_LeftPanel.cshtml" />
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>
     </None>

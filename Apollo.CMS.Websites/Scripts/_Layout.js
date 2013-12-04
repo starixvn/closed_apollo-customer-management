@@ -88,6 +88,38 @@ var Layout = function ($) {
             });
 
             return $obj;
+        },
+        showUplineAgent: function () {
+            var showUpline = $('#view-more, #icon-more'),
+                agentList = $('#list-agent'),
+                iconMore = $('#icon-more');
+
+            showUpline.click(function (event) {
+                agentList.slideToggle(function () {
+                    clearTimeout(Layout.uplineAgentTime);
+                    if (agentList.is(':visible')) {
+                        iconMore.addClass('active');
+                    } else {
+                        iconMore.removeClass('active');
+                    }
+                });
+                event.stopPropagation();
+            });
+
+            agentList.on('mouseover', function () {
+                clearTimeout(Layout.uplineAgentTime);
+            });
+
+            agentList.on('mouseout', function () {
+                Layout.uplineAgentTime = setTimeout('Layout.hideUplineAgent()', 10000);
+            });
+        },
+        hideUplineAgent: function () {
+            var iconMore = $('#icon-more');
+
+            $("#list-agent").fadeOut("fast", function () {
+                iconMore.removeClass('active');
+            });
         }
     };
 } (jQuery);
@@ -105,6 +137,9 @@ $(document).ready(function () {
             Layout.hideShowIconTreeview();
         }
     });
+
+    //show upline agent
+    Layout.showUplineAgent();
 
     // collpase or expand left content
     Layout.collapseExpand();
