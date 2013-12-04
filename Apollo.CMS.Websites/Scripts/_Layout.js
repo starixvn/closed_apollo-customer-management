@@ -85,18 +85,20 @@ var Layout = function ($) {
             return $obj;
         },
         showUplineAgent: function () {
-            var showUpline = $('#show-upline'),
-                agentList = $('#list-agent');
+            var showUpline = $('#view-more, #icon-more'),
+                agentList = $('#list-agent'),
+                iconMore = $('#icon-more');
 
-            showUpline.click(function () {
+            showUpline.click(function (event) {
                 agentList.slideToggle(function () {
                     clearTimeout(Layout.uplineAgentTime);
                     if (agentList.is(':visible')) {
-                        showUpline.find('.icon-upline').addClass('active');
+                        iconMore.addClass('active');
                     } else {
-                        showUpline.find('.icon-upline').removeClass('active');
+                        iconMore.removeClass('active');
                     }
                 });
+                event.stopPropagation();
             });
 
             agentList.on('mouseover', function () {
@@ -108,10 +110,10 @@ var Layout = function ($) {
             });
         },
         hideUplineAgent: function () {
-            var showUpline = $('#show-upline');
+            var iconMore = $('#icon-more');
 
             $("#list-agent").fadeOut("fast", function () {
-                showUpline.find('.icon-upline').removeClass('active');
+                iconMore.removeClass('active');
             });
         }
     };
