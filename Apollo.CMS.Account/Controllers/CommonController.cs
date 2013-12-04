@@ -50,7 +50,7 @@ namespace Apollo.CMS.Account.Controllers
             });
 
             ViewBag.MemberTypes = memberTypes;
-            return PartialView("~/Views/Shared/_Search.cshtml");
+            return PartialView();
         }
     }
 }
