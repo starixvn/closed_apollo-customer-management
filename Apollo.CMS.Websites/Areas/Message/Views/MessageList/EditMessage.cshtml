@@ -1,0 +1,67 @@
+﻿@model Apollo.CMS.Message.Models.MessageList.Message
+
+<div class="panel">
+    <div id="divEnglishLabel" class="panel-heading">
+        @Html.LabelFor(m => m.ContentEn, Labels.English, new { @class = "language-title" }) <span class="icon-important"></span>
+    </div>
+    <div class="panel-body no-padding">
+        @Html.TextAreaFor(m => m.ContentEn, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
+    </div>
+</div>
+<div class="panel">
+    <div class="panel-heading">
+        @Html.LabelFor(m => m.ContentCh, Labels.ChineseTraditional, new { @class = "language-title" })
+    </div>
+    <div class="panel-body no-padding">
+        @Html.TextAreaFor(m => m.ContentCh, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
+    </div>
+</div>
+<div class="panel">
+    <div class="panel-heading">
+        @Html.LabelFor(m => m.ContentCs, Labels.ChineseSimplified, new { @class = "language-title" })
+    </div>
+    <div class="panel-body no-padding">
+        @Html.TextAreaFor(m => m.ContentCs, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
+    </div>
+</div>
+<div class="panel other-lag">
+    <div id="divOtherLanguageTitle" class="panel-heading language-group-title">
+        <span id="spanOtherLanguage" class="icon-exp-panel"></span>@Labels.OtherLanguage</div>
+    <div id="divOtherLanguage" class="panel-body body-otherLanguage">
+        <div class="panel">
+            <div class="panel-heading">
+                @Html.LabelFor(m => m.ContentJp, Labels.Japanese, new { @class = "language-title noborder-right" })
+            </div>
+            <div class="panel-body no-padding">
+                @Html.TextAreaFor(m => m.ContentJp, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-heading">
+                @Html.LabelFor(m => m.ContentKo, Labels.Korean, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title noborder-right" })
+            </div>
+            <div class="panel-body no-padding">
+                @Html.TextAreaFor(m => m.ContentKo, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-heading">
+                @Html.LabelFor(m => m.ContentTh, Labels.Thai, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title" })
+            </div>
+            <div class="panel-body no-padding">
+                @Html.TextAreaFor(m => m.ContentTh, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-heading">
+                @Html.LabelFor(m => m.ContentVn, Labels.Vietnamese, new { @class = "col-xs-12 col-sm-12 col-md-12 language-title" })
+            </div>
+            <div class="panel-body no-padding">
+                @Html.TextAreaFor(m => m.ContentVn, new { @class = "col-xs-12 col-sm-12 col-md-12 language-body" })
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row filter-form">
+    <input type="button" id="updateMessageBtn" class="btn pull-left" value="@ViewLang.Submit" />
+</div>
