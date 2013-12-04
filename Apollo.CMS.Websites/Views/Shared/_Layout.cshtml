@@ -26,7 +26,7 @@
                 if (hasPermission)
                 {
                     leftContentStyle = "col-xs-9 col-sm-9 col-md-10";
-                    @Html.Action("Search", new RouteValueDictionary(new { Controller = "Common", Area = "Account" }));
+                    @Html.Action("Search", new RouteValueDictionary(new { Controller = "AccountInfo", Area = "Account" }));
                 }
                 else
                 {
@@ -60,7 +60,7 @@
         <div class="row content">
             @if (hasPermission == true)
             {
-                @Html.Action("LeftPanel", new RouteValueDictionary(new { Controller = "Common", Area = "Account" }));
+                @Html.Action("LeftPanel", new RouteValueDictionary(new { Controller = "AccountInfo", Area = "Account" }));
             }
             <div id="mainContent" class="@leftContentStyle mainContent">
                 @if (hasPermission == true)

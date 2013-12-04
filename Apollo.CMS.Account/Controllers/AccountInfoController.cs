@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="CommonController.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="AccountInfoController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -17,7 +17,7 @@ namespace Apollo.CMS.Account.Controllers
     /// <summary>
     /// Common controller.
     /// </summary>
-    public class CommonController : BaseController
+    public class AccountInfoController : BaseController
     {
         /// <summary>
         /// Get Left Pan Partial view.

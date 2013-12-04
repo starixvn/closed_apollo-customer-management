@@ -246,8 +246,8 @@
     <Content Include="Content\lib\jquery-ui\jquery.selectBoxIt.css" />
     <Content Include="Global.asax" />
     <Content Include="Areas\Account\Views\Web.config" />
-    <Content Include="Areas\Account\Views\Common\LeftPanel.cshtml" />
-    <Content Include="Areas\Account\Views\Common\Search.cshtml" />
+    <Content Include="Areas\Account\Views\AccountInfo\LeftPanel.cshtml" />
+    <Content Include="Areas\Account\Views\AccountInfo\Search.cshtml" />
     <None Include="Content\site\font\MyriadPro-Cond.eot" />
     <None Include="Content\site\font\MyriadPro-Cond.ttf" />
     <None Include="Content\site\font\MyriadPro-Cond.woff" />
