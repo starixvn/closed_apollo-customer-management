@@ -394,8 +394,6 @@
     <Content Include="Content\site\custom.less" />
     <Content Include="Content\site\customFanexGrid.less" />
     <Content Include="Content\site\grid.less" />
-    <Content Include="Views\Shared\_Search.cshtml" />
-    <Content Include="Views\Shared\_LeftPanel.cshtml" />
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>
     </None>
