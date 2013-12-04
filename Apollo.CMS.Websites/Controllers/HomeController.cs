@@ -48,39 +48,5 @@ namespace Apollo.CMS.Websites.Controllers
             ViewBag.MenuItemList = CurrentSession.Menu;
             return PartialView("~/Views/Shared/_Menu.cshtml");
         }
-
-        /// <summary>
-        /// Get Search Partial view.
-        /// </summary>
-        /// <returns>Partial menu view.</returns>
-        [ChildActionOnly]
-        public PartialViewResult _Search()
-        {
-            var memberTypes = new List<SelectListItem>();
-
-            memberTypes.Add(new SelectListItem
-            {
-                Text = ViewLang.Agent,
-                Value = "true"
-            });
-            memberTypes.Add(new SelectListItem
-            {
-                Text = ViewLang.Member,
-                Value = "false"
-            });
-
-            ViewBag.MemberTypes = memberTypes;
-            return PartialView("~/Views/Shared/_Search.cshtml");
-        }
-
-        /// <summary>
-        /// Get Left Pan Partial view.
-        /// </summary>
-        /// <returns>Partial menu view.</returns>
-        [ChildActionOnly]
-        public PartialViewResult _LeftPanel()
-        {
-            return PartialView("~/Views/Shared/_LeftPanel.cshtml");
-        }
     }
 }

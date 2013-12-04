@@ -9,13 +9,48 @@
 
 namespace Apollo.CMS.Account.Controllers
 {
+    using System.Collections.Generic;
     using System.Web.Mvc;
     using Apollo.CMS.Core.Controllers;
+    using Apollo.CMS.Core.Resources;
 
     /// <summary>
     /// Common controller.
     /// </summary>
     public class CommonController : BaseController
     {
+        /// <summary>
+        /// Get Left Pan Partial view.
+        /// </summary>
+        /// <returns>Partial menu view.</returns>
+        [ChildActionOnly]
+        public PartialViewResult LeftPanel()
+        {
+            return PartialView();
+        }
+
+        /// <summary>
+        /// Get Search Partial view.
+        /// </summary>
+        /// <returns>Partial menu view.</returns>
+        [ChildActionOnly]
+        public PartialViewResult Search()
+        {
+            var memberTypes = new List<SelectListItem>();
+
+            memberTypes.Add(new SelectListItem
+            {
+                Text = ViewLang.Agent,
+                Value = "true"
+            });
+            memberTypes.Add(new SelectListItem
+            {
+                Text = ViewLang.Member,
+                Value = "false"
+            });
+
+            ViewBag.MemberTypes = memberTypes;
+            return PartialView("~/Views/Shared/_Search.cshtml");
+        }
     }
 }
