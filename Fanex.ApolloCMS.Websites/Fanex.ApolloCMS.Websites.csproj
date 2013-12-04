@@ -401,9 +401,9 @@
       <Project>{FCD8A1C1-0EFB-4AFD-B8D4-98B56125235B}</Project>
       <Name>Fanex.ApolloCMS.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.ApolloCMS.Message\Message.csproj">
-      <Project>{5F2DFE2F-A67E-4749-B452-5F833A1225C5}</Project>
-      <Name>Message</Name>
+    <ProjectReference Include="..\Fanex.ApolloCMS.Message\Fanex.ApolloCMS.Message.csproj">
+      <Project>{F3C19221-A817-434E-9791-E67078104BA8}</Project>
+      <Name>Fanex.ApolloCMS.Message</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

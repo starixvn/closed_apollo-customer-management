@@ -11,7 +11,7 @@ namespace Fanex.ApolloCMS.Message.Services.Implements
 {
     using System.Collections.Generic;
     using System.Text;
-    using Fanex.ApolloCMS.Core.Services.Impl;
+    using Fanex.ApolloCMS.Core.Services.Implements;
     using Fanex.ApolloCMS.Message.Criteria.NewMessage;
     using Fanex.ApolloCMS.Message.Models.NewMessage;
     using Fanex.ApolloCMS.Message.Services.Interfaces;
