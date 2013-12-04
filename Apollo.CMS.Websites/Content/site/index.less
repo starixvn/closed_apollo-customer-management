@@ -163,10 +163,10 @@ input[type="text"] {
 
 .icon-upline {
     .icon;
-    background-position: -242px -17px;
+    background-position: -238px -17px;
 
     &.active {
-        background-position: -257px -17px;
+        background-position: -253px -17px;
     }
 }
 
@@ -506,48 +506,52 @@ input[type="text"] {
                     }
                 }
 
-                .upline-agent {
-                    position: relative;
-                    cursor: pointer;
-                    color: @link-color;
-                    z-index: 200;
+                &.view-more {
+                    padding: 7px 10px;
 
-                    &:hover {
-                        .icon-upline {
-                            background-position: -257px -17px;
+                    .upline-agent {
+                        position: relative;
+                        cursor: pointer;
+                        color: @link-color;
+                        z-index: 200;
+
+                        &:hover {
+                            .icon-upline {
+                                background-position: -253px -17px;
+                            }
                         }
-                    }
 
-                    .icon-upline {
-                        float: right;
-                        margin-left: 2px;
-                    }
+                        .icon-upline {
+                            float: right;
+                            margin-left: 2px;
+                        }
 
-                    .list-agent {
-                        position: absolute;
-                        top: 19px;
-                        right: -5px;
-                        border: 1px solid #84b4d4;
-                        z-index: 205;
-                        background-color: #e9f2f8;
-                        min-width: 130px;
-                        display: table;
-                        display: none;
+                        .list-agent {
+                            position: absolute;
+                            top: 19px;
+                            right: -5px;
+                            border: 1px solid #84b4d4;
+                            z-index: 205;
+                            background-color: #e9f2f8;
+                            min-width: 130px;
+                            display: table;
+                            display: none;
 
-                        li {
-                            border-top: 1px solid #d1d9df;
-                            padding: 5px 12px 22px;
+                            li {
+                                border-top: 1px solid #d1d9df;
+                                padding: 5px 12px 22px;
 
-                            &:hover {
-                                color: @text-color;
-                            }
+                                &:hover {
+                                    color: @text-color;
+                                }
                             
-                            &:first-child {
-                                border-top: none;
-                            }
+                                &:first-child {
+                                    border-top: none;
+                                }
 
-                            .level {
-                                color: #3f3f3f;
+                                .level {
+                                    color: #3f3f3f;
+                                }
                             }
                         }
                     }
