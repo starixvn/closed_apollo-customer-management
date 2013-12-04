@@ -29,6 +29,7 @@ namespace Apollo.CMS.Websites
             RegisterLoginBundles(bundles);
             RegisterMessageListBundles(bundles);
             RegisterNewMessageBundles(bundles);
+            RegisterTreeviewBundles(bundles);
 
             bundles.FileSetOrderList.Clear();
         }
@@ -132,6 +133,23 @@ namespace Apollo.CMS.Websites
             bundles.Add(new ScriptBundle("~/scripts/newPublicMessage").Include(
                 "~/Scripts/Validator.js",
                 "~/Areas/Message/Views/PublicMessage/Scripts/PublicMessage.js"));
+        }
+
+        /// <summary>
+        /// Registers the treeview bundles.
+        /// </summary>
+        /// <param name="bundles">The bundles collection.</param>
+        private static void RegisterTreeviewBundles(BundleCollection bundles)
+        {
+            bundles.AddAndInclude(
+                "~/site/treeView",                
+                "~/Areas/Account/Resources/TreeView/treeview.css");
+
+            bundles.Add(new ScriptBundle("~/scripts/treeView").Include(
+                "~/Areas/Account/Views/TreeView/Scripts/jquery.treeview.js",
+                "~/Areas/Account/Views/TreeView/Scripts/jquery.treeview.async.js",
+                "~/Areas/Account/Views/TreeView/Scripts/treeview.js"));
+
         }
     }
 

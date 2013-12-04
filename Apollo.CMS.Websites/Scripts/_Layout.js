@@ -41,7 +41,7 @@ var Layout = function ($) {
             // check IE8 and resolution > 993px
             if ($.browser.msie && $.browser.version == '8.0') {
                 var leftPanel = $('#searchPanel, #leftContent'),
-                    rightPanel = $('#rightHeader, #mainContent'); 
+                    rightPanel = $('#rightHeader, #mainContent');
                 if (screen.width > 993) {
                     leftPanel.addClass('width-ie8-20');
                     rightPanel.addClass('width-ie8-80');
@@ -63,6 +63,11 @@ var Layout = function ($) {
                 treeview.removeClass('disabled');
                 iconTreeView.removeClass('icon-treeview-disabled').addClass('icon-treeview');
             }
+        },
+        navigateFromIconTreeView: function () {
+            $('.icon-treeview').on('click', function () {
+                location.href = "../account/treeview";
+            });
         },
         createDatepicker: function ($obj, defaultValue, onSelectHandler, onCloseHandler) {
             var defaultDate = defaultValue ? moment(defaultValue).format(CMS.commonConstants.DateFormat) : 'today';
@@ -89,6 +94,7 @@ var Layout = function ($) {
 
 $(document).ready(function () {
     Layout.fixLaftPanelWidthForIE();
+    Layout.navigateFromIconTreeView();
 
     $('select').selectBoxIt();
     // show or hide icon Treeview
@@ -102,7 +108,7 @@ $(document).ready(function () {
 
     // collpase or expand left content
     Layout.collapseExpand();
-
+    
     // Set active menu css class
     $('ul.mainMenu > li').on('click', function (event) {
         var $this = $(this);

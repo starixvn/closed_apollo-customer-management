@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var agentId = ViewBag.AgentId == null ? 0 : ViewBag.AgentId;
+}
+@section Head 
+{
+    @Styles.Render("~/site/treeView")
+}
+
+<div id="wrapper"> 
+    <ul id="account-treeview" class="tree-sub" data-agentid="@agentId">
+    </ul>
+</div>
+
+@section Foot {    
+    @Scripts.Render("~/scripts/treeView")
+    <script type="text/javascript">
+            
+    </script>
+}
