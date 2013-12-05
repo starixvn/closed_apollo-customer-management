@@ -259,6 +259,7 @@
     <Content Include="Areas\Account\Views\AccountInfo\AgentList.cshtml" />
     <Content Include="Areas\Account\Views\AccountInfo\MemberList.cshtml" />
     <Content Include="Areas\Account\Views\AccountInfo\Upline.cshtml" />
+    <Content Include="Areas\Account\Resources\AccountInfo\accountInfo.less" />
     <None Include="Content\site\font\MyriadPro-Cond.eot" />
     <None Include="Content\site\font\MyriadPro-Cond.ttf" />
     <None Include="Content\site\font\MyriadPro-Cond.woff" />

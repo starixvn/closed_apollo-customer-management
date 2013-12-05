@@ -1,0 +1,47 @@
+@import "../../../../Content/site/variables.less";
+@import "../../../../Content/site/mixins.less";
+
+.container.page {
+    .header .search .search-container .containSearch .txtSearch.ui-autocomplete-input {
+        color: @text-color;
+    }
+}
+
+// autocomplete
+.ui-widget-content.ui-autocomplete {
+    left: 81px !important;
+    top: 37px !important;
+    background-color: #fff;
+    padding: 2px 0;
+    cursor: pointer;
+    .box-shadow(-1px 3px 2px #CCC);
+
+    .ui-menu-item {
+        color: #3F3F3F;
+
+        a {
+            line-height: 20px;
+            padding: 3px 0.4em;
+        }
+
+        &:first-child {
+            border-top: none;
+        }
+
+        .ui-state-hover {
+            background: @primary-color;
+            border: none;
+            color: #fff;
+            font-weight: normal;
+            .border-radius(0);
+        }
+    }
+}
+
+.eq-ie7, .eq-ie8 {
+    .container.page {
+        .header .search .search-container .containSearch .txtSearch {
+            padding-top: 2%;
+        }
+    }
+}

@@ -142,6 +142,10 @@ namespace Apollo.CMS.Websites
         /// <param name="bundles">The bundle collection.</param>
         private static void RegisterAccountInfoBundles(BundleCollection bundles)
         {
+            bundles.AddAndInclude(
+                "~/site/accountInfo",
+                "~/Areas/Account/Resources/AccountInfo/accountInfo.less");
+
             bundles.Add(new ScriptBundle("~/scripts/searchBar").Include(
                 "~/Areas/Account/Views/AccountInfo/Scripts/SearchBar.js"));
 
