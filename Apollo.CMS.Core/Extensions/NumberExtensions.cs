@@ -90,7 +90,7 @@ namespace Apollo.CMS.Core.Extensions
         {
             if (value != null)
             {
-                string formatString = string.Format("{0:n{0}}", decDigits);
+                string formatString = "{0:n" + decDigits.ToString() + "}";
                 string result = null;
                 if (value != null)
                 {

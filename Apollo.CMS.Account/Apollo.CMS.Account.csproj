@@ -61,9 +61,22 @@
     <Compile Include="AccountAreaRegistration.cs" />
     <Compile Include="Controllers\AccountInfoController.cs" />
     <Compile Include="Controllers\TreeViewController.cs" />
+    <Compile Include="Criteria\AccountInfo\GetAgentInfoCriteria.cs" />
+    <Compile Include="Criteria\AccountInfo\GetAgentUplineCriteria.cs" />
+    <Compile Include="Criteria\AccountInfo\GetDownlineAgentsCriteria.cs" />
+    <Compile Include="Criteria\AccountInfo\GetDownlineMembersCriteria.cs" />
+    <Compile Include="Criteria\AccountInfo\GetMemberInfoCriteria.cs" />
+    <Compile Include="Criteria\AccountInfo\GetSuggestedCustomersByUsernameCriteria.cs" />
     <Compile Include="Criteria\TreeView\TreeViewCriteria.cs" />
+    <Compile Include="Models\AccountInfo\AgentInfo.cs" />
+    <Compile Include="Models\AccountInfo\MemberInfo.cs" />
+    <Compile Include="Models\AccountInfo\Agent.cs" />
+    <Compile Include="Models\AccountInfo\Member.cs" />
+    <Compile Include="Models\AccountInfo\UplineAgent.cs" />
     <Compile Include="Models\TreeView\TreeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccountInfo\Implements\AccountInfoService.cs" />
+    <Compile Include="Services\AccountInfo\Interfaces\IAccountInfoService.cs" />
     <Compile Include="Services\TreeView\Implements\TreeViewService.cs" />
     <Compile Include="Services\TreeView\Interfaces\ITreeViewService.cs" />
   </ItemGroup>

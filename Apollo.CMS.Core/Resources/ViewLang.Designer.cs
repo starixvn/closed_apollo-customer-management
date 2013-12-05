@@ -169,6 +169,15 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upline.
+        /// </summary>
+        public static string Upline {
+            get {
+                return ResourceManager.GetString("Upline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
         public static string UserName {

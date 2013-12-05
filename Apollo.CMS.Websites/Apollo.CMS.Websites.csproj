@@ -193,6 +193,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\Account\Resources\TreeView\treeview.css" />
+    <Content Include="Areas\Account\Views\AccountInfo\Scripts\SearchBar.js" />
+    <Content Include="Areas\Account\Views\AccountInfo\Scripts\AccountInfo.js" />
     <Content Include="Areas\Account\Views\TreeView\Scripts\jquery.treeview.async.js" />
     <Content Include="Areas\Account\Views\TreeView\Scripts\jquery.treeview.js" />
     <Content Include="Areas\Account\Views\TreeView\Scripts\treeview.js" />
@@ -250,8 +252,13 @@
     <Content Include="Content\lib\jquery-ui\jquery.selectBoxIt.css" />
     <Content Include="Global.asax" />
     <Content Include="Areas\Account\Views\Web.config" />
-    <Content Include="Areas\Account\Views\AccountInfo\LeftPanel.cshtml" />
+    <Content Include="Areas\Account\Views\AccountInfo\AgentLeftPanel.cshtml" />
     <Content Include="Areas\Account\Views\AccountInfo\Search.cshtml" />
+    <Content Include="Areas\Account\Views\TreeView\Index.cshtml" />
+    <Content Include="Areas\Account\Views\AccountInfo\MemberLeftPanel.cshtml" />
+    <Content Include="Areas\Account\Views\AccountInfo\AgentList.cshtml" />
+    <Content Include="Areas\Account\Views\AccountInfo\MemberList.cshtml" />
+    <Content Include="Areas\Account\Views\AccountInfo\Upline.cshtml" />
     <None Include="Content\site\font\MyriadPro-Cond.eot" />
     <None Include="Content\site\font\MyriadPro-Cond.ttf" />
     <None Include="Content\site\font\MyriadPro-Cond.woff" />

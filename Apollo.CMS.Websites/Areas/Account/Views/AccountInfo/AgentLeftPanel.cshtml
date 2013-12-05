@@ -1,4 +1,9 @@
-﻿<div id="leftContent" class="col-xs-3 col-sm-3 col-md-2 leftContent">
+﻿@using Apollo.CMS.Account.Models.AccountInfo
+@using Apollo.CMS.Core.Extensions
+@{
+    var customer = (AgentInfo)ViewBag.Customer;
+}
+<div id="leftContent" class="col-xs-3 col-sm-3 col-md-2 leftContent">
     <div class="row item">
         <div class="col-xs-6 col-sm-6 col-md-6 text-left">
             Agent
@@ -9,7 +14,7 @@
     </div>
     <div class="row item">
         <div class="col-xs-6 col-sm-6 col-md-6 text-left">
-            Upline Agent
+            @ViewLang.Upline
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 text-right">
             <a href="#">5111 <span class="glyphicon glyphicon-home icon-link-home"></span></a>
@@ -58,7 +63,7 @@
         </div>
         <div class="row item-info">
             <div class="col-xs-6 col-sm-6 col-md-6">Sport Credit</div>
-            <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="credit">10,000.00</b></div>
+            <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="credit">@customer.SportCredit.Format(2)</b></div>
         </div>
     </div>
     <div class="row">
