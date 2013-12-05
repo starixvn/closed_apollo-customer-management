@@ -19,6 +19,8 @@ namespace Apollo.CMS.Account.Criteria.AccountInfo
     {
         public int AgentId { get; set; }
 
+        public string Username { get; set; }
+
         /// <summary>
         /// Get Setting Key.
         /// </summary>

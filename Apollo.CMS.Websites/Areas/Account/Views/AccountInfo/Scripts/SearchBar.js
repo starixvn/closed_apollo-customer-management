@@ -9,17 +9,29 @@ Namespace.Register("Apollo.CMS.AccountInfo.SearchBar");
 Apollo.CMS.AccountInfo.SearchBar = function () {
     var $this = this;
     var urls = {
-        GetSuggestedCustomers: CMS.resolveRootUrl('Account/AccountInfo/GetSuggestedCustomer')
+        GetSuggestedCustomers: CMS.resolveRootUrl('Account/AccountInfo/GetSuggestedCustomer'),
+        GetCustomer: CMS.resolveRootUrl('Account/AccountInfo/GetCustomer'),
+        GetLeftPanel: CMS.resolveRootUrl('Account/AccountInfo/LeftPanel')
     };
+    var isMember = false;
+
+    // Cache DOM elements
     var cacheDOM = function () {
         $this.DOMInstance.ddlMemberTypes = $('#ddlMemberTypes');
         $this.DOMInstance.txtUsername = $('#txtUsername');
         $this.DOMInstance.btnSearch = $('#btnSearch');
+        $this.DOMInstance.divLeftContent = $('#leftContent');
     };
+
+    // Bind event handlers to controls
     var initFields = function () {
+        $this.DOMInstance.ddlMemberTypes.change(function () {
+            isMember = $this.DOMInstance.ddlMemberTypes.val();
+        });
+
+        // Auto-complete for Search text-box.
         $this.DOMInstance.txtUsername.autocomplete({
             source: function (request, response) {
-                var isMember = $this.DOMInstance.ddlMemberTypes.val();
                 var params = {
                     IsMember: isMember,
                     Username: request.term
@@ -45,16 +57,85 @@ Apollo.CMS.AccountInfo.SearchBar = function () {
                 });
             },
             select: function (event, ui) {
-                //@@TODO: Get customer info.
+                getCustomer(isMember, ui.item.id);
             },
             position: { my: "right top", at: "right bottom" }
+        });
+
+        // Catch enter key of Search text-box.
+        $this.DOMInstance.txtUsername.keyup(function (event) {
+            if (event.keyCode == 13) {
+                getCustomerByUsername();
+            }
+        });
+
+        $this.DOMInstance.btnSearch.click(function () {
+            getCustomerByUsername();
+        });
+    };
+
+    // Get customer information by Id.
+    var getCustomer = function (isMember, id) {
+        var params = {
+            isMember: isMember,
+            id: id
+        };
+
+        $.ajax({
+            type: "POST",
+            url: urls.GetLeftPanel,
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            data: JSON.stringify(params),
+            beforeSend: function () {
+                CMS.loadingBox.show();
+            },
+            success: function (result) {
+                $this.DOMInstance.divLeftContent.html(result);
+            },
+            error: function (xhr, status, err) {
+                CMS.handleAjaxError(xhr, status, err);
+            },
+            complete: function () {
+                CMS.loadingBox.close();
+            }
+        });
+    };
+
+    // Get customer information by his or her username.
+    var getCustomerByUsername = function () {
+        var username = $this.DOMInstance.txtUsername.val();
+        var params = {
+            isMember: isMember,
+            username: username
+        };
+
+        $.ajax({
+            type: "POST",
+            url: urls.GetCustomer,
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            data: JSON.stringify(params),
+            beforeSend: function () {
+                CMS.loadingBox.show();
+            },
+            success: function (result) {
+                $this.DOMInstance.divLeftContent.html(result);
+            },
+            error: function (xhr, status, err) {
+                CMS.handleAjaxError(xhr, status, err);
+            },
+            complete: function () {
+                CMS.loadingBox.close();
+            }
         });
     };
 
     $this.DOMInstance = {
         ddlMemberTypes: null,
         txtUsername: null,
-        btnSearch: null
+        btnSearch: null,
+        divLeftContent: null
     };
     $this.InitPage = function () {
         cacheDOM();

@@ -60,7 +60,9 @@
         <div class="row content">
             @if (hasPermission == true)
             {
-                @Html.Action("LeftPanel", new RouteValueDictionary(new { Controller = "AccountInfo", Area = "Account" }));
+                <div id="leftContent" class="col-xs-3 col-sm-3 col-md-2 leftContent">
+                    @Html.Action("LeftPanel", new RouteValueDictionary(new { Controller = "AccountInfo", Area = "Account" }));
+                </div>
             }
             <div id="mainContent" class="@leftContentStyle mainContent">
                 @if (hasPermission == true)

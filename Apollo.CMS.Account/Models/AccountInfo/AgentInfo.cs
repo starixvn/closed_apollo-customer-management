@@ -20,7 +20,7 @@ namespace Apollo.CMS.Account.Models.AccountInfo
 
         public string Username { get; set; }
 
-        public byte Currency { get; set; }
+        public string Currency { get; set; }
 
         public byte Status { get; set; }
 
