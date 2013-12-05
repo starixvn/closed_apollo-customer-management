@@ -95,7 +95,7 @@ var Layout = function ($) {
                 iconMore = $('#icon-more');
 
             showUpline.click(function (event) {
-                agentList.slideToggle(function () {
+                agentList.slideToggle('fast', function () {
                     clearTimeout(Layout.uplineAgentTime);
                     if (agentList.is(':visible')) {
                         iconMore.addClass('active');
