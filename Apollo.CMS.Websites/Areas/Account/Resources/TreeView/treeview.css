@@ -24,11 +24,11 @@
     padding: 0 0 3px 16px;
     color: #3a8bc0;
     background: url(images/treeview-default-line.gif) 0 0 no-repeat;
-    cursor: pointer;
 }
 
 .treeview li span:hover {
     color: #FF6C14;
+    cursor: pointer;
 }
 
 .treeview a.selected {
