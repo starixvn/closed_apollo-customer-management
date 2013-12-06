@@ -17,7 +17,10 @@ Apollo.CMS.Account.AccountInfo = function () {
     // Bind event handlers to controls
     var initFields = function () {
         $('[data-toggle="tab"]').live('click', function (event) {
-            console.log(event.target);
+            var tabId = $(this).attr('href');
+            var tab = $(tabId);
+            //if (tabId === '#'
+            console.log(tabId);
         });
     };
 

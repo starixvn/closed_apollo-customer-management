@@ -99,7 +99,7 @@ Apollo.CMS.Account.SearchBar = function () {
             },
             success: function (result) {
                 $this.DOMInstance.divLeftContent.html(result);
-                Layout.collapseExpandLeftPanel(true);
+                Layout.expandLefPanel();
             },
             error: function (xhr, status, err) {
                 CMS.handleAjaxError(xhr, status, err);
