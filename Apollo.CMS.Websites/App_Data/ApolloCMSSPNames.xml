@@ -42,5 +42,6 @@
     <Setting Key="Acc_Agent_GetAgentUplinePath" SpName="Acc_Agent_GetAgentUplinePath" DbName="SVRCSD.RepDB.aplWeb" />
     <Setting Key="Acc_Agent_GetAgentByParentId" SpName="Acc_Agent_GetAgentByParentId" DbName="SVRCSD.RepDB.aplWeb" />
     <Setting Key="Acc_Customer_GetCustomerByAgentId" SpName="Acc_Customer_GetCustomerByAgentId" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Age_Agent_GetAgentDownline" SpName="Age_Agent_GetAgentDownline" DbName="SVRCSD.RepDB.aplWeb" />
   </Function>
 </Functions>
