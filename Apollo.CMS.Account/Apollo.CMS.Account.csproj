@@ -63,6 +63,7 @@
     <Compile Include="Controllers\TreeViewController.cs" />
     <Compile Include="Criteria\TreeView\TreeViewCriteria.cs" />
     <Compile Include="Models\TreeView\TreeViewModel.cs" />
+    <Compile Include="Models\TreeView\TreeViewViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\TreeView\Implements\TreeViewService.cs" />
     <Compile Include="Services\TreeView\Interfaces\ITreeViewService.cs" />

@@ -192,6 +192,11 @@
     <Content Include="App_Data\NAPFrameworkSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\Account\Resources\TreeView\Images\treeview-1.png" />
+    <Content Include="Areas\Account\Resources\TreeView\Images\treeview-default-line.gif" />
+    <Content Include="Areas\Account\Resources\TreeView\Images\treeview-default-line2.gif" />
+    <Content Include="Areas\Account\Resources\TreeView\Images\treeview-default.gif" />
+    <Content Include="Areas\Account\Resources\TreeView\Images\treeview.png" />
     <Content Include="Areas\Account\Resources\TreeView\treeview.css" />
     <Content Include="Areas\Account\Views\TreeView\Scripts\jquery.treeview.async.js" />
     <Content Include="Areas\Account\Views\TreeView\Scripts\jquery.treeview.js" />
@@ -252,6 +257,7 @@
     <Content Include="Areas\Account\Views\Web.config" />
     <Content Include="Areas\Account\Views\AccountInfo\LeftPanel.cshtml" />
     <Content Include="Areas\Account\Views\AccountInfo\Search.cshtml" />
+    <Content Include="Areas\Account\Views\TreeView\Index.cshtml" />
     <None Include="Content\site\font\MyriadPro-Cond.eot" />
     <None Include="Content\site\font\MyriadPro-Cond.ttf" />
     <None Include="Content\site\font\MyriadPro-Cond.woff" />

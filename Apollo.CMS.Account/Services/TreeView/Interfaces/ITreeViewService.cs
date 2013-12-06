@@ -19,6 +19,6 @@ namespace Apollo.CMS.Account.Services.TreeView.Interfaces
     /// </summary>
     public interface ITreeViewService
     {
-        IEnumerable<TreeViewModel> GetDataTreeView(TreeViewCriteria criteria);
+        List<TreeViewModel> GetDataTreeView(TreeViewCriteria criteria);
     }
 }
