@@ -2,16 +2,21 @@
 @using Apollo.CMS.Core.Extensions
 @using Apollo.CMS.Core.Helpers
 @using Apollo.CMS.Core.Services
-@{
+@using Fanex.Common
+@{    
+    var hasCustomerSettingPermission = (bool)ViewBag.HasCustomerSettingPermission;
     var customer = (AgentInfo)ViewBag.Customer;
+    var accountStatus = StatusHelper.GetStatus(Converter.ToInt(customer.Status), Converter.ToInt(customer.UplineStatus));
+    var betStatus = StatusHelper.GetStatus(Converter.ToInt(customer.BetStatus), Converter.ToInt(customer.UplineBetStatus));
 }
+@Html.Hidden("hdnCustomerId", customer.AgentId)
 
 <div class="row item">
     <div class="col-xs-3 col-sm-3 col-md-3 text-left">
         @ViewLang.Agent
     </div>
     <div class="col-xs-9 col-sm-9 col-md-9 text-right">
-        <a href="#">@customer.Username<span class="glyphicon glyphicon-home icon-link-home"></span></a>
+        @customer.Username<span class="glyphicon glyphicon-home icon-link-home"></span>
     </div>
 </div>
 <div class="row item">
@@ -19,16 +24,12 @@
         @ViewLang.Upline
     </div>
     <div class="col-xs-9 col-sm-9 col-md-9 text-right">
-        <a href="#">@customer.ParentUsername<span class="glyphicon glyphicon-home icon-link-home"></span></a>
+        <a href="#" class="search-link" data-customer-id="@customer.ParentId">@customer.ParentUsername<span class="glyphicon glyphicon-home icon-link-home"></span></a>
     </div>
 </div>
-<div class="row item no-border view-more">
-    <div class="col-xs-12 col-sm-12 col-md-12 text-right">
-        <div href="javascript:;" id="show-upline" class="upline-agent">
-            <span class="view-more" id="view-more">@ViewLang.ViewMoreUpline</span> <span class="icon-upline" id="icon-more"></span>            
-        </div>
-    </div>
-</div>
+
+@{ Html.RenderAction("UplineAgents", "AccountInfo", new { agentId = customer.ParentId }); }
+
 <div class="row list-btn">
     <div class="col-md-12">
         <div class="col-xs-12 col-sm-4 col-md-4">
@@ -49,36 +50,39 @@
     </div>
     <div class="row item-info">
         <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.AccountStatus</div>
-        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="active">@StatusHelper.GetStatus(customer.Status, customer.UplineStatus)</b></div>
+        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="@accountStatus.ToLower()">@accountStatus</b></div>
     </div>
     <div class="row item-info">
         <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.BetStatus</div>
-        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="locked">@StatusHelper.GetStatus(customer.BetStatus, customer.UplineBetStatus)</b></div>
+        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="@betStatus.ToLower()">@betStatus</b></div>
     </div>
     <div class="row item-info">
         <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.SportCredit</div>
-        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="credit">@customer.SportCredit.Format(2)</b></div>
+        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="credit">@Converter.ToDecimal(customer.SportCredit).Format(2)</b></div>
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
-            <li class="setting active"><a href="#setting" data-toggle="tab">@ViewLang.Setting</a></li>
-            <li><a href="#agent" data-toggle="tab">@ViewLang.Agent</a></li>
+            @{
+                var activeClass = string.Empty;
+
+                if (hasCustomerSettingPermission)
+                {
+                    <li class="setting active"><a href="#setting" data-toggle="tab">@ViewLang.Setting</a></li>
+                }
+                else
+                {
+                    activeClass = "active";
+                }
+            }
+            <li class="@activeClass"><a href="#agent" data-toggle="tab">@ViewLang.Agent</a></li>
             <li><a href="#member" data-toggle="tab">@ViewLang.Member</a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
-            <div class="tab-pane active" id="setting">
-                <ul class="super-menu list-unstyled">
-                    <li><a href="#"><span class="icon-row-right"></span>@ViewLang.ShareSetting</a></li>
-                    <li><a href="#"><span class="icon-row-right"></span>@ViewLang.BetAndCommSetting</a></li>
-                    <li><a href="#"><span class="icon-row-right"></span>@ViewLang.ShareHierachy</a></li>
-                    <li><a href="#"><span class="icon-row-right"></span>@ViewLang.CommHierachy</a></li>
-                    <li><a href="#"><span class="icon-row-right"></span>@ViewLang.UserLog</a></li>
-                </ul>
-            </div>
+            @{ Html.RenderPartial("Setting"); }
             <div class="tab-pane" id="agent"></div>
             <div class="tab-pane" id="member"></div>
         </div>

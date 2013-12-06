@@ -1,7 +1,5 @@
 ﻿/* File Created: December 5, 2013 */
 $(document).ready(function () {
-    var searchBar = new Apollo.CMS.Account.SearchBar();
-
     searchBar.InitPage();
 });
 
@@ -9,9 +7,9 @@ Namespace.Register("Apollo.CMS.Account.SearchBar");
 Apollo.CMS.Account.SearchBar = function () {
     var $this = this;
     var urls = {
-        GetSuggestedCustomers: CMS.resolveRootUrl('Account/AccountInfo/GetSuggestedCustomer'),
-        GetCustomer: CMS.resolveRootUrl('Account/AccountInfo/GetCustomer'),
-        GetLeftPanel: CMS.resolveRootUrl('Account/AccountInfo/LeftPanel')
+        GetSuggestedCustomers: '/Account/AccountInfo/GetSuggestedCustomer', //CMS.resolveRootUrl('Account/AccountInfo/GetSuggestedCustomer'),
+        GetCustomer: '/Account/AccountInfo/GetCustomer', //CMS.resolveRootUrl('Account/AccountInfo/GetCustomer'),
+        GetLeftPanel: '/Account/AccountInfo/LeftPanel' //CMS.resolveRootUrl('Account/AccountInfo/LeftPanel')
     };
     var isMember = false;
 
@@ -57,7 +55,7 @@ Apollo.CMS.Account.SearchBar = function () {
                 });
             },
             select: function (event, ui) {
-                getCustomer(isMember, ui.item.id, null);
+                $this.GetCustomer(isMember, ui.item.id, null);
             },
             position: { my: "right top", at: "right bottom" }
         });
@@ -66,7 +64,7 @@ Apollo.CMS.Account.SearchBar = function () {
         $this.DOMInstance.txtUsername.on('keyup', function (event) {
             if (event.keyCode == 13) {
                 var username = $this.DOMInstance.txtUsername.val();
-                getCustomer(isMember, null, username);
+                $this.GetCustomer(isMember, null, username);
             }
         });
 
@@ -76,12 +74,22 @@ Apollo.CMS.Account.SearchBar = function () {
 
         $this.DOMInstance.btnSearch.on('click', function () {
             var username = $this.DOMInstance.txtUsername.val();
-            getCustomer(isMember, null, username);
+            $this.GetCustomer(isMember, null, username);
         });
     };
 
+    // Re-show the previous selected tab and expand the left panel if it is collapsed.
+    var showCurrentTab = function () {
+        var currentTabId = $.cookie('left-panel-current-tab');
+        var currentTab = $('a[href="{0}"]'.format(currentTabId));
+
+        currentTab.tab('show');
+        currentTab.click();
+        Layout.expandLefPanel();
+    };
+
     // Get customer information by Id.
-    var getCustomer = function (isMember, id, username) {
+    $this.GetCustomer = function (isMember, id, username) {
         var params = {
             isMember: isMember,
             id: id,
@@ -99,7 +107,7 @@ Apollo.CMS.Account.SearchBar = function () {
             },
             success: function (result) {
                 $this.DOMInstance.divLeftContent.html(result);
-                Layout.expandLefPanel();
+                //showCurrentTab();
             },
             error: function (xhr, status, err) {
                 CMS.handleAjaxError(xhr, status, err);
@@ -120,4 +128,7 @@ Apollo.CMS.Account.SearchBar = function () {
         cacheDOM();
         initFields();
     };
-}
+};
+
+// Expose to reuse at another page.
+var searchBar = new Apollo.CMS.Account.SearchBar();

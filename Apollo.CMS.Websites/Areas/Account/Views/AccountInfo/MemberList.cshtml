@@ -1,1 +1,18 @@
-﻿
+﻿@using Apollo.CMS.Account.Models.AccountInfo
+@{
+    var members = (IEnumerable<Member>)ViewBag.Members;
+}
+
+<ul class="super-menu list-unstyled">
+    @if ((members != null) && (members.Count() > 0))
+    {
+        foreach (var item in members)
+        { 
+            <li><a href="#" class="search-link" data-customer-id="@item.CustId" data-is-member="true"><span class="icon-row-right"></span>@item.Username</a></li>
+        }
+    }
+    else
+    { 
+        <li><span>@ViewLang.NoData</span></li>
+    }
+</ul>

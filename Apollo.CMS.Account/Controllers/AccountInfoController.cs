@@ -17,6 +17,7 @@ namespace Apollo.CMS.Account.Controllers
     using Apollo.CMS.Account.Services.AccountInfo.Interfaces;
     using Apollo.CMS.Core.Controllers;
     using Apollo.CMS.Core.Resources;
+    using Fanex.Common;
     using Fanex.NAP.Core.Business;
 
     /// <summary>
@@ -106,6 +107,45 @@ namespace Apollo.CMS.Account.Controllers
         public JsonResult GetSuggestedCustomer(GetSuggestedCustomersByUsernameCriteria criteria)
         {
             return Json(this._accountInfoService.GetSuggestedCustomers(criteria));
+        }
+
+        /// <summary>
+        /// Gets up line agent list.
+        /// </summary>
+        /// <param name="agentId">The ID of the agent.</param>
+        /// <returns>Partial view repesents the up line popup.</returns>
+        public PartialViewResult UplineAgents(int? agentId)
+        {
+            ViewBag.UplineList = this._accountInfoService.GetUplineAgents(new GetAgentUplineCriteria
+            {
+                AgentId = Converter.ToInt(agentId)
+            });
+
+            return PartialView("Upline");
+        }
+
+        /// <summary>
+        /// Gets down line agent list.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>Partial view represents the list of down line agent.</returns>
+        [HttpPost]
+        public PartialViewResult GetDownlineAgents(GetDownlineAgentsCriteria criteria)
+        {
+            ViewBag.Agents = this._accountInfoService.GetDownlineAgents(criteria);
+            return PartialView("AgentList");
+        }
+
+        /// <summary>
+        /// Gets down line member list.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>Partial view represents the list of down line member.</returns>
+        [HttpPost]
+        public PartialViewResult GetDownlineMembers(GetDownlineMembersCriteria criteria)
+        {
+            ViewBag.Members = this._accountInfoService.GetDownlineMembers(criteria);
+            return PartialView("MemberList");
         }
     }
 }

@@ -16,29 +16,29 @@ namespace Apollo.CMS.Account.Models.AccountInfo
     {
         public int AgentId { get; set; }
 
-        public short AgentLevel { get; set; }
+        public short? AgentLevel { get; set; }
 
         public string Username { get; set; }
 
         public string Currency { get; set; }
 
-        public byte Status { get; set; }
+        public byte? Status { get; set; }
 
-        public byte BetStatus { get; set; }
+        public byte? BetStatus { get; set; }
 
-        public byte UplineStatus { get; set; }
+        public byte? UplineStatus { get; set; }
 
-        public byte UplineBetStatus { get; set; }
+        public byte? UplineBetStatus { get; set; }
 
-        public decimal MatchLimit { get; set; }
+        public decimal? MatchLimit { get; set; }
 
-        public decimal VirtualMultiplier { get; set; }
+        public decimal? VirtualMultiplier { get; set; }
 
-        public bool DoubleCommLosing { get; set; }
+        public bool? DoubleCommLosing { get; set; }
 
-        public decimal SportCredit { get; set; }
+        public decimal? SportCredit { get; set; }
 
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
 
         public string ParentUsername { get; set; }
     }

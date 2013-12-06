@@ -2,7 +2,7 @@ var Layout = function ($) {
     return {
         collapseExpand: function () {
             var collapseExpand = $('#collapseExpand');
-            var isCollapse = localStorage.getItem('isCollapse');
+            var isExpanded = $.cookie('is-expaned');
 
             collapseExpand.on('click', function () {
                 if (collapseExpand.hasClass('icon-collapse')) {
@@ -12,18 +12,18 @@ var Layout = function ($) {
                 }
             });
 
-            if (isCollapse == 'false') {
+            if (isExpanded == 'false') {
                 Layout.collapseExpandLeftPanel(false, 20);
             }
         },
-        collapseExpandLeftPanel: function (isCollapse, timespan) {
+        collapseExpandLeftPanel: function (isExpanded, timespan) {
             var leftContent = $('#leftContent');
             var mainContent = $('#mainContent');
             var collapseExpand = $('#collapseExpand');
 
             timespan = timespan ? timespan : 100;
 
-            if (isCollapse) {
+            if (isExpanded) {
                 leftContent.animate({
                     width: "toggle"
                 }, timespan, function () {
@@ -31,7 +31,7 @@ var Layout = function ($) {
                     collapseExpand.removeClass('icon-expand').addClass('icon-collapse');
                     collapseExpand.attr('title', 'Collapse');
                     mainContent.removeClass().addClass('col-xs-9 col-sm-9 col-md-10 mainContent');
-                    localStorage.setItem('isCollapse', 'true');
+                    $.cookie('is-expaned', 'true', { path: '/' });
                     Layout.fixLaftPanelWidthForIE();
                 });
             } else {
@@ -42,7 +42,7 @@ var Layout = function ($) {
                     collapseExpand.removeClass('icon-collapse').addClass('icon-expand');
                     collapseExpand.attr('title', 'Expand');
                     mainContent.removeClass().addClass('col-xs-12 col-sm-12 col-md-12 mainContent');
-                    localStorage.setItem('isCollapse', 'false');
+                    $.cookie('is-expaned', 'false', { path: '/' });
                 });
             }
         },
@@ -104,38 +104,6 @@ var Layout = function ($) {
             });
 
             return $obj;
-        },
-        showUplineAgent: function () {
-            var showUpline = $('#view-more, #icon-more'),
-                agentList = $('#list-agent'),
-                iconMore = $('#icon-more');
-
-            showUpline.click(function (event) {
-                agentList.slideToggle('fast', function () {
-                    clearTimeout(Layout.uplineAgentTime);
-                    if (agentList.is(':visible')) {
-                        iconMore.addClass('active');
-                    } else {
-                        iconMore.removeClass('active');
-                    }
-                });
-                event.stopPropagation();
-            });
-
-            agentList.on('mouseover', function () {
-                clearTimeout(Layout.uplineAgentTime);
-            });
-
-            agentList.on('mouseout', function () {
-                Layout.uplineAgentTime = setTimeout('Layout.hideUplineAgent()', 10000);
-            });
-        },
-        hideUplineAgent: function () {
-            var iconMore = $('#icon-more');
-
-            $("#list-agent").fadeOut("fast", function () {
-                iconMore.removeClass('active');
-            });
         }
     };
 } (jQuery);
@@ -153,9 +121,6 @@ $(document).ready(function () {
             Layout.hideShowIconTreeview();
         }
     });
-
-    //show upline agent
-    Layout.showUplineAgent();
 
     // collpase or expand left content
     Layout.collapseExpand();

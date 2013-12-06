@@ -17,7 +17,7 @@ namespace Apollo.CMS.Account.Criteria.AccountInfo
     /// </summary>
     public class GetDownlineMembersCriteria : CriteriaBase
     {
-        public int ParentId { get; set; }
+        public int AgentId { get; set; }
 
         /// <summary>
         /// Get Setting Key.

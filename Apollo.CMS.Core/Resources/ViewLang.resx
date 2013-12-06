@@ -165,8 +165,14 @@
   <data name="Locked" xml:space="preserve">
     <value>Locked</value>
   </data>
+  <data name="Lv" xml:space="preserve">
+    <value>Lv.</value>
+  </data>
   <data name="Member" xml:space="preserve">
     <value>Member</value>
+  </data>
+  <data name="NoData" xml:space="preserve">
+    <value>There is no data.</value>
   </data>
   <data name="Remove" xml:space="preserve">
     <value>Remove</value>

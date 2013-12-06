@@ -9,32 +9,98 @@ Namespace.Register("Apollo.CMS.Account.AccountInfo");
 Apollo.CMS.Account.AccountInfo = function () {
     var $this = this;
     var urls = {
-        GetSuggestedCustomers: CMS.resolveRootUrl('Account/AccountInfo/GetSuggestedCustomer'),
-        GetCustomer: CMS.resolveRootUrl('Account/AccountInfo/GetCustomer'),
-        GetLeftPanel: CMS.resolveRootUrl('Account/AccountInfo/LeftPanel')
+        GetUplineAgents: CMS.resolveRootUrl('Account/AccountInfo/GetUplineAgents'),
+        GetDownlineAgents: CMS.resolveRootUrl('Account/AccountInfo/GetDownlineAgents'),
+        GetDownlineMembers: CMS.resolveRootUrl('Account/AccountInfo/GetDownlineMembers')
     };
+    var uplineTimeout = null;
 
-    // Bind event handlers to controls
-    var initFields = function () {
-        $('[data-toggle="tab"]').live('click', function (event) {
-            var tabId = $(this).attr('href');
-            var tab = $(tabId);
-            //if (tabId === '#'
-            console.log(tabId);
+    // Show list of upline agents.
+    var showUplineAgents = function () {
+        $('#view-more, #icon-more').live('click', function (event) {
+            $('#list-agent').slideToggle('fast', function () {
+                clearTimeout(uplineTimeout);
+                if ($('#list-agent').is(':visible')) {
+                    $('#icon-more').addClass('active');
+                } else {
+                    $('#icon-more').removeClass('active');
+                }
+            });
+
+            event.stopPropagation();
+        });
+
+        $('#list-agent').live('mouseover', function () {
+            clearTimeout(uplineTimeout);
+        });
+
+        $('#list-agent').live('mouseout', function () {
+            uplineTimeout = setTimeout(hideUplineAgent, 10000);
+        });
+
+        $('.search-link[data-customer-id]').live('click', function () {
+            var customerId = $(this).attr('data-customer-id');
+            var isMember = $(this).attr('data-is-member');
+
+            isMember = isMember ? isMember : false;
+
+            searchBar.GetCustomer(isMember, customerId, null);
         });
     };
 
-    // Get customer information by Id.
-    var getCustomer = function (isMember, id, username) {
-        var params = {
-            isMember: isMember,
-            id: id,
-            username: username
-        };
+    // Hide list of upline agents
+    var hideUplineAgent = function () {
+        $("#list-agent").fadeOut("fast", function () {
+            $('#icon-more').removeClass('active');
+        });
+    };
+
+    // Handle selecting tab event.
+    var showTabContent = function () {
+        $('a[data-toggle="tab"]').live('click', function (event) {
+            var customerId = $('#hdnCustomerId').val();
+            var tabId = $(this).attr('href');
+            var tab = $(tabId);
+            var url = '';
+
+            $.cookie('left-panel-current-tab', tabId, { path: '/' });
+
+            if (tabId === '#agent') {
+                var params = {
+                    ParentId: customerId
+                };
+
+                getDownline(params, urls.GetDownlineAgents, tab);
+            } else if (tabId === '#member') {
+                var params = {
+                    AgentId: customerId
+                };
+
+                getDownline(params, urls.GetDownlineMembers, tab);
+            }
+        });
+    };
+
+    // Bind event handlers to controls
+    var bindEventHandlers = function () {
+        showTabContent();
+        showUplineAgents();
+    };
+
+    var initFields = function () {
+        var currentTabId = $.cookie('left-panel-current-tab');
+        var currentTab = $('a[href="{0}"]'.format(currentTabId));
+
+        currentTab.tab('show');
+        currentTab.click();
+    };
+
+    // Get downline data.
+    var getDownline = function (params, url, container) {
 
         $.ajax({
             type: "POST",
-            url: urls.GetLeftPanel,
+            url: url,
             contentType: "application/json; charset=utf-8",
             dataType: "html",
             data: JSON.stringify(params),
@@ -42,8 +108,7 @@ Apollo.CMS.Account.AccountInfo = function () {
                 CMS.loadingBox.show();
             },
             success: function (result) {
-                $this.DOMInstance.divLeftContent.html(result);
-                Layout.collapseExpandLeftPanel(true);
+                container.html(result);
             },
             error: function (xhr, status, err) {
                 CMS.handleAjaxError(xhr, status, err);
@@ -55,6 +120,7 @@ Apollo.CMS.Account.AccountInfo = function () {
     };
 
     $this.InitPage = function () {
+        bindEventHandlers();
         initFields();
     };
 }

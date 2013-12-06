@@ -22,40 +22,40 @@ namespace Apollo.CMS.Account.Models.AccountInfo
 
         public string Currency { get; set; }
 
-        public byte Status { get; set; }
+        public byte? Status { get; set; }
 
-        public byte BetStatus { get; set; }
+        public byte? BetStatus { get; set; }
 
-        public byte UplineStatus { get; set; }
+        public byte? UplineStatus { get; set; }
 
-        public byte UplineBetStatus { get; set; }
+        public byte? UplineBetStatus { get; set; }
 
-        public decimal MatchLimit { get; set; }
+        public decimal? MatchLimit { get; set; }
 
-        public decimal VirtualMultiplier { get; set; }
+        public decimal? VirtualMultiplier { get; set; }
 
-        public byte Danger { get; set; }
+        public byte? Danger { get; set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
 
-        public int Creator { get; set; }
+        public int? Creator { get; set; }
 
-        public DateTime LastLogged { get; set; }
+        public DateTime? LastLogged { get; set; }
 
         public string IPLogin { get; set; }
 
         public string UGroup { get; set; }
 
-        public bool DoubleCommLosing { get; set; }
+        public bool? DoubleCommLosing { get; set; }
 
         public int AgentId { get; set; }
 
-        public bool IsUGroupChanged { get; set; }
+        public bool? IsUGroupChanged { get; set; }
 
-        public decimal SportCredit { get; set; }
+        public decimal? SportCredit { get; set; }
 
         public string AgentUsername { get; set; }
 
-        public short AgentLevel { get; set; }
+        public short? AgentLevel { get; set; }
     }
 }
