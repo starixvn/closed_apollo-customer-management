@@ -12,7 +12,6 @@ var Layout = function ($) {
                 }
             });
 
-            console.log(isCollapse);
             if (isCollapse == 'false') {
                 Layout.collapseExpandLeftPanel(false, 20);
             }
@@ -45,6 +44,13 @@ var Layout = function ($) {
                     mainContent.removeClass().addClass('col-xs-12 col-sm-12 col-md-12 mainContent');
                     localStorage.setItem('isCollapse', 'false');
                 });
+            }
+        },
+        expandLefPanel: function () {
+            var collapseExpand = $('#collapseExpand');
+
+            if (!collapseExpand.hasClass('icon-collapse')) {
+                Layout.collapseExpandLeftPanel(true);
             }
         },
         fixLaftPanelWidthForIE: function () {
