@@ -10,6 +10,7 @@
 namespace Apollo.CMS.Account.Services.TreeView.Implements
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Apollo.CMS.Account.Criteria.TreeView;
     using Apollo.CMS.Account.Models.TreeView;
     using Apollo.CMS.Account.Services.TreeView.Interfaces;
@@ -20,9 +21,13 @@ namespace Apollo.CMS.Account.Services.TreeView.Implements
     /// </summary>
     public class TreeViewService : BaseService, ITreeViewService
     {
-        public IEnumerable<TreeViewModel> GetDataTreeView(TreeViewCriteria criteria)
-        {            
-            return GetListData<TreeViewModel>(criteria);
+        public List<TreeViewModel> GetDataTreeView(TreeViewCriteria criteria)
+        {
+            IEnumerable<TreeViewModel> result = null;
+
+            result = GetListData<TreeViewModel>(criteria);
+
+            return result.ToList();
         }
     }
 }

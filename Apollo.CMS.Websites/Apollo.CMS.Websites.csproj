@@ -192,6 +192,11 @@
     <Content Include="App_Data\NAPFrameworkSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\Account\Resources\TreeView\Images\treeview-1.png" />
+    <Content Include="Areas\Account\Resources\TreeView\Images\treeview-default-line.gif" />
+    <Content Include="Areas\Account\Resources\TreeView\Images\treeview-default-line2.gif" />
+    <Content Include="Areas\Account\Resources\TreeView\Images\treeview-default.gif" />
+    <Content Include="Areas\Account\Resources\TreeView\Images\treeview.png" />
     <Content Include="Areas\Account\Resources\TreeView\treeview.css" />
     <Content Include="Areas\Account\Views\AccountInfo\Scripts\SearchBar.js" />
     <Content Include="Areas\Account\Views\AccountInfo\Scripts\AccountInfo.js" />

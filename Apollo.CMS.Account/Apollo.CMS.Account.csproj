@@ -74,6 +74,7 @@
     <Compile Include="Models\AccountInfo\Member.cs" />
     <Compile Include="Models\AccountInfo\UplineAgent.cs" />
     <Compile Include="Models\TreeView\TreeViewModel.cs" />
+    <Compile Include="Models\TreeView\TreeViewViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountInfo\Implements\AccountInfoService.cs" />
     <Compile Include="Services\AccountInfo\Interfaces\IAccountInfoService.cs" />
