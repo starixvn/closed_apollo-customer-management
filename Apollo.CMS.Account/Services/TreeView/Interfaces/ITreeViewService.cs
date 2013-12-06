@@ -10,9 +10,8 @@
 namespace Apollo.CMS.Account.Services.TreeView.Interfaces
 {
     using System.Collections.Generic;
-    using System.Data;
-    using Apollo.CMS.Account.Models.TreeView;
     using Apollo.CMS.Account.Criteria.TreeView;
+    using Apollo.CMS.Account.Models.TreeView;
 
     /// <summary>
     /// TODO: Update summary.

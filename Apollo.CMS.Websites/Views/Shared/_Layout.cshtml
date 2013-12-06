@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="~/content/site/img/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     @Styles.Render("~/site/common")
+    @Styles.Render("~/site/accountInfo")
     @Scripts.Render("~/scripts/headjs")
     @if (ViewBag.ViewFlags != null && ViewBag.ViewFlags.IsReCheckin)
     {
@@ -60,7 +61,9 @@
         <div class="row content">
             @if (hasPermission == true)
             {
-                @Html.Action("LeftPanel", new RouteValueDictionary(new { Controller = "AccountInfo", Area = "Account" }));
+                <div id="leftContent" class="col-xs-3 col-sm-3 col-md-2 leftContent">
+                    @Html.Action("LeftPanel", new RouteValueDictionary(new { Controller = "AccountInfo", Area = "Account" }));
+                </div>
             }
             <div id="mainContent" class="@leftContentStyle mainContent">
                 @if (hasPermission == true)
@@ -80,6 +83,8 @@
     @Html.Hidden("ResourceNotFoundError", Messages.ResourceNotFoundError)
     @Html.Hidden("InternalError", Messages.InternalError)
     @Scripts.Render("~/scripts/commonJS")
+    @Scripts.Render("~/scripts/searchBar")
+    @Scripts.Render("~/scripts/leftPanel")
     @RenderSection("Foot", false)
 </body>
 </html>

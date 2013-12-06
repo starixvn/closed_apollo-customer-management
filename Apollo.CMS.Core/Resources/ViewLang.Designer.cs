@@ -61,6 +61,24 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account Status.
+        /// </summary>
+        public static string AccountStatus {
+            get {
+                return ResourceManager.GetString("AccountStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active.
+        /// </summary>
+        public static string Active {
+            get {
+                return ResourceManager.GetString("Active", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string Add {
@@ -88,6 +106,15 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bet and Comm Setting.
+        /// </summary>
+        public static string BetAndCommSetting {
+            get {
+                return ResourceManager.GetString("BetAndCommSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bet List.
         /// </summary>
         public static string BetList {
@@ -97,11 +124,47 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bet Status.
+        /// </summary>
+        public static string BetStatus {
+            get {
+                return ResourceManager.GetString("BetStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to C.Lock.
+        /// </summary>
+        public static string CLock {
+            get {
+                return ResourceManager.GetString("CLock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customer Management System.
         /// </summary>
         public static string CMS {
             get {
                 return ResourceManager.GetString("CMS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CommHierachy.
+        /// </summary>
+        public static string CommHierachy {
+            get {
+                return ResourceManager.GetString("CommHierachy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency.
+        /// </summary>
+        public static string Currency {
+            get {
+                return ResourceManager.GetString("Currency", resourceCulture);
             }
         }
         
@@ -133,6 +196,15 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Locked.
+        /// </summary>
+        public static string Locked {
+            get {
+                return ResourceManager.GetString("Locked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Member.
         /// </summary>
         public static string Member {
@@ -151,11 +223,56 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Setting.
+        /// </summary>
+        public static string Setting {
+            get {
+                return ResourceManager.GetString("Setting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shadow.
         /// </summary>
         public static string Shadow {
             get {
                 return ResourceManager.GetString("Shadow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share Hierachy.
+        /// </summary>
+        public static string ShareHierachy {
+            get {
+                return ResourceManager.GetString("ShareHierachy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share Setting.
+        /// </summary>
+        public static string ShareSetting {
+            get {
+                return ResourceManager.GetString("ShareSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sport Credit.
+        /// </summary>
+        public static string SportCredit {
+            get {
+                return ResourceManager.GetString("SportCredit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopped.
+        /// </summary>
+        public static string Stopped {
+            get {
+                return ResourceManager.GetString("Stopped", resourceCulture);
             }
         }
         
@@ -169,11 +286,38 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upline.
+        /// </summary>
+        public static string Upline {
+            get {
+                return ResourceManager.GetString("Upline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Log.
+        /// </summary>
+        public static string UserLog {
+            get {
+                return ResourceManager.GetString("UserLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
         public static string UserName {
             get {
                 return ResourceManager.GetString("UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View more upline.
+        /// </summary>
+        public static string ViewMoreUpline {
+            get {
+                return ResourceManager.GetString("ViewMoreUpline", resourceCulture);
             }
         }
     }

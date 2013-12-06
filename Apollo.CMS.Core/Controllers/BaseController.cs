@@ -65,7 +65,7 @@ namespace Apollo.CMS.Core.Controllers
             this._menuService = new MenuService();
             this._userService = new UserService { ServiceContext = ServiceContext };
 
-            ViewBag.HasAccountManagementPermission = this.HasRight(ApolloCMSFunctionKeys.ManageAccount, Constant.Policy.Read);
+            ViewBag.HasAccountManagementPermission = this.HasRight(ApolloCMSFunctionKeys.SearchAccount, Constant.Policy.Read);
         }
 
         /// <summary>

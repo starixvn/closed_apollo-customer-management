@@ -29,6 +29,7 @@ namespace Apollo.CMS.Websites
             RegisterLoginBundles(bundles);
             RegisterMessageListBundles(bundles);
             RegisterNewMessageBundles(bundles);
+            RegisterAccountInfoBundles(bundles);
             RegisterTreeviewBundles(bundles);
 
             bundles.FileSetOrderList.Clear();
@@ -136,20 +137,36 @@ namespace Apollo.CMS.Websites
         }
 
         /// <summary>
-        /// Registers the treeview bundles.
+        /// Registers bundles for left panel.
+        /// </summary>
+        /// <param name="bundles">The bundle collection.</param>
+        private static void RegisterAccountInfoBundles(BundleCollection bundles)
+        {
+            bundles.AddAndInclude(
+                "~/site/accountInfo",
+                "~/Areas/Account/Resources/AccountInfo/accountInfo.less");
+
+            bundles.Add(new ScriptBundle("~/scripts/searchBar").Include(
+                "~/Areas/Account/Views/AccountInfo/Scripts/SearchBar.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/leftPanel").Include(
+                "~/Areas/Account/Views/AccountInfo/Scripts/AccountInfo.js"));
+        }
+
+        /// <summary>
+        /// Registers the tree view bundles.
         /// </summary>
         /// <param name="bundles">The bundles collection.</param>
         private static void RegisterTreeviewBundles(BundleCollection bundles)
         {
             bundles.AddAndInclude(
-                "~/site/treeView",                
+                "~/site/treeView",
                 "~/Areas/Account/Resources/TreeView/treeview.css");
 
             bundles.Add(new ScriptBundle("~/scripts/treeView").Include(
                 "~/Areas/Account/Views/TreeView/Scripts/jquery.treeview.js",
                 "~/Areas/Account/Views/TreeView/Scripts/jquery.treeview.async.js",
                 "~/Areas/Account/Views/TreeView/Scripts/treeview.js"));
-
         }
     }
 

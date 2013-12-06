@@ -62,10 +62,10 @@
     <Reference Include="Fanex.Logging">
       <HintPath>..\Dependencies\Fanex\Fanex.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.NAP.Core">
+    <Reference Include="Fanex.NAP.Core, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\Dependencies\Fanex\Fanex.NAP.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.NAP.Framework">
+    <Reference Include="Fanex.NAP.Framework, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\Dependencies\Fanex\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
     <Reference Include="JavaScriptEngineSwitcher.Core">
@@ -198,6 +198,8 @@
     <Content Include="Areas\Account\Resources\TreeView\Images\treeview-default.gif" />
     <Content Include="Areas\Account\Resources\TreeView\Images\treeview.png" />
     <Content Include="Areas\Account\Resources\TreeView\treeview.css" />
+    <Content Include="Areas\Account\Views\AccountInfo\Scripts\SearchBar.js" />
+    <Content Include="Areas\Account\Views\AccountInfo\Scripts\AccountInfo.js" />
     <Content Include="Areas\Account\Views\TreeView\Scripts\jquery.treeview.async.js" />
     <Content Include="Areas\Account\Views\TreeView\Scripts\jquery.treeview.js" />
     <Content Include="Areas\Account\Views\TreeView\Scripts\treeview.js" />
@@ -255,9 +257,14 @@
     <Content Include="Content\lib\jquery-ui\jquery.selectBoxIt.css" />
     <Content Include="Global.asax" />
     <Content Include="Areas\Account\Views\Web.config" />
-    <Content Include="Areas\Account\Views\AccountInfo\LeftPanel.cshtml" />
+    <Content Include="Areas\Account\Views\AccountInfo\AgentLeftPanel.cshtml" />
     <Content Include="Areas\Account\Views\AccountInfo\Search.cshtml" />
     <Content Include="Areas\Account\Views\TreeView\Index.cshtml" />
+    <Content Include="Areas\Account\Views\AccountInfo\MemberLeftPanel.cshtml" />
+    <Content Include="Areas\Account\Views\AccountInfo\AgentList.cshtml" />
+    <Content Include="Areas\Account\Views\AccountInfo\MemberList.cshtml" />
+    <Content Include="Areas\Account\Views\AccountInfo\Upline.cshtml" />
+    <Content Include="Areas\Account\Resources\AccountInfo\accountInfo.less" />
     <None Include="Content\site\font\MyriadPro-Cond.eot" />
     <None Include="Content\site\font\MyriadPro-Cond.ttf" />
     <None Include="Content\site\font\MyriadPro-Cond.woff" />
@@ -420,6 +427,9 @@
       <Project>{F3C19221-A817-434E-9791-E67078104BA8}</Project>
       <Name>Apollo.CMS.Message</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
