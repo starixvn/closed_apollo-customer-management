@@ -88,6 +88,10 @@ Apollo.CMS.Account.SearchBar = function () {
         Layout.expandLefPanel();
     };
 
+    $this.test = function () {
+        alert('test');
+    };
+
     // Get customer information by Id.
     $this.GetCustomer = function (isMember, id, username) {
         var params = {
