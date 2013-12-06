@@ -1,12 +1,12 @@
 ﻿/* File Created: December 5, 2013 */
 $(document).ready(function () {
-    var searchBar = new Apollo.CMS.AccountInfo.SearchBar();
+    var searchBar = new Apollo.CMS.Account.SearchBar();
 
     searchBar.InitPage();
 });
 
-Namespace.Register("Apollo.CMS.AccountInfo.SearchBar");
-Apollo.CMS.AccountInfo.SearchBar = function () {
+Namespace.Register("Apollo.CMS.Account.SearchBar");
+Apollo.CMS.Account.SearchBar = function () {
     var $this = this;
     var urls = {
         GetSuggestedCustomers: CMS.resolveRootUrl('Account/AccountInfo/GetSuggestedCustomer'),
