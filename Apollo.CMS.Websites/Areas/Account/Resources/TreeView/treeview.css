@@ -1,3 +1,4 @@
+
 .treeview, .treeview ul {
     padding: 0;
     margin: 0;
@@ -5,7 +6,7 @@
 }
 
 .treeview .hitarea {
-    background: url("images/treeview-default.gif") no-repeat scroll 0 -111px #FFF;
+    background: url("images/treeview-default.gif") no-repeat scroll 0 -111px;
     height: 16px;
     width: 16px;
     margin-left: -16px;
@@ -21,6 +22,13 @@
 .treeview li {
     margin: 0;
     padding: 0 0 3px 16px;
+    color: #3a8bc0;
+    background: url(images/treeview-default-line.gif) 0 0 no-repeat;
+    cursor: pointer;
+}
+
+.treeview li span:hover {
+    color: #FF6C14;
 }
 
 .treeview a.selected {
@@ -37,19 +45,14 @@
     cursor: pointer;
 }
 
-.treeview li {
-    background: url(images/treeview-default-line.gif) 0 0 no-repeat;
-}
 .treeview li.collapsable, .treeview li.expandable {
     background: url(images/treeview-default-line2.gif) 0 0 repeat-y;
 }
 
-.treeview .expandable-hitarea 
-{
-    background: url(images/treeview-default.gif) -32px -67px no-repeat #FFF;
+.treeview .expandable-hitarea {
+    background: url(images/treeview-default.gif) -32px -67px no-repeat;
 }
-.treeview li.last 
-{
+.treeview li.last {
     background: url(images/treeview-default-line.gif) 0 -5088px no-repeat;
 }
 .treeview li.lastCollapsable, .treeview li.lastExpandable {
