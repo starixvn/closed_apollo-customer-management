@@ -17,7 +17,7 @@ namespace Apollo.CMS.Account.Criteria.AccountInfo
     /// </summary>
     public class GetMemberInfoCriteria : CriteriaBase
     {
-        public int CustId { get; set; }
+        public int? CustId { get; set; }
 
         public string Username { get; set; }
 

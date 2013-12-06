@@ -57,28 +57,35 @@ Apollo.CMS.AccountInfo.SearchBar = function () {
                 });
             },
             select: function (event, ui) {
-                getCustomer(isMember, ui.item.id);
+                getCustomer(isMember, ui.item.id, null);
             },
             position: { my: "right top", at: "right bottom" }
         });
 
         // Catch enter key of Search text-box.
-        $this.DOMInstance.txtUsername.keyup(function (event) {
+        $this.DOMInstance.txtUsername.on('keyup', function (event) {
             if (event.keyCode == 13) {
-                getCustomerByUsername();
+                var username = $this.DOMInstance.txtUsername.val();
+                getCustomer(isMember, null, username);
             }
         });
 
-        $this.DOMInstance.btnSearch.click(function () {
-            getCustomerByUsername();
+        $this.DOMInstance.txtUsername.on('focus', function (event) {
+            $this.DOMInstance.txtUsername.select();
+        });
+
+        $this.DOMInstance.btnSearch.on('click', function () {
+            var username = $this.DOMInstance.txtUsername.val();
+            getCustomer(isMember, null, username);
         });
     };
 
     // Get customer information by Id.
-    var getCustomer = function (isMember, id) {
+    var getCustomer = function (isMember, id, username) {
         var params = {
             isMember: isMember,
-            id: id
+            id: id,
+            username: username
         };
 
         $.ajax({
@@ -92,35 +99,7 @@ Apollo.CMS.AccountInfo.SearchBar = function () {
             },
             success: function (result) {
                 $this.DOMInstance.divLeftContent.html(result);
-            },
-            error: function (xhr, status, err) {
-                CMS.handleAjaxError(xhr, status, err);
-            },
-            complete: function () {
-                CMS.loadingBox.close();
-            }
-        });
-    };
-
-    // Get customer information by his or her username.
-    var getCustomerByUsername = function () {
-        var username = $this.DOMInstance.txtUsername.val();
-        var params = {
-            isMember: isMember,
-            username: username
-        };
-
-        $.ajax({
-            type: "POST",
-            url: urls.GetCustomer,
-            contentType: "application/json; charset=utf-8",
-            dataType: "html",
-            data: JSON.stringify(params),
-            beforeSend: function () {
-                CMS.loadingBox.show();
-            },
-            success: function (result) {
-                $this.DOMInstance.divLeftContent.html(result);
+                Layout.collapseExpandLeftPanel(true);
             },
             error: function (xhr, status, err) {
                 CMS.handleAjaxError(xhr, status, err);

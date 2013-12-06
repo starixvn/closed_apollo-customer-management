@@ -1,5 +1,6 @@
 ﻿@using Apollo.CMS.Account.Models.AccountInfo
 @using Apollo.CMS.Core.Extensions
+@using Apollo.CMS.Core.Helpers
 @using Apollo.CMS.Core.Services
 @{
     var customer = (AgentInfo)ViewBag.Customer;
@@ -24,12 +25,7 @@
 <div class="row item no-border view-more">
     <div class="col-xs-12 col-sm-12 col-md-12 text-right">
         <div href="javascript:;" id="show-upline" class="upline-agent">
-        <span class="view-more" id="view-more">View more upline</span> <span class="icon-upline" id="icon-more"></span>
-            <ul class="list-agent list-unstyled" id="list-agent">
-                <li><span class="level pull-left">Lv.2</span><a href="#" class="pull-right">511</a></li>
-                <li><span class="level pull-left">Lv.1</span><a href="#" class="pull-right">51</a></li>
-                <li><span class="level icon-super pull-left"></span><a href="#" class="pull-right">Super</a></li>
-            </ul>
+            <span class="view-more" id="view-more">@ViewLang.ViewMoreUpline</span> <span class="icon-upline" id="icon-more"></span>            
         </div>
     </div>
 </div>
@@ -56,11 +52,11 @@
     </div>
     <div class="row item-info">
         <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.AccountStatus</div>
-        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="active">@customer.Status</b></div>
+        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="active">@StatusHelper.GetStatus(customer.Status, customer.UplineStatus)</b></div>
     </div>
     <div class="row item-info">
         <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.BetStatus</div>
-        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="locked">@customer.BetStatus</b></div>
+        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="locked">@StatusHelper.GetStatus(customer.BetStatus, customer.UplineBetStatus)</b></div>
     </div>
     <div class="row item-info">
         <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.SportCredit</div>
@@ -72,27 +68,23 @@
         <!-- Nav tabs -->
         <!--<ul class="nav nav-tabs search-member">-->
         <ul class="nav nav-tabs">
-            <li class="setting active"><a href="#home" data-toggle="tab">Setting</a></li>
-            <li><a href="#agent" data-toggle="tab">Agent</a></li>
-            <li><a href="#member" data-toggle="tab">Member</a></li>
+            <li class="setting active"><a href="#home" data-toggle="tab">@ViewLang.Setting</a></li>
+            <li><a href="#agent" data-toggle="tab">@ViewLang.Agent</a></li>
+            <li><a href="#member" data-toggle="tab">@ViewLang.Member</a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
             <div class="tab-pane active" id="home">
                 <ul class="super-menu list-unstyled">
-                    <li><a href="#"><span class="icon-row-right"></span>Share Setting</a></li>
-                    <li><a href="#"><span class="icon-row-right"></span>Bet and Comm Setting</a></li>
-                    <li><a href="#"><span class="icon-row-right"></span>Share Hierachy</a></li>
-                    <li><a href="#"><span class="icon-row-right"></span>Comm Hierachy</a></li>
-                    <li><a href="#"><span class="icon-row-right"></span>User Log</a></li>
+                    <li><a href="#"><span class="icon-row-right"></span>@ViewLang.ShareSetting</a></li>
+                    <li><a href="#"><span class="icon-row-right"></span>@ViewLang.BetAndCommSetting</a></li>
+                    <li><a href="#"><span class="icon-row-right"></span>@ViewLang.ShareHierachy</a></li>
+                    <li><a href="#"><span class="icon-row-right"></span>@ViewLang.CommHierachy</a></li>
+                    <li><a href="#"><span class="icon-row-right"></span>@ViewLang.UserLog</a></li>
                 </ul>
             </div>
-            <div class="tab-pane" id="agent">
-                Agents
-            </div>
-            <div class="tab-pane" id="member">
-                Members
-            </div>
+            <div class="tab-pane" id="agent"></div>
+            <div class="tab-pane" id="member"></div>
         </div>
     </div>
 </div>

@@ -52,7 +52,7 @@ namespace Apollo.CMS.Account.Models.AccountInfo
 
         public bool IsUGroupChanged { get; set; }
 
-        public decimal SoprtCredit { get; set; }
+        public decimal SportCredit { get; set; }
 
         public string AgentUsername { get; set; }
 

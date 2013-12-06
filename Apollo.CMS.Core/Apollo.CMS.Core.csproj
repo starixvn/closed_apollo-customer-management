@@ -51,10 +51,10 @@
     <Reference Include="Fanex.Logging">
       <HintPath>..\Dependencies\Fanex\Fanex.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.NAP.Core">
+    <Reference Include="Fanex.NAP.Core, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\Dependencies\Fanex\Fanex.NAP.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.NAP.Framework">
+    <Reference Include="Fanex.NAP.Framework, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\Dependencies\Fanex\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -91,6 +91,7 @@
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\NumberExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Helpers\StatusHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Messages.Designer.cs">
       <AutoGen>True</AutoGen>

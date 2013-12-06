@@ -10,7 +10,6 @@
 namespace Apollo.CMS.Account.Controllers
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Web.Mvc;
     using Apollo.CMS.Account.Criteria.AccountInfo;
     using Apollo.CMS.Account.Models.AccountInfo;
@@ -18,6 +17,7 @@ namespace Apollo.CMS.Account.Controllers
     using Apollo.CMS.Account.Services.AccountInfo.Interfaces;
     using Apollo.CMS.Core.Controllers;
     using Apollo.CMS.Core.Resources;
+    using Fanex.NAP.Core.Business;
 
     /// <summary>
     /// Common controller.
@@ -34,6 +34,7 @@ namespace Apollo.CMS.Account.Controllers
         public AccountInfoController(IAccountInfoService accountInfoService)
         {
             this._accountInfoService = accountInfoService ?? new AccountInfoService();
+            ViewBag.HasCustomerSettingPermission = this.HasRight(ApolloCMSFunctionKeys.CustomerSetting, Constant.Policy.Read);
         }
 
         /// <summary>
@@ -41,14 +42,16 @@ namespace Apollo.CMS.Account.Controllers
         /// </summary>
         /// <param name="isMember">Whether the passed ID is of a member or not.</param>
         /// <param name="id">The ID of the customer.</param>
+        /// <param name="username">The username of the customer.</param>
         /// <returns>Partial menu view.</returns>
-        public PartialViewResult LeftPanel(bool isMember = false, int id = 0)
+        public PartialViewResult LeftPanel(bool isMember = false, int? id = null, string username = null)
         {
             if (isMember)
             {
                 var customer = this._accountInfoService.GetMemberInfo(new GetMemberInfoCriteria
                 {
-                    CustId = id
+                    CustId = id,
+                    Username = username
                 });
 
                 ViewBag.Customer = customer == null ? new MemberInfo() : customer;
@@ -59,7 +62,8 @@ namespace Apollo.CMS.Account.Controllers
             {
                 var customer = this._accountInfoService.GetAgentInfo(new GetAgentInfoCriteria
                 {
-                    AgentId = id
+                    AgentId = id,
+                    Username = username
                 });
 
                 ViewBag.Customer = customer == null ? new AgentInfo() : customer;
@@ -102,30 +106,6 @@ namespace Apollo.CMS.Account.Controllers
         public JsonResult GetSuggestedCustomer(GetSuggestedCustomersByUsernameCriteria criteria)
         {
             return Json(this._accountInfoService.GetSuggestedCustomers(criteria));
-        }
-
-        /// <summary>
-        /// Gets customer information.
-        /// </summary>
-        /// <param name="isMember">Whether the passed ID is of a member or not.</param>
-        /// <param name="username">The username of the customer.</param>
-        /// <returns>JSON object represents the list of suggested customers.</returns>
-        [HttpPost]
-        public PartialViewResult GetCustomer(bool isMember, string username)
-        {
-            var customer = new Member();
-            var customers = this._accountInfoService.GetSuggestedCustomers(new GetSuggestedCustomersByUsernameCriteria
-            {
-                IsMember = isMember,
-                Username = username
-            });
-
-            if ((customers != null) && (customers.Count() > 0))
-            {
-                customer = customers.First();
-            }
-
-            return LeftPanel(isMember, customer.CustId);
         }
     }
 }
