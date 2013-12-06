@@ -12,10 +12,9 @@ namespace Apollo.CMS.Account.Controllers
     using System.Linq;
     using System.Web.Mvc;
     using Apollo.CMS.Account.Criteria.TreeView;
+    using Apollo.CMS.Account.Models.TreeView;
     using Apollo.CMS.Account.Services.TreeView.Implements;
     using Apollo.CMS.Core.Controllers;
-    using System.Collections.Generic;
-    using Apollo.CMS.Account.Models.TreeView;
 
     /// <summary>
     /// TODO: Update summary.
@@ -29,115 +28,161 @@ namespace Apollo.CMS.Account.Controllers
             _treeViewServicer = new TreeViewService();
         }
 
+        /// <summary>
+        /// Indexes this instance.
+        /// </summary>
+        /// <returns>Action result.</returns>
         public ActionResult Index()
         {
-            ViewBag.AgentId = 62;
+            ViewBag.AgentId = 579;
             return View();
         }
 
-        public JsonResult CreateTreeView()
+        /// <summary>
+        /// Creates the TreeView by node.
+        /// </summary>
+        /// <param name="agentId">The agent identifier.</param>
+        /// <returns>JSON result.</returns>
+        public JsonResult CreateTreeViewByNode(int agentId)
         {
-            var criteria = new TreeViewCriteria()
+            var criteria = new GetAgentDownlineByIdCriteria()
             {
-                AgentId = 6741
+                AgentId = agentId
+            };
+
+            var dataTreeView = _treeViewServicer.GetDataTreeViewBranch(criteria);
+            var rootData = new TreeViewModel();
+            var rootList = new TreeViewViewModel();
+            if (dataTreeView != null && dataTreeView.Any())
+            {
+                TreeViewViewModel hierarchyTrees = new TreeViewViewModel();
+                TreeViewViewModel.Node objHTree = null;
+
+                foreach (var node in dataTreeView)
+                {
+                    objHTree = new TreeViewViewModel.Node()
+                    {
+                        Id = node.AgentId.Value,
+                        Username = node.Username,
+                        HasAgentDownline = node.HasAgentDownline.Value,
+                        ParentId = node.ParentId.HasValue ? node.ParentId.Value : 0,
+                        Children = null
+                    };
+
+                    hierarchyTrees.Add(objHTree);
+                }
+
+                return Json(hierarchyTrees, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new TreeViewViewModel(), JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Creates the TreeView.
+        /// </summary>
+        /// <param name="agentId">The agent identifier.</param>
+        /// <returns>JSON result.</returns>
+        public JsonResult CreateTreeView(int agentId)
+        {
+            var criteria = new GetAllAgentAndAgentDonwlineByIdCriteria()
+            {
+                AgentId = agentId
             };
 
             var dataTreeView = _treeViewServicer.GetDataTreeView(criteria);
-
-            TreeViewViewModel hierarchyTrees = new TreeViewViewModel();
-            TreeViewViewModel.TreeView objHTree = null;
-
-            foreach (var node in dataTreeView)
+            var rootData = new TreeViewModel();
+            var rootList = new TreeViewViewModel();
+            if (dataTreeView != null && dataTreeView.Any())
             {
-                objHTree = new TreeViewViewModel.TreeView();  
+                rootData = dataTreeView.Where(x => x.AgentLevel == 0).FirstOrDefault();
 
+                TreeViewViewModel hierarchyTrees = new TreeViewViewModel();
+                TreeViewViewModel.Node objHTree = null;
 
+                foreach (var node in dataTreeView)
+                {
+                    objHTree = new TreeViewViewModel.Node()
+                    {
+                        Id = node.AgentId.Value,
+                        Username = node.Username,
+                        HasAgentDownline = node.HasAgentDownline.Value,
+                        ParentId = node.ParentId.HasValue ? node.ParentId.Value : 0,
+                        Children = null
+                    };
+
+                    hierarchyTrees.Add(objHTree);
+                }
+
+                var listParentId = dataTreeView.Where(y => y.ParentId != null).Select(x => x.ParentId).Distinct().Reverse();
+                var children = new TreeViewViewModel.Node();
+                var childrenNodes = new TreeViewViewModel.Node();
+                bool isTheFirst = true;
+                foreach (var parentId in listParentId)
+                {
+                    var child = new TreeViewViewModel();
+
+                    var parentUsername = hierarchyTrees.Where(x => x.Id == parentId).FirstOrDefault();
+
+                    var treeNode = new TreeViewViewModel.Node();
+                    if (isTheFirst)
+                    {
+                        dataTreeView.Where(y => y.ParentId == parentId.Value).ToList().ForEach(x => child.Add(new TreeViewViewModel.Node
+                        {
+                            Id = x.AgentId.Value,
+                            Username = x.Username,
+                            HasAgentDownline = x.HasAgentDownline.Value,
+                            Classes = x.AgentId == agentId ? "hover" : string.Empty
+                        }));
+
+                        isTheFirst = false;
+                    }
+                    else
+                    {
+                        var childData = dataTreeView.Where(y => y.ParentId == parentId.Value);
+                        foreach (var item in childData)
+                        {
+                            if (item.AgentId == childrenNodes.Id)
+                            {
+                                child.Add(childrenNodes);
+                            }
+                            else
+                            {
+                                child.Add(new TreeViewViewModel.Node
+                                {
+                                    Id = item.AgentId.Value,
+                                    Username = item.Username,
+                                    HasAgentDownline = item.HasAgentDownline.Value,
+                                });
+                            }
+                        }
+                    }
+
+                    children = new TreeViewViewModel.Node()
+                    {
+                        Children = child,
+                        Id = parentId.Value,
+                        Username = parentUsername.Username,
+                        HasAgentDownline = parentUsername.HasAgentDownline,
+                        Expanded = child != null && child.Any() ? true : false
+                    };
+
+                    childrenNodes = children;
+                }
+
+                var root = new TreeViewViewModel.Node()
+                {
+                    Id = rootData.AgentId.Value,
+                    Username = rootData.Username,
+                    HasAgentDownline = rootData.HasAgentDownline.Value,
+                    Expanded = true,
+                    Children = childrenNodes.Children
+                };
+
+                rootList.Add(root);
             }
 
-
-            //var children = new List<TreeViewViewModel>();
-
-            //var listChildren = new Dictionary<int, List<TreeViewViewModel>>();
-            //var rootData = new TreeViewModel();
-
-
-            //if (dataTreeView != null && dataTreeView.Any())
-            //{
-            //    var parentIds = dataTreeView.Where(p => p.ParentId != null).Select(x => x.ParentId).Distinct();
-
-            //    var listParent = dataTreeView.Where(x => parentIds.Contains(x.AgentId.Value));
-
-            //    rootData = dataTreeView.Where(x => x.AgentLevel == 0).FirstOrDefault();
-
-            //    foreach (var item in parentIds)
-            //    {
-            //        var childrenByParentId = dataTreeView.Where(x => x.ParentId == item.Value);
-            //        children = new List<TreeViewViewModel>();
-            //        foreach (var child in childrenByParentId)
-            //        {
-            //            children.Add(new TreeViewViewModel
-            //            {
-            //                Id = child.AgentId.Value,
-            //                Username = child.Username,
-            //                HasAgentDownline = child.HasAgentDownline.Value,
-            //                Children = null
-            //            });
-            //        }
-
-            //        listChildren.Add(item.Value, children);
-            //    }
-
-
-
-
-            //    var root = new TreeViewViewModel();
-            //    children = listChildren.Where(x => x.Key == rootData.AgentId).Select(y => y.Value).FirstOrDefault();
-            //    root = new TreeViewViewModel()
-            //    {
-            //        Id = rootData.AgentId.Value,
-            //        Username = rootData.Username,
-            //        Children = CreateChildNode(children, listChildren),
-            //        Expanded = true
-            //    };
-
-            //    var rootList = new List<TreeViewViewModel>();
-            //    rootList.Add(root);
-
-            //    return Json(tree, JsonRequestBehavior.AllowGet);
-            //}
-
-            return Json(new List<TreeViewViewModel>(), JsonRequestBehavior.AllowGet);
+            return Json(rootList, JsonRequestBehavior.AllowGet);
         }
-
-        //private List<TreeViewViewModel> CreateChildNode(List<TreeViewViewModel> listOfChildren, Dictionary<int, List<TreeViewViewModel>> listOfParents)
-        //{
-        //    var child = new List<TreeViewViewModel>();
-        //    var hasAgentDownline = false;
-        //    if (listOfChildren != null && listOfChildren.Any())
-        //    {
-        //        var listOfChild = new List<TreeViewViewModel>();
-        //        foreach (var children in listOfChildren)
-        //        {
-        //            if (listOfParents.Keys.Contains(children.Id))
-        //            {
-        //                listOfChild = listOfParents[children.Id];
-        //                child.Add(new TreeViewViewModel
-        //                {
-        //                    Id = children.Id,
-        //                    Username = children.Username,
-        //                    HasAgentDownline = children.HasAgentDownline,
-        //                    Children = children.HasAgentDownline ? listOfChild : null
-        //                });
-
-        //                hasAgentDownline = children.HasAgentDownline;
-        //            }
-        //        }
-
-        //        return hasAgentDownline ? CreateChildNode(child[0].Children, listOfParents) : null;
-        //    }
-
-        //    return child;
-        //}
-
     }
 }

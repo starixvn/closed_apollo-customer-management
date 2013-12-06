@@ -10,13 +10,13 @@ Apollo.CMS.Account.TreeView = function () {
 
     self.LoadTreeView = function () {
         var accountTreeView = $("#account-treeview");
+        var rootId = accountTreeView.attr("data-agentid");
         accountTreeView.treeview({
-            url: "TreeView/CreateTreeView",
-            link: "",
-            linkdirectAgents: "",
-            agentId: 26,
+            url: "TreeView/CreateTreeViewByNode",
+            link: "<span href='#' data-agentid='{1}' data-username='{2}'>{0}</span>",            
+            agentId: rootId,
             showRoot: true,
-            rootLink: "TreeView/CreateTreeView"
+            rootLink: "TreeView/CreateTreeView?agentid=" + rootId
         });
     };
 

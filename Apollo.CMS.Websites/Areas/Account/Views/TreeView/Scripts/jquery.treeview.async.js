@@ -29,7 +29,7 @@
                 if (this.Id != undefined)
                 {
                     //var current = $("<li/>").attr("id", this.Id).html("<span>" + stringFormat((showRoot? settings.linkdirectAgents : settings.link) , this.Id, this.Username, this.Username, root)  + "</span>").appendTo(parent);
-                    var current = $("<li/>").attr("id", this.Id).html("<span>" +  this.Username + "</span>").appendTo(parent);
+                    var current = $("<li/>").attr("id", this.Id).html(stringFormat(settings.link,this.Username,this.Id,this.Username)).appendTo(parent);
 
                     if (this.Classes) {
                         current.children("span").addClass(this.Classes);
