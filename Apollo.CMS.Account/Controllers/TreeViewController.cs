@@ -97,22 +97,7 @@ namespace Apollo.CMS.Account.Controllers
             {
                 rootData = dataTreeView.Where(x => x.AgentLevel == 0).FirstOrDefault();
 
-                TreeViewViewModel hierarchyTrees = new TreeViewViewModel();
-                TreeViewViewModel.Node objHTree = null;
-
-                foreach (var node in dataTreeView)
-                {
-                    objHTree = new TreeViewViewModel.Node()
-                    {
-                        Id = node.AgentId.Value,
-                        Username = node.Username,
-                        HasAgentDownline = node.HasAgentDownline.Value,
-                        ParentId = node.ParentId.HasValue ? node.ParentId.Value : 0,
-                        Children = null
-                    };
-
-                    hierarchyTrees.Add(objHTree);
-                }
+                TreeViewViewModel hierarchyTrees = HierarchyTrees(dataTreeView);
 
                 var listParentId = dataTreeView.Where(y => y.ParentId != null).Select(x => x.ParentId).Distinct().Reverse();
                 var children = new TreeViewViewModel.Node();
@@ -183,6 +168,33 @@ namespace Apollo.CMS.Account.Controllers
             }
 
             return Json(rootList, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Hierarchies the trees.
+        /// </summary>
+        /// <param name="dataTreeView">The data TreeView.</param>
+        /// <returns>Tree View View Model. </returns>
+        private static TreeViewViewModel HierarchyTrees(System.Collections.Generic.List<TreeViewModel> dataTreeView)
+        {
+            TreeViewViewModel hierarchyTrees = new TreeViewViewModel();
+            TreeViewViewModel.Node objHTree = null;
+
+            foreach (var node in dataTreeView)
+            {
+                objHTree = new TreeViewViewModel.Node()
+                {
+                    Id = node.AgentId.Value,
+                    Username = node.Username,
+                    HasAgentDownline = node.HasAgentDownline.Value,
+                    ParentId = node.ParentId.HasValue ? node.ParentId.Value : 0,
+                    Children = null
+                };
+
+                hierarchyTrees.Add(objHTree);
+            }
+
+            return hierarchyTrees;
         }
     }
 }

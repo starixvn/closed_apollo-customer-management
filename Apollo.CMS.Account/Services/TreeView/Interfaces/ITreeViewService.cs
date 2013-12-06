@@ -19,6 +19,7 @@ namespace Apollo.CMS.Account.Services.TreeView.Interfaces
     public interface ITreeViewService
     {
         List<TreeViewModel> GetDataTreeView(GetAllAgentAndAgentDonwlineByIdCriteria criteria);
+
         List<TreeViewModel> GetDataTreeViewBranch(GetAgentDownlineByIdCriteria criteria);
     }
 }

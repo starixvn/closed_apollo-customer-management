@@ -1,8 +1,11 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="TreeViewViewModel.cs" company="">
-// TODO: Update copyright text.
+﻿// --------------------------------------------------------------------------
+// <copyright file="TreeViewViewModel.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Terry.Nguyen" date="2013.12.6">Created</change>
+// </history>
 
 namespace Apollo.CMS.Account.Models.TreeView
 {
@@ -16,6 +19,9 @@ namespace Apollo.CMS.Account.Models.TreeView
     /// </summary>
     public class TreeViewViewModel : List<TreeViewViewModel.Node>
     {
+        /// <summary>
+        /// Tree node class.
+        /// </summary>
         public class Node
         {
             public int Id { get; set; }
