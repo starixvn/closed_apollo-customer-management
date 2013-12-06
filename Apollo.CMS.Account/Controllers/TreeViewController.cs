@@ -44,24 +44,15 @@ namespace Apollo.CMS.Account.Controllers
 
             var dataTreeView = _treeViewServicer.GetDataTreeView(criteria);
 
-            var tree = from m in dataTreeView
-                       where m.AgentLevel == null
-                       select new 
-                        {
-                            Id = m.AgentId.Value,
-                            Username = m.Username,
-                            HasAgentDownline = m.HasAgentDownline.Value,
-                            Expanded = true,
-                            Children = from m2 in dataTreeView
-                                       where m2.ParentId == m.AgentId
-                                       select new 
-                                       { 
-                                         Id = m2.AgentId.Value,
-                                         Username = m2.Username,
-                                         Expanded = true,
-                                         HasAgentDownline = m2.HasAgentDownline.Value
-                                       }
-                        };
+            TreeViewViewModel hierarchyTrees = new TreeViewViewModel();
+            TreeViewViewModel.TreeView objHTree = null;
+
+            foreach (var node in dataTreeView)
+            {
+                objHTree = new TreeViewViewModel.TreeView();  
+
+
+            }
 
 
             //var children = new List<TreeViewViewModel>();
@@ -115,38 +106,38 @@ namespace Apollo.CMS.Account.Controllers
             //    return Json(tree, JsonRequestBehavior.AllowGet);
             //}
 
-            return Json(tree, JsonRequestBehavior.AllowGet);
+            return Json(new List<TreeViewViewModel>(), JsonRequestBehavior.AllowGet);
         }
 
-        private List<TreeViewViewModel> CreateChildNode(List<TreeViewViewModel> listOfChildren, Dictionary<int, List<TreeViewViewModel>> listOfParents)
-        {
-            var child = new List<TreeViewViewModel>();
-            var hasAgentDownline = false;
-            if (listOfChildren != null && listOfChildren.Any())
-            {
-                var listOfChild = new List<TreeViewViewModel>();
-                foreach (var children in listOfChildren)
-                {
-                    if (listOfParents.Keys.Contains(children.Id))
-                    {
-                        listOfChild = listOfParents[children.Id];
-                        child.Add(new TreeViewViewModel
-                        {
-                            Id = children.Id,
-                            Username = children.Username,
-                            HasAgentDownline = children.HasAgentDownline,
-                            Children = children.HasAgentDownline ? listOfChild : null
-                        });
+        //private List<TreeViewViewModel> CreateChildNode(List<TreeViewViewModel> listOfChildren, Dictionary<int, List<TreeViewViewModel>> listOfParents)
+        //{
+        //    var child = new List<TreeViewViewModel>();
+        //    var hasAgentDownline = false;
+        //    if (listOfChildren != null && listOfChildren.Any())
+        //    {
+        //        var listOfChild = new List<TreeViewViewModel>();
+        //        foreach (var children in listOfChildren)
+        //        {
+        //            if (listOfParents.Keys.Contains(children.Id))
+        //            {
+        //                listOfChild = listOfParents[children.Id];
+        //                child.Add(new TreeViewViewModel
+        //                {
+        //                    Id = children.Id,
+        //                    Username = children.Username,
+        //                    HasAgentDownline = children.HasAgentDownline,
+        //                    Children = children.HasAgentDownline ? listOfChild : null
+        //                });
 
-                        hasAgentDownline = children.HasAgentDownline;
-                    }
-                }
+        //                hasAgentDownline = children.HasAgentDownline;
+        //            }
+        //        }
 
-                return hasAgentDownline ? CreateChildNode(child[0].Children, listOfParents) : null;
-            }
+        //        return hasAgentDownline ? CreateChildNode(child[0].Children, listOfParents) : null;
+        //    }
 
-            return child;
-        }
+        //    return child;
+        //}
 
     }
 }

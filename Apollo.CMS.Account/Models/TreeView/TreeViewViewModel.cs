@@ -14,18 +14,21 @@ namespace Apollo.CMS.Account.Models.TreeView
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class TreeViewViewModel
+    public class TreeViewViewModel : List<TreeViewViewModel.TreeView>
     {
-        public int Id { get; set; }
+        public class TreeView
+        {
+            public int Id { get; set; }
 
-        public string Username { get; set; }
+            public string Username { get; set; }
 
-        public bool HasAgentDownline { get; set; }
+            public bool HasAgentDownline { get; set; }
 
-        public List<TreeViewViewModel> Children { get; set; }
+            public List<TreeViewViewModel> Children { get; set; }
 
-        public bool Expanded { get; set; }
+            public bool Expanded { get; set; }
 
-        public string Classes { get; set; }
+            public string Classes { get; set; }
+        }
     }
 }
