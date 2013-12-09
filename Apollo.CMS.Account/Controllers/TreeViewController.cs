@@ -32,9 +32,9 @@ namespace Apollo.CMS.Account.Controllers
         /// Indexes this instance.
         /// </summary>
         /// <returns>Action result.</returns>
-        public ActionResult Index()
+        public ActionResult Index(int agentId = 6437)
         {
-            ViewBag.AgentId = 579;
+            ViewBag.AgentId = agentId;
             return View();
         }
 
@@ -117,7 +117,7 @@ namespace Apollo.CMS.Account.Controllers
                             Id = x.AgentId.Value,
                             Username = x.Username,
                             HasAgentDownline = x.HasAgentDownline.Value,
-                            Classes = x.AgentId == agentId ? "hover" : string.Empty
+                            Classes = x.AgentId == agentId ? "nodeactived" : string.Empty
                         }));
 
                         isTheFirst = false;

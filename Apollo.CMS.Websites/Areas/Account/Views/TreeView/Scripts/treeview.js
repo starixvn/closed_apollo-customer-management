@@ -1,11 +1,26 @@
 ﻿Namespace.Register("Apollo.CMS.Account.TreeView");
 
 Apollo.CMS.Account.TreeView = function () {
-    
+
     var self = this;
 
     self.InitPage = function () {
-        self.LoadTreeView();        
+        self.LoadTreeView();
+    };
+
+    self.SearchCustomer = function (el) {
+        var agentId = $(el).attr("data-agentid");
+        var username = $(el).attr("data-agentusername");
+        $("#account-treeview ul li span").each(function (index) {
+            var $this = $(this);
+            if ($this.hasClass("hover")) {
+                $this.removeClass("hover");
+            }
+        });
+
+        $(el).addClass("hover");
+
+        searchBar.SearchCustomer(false, agentId, username);
     };
 
     self.LoadTreeView = function () {
@@ -13,18 +28,18 @@ Apollo.CMS.Account.TreeView = function () {
         var rootId = accountTreeView.attr("data-agentid");
         accountTreeView.treeview({
             url: "TreeView/CreateTreeViewByNode",
-            link: "<span onclick='searchBar.GetCustomer(false,{1});' class='nodetree' href='#'>{0}</span>",
+            link: "<span onclick='treeview.SearchCustomer(this);' data-agentid='{1}' data-agentusername='{2}' class='nodetree' href='#'>{0}</span>",
             agentId: rootId,
             showRoot: true,
             rootLink: "TreeView/CreateTreeView?agentid=" + rootId
-        });        
-    };        
+        });
+    };
 };
 
 
-
+var treeview = new Apollo.CMS.Account.TreeView();
 
 $(document).ready(function () {
-    var treeview = new Apollo.CMS.Account.TreeView();
+    
     treeview.InitPage();
 });
