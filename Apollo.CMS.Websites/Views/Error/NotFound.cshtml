@@ -4,13 +4,6 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Headline {
-	<h1>
-		<span class="title">
-			@Messages.AccessDenied
-		</span>
-	</h1>
+	<h5 class="row title">@Messages.NotFound</h5>
 }
-<div id="horizon">
-	<div id="deadcentre">
-	</div>
-</div>
+<span>@Messages.NotFoundMessage</span>

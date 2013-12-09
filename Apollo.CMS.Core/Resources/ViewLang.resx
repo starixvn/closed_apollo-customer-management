@@ -171,6 +171,9 @@
   <data name="Member" xml:space="preserve">
     <value>Member</value>
   </data>
+  <data name="NA" xml:space="preserve">
+    <value>N/A</value>
+  </data>
   <data name="NoData" xml:space="preserve">
     <value>There is no data.</value>
   </data>

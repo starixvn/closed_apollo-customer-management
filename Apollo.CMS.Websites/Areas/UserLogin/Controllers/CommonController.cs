@@ -48,14 +48,5 @@ namespace Apollo.CMS.Websites.Areas.UserLogin.Controllers
 
             return View();
         }
-        
-        /// <summary>
-        /// Redirect to access denied page.
-        /// </summary>
-        /// <returns>Access Denied view.</returns>
-        public ActionResult AccessDenied()
-        {
-            return View();
-        }
     }
 }
