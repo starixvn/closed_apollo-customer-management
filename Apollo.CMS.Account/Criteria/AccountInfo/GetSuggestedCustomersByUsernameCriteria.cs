@@ -28,7 +28,7 @@ namespace Apollo.CMS.Account.Criteria.AccountInfo
         /// <returns>Setting key of the criteria.</returns>
         public override string GetSettingKey()
         {
-            return IsMember ? "Age_Customer_GetByUsername" : "Age_Agent_SuggestByUsername";
+            return IsMember ? "Acc_Customer_GetByUsername" : "Acc_Agent_SuggestByUsername";
         }
 
         /// <summary>

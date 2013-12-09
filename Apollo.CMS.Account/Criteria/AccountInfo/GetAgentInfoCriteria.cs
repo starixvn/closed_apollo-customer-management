@@ -27,7 +27,7 @@ namespace Apollo.CMS.Account.Criteria.AccountInfo
         /// <returns>Setting key of the criteria.</returns>
         public override string GetSettingKey()
         {
-            return "Age_Agent_GetInfo";
+            return "Acc_Agent_GetInfo";
         }
 
         /// <summary>

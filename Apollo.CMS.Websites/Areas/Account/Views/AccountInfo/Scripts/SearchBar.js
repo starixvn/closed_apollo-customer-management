@@ -18,13 +18,19 @@ Apollo.CMS.Account.SearchBar = function () {
         $this.DOMInstance.ddlMemberTypes = $('#ddlMemberTypes');
         $this.DOMInstance.txtUsername = $('#txtUsername');
         $this.DOMInstance.btnSearch = $('#btnSearch');
+        $this.DOMInstance.btnTreeView = $('#btnTreeView');
         $this.DOMInstance.divLeftContent = $('#leftContent');
     };
 
     // Bind event handlers to controls
     var initFields = function () {
+        // Initialize the state of tree view icon.
+        isMember = $this.DOMInstance.ddlMemberTypes.val() === 'true';
+        changeTreeViewIconState(isMember);
+
         $this.DOMInstance.ddlMemberTypes.change(function () {
-            isMember = $this.DOMInstance.ddlMemberTypes.val();
+            isMember = $this.DOMInstance.ddlMemberTypes.val() === 'true';
+            changeTreeViewIconState(isMember);
             $this.DOMInstance.txtUsername.val('');
         });
 
@@ -79,22 +85,33 @@ Apollo.CMS.Account.SearchBar = function () {
         });
     };
 
-    // Re-show the previous selected tab and expand the left panel if it is collapsed.
-    var showCurrentTab = function () {
-        var currentTabId = $.cookie('left-panel-current-tab');
-        var currentTab = $('a[href="{0}"]'.format(currentTabId));
+    // Redirect to tree view
+    var redirectToTreeView = function () {
+        var custId = $('#hdnCustomerId').val();
+        var url = 'Account/TreeView?agentId={0}'.format(custId);
 
-        currentTab.tab('show');
-        currentTab.click();
-        Layout.expandLefPanel();
+        CMS.navigateToRoot(url);
+    };
+
+    // Change the state of tree view icon.
+    var changeTreeViewIconState = function (isMember) {
+        if (isMember) {
+            $this.DOMInstance.btnTreeView.parent().addClass('disabled');
+            $this.DOMInstance.btnTreeView.removeClass('icon-treeview').addClass('icon-treeview-disabled');
+            $this.DOMInstance.btnTreeView.off('click');
+        } else {
+            $this.DOMInstance.btnTreeView.parent().removeClass('disabled');
+            $this.DOMInstance.btnTreeView.removeClass('icon-treeview-disabled').addClass('icon-treeview');
+            $this.DOMInstance.btnTreeView.on('click', redirectToTreeView);
+        }
     };
 
     // Set the customer information and update the search bar
     $this.SearchCustomer = function (isMember, id, username) {
         $this.DOMInstance.ddlMemberTypes.val(isMember.toString());
-        $this.DOMInstance.ddlMemberTypes.data('selectBox-selectBoxIt').refresh();
+        $this.DOMInstance.ddlMemberTypes.change();
         $this.DOMInstance.txtUsername.val(username);
-        
+
         $this.GetCustomer(isMember, id, null);
     };
 
@@ -118,7 +135,6 @@ Apollo.CMS.Account.SearchBar = function () {
             success: function (result) {
                 $this.DOMInstance.divLeftContent.html(result);
                 $.cookie('left-panel-current-tab', '#setting', { path: '/' });
-                //showCurrentTab();
             },
             error: function (xhr, status, err) {
                 CMS.handleAjaxError(xhr, status, err);
@@ -133,6 +149,7 @@ Apollo.CMS.Account.SearchBar = function () {
         ddlMemberTypes: null,
         txtUsername: null,
         btnSearch: null,
+        btnTreeView: null,
         divLeftContent: null
     };
     $this.InitPage = function () {

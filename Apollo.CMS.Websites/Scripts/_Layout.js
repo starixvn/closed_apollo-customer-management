@@ -67,24 +67,6 @@ var Layout = function ($) {
                 }
             }
         },
-        hideShowIconTreeview: function () {
-            var selType = $("select#type"),
-                treeview = $('#treeview'),
-                iconTreeView = $('#treeview span');
-
-            if (selType.val() == '1') {
-                treeview.addClass('disabled');
-                iconTreeView.removeClass('icon-treeview').addClass('icon-treeview-disabled');
-            } else {
-                treeview.removeClass('disabled');
-                iconTreeView.removeClass('icon-treeview-disabled').addClass('icon-treeview');
-            }
-        },
-        navigateFromIconTreeView: function () {
-            $('.icon-treeview').on('click', function () {
-                location.href = "../account/treeview";
-            });
-        },
         createDatepicker: function ($obj, defaultValue, onSelectHandler, onCloseHandler) {
             var defaultDate = defaultValue ? moment(defaultValue).format(CMS.commonConstants.DateFormat) : 'today';
 
@@ -110,18 +92,9 @@ var Layout = function ($) {
 
 $(document).ready(function () {
     Layout.fixLaftPanelWidthForIE();
-    Layout.navigateFromIconTreeView();
 
     $('select').selectBoxIt();
-    // show or hide icon Treeview
-    Layout.hideShowIconTreeview();
-    var selType = $('select#type');
-    selType.bind({
-        'change': function (ev, obj) {
-            Layout.hideShowIconTreeview();
-        }
-    });
-
+    
     // collpase or expand left content
     Layout.collapseExpand();
     

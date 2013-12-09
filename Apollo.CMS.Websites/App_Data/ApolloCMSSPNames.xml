@@ -33,15 +33,15 @@
     <Setting Key="Acc_Agent_GetHierarchyById" SpName="Acc_Agent_GetHierarchyById" DbName="SVRCSD.RepDB.aplWeb" />    
   </Function>
   <Function Name="AccountInfo">
-    <Setting Key="Age_Agent_SuggestByUsername" SpName="Age_Agent_SuggestByUsername" DbName="SVRCSD.RepDB.aplWeb">
+    <Setting Key="Acc_Agent_SuggestByUsername" SpName="Acc_Agent_SuggestByUsername" DbName="SVRCSD.RepDB.aplWeb">
       <Mapping DataField="AgentId" ObjectProperty="CustId"/>
     </Setting>
-    <Setting Key="Age_Customer_GetByUsername" SpName="Age_Customer_GetByUsername" DbName="SVRCSD.RepDB.aplWeb" />
-    <Setting Key="Age_Agent_GetInfo" SpName="Age_Agent_GetInfo" DbName="SVRCSD.RepDB.aplWeb" />
-    <Setting Key="Age_Customer_GetInfo" SpName="Age_Customer_GetInfo" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_Customer_GetByUsername" SpName="Acc_Customer_GetByUsername" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_Agent_GetInfo" SpName="Acc_Agent_GetInfo" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_Customer_GetInfo" SpName="Acc_Customer_GetInfo" DbName="SVRCSD.RepDB.aplWeb" />
     <Setting Key="Acc_Agent_GetAgentUplinePath" SpName="Acc_Agent_GetAgentUplinePath" DbName="SVRCSD.RepDB.aplWeb" />
     <Setting Key="Acc_Agent_GetAgentByParentId" SpName="Acc_Agent_GetAgentByParentId" DbName="SVRCSD.RepDB.aplWeb" />
     <Setting Key="Acc_Customer_GetCustomerByAgentId" SpName="Acc_Customer_GetCustomerByAgentId" DbName="SVRCSD.RepDB.aplWeb" />
-    <Setting Key="Age_Agent_GetAgentDownline" SpName="Age_Agent_GetAgentDownline" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_Agent_GetAgentDownline" SpName="Acc_Agent_GetAgentDownline" DbName="SVRCSD.RepDB.aplWeb" />
   </Function>
 </Functions>
