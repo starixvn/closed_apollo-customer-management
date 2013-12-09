@@ -88,9 +88,15 @@ Apollo.CMS.Account.SearchBar = function () {
     // Redirect to tree view
     var redirectToTreeView = function () {
         var username = $this.DOMInstance.txtUsername.val();
-        var custId = $('#hdnCustomerId').val();
+        var oldUsername = $.trim($('#divAgentName').text());
+        console.log(oldUsername);
+        if (oldUsername === username) {
+            var custId = $('#hdnCustomerId').val();
 
-        CMS.navigateToRoot('Account/TreeView?agentId={0}&username={1}'.format(custId, username));
+            CMS.navigateToRoot('Account/TreeView?agentId={0}'.format(custId));
+        } else {
+            CMS.navigateToRoot('Account/TreeView?username={0}'.format(username));
+        }
     };
 
     // Change the state of tree view icon.

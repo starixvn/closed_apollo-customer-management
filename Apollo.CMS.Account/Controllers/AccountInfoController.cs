@@ -19,6 +19,7 @@ namespace Apollo.CMS.Account.Controllers
     using Apollo.CMS.Core.Resources;
     using Fanex.Common;
     using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Web.Attribute;
 
     /// <summary>
     /// Common controller.
@@ -45,10 +46,10 @@ namespace Apollo.CMS.Account.Controllers
         /// <param name="id">The ID of the customer.</param>
         /// <param name="username">The username of the customer.</param>
         /// <returns>Partial menu view.</returns>
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.SearchAccount, Policy = Constant.Policy.Read)]
         public PartialViewResult LeftPanel(bool isMember = false, int? id = null, string username = null)
         {
             string partialViewName = "AgentLeftPanel";
-
             if ((id == null) && (username == null))
             {
                 id = Converter.ToInt(Session["customerId"]);
@@ -69,7 +70,6 @@ namespace Apollo.CMS.Account.Controllers
                     id = customer.CustId;
                     username = customer.Username;
                     ViewBag.Customer = customer;
-
                     partialViewName = "MemberLeftPanel";
                 }
                 else
@@ -101,13 +101,19 @@ namespace Apollo.CMS.Account.Controllers
         /// <summary>
         /// Get Search Partial view.
         /// </summary>
+        /// <param name="isMember">Whether the passed ID is of a member or not.</param>
+        /// <param name="username">The username of the customer.</param>
         /// <returns>Partial menu view.</returns>
         [ChildActionOnly]
-        public PartialViewResult Search()
+        public PartialViewResult Search(bool isMember = false, string username = null)
         {
             var memberTypes = new List<SelectListItem>();
-            string username = Converter.ToString2(Session["username"]);
-            bool isMember = Converter.ToBool(Session["isMember"]);
+
+            if (username == null)
+            {
+                username = Converter.ToString2(Session["username"]);
+                isMember = Converter.ToBool(Session["isMember"]);
+            }
 
             memberTypes.Add(new SelectListItem
             {
@@ -133,6 +139,7 @@ namespace Apollo.CMS.Account.Controllers
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>JSON object represents the list of suggested customers.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.SearchAccount, Policy = Constant.Policy.Read)]
         public JsonResult GetSuggestedCustomer(GetSuggestedCustomersByUsernameCriteria criteria)
         {
             return Json(this._accountInfoService.GetSuggestedCustomers(criteria));
@@ -143,6 +150,7 @@ namespace Apollo.CMS.Account.Controllers
         /// </summary>
         /// <param name="agentId">The ID of the agent.</param>
         /// <returns>Partial view represents the up line popup.</returns>
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.SearchAccount, Policy = Constant.Policy.Read)]
         public PartialViewResult UplineAgents(int? agentId)
         {
             ViewBag.UplineList = this._accountInfoService.GetUplineAgents(new GetAgentUplineCriteria
@@ -159,6 +167,7 @@ namespace Apollo.CMS.Account.Controllers
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>Partial view represents the list of down line agent.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.SearchAccount, Policy = Constant.Policy.Read)]
         public PartialViewResult GetDownlineAgents(GetDownlineAgentsCriteria criteria)
         {
             ViewBag.Agents = this._accountInfoService.GetDownlineAgents(criteria);
@@ -171,6 +180,7 @@ namespace Apollo.CMS.Account.Controllers
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>Partial view represents the list of down line member.</returns>
         [HttpPost]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.SearchAccount, Policy = Constant.Policy.Read)]
         public PartialViewResult GetDownlineMembers(GetDownlineMembersCriteria criteria)
         {
             ViewBag.Members = this._accountInfoService.GetDownlineMembers(criteria);
