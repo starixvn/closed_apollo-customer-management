@@ -46,7 +46,7 @@
 <div class="row account-info">
     <div class="row item-info">
         <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.Currency</div>
-        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="currency">@customer.Currency</b></div>
+        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="currency">@(customer.ParentId == null ? ViewLang.NA : customer.Currency)</b></div>
     </div>
     <div class="row item-info">
         <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.AccountStatus</div>

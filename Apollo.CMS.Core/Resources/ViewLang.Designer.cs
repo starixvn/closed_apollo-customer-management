@@ -223,6 +223,15 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to N/A.
+        /// </summary>
+        public static string NA {
+            get {
+                return ResourceManager.GetString("NA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There is no data..
         /// </summary>
         public static string NoData {
