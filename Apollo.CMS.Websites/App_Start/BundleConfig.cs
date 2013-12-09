@@ -82,7 +82,7 @@ namespace Apollo.CMS.Websites
                 "~/Areas/UserLogin/themes/login.less");
 
             bundles.Add(new ScriptBundle("~/scripts/loginJS").Include(
-                "~/scripts/lib/jQuery/jquery-1.8.2.js",
+                "~/scripts/lib/jQuery/jquery-1.10.2.js",
                 "~/scripts/lib/jQuery/jquery.validate*",
                 "~/scripts/lib/jQuery/jquery.cookie.js",
                 "~/content/bootstrap/js/bootstrap.js",
