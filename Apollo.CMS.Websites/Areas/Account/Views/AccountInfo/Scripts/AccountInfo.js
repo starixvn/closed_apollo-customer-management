@@ -40,11 +40,11 @@ Apollo.CMS.Account.AccountInfo = function () {
 
         $('.search-link[data-customer-id]').live('click', function () {
             var customerId = $(this).attr('data-customer-id');
+            var username = $(this).text();
             var isMember = $(this).attr('data-is-member');
 
-            isMember = isMember ? isMember : false;
-
-            searchBar.GetCustomer(isMember, customerId, null);
+            isMember = isMember ? isMember : false;            
+            searchBar.SearchCustomer(isMember, customerId, username);
         });
     };
 

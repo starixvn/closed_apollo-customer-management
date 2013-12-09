@@ -25,6 +25,7 @@ Apollo.CMS.Account.SearchBar = function () {
     var initFields = function () {
         $this.DOMInstance.ddlMemberTypes.change(function () {
             isMember = $this.DOMInstance.ddlMemberTypes.val();
+            $this.DOMInstance.txtUsername.val('');
         });
 
         // Auto-complete for Search text-box.
@@ -86,7 +87,16 @@ Apollo.CMS.Account.SearchBar = function () {
         currentTab.tab('show');
         currentTab.click();
         Layout.expandLefPanel();
-    };      
+    };
+
+    // Set the customer information and update the search bar
+    $this.SearchCustomer = function (isMember, id, username) {
+        $this.DOMInstance.ddlMemberTypes.val(isMember.toString());
+        $this.DOMInstance.ddlMemberTypes.data('selectBox-selectBoxIt').refresh();
+        $this.DOMInstance.txtUsername.val(username);
+        
+        $this.GetCustomer(isMember, id, null);
+    };
 
     // Get customer information by Id.
     $this.GetCustomer = function (isMember, id, username) {
@@ -107,6 +117,7 @@ Apollo.CMS.Account.SearchBar = function () {
             },
             success: function (result) {
                 $this.DOMInstance.divLeftContent.html(result);
+                $.cookie('left-panel-current-tab', '#setting', { path: '/' });
                 //showCurrentTab();
             },
             error: function (xhr, status, err) {
