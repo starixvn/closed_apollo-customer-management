@@ -13,25 +13,25 @@ Apollo.CMS.Account.TreeView = function () {
         var username = $(el).attr("data-agentusername");
         $("#account-treeview ul li span").each(function (index) {
             var $this = $(this);
-            if ($this.hasClass("hover")) {
-                $this.removeClass("hover");
+            if ($this.hasClass("nodeactived")) {
+                $this.removeClass("nodeactived");
             }
         });
 
-        $(el).addClass("hover");
+        $(el).addClass("nodeactived");
 
         searchBar.SearchCustomer(false, agentId, username);
     };
 
     self.LoadTreeView = function () {
         var accountTreeView = $("#account-treeview");
-        var rootId = accountTreeView.attr("data-agentid");
+        var agentId = accountTreeView.attr("data-agentid");
+        var agentUsername = accountTreeView.attr("data-username");
         accountTreeView.treeview({
-            url: "TreeView/CreateTreeViewByNode",
-            link: "<span onclick='treeview.SearchCustomer(this);' data-agentid='{1}' data-agentusername='{2}' class='nodetree' href='#'>{0}</span>",
-            agentId: rootId,
-            showRoot: true,
-            rootLink: "TreeView/CreateTreeView?agentid=" + rootId
+            urlShowNodeData: "TreeView/CreateTreeViewByNode",
+            customeNode: "<span onclick='treeview.SearchCustomer(this);' data-agentid='{1}' data-agentusername='{2}' class='nodetree' href='#'>{0}</span>",            
+            showAllData: true,
+            urlShowAllData: "TreeView/CreateTreeView?agentid=" + agentId + "&username=" + agentUsername
         });
     };
 };

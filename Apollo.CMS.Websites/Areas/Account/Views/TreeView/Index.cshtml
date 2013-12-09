@@ -1,7 +1,9 @@
 ﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var agentId = ViewBag.AgentId == null ? 0 : ViewBag.AgentId;
+    var agentId = ViewBag.AgentId;
+    var username = ViewBag.Username;
+    
 }
 @section Head 
 {
@@ -9,7 +11,7 @@
 }
 
 <div id="wrapper"> 
-    <ul id="account-treeview" class="tree-sub" data-agentid="@agentId">
+    <ul id="account-treeview" class="tree-sub" data-agentid="@agentId" data-username="@username">
     </ul>
 </div>
 

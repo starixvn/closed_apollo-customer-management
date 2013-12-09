@@ -16,7 +16,9 @@ namespace Apollo.CMS.Account.Criteria.TreeView
     /// </summary>
     public class GetAllAgentAndAgentDonwlineByIdCriteria : CriteriaBase
     {
-        public int AgentId { get; set; }
+        public int? AgentId { get; set; }
+
+        public string Username { get; set; }
 
         public override string GetSettingKey()
         {

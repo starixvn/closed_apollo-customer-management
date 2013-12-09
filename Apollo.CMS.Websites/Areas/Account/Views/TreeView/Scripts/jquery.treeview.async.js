@@ -1,6 +1,6 @@
 /*
 * Async Treeview 0.1 - Lazy-loading extension for Treeview
-* 
+*
 * http://bassistance.de/jquery-plugins/jquery-plugin-treeview/
 *
 * Copyright (c) 2007 Jörn Zaefferer
@@ -14,7 +14,6 @@
 */
 
 ; (function ($) {
-    
     function stringFormat () {
       var s = arguments[0];
       for (var i = 0; i < arguments.length - 1; i++) {
@@ -24,12 +23,11 @@
       return s;
     }
 
-    function load(settings, root, child, container, showRoot) {
+    function load(settings, child, container, showAllData) {
         function createNode(parent) {
                 if (this.Id != undefined)
                 {
-                    //var current = $("<li/>").attr("id", this.Id).html("<span>" + stringFormat((showRoot? settings.linkdirectAgents : settings.link) , this.Id, this.Username, this.Username, root)  + "</span>").appendTo(parent);
-                    var current = $("<li/>").attr("id", this.Id).html(stringFormat(settings.link,this.Username,this.Id,this.Username)).appendTo(parent);
+                    var current = $("<li/>").attr("id", this.Id).html(stringFormat(settings.customeNode,this.Username,this.Id,this.Username)).appendTo(parent);
 
                     if (this.Classes) {
                         current.children("span").addClass(this.Classes);
@@ -48,37 +46,40 @@
                             }, branch);
                         }
                         if (this.Children && this.Children.length) {
-                            showRoot = false;
+                            showAllData = false;
                             $.each(this.Children, createNode, [branch])
                         }
                     }
                 }
             }
-        if(showRoot)
+
+        var url = settings.urlShowAllData;
+        if(showAllData)
         {
-            $.getJSON(settings.rootLink, null, function (response) {
-                $.each(response, createNode, [child]);
-                $(container).treeview({ add: child });
-            });
+            url = settings.urlShowAllData;
         }
         else
         {
-            $.getJSON(settings.url+"?agentId=" + root, null, function (response) {
+            url = settings.urlShowNodeData;
+        }
+
+        $.getJSON(url, null, function (response) {
                 $.each(response, createNode, [child]);
                 $(container).treeview({ add: child });
             });
-        }
     }
 
     var proxied = $.fn.treeview;
     $.fn.treeview = function (settings) {
-        if (!settings.url) {
+        if (!settings.urlShowAllData || !settings.urlShowNodeData) {
             return proxied.apply(this, arguments);
         }
+
         var container = this;
         //load(settings, "source", this, container);
-        load(settings, settings.agentId, this, container, settings.showRoot); // -1 is dummy root node id
+        load(settings, this, container, settings.showAllData); // -1 is dummy root node id
         var userToggle = settings.toggle;
+        var urlNodeData = settings.urlShowNodeData;
         return proxied.call(this, $.extend({}, settings, {
             collapsed: true,
             toggle: function () {
@@ -86,7 +87,8 @@
                 if ($this.hasClass("hasChildren")) {
                     var childList = $this.removeClass("hasChildren").find("ul");
                     childList.empty();
-                    load(settings, this.id, childList, container, false);
+                    settings.urlShowNodeData = urlNodeData + "?agentId=" + this.id;
+                    load(settings, childList, container, false);
                 }
                 if (userToggle) {
                     userToggle.apply(this, arguments);
@@ -94,5 +96,4 @@
             }
         }));
     };
-
 })(jQuery);

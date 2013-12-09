@@ -9,6 +9,7 @@
 
 namespace Apollo.CMS.Account.Controllers
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Web.Mvc;
     using Apollo.CMS.Account.Criteria.TreeView;
@@ -31,10 +32,16 @@ namespace Apollo.CMS.Account.Controllers
         /// <summary>
         /// Indexes this instance.
         /// </summary>
-        /// <returns>Action result.</returns>
-        public ActionResult Index(int agentId = 6437)
+        /// <param name="agentId">The agent identifier.</param>
+        /// <param name="username">The username.</param>
+        /// <returns>
+        /// Action result.
+        /// </returns>
+        public ActionResult Index(int? agentId = null, string username = null)
         {
             ViewBag.AgentId = agentId;
+            ViewBag.Username = username;
+
             return View();
         }
 
@@ -82,12 +89,20 @@ namespace Apollo.CMS.Account.Controllers
         /// Creates the TreeView.
         /// </summary>
         /// <param name="agentId">The agent identifier.</param>
-        /// <returns>JSON result.</returns>
-        public JsonResult CreateTreeView(int agentId)
+        /// <param name="username">The username.</param>
+        /// <returns>
+        /// JSON result.
+        /// </returns>
+        [SuppressMessage(
+            "StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+        public JsonResult CreateTreeView(int? agentId = null, string username = null)
         {
             var criteria = new GetAllAgentAndAgentDonwlineByIdCriteria()
             {
-                AgentId = agentId
+                AgentId = agentId,
+                Username = username
             };
 
             var dataTreeView = _treeViewServicer.GetDataTreeView(criteria);
