@@ -20,7 +20,7 @@ namespace Apollo.CMS.Account.Criteria.TreeView
 
         public override string GetSettingKey()
         {
-            return "Age_Agent_GetAgentDownline";
+            return "Acc_Agent_GetAgentDownline";
         }
 
         public override bool IsValid()
