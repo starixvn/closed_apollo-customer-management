@@ -117,44 +117,31 @@ namespace Apollo.CMS.Account.Controllers
                 var listParentId = dataTreeView.Where(y => y.ParentId != null).Select(x => x.ParentId).Distinct().Reverse();
                 var children = new TreeViewViewModel.Node();
                 var childrenNodes = new TreeViewViewModel.Node();
-                bool isTheFirst = true;
+                var child = new TreeViewViewModel();
+
                 foreach (var parentId in listParentId)
                 {
-                    var child = new TreeViewViewModel();
+                    child = new TreeViewViewModel();
 
                     var parentUsername = hierarchyTrees.Where(x => x.Id == parentId).FirstOrDefault();
 
-                    var treeNode = new TreeViewViewModel.Node();
-                    if (isTheFirst)
-                    {
-                        dataTreeView.Where(y => y.ParentId == parentId.Value).ToList().ForEach(x => child.Add(new TreeViewViewModel.Node
-                        {
-                            Id = x.AgentId.Value,
-                            Username = x.Username,
-                            HasAgentDownline = x.HasAgentDownline.Value,
-                            Classes = x.AgentId == agentId ? "nodeactived" : string.Empty
-                        }));
+                    var childData = dataTreeView.Where(y => y.ParentId == parentId.Value);
 
-                        isTheFirst = false;
-                    }
-                    else
+                    foreach (var item in childData)
                     {
-                        var childData = dataTreeView.Where(y => y.ParentId == parentId.Value);
-                        foreach (var item in childData)
+                        if (item.AgentId == childrenNodes.Id)
                         {
-                            if (item.AgentId == childrenNodes.Id)
+                            child.Add(childrenNodes);
+                        }
+                        else
+                        {
+                            child.Add(new TreeViewViewModel.Node
                             {
-                                child.Add(childrenNodes);
-                            }
-                            else
-                            {
-                                child.Add(new TreeViewViewModel.Node
-                                {
-                                    Id = item.AgentId.Value,
-                                    Username = item.Username,
-                                    HasAgentDownline = item.HasAgentDownline.Value,
-                                });
-                            }
+                                Id = item.AgentId.Value,
+                                Username = item.Username,
+                                HasAgentDownline = item.HasAgentDownline.Value,
+                                Classes = item.AgentId != agentId ? string.Empty : "nodeactived"
+                            });
                         }
                     }
 
@@ -164,7 +151,7 @@ namespace Apollo.CMS.Account.Controllers
                         Id = parentId.Value,
                         Username = parentUsername.Username,
                         HasAgentDownline = parentUsername.HasAgentDownline,
-                        Expanded = child != null && child.Any() ? true : false
+                        Expanded = child != null && child.Any() ? true : false,
                     };
 
                     childrenNodes = children;
