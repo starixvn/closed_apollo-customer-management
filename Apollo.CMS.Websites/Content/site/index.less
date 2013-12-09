@@ -685,6 +685,7 @@ input[type="text"] {
                 border: 1px solid @border-color;
                 border-width: 0 0 1px 0;
                 background-color: #fff;
+                position: relative;
 
                 .super-menu {
                     padding: 10px 0 1px 5px;
@@ -710,6 +711,10 @@ input[type="text"] {
                             }
                         }
                     }
+                }
+
+                .agent-list, .member-list {
+                     overflow: auto;
                 }
             }
         }

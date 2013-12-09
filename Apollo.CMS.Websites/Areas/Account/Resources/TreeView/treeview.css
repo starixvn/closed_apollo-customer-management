@@ -40,7 +40,7 @@
     display: none;
 }
 
-.treeview .hover {
+.treeview .hover, .treeview .nodeactived {
     color: #F78F1E;
     cursor: pointer;
 }

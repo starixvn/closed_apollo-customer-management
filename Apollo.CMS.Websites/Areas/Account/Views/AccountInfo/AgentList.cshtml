@@ -3,7 +3,7 @@
     var agents = (IEnumerable<Agent>)ViewBag.Agents;
 }
 
-<ul class="super-menu list-unstyled">
+<ul class="super-menu agent-list list-unstyled">
     @if ((agents != null) && (agents.Count() > 0))
     {
         foreach (var item in agents)
