@@ -87,10 +87,10 @@ Apollo.CMS.Account.SearchBar = function () {
 
     // Redirect to tree view
     var redirectToTreeView = function () {
+        var username = $this.DOMInstance.txtUsername.val();
         var custId = $('#hdnCustomerId').val();
-        var url = 'Account/TreeView?agentId={0}'.format(custId);
 
-        CMS.navigateToRoot(url);
+        CMS.navigateToRoot('Account/TreeView?agentId={0}&username={1}'.format(custId, username));
     };
 
     // Change the state of tree view icon.

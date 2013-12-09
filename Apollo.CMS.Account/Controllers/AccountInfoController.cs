@@ -49,7 +49,7 @@ namespace Apollo.CMS.Account.Controllers
         {
             string partialViewName = "AgentLeftPanel";
 
-            if ((id == null) && string.IsNullOrEmpty(username))
+            if ((id == null) && (username == null))
             {
                 id = Converter.ToInt(Session["customerId"]);
                 isMember = Converter.ToBool(Session["isMember"]);
