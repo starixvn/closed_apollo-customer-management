@@ -14,7 +14,7 @@ namespace Apollo.CMS.Websites.Controllers
     using Fanex.NAP.Core.Web.Attribute;
 
     /// <summary>
-    /// Home controller.
+    /// Error controller.
     /// </summary>
     [NapSuperAuth]
     public class ErrorController : BaseController

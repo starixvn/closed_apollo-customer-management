@@ -58,8 +58,8 @@ namespace Apollo.CMS.Websites
                 "~/scripts/lib/respond.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/commonJS").Include(
-                "~/scripts/lib/jQuery/jquery-1.10.2.js",
-                "~/scripts/lib/jQuery/jquery-ui-1.9.1.js",
+                "~/scripts/lib/jQuery/jquery-1.8.2.js",
+                "~/scripts/lib/jQuery/jquery-ui-1.8.24.js",
                 "~/scripts/lib/jQuery/jquery-migrate-1.2.1.js",
                 "~/scripts/lib/jquery/jquery.selectBoxIt.js",
                 "~/scripts/lib/jquery/jquery.cookie.js",
@@ -82,7 +82,7 @@ namespace Apollo.CMS.Websites
                 "~/Areas/UserLogin/themes/login.less");
 
             bundles.Add(new ScriptBundle("~/scripts/loginJS").Include(
-                "~/scripts/lib/jQuery/jquery-1.10.2.js",
+                "~/scripts/lib/jQuery/jquery-1.8.2.js",
                 "~/scripts/lib/jQuery/jquery.validate*",
                 "~/scripts/lib/jQuery/jquery.cookie.js",
                 "~/content/bootstrap/js/bootstrap.js",
