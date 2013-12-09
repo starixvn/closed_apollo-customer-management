@@ -64,6 +64,11 @@
         }
 
         $.getJSON(url, null, function (response) {
+                if(response.length <= 0)
+                {
+                    $(container).html("There is no data.");
+                    return;
+                }
                 $.each(response, createNode, [child]);
                 $(container).treeview({ add: child });
             });
