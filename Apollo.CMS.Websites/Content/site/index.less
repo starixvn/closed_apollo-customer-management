@@ -686,6 +686,8 @@ input[type="text"] {
                 border-width: 0 0 1px 0;
                 background-color: #fff;
                 position: relative;
+                height: 100%;
+                overflow: auto;
 
                 .super-menu {
                     padding: 10px 0 1px 5px;
@@ -722,7 +724,6 @@ input[type="text"] {
         .mainContent {
             height: 100%;
             position: relative;
-            overflow: auto;
 
             .collapse-expand {
                 position: absolute;
@@ -731,8 +732,9 @@ input[type="text"] {
             }
 
             .container-content {
-                padding: 10px 20px;
-
+                padding: 1% 20px;
+                overflow: auto;
+                max-height: 98%;
                 .title {
                     color: @primary-color;
                     border-bottom: 1px solid @second-border-color;
