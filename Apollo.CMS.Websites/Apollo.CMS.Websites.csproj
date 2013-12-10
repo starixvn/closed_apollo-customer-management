@@ -229,7 +229,9 @@
     <Content Include="Content\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
-    <Content Include="Content\site\font\MyriadPro-Cond.svg" />
+    <Content Include="Content\site\font\MyriadPro-Cond.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\site\img\favicon.ico" />
     <Content Include="Content\site\img\icon-cal-orange.jpg" />
     <Content Include="Content\site\img\icon-cal.jpg" />
@@ -267,9 +269,15 @@
     <Content Include="Areas\Account\Views\AccountInfo\Upline.cshtml" />
     <Content Include="Areas\Account\Resources\AccountInfo\accountInfo.less" />
     <Content Include="Areas\Account\Views\AccountInfo\Setting.cshtml" />
-    <None Include="Content\site\font\MyriadPro-Cond.eot" />
-    <None Include="Content\site\font\MyriadPro-Cond.ttf" />
-    <None Include="Content\site\font\MyriadPro-Cond.woff" />
+    <None Include="Content\site\font\MyriadPro-Cond.eot">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\site\font\MyriadPro-Cond.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\site\font\MyriadPro-Cond.woff">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Noesis.Javascript\Noesis.Javascript.x64.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

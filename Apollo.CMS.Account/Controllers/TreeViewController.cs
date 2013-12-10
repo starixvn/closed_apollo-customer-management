@@ -163,7 +163,8 @@ namespace Apollo.CMS.Account.Controllers
                     Username = rootData.Username,
                     HasAgentDownline = rootData.HasAgentDownline.Value,
                     Expanded = true,
-                    Children = childrenNodes.Children
+                    Children = childrenNodes.Children,
+                    Classes = listParentId != null && listParentId.Any() ? string.Empty : "nodeactived"
                 };
 
                 rootList.Add(root);
