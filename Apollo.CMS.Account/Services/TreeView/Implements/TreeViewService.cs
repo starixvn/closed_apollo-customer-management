@@ -21,6 +21,11 @@ namespace Apollo.CMS.Account.Services.TreeView.Implements
     /// </summary>
     public class TreeViewService : BaseService, ITreeViewService
     {
+        /// <summary>
+        /// Gets the data TreeView.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>List of tree view model.</returns>
         public List<TreeViewModel> GetDataTreeView(GetAllAgentAndAgentDonwlineByIdCriteria criteria)
         {
             IEnumerable<TreeViewModel> result = null;
@@ -30,6 +35,11 @@ namespace Apollo.CMS.Account.Services.TreeView.Implements
             return result.ToList();
         }
 
+        /// <summary>
+        /// Gets the data TreeView branch.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>List of tree view model.</returns>
         public List<TreeViewModel> GetDataTreeViewBranch(GetAgentDownlineByIdCriteria criteria)
         {
             IEnumerable<TreeViewModel> result = null;

@@ -140,7 +140,7 @@ namespace Apollo.CMS.Account.Controllers
                                 Id = item.AgentId.Value,
                                 Username = item.Username,
                                 HasAgentDownline = item.HasAgentDownline.Value,
-                                Classes = item.AgentId != agentId ? string.Empty : "nodeactived"
+                                Classes = item.AgentId != agentId && item.Username != username ? string.Empty : "nodeactived"
                             });
                         }
                     }
