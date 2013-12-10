@@ -271,10 +271,10 @@
     <Content Include="Areas\Account\Views\AccountInfo\Setting.cshtml" />
     <Content Include="Areas\Account\Views\AccountInfo\DefaultLeftPanel.cshtml" />
     <Content Include="Content\site\font\MyriadPro-Cond.eot" />
-    <Content Include="Content\site\font\MyriadPro-Cond.ttf" />    
-    <None Include="Content\site\font\MyriadPro-Cond.woff">
+    <Content Include="Content\site\font\MyriadPro-Cond.ttf" />
+    <Content Include="Content\site\font\MyriadPro-Cond.woff">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="Noesis.Javascript\Noesis.Javascript.x64.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
