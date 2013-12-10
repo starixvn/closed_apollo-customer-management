@@ -474,6 +474,7 @@ input[type="text"] {
             background: #f3f6f6;
             border-right: 1px solid @border-color;
             height: 100%;
+            overflow: auto;
 
             a {
                 color: @link-color;
@@ -622,6 +623,10 @@ input[type="text"] {
                 }
             }
 
+            .tab-list {
+                max-height: 450px;
+            }
+
             .nav-tabs {
                 margin: 10px 0 0;
                 border: 1px solid @border-color;
@@ -685,9 +690,6 @@ input[type="text"] {
                 border: 1px solid @border-color;
                 border-width: 0 0 1px 0;
                 background-color: #fff;
-                position: relative;
-                height: 100%;
-                overflow: auto;
 
                 .super-menu {
                     padding: 10px 0 1px 5px;
@@ -717,6 +719,7 @@ input[type="text"] {
 
                 .agent-list, .member-list {
                      overflow: auto;
+                     max-height: 400px;
                 }
             }
         }
@@ -896,8 +899,18 @@ input[type="text"] {
             padding: 15px 7px 14px;
         }
 
-        .content .leftContent .nav-tabs li a {
-            padding: 6px 6px 6px;
+        .content .leftContent {
+            .nav-tabs li a {
+                padding: 6px 6px 6px;
+            }
+
+            .tab-list {
+                max-height: 370px;
+            }
+
+            .tab-content .agent-list, .tab-content .member-list {
+                max-height: 320px;
+            }
         }
     }
 }
@@ -906,6 +919,15 @@ input[type="text"] {
     .container.page {
         width: 770px;
 
+        .content .leftContent {
+            .tab-list {
+                max-height: 350px;
+            }
+
+            .tab-content .agent-list, .tab-content .member-list {
+                max-height: 300px;
+            }
+        }
         .form-group, .content .leftContent .list-btn .btn-link {
             margin: 2% 0;
         }
