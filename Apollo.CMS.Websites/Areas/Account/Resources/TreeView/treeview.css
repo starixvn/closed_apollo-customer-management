@@ -26,6 +26,10 @@
     background: url(images/treeview-default-line.gif) 0 0 no-repeat;
 }
 
+.treeview li.last, .treeview li.collapsable {
+    padding-bottom: 0;
+}
+
 .treeview li span:hover {
     color: #ff0000;
     cursor: pointer;
