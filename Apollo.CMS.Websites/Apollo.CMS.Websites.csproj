@@ -271,10 +271,7 @@
     <Content Include="Areas\Account\Views\AccountInfo\Setting.cshtml" />
     <Content Include="Areas\Account\Views\AccountInfo\DefaultLeftPanel.cshtml" />
     <Content Include="Content\site\font\MyriadPro-Cond.eot" />
-    <Content Include="Content\site\font\MyriadPro-Cond.ttf" />
-    <Content Include="Content\site\font\MyriadPro-Cond.woff" />
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <Content Include="Content\site\font\MyriadPro-Cond.ttf" />    
     <None Include="Content\site\font\MyriadPro-Cond.woff">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
