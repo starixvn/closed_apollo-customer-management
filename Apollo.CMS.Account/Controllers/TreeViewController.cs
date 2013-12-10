@@ -102,7 +102,7 @@ namespace Apollo.CMS.Account.Controllers
             var criteria = new GetAllAgentAndAgentDonwlineByIdCriteria()
             {
                 AgentId = agentId,
-                Username = username
+                Username = string.IsNullOrWhiteSpace(username) ? null : username
             };
 
             var dataTreeView = _treeViewServicer.GetDataTreeView(criteria);
