@@ -49,7 +49,8 @@ namespace Apollo.CMS.Account.Controllers
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.SearchAccount, Policy = Constant.Policy.Read)]
         public PartialViewResult LeftPanel(bool isMember = false, int? id = null, string username = null)
         {
-            string partialViewName = "AgentLeftPanel";
+            string partialViewName = "DefaultLeftPanel";
+
             if ((id == null) && (username == null))
             {
                 id = Converter.ToInt(Session["customerId"]);
@@ -84,11 +85,8 @@ namespace Apollo.CMS.Account.Controllers
                     id = customer.AgentId;
                     username = customer.Username;
                     ViewBag.Customer = customer;
+                    partialViewName = "AgentLeftPanel";
                 }
-            }
-            else
-            {
-                ViewBag.Customer = new AgentInfo();
             }
 
             Session.Add("customerId", id);

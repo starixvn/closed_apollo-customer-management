@@ -9,63 +9,71 @@
     var accountStatus = StatusHelper.GetStatus(Converter.ToInt(customer.Status), Converter.ToInt(customer.UplineStatus));
     var betStatus = StatusHelper.GetStatus(Converter.ToInt(customer.BetStatus), Converter.ToInt(customer.UplineBetStatus));
 }
-@Html.Hidden("hdnCustomerId", customer.CustId)
 
-<div class="row item">
-    <div class="col-xs-3 col-sm-3 col-md-3 text-left">
-        @ViewLang.Member
-    </div>
-    <div class="col-xs-9 col-sm-9 col-md-9 text-right">
-        @customer.Username
-    </div>
-</div>
-<div class="row item">
-    <div class="col-xs-3 col-sm-3 col-md-3 text-left">
-        @ViewLang.Upline
-    </div>
-    <div class="col-xs-9 col-sm-9 col-md-9 text-right">
-        <a href="#" class="search-link" data-customer-id="@customer.AgentId">@customer.AgentUsername<span class="glyphicon glyphicon-home icon-link-home"></span></a>
-    </div>
-</div>
-
-@{ Html.RenderAction("UplineAgents", "AccountInfo", new { agentId = customer.AgentId }); }
-
-<div class="row list-btn">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <a href="#" class="btn-link no-marginLeft only">@ViewLang.BetList</a>
-    </div>
-</div>
-<div class="row account-info">
-    <div class="row item-info">
-        <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.Currency</div>
-        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="currency">@customer.Currency</b></div>
-    </div>
-    <div class="row item-info">
-        <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.AccountStatus</div>
-        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="@accountStatus.ToLower()">@accountStatus</b></div>
-    </div>
-    <div class="row item-info">
-        <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.BetStatus</div>
-        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="@betStatus.ToLower()">@betStatus</b></div>
-    </div>
-    <div class="row item-info">
-        <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.SportCredit</div>
-        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="credit">@Converter.ToDecimal(customer.SportCredit).Format(2)</b></div>
-    </div>
-</div>
-
-@if (hasCustomerSettingPermission)
+@if (customer.CustId != 0)
 {
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs search-member">
-                <li class="setting active"><a href="#home" data-toggle="tab">@ViewLang.Setting</a></li>
-            </ul>
-            <!-- Tab panes -->
-            <div class="tab-content">
-                @{ Html.RenderPartial("Setting"); }
-            </div>
+    @Html.Hidden("hdnCustomerId", customer.CustId)
+
+    <div class="row item">
+        <div class="col-xs-3 col-sm-3 col-md-3 text-left">
+            @ViewLang.Member
+        </div>
+        <div class="col-xs-9 col-sm-9 col-md-9 text-right">
+            @customer.Username
         </div>
     </div>
+    <div class="row item">
+        <div class="col-xs-3 col-sm-3 col-md-3 text-left">
+            @ViewLang.Upline
+        </div>
+        <div class="col-xs-9 col-sm-9 col-md-9 text-right">
+            <a href="#" class="search-link" data-customer-id="@customer.AgentId">@customer.AgentUsername<span class="glyphicon glyphicon-home icon-link-home"></span></a>
+        </div>
+    </div>
+
+    Html.RenderAction("UplineAgents", "AccountInfo", new { agentId = customer.AgentId });
+
+    <div class="row list-btn">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <a href="#" class="btn-link no-marginLeft only">@ViewLang.BetList</a>
+        </div>
+    </div>
+    <div class="row account-info">
+        <div class="row item-info">
+            <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.Currency</div>
+            <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="currency">@customer.Currency</b></div>
+        </div>
+        <div class="row item-info">
+            <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.AccountStatus</div>
+            <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="@accountStatus.ToLower()">@accountStatus</b></div>
+        </div>
+        <div class="row item-info">
+            <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.BetStatus</div>
+            <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="@betStatus.ToLower()">@betStatus</b></div>
+        </div>
+        <div class="row item-info">
+            <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.SportCredit</div>
+            <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="credit">@Converter.ToDecimal(customer.SportCredit).Format(2)</b></div>
+        </div>
+    </div>
+
+    if (hasCustomerSettingPermission)
+    {
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs search-member">
+                    <li class="setting active"><a href="#home" data-toggle="tab">@ViewLang.Setting</a></li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    @{ Html.RenderPartial("Setting"); }
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <span>@ViewLang.NoData</span>
 }

@@ -9,86 +9,93 @@
     var accountStatus = StatusHelper.GetStatus(Converter.ToInt(customer.Status), Converter.ToInt(customer.UplineStatus));
     var betStatus = StatusHelper.GetStatus(Converter.ToInt(customer.BetStatus), Converter.ToInt(customer.UplineBetStatus));
 }
-@Html.Hidden("hdnCustomerId", customer.AgentId)
-
-<div class="row item">
-    <div class="col-xs-3 col-sm-3 col-md-3 text-left">
-        @ViewLang.Agent
-    </div>
-    <div id="divAgentName" class="col-xs-9 col-sm-9 col-md-9 text-right">
-        @customer.Username<span class="glyphicon glyphicon-home icon-link-home"></span>
-    </div>
-</div>
-
-@if (customer.ParentId != null)
+@if (customer.AgentId != 0)
 {
+    @Html.Hidden("hdnCustomerId", customer.AgentId);
+
     <div class="row item">
         <div class="col-xs-3 col-sm-3 col-md-3 text-left">
-            @ViewLang.Upline
+            @ViewLang.Agent
         </div>
-        <div class="col-xs-9 col-sm-9 col-md-9 text-right">
-            <a href="#" class="search-link" data-customer-id="@customer.ParentId">@customer.ParentUsername<span class="glyphicon glyphicon-home icon-link-home"></span></a>
+        <div id="divAgentName" class="col-xs-9 col-sm-9 col-md-9 text-right">
+            @customer.Username<span class="glyphicon glyphicon-home icon-link-home"></span>
         </div>
     </div>
 
-    Html.RenderAction("UplineAgents", "AccountInfo", new { agentId = customer.ParentId });
+    if (customer.ParentId != null)
+    {
+        <div class="row item">
+            <div class="col-xs-3 col-sm-3 col-md-3 text-left">
+                @ViewLang.Upline
+            </div>
+            <div class="col-xs-9 col-sm-9 col-md-9 text-right">
+                <a href="#" class="search-link" data-customer-id="@customer.ParentId">@customer.ParentUsername<span class="glyphicon glyphicon-home icon-link-home"></span></a>
+            </div>
+        </div>
+
+        Html.RenderAction("UplineAgents", "AccountInfo", new { agentId = customer.ParentId });
+    }
+
+    <div class="row list-btn">
+        <div class="col-md-12">
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <a href="#" class="btn-link no-marginLeft">@ViewLang.Agent</a>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <a href="#" class="btn-link">@ViewLang.Member</a>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <a href="#" class="btn-link">@ViewLang.Shadow</a>
+            </div>
+        </div>
+    </div>
+    <div class="row account-info">
+        <div class="row item-info">
+            <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.Currency</div>
+            <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="currency">@(customer.ParentId == null ? ViewLang.NA : customer.Currency)</b></div>
+        </div>
+        <div class="row item-info">
+            <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.AccountStatus</div>
+            <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="@accountStatus.ToLower()">@accountStatus</b></div>
+        </div>
+        <div class="row item-info">
+            <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.BetStatus</div>
+            <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="@betStatus.ToLower()">@betStatus</b></div>
+        </div>
+        <div class="row item-info">
+            <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.SportCredit</div>
+            <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="credit">@Converter.ToDecimal(customer.SportCredit).Format(2)</b></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+                @{
+                    var activeClass = string.Empty;
+
+                    if (hasCustomerSettingPermission)
+                    {
+                        <li class="setting active"><a href="#setting" data-toggle="tab">@ViewLang.Setting</a></li>
+                    }
+                    else
+                    {
+                        activeClass = "active";
+                    }
+                }
+                <li class="@activeClass"><a href="#agent" data-toggle="tab">@ViewLang.Agent</a></li>
+                <li><a href="#member" data-toggle="tab">@ViewLang.Member</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                @{ Html.RenderPartial("Setting"); }
+                <div class="tab-pane" id="agent"></div>
+                <div class="tab-pane" id="member"></div>
+            </div>
+        </div>
+    </div>
 }
-
-<div class="row list-btn">
-    <div class="col-md-12">
-        <div class="col-xs-12 col-sm-4 col-md-4">
-            <a href="#" class="btn-link no-marginLeft">@ViewLang.Agent</a>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-md-4">
-            <a href="#" class="btn-link">@ViewLang.Member</a>
-        </div>
-        <div class="col-xs-12 col-sm-4 col-md-4">
-            <a href="#" class="btn-link">@ViewLang.Shadow</a>
-        </div>
-    </div>
-</div>
-<div class="row account-info">
-    <div class="row item-info">
-        <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.Currency</div>
-        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="currency">@(customer.ParentId == null ? ViewLang.NA : customer.Currency)</b></div>
-    </div>
-    <div class="row item-info">
-        <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.AccountStatus</div>
-        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="@accountStatus.ToLower()">@accountStatus</b></div>
-    </div>
-    <div class="row item-info">
-        <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.BetStatus</div>
-        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="@betStatus.ToLower()">@betStatus</b></div>
-    </div>
-    <div class="row item-info">
-        <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.SportCredit</div>
-        <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="credit">@Converter.ToDecimal(customer.SportCredit).Format(2)</b></div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs">
-            @{
-                var activeClass = string.Empty;
-
-                if (hasCustomerSettingPermission)
-                {
-                    <li class="setting active"><a href="#setting" data-toggle="tab">@ViewLang.Setting</a></li>
-                }
-                else
-                {
-                    activeClass = "active";
-                }
-            }
-            <li class="@activeClass"><a href="#agent" data-toggle="tab">@ViewLang.Agent</a></li>
-            <li><a href="#member" data-toggle="tab">@ViewLang.Member</a></li>
-        </ul>
-        <!-- Tab panes -->
-        <div class="tab-content">
-            @{ Html.RenderPartial("Setting"); }
-            <div class="tab-pane" id="agent"></div>
-            <div class="tab-pane" id="member"></div>
-        </div>
-    </div>
-</div>
+else
+{
+    <span>@ViewLang.NoData</span>
+}

@@ -99,7 +99,7 @@ $(document).ready(function () {
     Layout.collapseExpand();
     
     // Set active menu css class
-    $('ul.mainMenu > li, .containTreeview .treeview').on('click', function (event) {
+    $('ul.mainMenu > li, #searchTreeView').on('click', function (event) {
         var $this = $(this);
 
         $.cookie('menu-id', $this.attr('id'), { path: '/' });
