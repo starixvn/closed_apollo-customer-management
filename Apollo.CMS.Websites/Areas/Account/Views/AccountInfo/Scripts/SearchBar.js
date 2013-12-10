@@ -102,11 +102,18 @@ Apollo.CMS.Account.SearchBar = function () {
     // Change the state of tree view icon.
     var changeTreeViewIconState = function (isMember) {
         if (isMember) {
-            $this.DOMInstance.btnTreeView.parent().addClass('disabled');
+            $this.DOMInstance.btnTreeView.parent().removeClass('active').addClass('disabled');
             $this.DOMInstance.btnTreeView.removeClass('icon-treeview').addClass('icon-treeview-disabled');
             $this.DOMInstance.btnTreeView.off('click');
         } else {
-            $this.DOMInstance.btnTreeView.parent().removeClass('disabled');
+            var menuId = $.cookie('menu-id');
+            var treeViewIcon = $this.DOMInstance.btnTreeView.parent();
+
+            if (treeViewIcon.attr('id') == menuId) {
+                treeViewIcon.addClass('active');
+            }
+            
+            treeViewIcon.removeClass('disabled');
             $this.DOMInstance.btnTreeView.removeClass('icon-treeview-disabled').addClass('icon-treeview');
             $this.DOMInstance.btnTreeView.on('click', redirectToTreeView);
         }
