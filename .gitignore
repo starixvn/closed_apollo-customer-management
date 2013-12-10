@@ -20,3 +20,6 @@ Apollo.CMS.Core/Apollo.CMS.Core.csproj.user
 Apollo.CMS.Message/Apollo.CMS.Message.csproj.user
 /Apollo.CMS.Websites/Apollo.CMS.Websites.csproj.user
 Apollo.CMS.Websites/Apollo.CMS.Websites.Publish.xml
+/Apollo.CMS.Websites/Apollo.CMS.Websites.csproj.orig
+/Apollo.CMS.Websites/Apollo.CMS.Websites.Publish.xml
+/Apollo.CMS.Websites/Areas/Account/Views/Web.config.orig
