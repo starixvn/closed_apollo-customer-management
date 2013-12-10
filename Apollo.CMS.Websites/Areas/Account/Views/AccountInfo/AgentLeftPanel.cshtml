@@ -19,16 +19,20 @@
         @customer.Username<span class="glyphicon glyphicon-home icon-link-home"></span>
     </div>
 </div>
-<div class="row item">
-    <div class="col-xs-3 col-sm-3 col-md-3 text-left">
-        @ViewLang.Upline
-    </div>
-    <div class="col-xs-9 col-sm-9 col-md-9 text-right">
-        <a href="#" class="search-link" data-customer-id="@customer.ParentId">@customer.ParentUsername<span class="glyphicon glyphicon-home icon-link-home"></span></a>
-    </div>
-</div>
 
-@{ Html.RenderAction("UplineAgents", "AccountInfo", new { agentId = customer.ParentId }); }
+@if (customer.ParentId != null)
+{
+    <div class="row item">
+        <div class="col-xs-3 col-sm-3 col-md-3 text-left">
+            @ViewLang.Upline
+        </div>
+        <div class="col-xs-9 col-sm-9 col-md-9 text-right">
+            <a href="#" class="search-link" data-customer-id="@customer.ParentId">@customer.ParentUsername<span class="glyphicon glyphicon-home icon-link-home"></span></a>
+        </div>
+    </div>
+
+    Html.RenderAction("UplineAgents", "AccountInfo", new { agentId = customer.ParentId });
+}
 
 <div class="row list-btn">
     <div class="col-md-12">

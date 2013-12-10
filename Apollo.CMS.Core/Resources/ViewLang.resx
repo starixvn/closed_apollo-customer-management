@@ -129,6 +129,9 @@
   <data name="Agent" xml:space="preserve">
     <value>Agent</value>
   </data>
+  <data name="AgentHierarchy" xml:space="preserve">
+    <value>Agent Hierarchy</value>
+  </data>
   <data name="All" xml:space="preserve">
     <value>All</value>
   </data>

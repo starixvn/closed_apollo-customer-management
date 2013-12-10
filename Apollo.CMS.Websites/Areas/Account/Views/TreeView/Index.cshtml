@@ -9,9 +9,11 @@
 {
     @Styles.Render("~/site/treeView")
 }
-
+<H5 class="title">
+    @ViewLang.AgentHierarchy
+</H5>
 <div id="wrapper"> 
-    <ul id="account-treeview" class="tree-sub" data-agentid="@agentId" data-username="@username">
+    <ul id="account-treeview" class="tree-sub" data-agent-id="@agentId" data-agent-username="@username">
     </ul>
 </div>
 
