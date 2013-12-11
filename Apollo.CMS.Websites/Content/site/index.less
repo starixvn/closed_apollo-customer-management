@@ -588,6 +588,10 @@ input[type="text"] {
                         background-color: @second-button-bg-hover;
                     }
 
+                    &:focus {
+                        text-decoration: none;
+                    }
+
                     &.no-marginLeft {
                         margin-left: 0;
                     }
@@ -662,7 +666,7 @@ input[type="text"] {
                         border-left: none;
                     }
 
-                    &.active,  &:hover {
+                    &.active {
                         a, a:hover, a:focus {
                             .border-radius(0);
                             background-color: #fff;
@@ -675,6 +679,12 @@ input[type="text"] {
 
                     &.active a {
                         font-weight: bold;
+                    }
+
+                     &:hover {
+                        a {
+                           background: lighten(#ededed, 3%);
+                        }
                     }
                 }
 
