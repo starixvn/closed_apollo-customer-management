@@ -11,7 +11,7 @@ namespace Apollo.CMS.Message.Services.Implements
 {
     using System.Collections.Generic;
     using System.Text;
-    using Apollo.CMS.Core.Services.Implements;
+    using Apollo.CMS.Core.Services;
     using Apollo.CMS.Message.Criteria.NewMessage;
     using Apollo.CMS.Message.Models.NewMessage;
     using Apollo.CMS.Message.Services.Interfaces;

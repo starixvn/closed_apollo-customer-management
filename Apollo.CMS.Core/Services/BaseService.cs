@@ -7,12 +7,11 @@
 //   <change who="Franklin.Nguyen" date="2013.11.29">Created</change>
 // </history>
 
-namespace Apollo.CMS.Core.Services.Implements
+namespace Apollo.CMS.Core.Services
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using Apollo.CMS.Core.Services.Interfaces;
     using Fanex.Common.Helper;
     using Fanex.Data;
     using Fanex.NAP.Framework.Data;
@@ -20,7 +19,7 @@ namespace Apollo.CMS.Core.Services.Implements
     /// <summary>
     /// Base Service.
     /// </summary>
-    public class BaseService : IBaseService
+    public class BaseService
     {
         protected readonly IDynamicRepository DynamicRepository;
 

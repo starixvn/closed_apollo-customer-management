@@ -11,7 +11,7 @@ namespace Apollo.CMS.Message.Services.Implements
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Apollo.CMS.Core.Services.Implements;
+    using Apollo.CMS.Core.Services;
     using Apollo.CMS.Message.Criteria.MessageList;
     using Apollo.CMS.Message.Models.MessageList;
     using Apollo.CMS.Message.Services.Interfaces;
@@ -45,7 +45,7 @@ namespace Apollo.CMS.Message.Services.Implements
             getMessageListCriteria.ToDate = getMessageListCriteria.ToDate.AddDays(1).AddMilliseconds(-1);
 
             result = GetListData<Message>(getMessageListCriteria);
-            
+
             return result.ToList();
         }
 

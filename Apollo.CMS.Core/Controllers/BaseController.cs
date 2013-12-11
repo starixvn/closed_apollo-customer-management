@@ -27,6 +27,8 @@ namespace Apollo.CMS.Core.Controllers
     /// </summary>
     public class BaseController : Controller
     {
+        protected const string CacheUtcOffset = "Apollo.CMS.Core.Controllers.UtcOffset";
+
         protected readonly ICurrentContext CurrentContext;
 
         protected readonly ICurrentSession CurrentSession;
@@ -66,6 +68,7 @@ namespace Apollo.CMS.Core.Controllers
             this._userService = new UserService { ServiceContext = ServiceContext };
 
             ViewBag.HasAccountManagementPermission = this.HasRight(ApolloCMSFunctionKeys.SearchAccount, Constant.Policy.Read);
+            ViewBag.UtcOffset = this.UtcOffset;
         }
 
         /// <summary>
@@ -91,6 +94,23 @@ namespace Apollo.CMS.Core.Controllers
             set
             {
                 ViewBag.ViewFlags = this._viewFlags = value;
+            }
+        }
+
+        protected string UtcOffset
+        {
+            get
+            {
+                var offsetString = CacheManager.Get<string>(CacheUtcOffset);
+                if (string.IsNullOrEmpty(offsetString))
+                {
+                    var offset = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now);
+
+                    offsetString = string.Format("{0}{1}", offset.Hours > 0 ? "+" : string.Empty, offset);
+                    CacheManager.Set<string>(CacheUtcOffset, offsetString);
+                }
+
+                return offsetString;
             }
         }
 

@@ -79,6 +79,7 @@
     </div>
     @Html.Hidden("DatePickerButtonUrl", Url.Content("~/content/site/img/icon-cal-orange.jpg"))
     @Html.Hidden("RootURL", Url.Content("~/"))
+    @Html.Hidden("ServerTimezone", (string)ViewBag.UtcOffset)
     @Html.Hidden("UnAuthorizedRequestError", Messages.UnAuthorizedRequestError)
     @Html.Hidden("ResourceNotFoundError", Messages.ResourceNotFoundError)
     @Html.Hidden("InternalError", Messages.InternalErrorMessage)

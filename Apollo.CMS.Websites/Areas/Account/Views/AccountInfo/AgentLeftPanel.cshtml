@@ -103,7 +103,12 @@ else if (customer.AgentId != 0)
             <!-- Tab panes -->
             <div class="tab-content">
                 @{ Html.RenderPartial("Setting"); }
-                <div class="tab-pane" id="agent"></div>
+                <div class="tab-pane @activeClass" id="agent">
+                    @if (!hasCustomerSettingPermission)
+                    {
+                        Html.RenderAction("GetDownlineAgents", "AccountInfo", new { ParentId = customer.ParentId });
+                    }
+                </div>
                 <div class="tab-pane" id="member"></div>
             </div>
         </div>
