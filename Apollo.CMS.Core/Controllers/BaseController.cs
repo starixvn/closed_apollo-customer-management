@@ -63,7 +63,6 @@ namespace Apollo.CMS.Core.Controllers
                 IsLive = this.Environment.Equals(Constant.LIVE),
                 HasEditRight = false,
                 IsReCheckin = NapSettings.Settings.EnableReCheckIn
-
             };
 
             this._menuService = new MenuService();
