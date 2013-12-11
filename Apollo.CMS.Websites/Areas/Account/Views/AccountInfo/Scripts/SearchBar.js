@@ -70,6 +70,7 @@ Apollo.CMS.Account.SearchBar = function () {
         $this.DOMInstance.txtUsername.on('keyup', function (event) {
             if (event.keyCode == 13) {
                 $this.DOMInstance.btnSearch.click();
+                $this.DOMInstance.txtUsername.blur();
             }
         });
 
@@ -129,7 +130,7 @@ Apollo.CMS.Account.SearchBar = function () {
     $this.SearchCustomer = function (isMember, id, username) {
         $this.DOMInstance.ddlMemberTypes.val(isMember.toString());
         $this.DOMInstance.ddlMemberTypes.change();
-        $this.DOMInstance.txtUsername.val(username);
+        $this.DOMInstance.txtUsername.val($.trim(username));
 
         $this.GetCustomer(isMember, id, null);
     };
