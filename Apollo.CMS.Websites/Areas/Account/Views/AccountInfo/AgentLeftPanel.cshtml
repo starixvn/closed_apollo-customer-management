@@ -9,7 +9,7 @@
 }
 @if (customer == null)
 {
-    <div class="text-center">@Messages.SearchAnAccount</div>
+    <div class="text-center nodata">@Messages.SearchAnAccount</div>
 }
 else if (customer.AgentId != 0)
 {
@@ -116,5 +116,5 @@ else if (customer.AgentId != 0)
 }
 else
 {
-    <div class="text-center">@ViewLang.NoData</div>
+    <div class="text-center nodata">@ViewLang.NoData</div>
 }
