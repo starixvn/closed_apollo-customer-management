@@ -14,7 +14,7 @@ namespace Apollo.CMS.Account.Services.TreeView.Implements
     using Apollo.CMS.Account.Criteria.TreeView;
     using Apollo.CMS.Account.Models.TreeView;
     using Apollo.CMS.Account.Services.TreeView.Interfaces;
-    using Apollo.CMS.Core.Services.Implements;
+    using Apollo.CMS.Core.Services;
 
     /// <summary>
     /// TODO: Update summary.

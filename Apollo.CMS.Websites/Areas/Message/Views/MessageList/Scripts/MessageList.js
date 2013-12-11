@@ -194,7 +194,7 @@ Apollo.CMS.Message.MessageList = function () {
 
         if (hasHostRight) {
             columns = [
-                    { HeaderText: postedDate, Width: 150, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: CMS.commonConstants.MomentDateTimeFormat },
+                    { HeaderText: postedDate, Width: 150, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: CMS.commonConstants.MomentDateTimeFormat, Timezone: CMS.serverTimezone },
                     { HeaderText: messageEnglish, Width: 300, Name: "MessageContent", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell) {
                         return '<div class="editBtn icon-edit" title="Edit" onclick="editMessage(' + currentCell.Value.MessageId + ')"></div><div class="messageContent" title="' + CMS.htmlEncode(currentCell.Value.ContentEn) + '">' + getSubMessageContent(currentCell.Value.ContentEn) + '</div><div class="clear"></div>';
                     }
@@ -219,7 +219,7 @@ Apollo.CMS.Message.MessageList = function () {
                 ];
         } else {
             columns = [
-                { HeaderText: postedDate, Width: 150, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: CMS.commonConstants.MomentDateTimeFormat },
+                { HeaderText: postedDate, Width: 150, Name: "PostedDate", HeaderAlign: "center", CellAlign: "center", FormatDateTime: CMS.commonConstants.MomentDateTimeFormat, Timezone: CMS.serverTimezone },
                 { HeaderText: messageEnglish, Width: 300, Name: "MessageContent", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell) {
                     return '<div class="messageContent" title="' + currentCell.Value.ContentEn + '">' + getSubMessageContent(currentCell.Value.ContentEn) + '</div>';
                 }

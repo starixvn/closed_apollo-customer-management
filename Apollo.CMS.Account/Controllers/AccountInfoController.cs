@@ -163,7 +163,6 @@ namespace Apollo.CMS.Account.Controllers
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>Partial view represents the list of down line agent.</returns>
-        [HttpPost]
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.SearchAccount, Policy = Constant.Policy.Read)]
         public PartialViewResult GetDownlineAgents(GetDownlineAgentsCriteria criteria)
         {

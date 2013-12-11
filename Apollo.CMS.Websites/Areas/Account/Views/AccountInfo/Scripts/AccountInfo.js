@@ -44,7 +44,7 @@ Apollo.CMS.Account.AccountInfo = function () {
             var username = $(this).text();
             var isMember = $(this).attr('data-is-member');
 
-            isMember = isMember ? isMember : false;            
+            isMember = isMember ? isMember : false;
             searchBar.SearchCustomer(isMember, customerId, username);
         });
     };
@@ -65,19 +65,21 @@ Apollo.CMS.Account.AccountInfo = function () {
             var url = '';
 
             $.cookie('left-panel-current-tab', tabId, { path: '/' });
+            
+            if (tab.children().length == 0) {
+                if (tabId === '#agent') {
+                    var params = {
+                        ParentId: customerId
+                    };
 
-            if (tabId === '#agent') {
-                var params = {
-                    ParentId: customerId
-                };
-
-                getDownline(params, urls.GetDownlineAgents, tab);
-            } else if (tabId === '#member') {
-                var params = {
-                    AgentId: customerId
-                };
-
-                getDownline(params, urls.GetDownlineMembers, tab);
+                    getDownline(params, urls.GetDownlineAgents, tab);
+                } else if (tabId === '#member') {
+                    var params = {
+                        AgentId: customerId
+                    };
+                    
+                    getDownline(params, urls.GetDownlineMembers, tab);
+                }
             }
         });
     };

@@ -13,7 +13,7 @@ namespace Apollo.CMS.Account.Services.AccountInfo.Implements
     using Apollo.CMS.Account.Criteria.AccountInfo;
     using Apollo.CMS.Account.Models.AccountInfo;
     using Apollo.CMS.Account.Services.AccountInfo.Interfaces;
-    using Apollo.CMS.Core.Services.Implements;
+    using Apollo.CMS.Core.Services;
 
     /// <summary>
     /// Account information service.

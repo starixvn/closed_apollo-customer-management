@@ -11,6 +11,7 @@ var CMS = function ($) {
         headlineMsgBox: null,
         loadingBox: null,
         datePickerButtonUrl: null,
+        serverTimezone: null,
 
         commonConstants: {
             DateFormat: 'mm/dd/yy',
@@ -27,6 +28,7 @@ var CMS = function ($) {
             CMS.internalError = $('#InternalError').val();
             CMS.dialogPopup = $('<div id="dialog-popup"></div>').appendTo('body');
             CMS.datePickerButtonUrl = $('#DatePickerButtonUrl').val();
+            CMS.serverTimezone = $("#ServerTimezone").val();
         },
         resolveRootUrl: function (relativeUrl) {
             return CMS.rootUrl + relativeUrl;
