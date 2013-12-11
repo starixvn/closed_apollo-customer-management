@@ -68,7 +68,8 @@ namespace Apollo.CMS.Websites
                 "~/scripts/lib/tipsy/tipsy-1.0.0.js",
                 "~/scripts/lib/namespace.js",
                 "~/scripts/_layout.js",
-                "~/scripts/cms.js"));
+                "~/scripts/cms.js",                
+                "~/Scripts/Validator.js"));
         }
 
         /// <summary>
@@ -102,7 +103,6 @@ namespace Apollo.CMS.Websites
                 "~/areas/message/resources/messagelist/message.less");
 
             bundles.Add(new ScriptBundle("~/scripts/messageList").Include(
-                "~/Scripts/Validator.js",
                 "~/Areas/Message/Views/MessageList/Scripts/MessageList.js"));
 
             bundles.AddAndInclude(
@@ -128,11 +128,9 @@ namespace Apollo.CMS.Websites
                 "~/areas/message/resources/newmessage/newMessage.less");
 
             bundles.Add(new ScriptBundle("~/scripts/newPrivateMessage").Include(
-                "~/Scripts/Validator.js",
                 "~/Areas/Message/Views/PrivateMessage/Scripts/PrivateMessage.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/newPublicMessage").Include(
-                "~/Scripts/Validator.js",
                 "~/Areas/Message/Views/PublicMessage/Scripts/PublicMessage.js"));
         }
 

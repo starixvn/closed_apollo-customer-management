@@ -65,10 +65,10 @@
                     @Html.Action("LeftPanel", new RouteValueDictionary(new { Controller = "AccountInfo", Area = "Account" }))
                 </div>
             }
-            <div id="mainContent" class="@leftContentStyle mainContent">
+            <div id="mainContent" class="col-xs-12 col-sm-12 col-md-12 mainContent">
                 @if (hasPermission == true)
                 {
-                    <span id="collapseExpand" class="collapse-expand icon-collapse"></span>
+                    <span id="collapseExpand" class="collapse-expand icon-expand"></span>
                 }
                 <div class="row container-content">
                     @RenderSection("Headline", false)

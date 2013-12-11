@@ -269,7 +269,6 @@
     <Content Include="Areas\Account\Views\AccountInfo\Upline.cshtml" />
     <Content Include="Areas\Account\Resources\AccountInfo\accountInfo.less" />
     <Content Include="Areas\Account\Views\AccountInfo\Setting.cshtml" />
-    <Content Include="Areas\Account\Views\AccountInfo\DefaultLeftPanel.cshtml" />
     <Content Include="Content\site\font\MyriadPro-Cond.eot" />
     <Content Include="Content\site\font\MyriadPro-Cond.ttf" />
     <Content Include="Content\site\font\MyriadPro-Cond.woff">

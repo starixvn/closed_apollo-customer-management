@@ -22,6 +22,7 @@ Apollo.CMS.Account.AccountInfo = function () {
                 clearTimeout(uplineTimeout);
                 if ($('#list-agent').is(':visible')) {
                     $('#icon-more').addClass('active');
+                    uplineTimeout = setTimeout(hideUplineAgent, 3000);
                 } else {
                     $('#icon-more').removeClass('active');
                 }
@@ -35,7 +36,7 @@ Apollo.CMS.Account.AccountInfo = function () {
         });
 
         $('#list-agent').live('mouseout', function () {
-            uplineTimeout = setTimeout(hideUplineAgent, 10000);
+            uplineTimeout = setTimeout(hideUplineAgent, 100);
         });
 
         $('.search-link[data-customer-id]').live('click', function () {

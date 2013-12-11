@@ -12,8 +12,8 @@ var Layout = function ($) {
                 }
             });
 
-            if (isExpanded == 'false') {
-                Layout.collapseExpandLeftPanel(false, 20);
+            if (isExpanded == 'true') {
+                Layout.collapseExpandLeftPanel(true, 10);
             }
         },
         collapseExpandLeftPanel: function (isExpanded, timespan) {

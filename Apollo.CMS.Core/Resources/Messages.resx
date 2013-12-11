@@ -183,8 +183,14 @@
   <data name="RequiredMemberError" xml:space="preserve">
     <value>At least one customer is required!</value>
   </data>
+  <data name="RequiredUsernameError" xml:space="preserve">
+    <value>Username is required!</value>
+  </data>
   <data name="ResourceNotFoundError" xml:space="preserve">
     <value>Resources not found!</value>
+  </data>
+  <data name="SearchAnAccount" xml:space="preserve">
+    <value>Please search an account!</value>
   </data>
   <data name="UnAuthorizedRequestError" xml:space="preserve">
     <value>Unauthorized request rejected!</value>

@@ -5,12 +5,17 @@
 @using Fanex.Common
 @{    
     var hasCustomerSettingPermission = (bool)ViewBag.HasCustomerSettingPermission;
-    var customer = (AgentInfo)ViewBag.Customer;
+    var customer = (AgentInfo)ViewBag.Customer;    
+}
+@if (customer == null)
+{
+    <div class="text-center">@Messages.SearchAnAccount</div>
+}
+else if (customer.AgentId != 0)
+{
     var accountStatus = StatusHelper.GetStatus(Converter.ToInt(customer.Status), Converter.ToInt(customer.UplineStatus));
     var betStatus = StatusHelper.GetStatus(Converter.ToInt(customer.BetStatus), Converter.ToInt(customer.UplineBetStatus));
-}
-@if (customer.AgentId != 0)
-{
+    
     @Html.Hidden("hdnCustomerId", customer.AgentId);
 
     <div class="row item">
@@ -53,19 +58,27 @@
     <div class="row account-info">
         <div class="row item-info">
             <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.Currency</div>
-            <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="currency">@(customer.ParentId == null ? ViewLang.NA : customer.Currency)</b></div>
+            <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                <b class="currency">@(customer.ParentId == null ? ViewLang.NA : customer.Currency)</b>
+            </div>
         </div>
         <div class="row item-info">
             <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.AccountStatus</div>
-            <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="@accountStatus.ToLower()">@accountStatus</b></div>
+            <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                <b class="@accountStatus.ToLower().Replace(".", string.Empty)">@accountStatus</b>
+            </div>
         </div>
         <div class="row item-info">
             <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.BetStatus</div>
-            <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="@betStatus.ToLower()">@betStatus</b></div>
+            <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                <b class="@betStatus.ToLower().Replace(".", string.Empty)">@betStatus</b>
+            </div>
         </div>
         <div class="row item-info">
             <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.SportCredit</div>
-            <div class="col-xs-6 col-sm-6 col-md-6 text-right"><b class="credit">@Converter.ToDecimal(customer.SportCredit).Format(2)</b></div>
+            <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                <b class="credit">@Converter.ToDecimal(customer.SportCredit).Format(2)</b>
+            </div>
         </div>
     </div>
     <div class="row tab-list">
@@ -98,5 +111,5 @@
 }
 else
 {
-    <span>@ViewLang.NoData</span>
+    <div class="text-center">@ViewLang.NoData</div>
 }

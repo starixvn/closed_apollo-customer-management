@@ -259,11 +259,29 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Username is required!.
+        /// </summary>
+        public static string RequiredUsernameError {
+            get {
+                return ResourceManager.GetString("RequiredUsernameError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Resources not found!.
         /// </summary>
         public static string ResourceNotFoundError {
             get {
                 return ResourceManager.GetString("ResourceNotFoundError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please search an account!.
+        /// </summary>
+        public static string SearchAnAccount {
+            get {
+                return ResourceManager.GetString("SearchAnAccount", resourceCulture);
             }
         }
         

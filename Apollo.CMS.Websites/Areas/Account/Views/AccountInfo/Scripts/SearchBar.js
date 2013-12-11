@@ -31,7 +31,6 @@ Apollo.CMS.Account.SearchBar = function () {
         $this.DOMInstance.ddlMemberTypes.change(function () {
             isMember = $this.DOMInstance.ddlMemberTypes.val() === 'true';
             changeTreeViewIconState(isMember);
-            $this.DOMInstance.txtUsername.val('');
         });
 
         // Auto-complete for Search text-box.
@@ -70,8 +69,7 @@ Apollo.CMS.Account.SearchBar = function () {
         // Catch enter key of Search text-box.
         $this.DOMInstance.txtUsername.on('keyup', function (event) {
             if (event.keyCode == 13) {
-                var username = $this.DOMInstance.txtUsername.val();
-                $this.GetCustomer(isMember, null, username);
+                $this.DOMInstance.btnSearch.click();
             }
         });
 
@@ -81,7 +79,13 @@ Apollo.CMS.Account.SearchBar = function () {
 
         $this.DOMInstance.btnSearch.on('click', function () {
             var username = $this.DOMInstance.txtUsername.val();
-            $this.GetCustomer(isMember, null, username);
+
+            if (!username) {
+                var requiredErrorMsg = $this.DOMInstance.txtUsername.attr('data-val-required');
+                Validator.showTooltip($this.DOMInstance.txtUsername, requiredErrorMsg, 'nw');
+            } else {
+                $this.GetCustomer(isMember, null, username);
+            }
         });
     };
 
@@ -112,7 +116,7 @@ Apollo.CMS.Account.SearchBar = function () {
             if (treeViewIcon.attr('id') == menuId) {
                 treeViewIcon.addClass('active');
             }
-            
+
             treeViewIcon.removeClass('disabled');
             $this.DOMInstance.btnTreeView.removeClass('icon-treeview-disabled').addClass('icon-treeview');
             $this.DOMInstance.btnTreeView.on('click', redirectToTreeView);
@@ -154,6 +158,7 @@ Apollo.CMS.Account.SearchBar = function () {
             },
             complete: function () {
                 CMS.loadingBox.close();
+                Layout.expandLefPanel();
             }
         });
     };

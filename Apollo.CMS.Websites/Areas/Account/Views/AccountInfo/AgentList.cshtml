@@ -2,17 +2,20 @@
 @{
     var agents = (IEnumerable<Agent>)ViewBag.Agents;
 }
-
 <ul class="super-menu agent-list list-unstyled">
     @if ((agents != null) && (agents.Count() > 0))
     {
         foreach (var item in agents)
         { 
-            <li><a href="#" class="search-link" data-customer-id="@item.AgentId"><span class="icon-row-right"></span>@item.Username</a></li>
+            <li>
+                <a href="#" class="search-link" data-customer-id="@item.AgentId">
+                    <span class="icon-row-right"></span>@item.Username
+                </a>
+            </li>
         }
     }
     else
     { 
-        <li><span>@ViewLang.NoData</span></li>
+        <li><div class="text-center">@ViewLang.NoData</div></li>
     }
 </ul>
