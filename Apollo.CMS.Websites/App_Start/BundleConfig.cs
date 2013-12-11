@@ -57,6 +57,9 @@ namespace Apollo.CMS.Websites
             bundles.Add(new ScriptBundle("~/scripts/repondjs").Include(
                 "~/scripts/lib/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/ReCheckin").Include(
+                    "~/Areas/UserLogin/scripts/ReCheckIn.js"));
+
             bundles.Add(new ScriptBundle("~/scripts/commonJS").Include(
                 "~/scripts/lib/jQuery/jquery-1.8.2.js",
                 "~/scripts/lib/jQuery/jquery-ui-1.8.24.js",

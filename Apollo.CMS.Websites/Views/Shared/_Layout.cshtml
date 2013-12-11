@@ -9,11 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     @Styles.Render("~/site/common")
     @Styles.Render("~/site/accountInfo")
-    @Scripts.Render("~/scripts/headjs")
-    @if (ViewBag.ViewFlags != null && ViewBag.ViewFlags.IsReCheckin)
-    {
-        <script src="~/Areas/UserLogin/scripts/ReCheckIn.js" type="text/javascript"></script>
-    }
+    @Scripts.Render("~/scripts/headjs")    
     @RenderSection("Head", false)
     @Scripts.Render("~/scripts/repondjs")
 </head>
@@ -86,6 +82,10 @@
     @Scripts.Render("~/scripts/commonJS")
     @Scripts.Render("~/scripts/searchBar")
     @Scripts.Render("~/scripts/leftPanel")
+    @if (ViewBag.ViewFlags != null && ViewBag.ViewFlags.IsReCheckin)
+    {
+        @Scripts.Render("~/Scripts/ReCheckin")
+    }
     @RenderSection("Foot", false)
 </body>
 </html>

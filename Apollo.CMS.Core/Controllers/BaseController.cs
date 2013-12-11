@@ -61,7 +61,9 @@ namespace Apollo.CMS.Core.Controllers
             ViewFlags = new ViewFlags
             {
                 IsLive = this.Environment.Equals(Constant.LIVE),
-                HasEditRight = false
+                HasEditRight = false,
+                IsReCheckin = NapSettings.Settings.EnableReCheckIn
+
             };
 
             this._menuService = new MenuService();
