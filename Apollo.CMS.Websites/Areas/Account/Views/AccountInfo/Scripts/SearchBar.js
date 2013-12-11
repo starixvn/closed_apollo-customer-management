@@ -93,7 +93,9 @@ Apollo.CMS.Account.SearchBar = function () {
     var redirectToTreeView = function () {
         var username = $this.DOMInstance.txtUsername.val();
         var oldUsername = $.trim($('#divAgentName').text());
-        console.log(oldUsername);
+
+        $this.DOMInstance.txtUsername.tipsy('hide');
+
         if (oldUsername === username) {
             var custId = $('#hdnCustomerId').val();
 
@@ -139,6 +141,8 @@ Apollo.CMS.Account.SearchBar = function () {
             id: id,
             username: username
         };
+
+        $this.DOMInstance.txtUsername.tipsy('hide');
 
         $.ajax({
             type: "POST",
