@@ -346,9 +346,10 @@ input[type="text"] {
                     }
 
                    &.disabled:hover {
-                        border: 1px solid @primary-color;
+                        border-color: @primary-color;
                         background-color: #fff;
-                        height: 28px;
+                        height: 26px;
+                        border-width: 0 1px;
                     }
                 }
             }
@@ -702,6 +703,7 @@ input[type="text"] {
 
                         &.setting {
                             border-right: 1px solid @border-color;
+                            width: 35%;
                         }
                     }
                 }
