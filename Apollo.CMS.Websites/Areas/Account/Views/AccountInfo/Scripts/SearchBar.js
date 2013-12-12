@@ -6,10 +6,11 @@ $(document).ready(function () {
 Namespace.Register("Apollo.CMS.Account.SearchBar");
 Apollo.CMS.Account.SearchBar = function () {
     var $this = this;
+    var rootUrl = $('#RootURL').val() || '/';
     var urls = {
-        GetSuggestedCustomers: '/Account/AccountInfo/GetSuggestedCustomer', //CMS.resolveRootUrl('Account/AccountInfo/GetSuggestedCustomer'),
-        GetCustomer: '/Account/AccountInfo/GetCustomer', //CMS.resolveRootUrl('Account/AccountInfo/GetCustomer'),
-        GetLeftPanel: '/Account/AccountInfo/LeftPanel' //CMS.resolveRootUrl('Account/AccountInfo/LeftPanel')
+        GetSuggestedCustomers: rootUrl + 'Account/AccountInfo/GetSuggestedCustomer',
+        GetCustomer: rootUrl + 'Account/AccountInfo/GetCustomer',
+        GetLeftPanel: rootUrl + 'Account/AccountInfo/LeftPanel'
     };
     var isMember = false;
 
