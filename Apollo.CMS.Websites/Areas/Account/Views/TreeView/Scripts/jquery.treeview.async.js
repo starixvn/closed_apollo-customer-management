@@ -53,16 +53,7 @@
                 }
             }
 
-        var url = settings.urlShowAllData;
-        if(showAllData)
-        {
-            url = settings.urlShowAllData;
-        }
-        else
-        {
-            url = settings.urlShowNodeData;
-        }
-
+        var url = showAllData ? settings.urlShowAllData : settings.urlShowNodeData;      
         $.getJSON(url, null, function (response) {
                 if(response.length <= 0)
                 {
