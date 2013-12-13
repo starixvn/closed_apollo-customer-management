@@ -2,7 +2,7 @@
 @{
     var members = (IEnumerable<Member>)ViewBag.Members;
 }
-<ul class="super-menu list-unstyled">
+<ul class="super-menu member-list list-unstyled">
     @if ((members != null) && (members.Count() > 0))
     {
         foreach (var item in members)
