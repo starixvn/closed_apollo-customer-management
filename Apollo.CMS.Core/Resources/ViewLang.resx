@@ -201,8 +201,8 @@
   <data name="Shadow" xml:space="preserve">
     <value>Shadow</value>
   </data>
-  <data name="ShareHierachy" xml:space="preserve">
-    <value>Share Hierachy</value>
+  <data name="ShareHierarchy" xml:space="preserve">
+    <value>Share Hierarchy</value>
   </data>
   <data name="Shareholder" xml:space="preserve">
     <value>Shareholder</value>

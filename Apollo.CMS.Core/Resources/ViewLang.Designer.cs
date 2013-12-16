@@ -313,11 +313,11 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Share Hierachy.
+        ///   Looks up a localized string similar to Share Hierarchy.
         /// </summary>
-        public static string ShareHierachy {
+        public static string ShareHierarchy {
             get {
-                return ResourceManager.GetString("ShareHierachy", resourceCulture);
+                return ResourceManager.GetString("ShareHierarchy", resourceCulture);
             }
         }
         
