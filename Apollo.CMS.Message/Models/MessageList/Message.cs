@@ -10,12 +10,8 @@
 namespace Apollo.CMS.Message.Models.MessageList
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using System.Text;
-    using Apollo.CMS.Message.Constants;
-    using Apollo.CMS.Message.Resources;
+    using Apollo.CMS.Core.Resources;
 
     /// <summary>
     /// Message model.
@@ -28,7 +24,7 @@ namespace Apollo.CMS.Message.Models.MessageList
 
         public string ContentCs { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(Labels), ErrorMessageResourceName = "RequireEnglishContent")]
+        [Required(ErrorMessageResourceType = typeof(ViewLang), ErrorMessageResourceName = "RequireEnglishContent")]
         public string ContentEn { get; set; }
 
         public string ContentJp { get; set; }

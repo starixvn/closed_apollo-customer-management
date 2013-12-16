@@ -11,8 +11,8 @@ namespace Apollo.CMS.Message.Criteria.NewMessage
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Apollo.CMS.Core.Resources;
     using Apollo.CMS.Message.Models.NewMessage;
-    using Apollo.CMS.Message.Resources;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
@@ -30,7 +30,7 @@ namespace Apollo.CMS.Message.Criteria.NewMessage
 
         public string Recipient { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(Labels), ErrorMessageResourceName = "RequireEnglishContent")]
+        [Required(ErrorMessageResourceType = typeof(ViewLang), ErrorMessageResourceName = "RequireEnglishContent")]
         public string ContentEn { get; set; }
 
         public string ContentCh { get; set; }

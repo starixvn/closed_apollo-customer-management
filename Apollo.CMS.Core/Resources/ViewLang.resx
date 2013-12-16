@@ -201,8 +201,8 @@
   <data name="Shadow" xml:space="preserve">
     <value>Shadow</value>
   </data>
-  <data name="ShareHierachy" xml:space="preserve">
-    <value>Share Hierachy</value>
+  <data name="ShareHierarchy" xml:space="preserve">
+    <value>Share Hierarchy</value>
   </data>
   <data name="Shareholder" xml:space="preserve">
     <value>Shareholder</value>
@@ -233,5 +233,119 @@
   </data>
   <data name="ViewMoreUpline" xml:space="preserve">
     <value>View more upline</value>
+  </data>
+  <data name="AllTypes" xml:space="preserve">
+    <value>All Types</value>
+  </data>
+  <data name="AlsoInformUpline" xml:space="preserve">
+    <value>Also Inform Upline</value>
+  </data>
+  <data name="ChineseSimplified" xml:space="preserve">
+    <value>Chinese Simplified</value>
+  </data>
+  <data name="ChineseTraditional" xml:space="preserve">
+    <value>Chinese Traditional</value>
+  </data>
+  <data name="Creator" xml:space="preserve">
+    <value>Creator</value>
+  </data>
+  <data name="EditMessage" xml:space="preserve">
+    <value>Edit Message</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="InformUpline" xml:space="preserve">
+    <value>Inform Upline</value>
+  </data>
+  <data name="IsSpecical" xml:space="preserve">
+    <value>Is Specical</value>
+  </data>
+  <data name="Japanese" xml:space="preserve">
+    <value>Japanese</value>
+  </data>
+  <data name="Korean" xml:space="preserve">
+    <value>Korean</value>
+  </data>
+  <data name="MajorLanguage" xml:space="preserve">
+    <value>Major Language</value>
+  </data>
+  <data name="MaxRowsLimit" xml:space="preserve">
+    <value>Max Rows Limit:</value>
+  </data>
+  <data name="MessageEnglish" xml:space="preserve">
+    <value>Message English</value>
+  </data>
+  <data name="MessageList" xml:space="preserve">
+    <value>Message List</value>
+  </data>
+  <data name="MessageType" xml:space="preserve">
+    <value>Message Type</value>
+  </data>
+  <data name="NewPrivateMessage" xml:space="preserve">
+    <value>New Private Message</value>
+  </data>
+  <data name="NewPublicMessage" xml:space="preserve">
+    <value>New Public Message</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="NoMember" xml:space="preserve">
+    <value>There is no customer.</value>
+  </data>
+  <data name="OtherLanguage" xml:space="preserve">
+    <value>Other Language</value>
+  </data>
+  <data name="PostedDate" xml:space="preserve">
+    <value>Posted Date</value>
+  </data>
+  <data name="Private" xml:space="preserve">
+    <value>Private</value>
+  </data>
+  <data name="Public" xml:space="preserve">
+    <value>Public</value>
+  </data>
+  <data name="Recipient" xml:space="preserve">
+    <value>Recipient</value>
+  </data>
+  <data name="Remove1" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="RemoveMessageConfirm" xml:space="preserve">
+    <value>Are you sure you want to remove the message?</value>
+  </data>
+  <data name="RequireEnglishContent" xml:space="preserve">
+    <value>English content is required!</value>
+  </data>
+  <data name="Special" xml:space="preserve">
+    <value>Special</value>
+  </data>
+  <data name="SpecialMessage" xml:space="preserve">
+    <value>Special Message</value>
+  </data>
+  <data name="Thai" xml:space="preserve">
+    <value>Thai</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="TopNewMessages" xml:space="preserve">
+    <value>Top New Messages</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="UpdateMessageSuccessInform" xml:space="preserve">
+    <value>The message have been updated successfully!</value>
+  </data>
+  <data name="Vietnamese" xml:space="preserve">
+    <value>Vietnamese</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>
