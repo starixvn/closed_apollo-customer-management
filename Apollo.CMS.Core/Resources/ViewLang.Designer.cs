@@ -124,6 +124,24 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All Types.
+        /// </summary>
+        public static string AllTypes {
+            get {
+                return ResourceManager.GetString("AllTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Also Inform Upline.
+        /// </summary>
+        public static string AlsoInformUpline {
+            get {
+                return ResourceManager.GetString("AlsoInformUpline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bet and Comm Setting.
         /// </summary>
         public static string BetAndCommSetting {
@@ -147,6 +165,24 @@ namespace Apollo.CMS.Core.Resources {
         public static string BetStatus {
             get {
                 return ResourceManager.GetString("BetStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chinese Simplified.
+        /// </summary>
+        public static string ChineseSimplified {
+            get {
+                return ResourceManager.GetString("ChineseSimplified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chinese Traditional.
+        /// </summary>
+        public static string ChineseTraditional {
+            get {
+                return ResourceManager.GetString("ChineseTraditional", resourceCulture);
             }
         }
         
@@ -178,6 +214,15 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Creator.
+        /// </summary>
+        public static string Creator {
+            get {
+                return ResourceManager.GetString("Creator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Currency.
         /// </summary>
         public static string Currency {
@@ -196,6 +241,33 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Message.
+        /// </summary>
+        public static string EditMessage {
+            get {
+                return ResourceManager.GetString("EditMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        public static string English {
+            get {
+                return ResourceManager.GetString("English", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From.
+        /// </summary>
+        public static string From {
+            get {
+                return ResourceManager.GetString("From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to High Level Agents.
         /// </summary>
         public static string HighLevelAgents {
@@ -205,11 +277,47 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inform Upline.
+        /// </summary>
+        public static string InformUpline {
+            get {
+                return ResourceManager.GetString("InformUpline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username....
         /// </summary>
         public static string InputUserName {
             get {
                 return ResourceManager.GetString("InputUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is Specical.
+        /// </summary>
+        public static string IsSpecical {
+            get {
+                return ResourceManager.GetString("IsSpecical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Japanese.
+        /// </summary>
+        public static string Japanese {
+            get {
+                return ResourceManager.GetString("Japanese", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Korean.
+        /// </summary>
+        public static string Korean {
+            get {
+                return ResourceManager.GetString("Korean", resourceCulture);
             }
         }
         
@@ -259,11 +367,56 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Major Language.
+        /// </summary>
+        public static string MajorLanguage {
+            get {
+                return ResourceManager.GetString("MajorLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max Rows Limit:.
+        /// </summary>
+        public static string MaxRowsLimit {
+            get {
+                return ResourceManager.GetString("MaxRowsLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Member.
         /// </summary>
         public static string Member {
             get {
                 return ResourceManager.GetString("Member", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message English.
+        /// </summary>
+        public static string MessageEnglish {
+            get {
+                return ResourceManager.GetString("MessageEnglish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message List.
+        /// </summary>
+        public static string MessageList {
+            get {
+                return ResourceManager.GetString("MessageList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message Type.
+        /// </summary>
+        public static string MessageType {
+            get {
+                return ResourceManager.GetString("MessageType", resourceCulture);
             }
         }
         
@@ -277,6 +430,33 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Private Message.
+        /// </summary>
+        public static string NewPrivateMessage {
+            get {
+                return ResourceManager.GetString("NewPrivateMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Public Message.
+        /// </summary>
+        public static string NewPublicMessage {
+            get {
+                return ResourceManager.GetString("NewPublicMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There is no data..
         /// </summary>
         public static string NoData {
@@ -286,11 +466,92 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is no customer..
+        /// </summary>
+        public static string NoMember {
+            get {
+                return ResourceManager.GetString("NoMember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other Language.
+        /// </summary>
+        public static string OtherLanguage {
+            get {
+                return ResourceManager.GetString("OtherLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Posted Date.
+        /// </summary>
+        public static string PostedDate {
+            get {
+                return ResourceManager.GetString("PostedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Private.
+        /// </summary>
+        public static string Private {
+            get {
+                return ResourceManager.GetString("Private", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Public.
+        /// </summary>
+        public static string Public {
+            get {
+                return ResourceManager.GetString("Public", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recipient.
+        /// </summary>
+        public static string Recipient {
+            get {
+                return ResourceManager.GetString("Recipient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove.
         /// </summary>
         public static string Remove {
             get {
                 return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string Remove1 {
+            get {
+                return ResourceManager.GetString("Remove1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to remove the message?.
+        /// </summary>
+        public static string RemoveMessageConfirm {
+            get {
+                return ResourceManager.GetString("RemoveMessageConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English content is required!.
+        /// </summary>
+        public static string RequireEnglishContent {
+            get {
+                return ResourceManager.GetString("RequireEnglishContent", resourceCulture);
             }
         }
         
@@ -340,6 +601,24 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Special.
+        /// </summary>
+        public static string Special {
+            get {
+                return ResourceManager.GetString("Special", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Special Message.
+        /// </summary>
+        public static string SpecialMessage {
+            get {
+                return ResourceManager.GetString("SpecialMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sport Credit.
         /// </summary>
         public static string SportCredit {
@@ -376,6 +655,51 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thai.
+        /// </summary>
+        public static string Thai {
+            get {
+                return ResourceManager.GetString("Thai", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To.
+        /// </summary>
+        public static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Top New Messages.
+        /// </summary>
+        public static string TopNewMessages {
+            get {
+                return ResourceManager.GetString("TopNewMessages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        public static string Type {
+            get {
+                return ResourceManager.GetString("Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The message have been updated successfully!.
+        /// </summary>
+        public static string UpdateMessageSuccessInform {
+            get {
+                return ResourceManager.GetString("UpdateMessageSuccessInform", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upline.
         /// </summary>
         public static string Upline {
@@ -403,11 +727,29 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vietnamese.
+        /// </summary>
+        public static string Vietnamese {
+            get {
+                return ResourceManager.GetString("Vietnamese", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View more upline.
         /// </summary>
         public static string ViewMoreUpline {
             get {
                 return ResourceManager.GetString("ViewMoreUpline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

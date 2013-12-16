@@ -8,13 +8,13 @@
     @Styles.Render("~/site/newMessage")
 }
 @section HeadLine {
-    <h5 class="row title">@Labels.MessageList</h5>
+    <h5 class="row title">@ViewLang.MessageList</h5>
 }
 <div class="row filter-form clearfix message-list" id="message-list">
     <div class="filter-row clearfix">
         <div class="filter-item">
             <div class="lbl lbl-large">
-                <label>@Labels.TopNewMessages</label>
+                <label>@ViewLang.TopNewMessages</label>
             </div>
             <div class="txt width-auto">
                 <select id="ddlTopNewMessage" class="topMessage">
@@ -26,7 +26,7 @@
         </div>
         <div class="filter-item">
             <div class="lbl lbl-small">
-                <label>@Labels.From</label>
+                <label>@ViewLang.From</label>
             </div>
             <div class="txt width-auto">
                 <input type="text" id="dateFrom" data-val-required="@Messages.RequiredFieldError" data-val-date="@Messages.InvalidDateError" data-val-date-from="@string.Empty"/>
@@ -34,7 +34,7 @@
         </div>
         <div class="filter-item dateTo">
             <div class="lbl width-auto">
-                <label>@Labels.To</label>
+                <label>@ViewLang.To</label>
             </div>
             <div class="txt width-auto">
                 <input type="text" id="dateTo" data-val-required="@Messages.RequiredFieldError" data-val-date="@Messages.InvalidDateError" data-val-date-to="@Messages.DateRangeError"/>
@@ -45,30 +45,30 @@
     <div class="filter-row clearfix">
         <div class="filter-item">
             <div class="lbl lbl-large">
-                <label>@Labels.MessageType</label>
+                <label>@ViewLang.MessageType</label>
             </div>
             <div class="txt width-auto">
                 <select id="ddlMessageType" class="messageType">
-                    <option value="All">@Labels.AllTypes</option>
-                    <option value="3">@Labels.Public</option>
-                    <option value="1">@Labels.Private</option>
+                    <option value="All">@ViewLang.AllTypes</option>
+                    <option value="3">@ViewLang.Public</option>
+                    <option value="1">@ViewLang.Private</option>
                 </select>
             </div>
         </div>
         <div class="filter-item">
             <div class="lbl lbl-small">
-                <label>@Labels.Special</label>
+                <label>@ViewLang.Special</label>
             </div>
             <div class="txt width-auto">
                 <select id="ddlSpecial" class="sel-special">
-                    <option value="All">@Labels.All</option>
-                    <option value="1">@Labels.Yes</option>
-                    <option value="0">@Labels.No</option>
+                    <option value="All">@ViewLang.All</option>
+                    <option value="1">@ViewLang.Yes</option>
+                    <option value="0">@ViewLang.No</option>
                 </select>
             </div>
         </div>
         <div class="filter-item">
-            <input id="btnGetListMessage" type="button" class="btn btn-default btn-submit" value="@Labels.Submit"/>
+            <input id="btnGetListMessage" type="button" class="btn btn-default btn-submit" value="@ViewLang.Submit"/>
         </div>
     </div>
 </div>
@@ -81,19 +81,19 @@
     @Scripts.Render("~/scripts/fanexGrid")
     @Scripts.Render("~/scripts/messageList")
     <script type="text/javascript">
-        var publicMessage = '@Labels.Public';
-        var privateMessage = '@Labels.Private';
-        var messageIsSpecial = '@Labels.Yes';
-        var messageNotSpecial = '@Labels.No';
-        var postedDate = '@Labels.PostedDate';
-        var messageEnglish = '@Labels.MessageEnglish';
-        var messageType = '@Labels.Type';
-        var isSpecial = '@Labels.IsSpecical';
-        var creator = '@Labels.Creator';
-        var recipient = '@Labels.Recipient';
-        var remove = '@Labels.Remove';
-        var updateSuccessInform = '@Labels.UpdateMessageSuccessInform';
-        var removeMessageConfirm = '@Labels.RemoveMessageConfirm';
+        var publicMessage = '@ViewLang.Public';
+        var privateMessage = '@ViewLang.Private';
+        var messageIsSpecial = '@ViewLang.Yes';
+        var messageNotSpecial = '@ViewLang.No';
+        var postedDate = '@ViewLang.PostedDate';
+        var messageEnglish = '@ViewLang.MessageEnglish';
+        var messageType = '@ViewLang.Type';
+        var isSpecial = '@ViewLang.IsSpecical';
+        var creator = '@ViewLang.Creator';
+        var recipient = '@ViewLang.Recipient';
+        var remove = '@ViewLang.Remove';
+        var updateSuccessInform = '@ViewLang.UpdateMessageSuccessInform';
+        var removeMessageConfirm = '@ViewLang.RemoveMessageConfirm';
         var today = '@DateTime.Now.ToShortDateString()';
         var minDate = '@ViewBag.MinDate';
         var hasHostRight = '@ViewBag.HasHostRight' == 'True';
