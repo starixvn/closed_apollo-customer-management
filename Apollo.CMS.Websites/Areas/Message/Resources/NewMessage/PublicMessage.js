@@ -61,6 +61,7 @@ Apollo.CMS.Message.PublicMessage = function () {
                 $this.DOMInstance.divAgentLevels.slideUp('slow');
             }
         });
+        $this.DOMInstance.ddlRecipient.change();
 
         $('input:radio', $this.DOMInstance.divAgentLevels).on('change', function () {
             if ($(this).val() === 'HighLevelAgents') {
@@ -97,7 +98,7 @@ Apollo.CMS.Message.PublicMessage = function () {
         if ((levels.length === 0) && (selectedRadio.val() === 'HighLevelAgents')) {
             var errorMsg = $this.DOMInstance.divAgentLevels.attr('data-val-required');
 
-            Validator.showTooltip($this.DOMInstance.chkSuper, errorMsg, 'sw');
+            Validator.showTooltip($this.DOMInstance.chkSuper, errorMsg, 'nw');
             isValid = false;
         }
 

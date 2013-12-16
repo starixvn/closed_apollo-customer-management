@@ -20,39 +20,39 @@ namespace Apollo.CMS.Core.Helpers
         /// <summary>
         /// Gets customer's status based his current status and his up line status as well.
         /// </summary>
-        /// <param name="statusId">The status ID of the customer.</param>
-        /// <param name="uplineStatusId">The status ID of up line.</param>
+        /// <param name="status">The status ID of the customer.</param>
+        /// <param name="uplineStatus">The status ID of up line.</param>
         /// <returns>Associate status of the customer.</returns>
-        public static string GetStatus(int statusId, int uplineStatusId)
+        public static string GetStatus(int status, int uplineStatus)
         {
-            string status = string.Empty;
+            string statusValue = string.Empty;
 
-            if ((statusId == (int)CustomerStatus.Active) && (uplineStatusId == (int)CustomerStatus.Active))
+            if ((status == (int)CustomerStatus.Active) && (uplineStatus == (int)CustomerStatus.Active))
             {
-                status = ViewLang.Active;
+                statusValue = ViewLang.Active;
             }
-            else if ((statusId == (int)CustomerStatus.Stopped) && (uplineStatusId == (int)CustomerStatus.Active))
+            else if ((status == (int)CustomerStatus.Stopped) && (uplineStatus == (int)CustomerStatus.Active))
             {
-                status = ViewLang.Stopped;
+                statusValue = ViewLang.Stopped;
             }
-            else if ((statusId == (int)CustomerStatus.Locked) && (uplineStatusId == (int)CustomerStatus.Active))
+            else if ((status == (int)CustomerStatus.Locked) && (uplineStatus == (int)CustomerStatus.Active))
             {
-                status = ViewLang.Locked;
+                statusValue = ViewLang.Locked;
             }
-            else if ((statusId == (int)CustomerStatus.Active) && (uplineStatusId == (int)CustomerStatus.Stopped))
+            else if ((status == (int)CustomerStatus.Active) && (uplineStatus == (int)CustomerStatus.Stopped))
             {
-                status = ViewLang.CLock;
+                statusValue = ViewLang.CLock;
             }
-            else if ((statusId == (int)CustomerStatus.Stopped) && (uplineStatusId == (int)CustomerStatus.Stopped))
+            else if ((status == (int)CustomerStatus.Stopped) && (uplineStatus == (int)CustomerStatus.Stopped))
             {
-                status = ViewLang.CLock;
+                statusValue = ViewLang.CLock;
             }
-            else if ((statusId == (int)CustomerStatus.Locked) && (uplineStatusId == (int)CustomerStatus.Stopped))
+            else if ((status == (int)CustomerStatus.Locked) && (uplineStatus == (int)CustomerStatus.Stopped))
             {
-                status = ViewLang.CLock;
+                statusValue = ViewLang.CLock;
             }
 
-            return status;
+            return statusValue;
         }
     }
 }

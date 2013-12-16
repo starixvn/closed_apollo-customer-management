@@ -15,10 +15,11 @@ else if (customer.AgentId != 0)
 {
     var accountStatus = StatusHelper.GetStatus(Converter.ToInt(customer.Status), Converter.ToInt(customer.UplineStatus));
     var betStatus = StatusHelper.GetStatus(Converter.ToInt(customer.BetStatus), Converter.ToInt(customer.UplineBetStatus));
+    var noBorderCss = customer.ParentId == null ? "no-border" : string.Empty;
     
     @Html.Hidden("hdnCustomerId", customer.AgentId);
 
-    <div class="row item">
+    <div class="row item @noBorderCss">
         <div class="col-xs-3 col-sm-3 col-md-3 text-left">
             @ViewLang.Agent
         </div>
