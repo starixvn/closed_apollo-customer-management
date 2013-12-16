@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="GetAllAgentAndAgentDonwlineByIdCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GetAllAgentAndAgentDownlineByIdCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -12,9 +12,9 @@ namespace Apollo.CMS.Account.Criteria.TreeView
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Get all agent and agent down line by id class.
     /// </summary>
-    public class GetAllAgentAndAgentDonwlineByIdCriteria : CriteriaBase
+    public class GetAllAgentAndAgentDownlineByIdCriteria : CriteriaBase
     {
         public int? AgentId { get; set; }
 

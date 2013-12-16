@@ -14,11 +14,11 @@ namespace Apollo.CMS.Account.Services.TreeView.Interfaces
     using Apollo.CMS.Account.Models.TreeView;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Tree view service interface.
     /// </summary>
     public interface ITreeViewService
     {
-        List<TreeViewModel> GetDataTreeView(GetAllAgentAndAgentDonwlineByIdCriteria criteria);
+        List<TreeViewModel> GetDataTreeView(GetAllAgentAndAgentDownlineByIdCriteria criteria);
 
         List<TreeViewModel> GetDataTreeViewBranch(GetAgentDownlineByIdCriteria criteria);
     }

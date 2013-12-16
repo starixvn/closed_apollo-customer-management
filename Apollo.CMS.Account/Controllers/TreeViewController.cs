@@ -18,7 +18,7 @@ namespace Apollo.CMS.Account.Controllers
     using Apollo.CMS.Core.Controllers;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Tree view controller class.
     /// </summary>
     public class TreeViewController : BaseController
     {
@@ -99,7 +99,7 @@ namespace Apollo.CMS.Account.Controllers
             Justification = "Reviewed. Suppression is OK here.")]
         public JsonResult CreateTreeView(int? agentId = null, string username = null)
         {
-            var criteria = new GetAllAgentAndAgentDonwlineByIdCriteria()
+            var criteria = new GetAllAgentAndAgentDownlineByIdCriteria()
             {
                 AgentId = agentId,
                 Username = string.IsNullOrWhiteSpace(username) ? null : username

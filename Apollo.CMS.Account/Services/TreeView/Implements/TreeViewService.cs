@@ -17,7 +17,7 @@ namespace Apollo.CMS.Account.Services.TreeView.Implements
     using Apollo.CMS.Core.Services;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Tree view service.
     /// </summary>
     public class TreeViewService : BaseService, ITreeViewService
     {
@@ -26,7 +26,7 @@ namespace Apollo.CMS.Account.Services.TreeView.Implements
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>List of tree view model.</returns>
-        public List<TreeViewModel> GetDataTreeView(GetAllAgentAndAgentDonwlineByIdCriteria criteria)
+        public List<TreeViewModel> GetDataTreeView(GetAllAgentAndAgentDownlineByIdCriteria criteria)
         {
             IEnumerable<TreeViewModel> result = null;
 

@@ -12,7 +12,7 @@ namespace Apollo.CMS.Account.Criteria.TreeView
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Get agent down line by id class.
     /// </summary>
     public class GetAgentDownlineByIdCriteria : CriteriaBase
     {
