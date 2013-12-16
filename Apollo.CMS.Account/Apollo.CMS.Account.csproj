@@ -68,7 +68,7 @@
     <Compile Include="Criteria\AccountInfo\GetMemberInfoCriteria.cs" />
     <Compile Include="Criteria\AccountInfo\GetSuggestedCustomersByUsernameCriteria.cs" />
     <Compile Include="Criteria\TreeView\GetAgentDownlineByIdCriteria.cs" />
-    <Compile Include="Criteria\TreeView\GetAllAgentAndAgentDonwlineByIdCriteria.cs" />
+    <Compile Include="Criteria\TreeView\GetAllAgentAndAgentDownlineByIdCriteria.cs" />
     <Compile Include="Models\AccountInfo\AgentInfo.cs" />
     <Compile Include="Models\AccountInfo\MemberInfo.cs" />
     <Compile Include="Models\AccountInfo\Agent.cs" />

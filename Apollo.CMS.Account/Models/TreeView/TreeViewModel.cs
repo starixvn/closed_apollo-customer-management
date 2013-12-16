@@ -10,7 +10,7 @@
 namespace Apollo.CMS.Account.Models.TreeView
 {
     /// <summary>
-    /// TODO: Update summary.
+    /// Tree view model.
     /// </summary>
     public class TreeViewModel
     {

@@ -15,7 +15,7 @@ namespace Apollo.CMS.Account.Models.TreeView
     using System.Text;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Tree view view model.
     /// </summary>
     public class TreeViewViewModel : List<TreeViewViewModel.Node>
     {
