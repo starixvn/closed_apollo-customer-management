@@ -106,7 +106,7 @@ namespace Apollo.CMS.Websites
                 "~/areas/message/resources/messagelist/message.less");
 
             bundles.Add(new ScriptBundle("~/scripts/messageList").Include(
-                "~/Areas/Message/Views/MessageList/Scripts/MessageList.js"));
+                "~/Areas/Message/Resources/MessageList/MessageList.js"));
 
             bundles.AddAndInclude(
                  "~/styles/fanexGrid",
@@ -131,10 +131,10 @@ namespace Apollo.CMS.Websites
                 "~/areas/message/resources/newmessage/newMessage.less");
 
             bundles.Add(new ScriptBundle("~/scripts/newPrivateMessage").Include(
-                "~/Areas/Message/Views/PrivateMessage/Scripts/PrivateMessage.js"));
+                "~/Areas/Message/Resources/NewMessage/PrivateMessage.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/newPublicMessage").Include(
-                "~/Areas/Message/Views/PublicMessage/Scripts/PublicMessage.js"));
+                "~/Areas/Message/Resources/NewMessage/PublicMessage.js"));
         }
 
         /// <summary>
@@ -148,10 +148,10 @@ namespace Apollo.CMS.Websites
                 "~/Areas/Account/Resources/AccountInfo/accountInfo.less");
 
             bundles.Add(new ScriptBundle("~/scripts/searchBar").Include(
-                "~/Areas/Account/Views/AccountInfo/Scripts/SearchBar.js"));
+                "~/Areas/Account/Resources/AccountInfo/SearchBar.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/leftPanel").Include(
-                "~/Areas/Account/Views/AccountInfo/Scripts/AccountInfo.js"));
+                "~/Areas/Account/Resources/AccountInfo/AccountInfo.js"));
         }
 
         /// <summary>
@@ -165,9 +165,9 @@ namespace Apollo.CMS.Websites
                 "~/Areas/Account/Resources/TreeView/treeview.css");
 
             bundles.Add(new ScriptBundle("~/scripts/treeView").Include(
-                "~/Areas/Account/Views/TreeView/Scripts/jquery.treeview.js",
-                "~/Areas/Account/Views/TreeView/Scripts/jquery.treeview.async.js",
-                "~/Areas/Account/Views/TreeView/Scripts/treeview.js"));
+                "~/Areas/Account/Resources/TreeView/jquery.treeview.js",
+                "~/Areas/Account/Resources/TreeView/jquery.treeview.async.js",
+                "~/Areas/Account/Resources/TreeView/treeview.js"));
         }
     }
 

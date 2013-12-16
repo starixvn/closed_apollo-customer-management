@@ -87,6 +87,7 @@
     <Compile Include="Constants\BetStatus.cs" />
     <Compile Include="Constants\CommonConstants.cs" />
     <Compile Include="Constants\CustomerStatus.cs" />
+    <Compile Include="Constants\HighLevelAgents.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\NumberExtensions.cs" />

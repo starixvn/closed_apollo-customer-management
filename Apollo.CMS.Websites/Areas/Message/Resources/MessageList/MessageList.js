@@ -38,7 +38,7 @@ Apollo.CMS.Message.MessageList = function () {
         },
         removeMessageParam: {
             MsgId: null,
-            TargetId: null
+            MsgTargetId: null
         }
     };
 
@@ -178,11 +178,17 @@ Apollo.CMS.Message.MessageList = function () {
                 FromDate: _params.getListMessageParam.FromDate,
                 ToDate: _params.getListMessageParam.ToDate
             }),
+            beforeSend: function () {
+                CMS.loadingBox.show();
+            },
             success: function (rs) {
                 self.renderGrid(rs);
             },
             error: function (xhr, status, err) {
                 CMS.handleAjaxError(xhr, status, err);
+            },
+            complete: function () {
+                CMS.loadingBox.close();
             }
         });
     };
@@ -213,7 +219,7 @@ Apollo.CMS.Message.MessageList = function () {
                     }
                     },
                     { HeaderText: remove, Width: 60, Name: "Remove", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (currentCell) {
-                        return '<div title="Remove" class="icon-remove" onclick="removeMessage(' + currentCell.Value.MessageId + ',' + currentCell.Value.TargetId + ' )"></div>';
+                        return '<div title="Remove" class="icon-remove" onclick="removeMessage(' + currentCell.Value.MessageId + ',' + currentCell.Value.MsgTargetId + ' )"></div>';
                     }
                     }
                 ];
@@ -370,13 +376,13 @@ Apollo.CMS.Message.MessageList = function () {
         });
     };
 
-    removeMessage = function (messageId, targetId) {
-        self.removeMessage(messageId, targetId);
+    removeMessage = function (messageId, msgTargetId) {
+        self.removeMessage(messageId, msgTargetId);
     };
 
-    self.removeMessage = function (messageId, targetId) {
+    self.removeMessage = function (messageId, msgTargetId) {
         _params.removeMessageParam.MsgId = messageId;
-        _params.removeMessageParam.TargetId = targetId;
+        _params.removeMessageParam.MsgTargetId = msgTargetId;
 
         CMS.headlineMsgBox.confirm(removeMessageConfirm, function () {
             $.ajax({

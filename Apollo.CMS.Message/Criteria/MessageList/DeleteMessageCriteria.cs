@@ -19,7 +19,7 @@ namespace Apollo.CMS.Message.Criteria.MessageList
     {
         public int MsgId { get; set; }
 
-        public int TargetId { get; set; }
+        public int MsgTargetId { get; set; }
 
         public int UserLoginId { get; set; }
 

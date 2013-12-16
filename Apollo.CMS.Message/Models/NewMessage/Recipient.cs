@@ -21,5 +21,7 @@ namespace Apollo.CMS.Message.Models.NewMessage
         public bool IsAgent { get; set; }
 
         public bool InformUpline { get; set; }
+
+        public int? AgentLevel { get; set; }
     }
 }

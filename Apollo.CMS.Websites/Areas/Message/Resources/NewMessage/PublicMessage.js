@@ -38,6 +38,7 @@ Apollo.CMS.Message.PublicMessage = function () {
         $this.DOMInstance.spanOtherLanguage = $('#spanOtherLanguage');
         $this.DOMInstance.divOtherLanguageTitle = $('#divOtherLanguageTitle');
         $this.DOMInstance.divOtherLanguage = $('#divOtherLanguage');
+        $this.DOMInstance.divAgentLevels = $('#divAgentLevels');
     };
     var initFields = function () {
         $this.DOMInstance.divOtherLanguageTitle.bind('click', function () {
@@ -50,7 +51,25 @@ Apollo.CMS.Message.PublicMessage = function () {
             $this.DOMInstance.divOtherLanguage.slideToggle('slow');
         });
 
-        $this.DOMInstance.btnSubmit.bind('click', function () {
+        $this.DOMInstance.ddlRecipient.on('change', function () {
+            var selectedIndex = $('option:selected', $this.DOMInstance.ddlRecipient).index();
+
+            if (selectedIndex === 1) {
+                $this.DOMInstance.divAgentLevels.slideDown('slow');
+            } else {
+                $this.DOMInstance.divAgentLevels.slideUp('slow');
+            }
+        });
+
+        $('input:radio', $this.DOMInstance.divAgentLevels).on('change', function () {
+            if ($(this).val() === 'HighLevelAgents') {
+                $('input:checkbox', $this.DOMInstance.divAgentLevels).removeAttr('disabled');
+            } else {
+                $('input:checkbox', $this.DOMInstance.divAgentLevels).attr('disabled', 'true');
+            }
+        });
+
+        $this.DOMInstance.btnSubmit.on('click', function () {
             if (validateForm()) {
                 getParamValues();
                 $this.AddNewMessage();
@@ -76,6 +95,7 @@ Apollo.CMS.Message.PublicMessage = function () {
     var getParamValues = function () {
         var selectedRecipientId = $this.DOMInstance.ddlRecipient.val();
         var selectedRecipientName = $('option:selected', $this.DOMInstance.ddlRecipient).text();
+        var selectedHighLevels = $('input[name=AgentLevel]:checked', $this.DOMInstance.divAgentLevels).val();
         var recipients = [];
 
         if (selectedRecipientId == 'null') {
@@ -87,6 +107,18 @@ Apollo.CMS.Message.PublicMessage = function () {
                 var recipient = {
                     TargetId: item.val(),
                     TargetName: item.text()
+                };
+
+                recipients.push(recipient);
+            }
+        } else if ((selectedHighLevels === 'HighLevelAgents') && ($this.DOMInstance.divAgentLevels.is(':visible'))) {
+            var levels = $('input:checkbox:checked', $this.DOMInstance.divAgentLevels);
+
+            for (var index = 0; index < levels.length; index++) {
+                var recipient = {
+                    TargetId: selectedRecipientId,
+                    TargetName: selectedRecipientName,
+                    AgentLevel: $(levels[index]).attr('data-msg-target-id')
                 };
 
                 recipients.push(recipient);
@@ -138,7 +170,8 @@ Apollo.CMS.Message.PublicMessage = function () {
         btnSubmit: null,
         divEnglishLabel: null,
         divOtherLanguageTitle: null,
-        divOtherLanguage: null
+        divOtherLanguage: null,
+        divAgentLevels: null
     };
     $this.InitPage = function () {
         cacheDOM();

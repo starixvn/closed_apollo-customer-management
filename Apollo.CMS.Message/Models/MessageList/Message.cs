@@ -50,5 +50,7 @@ namespace Apollo.CMS.Message.Models.MessageList
         public string Recipient { get; set; }
 
         public int MessageId { get; set; }
+
+        public int MsgTargetId { get; set; }
     }
 }

@@ -135,6 +135,9 @@
   <data name="All" xml:space="preserve">
     <value>All</value>
   </data>
+  <data name="AllLevels" xml:space="preserve">
+    <value>All Levels</value>
+  </data>
   <data name="BetAndCommSetting" xml:space="preserve">
     <value>Bet and Comm Setting</value>
   </data>
@@ -150,14 +153,17 @@
   <data name="CMS" xml:space="preserve">
     <value>Customer Management System</value>
   </data>
-  <data name="CommHierachy" xml:space="preserve">
-    <value>CommHierachy</value>
+  <data name="CommHierarchy" xml:space="preserve">
+    <value>Comm Hierarchy</value>
   </data>
   <data name="Currency" xml:space="preserve">
     <value>Currency</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
+  </data>
+  <data name="HighLevelAgents" xml:space="preserve">
+    <value>High Level Agents</value>
   </data>
   <data name="InputUserName" xml:space="preserve">
     <value>Username...</value>
@@ -170,6 +176,12 @@
   </data>
   <data name="Lv" xml:space="preserve">
     <value>Lv.</value>
+  </data>
+  <data name="MainAgent" xml:space="preserve">
+    <value>Main Agent</value>
+  </data>
+  <data name="MainShareholder" xml:space="preserve">
+    <value>Main Shareholder</value>
   </data>
   <data name="Member" xml:space="preserve">
     <value>Member</value>
@@ -192,6 +204,9 @@
   <data name="ShareHierachy" xml:space="preserve">
     <value>Share Hierachy</value>
   </data>
+  <data name="Shareholder" xml:space="preserve">
+    <value>Shareholder</value>
+  </data>
   <data name="ShareSetting" xml:space="preserve">
     <value>Share Setting</value>
   </data>
@@ -203,6 +218,9 @@
   </data>
   <data name="Submit" xml:space="preserve">
     <value>Submit</value>
+  </data>
+  <data name="Super" xml:space="preserve">
+    <value>Super</value>
   </data>
   <data name="Upline" xml:space="preserve">
     <value>Upline</value>

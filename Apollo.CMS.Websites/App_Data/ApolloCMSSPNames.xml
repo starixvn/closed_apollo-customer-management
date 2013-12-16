@@ -3,11 +3,11 @@
   <Function Name="NewMessage">
     <Setting Key="Acc_Msg_GetRecipientInfo" SpName="Acc_Msg_GetRecipientInfo" DbName="SVRCSD.RepDB.aplWeb" />
     <Setting Key="Acc_Msg_GetUplineById" SpName="Acc_Msg_GetUplineById" DbName="SVRCSD.RepDB.aplWeb" />
-    <Setting Key="Acc_Msg_InsertMessage" SpName="Acc_Msg_InsertMessage" DbName="SVRMSG.MsgDB.aplweb" />
+    <Setting Key="Acc_Msg_InsertMessage" SpName="Acc_Msg_InsertMessage_xtest" DbName="SVRMSG.MsgDB.aplweb" />
     <Setting Key="Acc_Msg_GetAllSite" SpName="Acc_Msg_GetAllSite" DbName="SVRMSG.MsgDB.aplweb" />
   </Function>
   <Function Name="MessageList">
-    <Setting Key="Acc_Msg_GetListMessage" SpName="Acc_Msg_GetListMessage" DbName="SVRMSG.MsgDB.aplweb">
+    <Setting Key="Acc_Msg_GetListMessage" SpName="Acc_Msg_GetListMessage_xtest" DbName="SVRMSG.MsgDB.aplweb">
       <Mapping DataField="Content_ch" ObjectProperty="ContentCh"/>
       <Mapping DataField="Content_cs" ObjectProperty="ContentCs"/>
       <Mapping DataField="Content_en" ObjectProperty="ContentEn"/>
@@ -27,7 +27,7 @@
       <Mapping DataField="Content_vn" ObjectProperty="ContentVn"/>
     </Setting>
     <Setting Key="Acc_Msg_UpdateMessage" SpName="Acc_Msg_UpdateMessage" DbName="SVRMSG.MsgDB.aplweb" />
-    <Setting Key="Acc_Msg_DeleteMessage" SpName="Acc_Msg_DeleteMessage" DbName="SVRMSG.MsgDB.aplweb" />
+    <Setting Key="Acc_Msg_DeleteMessage" SpName="Acc_Msg_DeleteMessage_xtest" DbName="SVRMSG.MsgDB.aplweb" />
   </Function>
   <Function name="TreeView">
     <Setting Key="Acc_Agent_GetHierarchyById" SpName="Acc_Agent_GetHierarchyById" DbName="SVRCSD.RepDB.aplWeb" />    

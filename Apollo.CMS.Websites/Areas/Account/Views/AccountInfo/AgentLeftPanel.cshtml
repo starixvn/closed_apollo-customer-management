@@ -105,7 +105,7 @@ else if (customer.AgentId != 0)
                 <div class="tab-pane @activeClass" id="agent">
                     @if (!hasCustomerSettingPermission)
                     {
-                        Html.RenderAction("GetDownlineAgents", "AccountInfo", new { ParentId = customer.ParentId });
+                        Html.RenderAction("GetDownlineAgents", "AccountInfo", new { ParentId = customer.AgentId });
                     }
                 </div>
                 <div class="tab-pane" id="member"></div>

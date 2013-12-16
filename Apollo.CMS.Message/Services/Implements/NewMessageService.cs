@@ -72,10 +72,15 @@ namespace Apollo.CMS.Message.Services.Implements
         private string ConvertRecipientListToXml(IEnumerable<Recipient> recipients)
         {
             StringBuilder stringBuilder = new StringBuilder("<ROOT>");
-            string recipientNode = "<Recipient TargetId=\"{0}\" TargetName=\"{1}\" IsAgent=\"{2}\"></Recipient>";
+            string recipientNode = "<Recipient TargetId=\"{0}\" TargetName=\"{1}\" IsAgent=\"{2}\"{3}></Recipient>";
+            string agentLevelAttribute = " AgentLevel=\"{0}\"";
+            string agentLevel = string.Empty;
 
             foreach (var item in recipients)
             {
+                agentLevel = item.AgentLevel == null ? string.Empty : string.Format(agentLevelAttribute, item.AgentLevel);
+                stringBuilder.AppendFormat(recipientNode, item.TargetId, item.TargetName, item.IsAgent == true ? 1 : 0, agentLevel);
+
                 if (item.InformUpline)
                 {
                     var uplines = this.GetUplineById(new GetUplineByIdCriteria
@@ -83,23 +88,11 @@ namespace Apollo.CMS.Message.Services.Implements
                         Id = item.TargetId,
                         IsAgent = item.IsAgent
                     });
-
+                    
                     foreach (var upline in uplines)
                     {
-                        stringBuilder.AppendFormat(
-                                          recipientNode,
-                                          upline.TargetId,
-                                          upline.TargetName,
-                                          1);
+                        stringBuilder.AppendFormat(recipientNode, upline.TargetId, upline.TargetName, 1, agentLevel);
                     }
-                }
-                else
-                {
-                    stringBuilder.AppendFormat(
-                                      recipientNode,
-                                      item.TargetId,
-                                      item.TargetName,
-                                      item.IsAgent == true ? 1 : 0);
                 }
             }
 
