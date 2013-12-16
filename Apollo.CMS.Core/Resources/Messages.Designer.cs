@@ -250,6 +250,15 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to At least one level is required!.
+        /// </summary>
+        public static string RequiredLevelError {
+            get {
+                return ResourceManager.GetString("RequiredLevelError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to At least one customer is required!.
         /// </summary>
         public static string RequiredMemberError {

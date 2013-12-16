@@ -39,6 +39,7 @@ Apollo.CMS.Message.PublicMessage = function () {
         $this.DOMInstance.divOtherLanguageTitle = $('#divOtherLanguageTitle');
         $this.DOMInstance.divOtherLanguage = $('#divOtherLanguage');
         $this.DOMInstance.divAgentLevels = $('#divAgentLevels');
+        $this.DOMInstance.chkSuper = $('#chkSuper');
     };
     var initFields = function () {
         $this.DOMInstance.divOtherLanguageTitle.bind('click', function () {
@@ -79,6 +80,9 @@ Apollo.CMS.Message.PublicMessage = function () {
     var validateForm = function () {
         var contentEnValue = $.trim($this.DOMInstance.txtContentEn.val());
         var label = $this.DOMInstance.divEnglishLabel;
+        var levels = $('input:checkbox:checked', $this.DOMInstance.divAgentLevels);
+        var selectedRadio = $('input:radio:checked', $this.DOMInstance.divAgentLevels);
+        var isValid = true;
 
         label.tipsy('hide');
         if (!contentEnValue) {
@@ -86,11 +90,18 @@ Apollo.CMS.Message.PublicMessage = function () {
 
             Validator.showTooltip(label, errorMsg, 'sw');
             $this.DOMInstance.txtContentEn.focus();
-
-            return false;
-        } else {
-            return true;
+            isValid = false;
         }
+
+        $this.DOMInstance.chkSuper.tipsy('hide');
+        if ((levels.length === 0) && (selectedRadio.val() === 'HighLevelAgents')) {
+            var errorMsg = $this.DOMInstance.divAgentLevels.attr('data-val-required');
+
+            Validator.showTooltip($this.DOMInstance.chkSuper, errorMsg, 'sw');
+            isValid = false;
+        }
+
+        return isValid;
     };
     var getParamValues = function () {
         var selectedRecipientId = $this.DOMInstance.ddlRecipient.val();
@@ -171,7 +182,8 @@ Apollo.CMS.Message.PublicMessage = function () {
         divEnglishLabel: null,
         divOtherLanguageTitle: null,
         divOtherLanguage: null,
-        divAgentLevels: null
+        divAgentLevels: null,
+        chkSuper: null
     };
     $this.InitPage = function () {
         cacheDOM();

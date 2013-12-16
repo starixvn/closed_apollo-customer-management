@@ -180,6 +180,9 @@
   <data name="RequiredFieldError" xml:space="preserve">
     <value>This field is required!</value>
   </data>
+  <data name="RequiredLevelError" xml:space="preserve">
+    <value>At least one level is required!</value>
+  </data>
   <data name="RequiredMemberError" xml:space="preserve">
     <value>At least one customer is required!</value>
   </data>

@@ -86,7 +86,7 @@
         </div>
         <input type="button" id="btnSubmit" class="btn pull-left" value="@ViewLang.Submit" />
     </div>
-    <div id="divAgentLevels" class="row second-row collapse">
+    <div id="divAgentLevels" class="row second-row collapse" data-val-required="@Messages.RequiredLevelError">
         <div class="pull-left">
             <label>@Html.RadioButton("AgentLevel", "HighLevelAgents", true) @ViewLang.HighLevelAgents</label>
         </div>
@@ -95,7 +95,7 @@
         </div>
         <br /><hr class="separator" />
         <div class="pull-left">
-            <label>@Html.CheckBox("chkSuper", true, new { data_msg_target_id = (int)HighLevelAgents.Super }) @ViewLang.Super</label>
+            <label class="align-left">@Html.CheckBox("chkSuper", true, new { data_msg_target_id = (int)HighLevelAgents.Super }) @ViewLang.Super</label>
         </div>
         <div class="pull-left checkbox">
             <label>@Html.CheckBox("chkMainShareholder", true, new { data_msg_target_id = (int)HighLevelAgents.MainShareholder }) @ViewLang.MainShareholder</label>
