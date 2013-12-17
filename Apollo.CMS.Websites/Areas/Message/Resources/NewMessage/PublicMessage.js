@@ -167,6 +167,8 @@ Apollo.CMS.Message.PublicMessage = function () {
         $this.DOMInstance.ddlRecipient.attr('disabled', 'true');
         $this.DOMInstance.chkIsSpecialMsg.attr('disabled', 'true');
         $this.DOMInstance.btnSubmit.attr('disabled', 'true');
+        $('input:checkbox', $this.DOMInstance.divAgentLevels).attr('disabled', 'true');
+        $('input:radio', $this.DOMInstance.divAgentLevels).attr('disabled', 'true');
     };
 
     $this.DOMInstance = {
