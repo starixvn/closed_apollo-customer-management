@@ -85,46 +85,5 @@ namespace Apollo.CMS.Core.Services
                 return null;
             }
         }
-
-        /// <summary>
-        /// Gets menu item by menu URL from cached list.
-        /// </summary>
-        /// <param name="menuURL">Menu URL string.</param>
-        /// <param name="menuList">List of cached menu items.</param>
-        /// <returns>Menu item.</returns>
-        public MenuItem GetMenuByURL(string menuURL, IList<MenuItem> menuList)
-        {
-            if (!string.IsNullOrEmpty(menuURL)
-                && !string.Equals(menuURL, UrlSeparator.ToString())
-                && (AppSession.CurrentUserMenu != null))
-            {
-                MenuItem menu = menuList.FirstOrDefault<MenuItem>(m => m.Url.StartsWith(menuURL));
-                return menu;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Gets menu name by menu URL.
-        /// </summary>
-        /// <param name="menuURL">Menu URL string.</param>
-        /// <returns>Name of menu.</returns>
-        public string GetMenuNameByURL(string menuURL)
-        {
-            if (!string.IsNullOrEmpty(menuURL)
-                && !string.Equals(menuURL, UrlSeparator.ToString())
-                && (AppSession.CurrentUserMenu != null))
-            {
-                MenuItem menu = AppSession.CurrentUserMenu.FirstOrDefault<MenuItem>(m => m.Url.StartsWith(menuURL));
-                return menu.Name;
-            }
-            else
-            {
-                return null;
-            }
-        }
     }
 }

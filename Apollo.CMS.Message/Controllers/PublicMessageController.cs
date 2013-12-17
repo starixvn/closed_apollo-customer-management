@@ -10,18 +10,18 @@
 
 namespace Apollo.CMS.Message.Controllers
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using Apollo.CMS.Core.Controllers;
     using Apollo.CMS.Core.Resources;
-    using Apollo.CMS.Core.Web;
     using Apollo.CMS.Message.Constants;
     using Apollo.CMS.Message.Criteria.NewMessage;
+    using Apollo.CMS.Message.Models.NewMessage;
     using Apollo.CMS.Message.Services.Implements;
     using Apollo.CMS.Message.Services.Interfaces;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
-    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// New public message controller.
@@ -48,8 +48,8 @@ namespace Apollo.CMS.Message.Controllers
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.AddNewMessage, Policy = Constant.Policy.Host)]
         public ActionResult Index()
         {
-            var sites = this._newMessageService.GetAllSites(new GetAllSitesCriteria());
-            var recipients = sites.Select(obj => new SelectListItem
+            IEnumerable<Site> sites = this._newMessageService.GetAllSites(new GetAllSitesCriteria());
+            List<SelectListItem> recipients = sites.Select(obj => new SelectListItem
             {
                 Text = obj.SiteName,
                 Value = obj.SiteId

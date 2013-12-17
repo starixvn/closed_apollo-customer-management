@@ -61,7 +61,7 @@ namespace Apollo.CMS.Account.Controllers
             {
                 if (isMember)
                 {
-                    var customer = this._accountInfoService.GetMemberInfo(new GetMemberInfoCriteria
+                    MemberInfo customer = this._accountInfoService.GetMemberInfo(new GetMemberInfoCriteria
                     {
                         CustId = id,
                         Username = username
@@ -75,7 +75,7 @@ namespace Apollo.CMS.Account.Controllers
                 }
                 else
                 {
-                    var customer = this._accountInfoService.GetAgentInfo(new GetAgentInfoCriteria
+                    AgentInfo customer = this._accountInfoService.GetAgentInfo(new GetAgentInfoCriteria
                     {
                         AgentId = id,
                         Username = username
