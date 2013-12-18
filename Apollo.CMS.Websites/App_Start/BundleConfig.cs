@@ -31,6 +31,7 @@ namespace Apollo.CMS.Websites
             RegisterNewMessageBundles(bundles);
             RegisterAccountInfoBundles(bundles);
             RegisterTreeviewBundles(bundles);
+            RegisterAccountListBundles(bundles);
 
             bundles.FileSetOrderList.Clear();
         }
@@ -103,7 +104,6 @@ namespace Apollo.CMS.Websites
         {
             bundles.AddAndInclude(
                 "~/site/messageList",
-                "~/content/site/customFanexGrid.less",
                 "~/areas/message/resources/messagelist/message.less");
 
             bundles.Add(new ScriptBundle("~/scripts/messageList").Include(
@@ -112,7 +112,8 @@ namespace Apollo.CMS.Websites
             bundles.AddAndInclude(
                  "~/styles/fanexGrid",
                  "~/scripts/lib/Fanex.Grid/Fanex.Grid.css",
-                 "~/scripts/lib/Fanex.Grid/Fanex.Pagination.css");
+                 "~/scripts/lib/Fanex.Grid/Fanex.Pagination.css",
+                "~/content/site/customFanexGrid.less");
 
             bundles.Add(new ScriptBundle("~/scripts/fanexGrid").Include(
                 "~/scripts/lib/Fanex.Grid/Fanex.Grid.js",
@@ -169,6 +170,22 @@ namespace Apollo.CMS.Websites
                 "~/Areas/Account/Resources/TreeView/jquery.treeview.js",
                 "~/Areas/Account/Resources/TreeView/jquery.treeview.async.js",
                 "~/Areas/Account/Resources/TreeView/treeview.js"));
+        }
+
+        /// <summary>
+        /// Registers bundles for account list function.
+        /// </summary>
+        /// <param name="bundles">The bundles collection.</param>
+        private static void RegisterAccountListBundles(BundleCollection bundles)
+        {
+            bundles.Add(new ScriptBundle("~/scripts/agentList").Include(
+                "~/Areas/Account/Resources/AccountList/AgentList.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/memberList").Include(
+                "~/Areas/Account/Resources/AccountList/MemberList.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/shadowList").Include(
+                "~/Areas/Account/Resources/AccountList/ShadowList.js"));
         }
     }
 

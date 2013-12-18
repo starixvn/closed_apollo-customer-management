@@ -53,3 +53,13 @@
 <div class="row content-grid display-none">
     <div class="freegrid resizable-grid" id="divAgentList"></div>
 </div>
+
+@section Foot {
+    @Scripts.Render("~/scripts/fanexGrid")
+    @Scripts.Render("~/scripts/agentList")
+
+    <script type="text/javascript">
+        var tableHeaders = {
+        };
+    </script>
+}

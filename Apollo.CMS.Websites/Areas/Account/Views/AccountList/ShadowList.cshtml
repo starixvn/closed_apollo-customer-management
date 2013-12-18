@@ -18,3 +18,13 @@
 <div class="row">
     @{ Html.RenderAction("Breadcrumb", "AccountList", new { agentId = agentId }); }
 </div>
+
+@section Foot {
+    @Scripts.Render("~/scripts/fanexGrid")
+    @Scripts.Render("~/scripts/agentList")
+
+    <script type="text/javascript">
+        var tableHeaders = {
+        };
+    </script>
+}
