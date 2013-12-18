@@ -106,7 +106,6 @@
     </Compile>
     <Compile Include="Services\CacheRef.cs" />
     <Compile Include="Services\BaseService.cs" />
-    <Compile Include="Services\MenuService.cs" />
     <Compile Include="Web\ApolloCMSFunctionKeys.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
