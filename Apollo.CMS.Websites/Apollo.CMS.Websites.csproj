@@ -193,6 +193,9 @@
     <Content Include="App_Data\NAPFrameworkSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\Account\Resources\AccountList\ShadowList.js" />
+    <Content Include="Areas\Account\Resources\AccountList\MemberList.js" />
+    <Content Include="Areas\Account\Resources\AccountList\AgentList.js" />
     <Content Include="Areas\Account\Resources\TreeView\Images\treeview-1.png" />
     <Content Include="Areas\Account\Resources\TreeView\Images\treeview-default-line.gif" />
     <Content Include="Areas\Account\Resources\TreeView\Images\treeview-default-line2.gif" />

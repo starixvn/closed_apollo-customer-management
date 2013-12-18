@@ -1,5 +1,20 @@
 ﻿@{
-    ViewBag.Title = "ShadowList";
-}
+    var agentId = (int)ViewBag.AgentId;
 
-<h2>ShadowList</h2>
+    ViewBag.Title = ViewLang.ShadowList;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    @Styles.Render("~/styles/fanexGrid")
+}
+@section HeadLine {
+    <h5 class="row title">
+        @ViewLang.ShadowList
+        <a href="#" class="btn-link">@ViewLang.AgentList</a>
+        <a href="#" class="btn-link">@ViewLang.MemberList</a>
+    </h5>
+}
+@Html.Hidden("hdnAgentId", agentId)
+<div class="row">
+    @{ Html.RenderAction("Breadcrumb", "AccountList", new { agentId = agentId }); }
+</div>

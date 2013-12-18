@@ -1,5 +1,55 @@
 ﻿@{
-    ViewBag.Title = "MemberList";
-}
+    var agentId = (int)ViewBag.AgentId;
 
-<h2>MemberList</h2>
+    ViewBag.Title = ViewLang.MemberList;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    @Styles.Render("~/styles/fanexGrid")
+}
+@section HeadLine {
+    <h5 class="row title">
+        @ViewLang.MemberList
+        <a href="#" class="btn-link">@ViewLang.AgentList</a>
+        <a href="#" class="btn-link">@ViewLang.ShadowList</a>
+    </h5>
+}
+@Html.Hidden("hdnAgentId", agentId)
+
+<div class="row filter-form clearfix resizable-form" data-original-width="862">
+    <div class="filter-row clearfix">
+        <div class="filter-item">
+            <div class="lbl width-auto">
+                @Html.Label("txtUsername", ViewLang.UserName)
+            </div>
+            <div class="txt width-auto">
+                @Html.TextBox("txtUsername")
+            </div>
+        </div>
+        <div class="filter-item">
+            <div class="lbl lbl-small">            
+                @Html.Label("ddlStatus", ViewLang.Status)
+            </div>
+            <div class="txt width-auto">
+                @Html.DropDownList("ddlStatus", (IEnumerable<SelectListItem>)ViewBag.AccountStatuses)
+            </div>
+        </div>
+        <div class="filter-item">
+            <div class="lbl width-auto">
+                @Html.Label("ddlBetStatus", ViewLang.BetStatus)
+            </div>
+            <div class="txt width-auto">
+                @Html.DropDownList("ddlBetStatus", (IEnumerable<SelectListItem>)ViewBag.BetStatuses)
+            </div>
+        </div>
+        <div class="filter-item">
+            <input id="btnSubmit" type="button" class="btn btn-default" value="@ViewLang.Submit"/>
+        </div>
+    </div>
+</div>
+<div class="row">
+    @{ Html.RenderAction("Breadcrumb", "AccountList", new { agentId = agentId }); }
+</div>
+<div class="row content-grid display-none">
+    <div class="freegrid resizable-grid" id="divAgentList"></div>
+</div>

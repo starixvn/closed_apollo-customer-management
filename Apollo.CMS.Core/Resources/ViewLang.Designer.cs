@@ -106,6 +106,15 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Agent List.
+        /// </summary>
+        public static string AgentList {
+            get {
+                return ResourceManager.GetString("AgentList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All.
         /// </summary>
         public static string All {
@@ -394,6 +403,15 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Member List.
+        /// </summary>
+        public static string MemberList {
+            get {
+                return ResourceManager.GetString("MemberList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Message English.
         /// </summary>
         public static string MessageEnglish {
@@ -574,6 +592,15 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shadow List.
+        /// </summary>
+        public static string ShadowList {
+            get {
+                return ResourceManager.GetString("ShadowList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Share Hierarchy.
         /// </summary>
         public static string ShareHierarchy {
@@ -624,6 +651,15 @@ namespace Apollo.CMS.Core.Resources {
         public static string SportCredit {
             get {
                 return ResourceManager.GetString("SportCredit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
             }
         }
         
