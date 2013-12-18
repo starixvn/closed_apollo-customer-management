@@ -295,7 +295,7 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is Specical.
+        ///   Looks up a localized string similar to Is Special.
         /// </summary>
         public static string IsSpecical {
             get {
