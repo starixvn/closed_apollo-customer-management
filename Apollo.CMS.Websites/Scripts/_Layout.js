@@ -21,7 +21,7 @@ var Layout = function ($) {
                 collapseExpand.attr('title', 'Collapse');
                 leftContent.css('display', 'block');
                 mainContent.removeClass().addClass('col-xs-9 col-sm-9 col-md-10 mainContent');
-                Layout.fixLaftPanelWidthForIE();
+                Layout.fixLeftPanelWidthForIE();
             }
 
             Layout.resizeRighContent();
@@ -42,7 +42,7 @@ var Layout = function ($) {
                     collapseExpand.attr('title', 'Collapse');
                     mainContent.removeClass().addClass('col-xs-9 col-sm-9 col-md-10 mainContent');
                     $.cookie('is-expaned', 'true', { path: '/' });
-                    Layout.fixLaftPanelWidthForIE();
+                    Layout.fixLeftPanelWidthForIE();
                     Layout.resizeRighContent();
                 });
             } else {
@@ -67,13 +67,13 @@ var Layout = function ($) {
         },
         resizeRighContent: function () {
             var mainContentWidth = parseInt($('#mainContent').css('width'), 10) - 40;
-            var filterFormWidth = null;
+            var gridWidth = 1024;
             
             $('.resizable-grid').each(function () {
                 var grid = $(this);
                 if (grid.children().length > 0) {
                     grid.fanexGrid("resizeGrid");
-                    filterFormWidth = parseInt(grid.css('width'), 10);
+                    gridWidth = parseInt(grid.css('width'), 10);
                 }
             });
 
@@ -81,17 +81,16 @@ var Layout = function ($) {
                 var form = $(this);
                 var originalWidth = parseInt(form.attr('data-original-width'), 10);
 
-                filterFormWidth = filterFormWidth || parseInt(form.css('width'), 10);
-                filterFormWidth = (mainContentWidth < filterFormWidth) ? mainContentWidth : filterFormWidth;
-                
                 if (originalWidth > mainContentWidth) {
+                    var filterFormWidth = mainContentWidth > gridWidth ? gridWidth : mainContentWidth;
+                
                     form.css('width', filterFormWidth);
                 } else {
                     form.removeAttr('style');
                 }
             });
         },
-        fixLaftPanelWidthForIE: function () {
+        fixLeftPanelWidthForIE: function () {
             // check IE8 and resolution > 993px
             if ($.browser.msie && $.browser.version == '8.0') {
                 var leftPanel = $('#searchPanel, #leftContent'),
@@ -129,7 +128,7 @@ var Layout = function ($) {
 } (jQuery);
 
 $(document).ready(function () {
-    Layout.fixLaftPanelWidthForIE();
+    Layout.fixLeftPanelWidthForIE();
 
     $('select').selectBoxIt();
 
