@@ -19,6 +19,7 @@ else if (customer.AgentId != 0)
     var isHighLevel = customer.AgentLevel < (int)HighLevelAgents.MainAgent;
     var noBorderCss = customer.ParentId == null ? "no-border" : string.Empty;
     var buttonCss = isHighLevel ? "col-xs-12 col-sm-6 col-md-6" : "col-xs-12 col-sm-4 col-md-4";
+    var tabCss = isHighLevel ? "high-level-tab" : string.Empty;
     
     @Html.Hidden("hdnCustomerId", customer.AgentId);
 
@@ -31,6 +32,7 @@ else if (customer.AgentId != 0)
         </div>
     </div>
 
+    <!-- Hide Upline when searched account is Super -->
     if (customer.ParentId != null)
     {
         <div class="row item no-border">
@@ -51,6 +53,7 @@ else if (customer.AgentId != 0)
                 <a href="#" class="btn-link no-marginLeft">@ViewLang.Agent</a>
             </div>
 
+            <!-- Hide Member button when searched account is Super, Main Shareholder or Shareolder -->
             @if (!isHighLevel)
             {
                 <div class="@buttonCss">
@@ -92,10 +95,11 @@ else if (customer.AgentId != 0)
     <div class="row tab-list">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <!-- Nav tabs -->
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs @tabCss">
                 @{
                     var activeClass = string.Empty;
 
+                    <!-- Hide Setting tab when logged in user does not have permission on setting function -->
                     if (hasCustomerSettingPermission)
                     {
                         <li class="setting active"><a href="#setting" data-toggle="tab">@ViewLang.Setting</a></li>
@@ -107,6 +111,7 @@ else if (customer.AgentId != 0)
                 }
                 <li class="@activeClass"><a href="#agent" data-toggle="tab">@ViewLang.Agent</a></li>
                 
+                <!-- Hide Member tab when searched account is Super, Main Shareholder or Shareolder -->
                 @if (!isHighLevel)
                 {
                     <li><a href="#member" data-toggle="tab">@ViewLang.Member</a></li>
@@ -116,6 +121,7 @@ else if (customer.AgentId != 0)
             <div class="tab-content">
                 @{ Html.RenderPartial("Setting"); }
                 <div class="tab-pane @activeClass" id="agent">
+                    <!-- Automatically load agent list when setting tab is hidden -->
                     @if (!hasCustomerSettingPermission)
                     {
                         Html.RenderAction("GetDownlineAgents", "AccountInfo", new { ParentId = customer.AgentId });
