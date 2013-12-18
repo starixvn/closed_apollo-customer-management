@@ -109,7 +109,7 @@ else if (customer.AgentId != 0)
                         activeClass = "active";
                     }
                 }
-                <li class="@activeClass"><a href="#agent" data-toggle="tab">@ViewLang.Agent</a></li>
+                <li class="agent @activeClass"><a href="#agent" data-toggle="tab">@ViewLang.Agent</a></li>
                 
                 <!-- Hide Member tab when searched account is Super, Main Shareholder or Shareolder -->
                 @if (!isHighLevel)
