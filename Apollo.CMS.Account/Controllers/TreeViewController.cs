@@ -9,6 +9,7 @@
 
 namespace Apollo.CMS.Account.Controllers
 {
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Web.Mvc;
@@ -62,24 +63,7 @@ namespace Apollo.CMS.Account.Controllers
             var rootList = new TreeViewViewModel();
             if (dataTreeView != null && dataTreeView.Any())
             {
-                TreeViewViewModel hierarchyTrees = new TreeViewViewModel();
-                TreeViewViewModel.Node objHTree = null;
-
-                foreach (var node in dataTreeView)
-                {
-                    objHTree = new TreeViewViewModel.Node()
-                    {
-                        Id = node.AgentId.Value,
-                        Username = node.Username,
-                        HasAgentDownline = node.HasAgentDownline.Value,
-                        ParentId = node.ParentId.HasValue ? node.ParentId.Value : 0,
-                        Children = null
-                    };
-
-                    hierarchyTrees.Add(objHTree);
-                }
-
-                return Json(hierarchyTrees, JsonRequestBehavior.AllowGet);
+                return Json(HierarchyTrees(dataTreeView), JsonRequestBehavior.AllowGet);
             }
 
             return Json(new TreeViewViewModel(), JsonRequestBehavior.AllowGet);
@@ -178,7 +162,7 @@ namespace Apollo.CMS.Account.Controllers
         /// </summary>
         /// <param name="dataTreeView">The data TreeView.</param>
         /// <returns>Tree View View Model. </returns>
-        private static TreeViewViewModel HierarchyTrees(System.Collections.Generic.List<TreeViewModel> dataTreeView)
+        private static TreeViewViewModel HierarchyTrees(List<TreeViewModel> dataTreeView)
         {
             TreeViewViewModel hierarchyTrees = new TreeViewViewModel();
             TreeViewViewModel.Node objHTree = null;
