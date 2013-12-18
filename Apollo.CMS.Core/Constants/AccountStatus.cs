@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="CustomerStatus.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="AccountStatus.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -9,7 +9,7 @@
 
 namespace Apollo.CMS.Core.Constants
 {
-    public enum CustomerStatus : int
+    public enum AccountStatus : int
     {
         /// <summary>
         /// Status active.

@@ -1,4 +1,5 @@
 ﻿@using Apollo.CMS.Account.Models.AccountInfo
+@using Apollo.CMS.Core.Constants
 @using Apollo.CMS.Core.Extensions
 @using Apollo.CMS.Core.Helpers
 @using Apollo.CMS.Core.Services
@@ -6,8 +7,8 @@
 @{
     var hasCustomerSettingPermission = (bool)ViewBag.HasCustomerSettingPermission;
     var customer = (MemberInfo)ViewBag.Customer;
-    var accountStatus = StatusHelper.GetStatus(Converter.ToInt(customer.Status), Converter.ToInt(customer.UplineStatus));
-    var betStatus = StatusHelper.GetStatus(Converter.ToInt(customer.BetStatus), Converter.ToInt(customer.UplineBetStatus));
+    var accountStatus = StatusHelper.GetStatus((AccountStatus)customer.Status, (AccountStatus)customer.UplineStatus);
+    var betStatus = StatusHelper.GetStatus((AccountStatus)customer.BetStatus, (AccountStatus)customer.UplineBetStatus);
 }
 @if (customer.CustId != 0)
 {

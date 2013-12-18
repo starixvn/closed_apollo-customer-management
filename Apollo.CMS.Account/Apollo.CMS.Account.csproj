@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="AccountAreaRegistration.cs" />
     <Compile Include="Controllers\AccountInfoController.cs" />
+    <Compile Include="Controllers\AccountListController.cs" />
     <Compile Include="Controllers\TreeViewController.cs" />
     <Compile Include="Criteria\AccountInfo\GetAgentInfoCriteria.cs" />
     <Compile Include="Criteria\AccountInfo\GetAgentUplineCriteria.cs" />
@@ -79,10 +80,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountInfo\Implements\AccountInfoService.cs" />
     <Compile Include="Services\AccountInfo\Interfaces\IAccountInfoService.cs" />
+    <Compile Include="Services\AccountList\Implements\AccountListService.cs" />
+    <Compile Include="Services\AccountList\Interfaces\IAccountListService.cs" />
     <Compile Include="Services\TreeView\Implements\TreeViewService.cs" />
     <Compile Include="Services\TreeView\Interfaces\ITreeViewService.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Criteria\AccountList\" />
+    <Folder Include="Models\AccountList\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Apollo.CMS.Core\Apollo.CMS.Core.csproj">
       <Project>{FCD8A1C1-0EFB-4AFD-B8D4-98B56125235B}</Project>

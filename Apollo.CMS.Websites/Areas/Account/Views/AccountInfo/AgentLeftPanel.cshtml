@@ -1,4 +1,5 @@
 ﻿@using Apollo.CMS.Account.Models.AccountInfo
+@using Apollo.CMS.Core.Constants
 @using Apollo.CMS.Core.Extensions
 @using Apollo.CMS.Core.Helpers
 @using Apollo.CMS.Core.Services
@@ -13,9 +14,11 @@
 }
 else if (customer.AgentId != 0)
 {
-    var accountStatus = StatusHelper.GetStatus(Converter.ToInt(customer.Status), Converter.ToInt(customer.UplineStatus));
-    var betStatus = StatusHelper.GetStatus(Converter.ToInt(customer.BetStatus), Converter.ToInt(customer.UplineBetStatus));
+    var accountStatus = StatusHelper.GetStatus((AccountStatus)customer.Status, (AccountStatus)customer.UplineStatus);
+    var betStatus = StatusHelper.GetStatus((AccountStatus)customer.BetStatus, (AccountStatus)customer.UplineBetStatus);
+    var isHighLevel = customer.AgentLevel < (int)HighLevelAgents.MainAgent;
     var noBorderCss = customer.ParentId == null ? "no-border" : string.Empty;
+    var buttonCss = isHighLevel ? "col-xs-12 col-sm-6 col-md-6" : "col-xs-12 col-sm-4 col-md-4";
     
     @Html.Hidden("hdnCustomerId", customer.AgentId);
 
@@ -44,13 +47,18 @@ else if (customer.AgentId != 0)
 
     <div class="row list-btn">
         <div class="col-md-12">
-            <div class="col-xs-12 col-sm-4 col-md-4">
+            <div class="@buttonCss">
                 <a href="#" class="btn-link no-marginLeft">@ViewLang.Agent</a>
             </div>
-            <div class="col-xs-12 col-sm-4 col-md-4">
-                <a href="#" class="btn-link">@ViewLang.Member</a>
-            </div>
-            <div class="col-xs-12 col-sm-4 col-md-4">
+
+            @if (!isHighLevel)
+            {
+                <div class="@buttonCss">
+                    <a href="#" class="btn-link">@ViewLang.Member</a>
+                </div>
+            }
+            
+            <div class="@buttonCss">
                 <a href="#" class="btn-link">@ViewLang.Shadow</a>
             </div>
         </div>
@@ -98,7 +106,11 @@ else if (customer.AgentId != 0)
                     }
                 }
                 <li class="@activeClass"><a href="#agent" data-toggle="tab">@ViewLang.Agent</a></li>
-                <li><a href="#member" data-toggle="tab">@ViewLang.Member</a></li>
+                
+                @if (!isHighLevel)
+                {
+                    <li><a href="#member" data-toggle="tab">@ViewLang.Member</a></li>
+                }
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
@@ -109,7 +121,11 @@ else if (customer.AgentId != 0)
                         Html.RenderAction("GetDownlineAgents", "AccountInfo", new { ParentId = customer.AgentId });
                     }
                 </div>
-                <div class="tab-pane" id="member"></div>
+
+                @if (!isHighLevel)
+                {
+                    <div class="tab-pane" id="member"></div>
+                }
             </div>
         </div>
     </div>

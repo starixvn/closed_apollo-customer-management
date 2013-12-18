@@ -23,31 +23,31 @@ namespace Apollo.CMS.Core.Helpers
         /// <param name="status">The status ID of the customer.</param>
         /// <param name="uplineStatus">The status ID of up line.</param>
         /// <returns>Associate status of the customer.</returns>
-        public static string GetStatus(int status, int uplineStatus)
+        public static string GetStatus(AccountStatus status, AccountStatus uplineStatus)
         {
             string statusValue = string.Empty;
 
-            if ((status == (int)CustomerStatus.Active) && (uplineStatus == (int)CustomerStatus.Active))
+            if ((status == AccountStatus.Active) && (uplineStatus == AccountStatus.Active))
             {
                 statusValue = ViewLang.Active;
             }
-            else if ((status == (int)CustomerStatus.Stopped) && (uplineStatus == (int)CustomerStatus.Active))
+            else if ((status == AccountStatus.Stopped) && (uplineStatus == AccountStatus.Active))
             {
                 statusValue = ViewLang.Stopped;
             }
-            else if ((status == (int)CustomerStatus.Locked) && (uplineStatus == (int)CustomerStatus.Active))
+            else if ((status == AccountStatus.Locked) && (uplineStatus == AccountStatus.Active))
             {
                 statusValue = ViewLang.Locked;
             }
-            else if ((status == (int)CustomerStatus.Active) && (uplineStatus == (int)CustomerStatus.Stopped))
+            else if ((status == AccountStatus.Active) && (uplineStatus == AccountStatus.Stopped))
             {
                 statusValue = ViewLang.CLock;
             }
-            else if ((status == (int)CustomerStatus.Stopped) && (uplineStatus == (int)CustomerStatus.Stopped))
+            else if ((status == AccountStatus.Stopped) && (uplineStatus == AccountStatus.Stopped))
             {
                 statusValue = ViewLang.CLock;
             }
-            else if ((status == (int)CustomerStatus.Locked) && (uplineStatus == (int)CustomerStatus.Stopped))
+            else if ((status == AccountStatus.Locked) && (uplineStatus == AccountStatus.Stopped))
             {
                 statusValue = ViewLang.CLock;
             }
