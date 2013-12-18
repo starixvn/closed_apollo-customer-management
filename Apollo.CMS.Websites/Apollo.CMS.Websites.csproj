@@ -274,6 +274,10 @@
     <Content Include="Content\site\font\MyriadPro-Cond.woff">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Areas\Account\Views\AccountList\AgentList.cshtml" />
+    <Content Include="Areas\Account\Views\AccountList\MemberList.cshtml" />
+    <Content Include="Areas\Account\Views\AccountList\ShadowList.cshtml" />
+    <Content Include="Areas\Account\Views\AccountList\Breadcrumb.cshtml" />
     <None Include="Noesis.Javascript\Noesis.Javascript.x64.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
