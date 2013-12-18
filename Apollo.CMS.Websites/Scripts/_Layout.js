@@ -2,6 +2,8 @@ var Layout = function ($) {
     return {
         collapseExpand: function () {
             var collapseExpand = $('#collapseExpand');
+            var leftContent = $('#leftContent');
+            var mainContent = $('#mainContent');
             var isExpanded = $.cookie('is-expaned');
 
             collapseExpand.on('click', function () {
@@ -13,8 +15,16 @@ var Layout = function ($) {
             });
 
             if (isExpanded == 'true') {
-                Layout.collapseExpandLeftPanel(true, 10);
+                // Layout.collapseExpandLeftPanel(true, 10);
+                // Improve the behavior of lelf panel when switching pages.
+                collapseExpand.removeClass('icon-expand').addClass('icon-collapse');
+                collapseExpand.attr('title', 'Collapse');
+                leftContent.css('display', 'block');
+                mainContent.removeClass().addClass('col-xs-9 col-sm-9 col-md-10 mainContent');
+                Layout.fixLaftPanelWidthForIE();
             }
+
+            Layout.resizeRighContent();
         },
         collapseExpandLeftPanel: function (isExpanded, timespan) {
             var leftContent = $('#leftContent');
@@ -33,6 +43,7 @@ var Layout = function ($) {
                     mainContent.removeClass().addClass('col-xs-9 col-sm-9 col-md-10 mainContent');
                     $.cookie('is-expaned', 'true', { path: '/' });
                     Layout.fixLaftPanelWidthForIE();
+                    Layout.resizeRighContent();
                 });
             } else {
                 leftContent.animate({
@@ -43,6 +54,7 @@ var Layout = function ($) {
                     collapseExpand.attr('title', 'Expand');
                     mainContent.removeClass().addClass('col-xs-12 col-sm-12 col-md-12 mainContent');
                     $.cookie('is-expaned', 'false', { path: '/' });
+                    Layout.resizeRighContent();
                 });
             }
         },
@@ -52,6 +64,32 @@ var Layout = function ($) {
             if (!collapseExpand.hasClass('icon-collapse')) {
                 Layout.collapseExpandLeftPanel(true);
             }
+        },
+        resizeRighContent: function () {
+            var mainContentWidth = parseInt($('#mainContent').css('width'), 10) - 40;
+            var filterFormWidth = null;
+            
+            $('.resizable-grid').each(function () {
+                var grid = $(this);
+                if (grid.children().length > 0) {
+                    grid.fanexGrid("resizeGrid");
+                    filterFormWidth = parseInt(grid.css('width'), 10);
+                }
+            });
+
+            $('.resizable-form').each(function () {
+                var form = $(this);
+                var originalWidth = parseInt(form.attr('data-original-width'), 10);
+
+                filterFormWidth = filterFormWidth || parseInt(form.css('width'), 10);
+                filterFormWidth = (mainContentWidth < filterFormWidth) ? mainContentWidth : filterFormWidth;
+                
+                if (originalWidth > mainContentWidth) {
+                    form.css('width', filterFormWidth);
+                } else {
+                    form.removeAttr('style');
+                }
+            });
         },
         fixLaftPanelWidthForIE: function () {
             // check IE8 and resolution > 993px
@@ -94,10 +132,10 @@ $(document).ready(function () {
     Layout.fixLaftPanelWidthForIE();
 
     $('select').selectBoxIt();
-    
+
     // collpase or expand left content
     Layout.collapseExpand();
-    
+
     // Set active menu css class
     $('ul.mainMenu > li, #searchTreeView').on('click', function (event) {
         var $this = $(this);
@@ -111,4 +149,7 @@ $(document).ready(function () {
             $this.addClass('active');
         }
     });
+
+    var lazyLayout = _.debounce(Layout.resizeRighContent, 50);
+    $(window).resize(lazyLayout);
 });

@@ -70,6 +70,7 @@ namespace Apollo.CMS.Websites
                 "~/scripts/lib/msgbox/msgbox-0.0.1.js",
                 "~/scripts/lib/tipsy/tipsy-1.0.0.js",
                 "~/scripts/lib/namespace.js",
+                "~/scripts/lib/Underscore/underscore.js",
                 "~/scripts/_layout.js",
                 "~/scripts/cms.js",                
                 "~/Scripts/Validator.js"));

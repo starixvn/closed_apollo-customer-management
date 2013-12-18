@@ -68,17 +68,6 @@ Apollo.CMS.Message.MessageList = function () {
         cacheDOMElements();
         self.renderDatePicker();
         self.bindingEvents();
-        // Resize filter search depend on width of data grid
-        var filterSearch = $('#message-list'),
-        gridMessage = $('#gridMessage'),
-        content = $('#mainContent');
-        messageList.resizeWidthOfSearch(filterSearch, gridMessage, content);
-        $(window).resize(function () {
-            if (!$('#gridMessageContainer').hasClass('display-none')) {
-                gridMessage.fanexGrid("resizeGrid");
-            }
-            messageList.resizeWidthOfSearch(filterSearch, gridMessage, content);
-        });
     };
 
     var getSubMessageContent = function (content) {
@@ -413,13 +402,6 @@ Apollo.CMS.Message.MessageList = function () {
                 self.updateMessage();
             }
         });
-        $("#collapseExpand").click(function () {
-            if (!$('#gridMessageContainer').hasClass('display-none')) {
-                setTimeout(function () {
-                    $("#gridMessage").fanexGrid("resizeGrid");
-                }, 110);
-            }
-        });
 
         $("#divOtherLanguageTitle").live('click', function () {
             var spanOtherLanguage = $('#spanOtherLanguage');
@@ -435,24 +417,6 @@ Apollo.CMS.Message.MessageList = function () {
 
         if (isRedirected) {
             $("#btnGetListMessage").click();
-        }
-    };
-
-    self.resizeWidthOfSearch = function (filterSearch, gridMessage, content) {
-        if (content.width() < 905) {
-            if (gridMessage.width() > 0) {
-                var widthContent = gridMessage.width() - 27;
-                filterSearch.width(widthContent);
-            } else {
-                if (content.width() > 635) {
-                    var widthContent = (content.width() - 60);
-                    filterSearch.width(widthContent);
-                } else {
-                    filterSearch.width(580);
-                }
-            }
-        } else {
-            filterSearch.removeAttr('style');
         }
     };
 };

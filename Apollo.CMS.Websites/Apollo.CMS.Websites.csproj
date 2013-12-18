@@ -285,6 +285,8 @@
     <Content Include="Scripts\lib\jQuery\jquery-migrate-1.2.1.js" />
     <Content Include="Scripts\lib\jQuery\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\lib\jQuery\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\lib\Underscore\underscore.js" />
+    <Content Include="Scripts\lib\Underscore\underscore.min.js" />
     <Content Include="Scripts\Validator.js" />
     <Content Include="Scripts\CMS.js" />
     <Content Include="Scripts\lib\Fanex.Grid\Fanex.Grid.css" />
