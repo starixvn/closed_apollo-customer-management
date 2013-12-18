@@ -56,7 +56,11 @@ Apollo.CMS.Message.PublicMessage = function () {
             var selectedIndex = $('option:selected', $this.DOMInstance.ddlRecipient).index();
 
             if (selectedIndex === 1) {
+                var defaultRadio = $('input:radio[value="HighLevelAgents"]', $this.DOMInstance.divAgentLevels);
+
                 $this.DOMInstance.divAgentLevels.slideDown('slow');
+                defaultRadio.prop('checked', true);
+                defaultRadio.change();
             } else {
                 $this.DOMInstance.divAgentLevels.slideUp('slow');
             }
@@ -64,6 +68,8 @@ Apollo.CMS.Message.PublicMessage = function () {
         $this.DOMInstance.ddlRecipient.change();
 
         $('input:radio', $this.DOMInstance.divAgentLevels).on('change', function () {
+            $('input:checkbox', $this.DOMInstance.divAgentLevels).prop('checked', true);
+
             if ($(this).val() === 'HighLevelAgents') {
                 $('input:checkbox', $this.DOMInstance.divAgentLevels).removeAttr('disabled');
             } else {
@@ -95,7 +101,7 @@ Apollo.CMS.Message.PublicMessage = function () {
         }
 
         $this.DOMInstance.chkSuper.tipsy('hide');
-        if ((levels.length === 0) && (selectedRadio.val() === 'HighLevelAgents')) {
+        if (($this.DOMInstance.divAgentLevels.is(':visible')) && (levels.length === 0) && (selectedRadio.val() === 'HighLevelAgents')) {
             var errorMsg = $this.DOMInstance.divAgentLevels.attr('data-val-required');
 
             Validator.showTooltip($this.DOMInstance.chkSuper, errorMsg, 'nw');
