@@ -118,7 +118,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
                 row =
                 {
                     Columns: [{ Name: 'ColNo', Value: index + 1 },
-                              { Name: 'ColEdit', Value: '<span class="edit-class" />' },
+                              { Name: 'ColEdit', Value: '<span class="icon-edit-link" />' },
                               { Name: 'ColUsername', Value: item.Username },
                               { Name: 'ColDownline', Value: '<span class="link downline" data-cust-id="{0}">{1}</span>'.format(item.CustId, item.NumberOfAgent) },
                               { Name: 'ColMember', Value: '<span class="link member" data-cust-id="{0}">{1}</span>'.format(item.CustId, item.NumberOfMember) },
@@ -133,7 +133,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
         var gridOptions =
         {
             columns: [{ HeaderText: tableHeaders.No, Width: 50, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
-                      { HeaderText: tableHeaders.Edit, Width: 70, Name: 'ColEdit', HeaderAlign: 'center', CellAlign: 'left' },
+                      { HeaderText: tableHeaders.Edit, Width: 70, Name: 'ColEdit', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.Username, Width: 180, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left' },
                       { HeaderText: tableHeaders.Downline, Width: 100, Name: 'ColDownline', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.Member, Width: 100, Name: 'ColMember', HeaderAlign: 'center', CellAlign: 'center' },
@@ -153,7 +153,8 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
                 pagerSelectCallBack: changePage
             },
             bodyRowHeight: 30,
-            bodyRows: bodyData
+            bodyRows: bodyData,
+            showDistinctRow: false
         };
 
         $this.DOMInstance.divAgentList.removeClass('hide').fanexGrid(gridOptions);

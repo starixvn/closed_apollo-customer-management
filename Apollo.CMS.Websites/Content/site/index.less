@@ -182,6 +182,11 @@ input[type="text"] {
     background-position: -318px -24px;
 }
 
+.icon-edit-link {
+    .icon;
+    background-position: -298px -22px;
+}
+
 /* Mixins */
 .childMenu {
     width: 142px;
@@ -482,6 +487,19 @@ input[type="text"] {
         bottom: 0;
         background: @content-bg;
 
+        /* Status */
+        .active {
+            color: #1fbd41;
+        }
+
+        .clock, .stopped {
+            color: #ed3737;
+        }
+
+        .locked {
+            color: #ff6408;
+        }
+
         .leftContent {
             background: #f3f6f6;
             border-right: 1px solid @border-color;
@@ -628,18 +646,6 @@ input[type="text"] {
                     &:first-child {
                         border-top: none;
                     }
-                }
-
-                .active {
-                    color: #1fbd41;
-                }
-
-                .clock, .stopped {
-                    color: #ed3737;
-                }
-
-                .locked {
-                    color: #ff6408;
                 }
 
                 .currency, .credit {

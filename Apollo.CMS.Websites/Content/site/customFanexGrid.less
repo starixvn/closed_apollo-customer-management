@@ -27,4 +27,60 @@
         color: @table-text-color;
         font-weight: normal;
     }
+
+    tr.highlight-row:hover td {
+        background-color: #fdfbe9;
+    }
+
+}
+
+/* Pagination */
+#pagination {
+    div.itemperpage {
+        color: @text-color;
+        margin-top: 0;
+        font-weight: normal;
+    }
+
+    #itemperpage, .numberlist {
+        border-color: #cfcfcf;
+        .border-radius(2px);
+    }
+
+    .numberlist {
+        background-color: #fff;
+        height: 17px;
+        padding: 0;
+
+        ul li {
+            height: 100%;
+            padding: 0;
+
+            &.sep {
+                background: none;
+                border-right: 1px solid #cfcfcf;
+            }
+        }
+
+        a:hover, .current {
+            background: #589cc9;
+            .border-radius(0);
+        }
+
+        .current.prev, .current.next {
+            background: none;
+            color: #589cc9;
+        }
+
+        span, a {
+            padding: 1px 5px;
+            height: 15px;
+            margin-right: 0;
+        }
+    }
+
+    div.detailtext {
+        color: @text-color;
+        margin: 0;
+    }
 }
