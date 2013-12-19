@@ -381,6 +381,7 @@
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Web.AppSettings.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\UserControl\Models\" />

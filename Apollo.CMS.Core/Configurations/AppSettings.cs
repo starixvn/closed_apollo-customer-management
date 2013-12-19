@@ -33,6 +33,14 @@ namespace Apollo.CMS.Core.Configurations
             }
         }
 
+        public static int DefaultPageSize
+        {
+            get
+            {
+                return Convert.ToInt32(GetValue("DefaultPageSize"));
+            }
+        }
+
         /// <summary>
         /// Gets the value from web configuration.
         /// </summary>

@@ -15,6 +15,7 @@ namespace Apollo.CMS.Account.Controllers
     using Apollo.CMS.Account.Models.AccountList;
     using Apollo.CMS.Account.Services.AccountList.Implements;
     using Apollo.CMS.Account.Services.AccountList.Interfaces;
+    using Apollo.CMS.Core.Configurations;
     using Apollo.CMS.Core.Constants;
     using Apollo.CMS.Core.Controllers;
     using Apollo.CMS.Core.Resources;
@@ -36,6 +37,7 @@ namespace Apollo.CMS.Account.Controllers
         public AccountListController(IAccountListService accountListService)
         {
             this._accountListService = accountListService ?? new AccountListService();
+            ViewBag.PageSize = AppSettings.DefaultPageSize;
         }
 
         /// <summary>
@@ -76,12 +78,14 @@ namespace Apollo.CMS.Account.Controllers
         /// Redirects member list page.
         /// </summary>
         /// <param name="agentId">The ID of searched agent.</param>
+        /// <param name="agentLevel">The level of searched agent.</param>
         /// <returns>Member list view.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.SearchAccount, Policy = Constant.Policy.Read)]
-        public ActionResult MemberList(int agentId = 0)
+        public ActionResult MemberList(int agentId = 0, int agentLevel = 0)
         {
             ViewBag.AgentId = agentId;
+            ViewBag.AgentLevel = agentLevel;
             ViewBag.AccountStatuses = GetAccountStatusList();
             ViewBag.BetStatuses = GetBetStatusList();
 
@@ -108,12 +112,14 @@ namespace Apollo.CMS.Account.Controllers
         /// Redirects shadow list page.
         /// </summary>
         /// <param name="agentId">The ID of searched agent.</param>
+        /// <param name="agentLevel">The level of searched agent.</param>
         /// <returns>Shadow list view.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.SearchAccount, Policy = Constant.Policy.Read)]
-        public ActionResult ShadowList(int agentId = 0)
+        public ActionResult ShadowList(int agentId = 0, int agentLevel = 0)
         {
             ViewBag.AgentId = agentId;
+            ViewBag.AgentLevel = agentLevel;
 
             return View();
         }

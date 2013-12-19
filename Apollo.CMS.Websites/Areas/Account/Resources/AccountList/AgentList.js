@@ -16,12 +16,11 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
     var parameters = {
         AgentId: null,
         Username: null,
-        AgentLevel: null,
         Status: null,
         BetStatus: null,
         PageIndex: null,
         PageSize: null,
-        OrderDirection: null
+        IsOrderByAsc: null
     };
     var highLevelAgents = {
         Super: 0,
@@ -31,8 +30,6 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
 
     // Cache DOM elements
     var cacheDOM = function () {
-        $this.DOMInstance.hdnAgentId = $('#hdnAgentId');
-        $this.DOMInstance.hdnAgentLevel = $('#hdnAgentLevel');
         $this.DOMInstance.txtUsername = $('#txtUsername', '#divFilterForm');
         $this.DOMInstance.ddlStatus = $('#ddlStatus', '#divFilterForm');
         $this.DOMInstance.ddlBetStatus = $('#ddlBetStatus', '#divFilterForm');
@@ -42,12 +39,10 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
 
     // Initialize fields and handle events.
     var initFields = function () {
-        parameters.AgentId = $this.DOMInstance.hdnAgentId.val();
-        parameters.AgentLevel = $this.DOMInstance.hdnAgentLevel.val();
-
-        //@@TODO: Get default page size from web config
-        parameters.PageSize = 10;
+        parameters.AgentId = agentId;
+        parameters.PageSize = pageSize;
         parameters.PageIndex = 0;
+        parameters.IsOrderByAsc = true;
 
         $this.DOMInstance.btnSubmit.on('click', function () {
             parameters.Username = $.trim($this.DOMInstance.txtUsername.val());
@@ -134,7 +129,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
         {
             columns: [{ HeaderText: tableHeaders.No, Width: 50, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.Edit, Width: 70, Name: 'ColEdit', HeaderAlign: 'center', CellAlign: 'center' },
-                      { HeaderText: tableHeaders.Username, Width: 180, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left', Sort: true },
+                      { HeaderText: tableHeaders.Username, Width: 180, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left', Sort: true, SortDirection: parameters.IsOrderByAsc ? 'asc' : 'desc' },
                       { HeaderText: tableHeaders.Downline, Width: 100, Name: 'ColDownline', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.Member, Width: 100, Name: 'ColMember', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.Shadow, Width: 100, Name: 'ColShadow', HeaderAlign: 'center', CellAlign: 'center' },
@@ -156,6 +151,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
                 serverSortFunction: sort
             },
             showDistinctRow: false,
+            showHighlightRow: false,
             bodyRowHeight: 30,
             bodyRows: bodyData
         };
@@ -170,13 +166,12 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
     };
 
     var sort = function (sortColumnName, sortDirection) {
-        parameters.OrderDirection = sortDirection === 'ASC';
+        parameters.IsOrderByAsc = sortDirection === 'ASC';
+        parameters.PageIndex = 0;
         getData();
     };
 
     $this.DOMInstance = {
-        hdnAgentId: null,
-        hdnAgentLevel: null,
         txtUsername: null,
         ddlStatus: null,
         ddlBetStatus: null,

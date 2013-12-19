@@ -1,21 +1,35 @@
-﻿@{
+﻿@using Apollo.CMS.Core.Constants
+@{
     var agentId = (int)ViewBag.AgentId;
+    var agentLevel = (int)ViewBag.AgentLevel;
+    var pageSize = (int)ViewBag.PageSize;
 
     ViewBag.Title = ViewLang.ShadowList;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head {
     @Styles.Render("~/styles/fanexGrid")
+    @Styles.Render("~/site/accountList")
 }
 @section HeadLine {
     <h5 class="row title">
-        @ViewLang.ShadowList
-        <a href="#" class="btn-link">@ViewLang.AgentList</a>
-        <a href="#" class="btn-link">@ViewLang.MemberList</a>
+        <span class="txt-title">@ViewLang.ShadowList</span>
+        <div class="btn-switch">
+            <a href="@Url.Action("AgentList", "AccountList", new { agentId = agentId, agentLevel = agentLevel })" class="switch-link">
+                <span class="icon-list"></span> @ViewLang.AgentList
+            </a>
+
+            @if (agentLevel > (int)HighLevelAgents.Shareholder)
+            {
+                <a href="@Url.Action("MemberList", "AccountList", new { agentId = agentId, agentLevel = agentLevel })" class="switch-link">
+                    <span class="icon-list"></span> @ViewLang.MemberList
+                </a>
+            }
+        </div>
     </h5>
 }
-@Html.Hidden("hdnAgentId", agentId)
-<div class="row">
+
+<div class="row breadcrumbs">
     @{ Html.RenderAction("Breadcrumb", "AccountList", new { agentId = agentId }); }
 </div>
 <div class="row content-grid">
@@ -34,5 +48,7 @@
             RegisterDate: '@ViewLang.RegisterDate',
             Status: '@ViewLang.Status'
         };
+        var agentId = parseInt('@agentId');
+        var pageSize = parseInt('@pageSize');
     </script>
 }
