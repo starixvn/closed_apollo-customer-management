@@ -241,6 +241,15 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Downline.
+        /// </summary>
+        public static string Downline {
+            get {
+                return ResourceManager.GetString("Downline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string Edit {

@@ -39,10 +39,12 @@ namespace Apollo.CMS.Account.Controllers
         /// <summary>
         /// Redirects agent list page.
         /// </summary>
+        /// <param name="agentId">The ID of searched agent.</param>
+        /// <param name="agentLevel">The level of searched agent.</param>
         /// <returns>Agent list view.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.SearchAccount, Policy = Constant.Policy.Read)]
-        public ActionResult AgentList(int agentId = 0)
+        public ActionResult AgentList(int agentId = 0, int agentLevel = 0)
         {
             ViewBag.AgentId = agentId;
             ViewBag.AccountStatuses = GetAccountStatusList();
@@ -54,6 +56,7 @@ namespace Apollo.CMS.Account.Controllers
         /// <summary>
         /// Redirects member list page.
         /// </summary>
+        /// <param name="agentId">The ID of searched agent.</param>
         /// <returns>Member list view.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.SearchAccount, Policy = Constant.Policy.Read)]
@@ -69,6 +72,7 @@ namespace Apollo.CMS.Account.Controllers
         /// <summary>
         /// Redirects shadow list page.
         /// </summary>
+        /// <param name="agentId">The ID of searched agent.</param>
         /// <returns>Shadow list view.</returns>
         [HttpGet]
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.SearchAccount, Policy = Constant.Policy.Read)]
@@ -82,6 +86,7 @@ namespace Apollo.CMS.Account.Controllers
         /// <summary>
         /// Creates breadcrumb.
         /// </summary>
+        /// <param name="agentId">The ID of searched agent.</param>
         /// <returns>Breadcrumb partial view.</returns>
         [ChildActionOnly]
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.SearchAccount, Policy = Constant.Policy.Read)]
