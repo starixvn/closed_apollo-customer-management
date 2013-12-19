@@ -1,6 +1,7 @@
 ﻿@{
     var agentId = (int)ViewBag.AgentId;
-    var agentlevel = (int)ViewBag.AgentLevel;
+    var agentLevel = (int)ViewBag.AgentLevel;
+    var pageSize = (int)ViewBag.PageSize;
     
     ViewBag.Title = ViewLang.AgentList;
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,8 +19,6 @@
         </div>
     </h5>
 }
-@Html.Hidden("hdnAgentId", agentId)
-@Html.Hidden("hdnAgentLevel", agentlevel)
 
 <div id="divFilterForm" class="row filter-form clearfix resizable-form filter-mainAgent" data-original-width="858">
     <div class="filter-row clearfix">
@@ -74,5 +73,7 @@
             Status: '@ViewLang.Status',
             BetStatus: '@ViewLang.BetStatus'
         };
+        var agentId = parseInt('@agentId');
+        var pageSize = parseInt('@pageSize');
     </script>
 }

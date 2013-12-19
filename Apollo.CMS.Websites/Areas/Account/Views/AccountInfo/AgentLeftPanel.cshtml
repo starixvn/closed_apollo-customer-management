@@ -57,12 +57,12 @@ else if (customer.AgentId != 0)
             @if (!isHighLevel)
             {
                 <div class="@buttonCss">
-                    @Html.ActionLink(ViewLang.Member, "MemberList", "AccountList", new { agentId = customer.AgentId }, new { @class = "btn-link" })
+                    @Html.ActionLink(ViewLang.Member, "MemberList", "AccountList", new { agentId = customer.AgentId, agentLevel = customer.AgentLevel }, new { @class = "btn-link" })
                 </div>
             }
             
             <div class="@buttonCss">
-                @Html.ActionLink(ViewLang.Shadow, "ShadowList", "AccountList", new { agentId = customer.AgentId }, new { @class = "btn-link" })
+                @Html.ActionLink(ViewLang.Shadow, "ShadowList", "AccountList", new { agentId = customer.AgentId, agentLevel = customer.AgentLevel }, new { @class = "btn-link" })
             </div>
         </div>
     </div>

@@ -9,8 +9,7 @@ Namespace.Register("Apollo.CMS.Account.AccountList.ShadowList");
 Apollo.CMS.Account.AccountList.ShadowList = function () {
     var $this = this;
     var urls = {
-        AgentList: CMS.resolveRootUrl('Account/AccountList/AgentList'),
-        MemberList: CMS.resolveRootUrl('Account/AccountList/MemberList'),
+        ShadowSetting: CMS.resolveRootUrl('Account/AccountList/MemberList'), // Update later
         GetShadowList: CMS.resolveRootUrl('Account/AccountList/GetShadowList')
     };
     var parameters = {
@@ -20,21 +19,20 @@ Apollo.CMS.Account.AccountList.ShadowList = function () {
         IsOrderByAsc: null
     };
 
-    // Cache DOM elements
-    var cacheDOM = function () {
-        $this.DOMInstance.divShadowList = $('#divShadowList');
-    };
-
     // Initialize fields and handle events.
     var initFields = function () {
+        $this.DOMInstance.divShadowList = $('#divShadowList');
+
+        parameters.AgentId = agentId;
+        parameters.PageSize = pageSize;
+        parameters.PageIndex = 0;
+        parameters.IsOrderByAsc = true;
+
         getData();
     };
 
     // Get data
     var getData = function () {
-        parameters.AgentId = 1;
-        parameters.PageSize = 50;
-
         $.ajax({
             type: "POST",
             url: urls.GetShadowList,
@@ -45,7 +43,7 @@ Apollo.CMS.Account.AccountList.ShadowList = function () {
                 CMS.loadingBox.show();
             },
             success: function (result) {
-                renderShadowTable(result);
+                renderShadowTable(result.ShadowList, result.TotalItems);
             },
             error: function (xhr, status, err) {
                 CMS.handleAjaxError(xhr, status, err);
@@ -57,7 +55,7 @@ Apollo.CMS.Account.AccountList.ShadowList = function () {
     };
 
     // Render data table for low level agent.
-    var renderShadowTable = function (data) {
+    var renderShadowTable = function (data, totalItems) {
         var bodyData = [];
 
         $this.DOMInstance.divShadowList.addClass('hide');
@@ -82,22 +80,27 @@ Apollo.CMS.Account.AccountList.ShadowList = function () {
         {
             columns: [{ HeaderText: tableHeaders.No, Width: 50, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: CMS.commonConstants.NumberFormat },
                       { HeaderText: tableHeaders.Edit, Width: 70, Name: 'ColEdit', HeaderAlign: 'center', CellAlign: 'left' },
-                      { HeaderText: tableHeaders.Shadow, Width: 200, Name: 'ColShadow', HeaderAlign: 'center', CellAlign: 'center' },
-                      { HeaderText: tableHeaders.RegisterDate, Width: 180, Name: 'ColRegisterDate', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: CMS.commonConstants.MomentDateTimeFormat, Timezone: CMS.serverTimezone },
+                      { HeaderText: tableHeaders.Shadow, Width: 200, Name: 'ColShadow', HeaderAlign: 'center', CellAlign: 'center', Sort: true },
+                      { HeaderText: tableHeaders.RegisterDate, Width: 190, Name: 'ColRegisterDate', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: CMS.commonConstants.MomentDateTimeFormat, Timezone: CMS.serverTimezone },
                       { HeaderText: tableHeaders.Status, Width: 100, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'center'}],
             showFooter: true,
             gridExpandHeight: 250,
             showNumberColumn: true,
             showPager: true,
+            customPager: true,
             pagerOption: {
-                itemsPerPage: 20,
-                maxItemsPerPage: 100,
-                currentPage: 0,
-                startPerPage: 10,
-                pageStep: 10
+                itemsPerPage: parameters.PageSize,
+                currentPage: parameters.PageIndex,
+                totalItem: totalItems,
+                itemsPerPageArray: [10, 50, 100, 200, 500]
+                //pagerSelectCallBack: changePage
+            },
+            sortOption: {
+                //serverSortFunction: sort
             },
             bodyRowHeight: 30,
-            bodyRows: bodyData
+            showHighlightRow: false,
+            showDistinctRow: false
         };
 
         $this.DOMInstance.divShadowList.removeClass('hide').fanexGrid(gridOptions);
@@ -107,7 +110,6 @@ Apollo.CMS.Account.AccountList.ShadowList = function () {
         divShadowList: null
     };
     $this.InitPage = function () {
-        cacheDOM();
         initFields();
     };
 };
