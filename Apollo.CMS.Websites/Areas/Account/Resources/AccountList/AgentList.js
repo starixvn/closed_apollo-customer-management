@@ -134,7 +134,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
         {
             columns: [{ HeaderText: tableHeaders.No, Width: 50, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.Edit, Width: 70, Name: 'ColEdit', HeaderAlign: 'center', CellAlign: 'left' },
-                      { HeaderText: tableHeaders.Username, Width: 180, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left' },
+                      { HeaderText: tableHeaders.Username, Width: 180, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left', Sort: true },
                       { HeaderText: tableHeaders.Downline, Width: 100, Name: 'ColDownline', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.Member, Width: 100, Name: 'ColMember', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.Shadow, Width: 100, Name: 'ColShadow', HeaderAlign: 'center', CellAlign: 'center' },
@@ -152,6 +152,10 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
                 itemsPerPageArray: [10, 50, 100, 200, 500],
                 pagerSelectCallBack: changePage
             },
+            sortOption: {
+                serverSortFunction: sort
+            },
+            showDistinctRow: false,
             bodyRowHeight: 30,
             bodyRows: bodyData
         };
@@ -162,6 +166,11 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
     var changePage = function (pageIndex, itemsPerPage, data) {
         parameters.PageSize = itemsPerPage;
         parameters.PageIndex = pageIndex;
+        getData();
+    };
+
+    var sort = function (sortColumnName, sortDirection) {
+        parameters.OrderDirection = sortDirection === 'ASC';
         getData();
     };
 
