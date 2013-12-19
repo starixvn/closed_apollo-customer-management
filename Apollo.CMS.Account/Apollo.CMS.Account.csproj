@@ -68,6 +68,10 @@
     <Compile Include="Criteria\AccountInfo\GetDownlineMembersCriteria.cs" />
     <Compile Include="Criteria\AccountInfo\GetMemberInfoCriteria.cs" />
     <Compile Include="Criteria\AccountInfo\GetSuggestedCustomersByUsernameCriteria.cs" />
+    <Compile Include="Criteria\AccountList\GetAgentListCriteria.cs" />
+    <Compile Include="Criteria\AccountList\GetMemberListCriteria.cs" />
+    <Compile Include="Criteria\AccountList\GetNavigationPathCriteria.cs" />
+    <Compile Include="Criteria\AccountList\GetShadowListCriteria.cs" />
     <Compile Include="Criteria\TreeView\GetAgentDownlineByIdCriteria.cs" />
     <Compile Include="Criteria\TreeView\GetAllAgentAndAgentDownlineByIdCriteria.cs" />
     <Compile Include="Models\AccountInfo\AgentInfo.cs" />
@@ -75,6 +79,10 @@
     <Compile Include="Models\AccountInfo\Agent.cs" />
     <Compile Include="Models\AccountInfo\Member.cs" />
     <Compile Include="Models\AccountInfo\UplineAgent.cs" />
+    <Compile Include="Models\AccountList\Agent.cs" />
+    <Compile Include="Models\AccountList\Member.cs" />
+    <Compile Include="Models\AccountList\NavigationPath.cs" />
+    <Compile Include="Models\AccountList\Shadow.cs" />
     <Compile Include="Models\TreeView\TreeViewModel.cs" />
     <Compile Include="Models\TreeView\TreeViewViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,10 +93,7 @@
     <Compile Include="Services\TreeView\Implements\TreeViewService.cs" />
     <Compile Include="Services\TreeView\Interfaces\ITreeViewService.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Criteria\AccountList\" />
-    <Folder Include="Models\AccountList\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Apollo.CMS.Core\Apollo.CMS.Core.csproj">
       <Project>{FCD8A1C1-0EFB-4AFD-B8D4-98B56125235B}</Project>

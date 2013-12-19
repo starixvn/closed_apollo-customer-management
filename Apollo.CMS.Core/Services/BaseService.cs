@@ -57,6 +57,38 @@ namespace Apollo.CMS.Core.Services
         }
 
         /// <summary>
+        /// Gets the list of data and total items.
+        /// </summary>
+        /// <typeparam name="T">Generic type.</typeparam>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <param name="totalItems">Total items.</param>
+        /// <returns>The list of data.</returns>
+        public virtual IEnumerable<T> GetListData<T>(ICriteria criteria, out int totalItems)
+        {
+            IEnumerable<T> result = null;
+
+            Check.Argument.IsNotNull(criteria, "criteria");
+            totalItems = 0;
+
+            using (IObjectDb db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                Hashtable outputParam = null;
+
+                result = db.Query<T>(criteria.GetSpParams());
+                outputParam = db.GetOuputParams();
+
+                if (outputParam.ContainsKey("totalitems"))
+                {
+                    totalItems = (int)outputParam["totalitems"];
+                }
+            }
+
+            result = result ?? new List<T>();
+
+            return result;
+        }
+
+        /// <summary>
         /// Gets data.
         /// </summary>
         /// <typeparam name="T">Generic type.</typeparam>

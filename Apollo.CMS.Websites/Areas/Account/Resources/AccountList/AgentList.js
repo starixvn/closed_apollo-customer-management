@@ -16,15 +16,23 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
     var parameters = {
         AgentId: null,
         Username: null,
+        AgentLevel: null,
         Status: null,
         BetStatus: null,
         PageIndex: null,
         PageSize: null,
         OrderDirection: null
     };
+    var highLevelAgents = {
+        Super: 0,
+        MainShareholder: 1,
+        Shareholder: 2
+    };
 
     // Cache DOM elements
     var cacheDOM = function () {
+        $this.DOMInstance.hdnAgentId = $('#hdnAgentId');
+        $this.DOMInstance.hdnAgentLevel = $('#hdnAgentLevel');
         $this.DOMInstance.txtUsername = $('#txtUsername');
         $this.DOMInstance.ddlStatus = $('#ddlStatus');
         $this.DOMInstance.ddlBetStatus = $('#ddlBetStatus');
@@ -34,6 +42,13 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
 
     // Initialize fields and handle events.
     var initFields = function () {
+        parameters.AgentId = $this.DOMInstance.hdnAgentId.val();
+        parameters.AgentLevel = $this.DOMInstance.hdnAgentLevel.val();
+
+        //@@TODO: Get default page size from web config
+        parameters.PageSize = 10;
+        parameters.PageIndex = 0;
+
         $this.DOMInstance.btnSubmit.on('click', function () {
             parameters.Username = $.trim($this.DOMInstance.txtUsername.val());
             parameters.Status = $this.DOMInstance.ddlStatus.val();
@@ -46,28 +61,42 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
 
     // Get data
     var getData = function () {
-        //@@TODO: Call ajax here
-        var result = [{
-            CustId: 20,
-            Username: 'Agent01',
-            Downline: 25,
-            Member: 5,
-            Shadow: 2,
-            Status: 'Active',
-            BetStatus: 'Stopped'
-        }];
-
-        renderTable(result);
+        $.ajax({
+            type: "POST",
+            url: urls.GetAgentList,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(parameters),
+            beforeSend: function () {
+                CMS.loadingBox.show();
+            },
+            success: function (result) {
+                renderTable(result.AgentList, result.TotalItems);
+            },
+            error: function (xhr, status, err) {
+                CMS.handleAjaxError(xhr, status, err);
+            },
+            complete: function () {
+                CMS.loadingBox.close();
+            }
+        });
     };
 
     // Check the agent level and render associate table type.
-    var renderTable = function (data) {
-        //@@TODO: Check agent level here
-        renderAgentTable(data);
+    var renderTable = function (data, totalItems) {
+        if (parameters.AgentLevel == highLevelAgents.Super) {
+            //@@TODO: Hide Member List button
+            renderMainShareholderTable(data, totalItems);
+        } else if (parameters.AgentLevel == highLevelAgents.MainShareholder) {
+            //@@TODO: Hide Member List button
+            renderShareholderTable(data, totalItems);
+        } else {
+            renderAgentTable(data, totalItems);
+        }
     };
 
     // Render data table for main shareholder.
-    var renderMainShareholderTable = function (data) {
+    var renderMainShareholderTable = function (data, totalItems) {
         //@@TODO: Implement
     };
 
@@ -77,7 +106,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
     };
 
     // Render data table for low level agent.
-    var renderAgentTable = function (data) {
+    var renderAgentTable = function (data, totalItems) {
         var bodyData = [];
 
         $this.DOMInstance.divAgentList.addClass('hide');
@@ -91,11 +120,11 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
                     Columns: [{ Name: 'ColNo', Value: index + 1 },
                               { Name: 'ColEdit', Value: '<span class="edit-class" />' },
                               { Name: 'ColUsername', Value: item.Username },
-                              { Name: 'ColDownline', Value: '<span class="link downline" data-cust-id="{0}">{1}</span>'.format(item.CustId, item.Downline) },
-                              { Name: 'ColMember', Value: '<span class="link member" data-cust-id="{0}">{1}</span>'.format(item.CustId, item.Member) },
-                              { Name: 'ColShadow', Value: '<span class="link shadow" data-cust-id="{0}">{1}</span>'.format(item.CustId, item.Shadow) },
-                              { Name: 'ColStatus', Value: '<span class="{0}">{1}</span>'.format(item.Status.toLowerCase().replace(/./g, ''), item.Status) },
-                              { Name: 'ColBetStatus', Value: '<span class="{0}">{1}</span>'.format(item.BetStatus.toLowerCase().replace(/./g, ''), item.BetStatus)}]
+                              { Name: 'ColDownline', Value: '<span class="link downline" data-cust-id="{0}">{1}</span>'.format(item.CustId, item.NumberOfAgent) },
+                              { Name: 'ColMember', Value: '<span class="link member" data-cust-id="{0}">{1}</span>'.format(item.CustId, item.NumberOfMember) },
+                              { Name: 'ColShadow', Value: '<span class="link shadow" data-cust-id="{0}">{1}</span>'.format(item.CustId, item.NumberOfShadow) },
+                              { Name: 'ColStatus', Value: '<span class="{0}">{1}</span>'.format(item.RealStatus.toLowerCase().replace(/./g, ''), item.RealStatus) },
+                              { Name: 'ColBetStatus', Value: '<span class="{0}">{1}</span>'.format(item.RealBetStatus.toLowerCase().replace(/./g, ''), item.RealBetStatus)}]
                 };
                 bodyData.push(row);
             });
@@ -115,12 +144,13 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
             gridExpandHeight: 250,
             showNumberColumn: true,
             showPager: true,
+            customPager: true,
             pagerOption: {
-                itemsPerPage: 20,
-                maxItemsPerPage: 100,
-                currentPage: 0,
-                startPerPage: 10,
-                pageStep: 10
+                itemsPerPage: parameters.PageSize,
+                currentPage: parameters.PageIndex,
+                totalItem: totalItems,
+                itemsPerPageArray: [10, 50, 100, 200, 500],
+                pagerSelectCallBack: changePage
             },
             bodyRowHeight: 30,
             bodyRows: bodyData
@@ -129,12 +159,19 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
         $this.DOMInstance.divAgentList.removeClass('hide').fanexGrid(gridOptions);
     };
 
+    var changePage = function (pageIndex, itemsPerPage, data) {
+        parameters.PageSize = itemsPerPage;
+        parameters.PageIndex = pageIndex;
+        getData();
+    };
+
     $this.DOMInstance = {
+        hdnAgentId: null,
+        hdnAgentLevel: null,
         txtUsername: null,
         ddlStatus: null,
         ddlBetStatus: null,
         btnSubmit: null,
-        divAgentListContainer: null,
         divAgentList: null
     };
     $this.InitPage = function () {

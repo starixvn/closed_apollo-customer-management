@@ -18,13 +18,21 @@
 <div class="row">
     @{ Html.RenderAction("Breadcrumb", "AccountList", new { agentId = agentId }); }
 </div>
+<div class="row content-grid">
+    <div id="divShadowList" class="freegrid hide resizable-grid"></div>
+</div>
 
 @section Foot {
     @Scripts.Render("~/scripts/fanexGrid")
-    @Scripts.Render("~/scripts/agentList")
+    @Scripts.Render("~/scripts/shadowList")
 
     <script type="text/javascript">
         var tableHeaders = {
+            No: '#',
+            Edit: '@ViewLang.Edit',
+            Shadow: '@ViewLang.Shadow',
+            RegisterDate: '@ViewLang.RegisterDate',
+            Status: '@ViewLang.Status'
         };
     </script>
 }

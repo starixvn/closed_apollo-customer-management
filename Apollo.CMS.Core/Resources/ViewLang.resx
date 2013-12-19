@@ -363,4 +363,7 @@
   <data name="Downline" xml:space="preserve">
     <value>Downline</value>
   </data>
+  <data name="RegisterDate" xml:space="preserve">
+    <value>Register Date</value>
+  </data>
 </root>

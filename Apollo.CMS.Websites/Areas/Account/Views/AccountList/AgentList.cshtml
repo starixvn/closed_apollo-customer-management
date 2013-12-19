@@ -1,5 +1,6 @@
 ﻿@{
     var agentId = (int)ViewBag.AgentId;
+    var agentlevel = (int)ViewBag.AgentLevel;
     
     ViewBag.Title = ViewLang.AgentList;
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,8 +19,9 @@
     </h5>
 }
 @Html.Hidden("hdnAgentId", agentId)
+@Html.Hidden("hdnAgentLevel", agentlevel)
 
-<div class="row filter-form clearfix resizable-form filter-mainAgent" data-original-width="862">
+<div class="row filter-form clearfix resizable-form filter-mainAgent" data-original-width="858">
     <div class="filter-row clearfix">
         <div class="filter-item">
             <div class="lbl width-auto">

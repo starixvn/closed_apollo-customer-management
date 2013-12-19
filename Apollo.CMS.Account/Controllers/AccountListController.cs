@@ -11,6 +11,8 @@ namespace Apollo.CMS.Account.Controllers
 {
     using System.Collections.Generic;
     using System.Web.Mvc;
+    using Apollo.CMS.Account.Criteria.AccountList;
+    using Apollo.CMS.Account.Models.AccountList;
     using Apollo.CMS.Account.Services.AccountList.Implements;
     using Apollo.CMS.Account.Services.AccountList.Interfaces;
     using Apollo.CMS.Core.Constants;
@@ -47,10 +49,27 @@ namespace Apollo.CMS.Account.Controllers
         public ActionResult AgentList(int agentId = 0, int agentLevel = 0)
         {
             ViewBag.AgentId = agentId;
+            ViewBag.AgentLevel = agentLevel;
             ViewBag.AccountStatuses = GetAccountStatusList();
             ViewBag.BetStatuses = GetBetStatusList();
 
             return View();
+        }
+
+        /// <summary>
+        /// Gets direct down line agent list.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>List of direct agents.</returns>
+        [HttpPost]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.SearchAccount, Policy = Constant.Policy.Read)]
+        public JsonResult GetAgentList(GetAgentListCriteria criteria)
+        {
+            return Json(new
+            {
+                AgentList = this._accountListService.GetAgentList(criteria),
+                TotalItems = criteria.TotalItems
+            });
         }
 
         /// <summary>
@@ -70,6 +89,18 @@ namespace Apollo.CMS.Account.Controllers
         }
 
         /// <summary>
+        /// Gets direct down line member list.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>List of direct members.</returns>
+        [HttpPost]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.SearchAccount, Policy = Constant.Policy.Read)]
+        public JsonResult GetMemberList(GetMemberListCriteria criteria)
+        {
+            return Json(this._accountListService.GetMemberList(criteria));
+        }
+
+        /// <summary>
         /// Redirects shadow list page.
         /// </summary>
         /// <param name="agentId">The ID of searched agent.</param>
@@ -84,6 +115,22 @@ namespace Apollo.CMS.Account.Controllers
         }
 
         /// <summary>
+        /// Gets shadow list.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>List of shadows.</returns>
+        [HttpPost]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.SearchAccount, Policy = Constant.Policy.Read)]
+        public JsonResult GetShadowList(GetShadowListCriteria criteria)
+        {
+            return Json(new
+            {
+                AgentList = this._accountListService.GetShadowList(criteria),
+                TotalItems = criteria.TotalItems
+            });
+        }
+
+        /// <summary>
         /// Creates breadcrumb.
         /// </summary>
         /// <param name="agentId">The ID of searched agent.</param>
@@ -92,9 +139,12 @@ namespace Apollo.CMS.Account.Controllers
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.SearchAccount, Policy = Constant.Policy.Read)]
         public PartialViewResult Breadcrumb(int agentId = 0)
         {
-            ViewBag.AgentId = agentId;
+            IEnumerable<NavigationPath> navigationPath = this._accountListService.GetNavigationPaths(new GetNavigationPathCriteria
+            {
+                AgentId = agentId
+            });
 
-            return PartialView();
+            return PartialView(navigationPath);
         }
 
         /// <summary>
@@ -108,22 +158,22 @@ namespace Apollo.CMS.Account.Controllers
             statusList.Add(new SelectListItem
             {
                 Text = ViewLang.All,
-                Value = "null"
+                Value = ((int)BetStatus.All).ToString()
             });
             statusList.Add(new SelectListItem
             {
                 Text = ViewLang.Active,
-                Value = BetStatus.Active.ToString()
+                Value = ((int)BetStatus.Active).ToString()
             });
             statusList.Add(new SelectListItem
             {
                 Text = ViewLang.Stopped,
-                Value = BetStatus.Stopped.ToString()
+                Value = ((int)BetStatus.Stopped).ToString()
             });
             statusList.Add(new SelectListItem
             {
                 Text = ViewLang.CLock,
-                Value = BetStatus.CLock.ToString()
+                Value = ((int)BetStatus.CLock).ToString()
             });
 
             return statusList;
@@ -140,27 +190,27 @@ namespace Apollo.CMS.Account.Controllers
             statusList.Add(new SelectListItem
             {
                 Text = ViewLang.All,
-                Value = "null"
+                Value = ((int)AccountStatus.All).ToString()
             });
             statusList.Add(new SelectListItem
             {
                 Text = ViewLang.Active,
-                Value = AccountStatus.Active.ToString()
+                Value = ((int)AccountStatus.Active).ToString()
             });
             statusList.Add(new SelectListItem
             {
                 Text = ViewLang.Stopped,
-                Value = AccountStatus.Stopped.ToString()
+                Value = ((int)AccountStatus.Stopped).ToString()
             });
             statusList.Add(new SelectListItem
             {
                 Text = ViewLang.Locked,
-                Value = AccountStatus.Locked.ToString()
+                Value = ((int)AccountStatus.Locked).ToString()
             });
             statusList.Add(new SelectListItem
             {
                 Text = ViewLang.CLock,
-                Value = AccountStatus.CLock.ToString()
+                Value = ((int)AccountStatus.CLock).ToString()
             });
 
             return statusList;

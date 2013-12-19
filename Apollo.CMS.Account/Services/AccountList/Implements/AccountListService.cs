@@ -9,6 +9,9 @@
 
 namespace Apollo.CMS.Account.Services.AccountList.Implements
 {
+    using System.Collections.Generic;
+    using Apollo.CMS.Account.Criteria.AccountList;
+    using Apollo.CMS.Account.Models.AccountList;
     using Apollo.CMS.Account.Services.AccountList.Interfaces;
     using Apollo.CMS.Core.Services;
 
@@ -16,6 +19,50 @@ namespace Apollo.CMS.Account.Services.AccountList.Implements
     /// Account list service.
     /// </summary>
     public class AccountListService : BaseService, IAccountListService
-    {        
+    {
+        /// <summary>
+        /// Gets navigation path.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>List of navigation paths.</returns>
+        public IEnumerable<NavigationPath> GetNavigationPaths(GetNavigationPathCriteria criteria)
+        {
+            return this.GetListData<NavigationPath>(criteria);
+        }
+
+        /// <summary>
+        /// Gets direct down line agent list of a specific agent.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>List of direct down line agent list.</returns>
+        public IEnumerable<Agent> GetAgentList(GetAgentListCriteria criteria)
+        {
+            int totalItems;
+            IEnumerable<Agent> agentList = this.GetListData<Agent>(criteria, out totalItems);
+
+            criteria.TotalItems = totalItems;
+
+            return agentList;
+        }
+
+        /// <summary>
+        /// Gets member list of a specific agent.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>List of direct members.</returns>
+        public IEnumerable<Member> GetMemberList(GetMemberListCriteria criteria)
+        {
+            return this.GetListData<Member>(criteria);
+        }
+
+        /// <summary>
+        /// Gets shadow list of a specific agent.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>List of shadows.</returns>
+        public IEnumerable<Shadow> GetShadowList(GetShadowListCriteria criteria)
+        {
+            return this.GetListData<Shadow>(criteria);
+        }
     }
 }

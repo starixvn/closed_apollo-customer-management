@@ -44,4 +44,10 @@
     <Setting Key="Acc_Customer_GetCustomerByAgentId" SpName="Acc_Customer_GetCustomerByAgentId" DbName="SVRCSD.RepDB.aplWeb" />
     <Setting Key="Acc_Agent_GetAgentDownline" SpName="Acc_Agent_GetAgentDownline" DbName="SVRCSD.RepDB.aplWeb" />
   </Function>
+  <Function Name="AccountList">
+    <Setting Key="Acc_Agent_GetByAgent" SpName="Acc_Agent_GetByAgent" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_Customer_GetByAgent" SpName="Acc_Customer_GetByAgent" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_AgentUser_GetByAgent" SpName="Acc_AgentUser_GetByAgent" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_Agent_GetNavigatePath" SpName="Acc_Agent_GetNavigatePath" DbName="SVRCSD.RepDB.aplWeb" />
+  </Function>
 </Functions>

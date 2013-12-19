@@ -12,6 +12,11 @@ namespace Apollo.CMS.Core.Constants
     public enum AccountStatus : int
     {
         /// <summary>
+        /// All statuses.
+        /// </summary>
+        All = 0,
+
+        /// <summary>
         /// Status active.
         /// </summary>
         Active = 1,
