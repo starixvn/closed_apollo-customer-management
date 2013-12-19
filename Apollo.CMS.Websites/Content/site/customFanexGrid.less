@@ -62,9 +62,14 @@
             }
         }
 
+        .current.prev, .prev {
+            border-right: 1px solid #cfcfcf;
+        }
+
         a:hover, .current {
             background: #589cc9;
             .border-radius(0);
+            margin: 0;
         }
 
         .current.prev, .current.next {
@@ -72,10 +77,11 @@
             color: #589cc9;
         }
 
-        span, a {
+        span, a, a:hover {
             padding: 1px 5px;
             height: 15px;
             margin-right: 0;
+            font-weight: normal;
         }
     }
 
