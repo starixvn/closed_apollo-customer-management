@@ -50,8 +50,8 @@
 <div class="row">
     @{ Html.RenderAction("Breadcrumb", "AccountList", new { agentId = agentId }); }
 </div>
-<div class="row content-grid display-none">
-    <div class="freegrid resizable-grid" id="divAgentList"></div>
+<div class="row content-grid">
+    <div id="divAgentList" class="freegrid hide resizable-grid"></div>
 </div>
 
 @section Foot {
@@ -60,6 +60,14 @@
 
     <script type="text/javascript">
         var tableHeaders = {
+            No: '#',
+            Edit: '@ViewLang.Edit',
+            Username: '@ViewLang.UserName',
+            Downline: '@ViewLang.Downline',
+            Member: '@ViewLang.Member',
+            Shadow: '@ViewLang.Shadow',
+            Status: '@ViewLang.Status',
+            BetStatus: '@ViewLang.BetStatus'
         };
     </script>
 }

@@ -360,4 +360,7 @@
   <data name="Status" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="Downline" xml:space="preserve">
+    <value>Downline</value>
+  </data>
 </root>
