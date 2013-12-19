@@ -281,6 +281,7 @@
     <Content Include="Areas\Account\Views\AccountList\MemberList.cshtml" />
     <Content Include="Areas\Account\Views\AccountList\ShadowList.cshtml" />
     <Content Include="Areas\Account\Views\AccountList\Breadcrumb.cshtml" />
+    <Content Include="Areas\Account\Resources\AccountList\accountList.less" />
     <None Include="Noesis.Javascript\Noesis.Javascript.x64.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

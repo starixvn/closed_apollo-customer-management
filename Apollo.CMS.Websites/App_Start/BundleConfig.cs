@@ -178,6 +178,10 @@ namespace Apollo.CMS.Websites
         /// <param name="bundles">The bundles collection.</param>
         private static void RegisterAccountListBundles(BundleCollection bundles)
         {
+            bundles.AddAndInclude(
+                "~/site/accountList",
+                "~/Areas/Account/Resources/AccountList/accountList.less");
+
             bundles.Add(new ScriptBundle("~/scripts/agentList").Include(
                 "~/Areas/Account/Resources/AccountList/AgentList.js"));
 
