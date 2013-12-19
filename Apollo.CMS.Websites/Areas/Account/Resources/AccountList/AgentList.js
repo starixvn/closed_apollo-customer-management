@@ -33,10 +33,10 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
     var cacheDOM = function () {
         $this.DOMInstance.hdnAgentId = $('#hdnAgentId');
         $this.DOMInstance.hdnAgentLevel = $('#hdnAgentLevel');
-        $this.DOMInstance.txtUsername = $('#txtUsername');
-        $this.DOMInstance.ddlStatus = $('#ddlStatus');
-        $this.DOMInstance.ddlBetStatus = $('#ddlBetStatus');
-        $this.DOMInstance.btnSubmit = $('#btnSubmit');
+        $this.DOMInstance.txtUsername = $('#txtUsername', '#divFilterForm');
+        $this.DOMInstance.ddlStatus = $('#ddlStatus', '#divFilterForm');
+        $this.DOMInstance.ddlBetStatus = $('#ddlBetStatus', '#divFilterForm');
+        $this.DOMInstance.btnSubmit = $('#btnSubmit', '#divFilterForm');
         $this.DOMInstance.divAgentList = $('#divAgentList');
     };
 
