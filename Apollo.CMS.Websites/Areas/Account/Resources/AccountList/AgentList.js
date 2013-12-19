@@ -123,8 +123,8 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
                               { Name: 'ColDownline', Value: '<span class="link downline" data-cust-id="{0}">{1}</span>'.format(item.CustId, item.NumberOfAgent) },
                               { Name: 'ColMember', Value: '<span class="link member" data-cust-id="{0}">{1}</span>'.format(item.CustId, item.NumberOfMember) },
                               { Name: 'ColShadow', Value: '<span class="link shadow" data-cust-id="{0}">{1}</span>'.format(item.CustId, item.NumberOfShadow) },
-                              { Name: 'ColStatus', Value: '<span class="{0}">{1}</span>'.format(item.RealStatus.toLowerCase().replace(/./g, ''), item.RealStatus) },
-                              { Name: 'ColBetStatus', Value: '<span class="{0}">{1}</span>'.format(item.RealBetStatus.toLowerCase().replace(/./g, ''), item.RealBetStatus)}]
+                              { Name: 'ColStatus', Value: '<span class="{0}">{1}</span>'.format(item.RealStatus.toLowerCase().replace(/\./g, ''), item.RealStatus) },
+                              { Name: 'ColBetStatus', Value: '<span class="{0}">{1}</span>'.format(item.RealBetStatus.toLowerCase().replace(/\./g, ''), item.RealBetStatus)}]
                 };
                 bodyData.push(row);
             });
