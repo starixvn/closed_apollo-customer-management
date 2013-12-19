@@ -52,7 +52,12 @@ namespace Apollo.CMS.Account.Services.AccountList.Implements
         /// <returns>List of direct members.</returns>
         public IEnumerable<Member> GetMemberList(GetMemberListCriteria criteria)
         {
-            return this.GetListData<Member>(criteria);
+            int totalItems;
+            IEnumerable<Member> memberList = this.GetListData<Member>(criteria, out totalItems);
+
+            criteria.TotalItems = totalItems;
+
+            return memberList;
         }
 
         /// <summary>
@@ -62,7 +67,12 @@ namespace Apollo.CMS.Account.Services.AccountList.Implements
         /// <returns>List of shadows.</returns>
         public IEnumerable<Shadow> GetShadowList(GetShadowListCriteria criteria)
         {
-            return this.GetListData<Shadow>(criteria);
+            int totalItems;
+            IEnumerable<Shadow> shadowList = this.GetListData<Shadow>(criteria, out totalItems);
+
+            criteria.TotalItems = totalItems;
+
+            return shadowList;
         }
     }
 }

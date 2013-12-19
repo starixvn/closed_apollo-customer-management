@@ -97,7 +97,11 @@ namespace Apollo.CMS.Account.Controllers
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.SearchAccount, Policy = Constant.Policy.Read)]
         public JsonResult GetMemberList(GetMemberListCriteria criteria)
         {
-            return Json(this._accountListService.GetMemberList(criteria));
+            return Json(new
+            {
+                MemberList = this._accountListService.GetMemberList(criteria),
+                TotalItems = criteria.TotalItems
+            });
         }
 
         /// <summary>
@@ -125,7 +129,7 @@ namespace Apollo.CMS.Account.Controllers
         {
             return Json(new
             {
-                AgentList = this._accountListService.GetShadowList(criteria),
+                ShadowList = this._accountListService.GetShadowList(criteria),
                 TotalItems = criteria.TotalItems
             });
         }

@@ -1,6 +1,22 @@
-﻿<ul class="list list-unstyled list-inline">
-    <li><a href="#">Super</a></li>
-    <li><a href="#">MainSH01 <span class="currency">(HKD)</span></a></li>
-    <li><a href="#">SH01</a></li>
-    <li class="none-icon"><a href="#">MainAgent01</a></li>
+﻿@using Apollo.CMS.Account.Models.AccountList
+@using Apollo.CMS.Core.Constants
+@model IEnumerable<NavigationPath>
+
+<ul class="list list-unstyled list-inline">
+    @{
+        int numberOfItems = Model.Count();
+        string currency = null;
+        NavigationPath item = null;
+
+        for (int index = 0; index < numberOfItems - 1; index++)
+        {
+            item = Model.ElementAt(index);
+            currency = (item.AgentLevel == (int)HighLevelAgents.MainShareholder) ? string.Format("<span class='currency'>({0})</span>", item.Currency) : string.Empty;
+            
+            <li><a href="@Url.Action("AgentList", "AccountList", new { agentId = item.AgentId, agentLevel = item.AgentLevel })">@Html.Raw(string.Format("{0} {1}", item.Username, currency))</a></li>            
+        }
+
+        item = Model.ElementAt(numberOfItems - 1);
+        <li class="none-icon"><a href="@Url.Action("AgentList", "AccountList", new { agentId = item.AgentId, agentLevel = item.AgentLevel })">@item.Username</a></li>
+    }
 </ul>
