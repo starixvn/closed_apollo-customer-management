@@ -6,17 +6,20 @@
 }
 @section Head {
     @Styles.Render("~/styles/fanexGrid")
+    @Styles.Render("~/site/accountList")
 }
 @section HeadLine {
     <h5 class="row title">
-        @ViewLang.MemberList
-        <a href="#" class="btn-link">@ViewLang.AgentList</a>
-        <a href="#" class="btn-link">@ViewLang.ShadowList</a>
+        <span class="txt-title">@ViewLang.MemberList</span>
+        <div class="btn-switch">
+            <a href="#" class="switch-link"><span class="icon-list"></span>@ViewLang.AgentList</a>
+            <a href="#" class="switch-link"><span class="icon-list"></span>@ViewLang.ShadowList</a>
+        </div>
     </h5>
 }
 @Html.Hidden("hdnAgentId", agentId)
 
-<div class="row filter-form clearfix resizable-form" data-original-width="862">
+<div class="row filter-form clearfix resizable-form memberList" data-original-width="862">
     <div class="filter-row clearfix">
         <div class="filter-item">
             <div class="lbl width-auto">
@@ -47,7 +50,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+<div class="row breadcrumbs">
     @{ Html.RenderAction("Breadcrumb", "AccountList", new { agentId = agentId }); }
 </div>
 <div class="row content-grid display-none">

@@ -82,8 +82,8 @@ Apollo.CMS.Account.AccountList.ShadowList = function () {
         {
             columns: [{ HeaderText: tableHeaders.No, Width: 50, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: CMS.commonConstants.NumberFormat },
                       { HeaderText: tableHeaders.Edit, Width: 70, Name: 'ColEdit', HeaderAlign: 'center', CellAlign: 'left' },
-                      { HeaderText: tableHeaders.Shadow, Width: 100, Name: 'ColShadow', HeaderAlign: 'center', CellAlign: 'center' },
-                      { HeaderText: tableHeaders.RegisterDate, Width: 100, Name: 'ColRegisterDate', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: CMS.commonConstants.MomentDateTimeFormat, Timezone: CMS.serverTimezone },
+                      { HeaderText: tableHeaders.Shadow, Width: 200, Name: 'ColShadow', HeaderAlign: 'center', CellAlign: 'center' },
+                      { HeaderText: tableHeaders.RegisterDate, Width: 180, Name: 'ColRegisterDate', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: CMS.commonConstants.MomentDateTimeFormat, Timezone: CMS.serverTimezone },
                       { HeaderText: tableHeaders.Status, Width: 100, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'center'}],
             showFooter: true,
             gridExpandHeight: 250,
