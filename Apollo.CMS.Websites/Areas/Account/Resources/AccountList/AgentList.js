@@ -9,8 +9,9 @@ Namespace.Register("Apollo.CMS.Account.AccountList.AgentList");
 Apollo.CMS.Account.AccountList.AgentList = function () {
     var $this = this;
     var urls = {
-        MemberList: CMS.resolveRootUrl('Account/AccountList/MemberList'),
-        ShadowList: CMS.resolveRootUrl('Account/AccountList/ShadowList'),
+        AgentList: CMS.resolveRootUrl('Account/AccountList/AgentList?agentId={0}&agentLevel={1}'),
+        MemberList: CMS.resolveRootUrl('Account/AccountList/MemberList?agentId={0}&agentLevel={1}'),
+        ShadowList: CMS.resolveRootUrl('Account/AccountList/ShadowList?agentId={0}&agentLevel={1}'),
         GetAgentList: CMS.resolveRootUrl('Account/AccountList/GetAgentList')
     };
     var parameters = {
@@ -115,9 +116,9 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
                     Columns: [{ Name: 'ColNo', Value: index + 1 },
                               { Name: 'ColEdit', Value: '<span class="icon-edit-link" />' },
                               { Name: 'ColUsername', Value: item.Username },
-                              { Name: 'ColDownline', Value: '<span class="link downline" data-cust-id="{0}">{1}</span>'.format(item.CustId, item.NumberOfAgent) },
-                              { Name: 'ColMember', Value: '<span class="link member" data-cust-id="{0}">{1}</span>'.format(item.CustId, item.NumberOfMember) },
-                              { Name: 'ColShadow', Value: '<span class="link shadow" data-cust-id="{0}">{1}</span>'.format(item.CustId, item.NumberOfShadow) },
+                              { Name: 'ColDownline', Value: item.NumberOfAgent > 0 ? '<span class="link downline" data-agent-id="{0}" data-agent-level="{1}">{2}</span>'.format(item.AgentId, item.AgentLevel, item.NumberOfAgent) : '0' },
+                              { Name: 'ColMember', Value: item.NumberOfMember > 0 ? '<span class="link member" data-agent-id="{0}" data-agent-level="{1}">{2}</span>'.format(item.AgentId, item.AgentLevel, item.NumberOfMember) : '0' },
+                              { Name: 'ColShadow', Value: item.NumberOfShadow > 0 ? '<span class="link shadow" data-agent-id="{0}" data-agent-level="{1}">{2}</span>'.format(item.AgentId, item.AgentLevel, item.NumberOfShadow) : '0' },
                               { Name: 'ColStatus', Value: '<span class="{0}">{1}</span>'.format(item.RealStatus.toLowerCase().replace(/\./g, ''), item.RealStatus) },
                               { Name: 'ColBetStatus', Value: '<span class="{0}">{1}</span>'.format(item.RealBetStatus.toLowerCase().replace(/\./g, ''), item.RealBetStatus)}]
                 };
@@ -135,8 +136,9 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
                       { HeaderText: tableHeaders.Shadow, Width: 100, Name: 'ColShadow', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.Status, Width: 100, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.BetStatus, Width: 100, Name: 'ColBetStatus', HeaderAlign: 'center', CellAlign: 'center'}],
+            showDistinctRow: false,
+            showHighlightRow: false,
             showFooter: true,
-            gridExpandHeight: 250,
             showNumberColumn: true,
             showPager: true,
             customPager: true,
@@ -145,27 +147,56 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
                 currentPage: parameters.PageIndex,
                 totalItem: totalItems,
                 itemsPerPageArray: [10, 50, 100, 200, 500],
-                pagerSelectCallBack: changePage
+                pagerSelectCallBack: handleChangingPage
             },
             sortOption: {
-                serverSortFunction: sort
+                serverSortFunction: handleSorting
             },
-            showDistinctRow: false,
-            showHighlightRow: false,
+            gridExpandHeight: 250,
             bodyRowHeight: 30,
             bodyRows: bodyData
         };
 
         $this.DOMInstance.divAgentList.removeClass('hide').fanexGrid(gridOptions);
+        bindGridEventhandlers();
     };
 
-    var changePage = function (pageIndex, itemsPerPage, data) {
+    // Bind grid event handlers
+    var bindGridEventhandlers = function () {
+        $('.downline', $this.DOMInstance.divAgentList).on('click', function () {
+            var cell = $(this);
+            var currentAgentId = cell.attr('data-agent-id');
+            var currentAgentLevel = cell.attr('data-agent-level');
+
+            CMS.navigateTo(urls.AgentList.format(currentAgentId, currentAgentLevel));
+        });
+
+        $('.member', $this.DOMInstance.divAgentList).on('click', function () {
+            var cell = $(this);
+            var currentAgentId = cell.attr('data-agent-id');
+            var currentAgentLevel = cell.attr('data-agent-level');
+
+            CMS.navigateTo(urls.MemberList.format(currentAgentId, currentAgentLevel));
+        });
+
+        $('.shadow', $this.DOMInstance.divAgentList).on('click', function () {
+            var cell = $(this);
+            var currentAgentId = cell.attr('data-agent-id');
+            var currentAgentLevel = cell.attr('data-agent-level');
+
+            CMS.navigateTo(urls.ShadowList.format(currentAgentId, currentAgentLevel));
+        });
+    };
+
+    // Handle paging at server side.
+    var handleChangingPage = function (pageIndex, itemsPerPage, data) {
         parameters.PageSize = itemsPerPage;
         parameters.PageIndex = pageIndex;
         getData();
     };
 
-    var sort = function (sortColumnName, sortDirection) {
+    // Handle sorting at server side.
+    var handleSorting = function (sortColumnName, sortDirection) {
         parameters.IsOrderByAsc = sortDirection === 'ASC';
         parameters.PageIndex = 0;
         getData();

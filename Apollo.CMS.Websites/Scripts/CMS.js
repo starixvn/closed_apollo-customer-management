@@ -92,7 +92,7 @@ var CMS = function ($) {
             setTimeout('CMS.navigateTo("' + url + '")', msec);
         },
         navigateTo: function (url) {
-            window.location.replace(CMS.resolveClientUrl(url));
+            window.location.replace(url);
         },
         navigateToRoot: function (url) {
             window.location.replace(CMS.resolveRootUrl(url));
