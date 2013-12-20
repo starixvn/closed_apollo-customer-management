@@ -31,10 +31,11 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
 
     // Cache DOM elements
     var cacheDOM = function () {
-        $this.DOMInstance.txtUsername = $('#txtUsername', '#divFilterForm');
-        $this.DOMInstance.ddlStatus = $('#ddlStatus', '#divFilterForm');
-        $this.DOMInstance.ddlBetStatus = $('#ddlBetStatus', '#divFilterForm');
-        $this.DOMInstance.btnSubmit = $('#btnSubmit', '#divFilterForm');
+        $this.DOMInstance.divFilterForm = $('#divFilterForm');
+        $this.DOMInstance.txtUsername = $('#txtUsername', $this.DOMInstance.divFilterForm);
+        $this.DOMInstance.ddlStatus = $('#ddlStatus', $this.DOMInstance.divFilterForm);
+        $this.DOMInstance.ddlBetStatus = $('#ddlBetStatus', $this.DOMInstance.divFilterForm);
+        $this.DOMInstance.btnSubmit = $('#btnSubmit', $this.DOMInstance.divFilterForm);
         $this.DOMInstance.divAgentList = $('#divAgentList');
         $this.DOMInstance.divContextMenu = $('#divContextMenu');
     };
@@ -119,6 +120,8 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
             columns.push({ HeaderText: tableHeaders.Currency, Width: 100, Name: 'ColCurrency', HeaderAlign: 'center', CellAlign: 'center' });
         } else if (hasMember) {
             columns.splice(4, 0, { HeaderText: tableHeaders.Member, Width: 100, Name: 'ColMember', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: CMS.commonConstants.NumberFormat });
+        } else {
+            $this.DOMInstance.divFilterForm.removeClass('filter-mainAgent').addClass('shareholder').attr('data-original-width', 758);
         }
 
         if (data && data.length > 0) {
