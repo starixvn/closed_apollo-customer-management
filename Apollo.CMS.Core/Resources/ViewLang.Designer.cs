@@ -637,6 +637,15 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shadow Permission.
+        /// </summary>
+        public static string ShadowPermission {
+            get {
+                return ResourceManager.GetString("ShadowPermission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Share Hierarchy.
         /// </summary>
         public static string ShareHierarchy {

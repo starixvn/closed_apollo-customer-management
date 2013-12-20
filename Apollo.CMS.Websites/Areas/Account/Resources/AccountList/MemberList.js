@@ -84,7 +84,7 @@ Apollo.CMS.Account.AccountList.MemberList = function () {
                 row =
                 {
                     Columns: [{ Name: 'ColNo', Value: index + 1 },
-                              { Name: 'ColEdit', Value: '<span class="icon-edit-link" data-cust-id="{0}"/>'.format(item.CustId) },
+                              { Name: 'ColEdit', Value: '<span class="icon-edit-link" data-cust-id="{0}" title="{1}"/>'.format(item.CustId, tableHeaders.BetAndCommSetting) },
                               { Name: 'ColUsername', Value: item.Username },
                               { Name: 'ColStatus', Value: '<span class="{0}">{1}</span>'.format(item.RealStatus.toLowerCase().replace(/\./g, ''), item.RealStatus) },
                               { Name: 'ColBetStatus', Value: '<span class="{0}">{1}</span>'.format(item.RealBetStatus.toLowerCase().replace(/\./g, ''), item.RealBetStatus) },

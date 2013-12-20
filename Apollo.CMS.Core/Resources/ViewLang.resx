@@ -372,4 +372,7 @@
   <data name="CommGroup" xml:space="preserve">
     <value>Comm. Group</value>
   </data>
+  <data name="ShadowPermission" xml:space="preserve">
+    <value>Shadow Permission</value>
+  </data>
 </root>

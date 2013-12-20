@@ -236,6 +236,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\site\img\favicon.ico" />
+    <Content Include="Content\site\img\icon-breadcrumb.png" />
     <Content Include="Content\site\img\icon-cal-orange.jpg" />
     <Content Include="Content\site\img\icon-cal.jpg" />
     <Content Include="Content\site\img\icon-row-left.png" />
