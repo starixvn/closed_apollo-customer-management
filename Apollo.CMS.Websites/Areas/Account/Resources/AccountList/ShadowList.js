@@ -70,7 +70,7 @@ Apollo.CMS.Account.AccountList.ShadowList = function () {
                               { Name: 'ColEdit', Value: '<span class="icon-edit-link" data-cust-id="{0}" title="{1}"/>'.format(item.Id, tableHeaders.ShadowPermission) },
                               { Name: 'ColShadow', Value: item.Username },
                               { Name: 'ColRegisterDate', Value: item.CreatedDate },
-                              { Name: 'ColStatus', Value: '<span class="{0}">{1}</span>'.format(item.RealStatus.toLowerCase().replace(/\./g, ''), item.RealStatus)}]
+                              { Name: 'ColStatus', Value: '<span class="{0}">{1}</span>'.format(item.ActualStatus.toLowerCase().replace(/\./g, ''), item.ActualStatus)}]
                 };
                 bodyData.push(row);
             });

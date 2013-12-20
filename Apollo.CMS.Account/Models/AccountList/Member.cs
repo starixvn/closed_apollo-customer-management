@@ -35,7 +35,7 @@ namespace Apollo.CMS.Account.Models.AccountList
 
         public decimal? CashBalance { get; set; }
 
-        public string RealStatus
+        public string ActualStatus
         {
             get
             {
@@ -43,7 +43,7 @@ namespace Apollo.CMS.Account.Models.AccountList
             }
         }
 
-        public string RealBetStatus
+        public string ActualBetStatus
         {
             get
             {
