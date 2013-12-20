@@ -69,18 +69,15 @@
 <div class="row content-grid">
     <div id="divAgentList" class="freegrid hide resizable-grid"></div>
 </div>
-<div id="divContextMenu" class="hide">
-    <ul class="contextMenu list-unstyled">
-        <li><a href="#">@ViewLang.ShareSetting</a></li>
 
-        @if (hasMember)
-        {
-            <li><a href="#">@ViewLang.MemberShareSetting</a></li>
-        }
-        
-        <li><a href="#">@ViewLang.BetAndCommSetting</a></li>
-    </ul>
-</div>
+<ul id="divContextMenu" class="contextMenu list-unstyled">
+    <li><a href="#">@ViewLang.ShareSetting</a></li>
+    @if (hasMember)
+    {
+        <li><a href="#">@ViewLang.MemberShareSetting</a></li>
+    }
+    <li><a href="#">@ViewLang.BetAndCommSetting</a></li>
+</ul>
 
 @section Foot {
     @Scripts.Render("~/scripts/fanexGrid")
