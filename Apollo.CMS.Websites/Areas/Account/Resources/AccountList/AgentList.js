@@ -57,7 +57,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
         $this.DOMInstance.btnSubmit.click();
 
         $('html').on('click', function () {
-            $this.DOMInstance.divContextMenu.slideUp();
+            $this.DOMInstance.divContextMenu.hide();
         });
     };
 
