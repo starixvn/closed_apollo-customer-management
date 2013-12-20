@@ -366,4 +366,10 @@
   <data name="RegisterDate" xml:space="preserve">
     <value>Register Date</value>
   </data>
+  <data name="MemberShareSetting" xml:space="preserve">
+    <value>Member Share Setting</value>
+  </data>
+  <data name="CommGroup" xml:space="preserve">
+    <value>Comm. Group</value>
+  </data>
 </root>

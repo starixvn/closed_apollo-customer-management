@@ -1,5 +1,8 @@
-﻿@{
+﻿@using System.Web.Script.Serialization
+@{
     var agentId = (int)ViewBag.AgentId;
+    var agentLevel = (int)ViewBag.AgentLevel;
+    var pageSize = (int)ViewBag.PageSize;
 
     ViewBag.Title = ViewLang.MemberList;
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,14 +15,17 @@
     <h5 class="row title">
         <span class="txt-title">@ViewLang.MemberList</span>
         <div class="btn-switch">
-            <a href="#" class="switch-link"><span class="icon-list"></span>@ViewLang.AgentList</a>
-            <a href="#" class="switch-link"><span class="icon-list"></span>@ViewLang.ShadowList</a>
+            <a href="@Url.Action("AgentList", "AccountList", new { agentId = agentId, agentLevel = agentLevel })" class="switch-link">
+                    <span class="icon-list"></span> @ViewLang.AgentList
+                </a>
+            <a href="@Url.Action("ShadowList", "AccountList", new { agentId = agentId, agentLevel = agentLevel })" class="switch-link">
+                <span class="icon-list"></span> @ViewLang.Shadow
+            </a>
         </div>
     </h5>
 }
-@Html.Hidden("hdnAgentId", agentId)
 
-<div class="row filter-form clearfix resizable-form memberList" data-original-width="862">
+<div id="divFilterForm" class="row filter-form clearfix resizable-form memberList" data-original-width="862">
     <div class="filter-row clearfix">
         <div class="filter-item">
             <div class="lbl width-auto">
@@ -54,7 +60,7 @@
     @{ Html.RenderAction("Breadcrumb", "AccountList", new { agentId = agentId }); }
 </div>
 <div class="row content-grid display-none">
-    <div class="freegrid resizable-grid" id="divAgentList"></div>
+    <div class="freegrid resizable-grid" id="divMemberList"></div>
 </div>
 
 @section Foot {
@@ -63,6 +69,16 @@
 
     <script type="text/javascript">
         var tableHeaders = {
+            No: '#',
+            Edit: '@ViewLang.Edit',
+            Username: '@ViewLang.UserName',
+            Status: '@ViewLang.Status',
+            BetStatus: '@ViewLang.BetStatus',
+            CommGroup: '@ViewLang.CommGroup',
+            SportCredit: '@ViewLang.SportCredit'
         };
+        var agentId = @agentId;
+        var pageSize = @pageSize;
+        var pageRanges = @Html.Raw(new JavaScriptSerializer().Serialize(ViewBag.PageRanges));
     </script>
 }

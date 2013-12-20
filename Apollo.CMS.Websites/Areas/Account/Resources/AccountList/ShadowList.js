@@ -9,7 +9,7 @@ Namespace.Register("Apollo.CMS.Account.AccountList.ShadowList");
 Apollo.CMS.Account.AccountList.ShadowList = function () {
     var $this = this;
     var urls = {
-        ShadowSetting: CMS.resolveRootUrl('Account/AccountList/MemberList'), // Update later
+        ShadowSetting: CMS.resolveRootUrl('Account/ShadowSetting'), // Update later
         GetShadowList: CMS.resolveRootUrl('Account/AccountList/GetShadowList')
     };
     var parameters = {
@@ -67,10 +67,10 @@ Apollo.CMS.Account.AccountList.ShadowList = function () {
                 row =
                 {
                     Columns: [{ Name: 'ColNo', Value: index + 1 },
-                              { Name: 'ColEdit', Value: '<span class="edit-class" data-cust-id="{0}"/>'.format(item.custId) },
+                              { Name: 'ColEdit', Value: '<span class="icon-edit-link" data-cust-id="{0}"/>'.format(item.Id) },
                               { Name: 'ColShadow', Value: item.Username },
-                              { Name: 'ColRegisterDate', Value: item.RegisterDate },
-                              { Name: 'ColStatus', Value: '<span class="{0}">{1}</span>'.format(item.Status.toLowerCase().replace(/./g, ''), item.Status)}]
+                              { Name: 'ColRegisterDate', Value: item.CreatedDate },
+                              { Name: 'ColStatus', Value: '<span class="{0}">{1}</span>'.format(item.RealStatus.toLowerCase().replace(/\./g, ''), item.RealStatus)}]
                 };
                 bodyData.push(row);
             });
@@ -78,32 +78,47 @@ Apollo.CMS.Account.AccountList.ShadowList = function () {
 
         var gridOptions =
         {
-            columns: [{ HeaderText: tableHeaders.No, Width: 50, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: CMS.commonConstants.NumberFormat },
-                      { HeaderText: tableHeaders.Edit, Width: 70, Name: 'ColEdit', HeaderAlign: 'center', CellAlign: 'left' },
-                      { HeaderText: tableHeaders.Shadow, Width: 200, Name: 'ColShadow', HeaderAlign: 'center', CellAlign: 'center', Sort: true },
+            columns: [{ HeaderText: tableHeaders.No, Width: 70, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: CMS.commonConstants.NumberFormat },
+                      { HeaderText: tableHeaders.Edit, Width: 70, Name: 'ColEdit', HeaderAlign: 'center', CellAlign: 'center' },
+                      { HeaderText: tableHeaders.Shadow, Width: 200, Name: 'ColShadow', HeaderAlign: 'center', CellAlign: 'left', Sort: true, SortDirection: parameters.IsOrderByAsc ? 'asc' : 'desc' },
                       { HeaderText: tableHeaders.RegisterDate, Width: 190, Name: 'ColRegisterDate', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: CMS.commonConstants.MomentDateTimeFormat, Timezone: CMS.serverTimezone },
                       { HeaderText: tableHeaders.Status, Width: 100, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'center'}],
             showFooter: true,
-            gridExpandHeight: 250,
             showNumberColumn: true,
+            showHighlightRow: false,
+            showDistinctRow: false,
             showPager: true,
             customPager: true,
             pagerOption: {
                 itemsPerPage: parameters.PageSize,
                 currentPage: parameters.PageIndex,
                 totalItem: totalItems,
-                itemsPerPageArray: [10, 50, 100, 200, 500]
-                //pagerSelectCallBack: changePage
+                itemsPerPageArray: pageRanges,
+                pagerSelectCallBack: handleChangingPage
             },
             sortOption: {
-                //serverSortFunction: sort
+                serverSortFunction: handleSorting
             },
+            bodyRows: bodyData,
             bodyRowHeight: 30,
-            showHighlightRow: false,
-            showDistinctRow: false
+            gridExpandHeight: 250
         };
 
         $this.DOMInstance.divShadowList.removeClass('hide').fanexGrid(gridOptions);
+    };
+
+    // Handle paging at server side.
+    var handleChangingPage = function (pageIndex, itemsPerPage, data) {
+        parameters.PageSize = itemsPerPage;
+        parameters.PageIndex = pageIndex;
+        getData();
+    };
+
+    // Handle sorting at server side.
+    var handleSorting = function (sortColumnName, sortDirection) {
+        parameters.IsOrderByAsc = sortDirection === 'ASC';
+        parameters.PageIndex = 0;
+        getData();
     };
 
     $this.DOMInstance = {

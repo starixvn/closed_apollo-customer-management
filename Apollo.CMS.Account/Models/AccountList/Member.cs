@@ -9,6 +9,9 @@
 
 namespace Apollo.CMS.Account.Models.AccountList
 {
+    using Apollo.CMS.Core.Constants;
+    using Apollo.CMS.Core.Helpers;
+
     /// <summary>
     /// Member model.
     /// </summary>
@@ -31,5 +34,21 @@ namespace Apollo.CMS.Account.Models.AccountList
         public byte? UplineBetStatus { get; set; }
 
         public decimal? CashBalance { get; set; }
+
+        public string RealStatus
+        {
+            get
+            {
+                return StatusHelper.GetStatus((AccountStatus)this.Status, (AccountStatus)this.UplineStatus);
+            }
+        }
+
+        public string RealBetStatus
+        {
+            get
+            {
+                return StatusHelper.GetStatus((AccountStatus)this.BetStatus, (AccountStatus)this.UplineBetStatus);
+            }
+        }
     }
 }

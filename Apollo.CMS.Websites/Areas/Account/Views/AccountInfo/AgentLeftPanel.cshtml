@@ -14,8 +14,8 @@
 }
 else if (customer.AgentId != 0)
 {
-    var accountStatus = StatusHelper.GetStatus((AccountStatus)customer.Status, (AccountStatus)customer.UplineStatus);
-    var betStatus = StatusHelper.GetStatus((AccountStatus)customer.BetStatus, (AccountStatus)customer.UplineBetStatus);
+    var accountStatus = StatusHelper.GetStatus((AccountStatus)Converter.ToInt(customer.Status), (AccountStatus)Converter.ToInt(customer.UplineStatus));
+    var betStatus = StatusHelper.GetStatus((AccountStatus)Converter.ToInt(customer.BetStatus), (AccountStatus)Converter.ToInt(customer.UplineBetStatus));
     var isHighLevel = customer.AgentLevel < (int)HighLevelAgents.MainAgent;
     var noBorderCss = customer.ParentId == null ? "no-border" : string.Empty;
     var buttonCss = isHighLevel ? "col-xs-12 col-sm-6 col-md-6" : "col-xs-12 col-sm-4 col-md-4";

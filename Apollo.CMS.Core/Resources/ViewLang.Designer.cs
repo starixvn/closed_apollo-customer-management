@@ -214,6 +214,15 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Comm. Group.
+        /// </summary>
+        public static string CommGroup {
+            get {
+                return ResourceManager.GetString("CommGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Comm Hierarchy.
         /// </summary>
         public static string CommHierarchy {
@@ -417,6 +426,15 @@ namespace Apollo.CMS.Core.Resources {
         public static string MemberList {
             get {
                 return ResourceManager.GetString("MemberList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Member Share Setting.
+        /// </summary>
+        public static string MemberShareSetting {
+            get {
+                return ResourceManager.GetString("MemberShareSetting", resourceCulture);
             }
         }
         

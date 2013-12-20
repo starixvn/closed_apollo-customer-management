@@ -54,5 +54,33 @@ namespace Apollo.CMS.Core.Helpers
 
             return statusValue;
         }
+
+        /// <summary>
+        /// Gets the shadow status.
+        /// </summary>
+        /// <param name="status">The status.</param>
+        /// <returns>The associate status of the shadow.</returns>
+        public static string GetShadowStatus(AccountStatus status)
+        {
+            string statusValue = string.Empty;
+
+            switch (status)
+            {
+                case AccountStatus.Active:
+                    statusValue = ViewLang.Active;
+                    break;
+                case AccountStatus.Stopped:
+                    statusValue = ViewLang.Stopped;
+                    break;
+                case AccountStatus.Locked:
+                    statusValue = ViewLang.Locked;
+                    break;
+                case AccountStatus.CLock:
+                    statusValue = ViewLang.CLock;
+                    break;
+            }
+
+            return statusValue;
+        }
     }
 }

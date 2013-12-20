@@ -1,7 +1,11 @@
-﻿@{
+﻿@using System.Web.Script.Serialization
+@using Apollo.CMS.Core.Constants
+@{
     var agentId = (int)ViewBag.AgentId;
     var agentLevel = (int)ViewBag.AgentLevel;
     var pageSize = (int)ViewBag.PageSize;
+    var isSuper = agentLevel == (int)HighLevelAgents.Super;
+    var hasMember = agentLevel > (int)HighLevelAgents.MainShareholder;
     
     ViewBag.Title = ViewLang.AgentList;
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,8 +18,16 @@
     <h5 class="row title">
         <span class="txt-title">@ViewLang.AgentList</span>
         <div class="btn-switch">
-            <a href="#" class="switch-link"><span class="icon-list"></span> @ViewLang.MemberList</a>
-            <a href="#" class="switch-link"><span class="icon-list"></span> @ViewLang.ShadowList</a>
+            @if (agentLevel > (int)HighLevelAgents.Shareholder)
+            {
+                <a href="@Url.Action("MemberList", "AccountList", new { agentId = agentId, agentLevel = agentLevel })" class="switch-link">
+                    <span class="icon-list"></span> @ViewLang.MemberList
+                </a>
+            }
+            
+            <a href="@Url.Action("ShadowtList", "AccountList", new { agentId = agentId, agentLevel = agentLevel })" class="switch-link">
+                <span class="icon-list"></span> @ViewLang.Shadow
+            </a>
         </div>
     </h5>
 }
@@ -57,6 +69,13 @@
 <div class="row content-grid">
     <div id="divAgentList" class="freegrid hide resizable-grid"></div>
 </div>
+<div id="divContextMenu" class="hide">
+    <ul>
+        <li><a href="#">@ViewLang.ShareSetting</a></li>
+        <li><a href="#">@ViewLang.MemberShareSetting</a></li>
+        <li><a href="#">@ViewLang.BetAndCommSetting</a></li>
+    </ul>
+</div>
 
 @section Foot {
     @Scripts.Render("~/scripts/fanexGrid")
@@ -71,9 +90,13 @@
             Member: '@ViewLang.Member',
             Shadow: '@ViewLang.Shadow',
             Status: '@ViewLang.Status',
-            BetStatus: '@ViewLang.BetStatus'
+            BetStatus: '@ViewLang.BetStatus',
+            Currency: '@ViewLang.Currency'
         };
-        var agentId = parseInt('@agentId');
-        var pageSize = parseInt('@pageSize');
+        var agentId = @agentId;
+        var pageSize = @pageSize;
+        var isSuper = '@isSuper' === 'True';
+        var hasMember = '@hasMember' === 'True';
+        var pageRanges = @Html.Raw(new JavaScriptSerializer().Serialize(ViewBag.PageRanges));
     </script>
 }

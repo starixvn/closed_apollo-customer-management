@@ -36,6 +36,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
         $this.DOMInstance.ddlBetStatus = $('#ddlBetStatus', '#divFilterForm');
         $this.DOMInstance.btnSubmit = $('#btnSubmit', '#divFilterForm');
         $this.DOMInstance.divAgentList = $('#divAgentList');
+        $this.DOMInstance.divContextMenu = $('#divContextMenu');
     };
 
     // Initialize fields and handle events.
@@ -78,64 +79,11 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
         });
     };
 
-    // Check the agent level and render associate table type.
+    // Render data table for agent lisy.
     var renderTable = function (data, totalItems) {
-        if (parameters.AgentLevel == highLevelAgents.Super) {
-            //@@TODO: Hide Member List button
-            renderMainShareholderTable(data, totalItems);
-        } else if (parameters.AgentLevel == highLevelAgents.MainShareholder) {
-            //@@TODO: Hide Member List button
-            renderShareholderTable(data, totalItems);
-        } else {
-            renderAgentTable(data, totalItems);
-        }
-    };
-
-    // Render data table for main shareholder.
-    var renderMainShareholderTable = function (data, totalItems) {
-        //@@TODO: Implement
-    };
-
-    // Render data table for shareholder.
-    var renderShareholderTable = function (data) {
-        //@@TODO: Implement
-    };
-
-    // Render data table for low level agent.
-    var renderAgentTable = function (data, totalItems) {
         var bodyData = [];
-
-        $this.DOMInstance.divAgentList.addClass('hide');
-
-        if (data && data.length > 0) {
-            var row = null;
-
-            $.each(data, function (index, item) {
-                row =
-                {
-                    Columns: [{ Name: 'ColNo', Value: index + 1 },
-                              { Name: 'ColEdit', Value: '<span class="icon-edit-link" />' },
-                              { Name: 'ColUsername', Value: item.Username },
-                              { Name: 'ColDownline', Value: item.NumberOfAgent > 0 ? '<span class="link downline" data-agent-id="{0}" data-agent-level="{1}">{2}</span>'.format(item.AgentId, item.AgentLevel, item.NumberOfAgent) : '0' },
-                              { Name: 'ColMember', Value: item.NumberOfMember > 0 ? '<span class="link member" data-agent-id="{0}" data-agent-level="{1}">{2}</span>'.format(item.AgentId, item.AgentLevel, item.NumberOfMember) : '0' },
-                              { Name: 'ColShadow', Value: item.NumberOfShadow > 0 ? '<span class="link shadow" data-agent-id="{0}" data-agent-level="{1}">{2}</span>'.format(item.AgentId, item.AgentLevel, item.NumberOfShadow) : '0' },
-                              { Name: 'ColStatus', Value: '<span class="{0}">{1}</span>'.format(item.RealStatus.toLowerCase().replace(/\./g, ''), item.RealStatus) },
-                              { Name: 'ColBetStatus', Value: '<span class="{0}">{1}</span>'.format(item.RealBetStatus.toLowerCase().replace(/\./g, ''), item.RealBetStatus)}]
-                };
-                bodyData.push(row);
-            });
-        }
-
-        var gridOptions =
-        {
-            columns: [{ HeaderText: tableHeaders.No, Width: 50, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
-                      { HeaderText: tableHeaders.Edit, Width: 70, Name: 'ColEdit', HeaderAlign: 'center', CellAlign: 'center' },
-                      { HeaderText: tableHeaders.Username, Width: 180, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left', Sort: true, SortDirection: parameters.IsOrderByAsc ? 'asc' : 'desc' },
-                      { HeaderText: tableHeaders.Downline, Width: 100, Name: 'ColDownline', HeaderAlign: 'center', CellAlign: 'center' },
-                      { HeaderText: tableHeaders.Member, Width: 100, Name: 'ColMember', HeaderAlign: 'center', CellAlign: 'center' },
-                      { HeaderText: tableHeaders.Shadow, Width: 100, Name: 'ColShadow', HeaderAlign: 'center', CellAlign: 'center' },
-                      { HeaderText: tableHeaders.Status, Width: 100, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'center' },
-                      { HeaderText: tableHeaders.BetStatus, Width: 100, Name: 'ColBetStatus', HeaderAlign: 'center', CellAlign: 'center'}],
+        var columns = [];
+        var gridOptions = {
             showDistinctRow: false,
             showHighlightRow: false,
             showFooter: true,
@@ -146,7 +94,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
                 itemsPerPage: parameters.PageSize,
                 currentPage: parameters.PageIndex,
                 totalItem: totalItems,
-                itemsPerPageArray: [10, 50, 100, 200, 500],
+                itemsPerPageArray: pageRanges,
                 pagerSelectCallBack: handleChangingPage
             },
             sortOption: {
@@ -157,6 +105,49 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
             bodyRows: bodyData
         };
 
+        $this.DOMInstance.divAgentList.addClass('hide');
+
+        columns = [{ HeaderText: tableHeaders.No, Width: 70, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: CMS.commonConstants.NumberFormat },
+                   { HeaderText: tableHeaders.Edit, Width: 70, Name: 'ColEdit', HeaderAlign: 'center', CellAlign: 'center' },
+                   { HeaderText: tableHeaders.Username, Width: 180, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left', Sort: true, SortDirection: parameters.IsOrderByAsc ? 'asc' : 'desc' },
+                   { HeaderText: tableHeaders.Downline, Width: 100, Name: 'ColDownline', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: CMS.commonConstants.NumberFormat },
+                   { HeaderText: tableHeaders.Shadow, Width: 100, Name: 'ColShadow', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: CMS.commonConstants.NumberFormat },
+                   { HeaderText: tableHeaders.Status, Width: 100, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'center' },
+                   { HeaderText: tableHeaders.BetStatus, Width: 100, Name: 'ColBetStatus', HeaderAlign: 'center', CellAlign: 'center'}];
+
+        if (isSuper) {
+            columns.push({ HeaderText: tableHeaders.Currency, Width: 100, Name: 'ColCurrency', HeaderAlign: 'center', CellAlign: 'center' });
+        } else if (hasMember) {
+            columns.splice(4, 0, { HeaderText: tableHeaders.Member, Width: 100, Name: 'ColMember', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: CMS.commonConstants.NumberFormat });
+        }
+
+        if (data && data.length > 0) {
+            var row = null;
+
+            $.each(data, function (index, item) {
+                row =
+                {
+                    Columns: [{ Name: 'ColNo', Value: index + 1 },
+                              { Name: 'ColEdit', Value: '<span class="icon-edit-link" data-agent-id="{0}"/>'.format(item.AgentId) },
+                              { Name: 'ColUsername', Value: item.Username },
+                              { Name: 'ColDownline', Value: item.NumberOfAgent > 0 ? '<span class="link downline" data-agent-id="{0}" data-agent-level="{1}">{2}</span>'.format(item.AgentId, item.AgentLevel, item.NumberOfAgent) : '0' },
+                              { Name: 'ColShadow', Value: item.NumberOfShadow > 0 ? '<span class="link shadow" data-agent-id="{0}" data-agent-level="{1}">{2}</span>'.format(item.AgentId, item.AgentLevel, item.NumberOfShadow) : '0' },
+                              { Name: 'ColStatus', Value: '<span class="{0}">{1}</span>'.format(item.RealStatus.toLowerCase().replace(/\./g, ''), item.RealStatus) },
+                              { Name: 'ColBetStatus', Value: '<span class="{0}">{1}</span>'.format(item.RealBetStatus.toLowerCase().replace(/\./g, ''), item.RealBetStatus)}]
+                };
+                
+                if (isSuper) {
+                    row.Columns.push({ Name: 'ColCurrency', Value: item.Currency });
+                } else if (hasMember) {
+                    row.Columns.splice(4, 0, { Name: 'ColMember', Value: item.NumberOfMember > 0 ? '<span class="link member" data-agent-id="{0}" data-agent-level="{1}">{2}</span>'.format(item.AgentId, item.AgentLevel, item.NumberOfMember) : '0' });
+                }
+
+                bodyData.push(row);
+            });
+        }
+
+        gridOptions.columns = columns;
+        gridOptions.bodyRows = bodyData;
         $this.DOMInstance.divAgentList.removeClass('hide').fanexGrid(gridOptions);
         bindGridEventhandlers();
     };
@@ -207,7 +198,8 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
         ddlStatus: null,
         ddlBetStatus: null,
         btnSubmit: null,
-        divAgentList: null
+        divAgentList: null,
+        divContextMenu: null
     };
     $this.InitPage = function () {
         cacheDOM();

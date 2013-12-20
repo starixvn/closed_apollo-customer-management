@@ -10,6 +10,8 @@
 namespace Apollo.CMS.Account.Models.AccountList
 {
     using System;
+    using Apollo.CMS.Core.Constants;
+    using Apollo.CMS.Core.Helpers;
 
     /// <summary>
     /// Show model.
@@ -23,5 +25,13 @@ namespace Apollo.CMS.Account.Models.AccountList
         public DateTime? CreatedDate { get; set; }
 
         public byte? Status { get; set; }
+
+        public string RealStatus
+        {
+            get
+            {
+                return StatusHelper.GetShadowStatus((AccountStatus)this.Status);
+            }
+        }
     }
 }

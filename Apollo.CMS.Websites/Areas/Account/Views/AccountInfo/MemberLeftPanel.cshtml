@@ -7,8 +7,8 @@
 @{
     var hasCustomerSettingPermission = (bool)ViewBag.HasCustomerSettingPermission;
     var customer = (MemberInfo)ViewBag.Customer;
-    var accountStatus = StatusHelper.GetStatus((AccountStatus)customer.Status, (AccountStatus)customer.UplineStatus);
-    var betStatus = StatusHelper.GetStatus((AccountStatus)customer.BetStatus, (AccountStatus)customer.UplineBetStatus);
+    var accountStatus = StatusHelper.GetStatus((AccountStatus)Converter.ToInt(customer.Status), (AccountStatus)Converter.ToInt(customer.UplineStatus));
+    var betStatus = StatusHelper.GetStatus((AccountStatus)Converter.ToInt(customer.BetStatus), (AccountStatus)Converter.ToInt(customer.UplineBetStatus));
 }
 @if (customer.CustId != 0)
 {
