@@ -135,7 +135,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
                               { Name: 'ColStatus', Value: '<span class="{0}">{1}</span>'.format(item.RealStatus.toLowerCase().replace(/\./g, ''), item.RealStatus) },
                               { Name: 'ColBetStatus', Value: '<span class="{0}">{1}</span>'.format(item.RealBetStatus.toLowerCase().replace(/\./g, ''), item.RealBetStatus)}]
                 };
-                
+
                 if (isSuper) {
                     row.Columns.push({ Name: 'ColCurrency', Value: item.Currency });
                 } else if (hasMember) {
@@ -154,6 +154,16 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
 
     // Bind grid event handlers
     var bindGridEventhandlers = function () {
+        $('.icon-edit-link', $this.DOMInstance.divAgentList).each(function () {
+            var cell = $(this);
+            var currentAgentId = cell.attr('data-agent-id');
+
+            cell.html($this.DOMInstance.divContextMenu.html());
+            $('a', cell).each(function () {
+                $(this).attr('data-agent-id', currentAgentId);
+            });
+        });
+
         $('.downline', $this.DOMInstance.divAgentList).on('click', function () {
             var cell = $(this);
             var currentAgentId = cell.attr('data-agent-id');

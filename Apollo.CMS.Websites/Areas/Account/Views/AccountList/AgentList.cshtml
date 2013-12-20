@@ -72,7 +72,12 @@
 <div id="divContextMenu" class="hide">
     <ul>
         <li><a href="#">@ViewLang.ShareSetting</a></li>
-        <li><a href="#">@ViewLang.MemberShareSetting</a></li>
+
+        @if (hasMember)
+        {
+            <li><a href="#">@ViewLang.MemberShareSetting</a></li>
+        }
+        
         <li><a href="#">@ViewLang.BetAndCommSetting</a></li>
     </ul>
 </div>
