@@ -26,7 +26,7 @@ namespace Apollo.CMS.Account.Models.AccountList
 
         public byte? Status { get; set; }
 
-        public string RealStatus
+        public string ActualStatus
         {
             get
             {
