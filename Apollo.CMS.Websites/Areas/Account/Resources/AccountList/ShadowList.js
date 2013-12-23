@@ -93,7 +93,7 @@ Apollo.CMS.Account.AccountList.ShadowList = function () {
                 itemsPerPage: parameters.PageSize,
                 currentPage: parameters.PageIndex,
                 totalItem: totalItems,
-                itemsPerPageArray: pageRanges,
+                itemsPerPageArray: CMS.pageRanges,
                 pagerSelectCallBack: handleChangingPage
             },
             sortOption: {

@@ -50,19 +50,19 @@ else if (customer.AgentId != 0)
     <div class="row list-btn">
         <div class="col-md-12">
             <div class="@buttonCss">
-                @Html.ActionLink(ViewLang.Agent, "AgentList", "AccountList", new { agentId = customer.AgentId, agentLevel = customer.AgentLevel }, new { @class = "btn-link no-marginLeft" })
+                @Html.ActionLink(ViewLang.Agent, "AgentList", "AccountList", new { agentId = customer.AgentId, agentLevel = customer.AgentLevel }, new { @class = "btn-link no-marginLeft", id = "lnkAgentList" })
             </div>
 
             <!-- Hide Member button when searched account is Super, Main Shareholder or Shareolder -->
             @if (!isHighLevel)
             {
                 <div class="@buttonCss">
-                    @Html.ActionLink(ViewLang.Member, "MemberList", "AccountList", new { agentId = customer.AgentId, agentLevel = customer.AgentLevel }, new { @class = "btn-link" })
+                    @Html.ActionLink(ViewLang.Member, "MemberList", "AccountList", new { agentId = customer.AgentId, agentLevel = customer.AgentLevel }, new { @class = "btn-link", id = "lnkMemberList" })
                 </div>
             }
             
             <div class="@buttonCss">
-                @Html.ActionLink(ViewLang.Shadow, "ShadowList", "AccountList", new { agentId = customer.AgentId, agentLevel = customer.AgentLevel }, new { @class = "btn-link" })
+                @Html.ActionLink(ViewLang.Shadow, "ShadowList", "AccountList", new { agentId = customer.AgentId, agentLevel = customer.AgentLevel }, new { @class = "btn-link", id = "lnkShadowList" })
             </div>
         </div>
     </div>

@@ -114,7 +114,7 @@ Apollo.CMS.Account.AccountList.MemberList = function () {
                 itemsPerPage: parameters.PageSize,
                 currentPage: parameters.PageIndex,
                 totalItem: totalItems,
-                itemsPerPageArray: pageRanges,
+                itemsPerPageArray: CMS.pageRanges,
                 pagerSelectCallBack: handleChangingPage
             },
             sortOption: {

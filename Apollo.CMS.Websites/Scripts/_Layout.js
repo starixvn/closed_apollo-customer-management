@@ -136,7 +136,7 @@ $(document).ready(function () {
     Layout.collapseExpand();
 
     // Set active menu css class
-    $('ul.mainMenu > li, #searchTreeView').on('click', function (event) {
+    $('ul.mainMenu > li').on('click', function (event) {
         var $this = $(this);
 
         $.cookie('menu-id', $this.attr('id'), { path: '/' });
@@ -148,6 +148,9 @@ $(document).ready(function () {
             $this.addClass('active');
         }
     });
+    $('#searchTreeView, #lnkAgentList, #lnkMemberList, #lnkShadowList').on('click', function (event) {
+        $.cookie('menu-id', $(this).attr('id'), { path: '/' });
+    })
 
     var lazyLayout = _.debounce(Layout.resizeRighContent, 50);
     $(window).resize(lazyLayout);

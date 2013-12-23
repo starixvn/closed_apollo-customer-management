@@ -23,11 +23,6 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
         PageSize: null,
         IsOrderByAsc: null
     };
-    var highLevelAgents = {
-        Super: 0,
-        MainShareholder: 1,
-        Shareholder: 2
-    };
 
     // Cache DOM elements
     var cacheDOM = function () {
@@ -99,7 +94,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
                 itemsPerPage: parameters.PageSize,
                 currentPage: parameters.PageIndex,
                 totalItem: totalItems,
-                itemsPerPageArray: pageRanges,
+                itemsPerPageArray: CMS.pageRanges,
                 pagerSelectCallBack: handleChangingPage
             },
             sortOption: {
@@ -111,6 +106,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
         };
 
         $this.DOMInstance.divAgentList.addClass('hide');
+        $this.DOMInstance.divContextMenu.hide();
 
         columns = [{ HeaderText: tableHeaders.No, Width: 70, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: CMS.commonConstants.NumberFormat },
                    { HeaderText: tableHeaders.Edit, Width: 70, Name: 'ColEdit', HeaderAlign: 'center', CellAlign: 'center' },
@@ -177,7 +173,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
                 left: cellPosition.left - contextMenuWidth / 2
             });
         });
-
+        
         $('.downline', $this.DOMInstance.divAgentList).on('click', function () {
             var cell = $(this);
             var currentAgentId = cell.attr('data-agent-id');

@@ -28,7 +28,6 @@ namespace Apollo.CMS.Account.Controllers
     public class AccountListController : BaseController
     {
         private readonly IAccountListService _accountListService;
-        private readonly int[] _pageRanges = new int[5] { 10, 50, 100, 200, 500 };
 
         public AccountListController() :
             this(null)
@@ -39,7 +38,6 @@ namespace Apollo.CMS.Account.Controllers
         {
             this._accountListService = accountListService ?? new AccountListService();
             ViewBag.PageSize = AppSettings.DefaultPageSize;
-            ViewBag.PageRanges = this._pageRanges;
         }
 
         /// <summary>
