@@ -32,7 +32,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
         $this.DOMInstance.ddlBetStatus = $('#ddlBetStatus', $this.DOMInstance.divFilterForm);
         $this.DOMInstance.btnSubmit = $('#btnSubmit', $this.DOMInstance.divFilterForm);
         $this.DOMInstance.divAgentList = $('#divAgentList');
-        $this.DOMInstance.divContextMenu = $('#divContextMenu');
+        $this.DOMInstance.ulContextMenu = $('#ulContextMenu');
     };
 
     // Initialize fields and handle events.
@@ -52,7 +52,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
         $this.DOMInstance.btnSubmit.click();
 
         $('html').on('click', function () {
-            $this.DOMInstance.divContextMenu.hide();
+            $this.DOMInstance.ulContextMenu.hide();
         });
     };
 
@@ -106,7 +106,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
         };
 
         $this.DOMInstance.divAgentList.addClass('hide');
-        $this.DOMInstance.divContextMenu.hide();
+        $this.DOMInstance.ulContextMenu.hide();
 
         columns = [{ HeaderText: tableHeaders.No, Width: 70, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: CMS.commonConstants.NumberFormat },
                    { HeaderText: tableHeaders.Edit, Width: 70, Name: 'ColEdit', HeaderAlign: 'center', CellAlign: 'center' },
@@ -157,7 +157,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
 
     // Bind grid event handlers
     var bindGridEventhandlers = function (event) {
-        var contextMenuWidth = $this.DOMInstance.divContextMenu.width();
+        var contextMenuWidth = $this.DOMInstance.ulContextMenu.width();
 
         $('.icon-edit-link', $this.DOMInstance.divAgentList).on('click', function (event) {
             var cell = $(this);
@@ -167,8 +167,8 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
             event.preventDefault();
             event.stopPropagation();
 
-            $this.DOMInstance.divContextMenu.find('li > a').attr('data-agent-id', currentAgentId);
-            $this.DOMInstance.divContextMenu.slideDown().offset({
+            $this.DOMInstance.ulContextMenu.find('li > a').attr('data-agent-id', currentAgentId);
+            $this.DOMInstance.ulContextMenu.slideDown().offset({
                 top: cellPosition.top + cell.height() + 5,
                 left: cellPosition.left - contextMenuWidth / 2
             });
@@ -219,7 +219,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
         ddlBetStatus: null,
         btnSubmit: null,
         divAgentList: null,
-        divContextMenu: null
+        ulContextMenu: null
     };
     $this.InitPage = function () {
         cacheDOM();
