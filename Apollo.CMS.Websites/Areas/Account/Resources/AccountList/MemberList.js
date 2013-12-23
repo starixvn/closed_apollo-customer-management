@@ -35,13 +35,19 @@ Apollo.CMS.Account.AccountList.MemberList = function () {
     var initFields = function () {
         parameters.AgentId = agentId;
         parameters.PageSize = pageSize;
-        parameters.PageIndex = 0;
         parameters.IsOrderByAsc = true;
+
+        $this.DOMInstance.txtUsername.on('keyup', function (event) {
+            if (event.keyCode == 13) {
+                $this.DOMInstance.btnSubmit.click();
+            }
+        });
 
         $this.DOMInstance.btnSubmit.on('click', function () {
             parameters.Username = $.trim($this.DOMInstance.txtUsername.val());
             parameters.Status = $this.DOMInstance.ddlStatus.val();
             parameters.BetStatus = $this.DOMInstance.ddlBetStatus.val();
+            parameters.PageIndex = 0;
 
             getData();
         });
@@ -97,7 +103,7 @@ Apollo.CMS.Account.AccountList.MemberList = function () {
 
         var gridOptions =
         {
-            columns: [{ HeaderText: tableHeaders.No, Width: 70, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: CMS.commonConstants.NumberFormat },
+            columns: [{ HeaderText: tableHeaders.No, Width: 70, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.Edit, Width: 70, Name: 'ColEdit', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.Username, Width: 180, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left', Sort: true, SortDirection: parameters.IsOrderByAsc ? 'asc' : 'desc' },
                       { HeaderText: tableHeaders.Status, Width: 100, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'center' },

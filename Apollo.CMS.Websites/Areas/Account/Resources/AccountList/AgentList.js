@@ -8,6 +8,7 @@ $(document).ready(function () {
 Namespace.Register("Apollo.CMS.Account.AccountList.AgentList");
 Apollo.CMS.Account.AccountList.AgentList = function () {
     var $this = this;
+    var contextMenuTimeout = null;
     var urls = {
         AgentList: CMS.resolveRootUrl('Account/AccountList/AgentList?agentId={0}&agentLevel={1}'),
         MemberList: CMS.resolveRootUrl('Account/AccountList/MemberList?agentId={0}&agentLevel={1}'),
@@ -33,26 +34,39 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
         $this.DOMInstance.btnSubmit = $('#btnSubmit', $this.DOMInstance.divFilterForm);
         $this.DOMInstance.divAgentList = $('#divAgentList');
         $this.DOMInstance.ulContextMenu = $('#ulContextMenu');
+        $this.DOMInstance.linkContextMenuItem = $this.DOMInstance.ulContextMenu.find('li > a');
     };
 
     // Initialize fields and handle events.
     var initFields = function () {
         parameters.AgentId = agentId;
         parameters.PageSize = pageSize;
-        parameters.PageIndex = 0;
         parameters.IsOrderByAsc = true;
+
+        $this.DOMInstance.txtUsername.on('keyup', function (event) {
+            if (event.keyCode == 13) {
+                $this.DOMInstance.btnSubmit.click();
+            }
+        });
 
         $this.DOMInstance.btnSubmit.on('click', function () {
             parameters.Username = $.trim($this.DOMInstance.txtUsername.val());
             parameters.Status = $this.DOMInstance.ddlStatus.val();
             parameters.BetStatus = $this.DOMInstance.ddlBetStatus.val();
+            parameters.PageIndex = 0;
 
             getData();
         });
         $this.DOMInstance.btnSubmit.click();
 
+        $this.DOMInstance.ulContextMenu.on('mouseover', function () {
+            clearTimeout(contextMenuTimeout);
+        }).on('mouseout', function () {
+            contextMenuTimeout = setTimeout(hideContextMenu, 3000);
+        });
+
         $('html').on('click', function () {
-            $this.DOMInstance.ulContextMenu.hide();
+            hideContextMenu();
         });
     };
 
@@ -106,20 +120,20 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
         };
 
         $this.DOMInstance.divAgentList.addClass('hide');
-        $this.DOMInstance.ulContextMenu.hide();
+        hideContextMenu();
 
-        columns = [{ HeaderText: tableHeaders.No, Width: 70, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: CMS.commonConstants.NumberFormat },
+        columns = [{ HeaderText: tableHeaders.No, Width: 70, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
                    { HeaderText: tableHeaders.Edit, Width: 70, Name: 'ColEdit', HeaderAlign: 'center', CellAlign: 'center' },
                    { HeaderText: tableHeaders.Username, Width: 180, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left', Sort: true, SortDirection: parameters.IsOrderByAsc ? 'asc' : 'desc' },
-                   { HeaderText: tableHeaders.Downline, Width: 100, Name: 'ColDownline', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: CMS.commonConstants.NumberFormat },
-                   { HeaderText: tableHeaders.Shadow, Width: 100, Name: 'ColShadow', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: CMS.commonConstants.NumberFormat },
+                   { HeaderText: tableHeaders.Downline, Width: 100, Name: 'ColDownline', HeaderAlign: 'center', CellAlign: 'center' },
+                   { HeaderText: tableHeaders.Shadow, Width: 100, Name: 'ColShadow', HeaderAlign: 'center', CellAlign: 'center' },
                    { HeaderText: tableHeaders.Status, Width: 100, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'center' },
                    { HeaderText: tableHeaders.BetStatus, Width: 100, Name: 'ColBetStatus', HeaderAlign: 'center', CellAlign: 'center'}];
 
         if (isSuper) {
             columns.push({ HeaderText: tableHeaders.Currency, Width: 100, Name: 'ColCurrency', HeaderAlign: 'center', CellAlign: 'center' });
         } else if (hasMember) {
-            columns.splice(4, 0, { HeaderText: tableHeaders.Member, Width: 100, Name: 'ColMember', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: CMS.commonConstants.NumberFormat });
+            columns.splice(4, 0, { HeaderText: tableHeaders.Member, Width: 100, Name: 'ColMember', HeaderAlign: 'center', CellAlign: 'center' });
         } else {
             $this.DOMInstance.divFilterForm.removeClass('filter-mainAgent').addClass('shareholder').attr('data-original-width', 758);
         }
@@ -159,16 +173,24 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
     var bindGridEventhandlers = function (event) {
         var contextMenuWidth = $this.DOMInstance.ulContextMenu.width();
 
-        $('.icon-edit-link', $this.DOMInstance.divAgentList).off('click').on('click', function (event) {
+        $('.icon-edit-link', $this.DOMInstance.divAgentList).on('click', function (event) {
             var cell = $(this);
             var currentAgentId = cell.attr('data-agent-id');
+            var contextAgentId = $this.DOMInstance.linkContextMenuItem.attr('data-agent-id');
             var cellPosition = cell.offset();
 
-            $this.DOMInstance.ulContextMenu.find('li > a').attr('data-agent-id', currentAgentId);
-            $this.DOMInstance.ulContextMenu.slideDown().offset({
-                top: cellPosition.top + cell.height() + 5,
-                left: cellPosition.left - contextMenuWidth / 2
-            });
+            clearTimeout(contextMenuTimeout);
+
+            if (currentAgentId !== contextAgentId) {
+                contextMenuTimeout = setTimeout(hideContextMenu, 3000);
+                $this.DOMInstance.linkContextMenuItem.attr('data-agent-id', currentAgentId);
+                $this.DOMInstance.ulContextMenu.hide().slideDown('fast').offset({
+                    top: cellPosition.top + cell.height() + 5,
+                    left: cellPosition.left - contextMenuWidth / 2
+                });
+            } else {
+                hideContextMenu();
+            }
 
             return false;
         });
@@ -197,6 +219,10 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
             CMS.navigateTo(urls.ShadowList.format(currentAgentId, currentAgentLevel));
         });
     };
+    var hideContextMenu = function () {
+        $this.DOMInstance.linkContextMenuItem.attr('data-agent-id', 0);
+        $this.DOMInstance.ulContextMenu.hide();
+    };
 
     // Handle paging at server side.
     var handleChangingPage = function (pageIndex, itemsPerPage, data) {
@@ -218,7 +244,8 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
         ddlBetStatus: null,
         btnSubmit: null,
         divAgentList: null,
-        ulContextMenu: null
+        ulContextMenu: null,
+        linkContextMenuItem: null
     };
     $this.InitPage = function () {
         cacheDOM();

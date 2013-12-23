@@ -78,7 +78,7 @@ Apollo.CMS.Account.AccountList.ShadowList = function () {
 
         var gridOptions =
         {
-            columns: [{ HeaderText: tableHeaders.No, Width: 70, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center', FormatNumber: CMS.commonConstants.NumberFormat },
+            columns: [{ HeaderText: tableHeaders.No, Width: 70, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.Edit, Width: 70, Name: 'ColEdit', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.Shadow, Width: 200, Name: 'ColShadow', HeaderAlign: 'center', CellAlign: 'left', Sort: true, SortDirection: parameters.IsOrderByAsc ? 'asc' : 'desc' },
                       { HeaderText: tableHeaders.RegisterDate, Width: 190, Name: 'ColRegisterDate', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: CMS.commonConstants.MomentDateTimeFormat, Timezone: CMS.serverTimezone },

@@ -36,7 +36,7 @@ Apollo.CMS.Account.AccountInfo = function () {
         });
 
         $('#list-agent').live('mouseout', function () {
-            uplineTimeout = setTimeout(hideUplineAgent, 100);
+            uplineTimeout = setTimeout(hideUplineAgent, 3000);
         });
 
         $('.search-link[data-customer-id]').live('click', function () {
