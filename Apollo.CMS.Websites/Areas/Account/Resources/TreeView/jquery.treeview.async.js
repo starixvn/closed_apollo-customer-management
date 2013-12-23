@@ -54,15 +54,19 @@
             }
 
         var url = showAllData ? settings.urlShowAllData : settings.urlShowNodeData;      
+        var callbackFunc = settings.callbackFunc || function () {};
+
         $.getJSON(url, null, function (response) {
-                if(response.length <= 0)
-                {
-                    $(container).html("There is no data.");
-                    return;
-                }
-                $.each(response, createNode, [child]);
-                $(container).treeview({ add: child });
-            });
+            if(response.length <= 0)
+            {
+                $(container).html("There is no data.");
+                return;
+            }
+
+            $.each(response, createNode, [child]);
+            $(container).treeview({ add: child });
+            callbackFunc.apply();
+        });
     }
 
     var proxied = $.fn.treeview;

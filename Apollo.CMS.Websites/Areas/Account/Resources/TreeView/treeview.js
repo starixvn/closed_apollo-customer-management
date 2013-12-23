@@ -27,11 +27,16 @@ Apollo.CMS.Account.TreeView = function () {
         var accountTreeView = $("#account-treeview");
         var agentId = accountTreeView.attr("data-agent-id");
         var agentUsername = accountTreeView.attr("data-agent-username");
+
+        CMS.loadingBox.show();
         accountTreeView.treeview({
             urlShowNodeData: "TreeView/CreateTreeViewByNode",
-            customeNode: "<span onclick='treeview.SearchCustomer(this);' data-agent-id='{1}' data-agent-username='{2}' class='nodetree' href='#'>{0}</span>",            
+            customeNode: "<span onclick='treeview.SearchCustomer(this);' data-agent-id='{1}' data-agent-username='{2}' class='nodetree' href='#'>{0}</span>",
             showAllData: true,
-            urlShowAllData: "TreeView/CreateTreeView?agentid=" + agentId + "&username=" + agentUsername
+            urlShowAllData: "TreeView/CreateTreeView?agentid=" + agentId + "&username=" + agentUsername,
+            callbackFunc: function () {
+                CMS.loadingBox.close();
+            }
         });
     };
 };
