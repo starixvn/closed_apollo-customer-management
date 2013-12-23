@@ -12,7 +12,7 @@
         for (int index = 0; index < numberOfItems; index++)
         {
             item = Model.ElementAt(index);
-            currency = item.AgentLevel == (int)HighLevelAgents.MainShareholder ? string.Format("<span class='currency'>({0})</span>", item.Currency) : string.Empty;
+            currency = item.AgentLevel == (int)HighLevelAgents.MainShareholder ? string.Format("<span class='currency'>{0}</span>", item.Currency) : string.Empty;
             noIconCss = index == numberOfItems - 1 ? "class=none-icon" : string.Empty;
             
             <li @noIconCss>@Html.Raw(currency) <a href="@Url.Action("AgentList", "AccountList", new { agentId = item.AgentId, agentLevel = item.AgentLevel })">@item.Username</a></li>
