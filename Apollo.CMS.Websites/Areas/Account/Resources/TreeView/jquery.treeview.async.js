@@ -56,7 +56,10 @@
         var url = showAllData ? settings.urlShowAllData : settings.urlShowNodeData;      
         var callbackFunc = settings.callbackFunc || function () {};
 
+        CMS.loadingBox.show();
         $.getJSON(url, null, function (response) {
+            var firstCall = $.trim($(container).html()) === '';
+
             if(response.length <= 0)
             {
                 $(container).html("There is no data.");
@@ -65,7 +68,11 @@
 
             $.each(response, createNode, [child]);
             $(container).treeview({ add: child });
-            callbackFunc.apply();
+            CMS.loadingBox.close();
+
+            if (firstCall) {
+                callbackFunc.apply();
+            }
         });
     }
 
