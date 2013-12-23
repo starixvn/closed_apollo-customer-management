@@ -1,5 +1,4 @@
-﻿@using System.Web.Script.Serialization
-@using Apollo.CMS.Core.Constants
+﻿@using Apollo.CMS.Core.Constants
 @{
     var agentId = (int)ViewBag.AgentId;
     var agentLevel = (int)ViewBag.AgentLevel;
@@ -24,7 +23,7 @@
                     <span class="icon-list"></span> @ViewLang.MemberList
                 </a>
             }
-            
+
             <a href="@Url.Action("ShadowList", "AccountList", new { agentId = agentId, agentLevel = agentLevel })" class="switch-link">
                 <span class="icon-list"></span> @ViewLang.Shadow
             </a>
@@ -43,7 +42,7 @@
             </div>
         </div>
         <div class="filter-item">
-            <div class="lbl lbl-small">            
+            <div class="lbl lbl-small">
                 @Html.Label("ddlStatus", ViewLang.Status)
             </div>
             <div class="txt width-auto">

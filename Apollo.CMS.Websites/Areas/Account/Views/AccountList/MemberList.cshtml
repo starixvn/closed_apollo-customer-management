@@ -1,5 +1,4 @@
-﻿@using System.Web.Script.Serialization
-@{
+﻿@{
     var agentId = (int)ViewBag.AgentId;
     var agentLevel = (int)ViewBag.AgentLevel;
     var pageSize = (int)ViewBag.PageSize;
@@ -36,7 +35,7 @@
             </div>
         </div>
         <div class="filter-item">
-            <div class="lbl lbl-small">            
+            <div class="lbl lbl-small">
                 @Html.Label("ddlStatus", ViewLang.Status)
             </div>
             <div class="txt width-auto">

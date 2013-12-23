@@ -159,21 +159,20 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
     var bindGridEventhandlers = function (event) {
         var contextMenuWidth = $this.DOMInstance.ulContextMenu.width();
 
-        $('.icon-edit-link', $this.DOMInstance.divAgentList).on('click', function (event) {
+        $('.icon-edit-link', $this.DOMInstance.divAgentList).off('click').on('click', function (event) {
             var cell = $(this);
             var currentAgentId = cell.attr('data-agent-id');
             var cellPosition = cell.offset();
-
-            event.preventDefault();
-            event.stopPropagation();
 
             $this.DOMInstance.ulContextMenu.find('li > a').attr('data-agent-id', currentAgentId);
             $this.DOMInstance.ulContextMenu.slideDown().offset({
                 top: cellPosition.top + cell.height() + 5,
                 left: cellPosition.left - contextMenuWidth / 2
             });
+
+            return false;
         });
-        
+
         $('.downline', $this.DOMInstance.divAgentList).on('click', function () {
             var cell = $(this);
             var currentAgentId = cell.attr('data-agent-id');
