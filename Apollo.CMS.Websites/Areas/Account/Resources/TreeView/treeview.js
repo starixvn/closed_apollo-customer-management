@@ -21,6 +21,13 @@ Apollo.CMS.Account.TreeView = function () {
         $(el).addClass("nodeactived");
 
         searchBar.SearchCustomer(false, agentId, username);
+        self.ScrollTreeview();
+    };
+
+    self.ScrollTreeview = function () {
+        var divMainContent = $('div#mainContent > div.container-content');
+
+        divMainContent.scrollTop(divMainContent.scrollTop() + $('span.nodeactived').position().top - 15);
     };
 
     self.LoadTreeView = function () {
@@ -36,6 +43,7 @@ Apollo.CMS.Account.TreeView = function () {
             urlShowAllData: "TreeView/CreateTreeView?agentid=" + agentId + "&username=" + agentUsername,
             callbackFunc: function () {
                 CMS.loadingBox.close();
+                self.ScrollTreeview();
             }
         });
     };
