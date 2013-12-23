@@ -15,7 +15,7 @@
             currency = item.AgentLevel == (int)HighLevelAgents.MainShareholder ? string.Format("<span class='currency'>({0})</span>", item.Currency) : string.Empty;
             noIconCss = index == numberOfItems - 1 ? "class=none-icon" : string.Empty;
             
-            <li @noIconCss><a href="@Url.Action("AgentList", "AccountList", new { agentId = item.AgentId, agentLevel = item.AgentLevel })">@Html.Raw(string.Format("{0} {1}", item.Username, currency))</a></li>
+            <li @noIconCss>@Html.Raw(currency) <a href="@Url.Action("AgentList", "AccountList", new { agentId = item.AgentId, agentLevel = item.AgentLevel })">@item.Username</a></li>
         }
     }
 </ul>
