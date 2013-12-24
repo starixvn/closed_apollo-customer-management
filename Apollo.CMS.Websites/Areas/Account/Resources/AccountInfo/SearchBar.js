@@ -17,7 +17,7 @@ Apollo.CMS.Account.SearchBar = function () {
     // Cache DOM elements
     var cacheDOM = function () {
         $this.DOMInstance.ddlMemberTypes = $('#ddlMemberTypes');
-        $this.DOMInstance.txtUsername = $('#txtUsername');
+        $this.DOMInstance.txtSearch = $('#txtSearch');
         $this.DOMInstance.btnSearch = $('#btnSearch');
         $this.DOMInstance.btnTreeView = $('#btnTreeView');
         $this.DOMInstance.divLeftContent = $('#leftContent');
@@ -35,7 +35,7 @@ Apollo.CMS.Account.SearchBar = function () {
         });
 
         // Auto-complete for Search text-box.
-        $this.DOMInstance.txtUsername.autocomplete({
+        $this.DOMInstance.txtSearch.autocomplete({
             source: function (request, response) {
                 var params = {
                     IsMember: isMember,
@@ -68,23 +68,23 @@ Apollo.CMS.Account.SearchBar = function () {
         });
 
         // Catch enter key of Search text-box.
-        $this.DOMInstance.txtUsername.on('keyup', function (event) {
+        $this.DOMInstance.txtSearch.on('keyup', function (event) {
             if (event.keyCode == 13) {
                 $this.DOMInstance.btnSearch.click();
-                $this.DOMInstance.txtUsername.blur();
+                $this.DOMInstance.txtSearch.blur();
             }
         });
 
-        $this.DOMInstance.txtUsername.on('focus', function (event) {
-            $this.DOMInstance.txtUsername.select();
+        $this.DOMInstance.txtSearch.on('focus', function (event) {
+            $this.DOMInstance.txtSearch.select();
         });
 
         $this.DOMInstance.btnSearch.on('click', function () {
-            var username = $this.DOMInstance.txtUsername.val();
+            var username = $this.DOMInstance.txtSearch.val();
 
             if (!username) {
-                var requiredErrorMsg = $this.DOMInstance.txtUsername.attr('data-val-required');
-                Validator.showTooltip($this.DOMInstance.txtUsername, requiredErrorMsg, 'nw');
+                var requiredErrorMsg = $this.DOMInstance.txtSearch.attr('data-val-required');
+                Validator.showTooltip($this.DOMInstance.txtSearch, requiredErrorMsg, 'nw');
             } else {
                 $this.GetCustomer(isMember, null, username);
             }
@@ -93,10 +93,10 @@ Apollo.CMS.Account.SearchBar = function () {
 
     // Redirect to tree view
     var redirectToTreeView = function () {
-        var username = $this.DOMInstance.txtUsername.val();
+        var username = $this.DOMInstance.txtSearch.val();
         var oldUsername = $.trim($('#divAgentName').text());
 
-        $this.DOMInstance.txtUsername.tipsy('hide');
+        $this.DOMInstance.txtSearch.tipsy('hide');
 
         if (oldUsername === username) {
             var custId = $('#hdnCustomerId').val();
@@ -131,7 +131,7 @@ Apollo.CMS.Account.SearchBar = function () {
     $this.SearchCustomer = function (isMember, id, username) {
         $this.DOMInstance.ddlMemberTypes.val(isMember.toString());
         $this.DOMInstance.ddlMemberTypes.change();
-        $this.DOMInstance.txtUsername.val($.trim(username));
+        $this.DOMInstance.txtSearch.val($.trim(username));
 
         $this.GetCustomer(isMember, id, null);
     };
@@ -144,7 +144,7 @@ Apollo.CMS.Account.SearchBar = function () {
             username: username
         };
 
-        $this.DOMInstance.txtUsername.tipsy('hide');
+        $this.DOMInstance.txtSearch.tipsy('hide');
 
         $.ajax({
             type: "POST",
@@ -171,7 +171,7 @@ Apollo.CMS.Account.SearchBar = function () {
 
     $this.DOMInstance = {
         ddlMemberTypes: null,
-        txtUsername: null,
+        txtSearch: null,
         btnSearch: null,
         btnTreeView: null,
         divLeftContent: null
