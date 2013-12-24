@@ -11,6 +11,7 @@ namespace Apollo.CMS.Core.Helpers
 {
     using Apollo.CMS.Core.Constants;
     using Apollo.CMS.Core.Resources;
+    using Fanex.Common;
 
     /// <summary>
     /// Status helper.
@@ -23,31 +24,33 @@ namespace Apollo.CMS.Core.Helpers
         /// <param name="status">The status ID of the customer.</param>
         /// <param name="uplineStatus">The status ID of up line.</param>
         /// <returns>Associate status of the customer.</returns>
-        public static string GetStatus(AccountStatus status, AccountStatus uplineStatus)
+        public static string GetStatus(int? status, int? uplineStatus)
         {
+            AccountStatus statusEnumVal = (AccountStatus)Converter.ToInt(status);
+            AccountStatus uplineStatusEnumVal = (AccountStatus)Converter.ToInt(uplineStatus);
             string statusValue = string.Empty;
 
-            if ((status == AccountStatus.Active) && (uplineStatus == AccountStatus.Active))
+            if ((statusEnumVal == AccountStatus.Active) && (uplineStatusEnumVal == AccountStatus.Active))
             {
                 statusValue = ViewLang.Active;
             }
-            else if ((status == AccountStatus.Stopped) && (uplineStatus == AccountStatus.Active))
+            else if ((statusEnumVal == AccountStatus.Stopped) && (uplineStatusEnumVal == AccountStatus.Active))
             {
                 statusValue = ViewLang.Stopped;
             }
-            else if ((status == AccountStatus.Locked) && (uplineStatus == AccountStatus.Active))
+            else if ((statusEnumVal == AccountStatus.Locked) && (uplineStatusEnumVal == AccountStatus.Active))
             {
                 statusValue = ViewLang.Locked;
             }
-            else if ((status == AccountStatus.Active) && (uplineStatus == AccountStatus.Stopped))
+            else if ((statusEnumVal == AccountStatus.Active) && (uplineStatusEnumVal == AccountStatus.Stopped))
             {
                 statusValue = ViewLang.CLock;
             }
-            else if ((status == AccountStatus.Stopped) && (uplineStatus == AccountStatus.Stopped))
+            else if ((statusEnumVal == AccountStatus.Stopped) && (uplineStatusEnumVal == AccountStatus.Stopped))
             {
                 statusValue = ViewLang.CLock;
             }
-            else if ((status == AccountStatus.Locked) && (uplineStatus == AccountStatus.Stopped))
+            else if ((statusEnumVal == AccountStatus.Locked) && (uplineStatusEnumVal == AccountStatus.Stopped))
             {
                 statusValue = ViewLang.CLock;
             }
@@ -60,11 +63,12 @@ namespace Apollo.CMS.Core.Helpers
         /// </summary>
         /// <param name="status">The status.</param>
         /// <returns>The associate status of the shadow.</returns>
-        public static string GetShadowStatus(AccountStatus status)
+        public static string GetShadowStatus(int? status)
         {
+            AccountStatus statusEnumVal = (AccountStatus)Converter.ToInt(status);
             string statusValue = string.Empty;
 
-            switch (status)
+            switch (statusEnumVal)
             {
                 case AccountStatus.Active:
                     statusValue = ViewLang.Active;

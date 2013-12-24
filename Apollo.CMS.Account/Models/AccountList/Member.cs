@@ -39,7 +39,7 @@ namespace Apollo.CMS.Account.Models.AccountList
         {
             get
             {
-                return StatusHelper.GetStatus((AccountStatus)this.Status, (AccountStatus)this.UplineStatus);
+                return StatusHelper.GetStatus(this.Status, this.UplineStatus);
             }
         }
 
@@ -47,7 +47,7 @@ namespace Apollo.CMS.Account.Models.AccountList
         {
             get
             {
-                return StatusHelper.GetStatus((AccountStatus)this.BetStatus, (AccountStatus)this.UplineBetStatus);
+                return StatusHelper.GetStatus(this.BetStatus, this.UplineBetStatus);
             }
         }
     }

@@ -12,6 +12,7 @@ namespace Apollo.CMS.Account.Models.AccountList
     using System;
     using Apollo.CMS.Core.Constants;
     using Apollo.CMS.Core.Helpers;
+    using Fanex.Common;
 
     /// <summary>
     /// Show model.
@@ -30,7 +31,7 @@ namespace Apollo.CMS.Account.Models.AccountList
         {
             get
             {
-                return StatusHelper.GetShadowStatus((AccountStatus)this.Status);
+                return StatusHelper.GetShadowStatus(this.Status);
             }
         }
     }
