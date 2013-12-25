@@ -94,7 +94,7 @@ Apollo.CMS.Account.AccountList.MemberList = function () {
                               { Name: 'ColUsername', Value: item.Username },
                               { Name: 'ColStatus', Value: '<span class="{0}">{1}</span>'.format(item.ActualStatus.toLowerCase().replace(/\./g, ''), item.ActualStatus) },
                               { Name: 'ColBetStatus', Value: '<span class="{0}">{1}</span>'.format(item.ActualBetStatus.toLowerCase().replace(/\./g, ''), item.ActualBetStatus) },
-                              { Name: 'ColCommGroup', Value: item.UGroup.toUpperCase() },
+                              { Name: 'ColCommGroup', Value: item.ActualUserGroup },
                               { Name: 'ColSportCredit', Value: item.CashBalance}]
                 };
                 bodyData.push(row);

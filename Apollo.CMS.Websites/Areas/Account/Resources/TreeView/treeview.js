@@ -21,7 +21,7 @@ Apollo.CMS.Account.TreeView = function () {
         $(el).addClass("nodeactived");
 
         searchBar.SearchCustomer(false, agentId, username);
-        self.ScrollTreeview();
+        //self.ScrollTreeview();
     };
 
     self.ScrollTreeview = function () {

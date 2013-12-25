@@ -9,7 +9,7 @@
 
 namespace Apollo.CMS.Account.Models.AccountList
 {
-    using Apollo.CMS.Core.Constants;
+    using System.Web.Script.Serialization;
     using Apollo.CMS.Core.Helpers;
 
     /// <summary>
@@ -23,12 +23,16 @@ namespace Apollo.CMS.Account.Models.AccountList
 
         public short? AgentLevel { get; set; }
 
+        [ScriptIgnore]
         public byte? BetStatus { get; set; }
 
+        [ScriptIgnore]
         public byte? UplineStatus { get; set; }
 
+        [ScriptIgnore]
         public byte? UplineBetStatus { get; set; }
 
+        [ScriptIgnore]
         public byte? Status { get; set; }
 
         public int? NumberOfAgent { get; set; }

@@ -10,9 +10,8 @@
 namespace Apollo.CMS.Account.Models.AccountList
 {
     using System;
-    using Apollo.CMS.Core.Constants;
+    using System.Web.Script.Serialization;
     using Apollo.CMS.Core.Helpers;
-    using Fanex.Common;
 
     /// <summary>
     /// Show model.
@@ -25,6 +24,7 @@ namespace Apollo.CMS.Account.Models.AccountList
 
         public DateTime? CreatedDate { get; set; }
 
+        [ScriptIgnore]
         public byte? Status { get; set; }
 
         public string ActualStatus
