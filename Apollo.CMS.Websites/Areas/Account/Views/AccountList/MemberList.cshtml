@@ -58,8 +58,8 @@
 <div class="row breadcrumbs">
     @{ Html.RenderAction("Breadcrumb", "AccountList", new { agentId = agentId }); }
 </div>
-<div class="row content-grid display-none">
-    <div class="freegrid resizable-grid" id="divMemberList"></div>
+<div class="row content-grid">
+    <div id="divMemberList" class="freegrid hide resizable-grid"></div>
 </div>
 
 @section Foot {

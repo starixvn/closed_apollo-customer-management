@@ -42,6 +42,7 @@ Apollo.CMS.Account.AccountList.MemberList = function () {
                 $this.DOMInstance.btnSubmit.click();
             }
         });
+        $this.DOMInstance.txtUsername.focus();
 
         $this.DOMInstance.btnSubmit.on('click', function () {
             parameters.Username = $.trim($this.DOMInstance.txtUsername.val());
