@@ -9,16 +9,21 @@
 
 namespace Apollo.CMS.Account.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
     using Apollo.CMS.Account.Criteria.AccountInfo;
     using Apollo.CMS.Account.Models.AccountInfo;
     using Apollo.CMS.Account.Services.AccountInfo.Implements;
     using Apollo.CMS.Account.Services.AccountInfo.Interfaces;
+    using Apollo.CMS.Core.Configurations;
     using Apollo.CMS.Core.Controllers;
     using Apollo.CMS.Core.Resources;
     using Fanex.Common;
     using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Criteria.User;
+    using Fanex.NAP.Core.Service.Impl;
+    using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Attribute;
 
     /// <summary>
@@ -27,15 +32,17 @@ namespace Apollo.CMS.Account.Controllers
     public class AccountInfoController : BaseController
     {
         private readonly IAccountInfoService _accountInfoService;
+        private readonly IUserService _userService;
 
         public AccountInfoController() :
-            this(null)
+            this(null, null)
         {
         }
 
-        public AccountInfoController(IAccountInfoService accountInfoService)
+        public AccountInfoController(IAccountInfoService accountInfoService, IUserService userService)
         {
             this._accountInfoService = accountInfoService ?? new AccountInfoService();
+            this._userService = userService ?? new UserService();
             ViewBag.HasCustomerSettingPermission = this.HasRight(ApolloCMSFunctionKeys.CustomerSetting, Constant.Policy.Read);
         }
 
@@ -181,6 +188,36 @@ namespace Apollo.CMS.Account.Controllers
         {
             ViewBag.Members = this._accountInfoService.GetDownlineMembers(criteria);
             return PartialView("MemberList");
+        }
+
+        /// <summary>
+        /// Logs in to agent site internally.
+        /// </summary>
+        /// <param name="agentId">The agent identifier.</param>
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.SearchAccount, Policy = Constant.Policy.Read)]
+        public void RedirectToAgentSite(int agentId)
+        {
+            UserCheckInUserCriteria userCheckInCriteria = new UserCheckInUserCriteria
+            {
+                UserId = agentId,
+                SiteId = AppSettings.AgentSiteId,
+                NetSessionId = this.CurrentSession.SessionId,
+                Ip = this.CurrentContext.IP,
+                LoginDate = DateTime.Now.ToUniversalTime()
+            };
+            string parameterFormat = "OnUserId={0}&AdminId={1}&AdminName={2}&AgentId={3}&LoginTime={4}";
+            string parameters = string.Empty;
+
+            this._userService.UserCheckIn(ref userCheckInCriteria);
+            parameters = Cryptography.CfsEnCrypt(string.Format(
+                                                            parameterFormat,
+                                                            userCheckInCriteria.OnUserId,
+                                                            this.CurrentSession.UserId,
+                                                            this.CurrentSession.Username,
+                                                            agentId,
+                                                            userCheckInCriteria.LoginDate));
+
+            Response.Redirect(string.Format("{0}{1}", AppSettings.AgentSiteUrl, parameters));
         }
     }
 }

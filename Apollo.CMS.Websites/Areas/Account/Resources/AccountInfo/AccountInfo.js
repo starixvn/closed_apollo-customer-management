@@ -11,7 +11,8 @@ Apollo.CMS.Account.AccountInfo = function () {
     var urls = {
         GetUplineAgents: CMS.resolveRootUrl('Account/AccountInfo/GetUplineAgents'),
         GetDownlineAgents: CMS.resolveRootUrl('Account/AccountInfo/GetDownlineAgents'),
-        GetDownlineMembers: CMS.resolveRootUrl('Account/AccountInfo/GetDownlineMembers')
+        GetDownlineMembers: CMS.resolveRootUrl('Account/AccountInfo/GetDownlineMembers'),
+        LoginInternally: CMS.resolveRootUrl('Account/AccountInfo/RedirectToAgentSite?agentId={0}')
     };
     var uplineTimeout = null;
 
@@ -39,13 +40,19 @@ Apollo.CMS.Account.AccountInfo = function () {
             uplineTimeout = setTimeout(hideUplineAgent, 3000);
         });
 
-        $('.search-link[data-customer-id]').live('click', function () {
+        $('.search-link[data-customer-id]', '#leftContent').live('click', function () {
             var customerId = $(this).attr('data-customer-id');
             var username = $(this).text();
             var isMember = $(this).attr('data-is-member');
 
             isMember = isMember ? isMember : false;
             searchBar.SearchCustomer(isMember, customerId, username);
+        });
+
+        $('.icon-link-home[data-agent-id]', '#leftContent').live('click', function () {
+            var agentId = $(this).attr('data-agent-id');
+
+            CMS.openNewTab(urls.LoginInternally.format(agentId));
         });
     };
 
@@ -58,14 +65,14 @@ Apollo.CMS.Account.AccountInfo = function () {
 
     // Handle selecting tab event.
     var showTabContent = function () {
-        $('a[data-toggle="tab"]').live('click', function (event) {
+        $('a[data-toggle="tab"]', '#leftContent').live('click', function (event) {
             var customerId = $('#hdnCustomerId').val();
             var tabId = $(this).attr('href');
             var tab = $(tabId);
             var url = '';
 
             $.cookie('left-panel-current-tab', tabId, { path: '/' });
-            
+
             if (tab.children().length == 0) {
                 if (tabId === '#agent') {
                     var params = {
@@ -77,7 +84,7 @@ Apollo.CMS.Account.AccountInfo = function () {
                     var params = {
                         AgentId: customerId
                     };
-                    
+
                     getDownline(params, urls.GetDownlineMembers, tab);
                 }
             }

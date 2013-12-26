@@ -41,6 +41,22 @@ namespace Apollo.CMS.Core.Configurations
             }
         }
 
+        public static string AgentSiteUrl
+        {
+            get
+            {
+                return GetValue("AgentSiteUrl").ToString();
+            }
+        }
+
+        public static int AgentSiteId
+        {
+            get
+            {
+                return Convert.ToInt32(GetValue("AgentSiteId"));
+            }
+        }
+
         /// <summary>
         /// Gets the value from web configuration.
         /// </summary>
