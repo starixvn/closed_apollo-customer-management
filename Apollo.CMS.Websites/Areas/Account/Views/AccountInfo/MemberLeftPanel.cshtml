@@ -6,6 +6,7 @@
 @using Fanex.Common
 @{
     var hasCustomerSettingPermission = (bool)ViewBag.HasCustomerSettingPermission;
+    var hasLoginInternallyPermission = (bool)ViewBag.HasLoginInternallyPermission;
     var customer = (MemberInfo)ViewBag.Customer;
     var accountStatus = StatusHelper.GetStatus(customer.Status, customer.UplineStatus);
     var betStatus = StatusHelper.GetStatus(customer.BetStatus, customer.UplineBetStatus);
@@ -27,7 +28,11 @@
             @ViewLang.Upline
         </div>
         <div class="col-xs-9 col-sm-9 col-md-9 text-right">
-            <a href="#" class="search-link" data-customer-id="@customer.AgentId">@customer.AgentUsername</a><span class="glyphicon glyphicon-home icon-link-home"></span>
+            <a href="#" class="search-link" data-customer-id="@customer.AgentId">@customer.AgentUsername</a>
+            @if (hasLoginInternallyPermission)
+            {
+                <span class="glyphicon glyphicon-home icon-link-home" data-agent-id="@customer.AgentId"></span>
+            }
         </div>
     </div>
 

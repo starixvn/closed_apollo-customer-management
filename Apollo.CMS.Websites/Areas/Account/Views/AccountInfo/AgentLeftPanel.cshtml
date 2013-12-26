@@ -6,6 +6,7 @@
 @using Fanex.Common
 @{    
     var hasCustomerSettingPermission = (bool)ViewBag.HasCustomerSettingPermission;
+    var hasLoginInternallyPermission = (bool)ViewBag.HasLoginInternallyPermission;
     var customer = (AgentInfo)ViewBag.Customer;    
 }
 @if (customer == null)
@@ -26,7 +27,11 @@ else if (customer.AgentId != 0)
     <div class="row item @noBorderCss">
         <div class="col-xs-3 col-sm-3 col-md-3 text-left">@ViewLang.Agent</div>
         <div id="divAgentName" class="col-xs-9 col-sm-9 col-md-9 text-right">
-            @customer.Username<span class="glyphicon glyphicon-home icon-link-home" data-agent-id="@customer.AgentId"></span>
+            @customer.Username
+            @if (hasLoginInternallyPermission)
+            {
+                <span class="glyphicon glyphicon-home icon-link-home" data-agent-id="@customer.AgentId"></span>
+            }
         </div>
     </div>
 
@@ -36,7 +41,11 @@ else if (customer.AgentId != 0)
         <div class="row item no-border">
             <div class="col-xs-3 col-sm-3 col-md-3 text-left">@ViewLang.Upline</div>
             <div class="col-xs-9 col-sm-9 col-md-9 text-right">
-                <a href="#" class="search-link" data-customer-id="@customer.ParentId">@customer.ParentUsername</a><span class="glyphicon glyphicon-home icon-link-home" data-agent-id="@customer.ParentId"></span>
+                <a href="#" class="search-link" data-customer-id="@customer.ParentId">@customer.ParentUsername</a>
+                @if (hasLoginInternallyPermission)
+                {
+                    <span class="glyphicon glyphicon-home icon-link-home" data-agent-id="@customer.ParentId"></span>
+                }
             </div>
         </div>
 
