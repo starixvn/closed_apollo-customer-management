@@ -92,11 +92,11 @@ Apollo.CMS.Account.AccountList.MemberList = function () {
                 {
                     Columns: [{ Name: 'ColNo', Value: index + 1 },
                               { Name: 'ColEdit', Value: '<span class="icon-edit-link" data-cust-id="{0}" title="{1}"/>'.format(item.CustId, tableHeaders.BetAndCommSetting) },
-                              { Name: 'ColUsername', Value: '<span class="padding-cell">{0}</span>'.format(item.Username) },
+                              { Name: 'ColUsername', Value: item.Username },
                               { Name: 'ColStatus', Value: '<span class="{0}">{1}</span>'.format(item.ActualStatus.toLowerCase().replace(/\./g, ''), item.ActualStatus) },
                               { Name: 'ColBetStatus', Value: '<span class="{0}">{1}</span>'.format(item.ActualBetStatus.toLowerCase().replace(/\./g, ''), item.ActualBetStatus) },
                               { Name: 'ColCommGroup', Value: item.ActualUserGroup },
-                              { Name: 'ColSportCredit', Value: '<span class="padding-cell">{0}</span>'.format(item.CashBalance)}]
+                              { Name: 'ColSportCredit', Value: item.CashBalance}]
                 };
                 bodyData.push(row);
             });

@@ -147,7 +147,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
                 {
                     Columns: [{ Name: 'ColNo', Value: index + 1 },
                               { Name: 'ColEdit', Value: '<span class="icon-edit-link" data-agent-id="{0}"/>'.format(item.AgentId) },
-                              { Name: 'ColUsername', Value: '<span class="padding-cell">{0}</span>'.format(item.Username) },
+                              { Name: 'ColUsername', Value: item.Username },
                               { Name: 'ColDownline', Value: item.NumberOfAgent > 0 ? '<span class="link downline" data-agent-id="{0}" data-agent-level="{1}">{2}</span>'.format(item.AgentId, item.AgentLevel, item.NumberOfAgent) : '0' },
                               { Name: 'ColShadow', Value: item.NumberOfShadow > 0 ? '<span class="link shadow" data-agent-id="{0}" data-agent-level="{1}">{2}</span>'.format(item.AgentId, item.AgentLevel, item.NumberOfShadow) : '0' },
                               { Name: 'ColStatus', Value: '<span class="{0}">{1}</span>'.format(item.ActualStatus.toLowerCase().replace(/\./g, ''), item.ActualStatus) },
