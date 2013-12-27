@@ -33,5 +33,7 @@ namespace Apollo.CMS.Core.Constants
         public const string CurrentUserRoleAcess = "Apollo.CMS.Core.Contants.AppSession.CurrentUserRoleAccess";
         public const string CurrentWorkingOnMenu = "Apollo.CMS.Core.Contants.AppSession.CurrentWorkingOnMenu";
         public const string CurrentActionName = "Apollo.CMS.Core.Contants.AppSession.CurrentActionName";
+
+        public const int UsernameMaxLength = 50;
     }
 }

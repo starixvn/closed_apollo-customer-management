@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Apollo.CMS.Core.Constants
+@{
     var agentId = (int)ViewBag.AgentId;
     var agentLevel = (int)ViewBag.AgentLevel;
     var pageSize = (int)ViewBag.PageSize;
@@ -31,7 +32,7 @@
                 @Html.Label("txtUsername", ViewLang.UserName)
             </div>
             <div class="txt width-auto">
-                @Html.TextBox("txtUsername")
+                @Html.TextBox("txtUsername", string.Empty, new { maxlength = CommonConstants.UsernameMaxLength })
             </div>
         </div>
         <div class="filter-item">
