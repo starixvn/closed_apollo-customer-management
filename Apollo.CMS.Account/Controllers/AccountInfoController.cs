@@ -43,8 +43,8 @@ namespace Apollo.CMS.Account.Controllers
         {
             this._accountInfoService = accountInfoService ?? new AccountInfoService();
             this._userService = userService ?? new UserService();
-            ViewBag.HasCustomerSettingPermission = this.HasRight(ApolloCMSFunctionKeys.CustomerSetting, Constant.Policy.Read);
-            ViewBag.HasLoginInternallyPermission = this.HasRight(ApolloCMSFunctionKeys.LoginInternally, Constant.Policy.Read);
+            ViewBag.HasEditSettingPermission = this.HasRight(ApolloCMSFunctionKeys.EditSetting, Constant.Policy.Read);
+            ViewBag.HasLoginAgentSitePermission = this.HasRight(ApolloCMSFunctionKeys.LoginAgentSite, Constant.Policy.Read);
         }
 
         /// <summary>

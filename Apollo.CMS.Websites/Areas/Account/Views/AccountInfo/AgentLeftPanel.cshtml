@@ -5,8 +5,8 @@
 @using Apollo.CMS.Core.Services
 @using Fanex.Common
 @{    
-    var hasCustomerSettingPermission = (bool)ViewBag.HasCustomerSettingPermission;
-    var hasLoginInternallyPermission = (bool)ViewBag.HasLoginInternallyPermission;
+    var hasCustomerSettingPermission = (bool)ViewBag.HasEditSettingPermission;
+    var hasLoginInternallyPermission = (bool)ViewBag.HasLoginAgentSitePermission;
     var customer = (AgentInfo)ViewBag.Customer;    
 }
 @if (customer == null)

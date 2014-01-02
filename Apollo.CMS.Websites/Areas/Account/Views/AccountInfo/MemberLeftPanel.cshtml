@@ -5,8 +5,8 @@
 @using Apollo.CMS.Core.Services
 @using Fanex.Common
 @{
-    var hasCustomerSettingPermission = (bool)ViewBag.HasCustomerSettingPermission;
-    var hasLoginInternallyPermission = (bool)ViewBag.HasLoginInternallyPermission;
+    var hasCustomerSettingPermission = (bool)ViewBag.HasEditSettingPermission;
+    var hasLoginInternallyPermission = (bool)ViewBag.HasLoginAgentSitePermission;
     var customer = (MemberInfo)ViewBag.Customer;
     var accountStatus = StatusHelper.GetStatus(customer.Status, customer.UplineStatus);
     var betStatus = StatusHelper.GetStatus(customer.BetStatus, customer.UplineBetStatus);

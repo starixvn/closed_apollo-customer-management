@@ -113,6 +113,7 @@ var Layout = function ($) {
                 buttonImage: CMS.datePickerButtonUrl,
                 buttonImageOnly: true,
                 changeMonth: true,
+                changeYear: true,
                 onSelect: onSelectHandler ? onSelectHandler : function () { },
                 onClose: onCloseHandler ? onCloseHandler : function () { }
             }).datepicker('setDate', defaultDate);
