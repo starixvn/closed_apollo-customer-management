@@ -177,6 +177,9 @@
   <data name="PostMessageSuccessfully" xml:space="preserve">
     <value>The message has been posted successfully!</value>
   </data>
+  <data name="PreventLoginAgentSiteError" xml:space="preserve">
+    <value>The selected agent's account has been locked.</value>
+  </data>
   <data name="RequiredFieldError" xml:space="preserve">
     <value>This field is required!</value>
   </data>

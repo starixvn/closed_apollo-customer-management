@@ -21,6 +21,7 @@ else if (customer.AgentId != 0)
     var noBorderCss = customer.ParentId == null ? "no-border" : string.Empty;
     var buttonCss = isHighLevel ? "col-xs-12 col-sm-6 col-md-6" : "col-xs-12 col-sm-4 col-md-4";
     var tabCss = isHighLevel ? "high-level-tab" : string.Empty;
+    var internalLoginLinkAttr = string.Empty;
     
     @Html.Hidden("hdnCustomerId", customer.AgentId);
 
@@ -30,7 +31,11 @@ else if (customer.AgentId != 0)
             @customer.Username
             @if (hasLoginInternallyPermission)
             {
-                <span class="glyphicon glyphicon-home icon-link-home" data-agent-id="@customer.AgentId"></span>
+                internalLoginLinkAttr = ViewLang.Active.Equals(accountStatus, StringComparison.OrdinalIgnoreCase) ? 
+                    string.Format("data-agent-id=\"{0}\"", customer.AgentId) :
+                    string.Format("data-login-error=\"{0}\"", Messages.PreventLoginAgentSiteError);
+                
+                <span class="glyphicon glyphicon-home icon-link-home" @Html.Raw(internalLoginLinkAttr)></span>
             }
         </div>
     </div>
@@ -44,7 +49,11 @@ else if (customer.AgentId != 0)
                 <a href="#" class="search-link" data-customer-id="@customer.ParentId">@customer.ParentUsername</a>
                 @if (hasLoginInternallyPermission)
                 {
-                    <span class="glyphicon glyphicon-home icon-link-home" data-agent-id="@customer.ParentId"></span>
+                    internalLoginLinkAttr = (int)AccountStatus.Active == Converter.ToInt(customer.UplineStatus) ?
+                        string.Format("data-agent-id=\"{0}\"", customer.ParentId) :
+                        string.Format("data-login-error=\"{0}\"", Messages.PreventLoginAgentSiteError);
+                    
+                    <span class="glyphicon glyphicon-home icon-link-home" @Html.Raw(internalLoginLinkAttr)></span>
                 }
             </div>
         </div>

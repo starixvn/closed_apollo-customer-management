@@ -241,6 +241,15 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected agent&apos;s account has been locked..
+        /// </summary>
+        public static string PreventLoginAgentSiteError {
+            get {
+                return ResourceManager.GetString("PreventLoginAgentSiteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This field is required!.
         /// </summary>
         public static string RequiredFieldError {

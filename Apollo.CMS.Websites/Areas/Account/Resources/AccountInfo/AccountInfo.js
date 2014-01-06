@@ -40,7 +40,7 @@ Apollo.CMS.Account.AccountInfo = function () {
             uplineTimeout = setTimeout(hideUplineAgent, 3000);
         });
 
-        $('.search-link[data-customer-id]', '#leftContent').live('click', function () {
+        $('a.search-link[data-customer-id]', '#leftContent').live('click', function () {
             var customerId = $(this).attr('data-customer-id');
             var username = $(this).text();
             var isMember = $(this).attr('data-is-member');
@@ -49,10 +49,15 @@ Apollo.CMS.Account.AccountInfo = function () {
             searchBar.SearchCustomer(isMember, customerId, username);
         });
 
-        $('.icon-link-home[data-agent-id]', '#leftContent').live('click', function () {
+        $('span.icon-link-home', '#leftContent').live('click', function () {
             var agentId = $(this).attr('data-agent-id');
 
-            CMS.openNewTab(urls.LoginInternally.format(agentId));
+            if (agentId) {
+                CMS.openNewTab(urls.LoginInternally.format(agentId));
+            } else {
+                var errorMessage = $(this).attr('data-login-error');
+                CMS.showErrorMessage(errorMessage);
+            }
         });
     };
 

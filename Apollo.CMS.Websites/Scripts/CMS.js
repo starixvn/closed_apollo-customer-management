@@ -47,6 +47,12 @@ var CMS = function ($) {
         showInfoMessage: function (message) {
             CMS.infoMsgBox.showInfo(message, { duration: 3000 });
         },
+        showErrorMessage: function (message) {
+            CMS.headlineMsgBox.showErr(message, { duration: 3000 });
+        },
+        showWarningMessage: function (message) {
+            CMS.headlineMsgBox.showWarn(message, { duration: 3000 });
+        },
         modal: function (title, html, option) {
             CMS.dialogPopup.html(html).dialog({
                 width: 'auto',
