@@ -72,6 +72,8 @@ namespace Apollo.CMS.Websites
                 "~/scripts/lib/tipsy/tipsy-1.0.0.js",
                 "~/scripts/lib/namespace.js",
                 "~/scripts/lib/Underscore/underscore.js",
+                "~/scripts/lib/Fanex.Grid/moment.js",
+                "~/scripts/lib/Fanex.Grid/numeral.js",
                 "~/scripts/Extensions.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/layoutJS").Include(
@@ -123,9 +125,7 @@ namespace Apollo.CMS.Websites
 
             bundles.Add(new ScriptBundle("~/scripts/fanexGrid").Include(
                 "~/scripts/lib/Fanex.Grid/Fanex.Grid.js",
-                "~/scripts/lib/Fanex.Grid/Fanex.Pagination.js",
-                "~/scripts/lib/Fanex.Grid/moment.js",
-                "~/scripts/lib/Fanex.Grid/numeral.js"));
+                "~/scripts/lib/Fanex.Grid/Fanex.Pagination.js"));
         }
 
         /// <summary>

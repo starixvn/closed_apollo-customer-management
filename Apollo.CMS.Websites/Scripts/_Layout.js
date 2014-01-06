@@ -74,7 +74,7 @@ Apollo.CMS.LayoutHelper = function () {
                 resizeRighContent();
             });
         } else {
-            leftContent.animate({
+            $this.DOMInstance.divLeftContent.animate({
                 width: "toggle"
             }, timespan, function () {
                 $this.DOMInstance.spanCollapseExpand.removeClass('icon-collapse').addClass('icon-expand');
@@ -85,6 +85,25 @@ Apollo.CMS.LayoutHelper = function () {
                 resizeRighContent();
             });
         }
+    };
+
+    // Change behavior of links
+    var catchLinkEvents = function () {
+        $('a:not([href^="#"])').on('click', function () {
+            var linkId = this.id;
+            var link = this.href;
+
+            $.cookie('menu-id', linkId, { path: '/' });
+            $this.LoadMainContent(link);
+
+            return false;
+        }).each(function () {
+            var menuId = $.cookie('menu-id');
+
+            if (this.id === menuId) {
+                $(this).addClass('active');
+            }
+        });
     };
 
     // Bind event handlers.
@@ -100,22 +119,10 @@ Apollo.CMS.LayoutHelper = function () {
             }
         });
         toggleLeftPanel(isExpanded === 'true');
+        catchLinkEvents();
         $(window).resize(lazyLayout);
-
-        $('a[href!="#"]').on('click', function () {
-            var linkId = this.id;
-            var link = this.href;
-
-            $.cookie('menu-id', linkId, { path: '/' });
-            $this.LoadMainContent(link);
-
-            return false;
-        }).each(function () {
-            var menuId = $.cookie('menu-id');
-
-            if (this.id === menuId) {
-                $(this).addClass('active');
-            }
+        $this.DOMInstance.ifrMainContent.on('load', function () {
+            catchLinkEvents();
         });
     };
 

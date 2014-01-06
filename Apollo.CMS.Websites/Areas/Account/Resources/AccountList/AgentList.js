@@ -201,7 +201,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
             var currentAgentId = cell.attr('data-agent-id');
             var currentAgentLevel = cell.attr('data-agent-level');
 
-            CMS.navigateTo(urls.AgentList.format(currentAgentId, currentAgentLevel));
+            layoutHelper.LoadMainContent(urls.AgentList.format(currentAgentId, currentAgentLevel));
         });
 
         $('.member', $this.DOMInstance.divAgentList).on('click', function () {
@@ -209,7 +209,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
             var currentAgentId = cell.attr('data-agent-id');
             var currentAgentLevel = cell.attr('data-agent-level');
 
-            CMS.navigateTo(urls.MemberList.format(currentAgentId, currentAgentLevel));
+            layoutHelper.LoadMainContent(urls.MemberList.format(currentAgentId, currentAgentLevel));
         });
 
         $('.shadow', $this.DOMInstance.divAgentList).on('click', function () {
@@ -217,7 +217,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
             var currentAgentId = cell.attr('data-agent-id');
             var currentAgentLevel = cell.attr('data-agent-level');
 
-            CMS.navigateTo(urls.ShadowList.format(currentAgentId, currentAgentLevel));
+            layoutHelper.LoadMainContent(urls.ShadowList.format(currentAgentId, currentAgentLevel));
         });
     };
     var hideContextMenu = function () {

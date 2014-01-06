@@ -12,8 +12,16 @@
     @Scripts.Render("~/scripts/repondjs")
 </head>
 <body>
-    @RenderSection("Headline", false)
-    @RenderBody()
+    <div class="container page">
+        <div class="row content page-content">
+            <div id="mainContent" class="col-xs-12 col-sm-12 col-md-12 mainContent">
+                <div class="row container-content">
+                    @RenderSection("Headline", false)
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
     @Scripts.Render("~/scripts/commonJS")
     @Scripts.Render("~/scripts/pageLayoutJS")
     @RenderSection("Foot", false)
