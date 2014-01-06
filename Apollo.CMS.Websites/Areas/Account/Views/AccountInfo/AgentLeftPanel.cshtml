@@ -4,10 +4,10 @@
 @using Apollo.CMS.Core.Helpers
 @using Apollo.CMS.Core.Services
 @using Fanex.Common
-@{    
+@{
     var hasCustomerSettingPermission = (bool)ViewBag.HasEditSettingPermission;
     var hasLoginInternallyPermission = (bool)ViewBag.HasLoginAgentSitePermission;
-    var customer = (AgentInfo)ViewBag.Customer;    
+    var customer = (AgentInfo)ViewBag.Customer;
 }
 @if (customer == null)
 {
@@ -22,7 +22,7 @@ else if (customer.AgentId != 0)
     var buttonCss = isHighLevel ? "col-xs-12 col-sm-6 col-md-6" : "col-xs-12 col-sm-4 col-md-4";
     var tabCss = isHighLevel ? "high-level-tab" : string.Empty;
     var internalLoginLinkAttr = string.Empty;
-    
+
     @Html.Hidden("hdnCustomerId", customer.AgentId);
 
     <div class="row item @noBorderCss">
@@ -31,10 +31,10 @@ else if (customer.AgentId != 0)
             @customer.Username
             @if (hasLoginInternallyPermission)
             {
-                internalLoginLinkAttr = ViewLang.Active.Equals(accountStatus, StringComparison.OrdinalIgnoreCase) ? 
+                internalLoginLinkAttr = ViewLang.Active.Equals(accountStatus, StringComparison.OrdinalIgnoreCase) ?
                     string.Format("data-agent-id=\"{0}\"", customer.AgentId) :
                     string.Format("data-login-error=\"{0}\"", Messages.PreventLoginAgentSiteError);
-                
+
                 <span class="glyphicon glyphicon-home icon-link-home" @Html.Raw(internalLoginLinkAttr)></span>
             }
         </div>
@@ -49,10 +49,16 @@ else if (customer.AgentId != 0)
                 <a href="#" class="search-link" data-customer-id="@customer.ParentId">@customer.ParentUsername</a>
                 @if (hasLoginInternallyPermission)
                 {
-                    internalLoginLinkAttr = (int)AccountStatus.Active == Converter.ToInt(customer.UplineStatus) ?
-                        string.Format("data-agent-id=\"{0}\"", customer.ParentId) :
-                        string.Format("data-login-error=\"{0}\"", Messages.PreventLoginAgentSiteError);
-                    
+                    if ((int)AccountStatus.Active == Converter.ToInt(customer.UplineStatus) &&
+                        (int)AccountStatus.Active == Converter.ToInt(customer.ParentStatus))
+                    {
+                        internalLoginLinkAttr = string.Format("data-agent-id=\"{0}\"", customer.ParentId);
+                    }
+                    else
+                    {
+                        internalLoginLinkAttr = string.Format("data-login-error=\"{0}\"", Messages.PreventLoginAgentSiteError);
+                    }
+
                     <span class="glyphicon glyphicon-home icon-link-home" @Html.Raw(internalLoginLinkAttr)></span>
                 }
             </div>
@@ -66,7 +72,7 @@ else if (customer.AgentId != 0)
             <div class="@buttonCss">
                 @Html.ActionLink(ViewLang.Agent, "AgentList", "AccountList", new { agentId = customer.AgentId, agentLevel = customer.AgentLevel }, new { @class = "btn-link no-marginLeft", id = "lnkAgentList" })
             </div>
-
+            
             <!-- Hide Member button when searched account is Super, Main Shareholder or Shareolder -->
             @if (!isHighLevel)
             {
@@ -74,7 +80,6 @@ else if (customer.AgentId != 0)
                     @Html.ActionLink(ViewLang.Member, "MemberList", "AccountList", new { agentId = customer.AgentId, agentLevel = customer.AgentLevel }, new { @class = "btn-link", id = "lnkMemberList" })
                 </div>
             }
-            
             <div class="@buttonCss">
                 @Html.ActionLink(ViewLang.Shadow, "ShadowList", "AccountList", new { agentId = customer.AgentId, agentLevel = customer.AgentLevel }, new { @class = "btn-link", id = "lnkShadowList" })
             </div>
@@ -110,26 +115,26 @@ else if (customer.AgentId != 0)
         <div class="col-xs-12 col-sm-12 col-md-12">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs @tabCss">
-                @{
-                    var activeClass = string.Empty;
+            @{
+                var activeClass = string.Empty;
 
-                    <!-- Hide Setting tab when logged in user does not have permission on setting function -->
-                    if (hasCustomerSettingPermission)
-                    {
-                        <li class="setting active"><a href="#setting" data-toggle="tab">@ViewLang.Setting</a></li>
-                    }
-                    else
-                    {
-                        activeClass = "active";
-                    }
-                }
-                <li class="agent @activeClass"><a href="#agent" data-toggle="tab">@ViewLang.Agent</a></li>
-                
-                <!-- Hide Member tab when searched account is Super, Main Shareholder or Shareolder -->
-                @if (!isHighLevel)
+                <!-- Hide Setting tab when logged in user does not have permission on setting function -->
+                if (hasCustomerSettingPermission)
                 {
-                    <li><a href="#member" data-toggle="tab">@ViewLang.Member</a></li>
+                        <li class="setting active"><a href="#setting" data-toggle="tab">@ViewLang.Setting</a></li>
                 }
+                else
+                {
+                    activeClass = "active";
+                }
+            }
+            <li class="agent @activeClass"><a href="#agent" data-toggle="tab">@ViewLang.Agent</a></li>
+
+            <!-- Hide Member tab when searched account is Super, Main Shareholder or Shareolder -->
+            @if (!isHighLevel)
+            {
+                <li><a href="#member" data-toggle="tab">@ViewLang.Member</a></li>
+            }
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
@@ -141,7 +146,6 @@ else if (customer.AgentId != 0)
                         Html.RenderAction("GetDownlineAgents", "AccountInfo", new { ParentId = customer.AgentId });
                     }
                 </div>
-
                 @if (!isHighLevel)
                 {
                     <div class="tab-pane" id="member"></div>

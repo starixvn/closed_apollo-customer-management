@@ -72,9 +72,15 @@ namespace Apollo.CMS.Websites
                 "~/scripts/lib/tipsy/tipsy-1.0.0.js",
                 "~/scripts/lib/namespace.js",
                 "~/scripts/lib/Underscore/underscore.js",
+                "~/scripts/Extensions.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/layoutJS").Include(
                 "~/scripts/_layout.js",
-                "~/scripts/cms.js",                
+                "~/scripts/cms.js",
                 "~/Scripts/Validator.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/pageLayoutJS").Include(
+                "~/scripts/PageLayout.js"));
         }
 
         /// <summary>
@@ -200,7 +206,7 @@ namespace Apollo.CMS.Websites
     internal static class BundleExtensions
     {
         /// <summary>
-        /// Creates a bundle, include the virtual paths to the created bundle, 
+        /// Creates a bundle, include the virtual paths to the created bundle,
         /// and add it to the bundle collection.
         /// </summary>
         /// <param name="bundles">The bundle collection which the virtual paths are included.</param>

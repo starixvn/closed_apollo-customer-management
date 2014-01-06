@@ -1,23 +1,22 @@
 ﻿@{
     ViewBag.Title = ViewLang.AgentHierarchy;
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_PageLayout.cshtml";
     var agentId = ViewBag.AgentId;
     var username = ViewBag.Username;
-    
+
 }
-@section Head 
+@section Head
 {
     @Styles.Render("~/site/treeView")
 }
-<H5 class="title">
+<h5 class="title">
     @ViewLang.AgentHierarchy
-</H5>
-<div id="wrapper"> 
+</h5>
+<div id="wrapper">
     <ul id="account-treeview" class="tree-sub" data-agent-id="@agentId" data-agent-username="@username">
     </ul>
 </div>
-
-@section Foot {    
+@section Foot {
     @Scripts.Render("~/scripts/treeView")
     <script type="text/javascript">
         var nodata = '@ViewLang.NoData';

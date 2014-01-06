@@ -84,12 +84,12 @@ Apollo.CMS.Message.MessageList = function () {
         _params.getListMessageParam.FromDate = today;
         _params.getListMessageParam.ToDate = today;
 
-        Layout.createDatepicker($("#dateFrom"), null, null, function (selectedDate) {
+        layoutHelper.CreateDatepicker($("#dateFrom"), null, null, function (selectedDate) {
             $("#dateTo").datepicker("option", "minDate", selectedDate);
             _params.getListMessageParam.FromDate = selectedDate;
         }).datepicker('option', 'minDate', minDate).datepicker('option', 'maxDate', today);
 
-        Layout.createDatepicker($("#dateTo"), null, null, function (selectedDate) {
+        layoutHelper.CreateDatepicker($("#dateTo"), null, null, function (selectedDate) {
             _params.getListMessageParam.ToDate = selectedDate;
             $("#dateFrom").datepicker("option", "maxDate", selectedDate);
         }).datepicker('option', 'minDate', minDate).datepicker('option', 'maxDate', today);

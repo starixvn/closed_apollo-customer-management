@@ -41,5 +41,7 @@ namespace Apollo.CMS.Account.Models.AccountInfo
         public int? ParentId { get; set; }
 
         public string ParentUsername { get; set; }
+
+        public byte? ParentStatus { get; set; }
     }
 }

@@ -31,15 +31,20 @@
             <a href="#" class="search-link" data-customer-id="@customer.AgentId">@customer.AgentUsername</a>
             @if (hasLoginInternallyPermission)
             {
-                var internalLoginLinkAttr = (int)AccountStatus.Active == Converter.ToInt(customer.UplineStatus) ?
-                    string.Format("data-agent-id=\"{0}\"", customer.AgentId) :
-                    string.Format("data-login-error=\"{0}\"", Messages.PreventLoginAgentSiteError);
+                var internalLoginLinkAttr = string.Format("data-agent-id=\"{0}\"", customer.AgentId);
+
+                if ((int)AccountStatus.Active != Converter.ToInt(customer.UplineStatus) ||
+                    (int)AccountStatus.Active != Converter.ToInt(customer.AgentStatus))
+                {
+                    internalLoginLinkAttr = string.Format("data-login-error=\"{0}\"", Messages.PreventLoginAgentSiteError);
+                }
+
                 <span class="glyphicon glyphicon-home icon-link-home" @Html.Raw(internalLoginLinkAttr)></span>
             }
         </div>
     </div>
 
-            Html.RenderAction("UplineAgents", "AccountInfo", new { agentId = customer.AgentId });
+    Html.RenderAction("UplineAgents", "AccountInfo", new { agentId = customer.AgentId });
 
     <div class="row list-btn">
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -73,8 +78,8 @@
         </div>
     </div>
 
-            if (hasCustomerSettingPermission)
-            {
+    if (hasCustomerSettingPermission)
+    {
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <!-- Nav tabs -->
@@ -87,7 +92,7 @@
                 </div>
             </div>
         </div>
-            }
+    }
 }
 else
 {

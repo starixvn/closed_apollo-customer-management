@@ -80,6 +80,7 @@
     @Html.Hidden("ResourceNotFoundError", Messages.ResourceNotFoundError)
     @Html.Hidden("InternalError", Messages.InternalErrorMessage)
     @Scripts.Render("~/scripts/commonJS")
+    @Scripts.Render("~/scripts/layoutJS")
     @Scripts.Render("~/scripts/searchBar")
     @Scripts.Render("~/scripts/leftPanel")
     @if (ViewBag.ViewFlags != null && ViewBag.ViewFlags.IsReCheckin)

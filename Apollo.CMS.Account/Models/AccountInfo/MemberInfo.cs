@@ -57,5 +57,7 @@ namespace Apollo.CMS.Account.Models.AccountInfo
         public string AgentUsername { get; set; }
 
         public short? AgentLevel { get; set; }
+
+        public byte? AgentStatus { get; set; }
     }
 }

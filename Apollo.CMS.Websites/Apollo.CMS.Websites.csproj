@@ -289,6 +289,8 @@
     <None Include="Noesis.Javascript\Noesis.Javascript.x86.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="Scripts\Extensions.js" />
+    <Content Include="Scripts\PageLayout.js" />
     <Content Include="Scripts\lib\jQuery\jquery-1.8.2.js" />
     <Content Include="Scripts\lib\jQuery\jquery-1.8.2.min.js" />
     <Content Include="Scripts\lib\jQuery\jquery-migrate-1.2.1.js" />

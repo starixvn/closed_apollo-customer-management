@@ -101,9 +101,9 @@ Apollo.CMS.Account.SearchBar = function () {
         if (oldUsername === username) {
             var custId = $('#hdnCustomerId').val();
 
-            CMS.navigateToRoot('Account/TreeView?agentId={0}'.format(custId));
+            layoutHelper.LoadMainContent(rootUrl + 'Account/TreeView?agentId={0}'.format(custId));
         } else {
-            CMS.navigateToRoot('Account/TreeView?username={0}'.format(username));
+            layoutHelper.LoadMainContent(rootUrl + 'Account/TreeView?username={0}'.format(username));
         }
     };
 
@@ -164,7 +164,7 @@ Apollo.CMS.Account.SearchBar = function () {
             },
             complete: function () {
                 CMS.loadingBox.close();
-                Layout.expandLefPanel();
+                layoutHelper.ExpandLeftPanel();
             }
         });
     };
