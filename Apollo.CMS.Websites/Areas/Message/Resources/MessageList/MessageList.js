@@ -334,7 +334,7 @@ Apollo.CMS.Message.MessageList = function () {
                 MessageId: _params.getMessageByIdParam.messageId
             }),
             success: function (html) {
-                CMS.modal("Edit Message", html, { position: ['center', 90] });
+                pageLayout.Popup("Edit Message", html, { position: ['center', 90] }, true);
                 cacheDOMContentElements();
             },
             error: function (xhr, status, err) {
@@ -355,7 +355,7 @@ Apollo.CMS.Message.MessageList = function () {
             dataType: "json",
             data: JSON.stringify(_params.updateMessageParam),
             success: function (rs) {
-                CMS.closePopup();
+                pageLayout.ClosePopup();
                 CMS.showInfoMessage(updateSuccessInform);
                 self.getListMessage();
             },

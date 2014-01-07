@@ -5,8 +5,6 @@ var Validator = window.parent.Validator;
 var searchBar = window.parent.searchBar;
 
 $(document).ready(function () {
-    var pageLayout = new Apollo.CMS.PageLayoutHelper();
-
     pageLayout.InitPage();
 });
 
@@ -17,6 +15,7 @@ Apollo.CMS.PageLayoutHelper = function () {
     // Query and save DOM elements.
     var cacheDOM = function () {
         $this.DOMInstance.divMainContent = $('#mainContent');
+        $this.DOMInstance.divDialogPopup = $('<div id="divPopup"></div>').appendTo('body');
     };
 
     // Resize the filter form and grid of the right content, if there is any, when the window is resized.
@@ -53,9 +52,27 @@ Apollo.CMS.PageLayoutHelper = function () {
         $(window).resize(lazyLayout);
     };
 
+    // Show popup inside an iframe.
+    $this.Popup = function (title, html, option, isModal) {
+        $this.DOMInstance.divDialogPopup.html(html).dialog({
+            width: 'auto',
+            position: ['center', 160],
+            modal: isModal,
+            title: title
+        });
+
+        if (option) {
+            $this.DOMInstance.divDialogPopup.dialog('option', option);
+        }
+    };
+    $this.ClosePopup = function () {
+        $this.DOMInstance.divDialogPopup.dialog('close');
+    }
+
     // Cached DOM elements.
     $this.DOMInstance = {
-        divMainContent: null
+        divMainContent: null,
+        divDialogPopup: null
     };
 
     // Initialize page.
@@ -64,3 +81,4 @@ Apollo.CMS.PageLayoutHelper = function () {
         bindEventHandlers();
     };
 };
+var pageLayout = new Apollo.CMS.PageLayoutHelper();

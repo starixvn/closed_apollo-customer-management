@@ -70,8 +70,8 @@ Apollo.CMS.Account.SearchBar = function () {
         // Catch enter key of Search text-box.
         $this.DOMInstance.txtSearch.on('keyup', function (event) {
             if (event.keyCode == 13) {
-                $this.DOMInstance.btnSearch.click();
                 $this.DOMInstance.txtSearch.blur();
+                $this.DOMInstance.btnSearch.click();
             }
         });
 
