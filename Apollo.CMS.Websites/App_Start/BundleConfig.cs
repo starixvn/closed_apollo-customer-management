@@ -77,7 +77,7 @@ namespace Apollo.CMS.Websites
                 "~/scripts/Extensions.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/layoutJS").Include(
-                "~/scripts/_layout.js",
+                "~/scripts/layout.js",
                 "~/scripts/cms.js",
                 "~/Scripts/Validator.js"));
 

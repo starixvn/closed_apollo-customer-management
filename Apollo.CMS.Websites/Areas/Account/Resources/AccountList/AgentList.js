@@ -136,7 +136,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
         } else if (hasMember) {
             columns.splice(4, 0, { HeaderText: tableHeaders.Member, Width: 100, Name: 'ColMember', HeaderAlign: 'center', CellAlign: 'center' });
         } else {
-            $this.DOMInstance.divFilterForm.removeClass('filter-mainAgent').addClass('shareholder').attr('data-original-width', 758);
+            $this.DOMInstance.divFilterForm.removeClass('filter-mainAgent').addClass('shareholder').attr('data-original-width', 822);
         }
 
         if (data && data.length > 0) {

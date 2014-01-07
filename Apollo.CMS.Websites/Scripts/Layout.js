@@ -89,7 +89,7 @@ Apollo.CMS.LayoutHelper = function () {
 
     // Change behavior of links
     var catchLinkEvents = function () {
-        $('a:not([href^="#"])').on('click', function () {
+        $('a:not([href^="#"])').live('click', function () {
             var linkId = this.id;
             var link = this.href;
 
@@ -118,9 +118,15 @@ Apollo.CMS.LayoutHelper = function () {
                 toggleLeftPanel(true);
             }
         });
-        toggleLeftPanel(isExpanded === 'true');
+
+        if (isExpanded === 'true') {
+            $this.DOMInstance.spanCollapseExpand.click();
+        }
+
         catchLinkEvents();
+        $('select').selectBoxIt();
         $(window).resize(lazyLayout);
+
         $this.DOMInstance.ifrMainContent.on('load', function () {
             catchLinkEvents();
         });
