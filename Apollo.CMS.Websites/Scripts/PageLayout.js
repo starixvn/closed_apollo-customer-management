@@ -26,7 +26,7 @@ Apollo.CMS.PageLayoutHelper = function () {
         $('div.resizable-grid').each(function () {
             var grid = $(this);
             if (grid.children().length > 0) {
-                grid.fanexGrid("resizeGrid");
+                grid.fanexGrid('resizeGrid');
                 gridWidth = parseInt(grid.css('width'), 10);
             }
         });
@@ -45,11 +45,28 @@ Apollo.CMS.PageLayoutHelper = function () {
         });
     };
 
+    // Fix the filter form's width issue when the window is too small.
+    var fixFilterForm = function () {
+        var titleWidth = parseInt($('h5.title').css('width'), 10);
+
+        $('div.resizable-form').each(function () {
+            var $form = $(this);
+            var formWidth = parseInt($form.css('width'), 10);
+
+            if (formWidth > titleWidth) {
+                $form.css('width', titleWidth);
+            }
+        });
+    };
+
     // Bind event handlers.
     var bindEventHandlers = function () {
         var lazyLayout = _.debounce(resizeRighContent, 50);
+
         $('select').selectBoxIt();
         $(window).resize(lazyLayout);
+
+        fixFilterForm();
     };
 
     // Show popup inside an iframe.

@@ -30,33 +30,6 @@ Apollo.CMS.LayoutHelper = function () {
         }
     };
 
-    // Resize the filter form and grid of the right content, if there is any, when the window is resized.
-    var resizeRighContent = function () {
-        var mainContentWidth = parseInt($this.DOMInstance.divMainContent.css('width'), 10) - 40;
-        var gridWidth = 1024;
-
-        $('div.resizable-grid').each(function () {
-            var grid = $(this);
-            if (grid.children().length > 0) {
-                grid.fanexGrid("resizeGrid");
-                gridWidth = parseInt(grid.css('width'), 10);
-            }
-        });
-
-        $('div.resizable-form').each(function () {
-            var form = $(this);
-            var originalWidth = parseInt(form.attr('data-original-width'), 10);
-
-            if (originalWidth > mainContentWidth) {
-                var filterFormWidth = mainContentWidth > gridWidth ? gridWidth : mainContentWidth;
-
-                form.css('width', filterFormWidth);
-            } else {
-                form.removeAttr('style');
-            }
-        });
-    };
-
     // Toggle left panel
     var toggleLeftPanel = function (isExpanded, timespan) {
         timespan = timespan ? timespan : 100;
@@ -71,7 +44,6 @@ Apollo.CMS.LayoutHelper = function () {
                 $.cookie('is-expaned', 'true', { path: '/' });
 
                 fixLeftPanelWidthForIE();
-                resizeRighContent();
             });
         } else {
             $this.DOMInstance.divLeftContent.animate({
@@ -81,8 +53,6 @@ Apollo.CMS.LayoutHelper = function () {
                 $this.DOMInstance.spanCollapseExpand.attr('title', 'Expand');
                 $this.DOMInstance.divMainContent.removeClass().addClass('col-xs-12 col-sm-12 col-md-12 mainContent');
                 $.cookie('is-expaned', 'false', { path: '/' });
-
-                resizeRighContent();
             });
         }
     };
@@ -109,7 +79,6 @@ Apollo.CMS.LayoutHelper = function () {
     // Bind event handlers.
     var bindEventHandlers = function () {
         var isExpanded = $.cookie('is-expaned');
-        var lazyLayout = _.debounce(resizeRighContent, 50);
 
         $this.DOMInstance.spanCollapseExpand.on('click', function () {
             if ($this.DOMInstance.spanCollapseExpand.hasClass('icon-collapse')) {
@@ -125,7 +94,6 @@ Apollo.CMS.LayoutHelper = function () {
 
         catchLinkEvents();
         $('select').selectBoxIt();
-        $(window).resize(lazyLayout);
 
         $this.DOMInstance.ifrMainContent.on('load', function () {
             catchLinkEvents();
