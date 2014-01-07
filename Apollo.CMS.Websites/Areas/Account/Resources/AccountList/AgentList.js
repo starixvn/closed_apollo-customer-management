@@ -146,7 +146,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
                 row =
                 {
                     Columns: [{ Name: 'ColNo', Value: index + 1 },
-                              { Name: 'ColEdit', Value: '<span class="icon-edit-link" data-agent-id="{0}"/>'.format(item.AgentId) },
+                              { Name: 'ColEdit', Value: '<div class="icon-edit-link" data-agent-id="{0}"/>'.format(item.AgentId) },
                               { Name: 'ColUsername', Value: item.Username },
                               { Name: 'ColDownline', Value: item.NumberOfAgent > 0 ? '<span class="link downline" data-agent-id="{0}" data-agent-level="{1}">{2}</span>'.format(item.AgentId, item.AgentLevel, item.NumberOfAgent) : '0' },
                               { Name: 'ColShadow', Value: item.NumberOfShadow > 0 ? '<span class="link shadow" data-agent-id="{0}" data-agent-level="{1}">{2}</span>'.format(item.AgentId, item.AgentLevel, item.NumberOfShadow) : '0' },
@@ -174,7 +174,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
     var bindGridEventhandlers = function (event) {
         var contextMenuWidth = $this.DOMInstance.ulContextMenu.width();
 
-        $('.icon-edit-link', $this.DOMInstance.divAgentList).on('click', function (event) {
+        $('div.icon-edit-link', $this.DOMInstance.divAgentList).on('click', function (event) {
             var cell = $(this);
             var currentAgentId = cell.attr('data-agent-id');
             var contextAgentId = $this.DOMInstance.linkContextMenuItem.attr('data-agent-id');
@@ -196,7 +196,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
             return false;
         });
 
-        $('.downline', $this.DOMInstance.divAgentList).on('click', function () {
+        $('span.downline', $this.DOMInstance.divAgentList).on('click', function () {
             var cell = $(this);
             var currentAgentId = cell.attr('data-agent-id');
             var currentAgentLevel = cell.attr('data-agent-level');
@@ -204,7 +204,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
             layoutHelper.LoadMainContent(urls.AgentList.format(currentAgentId, currentAgentLevel));
         });
 
-        $('.member', $this.DOMInstance.divAgentList).on('click', function () {
+        $('span.member', $this.DOMInstance.divAgentList).on('click', function () {
             var cell = $(this);
             var currentAgentId = cell.attr('data-agent-id');
             var currentAgentLevel = cell.attr('data-agent-level');
@@ -212,7 +212,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
             layoutHelper.LoadMainContent(urls.MemberList.format(currentAgentId, currentAgentLevel));
         });
 
-        $('.shadow', $this.DOMInstance.divAgentList).on('click', function () {
+        $('span.shadow', $this.DOMInstance.divAgentList).on('click', function () {
             var cell = $(this);
             var currentAgentId = cell.attr('data-agent-id');
             var currentAgentLevel = cell.attr('data-agent-level');
