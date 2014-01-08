@@ -40,6 +40,10 @@ Apollo.CMS.Account.AccountInfo = function () {
             uplineTimeout = setTimeout(hideUplineAgent, 3000);
         });
 
+        $('html').live('click', function () {
+            hideUplineAgent();
+        });
+
         $('a.search-link[data-customer-id]', '#leftContent').live('click', function () {
             var customerId = $(this).attr('data-customer-id');
             var username = $(this).text();

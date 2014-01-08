@@ -95,8 +95,11 @@ Apollo.CMS.LayoutHelper = function () {
         catchLinkEvents();
         $('select').selectBoxIt();
 
-        $this.DOMInstance.ifrMainContent.on('load', function () {
-            catchLinkEvents();
+        // Make the click event on the page be the same through the iframe.
+        $('html').on('click', function () {
+            if (window.frames['MainContent']) {
+                $('html', $(window.frames['MainContent'].document)).click();
+            }
         });
     };
 

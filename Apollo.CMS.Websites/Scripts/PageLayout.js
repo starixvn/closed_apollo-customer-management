@@ -65,6 +65,11 @@ Apollo.CMS.PageLayoutHelper = function () {
 
         $('select').selectBoxIt();
         $(window).resize(lazyLayout);
+        
+        // Make the click event on the page be the same through the iframe.
+        $('html').on('click', function () {
+            $('html', $(window.parent.document)).click();
+        });
 
         fixFilterForm();
     };

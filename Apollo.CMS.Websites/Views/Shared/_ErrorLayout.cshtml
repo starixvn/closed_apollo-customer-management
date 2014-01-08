@@ -1,0 +1,16 @@
+﻿@using Apollo.CMS.Core.Resources
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title &mdash; @ViewLang.CMS</title>
+    <link rel="shortcut icon" href="~/content/site/img/favicon.ico" />
+    @Styles.Render("~/site/errorPage")
+</head>
+<body>
+    <div class="container">
+        @RenderBody()
+    </div>
+</body>
+</html>

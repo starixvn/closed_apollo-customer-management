@@ -52,6 +52,10 @@ namespace Apollo.CMS.Websites
                 "~/content/site/custom.less",
                 "~/content/site/index.less");
 
+            bundles.AddAndInclude(
+                "~/site/errorPage",
+                "~/content/site/errorPage.less");
+
             bundles.Add(new ScriptBundle("~/scripts/headjs").Include(
                 "~/scripts/lib/html5-libs/head.js"));
 

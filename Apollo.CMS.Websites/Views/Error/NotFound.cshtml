@@ -1,9 +1,7 @@
 ﻿@using Apollo.CMS.Core.Resources
 @{
-    ViewBag.Title = ViewLang.CMS;
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Messages.NotFound;
+    Layout = "~/Views/Shared/_ErrorLayout.cshtml";
 }
-@section Headline {
-    <h5 class="row title">@Messages.NotFound</h5>
-}
+<h1 class="row title">@Messages.NotFound</h1>
 <span>@Messages.NotFoundMessage</span>

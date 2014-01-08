@@ -1,0 +1,40 @@
+﻿/* File Created: January 8, 2014 */
+@import "variables.less";
+
+html, body
+{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+}
+body
+{
+    font-family: @font-family;
+    color: @content-bg;
+}
+.container
+{
+    margin: 0 auto;
+    padding: 20px;
+    width: 960px;
+    background-color: @primary-color;
+
+    h1
+    {
+        color: @content-bg;
+        padding: 0 0 10px;
+        font-weight: normal;
+        border-bottom: solid 1px @border-color;
+    }
+
+    a
+    {
+        color: @link-color;
+        text-decoration: none;
+    }
+    a:hover
+    {
+        text-decoration: underline;
+    }
+}
