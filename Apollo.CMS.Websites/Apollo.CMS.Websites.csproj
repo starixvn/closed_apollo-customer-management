@@ -232,7 +232,7 @@
     <Content Include="Content\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
-    <None Include="Content\site\errorPage.less" />
+    <Content Include="Content\site\errorPage.less" />
     <Content Include="Content\site\font\MyriadPro-Cond.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
