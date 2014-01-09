@@ -63,11 +63,11 @@
             if(response.length <= 0)
             {
                 $(container).html("There is no data.");
-                return;
+            } else {
+                $.each(response, createNode, [child]);
+                $(container).treeview({ add: child });
             }
 
-            $.each(response, createNode, [child]);
-            $(container).treeview({ add: child });
             CMS.loadingBox.close();
 
             if (firstCall) {
