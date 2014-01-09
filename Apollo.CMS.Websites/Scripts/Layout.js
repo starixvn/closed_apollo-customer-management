@@ -59,20 +59,20 @@ Apollo.CMS.LayoutHelper = function () {
 
     // Change behavior of links
     var catchLinkEvents = function () {
-        $('a:not([href^="#"])').live('click', function () {
-            var linkId = this.id;
-            var link = this.href;
+        $('a[href]:not([href^="#"])').live('click', function () {
+            var linkHref = this.href;
+            var $parent = $(this).closest('ul');
+            
+            $this.ResetMenuState();
+            if ($parent.hasClass('subMenu')) {
+                $parent = $parent.parent();
+                $parent.addClass('active');
+                $parent.removeClass('hovered-menu');
+            }
 
-            $.cookie('menu-id', linkId, { path: '/' });
-            $this.LoadMainContent(link);
+            $this.LoadMainContent(linkHref);
 
             return false;
-        }).each(function () {
-            var menuId = $.cookie('menu-id');
-
-            if (this.id === menuId) {
-                $(this).addClass('active');
-            }
         });
     };
 
@@ -95,10 +95,20 @@ Apollo.CMS.LayoutHelper = function () {
         catchLinkEvents();
         $('select').selectBoxIt();
 
+        $('ul.mainMenu > li').hover(function () {
+            $(this).addClass('hovered-menu');
+        }, function () {
+            $(this).removeClass('hovered-menu');
+        });
+
         // Make the click event on the page be the same through the iframe.
         $('html').on('click', function () {
             if (window.frames['MainContent']) {
                 $('html', $(window.frames['MainContent'].document)).click();
+            }
+        }).on('hover', function () {
+            if (window.frames['MainContent']) {
+                $('html', $(window.frames['MainContent'].document)).hover();
             }
         });
     };
@@ -147,6 +157,9 @@ Apollo.CMS.LayoutHelper = function () {
     };
     $this.LoadMainContent = function (link) {
         $this.DOMInstance.ifrMainContent.attr('src', link);
+    };
+    $this.ResetMenuState = function () {
+        $('ul.mainMenu > li.active, #searchTreeView').removeClass('active');
     };
 };
 var layoutHelper = new Apollo.CMS.LayoutHelper();

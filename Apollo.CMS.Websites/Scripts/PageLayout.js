@@ -69,6 +69,8 @@ Apollo.CMS.PageLayoutHelper = function () {
         // Make the click event on the page be the same through the iframe.
         $('html').on('click', function () {
             $('html', $(window.parent.document)).click();
+        }).on('hover', function () {
+            $('html', $(window.parent.document)).hover();
         });
 
         fixFilterForm();

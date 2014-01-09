@@ -20,6 +20,7 @@ Apollo.CMS.Account.SearchBar = function () {
         $this.DOMInstance.txtSearch = $('#txtSearch');
         $this.DOMInstance.btnSearch = $('#btnSearch');
         $this.DOMInstance.btnTreeView = $('#btnTreeView');
+        $this.DOMInstance.icoTreeView = $this.DOMInstance.btnTreeView.parent();
         $this.DOMInstance.divLeftContent = $('#leftContent');
     };
 
@@ -97,6 +98,8 @@ Apollo.CMS.Account.SearchBar = function () {
         var oldUsername = $.trim($('#divAgentName').text());
 
         $this.DOMInstance.txtSearch.tipsy('hide');
+        layoutHelper.ResetMenuState();
+        $this.DOMInstance.icoTreeView.addClass('active');
 
         if (oldUsername === username) {
             var custId = $('#hdnCustomerId').val();
@@ -114,14 +117,7 @@ Apollo.CMS.Account.SearchBar = function () {
             $this.DOMInstance.btnTreeView.removeClass('icon-treeview').addClass('icon-treeview-disabled');
             $this.DOMInstance.btnTreeView.off('click');
         } else {
-            var menuId = $.cookie('menu-id');
-            var treeViewIcon = $this.DOMInstance.btnTreeView.parent();
-
-            if (treeViewIcon.attr('id') == menuId) {
-                treeViewIcon.addClass('active');
-            }
-
-            treeViewIcon.removeClass('disabled');
+            $this.DOMInstance.icoTreeView.removeClass('disabled');
             $this.DOMInstance.btnTreeView.removeClass('icon-treeview-disabled').addClass('icon-treeview');
             $this.DOMInstance.btnTreeView.on('click', redirectToTreeView);
         }
@@ -174,6 +170,7 @@ Apollo.CMS.Account.SearchBar = function () {
         txtSearch: null,
         btnSearch: null,
         btnTreeView: null,
+        icoTreeView: null,
         divLeftContent: null
     };
     $this.InitPage = function () {
