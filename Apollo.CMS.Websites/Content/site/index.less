@@ -678,6 +678,10 @@ input[type="text"] {
                         border-width: 0 0 1px 1px;
                         padding: 6px 9px 6px;
                         .border-radius(0);
+
+                        &:focus {
+                            outline: none;
+                        }
                     }
 
                     &:first-child {
@@ -692,6 +696,7 @@ input[type="text"] {
                             border-top: 2px solid @link-color;
                             color: @link-color;
                             padding: 4px 9px 6px;
+                            outline: none;
                         }
                     }
 

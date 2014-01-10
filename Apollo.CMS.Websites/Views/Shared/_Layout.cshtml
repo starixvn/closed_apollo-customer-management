@@ -45,7 +45,7 @@
                                 <li><a href="@Url.Action("ChangePassword", "User", new { Area = "UserControl" })"><span
                                     class="glyphicon glyphicon-edit icon-changePass"></span>@ViewResources.Change_Password
                                 </a></li>
-                                <li><a href="@Url.Action("LogOut", "Login", new { Area = "UserLogin" })"><span class="glyphicon glyphicon-off">
+                                <li><a href="@Url.Action("LogOut", "Login", new { Area = "UserLogin" })" data-is-logout="true"><span class="glyphicon glyphicon-off">
                                 </span>@ViewResources.Sign_Out
                                 </a></li>
                             </ul>
