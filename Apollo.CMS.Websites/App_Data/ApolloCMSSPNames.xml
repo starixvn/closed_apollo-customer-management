@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Functions>
+  <Function Name="Common">
+    <Setting Key="Age_SelBalanceUpDay" SpName="Age_SelBalanceUpDay" DbName="SVRCSD.RepDB.aplWeb" />
+  </Function>
   <Function Name="NewMessage">
     <Setting Key="Acc_Msg_GetRecipientInfo" SpName="Acc_Msg_GetRecipientInfo" DbName="SVRCSD.RepDB.aplWeb" />
     <Setting Key="Acc_Msg_GetUplineById" SpName="Acc_Msg_GetUplineById" DbName="SVRCSD.RepDB.aplWeb" />
@@ -49,5 +52,11 @@
     <Setting Key="Acc_Customer_GetByAgent" SpName="Acc_Customer_GetByAgent" DbName="SVRCSD.RepDB.aplWeb" />
     <Setting Key="Acc_AgentUser_GetByAgent" SpName="Acc_AgentUser_GetByAgent" DbName="SVRCSD.RepDB.aplWeb" />
     <Setting Key="Acc_Agent_GetNavigatePath" SpName="Acc_Agent_GetNavigatePath" DbName="SVRCSD.RepDB.aplWeb" />
+  </Function>
+  <Function Name="MemberBetList">
+    <Setting Key="Acc_BetList_GetByCustomer" SpName="Acc_BetList_GetByCustomer" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_BetList_GetByCustomer_Old" SpName="Acc_BetList_GetByCustomer_Old" DbName="SVRCSD.ArchiveDB.aplWeb" />
+    <Setting Key="Acc_BetList_GetDetailByTransId" SpName="Acc_BetList_GetDetailByTransId" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_BetList_GetDetailByTransId_Old" SpName="Acc_BetList_GetDetailByTransId_Old" DbName="SVRCSD.ArchiveDB.aplWeb" />
   </Function>
 </Functions>

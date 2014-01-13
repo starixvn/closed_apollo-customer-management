@@ -1,0 +1,68 @@
+﻿@using Apollo.CMS.Core.Constants
+@using Fanex.Common
+@{
+    var memberId = Converter.ToInt(ViewBag.CustId);
+
+    ViewBag.Title = ViewLang.BetList;
+    Layout = "~/Views/Shared/_PageLayout.cshtml";
+}
+@section Head {
+    @Styles.Render("~/styles/fanexGrid")
+    @Styles.Render("~/site/accountList")
+}
+@section HeadLine {
+    <h5 class="row title">ViewBag.Title</h5>
+}
+
+<div id="divFilterForm" class="row filter-form clearfix resizable-form filter-mainAgent" data-original-width="937">
+    <div class="filter-row clearfix">
+        <div class="filter-item">
+            <div class="lbl width-auto">
+                <label for="dpkDateFrom">@ViewLang.DateRange</label>
+            </div>
+            <div class="txt width-auto">
+                <input type="text" id="dpkDateFrom" />
+            </div>
+        </div>
+        <div class="filter-item">
+            <div class="lbl lbl-small">
+                <label for="dpkDateTo">@ViewLang.To</label>
+            </div>
+            <div class="txt width-auto">
+                <input type="text" id="dpkDateTo" />
+            </div>
+        </div>
+        <div class="filter-item">
+            <input id="btnGenerate" type="button" class="btn btn-default" value="@ViewLang.Generate"/>
+        </div>
+    </div>
+</div>
+<div class="row content-grid">
+    <div id="divBetList" class="freegrid hide resizable-grid"></div>
+</div>
+
+@section Foot {
+    @Scripts.Render("~/scripts/fanexGrid")
+    @Scripts.Render("~/scripts/agentList")
+
+    <script type="text/javascript">
+        var tableHeaders = {
+            No: '#',
+            Edit: '@ViewLang.Edit',
+            TransTime: '@ViewLang.TransTime',
+            Member: '@ViewLang.Member',
+            Choice: '@ViewLang.Choice',
+            Odds: '@ViewLang.Odds',
+            Stake: '@ViewLang.Stake',
+            WinLoss: '@ViewLang.WinLoss',
+            Status: '@ViewLang.Status',
+            CompanyShare: '@ViewLang.CompanyShare',
+            Feature: '@ViewLang.Feature'
+        };
+        var detailTableHeaders = {
+            Agent: '@ViewLang.Agent',
+            Share: '@ViewLang.Share',
+            Comm: '@ViewLang.Comm'
+        };
+    </script>
+}

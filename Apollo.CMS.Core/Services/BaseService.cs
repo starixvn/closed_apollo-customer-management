@@ -12,6 +12,9 @@ namespace Apollo.CMS.Core.Services
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using Apollo.CMS.Core.Criteria;
+    using Apollo.CMS.Core.Models;
+    using Apollo.CMS.Core.Web;
     using Fanex.Common.Helper;
     using Fanex.Data;
     using Fanex.NAP.Framework.Data;
@@ -21,6 +24,7 @@ namespace Apollo.CMS.Core.Services
     /// </summary>
     public class BaseService
     {
+        public const string CachedBalanceUp = "Apollo.ParlayRMS.Core.BalanceUpService.BalanceUp";
         protected readonly IDynamicRepository DynamicRepository;
 
         public BaseService(IDynamicRepository repository = null)
@@ -33,6 +37,23 @@ namespace Apollo.CMS.Core.Services
             get
             {
                 return DynamicRepository;
+            }
+        }
+
+        protected BalanceUp BalanceUp
+        {
+            get
+            {
+                var balanceUp = CacheManager.Get<BalanceUp>(CachedBalanceUp);
+
+                if (balanceUp == null)
+                {
+                    var criteria = new BalanceUpCriteria();
+                    balanceUp = DynamicRepository.Get<BalanceUp>(criteria);
+                    CacheManager.Set<BalanceUp>(CachedBalanceUp, balanceUp, new TimeSpan(0, 0, 5, 0));
+                }
+
+                return balanceUp;
             }
         }
 

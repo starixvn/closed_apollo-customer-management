@@ -375,4 +375,40 @@
   <data name="ShadowPermission" xml:space="preserve">
     <value>Shadow Permission</value>
   </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="DateRange" xml:space="preserve">
+    <value>Date Range</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>Generate</value>
+  </data>
+  <data name="Choice" xml:space="preserve">
+    <value>Choice</value>
+  </data>
+  <data name="Comm" xml:space="preserve">
+    <value>Comm</value>
+  </data>
+  <data name="CompanyShare" xml:space="preserve">
+    <value>Company Share</value>
+  </data>
+  <data name="Feature" xml:space="preserve">
+    <value>Feature</value>
+  </data>
+  <data name="Odds" xml:space="preserve">
+    <value>Odds</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="Stake" xml:space="preserve">
+    <value>Stake</value>
+  </data>
+  <data name="TransTime" xml:space="preserve">
+    <value>Trans. Time</value>
+  </data>
+  <data name="WinLoss" xml:space="preserve">
+    <value>Win Loss</value>
+  </data>
 </root>

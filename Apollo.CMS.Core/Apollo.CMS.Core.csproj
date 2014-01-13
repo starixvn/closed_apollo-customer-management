@@ -68,6 +68,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
     </Reference>
+    <Reference Include="NPOI, Version=1.2.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\Others\NPOI.dll</HintPath>
+    </Reference>
     <Reference Include="RemotingRef">
       <HintPath>..\Dependencies\RemotingRef\RemotingRef.dll</HintPath>
     </Reference>
@@ -89,10 +93,18 @@
     <Compile Include="Constants\AccountStatus.cs" />
     <Compile Include="Constants\HighLevelAgents.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Criteria\BalanceUpCriteria.cs" />
+    <Compile Include="ExcelUtility\ExcelTemplateWriter.cs" />
+    <Compile Include="ExcelUtility\NPOIExtensions\HSSFCellExtensions.cs" />
+    <Compile Include="ExcelUtility\NPOIExtensions\HSSFCellRangeAddressExtensions.cs" />
+    <Compile Include="ExcelUtility\NPOIExtensions\HSSFRowExtensions.cs" />
+    <Compile Include="ExcelUtility\NPOIExtensions\HSSFSheetExtensions.cs" />
+    <Compile Include="ExcelUtility\NPOIExtensions\HSSFWorkbookExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\NumberExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Helpers\StatusHelper.cs" />
+    <Compile Include="Models\BalanceUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Messages.Designer.cs">
       <AutoGen>True</AutoGen>
