@@ -57,6 +57,14 @@ namespace Apollo.CMS.Core.Configurations
             }
         }
 
+        public static DateTime StartDate
+        {
+            get
+            {
+                return Convert.ToDateTime(GetValue("StartDate"));
+            }
+        }
+
         /// <summary>
         /// Gets the value from web configuration.
         /// </summary>

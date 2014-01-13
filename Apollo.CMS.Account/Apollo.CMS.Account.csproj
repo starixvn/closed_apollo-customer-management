@@ -77,8 +77,8 @@
     <Compile Include="Criteria\TreeView\GetAllAgentAndAgentDownlineByIdCriteria.cs" />
     <Compile Include="Models\AccountInfo\AgentInfo.cs" />
     <Compile Include="Models\AccountInfo\MemberInfo.cs" />
-    <Compile Include="Models\AccountInfo\Agent.cs" />
-    <Compile Include="Models\AccountInfo\Member.cs" />
+    <Compile Include="Models\AccountInfo\SuggestedAgent.cs" />
+    <Compile Include="Models\AccountInfo\SuggestedMember.cs" />
     <Compile Include="Models\AccountInfo\UplineAgent.cs" />
     <Compile Include="Models\AccountList\Agent.cs" />
     <Compile Include="Models\AccountList\Member.cs" />

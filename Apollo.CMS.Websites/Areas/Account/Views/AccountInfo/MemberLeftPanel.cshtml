@@ -7,6 +7,7 @@
 @{
     var hasCustomerSettingPermission = (bool)ViewBag.HasEditSettingPermission;
     var hasLoginInternallyPermission = (bool)ViewBag.HasLoginAgentSitePermission;
+    var hasViewBetListPermission = (bool)ViewBag.HasViewBetListPermission;
     var customer = (MemberInfo)ViewBag.Customer;
     var accountStatus = StatusHelper.GetStatus(customer.Status, customer.UplineStatus);
     var betStatus = StatusHelper.GetStatus(customer.BetStatus, customer.UplineBetStatus);
@@ -46,11 +47,19 @@
 
     Html.RenderAction("UplineAgents", "AccountInfo", new { agentId = customer.AgentId });
 
-    <div class="row list-btn">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <a href="#" class="btn-link no-marginLeft only">@ViewLang.BetList</a>
+    if (hasViewBetListPermission)
+    {
+        <div class="row list-btn">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                @Html.ActionLink(
+                    ViewLang.BetList,
+                    "Index",
+                    "MemberBetList",
+                    new { area = "BetList", custId = customer.CustId, username = customer.Username },
+                    new { @class = "btn-link no-marginLeft only", id = "lnkBetList" })
+            </div>
         </div>
-    </div>
+    }
     <div class="row account-info">
         <div class="row item-info">
             <div class="col-xs-6 col-sm-6 col-md-6">@ViewLang.Currency</div>

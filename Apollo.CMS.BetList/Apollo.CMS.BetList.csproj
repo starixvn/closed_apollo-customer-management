@@ -74,14 +74,21 @@
   <ItemGroup>
     <Compile Include="BetListAreaRegistration.cs" />
     <Compile Include="Controllers\MemberBetListController.cs" />
-    <Compile Include="Criteria\MemberBetList\GetBetListCriteria.cs" />
-    <Compile Include="Criteria\MemberBetList\GetOldBetListCriteria.cs" />
-    <Compile Include="Criteria\MemberBetList\GetWinLossOfLineCriteria.cs" />
+    <Compile Include="Criteria\MemberBetList\GetDetailedWinLossCriteria.cs" />
+    <Compile Include="Criteria\MemberBetList\GetMemberBetListCriteria.cs" />
+    <Compile Include="Criteria\MemberBetList\GetNewMemberBetListCriteria.cs" />
+    <Compile Include="Criteria\MemberBetList\GetOldMemberBetListCriteria.cs" />
+    <Compile Include="Criteria\MemberBetList\GetOldDetailedWinLossCriteria.cs" />
+    <Compile Include="Criteria\MemberBetList\GetNewDetailedWinLossCriteria.cs" />
+    <Compile Include="Helpers\BetListHelper.cs" />
     <Compile Include="Models\MemberBetList\BetTicket.cs" />
-    <Compile Include="Models\MemberBetList\LineWinLoss.cs" />
+    <Compile Include="Models\MemberBetList\DetailedWinLoss.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MemberBetList\Implements\MemberBetListService.cs" />
     <Compile Include="Services\MemberBetList\Interfaces\IMemberBetListService.cs" />
+    <Compile Include="ViewModels\MemberBetList\BetItem.cs" />
+    <Compile Include="ViewModels\MemberBetList\BetList.cs" />
+    <Compile Include="ViewModels\MemberBetList\DetailedWinLossItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Apollo.CMS.Core\Apollo.CMS.Core.csproj">

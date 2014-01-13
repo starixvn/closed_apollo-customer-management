@@ -196,6 +196,7 @@
     <Content Include="Areas\Account\Resources\AccountList\ShadowList.js" />
     <Content Include="Areas\Account\Resources\AccountList\MemberList.js" />
     <Content Include="Areas\Account\Resources\AccountList\AgentList.js" />
+    <None Include="Areas\Account\Resources\MemberBetList\memberBetList.less" />
     <Content Include="Areas\Account\Resources\MemberBetList\MemberBetList.js" />
     <Content Include="Areas\Account\Resources\TreeView\Images\treeview-1.png" />
     <Content Include="Areas\Account\Resources\TreeView\Images\treeview-default-line.gif" />
@@ -443,6 +444,10 @@
     <ProjectReference Include="..\Apollo.CMS.Account\Apollo.CMS.Account.csproj">
       <Project>{BACD6814-DE1E-435B-8CF6-39F6CC22768A}</Project>
       <Name>Apollo.CMS.Account</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Apollo.CMS.BetList\Apollo.CMS.BetList.csproj">
+      <Project>{A8E9B68F-AF11-4E07-9A39-15C2949BCD07}</Project>
+      <Name>Apollo.CMS.BetList</Name>
     </ProjectReference>
     <ProjectReference Include="..\Apollo.CMS.Core\Apollo.CMS.Core.csproj">
       <Project>{FCD8A1C1-0EFB-4AFD-B8D4-98B56125235B}</Project>

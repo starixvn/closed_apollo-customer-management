@@ -32,6 +32,7 @@ namespace Apollo.CMS.Websites
             RegisterAccountInfoBundles(bundles);
             RegisterTreeviewBundles(bundles);
             RegisterAccountListBundles(bundles);
+            RegisterMemberBetListBundles(bundles);
 
             bundles.FileSetOrderList.Clear();
         }
@@ -200,6 +201,20 @@ namespace Apollo.CMS.Websites
 
             bundles.Add(new ScriptBundle("~/scripts/shadowList").Include(
                 "~/Areas/Account/Resources/AccountList/ShadowList.js"));
+        }
+
+        /// <summary>
+        /// Registers bundles for member's bet list function.
+        /// </summary>
+        /// <param name="bundles">The bundles collection.</param>
+        private static void RegisterMemberBetListBundles(BundleCollection bundles)
+        {
+            bundles.AddAndInclude(
+                "~/site/memberBetList",
+                "~/Areas/Account/Resources/MemberBetList/memberBetList.less");
+
+            bundles.Add(new ScriptBundle("~/scripts/memberBetList").Include(
+                "~/Areas/Account/Resources/MemberBetList/MemberBetList.js"));
         }
     }
 

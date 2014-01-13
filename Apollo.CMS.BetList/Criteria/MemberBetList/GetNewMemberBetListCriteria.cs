@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="GetWinLossOfLineCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GetNewMemberBetListCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,14 +9,21 @@
 
 namespace Apollo.CMS.BetList.Criteria.MemberBetList
 {
+    using System;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// The criteria that are used to get win loss details of the whole line.
+    /// The criteria that are used to get the bet list.
     /// </summary>
-    public class GetWinLossOfLineCriteria : CriteriaBase
+    public class GetNewMemberBetListCriteria : CriteriaBase
     {
-        public long TransId { get; set; }
+        public int CustId { get; set; }
+
+        public DateTime FromDate { get; set; }
+
+        public DateTime ToDate { get; set; }
+
+        public DateTime MoveBetsDay { get; set; }
 
         /// <summary>
         /// Get Setting Key.
@@ -24,7 +31,7 @@ namespace Apollo.CMS.BetList.Criteria.MemberBetList
         /// <returns>Setting key of the criteria.</returns>
         public override string GetSettingKey()
         {
-            return "Acc_BetList_GetDetailByTransId";
+            return "Acc_BetList_GetByCustomer";
         }
 
         /// <summary>

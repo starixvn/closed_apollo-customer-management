@@ -9,48 +9,49 @@ Namespace.Register("Apollo.CMS.Account.MemberBetList");
 Apollo.CMS.Account.MemberBetList = function () {
     var $this = this;
     var urls = {
-        MemberBetList: CMS.resolveRootUrl('Account/MemberBetList/GetMemberBetList'),
-        TicketDetail: CMS.resolveRootUrl('Account/MemberBetList/GetTicketDetail')
+        MemberBetList: CMS.resolveRootUrl('BetList/MemberBetList/GetMemberBetList'),
+        TicketDetail: CMS.resolveRootUrl('BetList/MemberBetList/GetTicketDetail')
     };
     var parameters = {
-        MemberId: null,
-        DateFrom: null,
-        DateTo: null,
+        CustId: null,
+        FromDate: null,
+        ToDate: null,
         PageIndex: null,
+        PageSize: null,
+        IsLoadNew: null
     };
 
     // Cache DOM elements
     var cacheDOM = function () {
         $this.DOMInstance.divFilterForm = $('#divFilterForm');
-        $this.DOMInstance.dpkDateFrom = $('#dpkDateFrom', $this.DOMInstance.divFilterForm);
-        $this.DOMInstance.dpkDateTo = $('#dpkDateTo', $this.DOMInstance.divFilterForm);
+        $this.DOMInstance.dpkFromDate = $('#dpkFromDate', $this.DOMInstance.divFilterForm);
+        $this.DOMInstance.dpkToDate = $('#dpkToDate', $this.DOMInstance.divFilterForm);
         $this.DOMInstance.btnGenerate = $('#btnGenerate', $this.DOMInstance.divFilterForm);
         $this.DOMInstance.divBetList = $('#divBetList');
     };
 
     // Initialize fields and handle events.
     var initFields = function () {
-        parameters.CustId = custId;
+        parameters.CustId = memberId;
         parameters.PageSize = pageSize;
-        parameters.IsOrderByAsc = true;
 
-        layoutHelper.CreateDatepicker($this.DOMInstance.dpkDateFrom, null, null, function (selectedDate) {
-            $this.DOMInstance.dpkDateTo.datepicker("option", "minDate", selectedDate);
+        layoutHelper.CreateDatepicker($this.DOMInstance.dpkFromDate, null, null, function (selectedDate) {
+            $this.DOMInstance.dpkToDate.datepicker("option", "minDate", selectedDate);
         }).datepicker('option', 'minDate', minDate).datepicker('option', 'maxDate', today);
 
-        layoutHelper.CreateDatepicker($this.DOMInstance.dpkDateTo, null, null, function (selectedDate) {
-            $this.DOMInstance.dpkDateFrom.datepicker("option", "maxDate", selectedDate);
+        layoutHelper.CreateDatepicker($this.DOMInstance.dpkToDate, null, null, function (selectedDate) {
+            $this.DOMInstance.dpkFromDate.datepicker("option", "maxDate", selectedDate);
         }).datepicker('option', 'minDate', minDate).datepicker('option', 'maxDate', today);
 
-        $this.DOMInstance.btnSubmit.on('click', function () {
-            parameters.MemberId = $.trim($this.DOMInstance.txtUsername.val());
-            parameters.DateFrom = $this.DOMInstance.ddlStatus.val();
-            parameters.DateTo = $this.DOMInstance.ddlBetStatus.val();
+        $this.DOMInstance.btnGenerate.on('click', function () {
+            parameters.FromDate = $this.DOMInstance.dpkFromDate.datepicker('getDate');
+            parameters.ToDate = $this.DOMInstance.dpkToDate.datepicker('getDate');
             parameters.PageIndex = 0;
+            parameters.IsLoadNew = true;
 
             getData();
         });
-        $this.DOMInstance.btnSubmit.click();
+        $this.DOMInstance.btnGenerate.click();
     };
 
     // Get data
@@ -65,7 +66,7 @@ Apollo.CMS.Account.MemberBetList = function () {
                 CMS.loadingBox.show();
             },
             success: function (result) {
-                renderTable(result.AgentList, result.TotalItems);
+                renderTable(result);
             },
             error: function (xhr, status, err) {
                 CMS.handleAjaxError(xhr, status, err);
@@ -88,7 +89,7 @@ Apollo.CMS.Account.MemberBetList = function () {
                 CMS.loadingBox.show();
             },
             success: function (result) {
-                renderTable(result.AgentList, result.TotalItems);
+                renderTable(result);
             },
             error: function (xhr, status, err) {
                 CMS.handleAjaxError(xhr, status, err);
@@ -99,8 +100,8 @@ Apollo.CMS.Account.MemberBetList = function () {
         });
     };
 
-    // Render data table for agent lisy.
-    var renderTable = function (data, totalItems) {
+    // Render data table for member bet list.
+    var renderTable = function (data) {
         var bodyData = [];
         var columns = [];
         var gridOptions = {
@@ -113,57 +114,43 @@ Apollo.CMS.Account.MemberBetList = function () {
             pagerOption: {
                 itemsPerPage: parameters.PageSize,
                 currentPage: parameters.PageIndex,
-                totalItem: totalItems,
+                totalItem: 100, //@@TODO
                 itemsPerPageArray: CMS.pageRanges,
                 pagerSelectCallBack: handleChangingPage
-            },
-            sortOption: {
-                serverSortFunction: handleSorting
             },
             gridExpandHeight: 250,
             bodyRowHeight: 30,
             bodyRows: bodyData
         };
 
-        $this.DOMInstance.divAgentList.addClass('hide');
-        hideContextMenu();
+        $this.DOMInstance.divBetList.addClass('hide');
 
         columns = [{ HeaderText: tableHeaders.No, Width: 70, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
-                   { HeaderText: tableHeaders.Edit, Width: 70, Name: 'ColEdit', HeaderAlign: 'center', CellAlign: 'center' },
-                   { HeaderText: tableHeaders.Username, Width: 180, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left', Sort: true, SortDirection: parameters.IsOrderByAsc ? 'asc' : 'desc' },
-                   { HeaderText: tableHeaders.Downline, Width: 100, Name: 'ColDownline', HeaderAlign: 'center', CellAlign: 'center' },
-                   { HeaderText: tableHeaders.Shadow, Width: 100, Name: 'ColShadow', HeaderAlign: 'center', CellAlign: 'center' },
-                   { HeaderText: tableHeaders.Status, Width: 100, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'center' },
-                   { HeaderText: tableHeaders.BetStatus, Width: 100, Name: 'ColBetStatus', HeaderAlign: 'center', CellAlign: 'center'}];
+                   { HeaderText: tableHeaders.TransTime, Width: 150, Name: 'ColTransTime', HeaderAlign: 'center', CellAlign: 'center' },
+                   { HeaderText: tableHeaders.Choice, Width: 180, Name: 'ColChoice', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: tableHeaders.Odds, Width: 100, Name: 'ColOdds', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: tableHeaders.Stake, Width: 100, Name: 'ColStake', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: tableHeaders.WinLoss, Width: 100, Name: 'ColWinLoss', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: tableHeaders.Status, Width: 100, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: tableHeaders.CompanyShare, Width: 150, Name: 'ColCompanyShare', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: tableHeaders.Feature, Width: 100, Name: 'ColFeature', HeaderAlign: 'center', CellAlign: 'center'}];
 
-        if (isSuper) {
-            columns.push({ HeaderText: tableHeaders.Currency, Width: 100, Name: 'ColCurrency', HeaderAlign: 'center', CellAlign: 'center' });
-        } else if (hasMember) {
-            columns.splice(4, 0, { HeaderText: tableHeaders.Member, Width: 100, Name: 'ColMember', HeaderAlign: 'center', CellAlign: 'center' });
-        } else {
-            $this.DOMInstance.divFilterForm.removeClass('filter-mainAgent').addClass('shareholder').attr('data-original-width', 822);
-        }
-
-        if (data && data.length > 0) {
+        if (data && data.BetItems && data.BetItems.length > 0) {
             var row = null;
 
-            $.each(data, function (index, item) {
+            $.each(data.BetItems, function (index, item) {
                 row =
                 {
                     Columns: [{ Name: 'ColNo', Value: index + 1 },
-                              { Name: 'ColEdit', Value: '<div class="icon-edit-link" data-agent-id="{0}"/>'.format(item.AgentId) },
-                              { Name: 'ColUsername', Value: item.Username },
-                              { Name: 'ColDownline', Value: item.NumberOfAgent > 0 ? '<span class="link downline" data-agent-id="{0}" data-agent-level="{1}">{2}</span>'.format(item.AgentId, item.AgentLevel, item.NumberOfAgent) : '0' },
-                              { Name: 'ColShadow', Value: item.NumberOfShadow > 0 ? '<span class="link shadow" data-agent-id="{0}" data-agent-level="{1}">{2}</span>'.format(item.AgentId, item.AgentLevel, item.NumberOfShadow) : '0' },
-                              { Name: 'ColStatus', Value: '<span class="{0}">{1}</span>'.format(item.ActualStatus.toLowerCase().replace(/\./g, ''), item.ActualStatus) },
-                              { Name: 'ColBetStatus', Value: '<span class="{0}">{1}</span>'.format(item.ActualBetStatus.toLowerCase().replace(/\./g, ''), item.ActualBetStatus)}]
+                              { Name: 'ColTransTime', Value: item.TransTimeCol },
+                              { Name: 'ColChoice', Value: item.ChoiceCol },
+                              { Name: 'ColOdds', Value: item.OddsCol },
+                              { Name: 'ColStake', Value: item.Stake },
+                              { Name: 'ColWinLoss', Value: item.WinLoss },
+                              { Name: 'ColStatus', Value: item.StatusCol },
+                              { Name: 'ColCompanyShare', Value: item.CompanyShare },
+                              { Name: 'ColFeature', Value: tableHeaders.Details}]
                 };
-
-                if (isSuper) {
-                    row.Columns.push({ Name: 'ColCurrency', Value: item.Currency });
-                } else if (hasMember) {
-                    row.Columns.splice(4, 0, { Name: 'ColMember', Value: item.NumberOfMember > 0 ? '<span class="link member" data-agent-id="{0}" data-agent-level="{1}">{2}</span>'.format(item.AgentId, item.AgentLevel, item.NumberOfMember) : '0' });
-                }
 
                 bodyData.push(row);
             });
@@ -171,21 +158,21 @@ Apollo.CMS.Account.MemberBetList = function () {
 
         gridOptions.columns = columns;
         gridOptions.bodyRows = bodyData;
-        $this.DOMInstance.divAgentList.removeClass('hide').fanexGrid(gridOptions);
-        bindGridEventhandlers();
+        $this.DOMInstance.divBetList.removeClass('hide').fanexGrid(gridOptions);
     };
 
     // Handle paging at server side.
     var handleChangingPage = function (pageIndex, itemsPerPage, data) {
         parameters.PageSize = itemsPerPage;
         parameters.PageIndex = pageIndex;
+        parameters.IsLoadNew = false;
         getData();
     };
 
     $this.DOMInstance = {
         divFilterForm: null,
-        dpkDateFrom: null,
-        dpkDateTo: null,
+        dpkFromDate: null,
+        dpkToDate: null,
         btnGenerate: null,
         divBetList: null
     };

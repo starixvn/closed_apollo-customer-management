@@ -1,35 +1,35 @@
 ﻿@using Apollo.CMS.Core.Constants
 @using Fanex.Common
 @{
-    var memberId = Converter.ToInt(ViewBag.CustId);
+    var username = Converter.ToString2(ViewBag.Username);
 
     ViewBag.Title = ViewLang.BetList;
     Layout = "~/Views/Shared/_PageLayout.cshtml";
 }
 @section Head {
     @Styles.Render("~/styles/fanexGrid")
-    @Styles.Render("~/site/accountList")
+    @Styles.Render("~/site/memberBetList")
 }
 @section HeadLine {
-    <h5 class="row title">ViewBag.Title</h5>
+    <h5 class="row title">@ViewBag.Title - @username</h5>
 }
 
-<div id="divFilterForm" class="row filter-form clearfix resizable-form filter-mainAgent" data-original-width="937">
+<div id="divFilterForm" class="row filter-form clearfix resizable-form filter-mainAgent" data-original-width="960">
     <div class="filter-row clearfix">
         <div class="filter-item">
             <div class="lbl width-auto">
-                <label for="dpkDateFrom">@ViewLang.DateRange</label>
+                <label for="dpkFromDate">@ViewLang.DateRange</label>
             </div>
             <div class="txt width-auto">
-                <input type="text" id="dpkDateFrom" />
+                <input type="text" id="dpkFromDate" />
             </div>
         </div>
         <div class="filter-item">
             <div class="lbl lbl-small">
-                <label for="dpkDateTo">@ViewLang.To</label>
+                <label for="dpkToDate">@ViewLang.To</label>
             </div>
             <div class="txt width-auto">
-                <input type="text" id="dpkDateTo" />
+                <input type="text" id="dpkToDate" />
             </div>
         </div>
         <div class="filter-item">
@@ -43,12 +43,11 @@
 
 @section Foot {
     @Scripts.Render("~/scripts/fanexGrid")
-    @Scripts.Render("~/scripts/agentList")
+    @Scripts.Render("~/scripts/memberBetList")
 
     <script type="text/javascript">
         var tableHeaders = {
             No: '#',
-            Edit: '@ViewLang.Edit',
             TransTime: '@ViewLang.TransTime',
             Member: '@ViewLang.Member',
             Choice: '@ViewLang.Choice',
@@ -57,12 +56,17 @@
             WinLoss: '@ViewLang.WinLoss',
             Status: '@ViewLang.Status',
             CompanyShare: '@ViewLang.CompanyShare',
-            Feature: '@ViewLang.Feature'
+            Feature: '@ViewLang.Feature',
+            Details: '@ViewLang.Details'
         };
         var detailTableHeaders = {
             Agent: '@ViewLang.Agent',
             Share: '@ViewLang.Share',
             Comm: '@ViewLang.Comm'
         };
+        var today = '@DateTime.Now.ToShortDateString()';
+        var minDate = '@ViewBag.StartDate';
+        var memberId = @Converter.ToInt(ViewBag.CustId);
+        var pageSize = @Converter.ToInt(ViewBag.PageSize);
     </script>
 }

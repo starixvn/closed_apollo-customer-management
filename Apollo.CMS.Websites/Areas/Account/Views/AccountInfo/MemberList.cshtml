@@ -1,6 +1,6 @@
 ﻿@using Apollo.CMS.Account.Models.AccountInfo
 @{
-    var members = (IEnumerable<Member>)ViewBag.Members;
+    var members = (IEnumerable<SuggestedMember>)ViewBag.Members;
 }
 <ul class="super-menu member-list list-unstyled">
     @if ((members != null) && (members.Count() > 0))

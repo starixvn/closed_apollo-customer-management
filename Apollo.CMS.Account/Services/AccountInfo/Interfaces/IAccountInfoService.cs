@@ -20,7 +20,7 @@ namespace Apollo.CMS.Account.Services.AccountInfo.Interfaces
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>List of suggested customers that have the username like the input username.</returns>
-        IEnumerable<Member> GetSuggestedCustomers(GetSuggestedCustomersByUsernameCriteria criteria);
+        IEnumerable<SuggestedMember> GetSuggestedCustomers(GetSuggestedCustomersByUsernameCriteria criteria);
 
         /// <summary>
         /// Gets the information of an agent.
@@ -41,14 +41,14 @@ namespace Apollo.CMS.Account.Services.AccountInfo.Interfaces
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>List of direct down line agents.</returns>
-        IEnumerable<Agent> GetDownlineAgents(GetDownlineAgentsCriteria criteria);
+        IEnumerable<SuggestedAgent> GetDownlineAgents(GetDownlineAgentsCriteria criteria);
 
         /// <summary>
         /// Gets the direct down line members of a customer.
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>List of direct down line members.</returns>
-        IEnumerable<Member> GetDownlineMembers(GetDownlineMembersCriteria criteria);
+        IEnumerable<SuggestedMember> GetDownlineMembers(GetDownlineMembersCriteria criteria);
 
         /// <summary>
         /// Gets up line agents of an specific agent.

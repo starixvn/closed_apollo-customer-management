@@ -25,9 +25,9 @@ namespace Apollo.CMS.Account.Services.AccountInfo.Implements
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>List of suggested customers that have the username like the input username.</returns>
-        public IEnumerable<Member> GetSuggestedCustomers(GetSuggestedCustomersByUsernameCriteria criteria)
+        public IEnumerable<SuggestedMember> GetSuggestedCustomers(GetSuggestedCustomersByUsernameCriteria criteria)
         {
-            return this.GetListData<Member>(criteria);
+            return this.GetListData<SuggestedMember>(criteria);
         }
 
         /// <summary>
@@ -55,9 +55,9 @@ namespace Apollo.CMS.Account.Services.AccountInfo.Implements
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>List of direct down line agents.</returns>
-        public IEnumerable<Agent> GetDownlineAgents(GetDownlineAgentsCriteria criteria)
+        public IEnumerable<SuggestedAgent> GetDownlineAgents(GetDownlineAgentsCriteria criteria)
         {
-            return this.GetListData<Agent>(criteria);
+            return this.GetListData<SuggestedAgent>(criteria);
         }
 
         /// <summary>
@@ -65,9 +65,9 @@ namespace Apollo.CMS.Account.Services.AccountInfo.Implements
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>List of direct down line members.</returns>
-        public IEnumerable<Member> GetDownlineMembers(GetDownlineMembersCriteria criteria)
+        public IEnumerable<SuggestedMember> GetDownlineMembers(GetDownlineMembersCriteria criteria)
         {
-            return this.GetListData<Member>(criteria);
+            return this.GetListData<SuggestedMember>(criteria);
         }
 
         /// <summary>

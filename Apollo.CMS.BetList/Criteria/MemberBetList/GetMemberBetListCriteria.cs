@@ -1,0 +1,31 @@
+﻿// --------------------------------------------------------------------------
+// <copyright file="GetMemberBetListCriteria.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Jason.Ly" date="2014.1.10">Created</change>
+// </history>
+
+namespace Apollo.CMS.BetList.Criteria.MemberBetList
+{
+    using System;
+
+    /// <summary>
+    /// The general criteria that are used to get the bet list from current used database and backup database.
+    /// </summary>
+    public class GetMemberBetListCriteria
+    {
+        public int CustId { get; set; }
+
+        public DateTime FromDate { get; set; }
+
+        public DateTime ToDate { get; set; }
+
+        public int PageIndex { get; set; }
+
+        public int PageSize { get; set; }
+
+        public bool IsLoadNew { get; set; }
+    }
+}

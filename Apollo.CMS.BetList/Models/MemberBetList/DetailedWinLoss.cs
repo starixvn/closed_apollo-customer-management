@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="LineWinLoss.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="DetailedWinLoss.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -14,8 +14,7 @@ namespace Apollo.CMS.BetList.Models.MemberBetList
     /// <summary>
     /// Win loss of each level in the line.
     /// </summary>
-    [Serializable]
-    public class LineWinLoss
+    public class DetailedWinLoss
     {
         public long? TransID { get; set; }
 
@@ -23,13 +22,13 @@ namespace Apollo.CMS.BetList.Models.MemberBetList
 
         public string Status { get; set; }
 
-        public decimal? APositionTaking { get; set; }
+        public decimal? PositionTaking { get; set; }
 
-        public decimal? ADiscount { get; set; }
+        public decimal? Discount { get; set; }
 
-        public decimal? AWinlost { get; set; }
+        public decimal? WinLoss { get; set; }
 
-        public decimal? AComm { get; set; }
+        public decimal? Comm { get; set; }
 
         public string Username { get; set; }
 

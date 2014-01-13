@@ -9,9 +9,14 @@
 
 namespace Apollo.CMS.BetList.Controllers
 {
+    using System.Web.Mvc;
+    using Apollo.CMS.BetList.Criteria.MemberBetList;
     using Apollo.CMS.BetList.Services.MemberBetList.Implements;
     using Apollo.CMS.BetList.Services.MemberBetList.Interfaces;
+    using Apollo.CMS.Core.Configurations;
     using Apollo.CMS.Core.Controllers;
+    using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Web.Attribute;
 
     /// <summary>
     /// Member's bet list controller.
@@ -28,6 +33,36 @@ namespace Apollo.CMS.BetList.Controllers
         public MemberBetListController(IMemberBetListService memberBetListService)
         {
             this._memberBetListService = memberBetListService ?? new MemberBetListService();
+            ViewBag.PageSize = AppSettings.DefaultPageSize;
+            ViewBag.StartDate = AppSettings.StartDate.ToShortDateString();
+        }
+
+        /// <summary>
+        /// Redirect index page.
+        /// </summary>
+        /// <param name="custId">Customer ID.</param>
+        /// <param name="username">Customer's username.</param>
+        /// <returns>Index view.</returns>
+        [HttpGet]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewBetList, Policy = Constant.Policy.Read)]
+        public ActionResult Index(int custId, string username)
+        {
+            ViewBag.CustId = custId;
+            ViewBag.Username = username;
+
+            return View("~/Areas/Account/Views/MemberBetList/Index.cshtml");
+        }
+
+        /// <summary>
+        /// Gets the member bet list.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>The JSON list contains bet list of member.</returns>
+        [HttpPost]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewBetList, Policy = Constant.Policy.Read)]
+        public JsonResult GetMemberBetList(GetMemberBetListCriteria criteria)
+        {
+            return Json(this._memberBetListService.GetPagedBetList(criteria));
         }
     }
 }

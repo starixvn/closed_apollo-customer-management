@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="Agent.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SuggestedAgent.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -12,7 +12,7 @@ namespace Apollo.CMS.Account.Models.AccountInfo
     /// <summary>
     /// Suggested agent model.
     /// </summary>
-    public class Agent
+    public class SuggestedAgent
     {
         public int AgentId { get; set; }
 

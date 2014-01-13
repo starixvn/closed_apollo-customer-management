@@ -14,7 +14,6 @@ namespace Apollo.CMS.BetList.Models.MemberBetList
     /// <summary>
     /// Bet ticket model.
     /// </summary>
-    [Serializable]
     public class BetTicket
     {
         public long? TransId { get; set; }
@@ -55,7 +54,7 @@ namespace Apollo.CMS.BetList.Models.MemberBetList
 
         public decimal? Stake { get; set; }
 
-        public decimal? Actual_Stake { get; set; }
+        public decimal? ActualStake { get; set; }
 
         public DateTime? TransDate { get; set; }
 
@@ -65,17 +64,17 @@ namespace Apollo.CMS.BetList.Models.MemberBetList
 
         public decimal? PlayerDiscount { get; set; }
 
-        public decimal? Winlost { get; set; }
+        public decimal? WinLoss { get; set; }
 
         public decimal? PlayerComm { get; set; }
 
-        public decimal? APositionTaking { get; set; }
+        public decimal? CompanyPositionTaking { get; set; }
 
-        public decimal? ADiscount { get; set; }
+        public decimal? CompanyDiscount { get; set; }
 
-        public decimal? AWinlost { get; set; }
+        public decimal? CompanyWinLoss { get; set; }
 
-        public decimal? AComm { get; set; }
+        public decimal? CompanyComm { get; set; }
 
         public short? LiveHomeScore { get; set; }
 

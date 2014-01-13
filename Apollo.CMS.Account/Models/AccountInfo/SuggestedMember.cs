@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="Member.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SuggestedMember.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -12,7 +12,7 @@ namespace Apollo.CMS.Account.Models.AccountInfo
     /// <summary>
     /// Suggested member model.
     /// </summary>
-    public class Member
+    public class SuggestedMember
     {
         public int CustId { get; set; }
 

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="GetBetListCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GetOldMemberBetListCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -13,15 +13,15 @@ namespace Apollo.CMS.BetList.Criteria.MemberBetList
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// The criteria that are used to get the bet list.
+    /// The criteria that are used to get the bet list from backup database.
     /// </summary>
-    public class GetBetListCriteria : CriteriaBase
+    public class GetOldMemberBetListCriteria : CriteriaBase
     {
         public int CustId { get; set; }
 
         public DateTime FromDate { get; set; }
 
-        public DateTime Todate { get; set; }
+        public DateTime ToDate { get; set; }
 
         public DateTime MoveBetsDay { get; set; }
 
@@ -31,7 +31,7 @@ namespace Apollo.CMS.BetList.Criteria.MemberBetList
         /// <returns>Setting key of the criteria.</returns>
         public override string GetSettingKey()
         {
-            return "Acc_BetList_GetByCustomer";
+            return "Acc_BetList_GetByCustomer_Old";
         }
 
         /// <summary>
