@@ -7,7 +7,7 @@
 //   <change who="Terry.Nguyen" date="2013.12.4">Created</change>
 // </history>
 
-namespace Apollo.CMS.Account.Services.TreeView.Interfaces
+namespace Apollo.CMS.Account.Services.Interfaces
 {
     using System.Collections.Generic;
     using Apollo.CMS.Account.Criteria.TreeView;

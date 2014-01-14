@@ -7,13 +7,13 @@
 //   <change who="Terry.Nguyen" date="2013.12.4">Created</change>
 // </history>
 
-namespace Apollo.CMS.Account.Services.TreeView.Implements
+namespace Apollo.CMS.Account.Services.Implements
 {
     using System.Collections.Generic;
     using System.Linq;
     using Apollo.CMS.Account.Criteria.TreeView;
     using Apollo.CMS.Account.Models.TreeView;
-    using Apollo.CMS.Account.Services.TreeView.Interfaces;
+    using Apollo.CMS.Account.Services.Interfaces;
     using Apollo.CMS.Core.Services;
 
     /// <summary>

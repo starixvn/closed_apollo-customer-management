@@ -11,8 +11,8 @@ namespace Apollo.CMS.BetList.Controllers
 {
     using System.Web.Mvc;
     using Apollo.CMS.BetList.Criteria.MemberBetList;
-    using Apollo.CMS.BetList.Services.MemberBetList.Implements;
-    using Apollo.CMS.BetList.Services.MemberBetList.Interfaces;
+    using Apollo.CMS.BetList.Services.Implements;
+    using Apollo.CMS.BetList.Services.Interfaces;
     using Apollo.CMS.Core.Configurations;
     using Apollo.CMS.Core.Controllers;
     using Fanex.NAP.Core.Business;

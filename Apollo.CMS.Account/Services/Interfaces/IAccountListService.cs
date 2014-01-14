@@ -7,7 +7,7 @@
 //   <change who="Jason.Ly" date="2013.12.18">Created</change>
 // </history>
 
-namespace Apollo.CMS.Account.Services.AccountList.Interfaces
+namespace Apollo.CMS.Account.Services.Interfaces
 {
     using System.Collections.Generic;
     using Apollo.CMS.Account.Criteria.AccountList;

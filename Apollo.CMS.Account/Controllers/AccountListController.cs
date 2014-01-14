@@ -13,8 +13,8 @@ namespace Apollo.CMS.Account.Controllers
     using System.Web.Mvc;
     using Apollo.CMS.Account.Criteria.AccountList;
     using Apollo.CMS.Account.Models.AccountList;
-    using Apollo.CMS.Account.Services.AccountList.Implements;
-    using Apollo.CMS.Account.Services.AccountList.Interfaces;
+    using Apollo.CMS.Account.Services.Implements;
+    using Apollo.CMS.Account.Services.Interfaces;
     using Apollo.CMS.Core.Configurations;
     using Apollo.CMS.Core.Constants;
     using Apollo.CMS.Core.Controllers;

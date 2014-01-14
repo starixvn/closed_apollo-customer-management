@@ -7,12 +7,12 @@
 //   <change who="Jason.Ly" date="2013.12.18">Created</change>
 // </history>
 
-namespace Apollo.CMS.Account.Services.AccountList.Implements
+namespace Apollo.CMS.Account.Services.Implements
 {
     using System.Collections.Generic;
     using Apollo.CMS.Account.Criteria.AccountList;
     using Apollo.CMS.Account.Models.AccountList;
-    using Apollo.CMS.Account.Services.AccountList.Interfaces;
+    using Apollo.CMS.Account.Services.Interfaces;
     using Apollo.CMS.Core.Services;
 
     /// <summary>

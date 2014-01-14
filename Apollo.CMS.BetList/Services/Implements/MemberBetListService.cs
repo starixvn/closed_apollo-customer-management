@@ -7,14 +7,14 @@
 //   <change who="Jason.Ly" date="2014.01.10">Created</change>
 // </history>
 
-namespace Apollo.CMS.BetList.Services.MemberBetList.Implements
+namespace Apollo.CMS.BetList.Services.Implements
 {
     using System.Collections.Generic;
     using System.Linq;
     using Apollo.CMS.BetList.Criteria.MemberBetList;
     using Apollo.CMS.BetList.Helpers;
     using Apollo.CMS.BetList.Models.MemberBetList;
-    using Apollo.CMS.BetList.Services.MemberBetList.Interfaces;
+    using Apollo.CMS.BetList.Services.Interfaces;
     using Apollo.CMS.BetList.ViewModels.MemberBetList;
     using Apollo.CMS.Core.Models;
     using Apollo.CMS.Core.Services;
