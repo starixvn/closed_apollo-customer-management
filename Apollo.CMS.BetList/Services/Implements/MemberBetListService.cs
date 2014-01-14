@@ -67,18 +67,26 @@ namespace Apollo.CMS.BetList.Services.Implements
                 TransId = criteria.TransId,
                 IsBackupData = balanceUp.BalanceUpDay > criteria.TransDate
             };
-            IEnumerable<DetailedWinLossItem> result = null;
+            List<DetailedWinLossItem> result = null;
             IEnumerable<DetailedWinLoss> rawData = this.GetListData<DetailedWinLoss>(detailedWinLossCriteria);
 
-            result = rawData.Select(obj => new DetailedWinLossItem
+            if ((rawData != null) && rawData.Any())
             {
-                Username = obj.Username,
-                PositionTaking = obj.PositionTaking,
-                WinLoss = obj.WinLoss,
-                Discount = obj.WinLoss,
-                Comm = obj.Comm,
-                IsSuper = Converter.ToInt(obj.AgentLevel) == (int)HighLevelAgents.Super
-            });
+                result = new List<DetailedWinLossItem>();
+
+                foreach (DetailedWinLoss record in rawData)
+                {
+                    result.Add(new DetailedWinLossItem
+                    {
+                        Username = record.Username,
+                        PositionTaking = record.PositionTaking,
+                        WinLoss = record.WinLoss,
+                        Discount = record.WinLoss,
+                        Comm = record.Comm,
+                        IsSuper = Converter.ToInt(record.AgentLevel) == (int)HighLevelAgents.Super
+                    });
+                }
+            }
 
             return result;
         }

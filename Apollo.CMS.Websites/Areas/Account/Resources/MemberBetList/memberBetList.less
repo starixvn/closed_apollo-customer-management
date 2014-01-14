@@ -1,4 +1,7 @@
 ﻿/* File Created: January 13, 2014 */
+@import "../../../../Content/site/variables.less";
+@import "../../../../Content/site/mixins.less";
+
 .container.page .content .mainContent .container-content {
     .display-none {
         display: none;
@@ -16,25 +19,55 @@
         margin-top: 10px;
         clear: both;
         width: 100%;
-        
-        .grid-container.container {
-            padding:0;
-        }
     }
 }
 
  .ui-dialog {
-    min-width: 800px;
+    min-width: 570px;
 
     .ui-dialog-content {
         max-height: 700px;
-        min-width: 800px;
+        min-width: 550px;
     }
 }
 
 /* FANEX Grid */
 
 .freegrid {
+    .grid-container.container {
+        padding:0;
 
-    
+        .trans-time {
+            font-weight: bold;
+
+            .time {
+                font-weight: normal;
+            }
+        }
+
+        .oddstype {
+            color: @gray-color;
+        }
+
+        .link, .iplink {
+            color: @link-color;
+            cursor: pointer;
+
+            &:hover {
+                color: @hover-link-color;
+            }
+        }
+
+        .result {
+            display: none;
+        }
+
+        .underdog > font {
+            color: @red-color !important;
+        }
+    }
+    .table-cell {
+        //padding-right: 5px;
+        //padding-left: 5px;
+    }
 }

@@ -82,7 +82,7 @@ Apollo.CMS.Account.MemberBetList = function () {
     var getTicketData = function (transId, transDate) {
         var params = {
             TransId: transId,
-            TransDate: transDate
+            TransDate: moment(transDate)
         };
 
         $.ajax({
@@ -97,7 +97,7 @@ Apollo.CMS.Account.MemberBetList = function () {
             success: function (result) {
                 var title = '{0} - {1}: {2}'.format(detailTableHeaders.ViewDetails, detailTableHeaders.RefNo, transId);
 
-                pageLayout.Popup(title, $this.DOMInstance.divDetailedWinLossList, null, false);
+                pageLayout.Popup(title, $this.DOMInstance.divDetailedWinLossList, null, true);
                 renderDetailTable(result);
             },
             error: function (xhr, status, err) {
@@ -131,7 +131,8 @@ Apollo.CMS.Account.MemberBetList = function () {
         };
 
         // Element formats.
-        var detailColFormat = '<span class="winloss-details" data-ref-no="{0}" data-trans-date="{1}">{2}</span>';
+        var detailColFormat = '<span class="winloss-details" data-ref-no="{0}" data-trans-date="{1}" />{2}</span>';
+        var transTimeColFormat = '<div class="trans-time">{0}</div>';
 
         $this.DOMInstance.divBetList.addClass('hide');
 
@@ -139,7 +140,7 @@ Apollo.CMS.Account.MemberBetList = function () {
         columns = [{ HeaderText: tableHeaders.No, Width: 70, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
                    { HeaderText: tableHeaders.TransTime, Width: 150, Name: 'ColTransTime', HeaderAlign: 'center', CellAlign: 'center' },
                    { HeaderText: tableHeaders.Choice, Width: 260, Name: 'ColChoice', HeaderAlign: 'center', CellAlign: 'right' },
-                   { HeaderText: tableHeaders.Odds, Width: 50, Name: 'ColOdds', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: tableHeaders.Odds, Width: 100, Name: 'ColOdds', HeaderAlign: 'center', CellAlign: 'right' },
                    { HeaderText: tableHeaders.Stake, Width: 120, Name: 'ColStake', HeaderAlign: 'center', CellAlign: 'right' },
                    { HeaderText: tableHeaders.WinLoss, Width: 120, Name: 'ColWinLoss', HeaderAlign: 'center', CellAlign: 'right' },
                    { HeaderText: tableHeaders.Status, Width: 100, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'right' },
@@ -154,13 +155,13 @@ Apollo.CMS.Account.MemberBetList = function () {
                 row =
                 {
                     Columns: [{ Name: 'ColNo', Value: index + 1 },
-                              { Name: 'ColTransTime', Value: item.TransTimeCol },
+                              { Name: 'ColTransTime', Value: transTimeColFormat.format(item.TransTimeCol) },
                               { Name: 'ColChoice', Value: item.ChoiceCol },
                               { Name: 'ColOdds', Value: item.OddsCol },
-                              { Name: 'ColStake', Value: item.Stake },
-                              { Name: 'ColWinLoss', Value: item.WinLoss },
+                              { Name: 'ColStake', Value: formatNumberCol(item.Stake) },
+                              { Name: 'ColWinLoss', Value: formatNumberCol(item.WinLoss, false, item.Comm) },
                               { Name: 'ColStatus', Value: item.StatusCol },
-                              { Name: 'ColCompanyShare', Value: item.CompanyShare },
+                              { Name: 'ColCompanyShare', Value: formatNumberCol(item.CompanyShare, true, item.CompanyWinLoss) },
                               { Name: 'ColDetails', Value: detailColFormat.format(item.TransId, item.TransDate, tableHeaders.Details)}]
                 };
 
@@ -183,6 +184,8 @@ Apollo.CMS.Account.MemberBetList = function () {
         parameters.IsLoadNew = false;
         getData();
     };
+
+    // Handle events raised in the grid.
     var handleGridEvents = function () {
         $this.DOMInstance.divBetList.find('span.winloss-details').on('click', function () {
             var $obj = $(this);
@@ -207,20 +210,20 @@ Apollo.CMS.Account.MemberBetList = function () {
         $this.DOMInstance.divDetailedWinLossList.addClass('hide');
 
         // Configure grid's columns.
-        columns = [{ HeaderText: detailTableHeaders.Agent, Width: 200, Name: 'ColAgent', HeaderAlign: 'center', CellAlign: 'left' },
-                   { HeaderText: detailTableHeaders.Share, Width: 100, Name: 'ColShare', HeaderAlign: 'center', CellAlign: 'right' },
-                   { HeaderText: detailTableHeaders.Comm, Width: 100, Name: 'ColComm', HeaderAlign: 'center', CellAlign: 'right' }];
+        columns = [{ HeaderText: detailTableHeaders.Agent, Width: 250, Name: 'ColAgent', HeaderAlign: 'center', CellAlign: 'left' },
+                   { HeaderText: detailTableHeaders.Share, Width: 130, Name: 'ColShare', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: detailTableHeaders.Comm, Width: 130, Name: 'ColComm', HeaderAlign: 'center', CellAlign: 'right'}];
 
         // Push data to grid.
-        if (data && data.BetItems && data.BetItems.length > 0) {
+        if (data && data.length > 0) {
             var row = null;
 
-            $.each(data.BetItems, function (index, item) {
+            $.each(data, function (index, item) {
                 row =
                 {
                     Columns: [{ Name: 'ColAgent', Value: item.Username },
-                              { Name: 'ColShare', Value: item.PositionTaking },
-                              { Name: 'ColComm', Value: item.ColComm}]
+                              { Name: 'ColShare', Value: formatNumberCol(item.PositionTaking, true, item.WinLoss) },
+                              { Name: 'ColComm', Value: !item.IsSuper ? formatNumberCol(item.Discount, true, item.Comm) : 'N/A'}]
                 };
 
                 bodyData.push(row);
@@ -231,6 +234,32 @@ Apollo.CMS.Account.MemberBetList = function () {
         gridOptions.bodyRows = bodyData;
         $this.DOMInstance.divDetailedWinLossList.removeClass('hide').fanexGrid(gridOptions);
     };
+
+    // Format number column.
+    var formatNumberCol = function (firstNumber, isPercent, secondNumber, thirdNumber) {
+        var formattedStr = '';
+        var cssClass = '';
+
+        if ($.isNumeric(firstNumber)) {
+            var percent = isPercent ? '%' : '';
+
+            cssClass = firstNumber < 0 ? 'format-negative' : '';
+            firstNumber = isPercent ? firstNumber * 100 : firstNumber;
+            formattedStr += '<span class="{0}">{1}{2}</span>'.format(cssClass, numeral(firstNumber).format(CMS.commonConstants.DecimalFormat), percent);
+        }
+
+        if ($.isNumeric(secondNumber)) {
+            cssClass = secondNumber < 0 ? 'format-negative' : '';
+            formattedStr += '<br/><span class="{0}">{1}</span>'.format(cssClass, numeral(secondNumber).format(CMS.commonConstants.DecimalFormat));
+        }
+
+        if ($.isNumeric(thirdNumber)) {
+            cssClass = thirdNumber < 0 ? 'format-negative' : '';
+            formattedStr += '<br/><span class="{0}">{1}</span>'.format(cssClass, numeral(thirdNumber).format(CMS.commonConstants.DecimalFormat));
+        }
+
+        return formattedStr;
+    }
 
     $this.DOMInstance = {
         divFilterForm: null,

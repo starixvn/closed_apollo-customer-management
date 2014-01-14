@@ -12,6 +12,7 @@ namespace Apollo.CMS.BetList.Helpers
     using System.Collections.Generic;
     using System.Linq;
     using Apollo.CMS.BetList.Models.MemberBetList;
+    using Apollo.CMS.Core.Constants;
     using Fanex.BetList.Core.Entities;
     using Fanex.Common;
 
@@ -27,7 +28,32 @@ namespace Apollo.CMS.BetList.Helpers
         /// <returns>The odd name.</returns>
         public static string GetOddTypeName(object id)
         {
-            return string.Empty;
+            var oddName = string.Empty;
+
+            switch ((OddTypes)id)
+            {
+                case OddTypes.Dec:
+                    oddName = OddTypeNames.Dec;
+                    break;
+
+                case OddTypes.Hk:
+                    oddName = OddTypeNames.Hk;
+                    break;
+
+                case OddTypes.Indo:
+                    oddName = OddTypeNames.Indo;
+                    break;
+
+                case OddTypes.My:
+                    oddName = OddTypeNames.My;
+                    break;
+
+                case OddTypes.Us:
+                    oddName = OddTypeNames.Us;
+                    break;
+            }
+
+            return oddName;
         }
 
         /// <summary>
@@ -54,6 +80,7 @@ namespace Apollo.CMS.BetList.Helpers
                         Handicap1 = Converter.ToDecimal(item.Hdp1),
                         Handicap2 = Converter.ToDecimal(item.Hdp2),
                         Odds = Converter.ToDecimal(item.Odds),
+                        OddsType = Converter.ToString2(item.OddsType),
                         BetTeam = item.BetTeam,
                         EventStatus = item.BetStatus,
                         LiveHomeScore = Converter.ToInt(item.LiveHomeScore),
