@@ -8,6 +8,7 @@ $(document).ready(function () {
 Namespace.Register("Apollo.CMS.Account.MemberBetList");
 Apollo.CMS.Account.MemberBetList = function () {
     var $this = this;
+    var pageRanges = [10, 50, 100, 200, 500];
     var urls = {
         MemberBetList: CMS.resolveRootUrl('BetList/MemberBetList/GetMemberBetList'),
         TicketDetail: CMS.resolveRootUrl('BetList/MemberBetList/GetTicketDetail')
@@ -122,7 +123,7 @@ Apollo.CMS.Account.MemberBetList = function () {
             pagerOption: {
                 itemsPerPage: parameters.PageSize,
                 currentPage: parameters.PageIndex,
-                itemsPerPageArray: CMS.pageRanges,
+                itemsPerPageArray: pageRanges,
                 pagerSelectCallBack: handleChangingPage
             },
             gridExpandHeight: 250,
