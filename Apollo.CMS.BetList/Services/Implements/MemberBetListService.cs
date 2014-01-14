@@ -16,12 +16,14 @@ namespace Apollo.CMS.BetList.Services.Implements
     using Apollo.CMS.BetList.Models.MemberBetList;
     using Apollo.CMS.BetList.Services.Interfaces;
     using Apollo.CMS.BetList.ViewModels.MemberBetList;
+    using Apollo.CMS.Core.Constants;
     using Apollo.CMS.Core.Models;
     using Apollo.CMS.Core.Services;
     using Fanex.BetList.Core.Builder;
     using Fanex.BetList.Core.Entities;
     using Fanex.BetList.Core.Factories;
     using Fanex.BetList.Core.TicketHelper;
+    using Fanex.Common;
 
     /// <summary>
     /// Member's bet list service.
@@ -35,9 +37,8 @@ namespace Apollo.CMS.BetList.Services.Implements
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>The bet items of a page.</returns>
-        public BetList GetPagedBetList(GetMemberBetListCriteria criteria)
+        public BetList GetPagedBetList(MemberBetListFilter criteria)
         {
-            List<BetTicket> pageData = null;
             BetList result = null;
 
             if (criteria.IsLoadNew || _ticketList == null)
@@ -47,34 +48,69 @@ namespace Apollo.CMS.BetList.Services.Implements
 
             if (_ticketList.Any())
             {
-                pageData = _ticketList.GetRange(criteria.PageIndex * criteria.PageSize, criteria.PageSize);
-                result = GetPagedBetList(pageData);
+                result = SeparateBetListToPage(criteria);
             }
 
             return result;
         }
 
         /// <summary>
-        /// Converts raw bet list data from database to appropriate format.
+        /// Gets the detailed win loss of the whole line.
         /// </summary>
-        /// <param name="rawData">The raw data.</param>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>The win loss list.</returns>
+        public IEnumerable<DetailedWinLossItem> GetDetailWinLossList(DetailedWinLossFilter criteria)
+        {
+            BalanceUp balanceUp = this.BalanceUp;
+            var detailedWinLossCriteria = new GetDetailedWinLossCriteria
+            {
+                TransId = criteria.TransId,
+                IsBackupData = balanceUp.BalanceUpDay > criteria.TransDate
+            };
+            IEnumerable<DetailedWinLossItem> result = null;
+            IEnumerable<DetailedWinLoss> rawData = this.GetListData<DetailedWinLoss>(detailedWinLossCriteria);
+
+            result = rawData.Select(obj => new DetailedWinLossItem
+            {
+                Username = obj.Username,
+                PositionTaking = obj.PositionTaking,
+                WinLoss = obj.WinLoss,
+                Discount = obj.WinLoss,
+                Comm = obj.Comm,
+                IsSuper = Converter.ToInt(obj.AgentLevel) == (int)HighLevelAgents.Super
+            });
+
+            return result;
+        }
+
+        /// <summary>
+        /// Separate the bet list into pages.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>Formatted bet list.</returns>
-        private BetList GetPagedBetList(List<BetTicket> rawData)
+        private BetList SeparateBetListToPage(MemberBetListFilter criteria)
         {
             var result = new BetList();
+            List<BetTicket> pagedData = null;
+            int startIndex = criteria.PageIndex * criteria.PageSize;
+            int endIndex = startIndex + criteria.PageSize;
 
-            if (rawData != null && rawData.Any())
+            endIndex = endIndex > _ticketList.Count ? _ticketList.Count : endIndex;
+            pagedData = _ticketList.GetRange(startIndex, endIndex - startIndex);
+            result.TotalItems = _ticketList.Count;
+
+            if (pagedData != null && pagedData.Any())
             {
                 BetListHTMLFactory factory = new BetListHTMLFactory();
                 BetListHTMLBuilder builder = factory.CreateBuilder();
                 ITicketHelper ticketHelper = new TicketHelper { IsShowOddsWithChoice = true };
-                IEnumerable<ITicket> tickets = BetListHelper.Map(rawData);
+                IEnumerable<ITicket> tickets = BetListHelper.Map(pagedData);
 
                 foreach (ITicket ticket in tickets)
                 {
                     result.Add(new BetItem
                     {
-                        RefNo = ticket.RefNo,
+                        TransId = ticket.TransId,
                         TransDate = ticket.TransDate,
                         Stake = ticket.Stake,
                         WinLoss = ticket.Winlost,
@@ -96,52 +132,37 @@ namespace Apollo.CMS.BetList.Services.Implements
         /// Gets the bet ticket list.
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
-        private void GetBetTicket(GetMemberBetListCriteria criteria)
+        private void GetBetTicket(MemberBetListFilter criteria)
         {
             BalanceUp balanceUp = this.BalanceUp;
+            var betListCriteria = new GetMemberBetListCriteria
+            {
+                MoveBetsDay = balanceUp.MoveBetsDay,
+                CustId = criteria.CustId
+            };
+
             _ticketList = new List<BetTicket>();
 
-            if (balanceUp.BalanceUpDay < criteria.FromDate)
+            if ((criteria.FromDate < balanceUp.BalanceUpDay) && (balanceUp.BalanceUpDay < criteria.ToDate))
             {
-                var newBetListCriteria = new GetNewMemberBetListCriteria
-                {
-                    FromDate = criteria.FromDate,
-                    ToDate = criteria.ToDate,
-                    MoveBetsDay = balanceUp.MoveBetsDay,
-                    CustId = criteria.CustId
-                };
+                // Gets data from archive database.
+                betListCriteria.FromDate = criteria.FromDate;
+                betListCriteria.ToDate = balanceUp.BalanceUpDay.AddDays(-1);
+                betListCriteria.IsBackupData = true;
+                _ticketList.AddRange(this.GetListData<BetTicket>(betListCriteria));
 
-                _ticketList.AddRange(this.GetListData<BetTicket>(newBetListCriteria));
-            }
-            else if (criteria.ToDate < balanceUp.BalanceUpDay)
-            {
-                var oldBetListCriteria = new GetOldMemberBetListCriteria
-                {
-                    FromDate = criteria.FromDate,
-                    ToDate = criteria.ToDate,
-                    CustId = criteria.CustId
-                };
-
-                _ticketList.AddRange(this.GetListData<BetTicket>(oldBetListCriteria));
+                // Gets data from current using database.
+                betListCriteria.FromDate = balanceUp.BalanceUpDay;
+                betListCriteria.ToDate = criteria.ToDate;
+                betListCriteria.IsBackupData = false;
+                _ticketList.AddRange(this.GetListData<BetTicket>(betListCriteria));
             }
             else
             {
-                var newBetListCriteria = new GetNewMemberBetListCriteria
-                {
-                    FromDate = balanceUp.BalanceUpDay,
-                    ToDate = criteria.ToDate,
-                    MoveBetsDay = balanceUp.MoveBetsDay,
-                    CustId = criteria.CustId
-                };
-                var oldBetListCriteria = new GetOldMemberBetListCriteria
-                {
-                    FromDate = criteria.FromDate,
-                    ToDate = balanceUp.BalanceUpDay.AddDays(-1),
-                    CustId = criteria.CustId
-                };
-
-                _ticketList.AddRange(this.GetListData<BetTicket>(newBetListCriteria));
-                _ticketList.AddRange(this.GetListData<BetTicket>(newBetListCriteria));
+                betListCriteria.FromDate = criteria.FromDate;
+                betListCriteria.ToDate = criteria.ToDate;
+                betListCriteria.IsBackupData = balanceUp.BalanceUpDay > criteria.ToDate;
+                _ticketList.AddRange(this.GetListData<BetTicket>(betListCriteria));
                 _ticketList = _ticketList.OrderBy(obj => obj.TransId).ToList();
             }
         }

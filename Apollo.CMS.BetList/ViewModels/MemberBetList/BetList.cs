@@ -37,6 +37,8 @@ namespace Apollo.CMS.BetList.ViewModels.MemberBetList
 
         public int Counter { get; set; }
 
+        public int TotalItems { get; set; }
+
         /// <summary>
         /// Adds a specified item to the bet list.
         /// </summary>

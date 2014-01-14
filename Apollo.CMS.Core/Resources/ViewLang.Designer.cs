@@ -637,6 +637,15 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ref No.
+        /// </summary>
+        public static string RefNo {
+            get {
+                return ResourceManager.GetString("RefNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Register Date.
         /// </summary>
         public static string RegisterDate {
@@ -651,15 +660,6 @@ namespace Apollo.CMS.Core.Resources {
         public static string Remove {
             get {
                 return ResourceManager.GetString("Remove", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Remove.
-        /// </summary>
-        public static string Remove1 {
-            get {
-                return ResourceManager.GetString("Remove1", resourceCulture);
             }
         }
         
@@ -921,6 +921,15 @@ namespace Apollo.CMS.Core.Resources {
         public static string Vietnamese {
             get {
                 return ResourceManager.GetString("Vietnamese", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Details.
+        /// </summary>
+        public static string ViewDetails {
+            get {
+                return ResourceManager.GetString("ViewDetails", resourceCulture);
             }
         }
         

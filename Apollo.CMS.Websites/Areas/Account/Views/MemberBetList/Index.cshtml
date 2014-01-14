@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="filter-item">
-            <div class="lbl lbl-small">
+            <div class="lbl width-auto">
                 <label for="dpkToDate">@ViewLang.To</label>
             </div>
             <div class="txt width-auto">
@@ -39,6 +39,9 @@
 </div>
 <div class="row content-grid">
     <div id="divBetList" class="freegrid hide resizable-grid"></div>
+</div>
+<div class="row content-grid hide">
+    <div id="divDetailedWinLossList" class="freegrid"></div>
 </div>
 
 @section Foot {
@@ -56,10 +59,11 @@
             WinLoss: '@ViewLang.WinLoss',
             Status: '@ViewLang.Status',
             CompanyShare: '@ViewLang.CompanyShare',
-            Feature: '@ViewLang.Feature',
             Details: '@ViewLang.Details'
         };
         var detailTableHeaders = {
+            ViewDetails: '@ViewLang.ViewDetails',
+            RefNo: '@ViewLang.RefNo',
             Agent: '@ViewLang.Agent',
             Share: '@ViewLang.Share',
             Comm: '@ViewLang.Comm'

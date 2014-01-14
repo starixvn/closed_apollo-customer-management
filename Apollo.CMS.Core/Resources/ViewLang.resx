@@ -312,9 +312,6 @@
   <data name="Recipient" xml:space="preserve">
     <value>Recipient</value>
   </data>
-  <data name="Remove1" xml:space="preserve">
-    <value>Remove</value>
-  </data>
   <data name="RemoveMessageConfirm" xml:space="preserve">
     <value>Are you sure you want to remove the message?</value>
   </data>
@@ -413,5 +410,11 @@
   </data>
   <data name="Details" xml:space="preserve">
     <value>Details</value>
+  </data>
+  <data name="RefNo" xml:space="preserve">
+    <value>Ref No</value>
+  </data>
+  <data name="ViewDetails" xml:space="preserve">
+    <value>View Details</value>
   </data>
 </root>

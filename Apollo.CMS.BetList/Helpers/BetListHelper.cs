@@ -65,6 +65,7 @@ namespace Apollo.CMS.BetList.Helpers
                         MatchId = Converter.ToInt(item.MatchId),
                         MatchCode = item.MatchCode,
                         Status = item.Status,
+                        StatusId = item.StatusId,
                         Stake = Converter.ToDecimal(item.Stake),
                         Winlost = Converter.ToDecimal(item.WinLoss),
                         Comm = Converter.ToDecimal(item.PlayerComm),

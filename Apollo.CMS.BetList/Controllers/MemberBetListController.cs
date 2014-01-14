@@ -60,9 +60,21 @@ namespace Apollo.CMS.BetList.Controllers
         /// <returns>The JSON list contains bet list of member.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewBetList, Policy = Constant.Policy.Read)]
-        public JsonResult GetMemberBetList(GetMemberBetListCriteria criteria)
+        public JsonResult GetMemberBetList(MemberBetListFilter criteria)
         {
             return Json(this._memberBetListService.GetPagedBetList(criteria));
+        }
+
+        /// <summary>
+        /// Gets the detailed win loss of a whole line.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>The JSON list contains win loss list of a ticket.</returns>
+        [HttpPost]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewBetList, Policy = Constant.Policy.Read)]
+        public JsonResult GetTicketDetail(DetailedWinLossFilter criteria)
+        {
+            return Json(this._memberBetListService.GetDetailWinLossList(criteria));
         }
     }
 }

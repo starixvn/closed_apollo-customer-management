@@ -9,6 +9,7 @@
 
 namespace Apollo.CMS.BetList.Services.Interfaces
 {
+    using System.Collections.Generic;
     using Apollo.CMS.BetList.Criteria.MemberBetList;
     using Apollo.CMS.BetList.ViewModels.MemberBetList;
 
@@ -19,6 +20,13 @@ namespace Apollo.CMS.BetList.Services.Interfaces
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>The bet items of a page.</returns>
-        BetList GetPagedBetList(GetMemberBetListCriteria criteria);
+        BetList GetPagedBetList(MemberBetListFilter criteria);
+
+        /// <summary>
+        /// Gets the detailed win loss of the whole line.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>The win loss list.</returns>
+        IEnumerable<DetailedWinLossItem> GetDetailWinLossList(DetailedWinLossFilter criteria);
     }
 }

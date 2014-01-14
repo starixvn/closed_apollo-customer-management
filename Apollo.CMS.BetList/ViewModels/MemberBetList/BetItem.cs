@@ -17,7 +17,7 @@ namespace Apollo.CMS.BetList.ViewModels.MemberBetList
     [Serializable]
     public class BetItem
     {
-        public string RefNo { get; set; }
+        public long TransId { get; set; }
 
         public DateTime TransDate { get; set; }
 

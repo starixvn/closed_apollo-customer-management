@@ -74,12 +74,10 @@
   <ItemGroup>
     <Compile Include="BetListAreaRegistration.cs" />
     <Compile Include="Controllers\MemberBetListController.cs" />
-    <Compile Include="Criteria\MemberBetList\GetDetailedWinLossCriteria.cs" />
+    <Compile Include="Criteria\MemberBetList\DetailedWinLossFilter.cs" />
+    <Compile Include="Criteria\MemberBetList\MemberBetListFilter.cs" />
     <Compile Include="Criteria\MemberBetList\GetMemberBetListCriteria.cs" />
-    <Compile Include="Criteria\MemberBetList\GetNewMemberBetListCriteria.cs" />
-    <Compile Include="Criteria\MemberBetList\GetOldMemberBetListCriteria.cs" />
-    <Compile Include="Criteria\MemberBetList\GetOldDetailedWinLossCriteria.cs" />
-    <Compile Include="Criteria\MemberBetList\GetNewDetailedWinLossCriteria.cs" />
+    <Compile Include="Criteria\MemberBetList\GetDetailedWinLossCriteria.cs" />
     <Compile Include="Helpers\BetListHelper.cs" />
     <Compile Include="Models\MemberBetList\BetTicket.cs" />
     <Compile Include="Models\MemberBetList\DetailedWinLoss.cs" />

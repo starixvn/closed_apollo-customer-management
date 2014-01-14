@@ -10,11 +10,12 @@
 namespace Apollo.CMS.BetList.Criteria.MemberBetList
 {
     using System;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// The general criteria that are used to get the bet list from current used database and backup database.
+    /// The criteria that are used to get the bet list.
     /// </summary>
-    public class GetMemberBetListCriteria
+    public class GetMemberBetListCriteria : CriteriaBase
     {
         public int CustId { get; set; }
 
@@ -22,10 +23,34 @@ namespace Apollo.CMS.BetList.Criteria.MemberBetList
 
         public DateTime ToDate { get; set; }
 
-        public int PageIndex { get; set; }
+        public DateTime MoveBetsDay { get; set; }
 
-        public int PageSize { get; set; }
+        [SpParam(Ignored = true)]
+        public bool IsBackupData { get; set; }
 
-        public bool IsLoadNew { get; set; }
+        /// <summary>
+        /// Get Setting Key.
+        /// </summary>
+        /// <returns>Setting key of the criteria.</returns>
+        public override string GetSettingKey()
+        {
+            if (IsBackupData)
+            {
+                return "Acc_BetList_GetByCustomer_Old";
+            }
+            else
+            {
+                return "Acc_BetList_GetByCustomer";
+            }
+        }
+
+        /// <summary>
+        /// Check validation of the criteria.
+        /// </summary>
+        /// <returns>Whether or not the criteria is valid.</returns>
+        public override bool IsValid()
+        {
+            return true;
+        }
     }
 }
