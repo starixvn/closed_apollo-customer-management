@@ -76,5 +76,29 @@ namespace Apollo.CMS.BetList.Controllers
         {
             return Json(this._memberBetListService.GetDetailWinLossList(criteria));
         }
+
+        /// <summary>
+        /// Gets sub-tickets of mix parlay.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>The JSON list contains sub-tickets of a parlay ticket.</returns>
+        [HttpPost]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewBetList, Policy = Constant.Policy.Read)]
+        public JsonResult GetMixParlayByRefNo(GetParlaySubTicketsCriteria criteria)
+        {
+            return Json(this._memberBetListService.GetParlaySubTickets(criteria));
+        }
+
+        /// <summary>
+        /// Gets system parlay details.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>The JSON list contains system parlay details.</returns>
+        [HttpPost]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewBetList, Policy = Constant.Policy.Read)]
+        public JsonResult GetSystemParlayDetails(GetSystemParlayDetailsCriteria criteria)
+        {
+            return Json(this._memberBetListService.GetSystemParlayDetails(criteria));
+        }
     }
 }

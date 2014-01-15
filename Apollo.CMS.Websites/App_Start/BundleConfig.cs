@@ -211,7 +211,8 @@ namespace Apollo.CMS.Websites
         {
             bundles.AddAndInclude(
                 "~/site/memberBetList",
-                "~/Areas/Account/Resources/MemberBetList/memberBetList.less");
+                "~/Areas/Account/Resources/MemberBetList/memberBetList.less",
+                "~/content/site/betList.less");
 
             bundles.Add(new ScriptBundle("~/scripts/memberBetList").Include(
                 "~/Areas/Account/Resources/MemberBetList/MemberBetList.js"));

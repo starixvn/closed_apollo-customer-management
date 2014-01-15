@@ -92,6 +92,52 @@ namespace Apollo.CMS.BetList.Services.Implements
         }
 
         /// <summary>
+        /// Gets the parlay sub tickets.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>The HTML formatted string that represents the sub-tickets.</returns>
+        public string GetParlaySubTickets(GetParlaySubTicketsCriteria criteria)
+        {
+            string result = string.Empty;
+            IEnumerable<ParlaySubTicket> rawData = this.GetListData<ParlaySubTicket>(criteria);
+
+            if ((rawData != null) && rawData.Any())
+            {
+                List<ITicket> tickets = BetListHelper.Map(rawData);
+                BetListHTMLFactory factory = new BetListHTMLFactory();
+                BetListHTMLBuilder builder = factory.CreateBuilder();
+                ITicketHelper ticketHelper = new TicketHelper { IsShowOddsWithChoice = true };
+                string line = "<div class='line'></div>";
+
+                for (int i = 0; i < tickets.Count; i++)
+                {
+                    if (i == tickets.Count - 1)
+                    {
+                        line = "<div></div>";
+                    }
+
+                    builder.AddChoice(tickets[i], ticketHelper, null, string.Empty, line, false);
+                }
+
+                result = builder.GetBetList();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the system parlay details.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>The HTML formatted string that represents the system parlay details.</returns>
+        public string GetSystemParlayDetails(GetSystemParlayDetailsCriteria criteria)
+        {
+            string result = string.Empty;
+
+            return result;
+        }
+
+        /// <summary>
         /// Separate the bet list into pages.
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
@@ -111,11 +157,13 @@ namespace Apollo.CMS.BetList.Services.Implements
             {
                 BetListHTMLFactory factory = new BetListHTMLFactory();
                 BetListHTMLBuilder builder = factory.CreateBuilder();
-                ITicketHelper ticketHelper = new TicketHelper { IsShowOddsWithChoice = true };
+                ITicketHelper ticketHelper = new TicketHelper();
                 IEnumerable<ITicket> tickets = BetListHelper.Map(pagedData);
+                string ticketStatus = string.Empty;
 
                 foreach (ITicket ticket in tickets)
                 {
+                    ticketStatus = ticket.Status.ToLower();
                     result.Add(new BetItem
                     {
                         TransId = ticket.TransId,
@@ -128,7 +176,9 @@ namespace Apollo.CMS.BetList.Services.Implements
                         TransTimeCol = builder.BuildTrans(ticket),
                         ChoiceCol = builder.BuildChoice(ticket, ticketHelper, null, false),
                         OddsCol = builder.BuildOdds(ticket, null, BetListHelper.GetOddTypeName),
-                        StatusCol = builder.BuildStatus(ticket, ticketHelper, null, true)
+                        StatusCol = builder.BuildStatus(ticket, ticketHelper, null, true),
+                        IsHandicap = (ticket.BetTypeId == (int)BetTypes.Handicap) || (ticket.BetTypeId == (int)BetTypes._3_Way_Handicap),
+                        IsRunning = BetStatus.Running.Equals(ticketStatus) || BetStatus.Waiting.Equals(ticketStatus)
                     });
                 }
             }

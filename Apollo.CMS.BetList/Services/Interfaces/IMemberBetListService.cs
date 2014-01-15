@@ -28,5 +28,19 @@ namespace Apollo.CMS.BetList.Services.Interfaces
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>The win loss list.</returns>
         IEnumerable<DetailedWinLossItem> GetDetailWinLossList(DetailedWinLossFilter criteria);
+
+        /// <summary>
+        /// Gets the parlay sub tickets.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>The HTML formatted string that represents the sub-tickets.</returns>
+        string GetParlaySubTickets(GetParlaySubTicketsCriteria criteria);
+
+        /// <summary>
+        /// Gets the system parlay details.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>The HTML formatted string that represents the system parlay details.</returns>
+        string GetSystemParlayDetails(GetSystemParlayDetailsCriteria criteria);
     }
 }

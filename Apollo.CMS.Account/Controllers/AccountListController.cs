@@ -168,22 +168,22 @@ namespace Apollo.CMS.Account.Controllers
             statusList.Add(new SelectListItem
             {
                 Text = ViewLang.All,
-                Value = ((int)BetStatus.All).ToString()
+                Value = ((int)AccountStatus.All).ToString()
             });
             statusList.Add(new SelectListItem
             {
                 Text = ViewLang.Active,
-                Value = ((int)BetStatus.Active).ToString()
+                Value = ((int)AccountStatus.Active).ToString()
             });
             statusList.Add(new SelectListItem
             {
                 Text = ViewLang.Stopped,
-                Value = ((int)BetStatus.Stopped).ToString()
+                Value = ((int)AccountStatus.Stopped).ToString()
             });
             statusList.Add(new SelectListItem
             {
                 Text = ViewLang.CLock,
-                Value = ((int)BetStatus.CLock).ToString()
+                Value = ((int)AccountStatus.CLock).ToString()
             });
 
             return statusList;

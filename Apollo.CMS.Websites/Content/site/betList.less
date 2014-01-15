@@ -1,0 +1,131 @@
+﻿/* File Created: January 15, 2014 */
+@import "variables.less";
+@import "mixins.less";
+
+.icon {
+    background: url(img/icons.png) no-repeat;
+    padding: 0 4px;
+}
+
+.trans-time {
+    font-weight: bold;
+
+    .time {
+        font-weight: normal;
+    }
+}
+
+.odds {
+    .favorite, .underdog {
+        font-weight: normal;
+
+        font {
+            color: @red-color !important;
+        }
+    }
+
+    .oddstype {
+        color: @gray-color;
+    }
+}
+
+.choice {
+    .favorite, .underdog {
+        font-weight: bold;
+
+        .handicap {
+            color: #666666;
+            .odds {
+                font {
+                    color: #767676 !important;
+                }
+            }
+        }
+
+        .favorite:last-child {
+            color: @red-color;
+        }
+    }
+
+    &.handicap {
+        .favorite {
+            color: @red-color;
+        }
+    }
+
+    .bettype {
+        color: @primary-color;
+        font-weight: bold;
+    }
+
+    .goal-icon {
+        .icon;
+        height: 10px;
+        width: 10px;
+        display: inline;
+    }
+
+    .firstGoal {
+        .goal-icon;
+        background-position: -415px -4px;
+    }
+
+    .lastGoal {
+        .goal-icon;
+        background-position: -415px -23px;
+        margin-left: 2px;
+    }
+
+    .league {
+        .sport {
+            color: #0066CC;
+        }
+        .leagueName {
+            color: #666666;
+            line-height: 15px;
+        }
+    }
+
+    .line {
+        border-bottom: 1px solid @border-color;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        overflow: hidden;
+        text-align: left;
+        width: 100%;
+    }
+}
+        
+a, .link, .iplink {
+    color: @link-color;
+    cursor: pointer;
+
+    &:hover {
+        color: @hover-link-color;
+        text-decoration: none;
+    }
+}
+
+.result {
+    display: none;
+}
+
+.detail-icon {
+    .icon;
+    height: 15px;
+    width: 15px;
+    cursor: pointer;
+    display: block;
+    background-position: -432px -4px;
+
+    &:hover {
+        background-position: -432px -21px;
+    }
+}
+
+.detail {
+    .detail-icon;
+    display: inline;
+    line-height: 20px;
+    padding: 1px 0 2px 20px;
+}

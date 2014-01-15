@@ -31,6 +31,10 @@ namespace Apollo.CMS.BetList.ViewModels.MemberBetList
 
         public decimal CompanyShare { get; set; }
 
+        public bool IsHandicap { get; set; }
+
+        public bool IsRunning { get; set; }
+
         /// <summary>
         /// Gets or sets format of the transaction time column in the view.
         /// </summary>

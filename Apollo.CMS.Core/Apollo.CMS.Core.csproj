@@ -88,7 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\AppSettings.cs" />
-    <Compile Include="Constants\BetStatus.cs" />
+    <Compile Include="Constants\BetTypes.cs" />
     <Compile Include="Constants\CommonConstants.cs" />
     <Compile Include="Constants\AccountStatus.cs" />
     <Compile Include="Constants\HighLevelAgents.cs" />

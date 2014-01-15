@@ -61,7 +61,7 @@ namespace Apollo.CMS.BetList.Helpers
         /// </summary>
         /// <param name="data">The bet data that need to be mapped to Ticket objects.</param>
         /// <returns>List of Ticket objects.</returns>
-        public static IEnumerable<ITicket> Map(IEnumerable<BetTicket> data)
+        public static List<ITicket> Map(IEnumerable<BetTicket> data)
         {
             List<ITicket> result = new List<ITicket>();
             if ((data != null) && (data.Count() > 0))
@@ -70,6 +70,8 @@ namespace Apollo.CMS.BetList.Helpers
                 {
                     ITicket ticket = new Ticket
                     {
+                        CustId = Converter.ToInt(item.CustId),
+                        UserName = item.Username,
                         BetId = item.BetId,
                         RefNo = Converter.ToString2(item.RefNo),
                         TransId = Converter.To<long>(item.TransId),
@@ -99,6 +101,47 @@ namespace Apollo.CMS.BetList.Helpers
                         SuperPositionTaking = Converter.ToDecimal(item.CompanyPositionTaking),
                         SuperWinlost = Converter.ToDecimal(item.CompanyWinLoss),
                         IP = item.IP
+                    };
+
+                    result.Add(ticket);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Maps the list of ParlaySubTicket objects queried from DB to Ticket objects which will be used to generate bet list.
+        /// </summary>
+        /// <param name="data">The bet data that need to be mapped to Ticket objects.</param>
+        /// <returns>List of Ticket objects.</returns>
+        public static List<ITicket> Map(IEnumerable<ParlaySubTicket> data)
+        {
+            List<ITicket> result = new List<ITicket>();
+            if ((data != null) && (data.Count() > 0))
+            {
+                foreach (var item in data)
+                {
+                    ITicket ticket = new Ticket
+                    {
+                        RefNo = Converter.ToString2(item.RefNo),
+                        TransId = Converter.To<long>(item.TransId),
+                        BetTypeId = Converter.ToInt(item.BetType),
+                        HomeId = Converter.ToInt(item.HomeId),
+                        AwayId = Converter.ToInt(item.AwayId),
+                        Handicap1 = Converter.ToDecimal(item.Hdp1),
+                        Handicap2 = Converter.ToDecimal(item.Hdp2),
+                        Odds = Converter.ToDecimal(item.Odds),
+                        BetTeam = item.BetTeam,
+                        EventStatus = item.BetStatus,
+                        LiveHomeScore = Converter.ToInt(item.LiveHomeScore),
+                        LiveAwayScore = Converter.ToInt(item.LiveAwayScore),
+                        IsLive = Converter.ToBool(item.LiveIndicator),
+                        LeagueId = Converter.ToInt(item.LeagueId),
+                        SportTypeId = Converter.ToInt(item.SportType),
+                        IsNeutral = Converter.ToBool(item.IsNeutral),
+                        MatchId = Converter.ToInt(item.MatchId),
+                        StatusId = item.StatusId
                     };
 
                     result.Add(ticket);

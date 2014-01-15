@@ -11,7 +11,9 @@ Apollo.CMS.Account.MemberBetList = function () {
     var pageRanges = [10, 50, 100, 200, 500];
     var urls = {
         MemberBetList: CMS.resolveRootUrl('BetList/MemberBetList/GetMemberBetList'),
-        TicketDetail: CMS.resolveRootUrl('BetList/MemberBetList/GetTicketDetail')
+        TicketDetail: CMS.resolveRootUrl('BetList/MemberBetList/GetTicketDetail'),
+        GetMixParlayByRefNo: CMS.resolveRootUrl('BetList/MemberBetList/GetMixParlayByRefNo'),
+        GetSystemParlayDetails: CMS.resolveRootUrl('BetList/MemberBetList/GetSystemParlayDetails')
     };
     var parameters = {
         CustId: null,
@@ -132,8 +134,10 @@ Apollo.CMS.Account.MemberBetList = function () {
         };
 
         // Element formats.
-        var detailColFormat = '<span class="winloss-details" data-ref-no="{0}" data-trans-date="{1}" />{2}</span>';
         var transTimeColFormat = '<div class="trans-time">{0}</div>';
+        var choiceColFormat = '<div class="choice {0}">{1}</div>';
+        var oddColFormat = '<div class="odds">{0}</div>';
+        var detailColFormat = '<div class="winloss-details detail-icon" data-ref-no="{0}" data-trans-date="{1}" />';
 
         $this.DOMInstance.divBetList.addClass('hide');
 
@@ -157,13 +161,13 @@ Apollo.CMS.Account.MemberBetList = function () {
                 {
                     Columns: [{ Name: 'ColNo', Value: index + 1 },
                               { Name: 'ColTransTime', Value: transTimeColFormat.format(item.TransTimeCol) },
-                              { Name: 'ColChoice', Value: item.ChoiceCol },
-                              { Name: 'ColOdds', Value: item.OddsCol },
-                              { Name: 'ColStake', Value: formatNumberCol(item.Stake) },
-                              { Name: 'ColWinLoss', Value: formatNumberCol(item.WinLoss, false, item.Comm) },
-                              { Name: 'ColStatus', Value: item.StatusCol },
-                              { Name: 'ColCompanyShare', Value: formatNumberCol(item.CompanyShare, true, item.CompanyWinLoss) },
-                              { Name: 'ColDetails', Value: detailColFormat.format(item.TransId, item.TransDate, tableHeaders.Details)}]
+                              { Name: 'ColChoice', Value: choiceColFormat.format(item.IsHandicap ? 'handicap' : '', item.ChoiceCol) },
+                              { Name: 'ColOdds', Value: oddColFormat.format(item.OddsCol) },
+                              { Name: 'ColStake', Value: formatNumberCol(item.Stake, false, null, null) },
+                              { Name: 'ColWinLoss', Value: formatNumberCol(item.IsRunning ? '-  ' : item.WinLoss, false, item.Comm, null) },
+                              { Name: 'ColStatus', Value: item.StatusCol.replace('<br />', '') },
+                              { Name: 'ColCompanyShare', Value: formatNumberCol(item.CompanyShare, true, item.IsRunning ? null : item.CompanyWinLoss, null) },
+                              { Name: 'ColDetails', Value: detailColFormat.format(item.TransId, item.TransDate)}]
                 };
 
                 bodyData.push(row);
@@ -223,8 +227,8 @@ Apollo.CMS.Account.MemberBetList = function () {
                 row =
                 {
                     Columns: [{ Name: 'ColAgent', Value: item.Username },
-                              { Name: 'ColShare', Value: formatNumberCol(item.PositionTaking, true, item.WinLoss) },
-                              { Name: 'ColComm', Value: !item.IsSuper ? formatNumberCol(item.Discount, true, item.Comm) : 'N/A'}]
+                              { Name: 'ColShare', Value: formatNumberCol(item.PositionTaking, true, item.WinLoss, null) },
+                              { Name: 'ColComm', Value: !item.IsSuper ? formatNumberCol(item.Discount, true, item.Comm, null) : 'N/A'}]
                 };
 
                 bodyData.push(row);
@@ -241,25 +245,80 @@ Apollo.CMS.Account.MemberBetList = function () {
         var formattedStr = '';
         var cssClass = '';
 
-        if ($.isNumeric(firstNumber)) {
-            var percent = isPercent ? '%' : '';
+        if (firstNumber !== null) {
+            var percent = '';
 
-            cssClass = firstNumber < 0 ? 'format-negative' : '';
-            firstNumber = isPercent ? firstNumber * 100 : firstNumber;
-            formattedStr += '<span class="{0}">{1}{2}</span>'.format(cssClass, numeral(firstNumber).format(CMS.commonConstants.DecimalFormat), percent);
+            if ($.isNumeric(firstNumber)) {
+                percent = isPercent ? '%' : '';
+                cssClass = firstNumber < 0 ? 'format-negative' : '';
+                firstNumber = isPercent ? firstNumber * 100 : firstNumber;
+                firstNumber = numeral(firstNumber).format(CMS.commonConstants.DecimalFormat);
+            }
+
+            formattedStr += '<span class="{0}">{1}{2}</span>'.format(cssClass, firstNumber, percent);
         }
 
-        if ($.isNumeric(secondNumber)) {
-            cssClass = secondNumber < 0 ? 'format-negative' : '';
-            formattedStr += '<br/><span class="{0}">{1}</span>'.format(cssClass, numeral(secondNumber).format(CMS.commonConstants.DecimalFormat));
+        if (secondNumber !== null) {
+            if ($.isNumeric(secondNumber)) {
+                cssClass = secondNumber < 0 ? 'format-negative' : '';
+                secondNumber = numeral(secondNumber).format(CMS.commonConstants.DecimalFormat);
+            }
+
+            formattedStr += '<br/><span class="{0}">{1}</span>'.format(cssClass, secondNumber);
         }
 
-        if ($.isNumeric(thirdNumber)) {
-            cssClass = thirdNumber < 0 ? 'format-negative' : '';
-            formattedStr += '<br/><span class="{0}">{1}</span>'.format(cssClass, numeral(thirdNumber).format(CMS.commonConstants.DecimalFormat));
+        if (thirdNumber !== null) {
+            if ($.isNumeric(thirdNumber)) {
+                cssClass = thirdNumber < 0 ? 'format-negative' : '';
+                thirdNumber = numeral(thirdNumber).format(CMS.commonConstants.DecimalFormat);
+            }
+
+            formattedStr += '<br/><span class="{0}">{1}</span>'.format(cssClass, thirdNumber);
         }
 
         return formattedStr;
+    }
+
+    // Global function using to get list of bets which are played from given IP.
+    OpenIPInfo = function (ip) {
+        return false;
+    };
+
+    // Global function using to get sub-items of mix parlay ticket.
+    showMP = function (transId, refNo) {
+        var divEvent = $('#divEvent_{0}'.format(transId), $this.DOMInstance.divBetList);
+
+        if (divEvent.children().length === 0) {
+            var params = {
+                RefNo: refNo
+            };
+
+            $.ajax({
+                type: "POST",
+                url: urls.GetMixParlayByRefNo,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify(params),
+                beforeSend: function () {
+                    CMS.loadingBox.show();
+                },
+                success: function (result) {
+                    divEvent.html(result);
+                    divEvent.slideDown();
+                },
+                error: function (xhr, status, err) {
+                    CMS.handleAjaxError(xhr, status, err);
+                },
+                complete: function () {
+                    CMS.loadingBox.close();
+                }
+            });
+        } else {
+            divEvent.slideToggle();
+        }
+    };
+    showCombMP = function (transId, transIndex, refNo) {
+        showMP('{0}{1}'.format(transId, transIndex), refNo);
     }
 
     $this.DOMInstance = {
