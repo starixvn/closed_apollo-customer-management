@@ -129,3 +129,25 @@ a, .link, .iplink {
     line-height: 20px;
     padding: 1px 0 2px 20px;
 }
+
+table {
+    tbody {
+        tr.system-parlay-header {
+            th {
+                background-color: @table-header-bg;
+                font-weight: normal;
+                color: @table-header-color;
+                text-align: center;
+                border-color: @table-header-border;
+                padding: 3px 5px;
+                line-height: 25px;
+            }
+        }
+        td {
+            height: @table-height;
+            padding: 5px;
+            border-color: @table-border;
+            color: @table-text-color;
+        }
+    }
+}

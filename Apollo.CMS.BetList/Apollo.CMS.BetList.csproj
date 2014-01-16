@@ -84,8 +84,9 @@
     <Compile Include="Models\MemberBetList\BetTicket.cs" />
     <Compile Include="Models\MemberBetList\DetailedWinLoss.cs" />
     <Compile Include="Models\MemberBetList\ParlaySubTicket.cs" />
-    <Compile Include="Models\MemberBetList\SystemParlayDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Implements\MemberBetListRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IMemberBetListRepository.cs" />
     <Compile Include="Services\Implements\MemberBetListService.cs" />
     <Compile Include="Services\Interfaces\IMemberBetListService.cs" />
     <Compile Include="ViewModels\MemberBetList\BetItem.cs" />

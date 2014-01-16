@@ -14,6 +14,8 @@ namespace Apollo.CMS.BetList.Services.Implements
     using Apollo.CMS.BetList.Criteria.MemberBetList;
     using Apollo.CMS.BetList.Helpers;
     using Apollo.CMS.BetList.Models.MemberBetList;
+    using Apollo.CMS.BetList.Repositories.Implements;
+    using Apollo.CMS.BetList.Repositories.Interfaces;
     using Apollo.CMS.BetList.Services.Interfaces;
     using Apollo.CMS.BetList.ViewModels.MemberBetList;
     using Apollo.CMS.Core.Constants;
@@ -31,6 +33,17 @@ namespace Apollo.CMS.BetList.Services.Implements
     public class MemberBetListService : BaseService, IMemberBetListService
     {
         private static List<BetTicket> _ticketList;
+        private readonly IMemberBetListRepository _memberBetListRepository;
+
+        public MemberBetListService() :
+            this(null)
+        {
+        }
+
+        public MemberBetListService(IMemberBetListRepository memberBetListRepository)
+        {
+            this._memberBetListRepository = memberBetListRepository ?? new MemberBetListRepository();
+        }
 
         /// <summary>
         /// Gets the paged bet list.
@@ -132,7 +145,17 @@ namespace Apollo.CMS.BetList.Services.Implements
         /// <returns>The HTML formatted string that represents the system parlay details.</returns>
         public string GetSystemParlayDetails(GetSystemParlayDetailsCriteria criteria)
         {
+            SystemParlayData systemParlayData = null;
+            BetListHTMLFactory factory = new BetListHTMLFactory();
+            BetListHTMLBuilder builder = factory.CreateBuilder();
+            ITicketHelper ticketHelper = new TicketHelper();
+            BalanceUp balanceUp = this.BalanceUp;
             string result = string.Empty;
+
+            criteria.BalanceUpDay = balanceUp.BalanceUpDay;
+            criteria.MoveBetsDay = balanceUp.MoveBetsDay;
+            systemParlayData = this._memberBetListRepository.GetSystemParlayData(criteria);
+            result = builder.BuildSystemParlayDetail(ticketHelper, systemParlayData);
 
             return result;
         }

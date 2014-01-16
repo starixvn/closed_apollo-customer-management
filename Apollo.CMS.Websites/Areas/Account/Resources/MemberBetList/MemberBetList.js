@@ -115,6 +115,7 @@ Apollo.CMS.Account.MemberBetList = function () {
     // Render data table for member bet list.
     var renderTable = function (data) {
         var bodyData = [];
+        var footerData = [];
         var columns = [];
         var gridOptions = {
             showDistinctRow: false,
@@ -128,14 +129,14 @@ Apollo.CMS.Account.MemberBetList = function () {
                 itemsPerPageArray: pageRanges,
                 pagerSelectCallBack: handleChangingPage
             },
-            gridExpandHeight: 250,
+            gridExpandHeight: 200,
             bodyRowHeight: 30,
             bodyRows: bodyData
         };
 
         // Element formats.
         var transTimeColFormat = '<div class="trans-time">{0}</div>';
-        var choiceColFormat = '<div class="choice {0}">{1}</div>';
+        var choiceColFormat = '<div id="choice_{0}" class="choice {1}">{2}</div>';
         var oddColFormat = '<div class="odds">{0}</div>';
         var detailColFormat = '<div class="winloss-details detail-icon" data-ref-no="{0}" data-trans-date="{1}" />';
 
@@ -161,11 +162,11 @@ Apollo.CMS.Account.MemberBetList = function () {
                 {
                     Columns: [{ Name: 'ColNo', Value: index + 1 },
                               { Name: 'ColTransTime', Value: transTimeColFormat.format(item.TransTimeCol) },
-                              { Name: 'ColChoice', Value: choiceColFormat.format(item.IsHandicap ? 'handicap' : '', item.ChoiceCol) },
+                              { Name: 'ColChoice', Value: choiceColFormat.format(item.TransId, item.IsHandicap ? 'handicap' : '', item.ChoiceCol) },
                               { Name: 'ColOdds', Value: oddColFormat.format(item.OddsCol) },
                               { Name: 'ColStake', Value: formatNumberCol(item.Stake, false, null, null) },
                               { Name: 'ColWinLoss', Value: formatNumberCol(item.IsRunning ? '-  ' : item.WinLoss, false, item.Comm, null) },
-                              { Name: 'ColStatus', Value: item.StatusCol.replace('<br />', '') },
+                              { Name: 'ColStatus', Value: item.StatusCol },
                               { Name: 'ColCompanyShare', Value: formatNumberCol(item.CompanyShare, true, item.IsRunning ? null : item.CompanyWinLoss, null) },
                               { Name: 'ColDetails', Value: detailColFormat.format(item.TransId, item.TransDate)}]
                 };
@@ -173,11 +174,27 @@ Apollo.CMS.Account.MemberBetList = function () {
                 bodyData.push(row);
             });
 
+            row =
+            {
+                Columns: [{ Name: 'ColNo', Value: '' },
+                          { Name: 'ColTransTime', Value: '' },
+                          { Name: 'ColChoice', Value: data.BetItems.length },
+                          { Name: 'ColOdds', Value: '' },
+                          { Name: 'ColStake', Value: formatNumberCol(data.SumStake, false, null, null) },
+                          { Name: 'ColWinLoss', Value: formatNumberCol(data.SumWinLoss, false, data.SumComm, null) },
+                          { Name: 'ColStatus', Value: '' },
+                          { Name: 'ColCompanyShare', Value: formatNumberCol(null, false, data.SumCompanyWinLoss, null) },
+                          { Name: 'ColDetails', Value: ''}]
+            };
+
+            footerData.push(row);
+
             gridOptions.pagerOption.totalItem = data.TotalItems;
         }
 
         gridOptions.columns = columns;
         gridOptions.bodyRows = bodyData;
+        gridOptions.footerRows = footerData;
         $this.DOMInstance.divBetList.removeClass('hide').fanexGrid(gridOptions);
         handleGridEvents();
     };
@@ -255,7 +272,7 @@ Apollo.CMS.Account.MemberBetList = function () {
                 firstNumber = numeral(firstNumber).format(CMS.commonConstants.DecimalFormat);
             }
 
-            formattedStr += '<span class="{0}">{1}{2}</span>'.format(cssClass, firstNumber, percent);
+            formattedStr += '<div class="{0}">{1}{2}</div>'.format(cssClass, firstNumber, percent);
         }
 
         if (secondNumber !== null) {
@@ -264,7 +281,7 @@ Apollo.CMS.Account.MemberBetList = function () {
                 secondNumber = numeral(secondNumber).format(CMS.commonConstants.DecimalFormat);
             }
 
-            formattedStr += '<br/><span class="{0}">{1}</span>'.format(cssClass, secondNumber);
+            formattedStr += '<div class="{0}">{1}</div>'.format(cssClass, secondNumber);
         }
 
         if (thirdNumber !== null) {
@@ -273,7 +290,7 @@ Apollo.CMS.Account.MemberBetList = function () {
                 thirdNumber = numeral(thirdNumber).format(CMS.commonConstants.DecimalFormat);
             }
 
-            formattedStr += '<br/><span class="{0}">{1}</span>'.format(cssClass, thirdNumber);
+            formattedStr += '<div class="{0}">{1}</div>'.format(cssClass, thirdNumber);
         }
 
         return formattedStr;
@@ -303,6 +320,7 @@ Apollo.CMS.Account.MemberBetList = function () {
                     CMS.loadingBox.show();
                 },
                 success: function (result) {
+                    result = '<br/>' + result;
                     divEvent.html(result);
                     divEvent.slideDown();
                 },
@@ -319,7 +337,36 @@ Apollo.CMS.Account.MemberBetList = function () {
     };
     showCombMP = function (transId, transIndex, refNo) {
         showMP('{0}{1}'.format(transId, transIndex), refNo);
-    }
+    };
+
+    // Global function using to get system parlay details.
+    showCombMPDetail = function (refNo, winLossDate, transId, betId, custId) {
+        var params = {
+            RefNo: refNo,
+            CustId: custId
+        };
+        var title = $('#choice_{0}'.format(transId), $this.DOMInstance.divBetList).children('div:first').text();
+
+        $.ajax({
+            type: "POST",
+            url: urls.GetSystemParlayDetails,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(params),
+            beforeSend: function () {
+                CMS.loadingBox.show();
+            },
+            success: function (result) {
+                pageLayout.Popup(title, result, null, true);
+            },
+            error: function (xhr, status, err) {
+                CMS.handleAjaxError(xhr, status, err);
+            },
+            complete: function () {
+                CMS.loadingBox.close();
+            }
+        });
+    };
 
     $this.DOMInstance = {
         divFilterForm: null,

@@ -83,9 +83,6 @@
       <Mapping DataField="AComm" ObjectProperty="Comm"/>
     </Setting>
     <Setting Key="Acc_BetList_GetMixParlayByRefNo" SpName="Acc_BetList_GetMixParlayByRefNo" DbName="SVRCSD.RepDB.aplWeb" />
-    <Setting Key="Acc_BetList_GetDetailSystemParlayByRefNo" SpName="Acc_BetList_GetDetailSystemParlayByRefNo" DbName="SVRCSD.RepDB.aplWeb">
-      <Mapping DataField="Winlost" ObjectProperty="WinLoss"/>
-      <Mapping DataField="Winlostdate" ObjectProperty="WinLossDate"/>
-    </Setting>
+    <Setting Key="Acc_BetList_GetDetailSystemParlayByRefNo" SpName="Acc_BetList_GetDetailSystemParlayByRefNo" DbName="SVRCSD.RepDB.aplWeb" />
   </Function>
 </Functions>
