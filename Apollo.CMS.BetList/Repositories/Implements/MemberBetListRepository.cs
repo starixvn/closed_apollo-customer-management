@@ -39,18 +39,8 @@ namespace Apollo.CMS.BetList.Repositories.Implements
                     IEnumerable<SystemParlayTicket> systemParlayTickets = multi.Read<SystemParlayTicket>();
                     IEnumerable<SystemParlaySerial> systemParlaySerials = multi.Read<SystemParlaySerial>();
 
-                    systemParlayData.TicketList = new List<ISystemParlayTicket>();
-                    systemParlayData.SerialList = new List<ISystemParlaySerial>();
-
-                    foreach (var ticket in systemParlayTickets)
-                    {
-                        systemParlayData.TicketList.Add(ticket);
-                    }
-
-                    foreach (var serial in systemParlaySerials)
-                    {
-                        systemParlayData.SerialList.Add(serial);
-                    }
+                    systemParlayData.TicketList = new List<ISystemParlayTicket>(systemParlayTickets);
+                    systemParlayData.SerialList = new List<ISystemParlaySerial>(systemParlaySerials);
 
                     if (param.ContainsKey("outstanding"))
                     {
