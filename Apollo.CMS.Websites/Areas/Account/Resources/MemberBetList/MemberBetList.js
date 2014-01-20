@@ -144,13 +144,13 @@ Apollo.CMS.Account.MemberBetList = function () {
         $this.DOMInstance.divBetList.addClass('hide');
 
         // Configure grid's columns.
-        columns = [{ HeaderText: tableHeaders.No, Width: 70, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
-                   { HeaderText: tableHeaders.TransTime, Width: 150, Name: 'ColTransTime', HeaderAlign: 'center', CellAlign: 'center' },
-                   { HeaderText: tableHeaders.Choice, Width: 260, Name: 'ColChoice', HeaderAlign: 'center', CellAlign: 'right' },
-                   { HeaderText: tableHeaders.Odds, Width: 100, Name: 'ColOdds', HeaderAlign: 'center', CellAlign: 'right' },
+        columns = [{ HeaderText: tableHeaders.No, Width: 50, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
+                   { HeaderText: tableHeaders.TransTime, Width: 135, Name: 'ColTransTime', HeaderAlign: 'center', CellAlign: 'center' },
+                   { HeaderText: tableHeaders.Choice, Width: 290, Name: 'ColChoice', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: tableHeaders.Odds, Width: 90, Name: 'ColOdds', HeaderAlign: 'center', CellAlign: 'right' },
                    { HeaderText: tableHeaders.Stake, Width: 120, Name: 'ColStake', HeaderAlign: 'center', CellAlign: 'right' },
                    { HeaderText: tableHeaders.WinLoss, Width: 120, Name: 'ColWinLoss', HeaderAlign: 'center', CellAlign: 'right' },
-                   { HeaderText: tableHeaders.Status, Width: 100, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: tableHeaders.Status, Width: 100, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'center' },
                    { HeaderText: tableHeaders.CompanyShare, Width: 100, Name: 'ColCompanyShare', HeaderAlign: 'center', CellAlign: 'right' },
                    { HeaderText: tableHeaders.CompanyComm, Width: 100, Name: 'ColCompanyComm', HeaderAlign: 'center', CellAlign: 'right' },
                    { HeaderText: tableHeaders.Details, Width: 60, Name: 'ColDetails', HeaderAlign: 'center', CellAlign: 'center'}];
@@ -187,7 +187,7 @@ Apollo.CMS.Account.MemberBetList = function () {
                           { Name: 'ColWinLoss', Value: formatNumberCol(data.SumWinLoss, false, data.SumComm, null) },
                           { Name: 'ColStatus', Value: '' },
                           { Name: 'ColCompanyShare', Value: formatNumberCol(null, false, data.SumCompanyWinLoss, null) },
-                          { Name: 'ColCompanyComm', Value: formatNumberCol('N/A', true, data.SumCompanyComm, null) },
+                          { Name: 'ColCompanyComm', Value: formatNumberCol(null, true, data.SumCompanyComm, null) },
                           { Name: 'ColDetails', Value: ''}]
             };
 
@@ -220,6 +220,13 @@ Apollo.CMS.Account.MemberBetList = function () {
 
             getTicketData(transId, transDate);
         });
+
+        $this.DOMInstance.divBetList.find('div.time').each(function (index, obj) {
+            var $obj = $(obj);
+            var dateValue = $obj.text();
+
+            $obj.text(moment(dateValue).format(CMS.commonConstants.MomentDateTimeFormat));
+        });
     };
 
     // Render data table for detailed win loss.
@@ -249,7 +256,7 @@ Apollo.CMS.Account.MemberBetList = function () {
                 {
                     Columns: [{ Name: 'ColAgent', Value: item.Username },
                               { Name: 'ColShare', Value: formatNumberCol(item.PositionTaking, true, item.WinLoss, null) },
-                              { Name: 'ColComm', Value: !item.IsSuper ? formatNumberCol(item.Discount, true, item.Comm, null) : 'N/A'}]
+                              { Name: 'ColComm', Value: !item.IsSuper ? formatNumberCol(item.Discount, true, item.Comm, null) : formatNumberCol('N/A', false, item.Comm, null)}]
                 };
 
                 bodyData.push(row);
@@ -278,17 +285,19 @@ Apollo.CMS.Account.MemberBetList = function () {
         $this.DOMInstance.divSystemParlayDetails.addClass('hide');
 
         // Configure grid's columns.
-        columns = [{ HeaderText: systemParlayDetailsTableHeaders.Date, Width: 100, Name: 'ColDate', HeaderAlign: 'center', CellAlign: 'center' },
+        columns = [{ HeaderText: systemParlayDetailsTableHeaders.Date, Width: 80, Name: 'ColDate', HeaderAlign: 'center', CellAlign: 'center' },
                    { HeaderText: systemParlayDetailsTableHeaders.Event, Width: 250, Name: 'ColEvent', HeaderAlign: 'center', CellAlign: 'left' },
-                   { HeaderText: systemParlayDetailsTableHeaders.Odds, Width: 120, Name: 'ColOdds', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: systemParlayDetailsTableHeaders.Odds, Width: 80, Name: 'ColOdds', HeaderAlign: 'center', CellAlign: 'right' },
                    { HeaderText: systemParlayDetailsTableHeaders.Stake, Width: 120, Name: 'ColStake', HeaderAlign: 'center', CellAlign: 'right' },
                    { HeaderText: systemParlayDetailsTableHeaders.WinLoss, Width: 120, Name: 'ColWinLoss', HeaderAlign: 'center', CellAlign: 'right' },
-                   { HeaderText: systemParlayDetailsTableHeaders.Status, Width: 120, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'center'}];
+                   { HeaderText: systemParlayDetailsTableHeaders.Status, Width: 80, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'center'}];
 
         // Push data to grid.
         if (data && data.DailyTicketLists && data.DailyTicketLists.length > 0) {
             var row = null;
             var dateRowCounter = null;
+            var groupIndex = -1;
+            var statusFormat = '<span class="status">{0}</span>';
 
             $.each(data.DailyTicketLists, function (dateIndex, dailyTicketList) {
                 dateRowCounter = countRowsOfDateData(dailyTicketList.TicketItems);
@@ -301,15 +310,20 @@ Apollo.CMS.Account.MemberBetList = function () {
                         };
 
                         if (index === 0) {
+                            groupIndex++;
                             row.Columns.push(
                                 { Name: 'ColOdds', Value: ticket.Odds, MergeRowNumber: ticket.EventNames.length },
                                 { Name: 'ColStake', Value: ticket.Stake, MergeRowNumber: ticket.EventNames.length },
                                 { Name: 'ColWinLoss', Value: formatNumberCol(ticket.WinLoss, false, ticket.Comm, null), MergeRowNumber: ticket.EventNames.length },
-                                { Name: 'ColStatus', Value: ticket.Status, MergeRowNumber: ticket.EventNames.length });
+                                { Name: 'ColStatus', Value: statusFormat.format(ticket.Status), MergeRowNumber: ticket.EventNames.length });
 
                             if (ticketIndex === 0) {
                                 row.Columns.unshift({ Name: 'ColDate', Value: dailyTicketList.WinLossDate, MergeRowNumber: dateRowCounter });
                             }
+                        }
+
+                        if (groupIndex % 2 === 1) {
+                            row.CssClass = 'freegrid-even';
                         }
 
                         bodyData.push(row);

@@ -111,30 +111,7 @@ namespace Apollo.CMS.BetList.Helpers
         /// <returns>The odd name.</returns>
         public static string GetOddTypeName(object id)
         {
-            var oddName = string.Empty;
-
-            switch ((OddTypes)id)
-            {
-                case OddTypes.Dec:
-                    oddName = OddTypeNames.Dec;
-                    break;
-
-                case OddTypes.Hk:
-                    oddName = OddTypeNames.Hk;
-                    break;
-
-                case OddTypes.Indo:
-                    oddName = OddTypeNames.Indo;
-                    break;
-
-                case OddTypes.My:
-                    oddName = OddTypeNames.My;
-                    break;
-
-                case OddTypes.Us:
-                    oddName = OddTypeNames.Us;
-                    break;
-            }
+            var oddName = CacheRef.GetOddsTypeName(id);
 
             return oddName;
         }
@@ -165,6 +142,7 @@ namespace Apollo.CMS.BetList.Helpers
                         Handicap1 = Converter.ToDecimal(item.Hdp1),
                         Handicap2 = Converter.ToDecimal(item.Hdp2),
                         Odds = Converter.ToDecimal(item.Odds),
+                        MasterOdds = Converter.ToDecimal(item.MOdds),
                         OddsType = Converter.ToString2(item.OddsType),
                         BetTeam = item.BetTeam,
                         EventStatus = item.BetStatus,

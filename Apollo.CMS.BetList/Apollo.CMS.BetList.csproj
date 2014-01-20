@@ -75,7 +75,6 @@
     <Compile Include="BetListAreaRegistration.cs" />
     <Compile Include="Contants\BetStatusId.cs" />
     <Compile Include="Contants\BetTypes.cs" />
-    <Compile Include="Contants\OddTypeNames.cs" />
     <Compile Include="Controllers\MemberBetListController.cs" />
     <Compile Include="Criteria\MemberBetList\DetailedWinLossFilter.cs" />
     <Compile Include="Criteria\MemberBetList\GetParlaySubTicketsCriteria.cs" />

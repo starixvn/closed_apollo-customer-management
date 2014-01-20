@@ -92,7 +92,7 @@ namespace Apollo.CMS.BetList.Services.Implements
                         Username = record.Username,
                         PositionTaking = record.PositionTaking,
                         WinLoss = record.WinLoss,
-                        Discount = record.WinLoss,
+                        Discount = record.Discount,
                         Comm = record.Comm,
                         IsSuper = Converter.ToInt(record.AgentLevel) == (int)HighLevelAgents.Super
                     });

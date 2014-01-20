@@ -196,7 +196,7 @@
     <Content Include="Areas\Account\Resources\AccountList\ShadowList.js" />
     <Content Include="Areas\Account\Resources\AccountList\MemberList.js" />
     <Content Include="Areas\Account\Resources\AccountList\AgentList.js" />
-    <None Include="Areas\Account\Resources\MemberBetList\memberBetList.less" />
+    <Content Include="Areas\Account\Resources\MemberBetList\memberBetList.less" />
     <Content Include="Areas\Account\Resources\MemberBetList\MemberBetList.js" />
     <Content Include="Areas\Account\Resources\TreeView\Images\treeview-1.png" />
     <Content Include="Areas\Account\Resources\TreeView\Images\treeview-default-line.gif" />
@@ -234,7 +234,7 @@
     <Content Include="Content\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
-    <None Include="Content\site\betList.less" />
+    <Content Include="Content\site\betList.less" />
     <Content Include="Content\site\errorPage.less" />
     <Content Include="Content\site\font\MyriadPro-Cond.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
