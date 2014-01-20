@@ -11,6 +11,7 @@ namespace Apollo.CMS.BetList.Services.Interfaces
 {
     using System.Collections.Generic;
     using Apollo.CMS.BetList.Criteria.MemberBetList;
+    using Apollo.CMS.BetList.ViewModels.GeneralBetTicket;
     using Apollo.CMS.BetList.ViewModels.MemberBetList;
 
     public interface IMemberBetListService
@@ -40,7 +41,7 @@ namespace Apollo.CMS.BetList.Services.Interfaces
         /// Gets the system parlay details.
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
-        /// <returns>The HTML formatted string that represents the system parlay details.</returns>
-        string GetSystemParlayDetails(GetSystemParlayDetailsCriteria criteria);
+        /// <returns>The SystemParlayDetails object that represents the system parlay details.</returns>
+        SystemParlayDetails GetSystemParlayDetails(GetSystemParlayDetailsCriteria criteria);
     }
 }

@@ -73,6 +73,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BetListAreaRegistration.cs" />
+    <Compile Include="Contants\BetStatusId.cs" />
+    <Compile Include="Contants\BetTypes.cs" />
+    <Compile Include="Contants\OddTypeNames.cs" />
     <Compile Include="Controllers\MemberBetListController.cs" />
     <Compile Include="Criteria\MemberBetList\DetailedWinLossFilter.cs" />
     <Compile Include="Criteria\MemberBetList\GetParlaySubTicketsCriteria.cs" />
@@ -81,16 +84,23 @@
     <Compile Include="Criteria\MemberBetList\GetMemberBetListCriteria.cs" />
     <Compile Include="Criteria\MemberBetList\GetDetailedWinLossCriteria.cs" />
     <Compile Include="Helpers\BetListHelper.cs" />
-    <Compile Include="Models\MemberBetList\BetTicket.cs" />
+    <Compile Include="Helpers\SystemParlayDetailsHelper.cs" />
+    <Compile Include="Models\GeneralBetTicket\BetTicket.cs" />
+    <Compile Include="Models\GeneralBetTicket\SystemParlayData.cs" />
+    <Compile Include="Models\GeneralBetTicket\SystemParlaySerial.cs" />
+    <Compile Include="Models\GeneralBetTicket\SystemParlayTicket.cs" />
     <Compile Include="Models\MemberBetList\DetailedWinLoss.cs" />
-    <Compile Include="Models\MemberBetList\ParlaySubTicket.cs" />
+    <Compile Include="Models\GeneralBetTicket\ParlaySubTicket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Implements\MemberBetListRepository.cs" />
     <Compile Include="Repositories\Interfaces\IMemberBetListRepository.cs" />
     <Compile Include="Services\Implements\MemberBetListService.cs" />
     <Compile Include="Services\Interfaces\IMemberBetListService.cs" />
-    <Compile Include="ViewModels\MemberBetList\BetItem.cs" />
-    <Compile Include="ViewModels\MemberBetList\BetList.cs" />
+    <Compile Include="ViewModels\GeneralBetTicket\SystemParlayDetails.cs" />
+    <Compile Include="ViewModels\GeneralBetTicket\SystemParlayTicketItem.cs" />
+    <Compile Include="ViewModels\GeneralBetTicket\SystemParlayDailyTicketList.cs" />
+    <Compile Include="ViewModels\GeneralBetTicket\BetItem.cs" />
+    <Compile Include="ViewModels\GeneralBetTicket\BetList.cs" />
     <Compile Include="ViewModels\MemberBetList\DetailedWinLossItem.cs" />
   </ItemGroup>
   <ItemGroup>

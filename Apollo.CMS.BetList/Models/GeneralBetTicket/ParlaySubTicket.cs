@@ -7,7 +7,7 @@
 //   <change who="Jason.Ly" date="2014.1.15">Created</change>
 // </history>
 
-namespace Apollo.CMS.BetList.Models.MemberBetList
+namespace Apollo.CMS.BetList.Models.GeneralBetTicket
 {
     /// <summary>
     /// Parlay sub ticket model.

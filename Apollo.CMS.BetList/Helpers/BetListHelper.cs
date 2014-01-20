@@ -11,9 +11,13 @@ namespace Apollo.CMS.BetList.Helpers
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Apollo.CMS.BetList.Models.MemberBetList;
-    using Apollo.CMS.Core.Constants;
+    using Apollo.CMS.BetList.Constants;
+    using Apollo.CMS.BetList.Models.GeneralBetTicket;
+    using Apollo.CMS.BetList.ViewModels.GeneralBetTicket;
+    using Fanex.BetList.Core.Builder;
     using Fanex.BetList.Core.Entities;
+    using Fanex.BetList.Core.Factories;
+    using Fanex.BetList.Core.TicketHelper;
     using Fanex.Common;
 
     /// <summary>
@@ -21,6 +25,85 @@ namespace Apollo.CMS.BetList.Helpers
     /// </summary>
     public static class BetListHelper
     {
+        /// <summary>
+        /// Converts raw data queried from database to bet list table format.
+        /// </summary>
+        /// <param name="data">The raw data.</param>
+        /// <returns>BetList object represents bet list.</returns>
+        public static BetList ConvertToBetList(IEnumerable<BetTicket> data)
+        {
+            var result = new BetList();
+
+            if (data != null && data.Any())
+            {
+                BetListHTMLFactory factory = new BetListHTMLFactory();
+                BetListHTMLBuilder builder = factory.CreateBuilder();
+                TicketHelper ticketHelper = new TicketHelper();
+                IEnumerable<ITicket> tickets = BetListHelper.Map(data);
+                string ticketStatus = string.Empty;
+
+                result.TotalItems = data.Count();
+
+                foreach (ITicket ticket in tickets)
+                {
+                    ticketStatus = ticket.Status.ToLower();
+                    result.Add(new BetItem
+                    {
+                        Username = ticket.UserName,
+                        TransId = ticket.TransId,
+                        TransDate = ticket.TransDate,
+                        Stake = ticket.Stake,
+                        WinLoss = ticket.Winlost,
+                        Comm = ticket.Comm,
+                        CompanyWinLoss = ticket.SuperWinlost,
+                        CompanyShare = ticket.SuperPositionTaking,
+                        CompanyComm = ticket.SuperComm,
+                        TransTimeCol = builder.BuildTrans(ticket),
+                        ChoiceCol = builder.BuildChoice(ticket, ticketHelper, null, false),
+                        OddsCol = builder.BuildOdds(ticket, null, BetListHelper.GetOddTypeName),
+                        StatusCol = builder.BuildStatus(ticket, ticketHelper, null, true),
+                        IsHandicap = (ticket.BetTypeId == (int)BetTypes.Handicap) || (ticket.BetTypeId == (int)BetTypes._3_Way_Handicap),
+                        IsRunning = BetStatus.Running.Equals(ticketStatus) || BetStatus.Waiting.Equals(ticketStatus)
+                    });
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Converts raw data queried from database to the parlay sub ticket list.
+        /// </summary>
+        /// <param name="rawData">The raw data.</param>
+        /// <returns>The HTML formatted string that represents the sub-tickets.</returns>
+        public static string ConvertParlaySubTicketList(IEnumerable<ParlaySubTicket> rawData)
+        {
+            string result = string.Empty;
+
+            if ((rawData != null) && rawData.Any())
+            {
+                List<ITicket> tickets = BetListHelper.Map(rawData);
+                BetListHTMLFactory factory = new BetListHTMLFactory();
+                BetListHTMLBuilder builder = factory.CreateBuilder();
+                ITicketHelper ticketHelper = new TicketHelper { IsShowOddsWithChoice = true };
+                string line = "<div class='line'></div>";
+
+                for (int i = 0; i < tickets.Count; i++)
+                {
+                    if (i == tickets.Count - 1)
+                    {
+                        line = "<div></div>";
+                    }
+
+                    builder.AddChoice(tickets[i], ticketHelper, null, string.Empty, line, false);
+                }
+
+                result = builder.GetBetList();
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Gets the name of the odd type.
         /// </summary>
@@ -100,6 +183,7 @@ namespace Apollo.CMS.BetList.Helpers
                         Comm = Converter.ToDecimal(item.PlayerComm),
                         SuperPositionTaking = Converter.ToDecimal(item.CompanyPositionTaking),
                         SuperWinlost = Converter.ToDecimal(item.CompanyWinLoss),
+                        SuperComm = Converter.ToDecimal(item.CompanyComm),
                         IP = item.IP
                     };
 

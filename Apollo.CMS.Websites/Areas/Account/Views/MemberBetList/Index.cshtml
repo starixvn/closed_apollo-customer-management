@@ -43,6 +43,9 @@
 <div class="row content-grid hide">
     <div id="divDetailedWinLossList" class="freegrid"></div>
 </div>
+<div class="row content-grid hide">
+    <div id="divSystemParlayDetails" class="freegrid"></div>
+</div>
 
 @section Foot {
     @Scripts.Render("~/scripts/fanexGrid")
@@ -59,6 +62,7 @@
             WinLoss: '@ViewLang.WinLoss',
             Status: '@ViewLang.Status',
             CompanyShare: '@ViewLang.CompanyShare',
+            CompanyComm: '@ViewLang.CompanyComm',
             Details: '@ViewLang.Details'
         };
         var detailTableHeaders = {
@@ -67,6 +71,17 @@
             Agent: '@ViewLang.Agent',
             Share: '@ViewLang.Share',
             Comm: '@ViewLang.Comm'
+        };
+        var systemParlayDetailsTableHeaders = {
+            Date: '@ViewLang.Date',
+            Event: '@ViewLang.Event',
+            Odds: '@ViewLang.Odds',
+            Stake: '@ViewLang.Stake',
+            WinLoss: '@ViewLang.WinLoss',
+            Status: '@ViewLang.Status',
+            Subtotal: '@ViewLang.Subtotal',
+            Total: '@ViewLang.Total',
+            Outstanding: '@ViewLang.Outstanding'
         };
         var today = '@DateTime.Now.ToShortDateString()';
         var minDate = '@ViewBag.StartDate';

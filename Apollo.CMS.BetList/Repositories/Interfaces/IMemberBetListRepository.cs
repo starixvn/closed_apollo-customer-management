@@ -10,7 +10,7 @@
 namespace Apollo.CMS.BetList.Repositories.Interfaces
 {
     using Apollo.CMS.BetList.Criteria.MemberBetList;
-    using Fanex.BetList.Core.Entities;
+    using Apollo.CMS.BetList.Models.GeneralBetTicket;
 
     public interface IMemberBetListRepository
     {

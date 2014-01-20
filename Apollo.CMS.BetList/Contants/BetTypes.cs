@@ -7,7 +7,7 @@
 //   <change who="Anders.Le" date="2013.4.4">Created</change>
 // </history>
 
-namespace Apollo.CMS.Core.Constants
+namespace Apollo.CMS.BetList.Constants
 {
     /// <summary>
     /// Hard code bet types.

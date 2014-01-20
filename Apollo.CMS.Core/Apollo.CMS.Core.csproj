@@ -88,11 +88,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\AppSettings.cs" />
-    <Compile Include="Constants\BetTypes.cs" />
     <Compile Include="Constants\CommonConstants.cs" />
     <Compile Include="Constants\AccountStatus.cs" />
     <Compile Include="Constants\HighLevelAgents.cs" />
-    <Compile Include="Constants\OddTypeNames.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Criteria\BalanceUpCriteria.cs" />
     <Compile Include="ExcelUtility\ExcelTemplateWriter.cs" />

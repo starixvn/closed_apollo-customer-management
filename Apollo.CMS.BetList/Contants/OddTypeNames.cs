@@ -7,7 +7,7 @@
 //   <change who="Jason.Ly" date="2014.1.14">Created</change>
 // </history>
 
-namespace Apollo.CMS.Core.Constants
+namespace Apollo.CMS.BetList.Constants
 {
     public enum OddTypes : int
     {

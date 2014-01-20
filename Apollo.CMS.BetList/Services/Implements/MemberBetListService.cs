@@ -13,18 +13,16 @@ namespace Apollo.CMS.BetList.Services.Implements
     using System.Linq;
     using Apollo.CMS.BetList.Criteria.MemberBetList;
     using Apollo.CMS.BetList.Helpers;
+    using Apollo.CMS.BetList.Models.GeneralBetTicket;
     using Apollo.CMS.BetList.Models.MemberBetList;
     using Apollo.CMS.BetList.Repositories.Implements;
     using Apollo.CMS.BetList.Repositories.Interfaces;
     using Apollo.CMS.BetList.Services.Interfaces;
+    using Apollo.CMS.BetList.ViewModels.GeneralBetTicket;
     using Apollo.CMS.BetList.ViewModels.MemberBetList;
     using Apollo.CMS.Core.Constants;
     using Apollo.CMS.Core.Models;
     using Apollo.CMS.Core.Services;
-    using Fanex.BetList.Core.Builder;
-    using Fanex.BetList.Core.Entities;
-    using Fanex.BetList.Core.Factories;
-    using Fanex.BetList.Core.TicketHelper;
     using Fanex.Common;
 
     /// <summary>
@@ -111,53 +109,25 @@ namespace Apollo.CMS.BetList.Services.Implements
         /// <returns>The HTML formatted string that represents the sub-tickets.</returns>
         public string GetParlaySubTickets(GetParlaySubTicketsCriteria criteria)
         {
-            string result = string.Empty;
             IEnumerable<ParlaySubTicket> rawData = this.GetListData<ParlaySubTicket>(criteria);
 
-            if ((rawData != null) && rawData.Any())
-            {
-                List<ITicket> tickets = BetListHelper.Map(rawData);
-                BetListHTMLFactory factory = new BetListHTMLFactory();
-                BetListHTMLBuilder builder = factory.CreateBuilder();
-                ITicketHelper ticketHelper = new TicketHelper { IsShowOddsWithChoice = true };
-                string line = "<div class='line'></div>";
-
-                for (int i = 0; i < tickets.Count; i++)
-                {
-                    if (i == tickets.Count - 1)
-                    {
-                        line = "<div></div>";
-                    }
-
-                    builder.AddChoice(tickets[i], ticketHelper, null, string.Empty, line, false);
-                }
-
-                result = builder.GetBetList();
-            }
-
-            return result;
+            return BetListHelper.ConvertParlaySubTicketList(rawData);
         }
 
         /// <summary>
         /// Gets the system parlay details.
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
-        /// <returns>The HTML formatted string that represents the system parlay details.</returns>
-        public string GetSystemParlayDetails(GetSystemParlayDetailsCriteria criteria)
+        /// <returns>The SystemParlayDetails object that represents the system parlay details.</returns>
+        public SystemParlayDetails GetSystemParlayDetails(GetSystemParlayDetailsCriteria criteria)
         {
-            SystemParlayData systemParlayData = null;
-            BetListHTMLFactory factory = new BetListHTMLFactory();
-            BetListHTMLBuilder builder = factory.CreateBuilder();
-            ITicketHelper ticketHelper = new TicketHelper();
             BalanceUp balanceUp = this.BalanceUp;
             string result = string.Empty;
 
             criteria.BalanceUpDay = balanceUp.BalanceUpDay;
             criteria.MoveBetsDay = balanceUp.MoveBetsDay;
-            systemParlayData = this._memberBetListRepository.GetSystemParlayData(criteria);
-            result = builder.BuildSystemParlayDetail(ticketHelper, systemParlayData);
 
-            return result;
+            return SystemParlayDetailsHelper.Map(this._memberBetListRepository.GetSystemParlayData(criteria));
         }
 
         /// <summary>
@@ -167,44 +137,15 @@ namespace Apollo.CMS.BetList.Services.Implements
         /// <returns>Formatted bet list.</returns>
         private BetList SeparateBetListToPage(MemberBetListFilter criteria)
         {
-            var result = new BetList();
+            BetList result = null;
             List<BetTicket> pagedData = null;
             int startIndex = criteria.PageIndex * criteria.PageSize;
             int endIndex = startIndex + criteria.PageSize;
 
             endIndex = endIndex > _ticketList.Count ? _ticketList.Count : endIndex;
             pagedData = _ticketList.GetRange(startIndex, endIndex - startIndex);
+            result = BetListHelper.ConvertToBetList(pagedData);
             result.TotalItems = _ticketList.Count;
-
-            if (pagedData != null && pagedData.Any())
-            {
-                BetListHTMLFactory factory = new BetListHTMLFactory();
-                BetListHTMLBuilder builder = factory.CreateBuilder();
-                ITicketHelper ticketHelper = new TicketHelper();
-                IEnumerable<ITicket> tickets = BetListHelper.Map(pagedData);
-                string ticketStatus = string.Empty;
-
-                foreach (ITicket ticket in tickets)
-                {
-                    ticketStatus = ticket.Status.ToLower();
-                    result.Add(new BetItem
-                    {
-                        TransId = ticket.TransId,
-                        TransDate = ticket.TransDate,
-                        Stake = ticket.Stake,
-                        WinLoss = ticket.Winlost,
-                        Comm = ticket.Comm,
-                        CompanyWinLoss = ticket.SuperWinlost,
-                        CompanyShare = ticket.SuperPositionTaking,
-                        TransTimeCol = builder.BuildTrans(ticket),
-                        ChoiceCol = builder.BuildChoice(ticket, ticketHelper, null, false),
-                        OddsCol = builder.BuildOdds(ticket, null, BetListHelper.GetOddTypeName),
-                        StatusCol = builder.BuildStatus(ticket, ticketHelper, null, true),
-                        IsHandicap = (ticket.BetTypeId == (int)BetTypes.Handicap) || (ticket.BetTypeId == (int)BetTypes._3_Way_Handicap),
-                        IsRunning = BetStatus.Running.Equals(ticketStatus) || BetStatus.Waiting.Equals(ticketStatus)
-                    });
-                }
-            }
 
             return result;
         }

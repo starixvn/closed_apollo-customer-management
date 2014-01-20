@@ -10,10 +10,9 @@
 namespace Apollo.CMS.BetList.Repositories.Implements
 {
     using System.Collections;
-    using System.Collections.Generic;
     using Apollo.CMS.BetList.Criteria.MemberBetList;
+    using Apollo.CMS.BetList.Models.GeneralBetTicket;
     using Apollo.CMS.BetList.Repositories.Interfaces;
-    using Fanex.BetList.Core.Entities;
     using Fanex.Common;
     using Fanex.Data;
 
@@ -36,11 +35,8 @@ namespace Apollo.CMS.BetList.Repositories.Implements
             {
                 using (var multi = db.QueryMultiple(param))
                 {
-                    IEnumerable<SystemParlayTicket> systemParlayTickets = multi.Read<SystemParlayTicket>();
-                    IEnumerable<SystemParlaySerial> systemParlaySerials = multi.Read<SystemParlaySerial>();
-
-                    systemParlayData.TicketList = new List<ISystemParlayTicket>(systemParlayTickets);
-                    systemParlayData.SerialList = new List<ISystemParlaySerial>(systemParlaySerials);
+                    systemParlayData.TicketList = multi.Read<SystemParlayTicket>();
+                    systemParlayData.SerialList = multi.Read<SystemParlaySerial>();
 
                     if (param.ContainsKey("outstanding"))
                     {

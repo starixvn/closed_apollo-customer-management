@@ -32,6 +32,7 @@ Apollo.CMS.Account.MemberBetList = function () {
         $this.DOMInstance.btnGenerate = $('#btnGenerate', $this.DOMInstance.divFilterForm);
         $this.DOMInstance.divBetList = $('#divBetList');
         $this.DOMInstance.divDetailedWinLossList = $('#divDetailedWinLossList');
+        $this.DOMInstance.divSystemParlayDetails = $('#divSystemParlayDetails');
     };
 
     // Initialize fields and handle events.
@@ -151,6 +152,7 @@ Apollo.CMS.Account.MemberBetList = function () {
                    { HeaderText: tableHeaders.WinLoss, Width: 120, Name: 'ColWinLoss', HeaderAlign: 'center', CellAlign: 'right' },
                    { HeaderText: tableHeaders.Status, Width: 100, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'right' },
                    { HeaderText: tableHeaders.CompanyShare, Width: 100, Name: 'ColCompanyShare', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: tableHeaders.CompanyComm, Width: 100, Name: 'ColCompanyComm', HeaderAlign: 'center', CellAlign: 'right' },
                    { HeaderText: tableHeaders.Details, Width: 60, Name: 'ColDetails', HeaderAlign: 'center', CellAlign: 'center'}];
 
         // Push data to grid.
@@ -168,6 +170,7 @@ Apollo.CMS.Account.MemberBetList = function () {
                               { Name: 'ColWinLoss', Value: formatNumberCol(item.IsRunning ? '-  ' : item.WinLoss, false, item.Comm, null) },
                               { Name: 'ColStatus', Value: item.StatusCol },
                               { Name: 'ColCompanyShare', Value: formatNumberCol(item.CompanyShare, true, item.IsRunning ? null : item.CompanyWinLoss, null) },
+                              { Name: 'ColCompanyShare', Value: formatNumberCol('N/A', true, item.CompanyComm, null) },
                               { Name: 'ColDetails', Value: detailColFormat.format(item.TransId, item.TransDate)}]
                 };
 
@@ -184,6 +187,7 @@ Apollo.CMS.Account.MemberBetList = function () {
                           { Name: 'ColWinLoss', Value: formatNumberCol(data.SumWinLoss, false, data.SumComm, null) },
                           { Name: 'ColStatus', Value: '' },
                           { Name: 'ColCompanyShare', Value: formatNumberCol(null, false, data.SumCompanyWinLoss, null) },
+                          { Name: 'ColCompanyComm', Value: formatNumberCol('N/A', true, data.SumCompanyComm, null) },
                           { Name: 'ColDetails', Value: ''}]
             };
 
@@ -209,7 +213,7 @@ Apollo.CMS.Account.MemberBetList = function () {
 
     // Handle events raised in the grid.
     var handleGridEvents = function () {
-        $this.DOMInstance.divBetList.find('span.winloss-details').on('click', function () {
+        $this.DOMInstance.divBetList.find('div.winloss-details').on('click', function () {
             var $obj = $(this);
             var transId = $obj.attr('data-ref-no');
             var transDate = $obj.attr('data-trans-date');
@@ -256,6 +260,104 @@ Apollo.CMS.Account.MemberBetList = function () {
         gridOptions.bodyRows = bodyData;
         $this.DOMInstance.divDetailedWinLossList.removeClass('hide').fanexGrid(gridOptions);
     };
+
+    // Render data table for member bet list.
+    var renderSystemParlayDetailsTable = function (data) {
+        var bodyData = [];
+        var footerData = [];
+        var columns = [];
+        var gridOptions = {
+            showDistinctRow: false,
+            showHighlightRow: false,
+            showFooter: true,
+            bodyRowHeight: 30
+        };
+
+        $this.DOMInstance.divSystemParlayDetails.addClass('hide');
+
+        // Configure grid's columns.
+        columns = [{ HeaderText: systemParlayDetailsTableHeaders.Date, Width: 100, Name: 'ColDate', HeaderAlign: 'center', CellAlign: 'center' },
+                   { HeaderText: systemParlayDetailsTableHeaders.Event, Width: 250, Name: 'ColEvent', HeaderAlign: 'center', CellAlign: 'left' },
+                   { HeaderText: systemParlayDetailsTableHeaders.Odds, Width: 120, Name: 'ColOdds', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: systemParlayDetailsTableHeaders.Stake, Width: 120, Name: 'ColStake', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: systemParlayDetailsTableHeaders.WinLoss, Width: 120, Name: 'ColWinLoss', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: systemParlayDetailsTableHeaders.Status, Width: 120, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'center'}];
+
+        // Push data to grid.
+        if (data && data.DailyTicketLists && data.DailyTicketLists.length > 0) {
+            var row = null;
+            var dateRowCounter = null;
+
+            $.each(data.DailyTicketLists, function (dateIndex, dailyTicketList) {
+                dateRowCounter = countRowsOfDateData(dailyTicketList.TicketItems);
+
+                $.each(dailyTicketList.TicketItems, function (ticketIndex, ticket) {
+                    $.each(ticket.EventNames, function (index, event) {
+                        row =
+                        {
+                            Columns: [{ Name: 'ColEvent', Value: event}]
+                        };
+
+                        if (index === 0) {
+                            row.Columns.push(
+                                { Name: 'ColOdds', Value: ticket.Odds, MergeRowNumber: ticket.EventNames.length },
+                                { Name: 'ColStake', Value: ticket.Stake, MergeRowNumber: ticket.EventNames.length },
+                                { Name: 'ColWinLoss', Value: formatNumberCol(ticket.WinLoss, false, ticket.Comm, null), MergeRowNumber: ticket.EventNames.length },
+                                { Name: 'ColStatus', Value: ticket.Status, MergeRowNumber: ticket.EventNames.length });
+
+                            if (ticketIndex === 0) {
+                                row.Columns.unshift({ Name: 'ColDate', Value: dailyTicketList.WinLossDate, MergeRowNumber: dateRowCounter });
+                            }
+                        }
+
+                        bodyData.push(row);
+                    });
+                });
+
+                row =
+                {
+                    Columns: [{ Name: 'ColDate', Value: systemParlayDetailsTableHeaders.Subtotal, MergeColNumber: 4, CellAlign: 'right' },
+                              { Name: 'ColWinLoss', Value: formatNumberCol(dailyTicketList.TotalWinLoss, false, dailyTicketList.TotalComm, null) },
+                              { Name: 'ColStatus', Value: ''}],
+                    TdClass: 'subTotal'
+                };
+                bodyData.push(row);
+            });
+
+            row =
+            {
+                Columns: [{ Name: 'ColDate', Value: systemParlayDetailsTableHeaders.Total, MergeColNumber: 4, CellAlign: 'right' },
+                          { Name: 'ColWinLoss', Value: formatNumberCol(data.TotalWinLoss, false, data.TotalComm, null) },
+                          { Name: 'ColStatus', Value: ''}],
+                TdClass: 'total'
+            };
+            footerData.push(row);
+
+            row =
+            {
+                Columns: [{ Name: 'ColDate', Value: systemParlayDetailsTableHeaders.Outstanding, MergeColNumber: 4, CellAlign: 'right' },
+                          { Name: 'ColWinLoss', Value: formatNumberCol(data.Outstanding, false, null, null) },
+                          { Name: 'ColStatus', Value: ''}]
+            };
+            footerData.push(row);
+        }
+
+        gridOptions.columns = columns;
+        gridOptions.bodyRows = bodyData;
+        gridOptions.footerRows = footerData;
+        $this.DOMInstance.divSystemParlayDetails.removeClass('hide').fanexGrid(gridOptions);
+    };
+
+    // Count number of rows for each date group.
+    var countRowsOfDateData = function (ticketList) {
+        var counter = 0;
+
+        $.each(ticketList, function (index, item) {
+            counter += item.EventNames.length;
+        });
+
+        return counter;
+    }
 
     // Format number column.
     var formatNumberCol = function (firstNumber, isPercent, secondNumber, thirdNumber) {
@@ -357,7 +459,8 @@ Apollo.CMS.Account.MemberBetList = function () {
                 CMS.loadingBox.show();
             },
             success: function (result) {
-                pageLayout.Popup(title, result, null, true);
+                pageLayout.Popup(title, $this.DOMInstance.divSystemParlayDetails, null, true);
+                renderSystemParlayDetailsTable(result);
             },
             error: function (xhr, status, err) {
                 CMS.handleAjaxError(xhr, status, err);
@@ -374,7 +477,8 @@ Apollo.CMS.Account.MemberBetList = function () {
         dpkToDate: null,
         btnGenerate: null,
         divBetList: null,
-        divDetailedWinLossList: null
+        divDetailedWinLossList: null,
+        divSystemParlayDetails: null
     };
     $this.InitPage = function () {
         cacheDOM();

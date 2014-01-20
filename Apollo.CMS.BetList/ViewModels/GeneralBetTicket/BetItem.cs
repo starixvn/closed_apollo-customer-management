@@ -7,7 +7,7 @@
 //   <change who="Jason.Ly" date="2014.1.10">Created</change>
 // </history>
 
-namespace Apollo.CMS.BetList.ViewModels.MemberBetList
+namespace Apollo.CMS.BetList.ViewModels.GeneralBetTicket
 {
     using System;
 
@@ -17,6 +17,8 @@ namespace Apollo.CMS.BetList.ViewModels.MemberBetList
     [Serializable]
     public class BetItem
     {
+        public string Username { get; set; }
+
         public long TransId { get; set; }
 
         public DateTime TransDate { get; set; }
@@ -30,6 +32,8 @@ namespace Apollo.CMS.BetList.ViewModels.MemberBetList
         public decimal CompanyWinLoss { get; set; }
 
         public decimal CompanyShare { get; set; }
+
+        public decimal CompanyComm { get; set; }
 
         public bool IsHandicap { get; set; }
 

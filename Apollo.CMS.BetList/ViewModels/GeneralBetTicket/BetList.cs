@@ -7,7 +7,7 @@
 //   <change who="Jason.Ly" date="2014.1.10">Created</change>
 // </history>
 
-namespace Apollo.CMS.BetList.ViewModels.MemberBetList
+namespace Apollo.CMS.BetList.ViewModels.GeneralBetTicket
 {
     using System;
     using System.Collections.Generic;
@@ -35,6 +35,8 @@ namespace Apollo.CMS.BetList.ViewModels.MemberBetList
 
         public decimal SumCompanyShare { get; set; }
 
+        public decimal SumCompanyComm { get; set; }
+
         public int Counter { get; set; }
 
         public int TotalItems { get; set; }
@@ -52,6 +54,7 @@ namespace Apollo.CMS.BetList.ViewModels.MemberBetList
                 this.SumWinLoss += item.WinLoss;
                 this.SumComm += item.Comm;
                 this.SumCompanyShare += item.CompanyShare;
+                this.SumCompanyComm += item.CompanyComm;
                 this.SumCompanyWinLoss += item.CompanyWinLoss;
             }
         }
