@@ -48,9 +48,29 @@
         }
     }
 
+    .grid-fixed-table tr {
+        &.subTotal td {
+            background-color: #F2ECDC;
+            font-weight: bold;
+        }
+
+        &.total td {
+            background: #e1eaf0;
+            color: #444;
+        }
+    }
+
     .row_footer table thead th, .col_footer table thead th {
-        background: #e1e1e1  !important;
+        background: #e1e1e1 !important;
         color: #444;
+    }
+
+    /* Custom CSS for the case the total row in the footer */
+    .row_footer table thead tr, .col_footer table thead tr {
+        &.total th {
+            background: #e1eaf0 !important;
+            color: #444;
+        }
     }
 }
 

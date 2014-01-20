@@ -319,7 +319,7 @@ Apollo.CMS.Account.MemberBetList = function () {
                     Columns: [{ Name: 'ColDate', Value: systemParlayDetailsTableHeaders.Subtotal, MergeColNumber: 4, CellAlign: 'right' },
                               { Name: 'ColWinLoss', Value: formatNumberCol(dailyTicketList.TotalWinLoss, false, dailyTicketList.TotalComm, null) },
                               { Name: 'ColStatus', Value: ''}],
-                    TdClass: 'subTotal'
+                    CssClass: 'subTotal'
                 };
                 bodyData.push(row);
             });
@@ -329,7 +329,7 @@ Apollo.CMS.Account.MemberBetList = function () {
                 Columns: [{ Name: 'ColDate', Value: systemParlayDetailsTableHeaders.Total, MergeColNumber: 4, CellAlign: 'right' },
                           { Name: 'ColWinLoss', Value: formatNumberCol(data.TotalWinLoss, false, data.TotalComm, null) },
                           { Name: 'ColStatus', Value: ''}],
-                TdClass: 'total'
+                CssClass: 'total'
             };
             footerData.push(row);
 
