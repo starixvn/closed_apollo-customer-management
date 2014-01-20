@@ -101,7 +101,7 @@ Apollo.CMS.Account.MemberBetList = function () {
             success: function (result) {
                 var title = '{0} - {1}: {2}'.format(detailTableHeaders.ViewDetails, detailTableHeaders.RefNo, transId);
 
-                pageLayout.Popup(title, $this.DOMInstance.divDetailedWinLossList, null, true);
+                pageLayout.Popup(title, $this.DOMInstance.divDetailedWinLossList, { resizable: false }, true);
                 renderDetailTable(result);
             },
             error: function (xhr, status, err) {
@@ -270,7 +270,9 @@ Apollo.CMS.Account.MemberBetList = function () {
             showDistinctRow: false,
             showHighlightRow: false,
             showFooter: true,
-            bodyRowHeight: 30
+            bodyRowHeight: 30,
+            fullHeight: false,
+            gridHeight: 600
         };
 
         $this.DOMInstance.divSystemParlayDetails.addClass('hide');
@@ -412,6 +414,7 @@ Apollo.CMS.Account.MemberBetList = function () {
                 RefNo: refNo
             };
 
+            divEvent.addClass('parlay-details');
             $.ajax({
                 type: "POST",
                 url: urls.GetMixParlayByRefNo,
@@ -459,7 +462,7 @@ Apollo.CMS.Account.MemberBetList = function () {
                 CMS.loadingBox.show();
             },
             success: function (result) {
-                pageLayout.Popup(title, $this.DOMInstance.divSystemParlayDetails, null, true);
+                pageLayout.Popup(title, $this.DOMInstance.divSystemParlayDetails, { resizable: false }, true);
                 renderSystemParlayDetailsTable(result);
             },
             error: function (xhr, status, err) {
