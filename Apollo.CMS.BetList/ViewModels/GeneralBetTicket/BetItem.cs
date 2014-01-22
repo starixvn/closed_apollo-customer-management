@@ -17,9 +17,13 @@ namespace Apollo.CMS.BetList.ViewModels.GeneralBetTicket
     [Serializable]
     public class BetItem
     {
+        public long CustId { get; set; }
+
         public string Username { get; set; }
 
         public long TransId { get; set; }
+
+        public long RefNo { get; set; }
 
         public DateTime TransDate { get; set; }
 

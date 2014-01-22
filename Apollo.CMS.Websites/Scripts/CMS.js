@@ -29,7 +29,7 @@ var CMS = function ($) {
             CMS.internalError = $('#InternalError').val();
             CMS.dialogPopup = $('<div id="dialog-popup"></div>').appendTo('body');
             CMS.datePickerButtonUrl = $('#DatePickerButtonUrl').val();
-            CMS.serverTimezone = $("#ServerTimezone").val();
+            CMS.serverTimezone = $('#ServerTimezone').val();
         },
         resolveRootUrl: function (relativeUrl) {
             return CMS.rootUrl + relativeUrl;
@@ -85,7 +85,7 @@ var CMS = function ($) {
             if (url && data) {
                 //data can be string of parameters or array/object
                 data = typeof data == 'string' ? data : $.param(data);
-                var downloadUrl = url + "?" + data;
+                var downloadUrl = url + '?' + data;
                 var iframe = $('body iframe');
                 if (iframe.length == 0) {
                     iframe = $('<iframe width="0" height="0" class="display-none"></iframe>');
@@ -107,14 +107,14 @@ var CMS = function ($) {
         openWindow: function (url) {
             var popH = $(window).height(), popW = $(window).width();
             var formatter = new Array(
-                "resizable=no",
-                "scrollbars=yes",
-                "toolbar=no",
-                "menubar=no",
-                "location=no",
-                "addressbar=no",
-                "directories=no",
-                "status=yes"
+                'resizable=no',
+                'scrollbars=yes',
+                'toolbar=no',
+                'menubar=no',
+                'location=no',
+                'addressbar=no',
+                'directories=no',
+                'status=yes'
             ).join(',');
 
             window.open(url, '_blank', '' + ',' + formatter);

@@ -74,10 +74,10 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
     // Get data
     var getData = function () {
         $.ajax({
-            type: "POST",
+            type: 'POST',
             url: urls.GetAgentList,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
             data: JSON.stringify(parameters),
             beforeSend: function () {
                 CMS.loadingBox.show();

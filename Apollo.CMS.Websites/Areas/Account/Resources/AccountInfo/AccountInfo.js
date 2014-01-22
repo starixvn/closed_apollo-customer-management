@@ -67,7 +67,7 @@ Apollo.CMS.Account.AccountInfo = function () {
 
     // Hide list of upline agents
     var hideUplineAgent = function () {
-        $("#list-agent").fadeOut("fast", function () {
+        $('#list-agent').fadeOut('fast', function () {
             $('#icon-more').removeClass('active');
         });
     };
@@ -118,10 +118,10 @@ Apollo.CMS.Account.AccountInfo = function () {
     var getDownline = function (params, url, container) {
 
         $.ajax({
-            type: "POST",
+            type: 'POST',
             url: url,
-            contentType: "application/json; charset=utf-8",
-            dataType: "html",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'html',
             data: JSON.stringify(params),
             beforeSend: function () {
                 CMS.loadingBox.show();

@@ -50,7 +50,7 @@ namespace Apollo.CMS.BetList.Controllers
             ViewBag.CustId = custId;
             ViewBag.Username = username;
 
-            return View("~/Areas/Account/Views/MemberBetList/Index.cshtml");
+            return View();
         }
 
         /// <summary>

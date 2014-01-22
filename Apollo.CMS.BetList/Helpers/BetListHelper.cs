@@ -49,8 +49,10 @@ namespace Apollo.CMS.BetList.Helpers
                     ticketStatus = ticket.Status.ToLower();
                     result.Add(new BetItem
                     {
+                        CustId = ticket.CustId,
                         Username = ticket.UserName,
                         TransId = ticket.TransId,
+                        RefNo = Converter.To<long>(ticket.RefNo),
                         TransDate = ticket.TransDate,
                         Stake = ticket.Stake,
                         WinLoss = ticket.Winlost,
@@ -130,7 +132,7 @@ namespace Apollo.CMS.BetList.Helpers
                 {
                     ITicket ticket = new Ticket
                     {
-                        CustId = Converter.ToInt(item.CustId),
+                        CustId = Converter.To<long>(item.CustId),
                         UserName = item.Username,
                         BetId = item.BetId,
                         RefNo = Converter.ToString2(item.RefNo),

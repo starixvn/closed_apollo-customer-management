@@ -88,4 +88,14 @@
       <Mapping DataField="WinlostDate" ObjectProperty="WinLossDate"/>
     </Setting>
   </Function>
+  <Function Name="BetListByRefNo">
+    <Setting Key="Acc_BetList_GetByTransId" SpName="Acc_BetList_GetByTransId" DbName="SVRCSD.RepDB.aplWeb">
+      <Mapping DataField="Winlost" ObjectProperty="WinLoss"/>
+      <Mapping DataField="Actual_Stake" ObjectProperty="ActualStake"/>
+      <Mapping DataField="APositionTaking" ObjectProperty="CompanyPositionTaking"/>
+      <Mapping DataField="ADiscount" ObjectProperty="CompanyDiscount"/>
+      <Mapping DataField="AWinlost" ObjectProperty="CompanyWinLoss"/>
+      <Mapping DataField="AComm" ObjectProperty="CompanyComm"/>
+    </Setting>
+  </Function>
 </Functions>

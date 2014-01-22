@@ -238,10 +238,10 @@ Apollo.CMS.Message.PrivateMessage = function () {
         };
 
         $.ajax({
-            type: "POST",
+            type: 'POST',
             url: urls.GetRecipientInfo,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
             data: JSON.stringify(data),
             beforeSend: function () {
                 CMS.loadingBox.show();
@@ -264,10 +264,10 @@ Apollo.CMS.Message.PrivateMessage = function () {
         disableForm();
 
         $.ajax({
-            type: "POST",
+            type: 'POST',
             url: urls.AddNewMessage,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
             data: JSON.stringify(params),
             beforeSend: function () {
                 CMS.loadingBox.show();

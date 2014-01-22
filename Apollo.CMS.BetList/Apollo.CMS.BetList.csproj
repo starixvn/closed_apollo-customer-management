@@ -75,7 +75,9 @@
     <Compile Include="BetListAreaRegistration.cs" />
     <Compile Include="Contants\BetStatusId.cs" />
     <Compile Include="Contants\BetTypes.cs" />
+    <Compile Include="Controllers\BetListByRefNoController.cs" />
     <Compile Include="Controllers\MemberBetListController.cs" />
+    <Compile Include="Criteria\BetListByRefNo\GetBetListByRefNoCriteria.cs" />
     <Compile Include="Criteria\MemberBetList\DetailedWinLossFilter.cs" />
     <Compile Include="Criteria\MemberBetList\GetParlaySubTicketsCriteria.cs" />
     <Compile Include="Criteria\MemberBetList\GetSystemParlayDetailsCriteria.cs" />
@@ -93,8 +95,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Implements\MemberBetListRepository.cs" />
     <Compile Include="Repositories\Interfaces\IMemberBetListRepository.cs" />
+    <Compile Include="Services\Implements\BetListByRefNoService.cs" />
     <Compile Include="Services\Implements\MemberBetListService.cs" />
+    <Compile Include="Services\Interfaces\IBetListByRefNoService.cs" />
     <Compile Include="Services\Interfaces\IMemberBetListService.cs" />
+    <Compile Include="ViewModels\BetListByRefNo\BetListByRefNoItem.cs" />
     <Compile Include="ViewModels\GeneralBetTicket\SystemParlayDetails.cs" />
     <Compile Include="ViewModels\GeneralBetTicket\SystemParlayTicketItem.cs" />
     <Compile Include="ViewModels\GeneralBetTicket\SystemParlayDailyTicketList.cs" />

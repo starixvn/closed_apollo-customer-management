@@ -435,4 +435,10 @@
   <data name="CompanyComm" xml:space="preserve">
     <value>Company Comm</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="BetListByRefNo" xml:space="preserve">
+    <value>Bet List By Ref No</value>
+  </data>
 </root>

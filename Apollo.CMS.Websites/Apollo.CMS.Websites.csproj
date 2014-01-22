@@ -196,8 +196,9 @@
     <Content Include="Areas\Account\Resources\AccountList\ShadowList.js" />
     <Content Include="Areas\Account\Resources\AccountList\MemberList.js" />
     <Content Include="Areas\Account\Resources\AccountList\AgentList.js" />
-    <Content Include="Areas\Account\Resources\MemberBetList\memberBetList.less" />
-    <Content Include="Areas\Account\Resources\MemberBetList\MemberBetList.js" />
+    <Content Include="Areas\BetList\Resources\BetListByRefNo\BetListByRefNo.js" />
+    <Content Include="Areas\BetList\Resources\MemberBetList\memberBetList.less" />
+    <Content Include="Areas\BetList\Resources\MemberBetList\MemberBetList.js" />
     <Content Include="Areas\Account\Resources\TreeView\Images\treeview-1.png" />
     <Content Include="Areas\Account\Resources\TreeView\Images\treeview-default-line.gif" />
     <Content Include="Areas\Account\Resources\TreeView\Images\treeview-default-line2.gif" />
@@ -287,7 +288,10 @@
     <Content Include="Areas\Account\Views\AccountList\ShadowList.cshtml" />
     <Content Include="Areas\Account\Views\AccountList\Breadcrumb.cshtml" />
     <Content Include="Areas\Account\Resources\AccountList\accountList.less" />
-    <Content Include="Areas\Account\Views\MemberBetList\Index.cshtml" />
+    <Content Include="Areas\BetList\Views\MemberBetList\Index.cshtml" />
+    <Content Include="Areas\BetList\Views\Web.config" />
+    <Content Include="Areas\BetList\Views\BetListByRefNo\Index.cshtml" />
+    <Content Include="Areas\BetList\Resources\BetListByRefNo\betListByRefNo.less" />
     <None Include="Noesis.Javascript\Noesis.Javascript.x64.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

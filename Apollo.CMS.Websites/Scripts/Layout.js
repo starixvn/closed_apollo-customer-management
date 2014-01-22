@@ -47,7 +47,7 @@ Apollo.CMS.LayoutHelper = function () {
             });
         } else {
             $this.DOMInstance.divLeftContent.animate({
-                width: "toggle"
+                width: 'toggle'
             }, timespan, function () {
                 $this.DOMInstance.spanCollapseExpand.removeClass('icon-collapse').addClass('icon-expand');
                 $this.DOMInstance.spanCollapseExpand.attr('title', 'Expand');

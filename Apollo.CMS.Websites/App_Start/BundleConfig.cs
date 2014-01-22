@@ -33,6 +33,7 @@ namespace Apollo.CMS.Websites
             RegisterTreeviewBundles(bundles);
             RegisterAccountListBundles(bundles);
             RegisterMemberBetListBundles(bundles);
+            RegisterBetListByRefNoBundles(bundles);
 
             bundles.FileSetOrderList.Clear();
         }
@@ -211,11 +212,25 @@ namespace Apollo.CMS.Websites
         {
             bundles.AddAndInclude(
                 "~/site/memberBetList",
-                "~/Areas/Account/Resources/MemberBetList/memberBetList.less",
+                "~/Areas/BetList/Resources/MemberBetList/memberBetList.less",
                 "~/content/site/betList.less");
 
             bundles.Add(new ScriptBundle("~/scripts/memberBetList").Include(
-                "~/Areas/Account/Resources/MemberBetList/MemberBetList.js"));
+                "~/Areas/BetList/Resources/MemberBetList/MemberBetList.js"));
+        }
+
+        /// <summary>
+        /// Registers bundles for member's bet list function.
+        /// </summary>
+        /// <param name="bundles">The bundles collection.</param>
+        private static void RegisterBetListByRefNoBundles(BundleCollection bundles)
+        {
+            bundles.AddAndInclude(
+                "~/site/betListByRefNo",
+                "~/Areas/BetList/Resources/BetListByRefNo/betListByRefNo.less",
+                "~/content/site/betList.less");
+            bundles.Add(new ScriptBundle("~/scripts/betListByRefNo").Include(
+                "~/Areas/BetList/Resources/BetListByRefNo/BetListByRefNo.js"));
         }
     }
 

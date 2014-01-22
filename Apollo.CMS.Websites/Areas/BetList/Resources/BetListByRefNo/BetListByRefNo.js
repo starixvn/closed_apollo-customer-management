@@ -1,35 +1,24 @@
-﻿/* File Created: January 10, 2014 */
+﻿/* File Created: January 22, 2014 */
 $(document).ready(function () {
-    var memberBetList = new Apollo.CMS.Account.MemberBetList();
+    var memberBetList = new Apollo.CMS.BetList.MemberBetList();
 
     memberBetList.InitPage();
 });
 
-Namespace.Register("Apollo.CMS.Account.MemberBetList");
-Apollo.CMS.Account.MemberBetList = function () {
+Namespace.Register("Apollo.CMS.BetList.MemberBetList");
+Apollo.CMS.BetList.MemberBetList = function () {
     var $this = this;
-    var pageRanges = [10, 50, 100, 200, 500];
     var urls = {
-        MemberBetList: CMS.resolveRootUrl('BetList/MemberBetList/GetMemberBetList'),
-        TicketDetail: CMS.resolveRootUrl('BetList/MemberBetList/GetTicketDetail'),
-        GetMixParlayByRefNo: CMS.resolveRootUrl('BetList/MemberBetList/GetMixParlayByRefNo'),
-        GetSystemParlayDetails: CMS.resolveRootUrl('BetList/MemberBetList/GetSystemParlayDetails')
-    };
-    var parameters = {
-        CustId: null,
-        FromDate: null,
-        ToDate: null,
-        PageIndex: null,
-        PageSize: null,
-        IsLoadNew: null
+        MemberBetList: CMS.resolveRootUrl('BetList/BetListByRefNo/GetBetListByRefNo'),
+        GetSystemParlayDetails: CMS.resolveRootUrl('BetList/MemberBetList/GetSystemParlayDetails'),
+        TicketDetail: CMS.resolveRootUrl('BetList/MemberBetList/GetTicketDetail')
     };
 
     // Cache DOM elements
     var cacheDOM = function () {
         $this.DOMInstance.divFilterForm = $('#divFilterForm');
-        $this.DOMInstance.dpkFromDate = $('#dpkFromDate', $this.DOMInstance.divFilterForm);
-        $this.DOMInstance.dpkToDate = $('#dpkToDate', $this.DOMInstance.divFilterForm);
-        $this.DOMInstance.btnGenerate = $('#btnGenerate', $this.DOMInstance.divFilterForm);
+        $this.DOMInstance.txtRefNo = $('#txtRefNo', $this.DOMInstance.divFilterForm);
+        $this.DOMInstance.btnSearch = $('#btnSearch', $this.DOMInstance.divFilterForm);
         $this.DOMInstance.divBetList = $('#divBetList');
         $this.DOMInstance.divDetailedWinLossList = $('#divDetailedWinLossList');
         $this.DOMInstance.divSystemParlayDetails = $('#divSystemParlayDetails');
@@ -37,36 +26,32 @@ Apollo.CMS.Account.MemberBetList = function () {
 
     // Initialize fields and handle events.
     var initFields = function () {
-        parameters.CustId = memberId;
-        parameters.PageSize = pageSize;
+        $this.DOMInstance.btnSearch.on('click', function () {
+            var refNo = $.trim($this.DOMInstance.txtRefNo.val());
 
-        layoutHelper.CreateDatepicker($this.DOMInstance.dpkFromDate, null, null, function (selectedDate) {
-            $this.DOMInstance.dpkToDate.datepicker("option", "minDate", selectedDate);
-        }).datepicker('option', 'minDate', minDate).datepicker('option', 'maxDate', today);
-
-        layoutHelper.CreateDatepicker($this.DOMInstance.dpkToDate, null, null, function (selectedDate) {
-            $this.DOMInstance.dpkFromDate.datepicker("option", "maxDate", selectedDate);
-        }).datepicker('option', 'minDate', minDate).datepicker('option', 'maxDate', today);
-
-        $this.DOMInstance.btnGenerate.on('click', function () {
-            parameters.FromDate = $this.DOMInstance.dpkFromDate.datepicker('getDate');
-            parameters.ToDate = $this.DOMInstance.dpkToDate.datepicker('getDate');
-            parameters.PageIndex = 0;
-            parameters.IsLoadNew = true;
-
-            getData();
+            $this.DOMInstance.txtRefNo.val(refNo);
+            getData(refNo);
         });
-        $this.DOMInstance.btnGenerate.click();
+        $this.DOMInstance.txtRefNo.on('keyup', function (event) {
+            if (event.keyCode == 13) {
+                $this.DOMInstance.btnSearch.click();
+            }
+        });
+        $this.DOMInstance.txtRefNo.focus();
     };
 
     // Get data
-    var getData = function () {
+    var getData = function (refNo) {
+        var parameter = {
+            TransId: refNo
+        };
+
         $.ajax({
-            type: "POST",
+            type: 'POST',
             url: urls.MemberBetList,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: JSON.stringify(parameters),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: JSON.stringify(parameter),
             beforeSend: function () {
                 CMS.loadingBox.show();
             },
@@ -82,6 +67,102 @@ Apollo.CMS.Account.MemberBetList = function () {
         });
     };
 
+    // Render data table for member bet list.
+    var renderTable = function (data) {
+        var bodyData = [];
+        var columns = [];
+        var gridOptions = {
+            showDistinctRow: false,
+            showFooter: true,
+            gridExpandHeight: 200,
+            bodyRowHeight: 30,
+            bodyRows: bodyData
+        };
+
+        // Element formats.
+        var transTimeColFormat = '<div class="trans-time">{0}</div>';
+        var usernameFormat = '<div id="divUsername" class="link" data-cust-id="{0}">{1}</div>';
+        var choiceColFormat = '<div id="choice_{0}" class="choice {1}">{2}</div>';
+        var oddColFormat = '<div class="odds">{0}</div>';
+        var detailColFormat = '<div class="winloss-details detail-icon" data-ref-no="{0}" data-trans-date="{1}" />';
+
+        $this.DOMInstance.divBetList.addClass('hide');
+
+        // Configure grid's columns.
+        columns = [{ HeaderText: tableHeaders.TransTime, Width: 135, Name: 'ColTransTime', HeaderAlign: 'center', CellAlign: 'center' },
+                   { HeaderText: tableHeaders.Member, Width: 120, Name: 'ColMember', HeaderAlign: 'center', CellAlign: 'center' },
+                   { HeaderText: tableHeaders.Choice, Width: 290, Name: 'ColChoice', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: tableHeaders.Odds, Width: 50, Name: 'ColOdds', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: tableHeaders.Stake, Width: 80, Name: 'ColStake', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: tableHeaders.WinLoss, Width: 80, Name: 'ColWinLoss', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: tableHeaders.Status, Width: 100, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'center' },
+                   { HeaderText: tableHeaders.CompanyShare, Width: 100, Name: 'ColCompanyShare', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: tableHeaders.CompanyComm, Width: 100, Name: 'ColCompanyComm', HeaderAlign: 'center', CellAlign: 'right' },
+                   { HeaderText: tableHeaders.Details, Width: 50, Name: 'ColDetails', HeaderAlign: 'center', CellAlign: 'center'}];
+
+        // Push data to grid.
+        if (data && data.Ticket) {
+            var row = {
+                Columns: [{ Name: 'ColTransTime', Value: transTimeColFormat.format(data.Ticket.TransTimeCol) },
+                          { Name: 'ColMember', Value: usernameFormat.format(data.Ticket.CustId, data.Ticket.Username) },
+                          { Name: 'ColChoice', Value: choiceColFormat.format(data.Ticket.TransId, data.Ticket.IsHandicap ? 'handicap' : '', getChoice(data)) },
+                          { Name: 'ColOdds', Value: oddColFormat.format(data.Ticket.OddsCol) },
+                          { Name: 'ColStake', Value: formatNumberCol(data.Ticket.Stake, false, null, null) },
+                          { Name: 'ColWinLoss', Value: formatNumberCol(data.Ticket.IsRunning ? '-  ' : data.Ticket.WinLoss, false, data.Ticket.Comm, null) },
+                          { Name: 'ColStatus', Value: data.Ticket.StatusCol },
+                          { Name: 'ColCompanyShare', Value: formatNumberCol(data.Ticket.CompanyShare, true, data.Ticket.IsRunning ? null : data.Ticket.CompanyWinLoss, null) },
+                          { Name: 'ColCompanyShare', Value: formatNumberCol('N/A', true, data.Ticket.CompanyComm, null) },
+                          { Name: 'ColDetails', Value: detailColFormat.format(data.Ticket.TransId, data.Ticket.TransDate)}]
+            };
+            bodyData.push(row);
+        }
+
+        gridOptions.columns = columns;
+        gridOptions.bodyRows = bodyData;
+        $this.DOMInstance.divBetList.removeClass('hide').fanexGrid(gridOptions);
+        handleGridEvents(data);
+    };
+
+    // Handle events raised in the grid.
+    var handleGridEvents = function (data) {
+        $this.DOMInstance.divBetList.find('div.winloss-details').on('click', function () {
+            var $obj = $(this);
+            var transId = $obj.attr('data-ref-no');
+            var transDate = $obj.attr('data-trans-date');
+
+            getTicketData(transId, transDate);
+        });
+
+        $this.DOMInstance.divBetList.find('#divUsername').on('click', function () {
+            var $obj = $(this);
+            var custId = $obj.attr('data-cust-id');
+            var username = $.trim($obj.text());
+
+            searchBar.SearchCustomer(true, custId, username);
+        });
+
+        $this.DOMInstance.divBetList.find('div.time').each(function (index, obj) {
+            var $obj = $(obj);
+            var dateValue = $obj.text();
+
+            $obj.text(moment(dateValue).format(CMS.commonConstants.MomentDateTimeFormat));
+        });
+    };
+
+    var getChoice = function (data) {
+        var divWrapper = $('<div>').html(data.Ticket.ChoiceCol);
+
+        if (data && data.IsParlayTicket) {
+            var parlaySubTicket = '<br/>' + data.ParlaySubTicket;
+            var divParlayTicket = divWrapper.children(':last');
+
+            divParlayTicket.removeAttr('style');
+            divParlayTicket.html(parlaySubTicket);
+        }
+
+        return divWrapper.html();
+    };
+
     // Get detailed data of a ticket.
     var getTicketData = function (transId, transDate) {
         var params = {
@@ -90,10 +171,10 @@ Apollo.CMS.Account.MemberBetList = function () {
         };
 
         $.ajax({
-            type: "POST",
+            type: 'POST',
             url: urls.TicketDetail,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
             data: JSON.stringify(params),
             beforeSend: function () {
                 CMS.loadingBox.show();
@@ -110,122 +191,6 @@ Apollo.CMS.Account.MemberBetList = function () {
             complete: function () {
                 CMS.loadingBox.close();
             }
-        });
-    };
-
-    // Render data table for member bet list.
-    var renderTable = function (data) {
-        var bodyData = [];
-        var footerData = [];
-        var columns = [];
-        var gridOptions = {
-            showDistinctRow: false,
-            showFooter: true,
-            showNumberColumn: true,
-            showPager: true,
-            customPager: true,
-            pagerOption: {
-                itemsPerPage: parameters.PageSize,
-                currentPage: parameters.PageIndex,
-                itemsPerPageArray: pageRanges,
-                pagerSelectCallBack: handleChangingPage
-            },
-            gridExpandHeight: 200,
-            bodyRowHeight: 30,
-            bodyRows: bodyData
-        };
-
-        // Element formats.
-        var transTimeColFormat = '<div class="trans-time">{0}</div>';
-        var choiceColFormat = '<div id="choice_{0}" class="choice {1}">{2}</div>';
-        var oddColFormat = '<div class="odds">{0}</div>';
-        var detailColFormat = '<div class="winloss-details detail-icon" data-ref-no="{0}" data-trans-date="{1}" />';
-
-        $this.DOMInstance.divBetList.addClass('hide');
-
-        // Configure grid's columns.
-        columns = [{ HeaderText: tableHeaders.No, Width: 50, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
-                   { HeaderText: tableHeaders.TransTime, Width: 135, Name: 'ColTransTime', HeaderAlign: 'center', CellAlign: 'center' },
-                   { HeaderText: tableHeaders.Choice, Width: 290, Name: 'ColChoice', HeaderAlign: 'center', CellAlign: 'right' },
-                   { HeaderText: tableHeaders.Odds, Width: 90, Name: 'ColOdds', HeaderAlign: 'center', CellAlign: 'right' },
-                   { HeaderText: tableHeaders.Stake, Width: 120, Name: 'ColStake', HeaderAlign: 'center', CellAlign: 'right' },
-                   { HeaderText: tableHeaders.WinLoss, Width: 120, Name: 'ColWinLoss', HeaderAlign: 'center', CellAlign: 'right' },
-                   { HeaderText: tableHeaders.Status, Width: 100, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'center' },
-                   { HeaderText: tableHeaders.CompanyShare, Width: 100, Name: 'ColCompanyShare', HeaderAlign: 'center', CellAlign: 'right' },
-                   { HeaderText: tableHeaders.CompanyComm, Width: 100, Name: 'ColCompanyComm', HeaderAlign: 'center', CellAlign: 'right' },
-                   { HeaderText: tableHeaders.Details, Width: 60, Name: 'ColDetails', HeaderAlign: 'center', CellAlign: 'center'}];
-
-        // Push data to grid.
-        if (data && data.BetItems && data.BetItems.length > 0) {
-            var row = null;
-
-            $.each(data.BetItems, function (index, item) {
-                row =
-                {
-                    Columns: [{ Name: 'ColNo', Value: index + 1 },
-                              { Name: 'ColTransTime', Value: transTimeColFormat.format(item.TransTimeCol) },
-                              { Name: 'ColChoice', Value: choiceColFormat.format(item.TransId, item.IsHandicap ? 'handicap' : '', item.ChoiceCol) },
-                              { Name: 'ColOdds', Value: oddColFormat.format(item.OddsCol) },
-                              { Name: 'ColStake', Value: formatNumberCol(item.Stake, false, null, null) },
-                              { Name: 'ColWinLoss', Value: formatNumberCol(item.IsRunning ? '-  ' : item.WinLoss, false, item.Comm, null) },
-                              { Name: 'ColStatus', Value: item.StatusCol },
-                              { Name: 'ColCompanyShare', Value: formatNumberCol(item.CompanyShare, true, item.IsRunning ? null : item.CompanyWinLoss, null) },
-                              { Name: 'ColCompanyShare', Value: formatNumberCol('N/A', true, item.CompanyComm, null) },
-                              { Name: 'ColDetails', Value: detailColFormat.format(item.TransId, item.TransDate)}]
-                };
-
-                bodyData.push(row);
-            });
-
-            row =
-            {
-                Columns: [{ Name: 'ColNo', Value: '' },
-                          { Name: 'ColTransTime', Value: '' },
-                          { Name: 'ColChoice', Value: data.BetItems.length },
-                          { Name: 'ColOdds', Value: '' },
-                          { Name: 'ColStake', Value: formatNumberCol(data.SumStake, false, null, null) },
-                          { Name: 'ColWinLoss', Value: formatNumberCol(data.SumWinLoss, false, data.SumComm, null) },
-                          { Name: 'ColStatus', Value: '' },
-                          { Name: 'ColCompanyShare', Value: formatNumberCol(null, false, data.SumCompanyWinLoss, null) },
-                          { Name: 'ColCompanyComm', Value: formatNumberCol(null, true, data.SumCompanyComm, null) },
-                          { Name: 'ColDetails', Value: ''}]
-            };
-
-            footerData.push(row);
-
-            gridOptions.pagerOption.totalItem = data.TotalItems;
-        }
-
-        gridOptions.columns = columns;
-        gridOptions.bodyRows = bodyData;
-        gridOptions.footerRows = footerData;
-        $this.DOMInstance.divBetList.removeClass('hide').fanexGrid(gridOptions);
-        handleGridEvents();
-    };
-
-    // Handle paging at server side.
-    var handleChangingPage = function (pageIndex, itemsPerPage, data) {
-        parameters.PageSize = itemsPerPage;
-        parameters.PageIndex = pageIndex;
-        parameters.IsLoadNew = false;
-        getData();
-    };
-
-    // Handle events raised in the grid.
-    var handleGridEvents = function () {
-        $this.DOMInstance.divBetList.find('div.winloss-details').on('click', function () {
-            var $obj = $(this);
-            var transId = $obj.attr('data-ref-no');
-            var transDate = $obj.attr('data-trans-date');
-
-            getTicketData(transId, transDate);
-        });
-
-        $this.DOMInstance.divBetList.find('div.time').each(function (index, obj) {
-            var $obj = $(obj);
-            var dateValue = $obj.text();
-
-            $obj.text(moment(dateValue).format(CMS.commonConstants.MomentDateTimeFormat));
         });
     };
 
@@ -364,17 +329,6 @@ Apollo.CMS.Account.MemberBetList = function () {
         $this.DOMInstance.divSystemParlayDetails.removeClass('hide').fanexGrid(gridOptions);
     };
 
-    // Count number of rows for each date group.
-    var countRowsOfDateData = function (ticketList) {
-        var counter = 0;
-
-        $.each(ticketList, function (index, item) {
-            counter += item.EventNames.length;
-        });
-
-        return counter;
-    }
-
     // Format number column.
     var formatNumberCol = function (firstNumber, isPercent, secondNumber, thirdNumber) {
         var formattedStr = '';
@@ -414,6 +368,17 @@ Apollo.CMS.Account.MemberBetList = function () {
         return formattedStr;
     }
 
+    // Count number of rows for each date group.
+    var countRowsOfDateData = function (ticketList) {
+        var counter = 0;
+
+        $.each(ticketList, function (index, item) {
+            counter += item.EventNames.length;
+        });
+
+        return counter;
+    }
+
     // Global function using to get list of bets which are played from given IP.
     OpenIPInfo = function (ip) {
         return false;
@@ -421,41 +386,10 @@ Apollo.CMS.Account.MemberBetList = function () {
 
     // Global function using to get sub-items of mix parlay ticket.
     showMP = function (transId, refNo) {
-        var divEvent = $('#divEvent_{0}'.format(transId), $this.DOMInstance.divBetList);
-
-        if (divEvent.children().length === 0) {
-            var params = {
-                RefNo: refNo
-            };
-
-            divEvent.addClass('parlay-details');
-            $.ajax({
-                type: "POST",
-                url: urls.GetMixParlayByRefNo,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                data: JSON.stringify(params),
-                beforeSend: function () {
-                    CMS.loadingBox.show();
-                },
-                success: function (result) {
-                    result = '<br/>' + result;
-                    divEvent.html(result);
-                    divEvent.slideDown();
-                },
-                error: function (xhr, status, err) {
-                    CMS.handleAjaxError(xhr, status, err);
-                },
-                complete: function () {
-                    CMS.loadingBox.close();
-                }
-            });
-        } else {
-            divEvent.slideToggle();
-        }
+        //return false;
     };
     showCombMP = function (transId, transIndex, refNo) {
-        showMP('{0}{1}'.format(transId, transIndex), refNo);
+        //return false;
     };
 
     // Global function using to get system parlay details.
@@ -467,10 +401,10 @@ Apollo.CMS.Account.MemberBetList = function () {
         var title = $('#choice_{0}'.format(transId), $this.DOMInstance.divBetList).children('div:first').text();
 
         $.ajax({
-            type: "POST",
+            type: 'POST',
             url: urls.GetSystemParlayDetails,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
             data: JSON.stringify(params),
             beforeSend: function () {
                 CMS.loadingBox.show();
@@ -490,9 +424,8 @@ Apollo.CMS.Account.MemberBetList = function () {
 
     $this.DOMInstance = {
         divFilterForm: null,
-        dpkFromDate: null,
-        dpkToDate: null,
-        btnGenerate: null,
+        txtRefNo: null,
+        btnSearch: null,
         divBetList: null,
         divDetailedWinLossList: null,
         divSystemParlayDetails: null

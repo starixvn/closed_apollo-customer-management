@@ -1,0 +1,82 @@
+﻿@using Apollo.CMS.Core.Constants
+@using Fanex.Common
+@{
+    ViewBag.Title = ViewLang.BetListByRefNo;
+    Layout = "~/Views/Shared/_PageLayout.cshtml";
+}
+@section Head {
+    @Styles.Render("~/styles/fanexGrid")
+    @Styles.Render("~/site/betListByRefNo")
+}
+@section HeadLine 
+{
+    <h5 class="row title">@ViewBag.Title</h5>
+}
+
+<div id="divFilterForm" class="row filter-form clearfix resizable-form" data-original-width="1152">
+    <div class="filter-row clearfix">
+        <div class="filter-item">
+            <div class="lbl width-auto">
+                <label for="txtRefNo">@ViewLang.RefNo</label>
+            </div>
+            <div class="txt width-auto">
+                <input type="text" id="txtRefNo" />
+            </div>
+        </div>
+        <div class="filter-item">
+            <input id="btnSearch" type="button" class="btn btn-default" value="@ViewLang.Search"/>
+        </div>
+    </div>
+</div>
+<div class="row content-grid">
+    <div id="divBetList" class="freegrid hide resizable-grid"></div>
+</div>
+<div class="row content-grid hide">
+    <div id="divDetailedWinLossList" class="freegrid detailed-win-loss"></div>
+</div>
+<div class="row content-grid hide">
+    <div id="divSystemParlayDetails" class="freegrid system-parlay-details-popup"></div>
+</div>
+
+@section Foot 
+{
+    @Scripts.Render("~/scripts/fanexGrid")
+    @Scripts.Render("~/scripts/betListByRefNo")
+
+    <script type="text/javascript">
+        var tableHeaders = {
+            TransTime: '@ViewLang.TransTime',
+            Member: '@ViewLang.Member',
+            Choice: '@ViewLang.Choice',
+            Odds: '@ViewLang.Odds',
+            Stake: '@ViewLang.Stake',
+            WinLoss: '@ViewLang.WinLoss',
+            Status: '@ViewLang.Status',
+            CompanyShare: '@ViewLang.CompanyShare',
+            CompanyComm: '@ViewLang.CompanyComm',
+            Details: '@ViewLang.Details'
+        };
+        var detailTableHeaders = {
+            ViewDetails: '@ViewLang.ViewDetails',
+            RefNo: '@ViewLang.RefNo',
+            Agent: '@ViewLang.Agent',
+            Share: '@ViewLang.Share',
+            Comm: '@ViewLang.Comm'
+        };
+        var systemParlayDetailsTableHeaders = {
+            Date: '@ViewLang.Date',
+            Event: '@ViewLang.Event',
+            Odds: '@ViewLang.Odds',
+            Stake: '@ViewLang.Stake',
+            WinLoss: '@ViewLang.WinLoss',
+            Status: '@ViewLang.Status',
+            Subtotal: '@ViewLang.Subtotal',
+            Total: '@ViewLang.Total',
+            Outstanding: '@ViewLang.Outstanding'
+        };
+        var today = '@DateTime.Now.ToShortDateString()';
+        var minDate = '@ViewBag.StartDate';
+        var memberId = @Converter.ToInt(ViewBag.CustId);
+        var pageSize = @Converter.ToInt(ViewBag.PageSize);
+    </script>
+}

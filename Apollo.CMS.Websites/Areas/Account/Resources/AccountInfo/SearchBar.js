@@ -44,10 +44,10 @@ Apollo.CMS.Account.SearchBar = function () {
                 };
 
                 $.ajax({
-                    type: "POST",
+                    type: 'POST',
                     url: urls.GetSuggestedCustomers,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
                     data: JSON.stringify(params),
                     success: function (data) {
                         var found = $.map(data, function (item) {
@@ -65,7 +65,7 @@ Apollo.CMS.Account.SearchBar = function () {
             select: function (event, ui) {
                 $this.GetCustomer(isMember, ui.item.id, null);
             },
-            position: { my: "right top", at: "right bottom" }
+            position: { my: 'right top', at: 'right bottom' }
         });
 
         // Catch enter key of Search text-box.
@@ -143,10 +143,10 @@ Apollo.CMS.Account.SearchBar = function () {
         $this.DOMInstance.txtSearch.tipsy('hide');
 
         $.ajax({
-            type: "POST",
+            type: 'POST',
             url: urls.GetLeftPanel,
-            contentType: "application/json; charset=utf-8",
-            dataType: "html",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'html',
             data: JSON.stringify(params),
             beforeSend: function () {
                 CMS.loadingBox.show();

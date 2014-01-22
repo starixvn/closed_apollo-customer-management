@@ -58,10 +58,10 @@ Apollo.CMS.Account.AccountList.MemberList = function () {
     // Get data
     var getData = function () {
         $.ajax({
-            type: "POST",
+            type: 'POST',
             url: urls.GetMemberList,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
             data: JSON.stringify(parameters),
             beforeSend: function () {
                 CMS.loadingBox.show();

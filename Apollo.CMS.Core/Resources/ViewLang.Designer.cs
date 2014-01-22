@@ -169,6 +169,15 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bet List By Ref No.
+        /// </summary>
+        public static string BetListByRefNo {
+            get {
+                return ResourceManager.GetString("BetListByRefNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bet Status.
         /// </summary>
         public static string BetStatus {
@@ -714,6 +723,15 @@ namespace Apollo.CMS.Core.Resources {
         public static string RequireEnglishContent {
             get {
                 return ResourceManager.GetString("RequireEnglishContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
             }
         }
         
