@@ -64,7 +64,9 @@ namespace Apollo.CMS.BetList.Helpers
                         ChoiceCol = builder.BuildChoice(ticket, ticketHelper, null, false),
                         OddsCol = builder.BuildOdds(ticket, null, BetListHelper.GetOddTypeName),
                         StatusCol = builder.BuildStatus(ticket, ticketHelper, null, true),
-                        IsHandicap = (ticket.BetTypeId == (int)BetTypes.Handicap) || (ticket.BetTypeId == (int)BetTypes._3_Way_Handicap),
+                        IsHandicap = (ticket.BetTypeId == (int)BetTypes.Handicap) ||
+                                     (ticket.BetTypeId == (int)BetTypes._1st_Handicap) ||
+                                     (ticket.BetTypeId == (int)BetTypes._3_Way_Handicap),
                         IsRunning = BetStatus.Running.Equals(ticketStatus) || BetStatus.Waiting.Equals(ticketStatus)
                     });
                 }

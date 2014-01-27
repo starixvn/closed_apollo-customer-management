@@ -58,6 +58,9 @@
     <Reference Include="Fanex.NAP.Framework">
       <HintPath>..\Dependencies\Fanex\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\Dependencies\Others\NPOI.dll</HintPath>
+    </Reference>
     <Reference Include="RemotingRef, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\Dependencies\RemotingRef\RemotingRef.dll</HintPath>
     </Reference>
@@ -108,6 +111,10 @@
     <Compile Include="ViewModels\MemberBetList\DetailedWinLossItem.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Apollo.BetList.Extensions\Apollo.BetList.Extensions.csproj">
+      <Project>{60591496-4FC0-462B-A1C1-923E76A26002}</Project>
+      <Name>Apollo.BetList.Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Apollo.CMS.Core\Apollo.CMS.Core.csproj">
       <Project>{FCD8A1C1-0EFB-4AFD-B8D4-98B56125235B}</Project>
       <Name>Apollo.CMS.Core</Name>

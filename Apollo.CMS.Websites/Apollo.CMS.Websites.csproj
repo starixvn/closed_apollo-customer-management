@@ -292,6 +292,7 @@
     <Content Include="Areas\BetList\Views\Web.config" />
     <Content Include="Areas\BetList\Views\BetListByRefNo\Index.cshtml" />
     <Content Include="Areas\BetList\Resources\BetListByRefNo\betListByRefNo.less" />
+    <None Include="Areas\BetList\ExcelTemplates\MemberBetList.xls" />
     <None Include="Noesis.Javascript\Noesis.Javascript.x64.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

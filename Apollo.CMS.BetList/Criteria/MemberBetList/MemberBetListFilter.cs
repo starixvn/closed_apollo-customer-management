@@ -18,6 +18,8 @@ namespace Apollo.CMS.BetList.Criteria.MemberBetList
     {
         public int CustId { get; set; }
 
+        public string Username { get; set; }
+
         public DateTime FromDate { get; set; }
 
         public DateTime ToDate { get; set; }

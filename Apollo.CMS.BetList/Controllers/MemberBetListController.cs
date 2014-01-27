@@ -23,6 +23,7 @@ namespace Apollo.CMS.BetList.Controllers
     /// </summary>
     public class MemberBetListController : BaseController
     {
+        private const string MemberBetListTemplateFilePath = @"~\Areas\BetList\ExcelTemplates\MemberBetList.xls";
         private readonly IMemberBetListService _memberBetListService;
 
         public MemberBetListController() :
@@ -99,6 +100,20 @@ namespace Apollo.CMS.BetList.Controllers
         public JsonResult GetSystemParlayDetails(GetSystemParlayDetailsCriteria criteria)
         {
             return Json(this._memberBetListService.GetSystemParlayDetails(criteria));
+        }
+
+        /// <summary>
+        /// Exports the member bet list to Excel.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>Excel file contains bet list of member.</returns>
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewBetList, Policy = Constant.Policy.Read)]
+        public ActionResult ExportMemberBetList(MemberBetListFilter criteria)
+        {
+            string templateUrl = System.Web.HttpContext.Current.Server.MapPath(MemberBetListTemplateFilePath);
+            this._memberBetListService.ExportMemberBetList(criteria, templateUrl);
+
+            return new EmptyResult();
         }
     }
 }

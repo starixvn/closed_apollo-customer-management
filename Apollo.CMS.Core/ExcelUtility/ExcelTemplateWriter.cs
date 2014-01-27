@@ -152,6 +152,48 @@ namespace Apollo.CMS.Core.ExcelUtility
 
         #endregion Synchronize columns' width
 
+        #region Cell related methods
+
+        /// <summary>
+        /// Gets the cell style at a specific position.
+        /// </summary>
+        /// <param name="rowIndex">Index of the row.</param>
+        /// <param name="columnIndex">Index of the column.</param>
+        /// <returns>The cell style of cell at the passed position.</returns>
+        public ICellStyle GetCellStyle(int rowIndex, int columnIndex)
+        {
+            ICell cell = this._templateSheet.GetCell(rowIndex, columnIndex);
+            ICellStyle cellStyle = null;
+
+            if (cell != null)
+            {
+                cellStyle = cell.CellStyle;
+            }
+
+            return cellStyle;
+        }
+
+        /// <summary>
+        /// Gets the font at a specific position.
+        /// </summary>
+        /// <param name="rowIndex">Index of the row.</param>
+        /// <param name="columnIndex">Index of the column.</param>
+        /// <returns>The font of cell at the passed position.</returns>
+        public IFont GetFont(int rowIndex, int columnIndex)
+        {
+            ICellStyle cellStyle = this.GetCellStyle(rowIndex, columnIndex);
+            IFont font = null;
+
+            if (cellStyle != null)
+            {
+                font = cellStyle.GetFont(this._templateSheet.Workbook);
+            }
+
+            return font;
+        }
+
+        #endregion
+
         #region Row related methods
 
         /// <summary>

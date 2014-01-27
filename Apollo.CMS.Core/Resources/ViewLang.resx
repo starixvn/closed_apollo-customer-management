@@ -441,4 +441,13 @@
   <data name="BetListByRefNo" xml:space="preserve">
     <value>Bet List By Ref No</value>
   </data>
+  <data name="BetListReportTitle" xml:space="preserve">
+    <value>Bet List From {0} To {1} - {2}</value>
+  </data>
+  <data name="SystemParlay" xml:space="preserve">
+    <value>System Parlay</value>
+  </data>
+  <data name="BetListReportFileName" xml:space="preserve">
+    <value>BetList-{0}-From-{1}-To-{2}</value>
+  </data>
 </root>

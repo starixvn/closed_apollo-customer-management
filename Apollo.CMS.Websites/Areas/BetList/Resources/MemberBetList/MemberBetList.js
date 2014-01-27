@@ -11,12 +11,14 @@ Apollo.CMS.BetList.MemberBetList = function () {
     var pageRanges = [10, 50, 100, 200, 500];
     var urls = {
         MemberBetList: CMS.resolveRootUrl('BetList/MemberBetList/GetMemberBetList'),
+        ExportMemberBetList: CMS.resolveRootUrl('BetList/MemberBetList/ExportMemberBetList'),
         TicketDetail: CMS.resolveRootUrl('BetList/MemberBetList/GetTicketDetail'),
         GetMixParlayByRefNo: CMS.resolveRootUrl('BetList/MemberBetList/GetMixParlayByRefNo'),
         GetSystemParlayDetails: CMS.resolveRootUrl('BetList/MemberBetList/GetSystemParlayDetails')
     };
     var parameters = {
         CustId: null,
+        Username: null,
         FromDate: null,
         ToDate: null,
         PageIndex: null,
@@ -38,6 +40,7 @@ Apollo.CMS.BetList.MemberBetList = function () {
     // Initialize fields and handle events.
     var initFields = function () {
         parameters.CustId = memberId;
+        parameters.Username = memberName;
         parameters.PageSize = pageSize;
 
         layoutHelper.CreateDatepicker($this.DOMInstance.dpkFromDate, null, null, function (selectedDate) {
@@ -49,8 +52,8 @@ Apollo.CMS.BetList.MemberBetList = function () {
         }).datepicker('option', 'minDate', minDate).datepicker('option', 'maxDate', today);
 
         $this.DOMInstance.btnGenerate.on('click', function () {
-            parameters.FromDate = $this.DOMInstance.dpkFromDate.datepicker('getDate');
-            parameters.ToDate = $this.DOMInstance.dpkToDate.datepicker('getDate');
+            parameters.FromDate = $this.DOMInstance.dpkFromDate.val();
+            parameters.ToDate = $this.DOMInstance.dpkToDate.val();
             parameters.PageIndex = 0;
             parameters.IsLoadNew = true;
 
@@ -115,6 +118,9 @@ Apollo.CMS.BetList.MemberBetList = function () {
 
     // Render data table for member bet list.
     var renderTable = function (data) {
+        var reportTitle = betListReportTitle.format(moment(parameters.FromDate).format(CMS.commonConstants.MomentDateFormat),
+            moment(parameters.ToDate).format(CMS.commonConstants.MomentDateFormat),
+            parameters.Username);
         var bodyData = [];
         var footerData = [];
         var columns = [];
@@ -122,15 +128,21 @@ Apollo.CMS.BetList.MemberBetList = function () {
             showDistinctRow: false,
             showFooter: true,
             showNumberColumn: true,
+            showTitle: true,
             showPager: true,
             customPager: true,
+            titleInfo: {
+                text: reportTitle,
+                showExcelButton: true,
+                exportExcelFunction: exportBetList
+            },
             pagerOption: {
                 itemsPerPage: parameters.PageSize,
                 currentPage: parameters.PageIndex,
                 itemsPerPageArray: pageRanges,
                 pagerSelectCallBack: handleChangingPage
             },
-            gridExpandHeight: 200,
+            gridExpandHeight: 140,
             bodyRowHeight: 30,
             bodyRows: bodyData
         };
@@ -414,6 +426,11 @@ Apollo.CMS.BetList.MemberBetList = function () {
         return formattedStr;
     }
 
+    var exportBetList = function () {
+        parameters.IsLoadNew = false;
+        CMS.downloadFile(urls.ExportMemberBetList, parameters);
+    };
+
     // Global function using to get list of bets which are played from given IP.
     OpenIPInfo = function (ip) {
         return false;
@@ -464,7 +481,7 @@ Apollo.CMS.BetList.MemberBetList = function () {
             RefNo: refNo,
             CustId: custId
         };
-        var title = $('#choice_{0}'.format(transId), $this.DOMInstance.divBetList).children('div:first').text();
+        var title = '{0} - {1}'.format(systemParlayDetailsTableHeaders.SystemParlay, transId);
 
         $.ajax({
             type: 'POST',

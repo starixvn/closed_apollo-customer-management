@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{60591496-4FC0-462B-A1C1-923E76A26002}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Apollo.BetList.Extensions</RootNamespace>
+    <AssemblyName>Apollo.BetList.Extensions</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Fanex.BetList.Core">
+      <HintPath>..\Dependencies\Fanex\Fanex.BetList.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.BetList.Core.TicketHelper">
+      <HintPath>..\Dependencies\Fanex\Fanex.BetList.Core.TicketHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\Dependencies\Others\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="RemotingRef">
+      <HintPath>..\Dependencies\RemotingRef\RemotingRef.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BetListExcelGenerator.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice10Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice121Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice122Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice123Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice12Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice13Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice14Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice15Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice16Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice1Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice20Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice21Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice24Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice25Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice26Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice27Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice28Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice29Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice2Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice30Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice3Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice4Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice5Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice6Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice7Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice8Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice9Extensions.cs" />
+    <Compile Include="Builders\OddsBuilders\Odds1Extensions.cs" />
+    <Compile Include="Builders\OddsBuilders\Odds29Extensions.cs" />
+    <Compile Include="Builders\StatusBuilder\Status1Extensions.cs" />
+    <Compile Include="Builders\TransTimeBuilders\Trans1Extensions.cs" />
+    <Compile Include="Constants\CommonConstants.cs" />
+    <Compile Include="Entities\ChoiceWrapper.cs" />
+    <Compile Include="Entities\TransTimeWrapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RTFHelpers\ChoiceRTFHelper.cs" />
+    <Compile Include="RTFHelpers\NumberRTFHelper.cs" />
+    <Compile Include="RTFHelpers\OddsRTFHelper.cs" />
+    <Compile Include="RTFHelpers\StatusRTFHelper.cs" />
+    <Compile Include="RTFHelpers\TransTimeRTFHelper.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

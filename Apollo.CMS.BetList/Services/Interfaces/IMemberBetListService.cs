@@ -43,5 +43,12 @@ namespace Apollo.CMS.BetList.Services.Interfaces
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>The SystemParlayDetails object that represents the system parlay details.</returns>
         SystemParlayDetails GetSystemParlayDetails(GetSystemParlayDetailsCriteria criteria);
+
+        /// <summary>
+        /// Exports the member bet list report to Excel file.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <param name="templatePath">The template's path.</param>
+        void ExportMemberBetList(MemberBetListFilter criteria, string templatePath);
     }
 }

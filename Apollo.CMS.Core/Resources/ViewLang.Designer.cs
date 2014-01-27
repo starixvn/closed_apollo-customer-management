@@ -178,6 +178,24 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BetList-{0}-From-{1}-To-{2}.
+        /// </summary>
+        public static string BetListReportFileName {
+            get {
+                return ResourceManager.GetString("BetListReportFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bet List From {0} To {1} - {2}.
+        /// </summary>
+        public static string BetListReportTitle {
+            get {
+                return ResourceManager.GetString("BetListReportTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bet Status.
         /// </summary>
         public static string BetStatus {
@@ -885,6 +903,15 @@ namespace Apollo.CMS.Core.Resources {
         public static string Super {
             get {
                 return ResourceManager.GetString("Super", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System Parlay.
+        /// </summary>
+        public static string SystemParlay {
+            get {
+                return ResourceManager.GetString("SystemParlay", resourceCulture);
             }
         }
         
