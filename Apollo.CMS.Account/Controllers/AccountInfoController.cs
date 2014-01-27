@@ -204,21 +204,21 @@ namespace Apollo.CMS.Account.Controllers
                 SiteId = AppSettings.AgentSiteId,
                 NetSessionId = this.CurrentSession.SessionId,
                 Ip = this.CurrentContext.IP,
-                LoginDate = DateTime.Now.ToUniversalTime()
+                LoginDate = DateTime.Now
             };
             string parameterFormat = "OnUserId={0}&AdminId={1}&AdminName={2}&AgentId={3}&LoginTime={4}";
             string parameters = string.Empty;
 
             this._userService.UserCheckIn(ref userCheckInCriteria);
-            parameters = Cryptography.CfsEnCrypt(string.Format(
+            parameters = string.Format(
                                                             parameterFormat,
-                                                            userCheckInCriteria.OnUserId,
-                                                            this.CurrentSession.UserId,
-                                                            this.CurrentSession.Username,
-                                                            agentId,
-                                                            userCheckInCriteria.LoginDate));
+                                                             Cryptography.CfsEnCrypt(userCheckInCriteria.OnUserId.ToString()),
+                                                            Cryptography.CfsEnCrypt(this.CurrentSession.UserId.ToString()),
+                                                            Cryptography.CfsEnCrypt(this.CurrentSession.Username),
+                                                            Cryptography.CfsEnCrypt(agentId.ToString()),
+                                                            Cryptography.CfsEnCrypt(userCheckInCriteria.LoginDate.ToString()));
 
-            Response.Redirect(string.Format("{0}{1}", AppSettings.AgentSiteUrl, parameters));
+            Response.Redirect(string.Format("{0}?{1}", AppSettings.AgentSiteUrl, parameters));
         }
     }
 }
