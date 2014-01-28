@@ -347,7 +347,7 @@ namespace Apollo.CMS.Core.ExcelUtility
         /// <returns>Number of appearances of a text in the string.</returns>
         private int Count(string str, string countText)
         {
-            return (str.Length - str.Replace(countText, string.Empty).Length) / countText.Length + 1;
+            return ((str.Length - str.Replace(countText, string.Empty).Length) / countText.Length) + 1;
         }
 
         #endregion String helpers

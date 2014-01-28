@@ -155,7 +155,7 @@ namespace Apollo.CMS.BetList.Services.Implements
                                          criteria.FromDate.ToShortFormatedDateWithSlash(),
                                          criteria.ToDate.ToShortFormatedDateWithSlash(),
                                          criteria.Username);
-            var writer = new ExcelTemplateWriter(templatePath, fileName, reportTitle);
+            var writer = new ExcelTemplateWriter(templatePath, fileName, fileName);
 
             writer.WriteRow(0, new { reportTitle });
             writer.CopyRows(1, 2);
