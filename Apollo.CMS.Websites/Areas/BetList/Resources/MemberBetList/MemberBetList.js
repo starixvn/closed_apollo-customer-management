@@ -142,7 +142,7 @@ Apollo.CMS.BetList.MemberBetList = function () {
                 itemsPerPageArray: pageRanges,
                 pagerSelectCallBack: handleChangingPage
             },
-            gridExpandHeight: 140,
+            gridExpandHeight: 160,
             bodyRowHeight: 30,
             bodyRows: bodyData
         };
