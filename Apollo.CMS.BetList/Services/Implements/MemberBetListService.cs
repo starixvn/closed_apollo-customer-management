@@ -155,7 +155,7 @@ namespace Apollo.CMS.BetList.Services.Implements
                                          criteria.FromDate.ToShortFormatedDateWithSlash(),
                                          criteria.ToDate.ToShortFormatedDateWithSlash(),
                                          criteria.Username);
-            var writer = new ExcelTemplateWriter(templatePath, fileName, ViewLang.BetListReportTitle);
+            var writer = new ExcelTemplateWriter(templatePath, fileName, reportTitle);
 
             writer.WriteRow(0, new { reportTitle });
             writer.CopyRows(1, 2);
@@ -166,7 +166,11 @@ namespace Apollo.CMS.BetList.Services.Implements
             }
 
             FillBetTickets(ref writer);
+            FillTotalRow(ref writer);
+            writer.CopyRows(6, 1);
             writer.SyncColumnsWidth(9);
+            writer.AutosizeColumns(9);
+            writer.AutosizeRows(3);
             writer.Render();
         }
 
@@ -212,8 +216,38 @@ namespace Apollo.CMS.BetList.Services.Implements
                     FormatCompanyShare(ticket.SuperPositionTaking, ticket.SuperWinlost, numberRTFHelper),
                     FormatCompanyComm(ViewLang.NA, ticket.SuperComm, numberRTFHelper)
                 };
-                writer.WriteRow(4, row);
+                writer.WriteRow(3, row);
             }
+        }
+
+        /// <summary>
+        /// Fills the total row.
+        /// </summary>
+        /// <param name="writer">The writer using to write data.</param>
+        private void FillTotalRow(ref ExcelTemplateWriter writer)
+        {
+            NumberRTFHelper numberRTFHelper = GetTotalOddsRTFHelper(writer);
+
+            decimal sumStake = Converter.ToDecimal(_ticketList.Sum(obj => obj.Stake));
+            decimal sumWinLoss = Converter.ToDecimal(_ticketList.Sum(obj => obj.WinLoss));
+            decimal sumComm = Converter.ToDecimal(_ticketList.Sum(obj => obj.PlayerComm));
+            decimal sumCompanyWinLoss = Converter.ToDecimal(_ticketList.Sum(obj => obj.CompanyWinLoss));
+            decimal sumCompanyComm = Converter.ToDecimal(_ticketList.Sum(obj => obj.CompanyComm));
+
+            var row = new object[]
+            {
+                string.Empty,
+                string.Empty,
+                _ticketList.Count,
+                string.Empty,
+                sumStake,
+                FormatWinLoss(sumWinLoss, sumComm, numberRTFHelper),
+                string.Empty,
+                sumCompanyWinLoss,
+                sumCompanyComm
+            };
+
+            writer.WriteRow(5, row);
         }
 
         /// <summary>
@@ -235,7 +269,7 @@ namespace Apollo.CMS.BetList.Services.Implements
         /// Gets the choice column's fonts.
         /// </summary>
         /// <param name="writer">The writer that is used to get the font.</param>
-        /// <returns>TransTimeRTFHelper object.</returns>
+        /// <returns>ChoiceRTFHelper object.</returns>
         private ChoiceRTFHelper GetChoiceRTFHelper(ExcelTemplateWriter writer)
         {
             ChoiceRTFHelper choiceFonts = new ChoiceRTFHelper();
@@ -260,7 +294,7 @@ namespace Apollo.CMS.BetList.Services.Implements
         /// Gets the odds column's fonts.
         /// </summary>
         /// <param name="writer">The writer that is used to get the font.</param>
-        /// <returns>TransTimeRTFHelper object.</returns>
+        /// <returns>OddsRTFHelper object.</returns>
         private OddsRTFHelper GetOddsRTFHelper(ExcelTemplateWriter writer)
         {
             OddsRTFHelper oddsFonts = new OddsRTFHelper();
@@ -270,6 +304,21 @@ namespace Apollo.CMS.BetList.Services.Implements
             oddsFonts.OddsNameFont = writer.GetFont(9, 3);
 
             return oddsFonts;
+        }
+
+        /// <summary>
+        /// Gets the total odds row's fonts.
+        /// </summary>
+        /// <param name="writer">The writer that is used to get the font.</param>
+        /// <returns>NumberRTFHelper object.</returns>
+        private NumberRTFHelper GetTotalOddsRTFHelper(ExcelTemplateWriter writer)
+        {
+            NumberRTFHelper numberFonts = new NumberRTFHelper();
+
+            numberFonts.NegativeFont = writer.GetFont(10, 3);
+            numberFonts.PositiveFont = writer.GetFont(11, 3);
+
+            return numberFonts;
         }
 
         /// <summary>
@@ -309,7 +358,7 @@ namespace Apollo.CMS.BetList.Services.Implements
 
             return rtfHelper.RTFRenderer.Render();
         }
-        
+
         /// <summary>
         /// Formats the company commission.
         /// </summary>

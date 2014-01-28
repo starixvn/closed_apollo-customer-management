@@ -14,7 +14,7 @@ namespace Apollo.CMS.Core.Extensions
     /// <summary>
     /// String extensions.
     /// </summary>
-    public class StringExtensions
+    public static class StringExtensions
     {
         public enum TruncateOptions
         {

@@ -9,6 +9,7 @@
 
 namespace Apollo.CMS.Core.ExcelUtility
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using Apollo.CMS.Core.ExcelUtility.NPOIExtensions;
@@ -22,6 +23,9 @@ namespace Apollo.CMS.Core.ExcelUtility
     public class ExcelTemplateWriter
     {
         #region Attributes
+
+        private const float DefaultRowHeight = 15;
+        private const string BreakLine = "\n";
 
         private string _fileName;
         private string _sheetName;
@@ -99,6 +103,51 @@ namespace Apollo.CMS.Core.ExcelUtility
         }
 
         #endregion Cell Range methods
+
+        #region Auto resize rows' height
+
+        /// <summary>
+        /// Auto resizes the rows' height.
+        /// </summary>
+        /// <param name="from">Start row index.</param>
+        /// <param name="to">End row index.</param>
+        public void AutosizeRows(int from, int to)
+        {
+            IRow currentRow = null;
+            int totalLineBreaks = 0;
+
+            from = Math.Max(from, 0);
+            to = Math.Min(to, this._sheet.LastRowNum);
+
+            for (int i = from; i <= to; i++)
+            {
+                currentRow = this._sheet.GetRow(i);
+                totalLineBreaks = 0;
+
+                foreach (ICell cell in currentRow.Cells)
+                {
+                    if (cell.CellType == CellType.STRING)
+                    {
+                        totalLineBreaks = Math.Max(totalLineBreaks, Count(cell.StringCellValue, BreakLine));
+                    }
+                }
+
+                currentRow.HeightInPoints = totalLineBreaks * DefaultRowHeight;
+            }
+        }
+
+        /// <summary>
+        /// Auto resizes the rows' height.
+        /// </summary>
+        /// <param name="from">Start row index.</param>
+        public void AutosizeRows(int from)
+        {
+            int to = this._sheet.LastRowNum;
+
+            AutosizeRows(from, to);
+        }
+
+        #endregion Auto resize rows' height
 
         #region Auto resize columns' width
 
@@ -192,7 +241,7 @@ namespace Apollo.CMS.Core.ExcelUtility
             return font;
         }
 
-        #endregion
+        #endregion Cell related methods
 
         #region Row related methods
 
@@ -287,5 +336,20 @@ namespace Apollo.CMS.Core.ExcelUtility
         }
 
         #endregion Row related methods
+
+        #region String helpers
+
+        /// <summary>
+        /// Counts number of appearances of a text.
+        /// </summary>
+        /// <param name="str">The string that needs to count the text.</param>
+        /// <param name="countText">The counting text.</param>
+        /// <returns>Number of appearances of a text in the string.</returns>
+        private int Count(string str, string countText)
+        {
+            return (str.Length - str.Replace(countText, string.Empty).Length) / countText.Length + 1;
+        }
+
+        #endregion String helpers
     }
 }
