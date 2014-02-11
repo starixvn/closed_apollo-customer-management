@@ -2,9 +2,9 @@
 
 /* global Apollo, CMS, Namespace, Validator, layoutHelper */
 
-Namespace.Register("Apollo.CMS.Account.SearchBar");
+Namespace.Register('Apollo.CMS.Account.SearchBar');
 Apollo.CMS.Account.SearchBar = function () {
-    "use strict";
+    'use strict';
     var $this = this;
     var rootUrl = $('#RootURL').val() || '/';
     var urls = {
@@ -184,6 +184,6 @@ Apollo.CMS.Account.SearchBar = function () {
 var searchBar = new Apollo.CMS.Account.SearchBar();
 
 $(document).ready(function () {
-    "use strict";
+    'use strict';
     searchBar.InitPage();
 });

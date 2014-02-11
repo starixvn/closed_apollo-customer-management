@@ -3,15 +3,15 @@
 /* global Apollo, CMS, Namespace, searchBar */
 
 $(document).ready(function () {
-    "use strict";
+    'use strict';
     var accountInfo = new Apollo.CMS.Account.AccountInfo();
 
     accountInfo.InitPage();
 });
 
-Namespace.Register("Apollo.CMS.Account.AccountInfo");
+Namespace.Register('Apollo.CMS.Account.AccountInfo');
 Apollo.CMS.Account.AccountInfo = function () {
-    "use strict";
+    'use strict';
     var $this = this;
     var urls = {
         GetUplineAgents: CMS.resolveRootUrl('Account/AccountInfo/GetUplineAgents'),

@@ -3,15 +3,15 @@
 /* global Apollo, CMS, Namespace, tableHeaders, agentId, pageSize */
 
 $(document).ready(function () {
-    "use strict";
+    'use strict';
     var memberList = new Apollo.CMS.Account.AccountList.MemberList();
 
     memberList.InitPage();
 });
 
-Namespace.Register("Apollo.CMS.Account.AccountList.MemberList");
+Namespace.Register('Apollo.CMS.Account.AccountList.MemberList');
 Apollo.CMS.Account.AccountList.MemberList = function () {
-    "use strict";
+    'use strict';
     var $this = this;
     var urls = {
         MemberSetting: CMS.resolveRootUrl('Account/MemberSetting'), // Update later

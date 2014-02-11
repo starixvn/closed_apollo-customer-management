@@ -3,13 +3,13 @@
 /* global Apollo, CMS, Namespace, Validator, labels, messages, hasViewMessageRight, limitRows */
 
 $(document).ready(function () {
-    "use strict";
+    'use strict';
     var privateMessage = new Apollo.CMS.Message.PrivateMessage();
     
     privateMessage.InitPage();
 });
 
-Namespace.Register("Apollo.CMS.Message.PrivateMessage");
+Namespace.Register('Apollo.CMS.Message.PrivateMessage');
 Apollo.CMS.Message.PrivateMessage = function () {
     var $this = this;
     var urls = {

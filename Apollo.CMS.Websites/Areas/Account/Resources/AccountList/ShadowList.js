@@ -3,15 +3,15 @@
 /* global Apollo, CMS, Namespace, tableHeaders, agentId, pageSize */
 
 $(document).ready(function () {
-    "use strict";
+    'use strict';
     var shadowList = new Apollo.CMS.Account.AccountList.ShadowList();
 
     shadowList.InitPage();
 });
 
-Namespace.Register("Apollo.CMS.Account.AccountList.ShadowList");
+Namespace.Register('Apollo.CMS.Account.AccountList.ShadowList');
 Apollo.CMS.Account.AccountList.ShadowList = function () {
-    "use strict";
+    'use strict';
     var $this = this;
     var urls = {
         ShadowSetting: CMS.resolveRootUrl('Account/ShadowSetting'), // Update later

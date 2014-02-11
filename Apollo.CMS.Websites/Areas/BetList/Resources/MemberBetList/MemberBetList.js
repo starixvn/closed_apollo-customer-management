@@ -4,13 +4,13 @@
 /* global minDate, today, betListReportTitle, memberId, memberName, pageSize */
 
 $(document).ready(function () {
-    "use strict";
+    'use strict';
     var memberBetList = new Apollo.CMS.BetList.MemberBetList();
 
     memberBetList.InitPage();
 });
 
-Namespace.Register("Apollo.CMS.BetList.MemberBetList");
+Namespace.Register('Apollo.CMS.BetList.MemberBetList');
 Apollo.CMS.BetList.MemberBetList = function () {
     var $this = this;
     var pageRanges = [10, 50, 100, 200, 500];

@@ -2,7 +2,7 @@
 Namespace.Register("Apollo.CMS.Account.TreeView");
 
 Apollo.CMS.Account.TreeView = function () {
-    "use strict";
+    'use strict';
     var self = this;
 
     self.InitPage = function () {
@@ -51,6 +51,6 @@ Apollo.CMS.Account.TreeView = function () {
 var treeview = new Apollo.CMS.Account.TreeView();
 
 $(document).ready(function () {
-    "use strict";
+    'use strict';
     treeview.InitPage();
 });

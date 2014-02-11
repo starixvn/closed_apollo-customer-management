@@ -1,6 +1,6 @@
 ﻿/* global Apollo, Namespace, CMS, Validator, pageLayout, layoutHelper, minDate, today, hasHostRight, isRedirected */
 
-Namespace.Register("Apollo.CMS.Message.MessageList");
+Namespace.Register('Apollo.CMS.Message.MessageList');
 Apollo.CMS.Message.MessageList = function () {
     var self = this;
 
@@ -422,6 +422,6 @@ Apollo.CMS.Message.MessageList = function () {
 var messageList = new Apollo.CMS.Message.MessageList();
 
 $(document).ready(function () {
-    "use strict";
+    'use strict';
     messageList.InitPage();
 });

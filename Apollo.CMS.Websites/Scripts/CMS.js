@@ -1,6 +1,6 @@
 
 var CMS = (function ($) {
-    "use strict";
+    'use strict';
     return {
         rootUrl: null,
         unauthorizedRequestError: null,
@@ -137,7 +137,7 @@ var CMS = (function ($) {
 } (jQuery));
 
 $(document).ready(function () {
-    "use strict";
+    'use strict';
     CMS.initCoreValues();
 
     CMS.headlineMsgBox = $.msgbox({

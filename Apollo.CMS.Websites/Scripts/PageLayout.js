@@ -11,9 +11,9 @@ var searchBar = window.parent.searchBar;
 
 /*jshint ignore:end */
 
-Namespace.Register("Apollo.CMS.PageLayoutHelper");
+Namespace.Register('Apollo.CMS.PageLayoutHelper');
 Apollo.CMS.PageLayoutHelper = function () {
-    "use strict";
+    'use strict';
     var $this = this;
 
     // Query and save DOM elements.
@@ -112,6 +112,6 @@ Apollo.CMS.PageLayoutHelper = function () {
 var pageLayout = new Apollo.CMS.PageLayoutHelper();
 
 $(document).ready(function () {
-    "use strict";
+    'use strict';
     pageLayout.InitPage();
 });

@@ -3,13 +3,13 @@
 /* global Apollo, CMS, Namespace, moment, numeral, pageLayout, searchBar, tableHeaders, detailTableHeaders, systemParlayDetailsTableHeaders */
 
 $(document).ready(function () {
-    "use strict";
+    'use strict';
     var memberBetList = new Apollo.CMS.BetList.MemberBetList();
 
     memberBetList.InitPage();
 });
 
-Namespace.Register("Apollo.CMS.BetList.MemberBetList");
+Namespace.Register('Apollo.CMS.BetList.MemberBetList');
 Apollo.CMS.BetList.MemberBetList = function () {
     var $this = this;
     var urls = {

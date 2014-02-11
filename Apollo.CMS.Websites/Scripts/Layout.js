@@ -1,8 +1,8 @@
 /* global moment, Apollo, CMS, Namespace, layoutHelper */
 
-Namespace.Register("Apollo.CMS.LayoutHelper");
+Namespace.Register('Apollo.CMS.LayoutHelper');
 Apollo.CMS.LayoutHelper = function () {
-    "use strict";
+    'use strict';
     var $this = this;
 
     // Query and save DOM elements.
@@ -164,6 +164,6 @@ Apollo.CMS.LayoutHelper = function () {
 var layoutHelper = new Apollo.CMS.LayoutHelper();
 
 $(document).ready(function () {
-    "use strict";
+    'use strict';
     layoutHelper.InitPage();
 });

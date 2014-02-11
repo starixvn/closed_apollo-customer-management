@@ -3,15 +3,15 @@
 /* global Apollo, CMS, Namespace, Validator, messages, hasViewMessageRight */
 
 $(document).ready(function () {
-    "use strict";
+    'use strict';
     var publicMessage = new Apollo.CMS.Message.PublicMessage();
 
     publicMessage.InitPage();
 });
 
-Namespace.Register("Apollo.CMS.Message.PublicMessage");
+Namespace.Register('Apollo.CMS.Message.PublicMessage');
 Apollo.CMS.Message.PublicMessage = function () {
-    "use strict";
+    'use strict';
     var $this = this;
     var urls = {
         AddNewMessage: CMS.resolveRootUrl('PublicMessage/AddNewMessage'),

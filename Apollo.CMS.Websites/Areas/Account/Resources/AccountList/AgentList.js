@@ -3,15 +3,15 @@
 /* global Apollo, CMS, Namespace, layoutHelper, tableHeaders, agentId, pageSize, hasMember, isSuper */
 
 $(document).ready(function () {
-    "use strict";
+    'use strict';
     var agentList = new Apollo.CMS.Account.AccountList.AgentList();
 
     agentList.InitPage();
 });
 
-Namespace.Register("Apollo.CMS.Account.AccountList.AgentList");
+Namespace.Register('Apollo.CMS.Account.AccountList.AgentList');
 Apollo.CMS.Account.AccountList.AgentList = function () {
-    "use strict";
+    'use strict';
     var $this = this;
     var contextMenuTimeout = null;
     var urls = {
