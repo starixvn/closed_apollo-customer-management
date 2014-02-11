@@ -1,4 +1,7 @@
 ﻿/* File Created: December 18, 2013 */
+
+/* global CMS, layoutHelper, tableHeaders, agentId, pageSize, hasMember, isSuper */
+
 $(document).ready(function () {
     var agentList = new Apollo.CMS.Account.AccountList.AgentList();
 
@@ -44,7 +47,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
         parameters.IsOrderByAsc = true;
 
         $this.DOMInstance.txtUsername.on('keyup', function (event) {
-            if (event.keyCode == 13) {
+            if (event.keyCode === 13) {
                 $this.DOMInstance.btnSubmit.click();
             }
         });
@@ -171,10 +174,10 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
     };
 
     // Bind grid event handlers
-    var bindGridEventhandlers = function (event) {
+    var bindGridEventhandlers = function () {
         var contextMenuWidth = $this.DOMInstance.ulContextMenu.width();
 
-        $('div.icon-edit-link', $this.DOMInstance.divAgentList).on('click', function (event) {
+        $('div.icon-edit-link', $this.DOMInstance.divAgentList).on('click', function () {
             var cell = $(this);
             var currentAgentId = cell.attr('data-agent-id');
             var contextAgentId = $this.DOMInstance.linkContextMenuItem.attr('data-agent-id');
@@ -226,7 +229,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
     };
 
     // Handle paging at server side.
-    var handleChangingPage = function (pageIndex, itemsPerPage, data) {
+    var handleChangingPage = function (pageIndex, itemsPerPage) {
         parameters.PageSize = itemsPerPage;
         parameters.PageIndex = pageIndex;
         getData();

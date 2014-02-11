@@ -1,5 +1,8 @@
 ﻿/* File Created: November 14, 2013 */
-var Validator = function ($) {
+
+/* global CMS, moment */
+
+var Validator = (function ($) {
     return {
         showTooltip: function ($obj, message, gravity) {
             if ($obj.is(':hidden')) {
@@ -62,7 +65,7 @@ var Validator = function ($) {
                     var errMsg = eleObj.attr('data-val-date');
                     var value = $.trim(eleObj.val());
 
-                    if (errMsg && (value != '') && !moment(value, CMS.commonConstants.MomentDateFormat).isValid()) {
+                    if (errMsg && (value !== '') && !moment(value, CMS.commonConstants.MomentDateFormat).isValid()) {
                         Validator.showTooltip(eleObj, errMsg, gravity);
                         errorCounter++;
                     }
@@ -84,13 +87,13 @@ var Validator = function ($) {
                 var errorMsg = dateFrom.attr('data-val-date-from');
                 var displayObj = dateFrom;
 
-                if (errorMsg == '') {
+                if (errorMsg === '') {
                     errorMsg = dateTo.attr('data-val-date-to');
                     displayObj = dateTo;
                 }
 
-                if ((dFromVal != '') && moment(dFromVal, CMS.commonConstants.MomentDateFormat).isValid() &&
-                    (dToVal != '') && moment(dToVal, CMS.commonConstants.MomentDateFormat).isValid()) {
+                if ((dFromVal !== '') && moment(dFromVal, CMS.commonConstants.MomentDateFormat).isValid() &&
+                    (dToVal !== '') && moment(dToVal, CMS.commonConstants.MomentDateFormat).isValid()) {
 
                     var fDate = new Date(moment(dFromVal));
                     var tDate = new Date(moment(dToVal));
@@ -113,7 +116,7 @@ var Validator = function ($) {
             errorCounter += Validator.validateDateFields(form, gravity);
             errorCounter += Validator.validateDateRange(form, gravity);
 
-            return (errorCounter == 0);
+            return (errorCounter === 0);
         }
     };
-} (jQuery);
+} (jQuery));

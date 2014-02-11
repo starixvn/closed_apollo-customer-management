@@ -1,6 +1,4 @@
-$(document).ready(function () {
-    layoutHelper.InitPage();
-});
+/* global moment, CMS, layoutHelper */
 
 Namespace.Register("Apollo.CMS.LayoutHelper");
 Apollo.CMS.LayoutHelper = function () {
@@ -19,7 +17,7 @@ Apollo.CMS.LayoutHelper = function () {
     // Fix the issue related to the width of left panel when rendering by IE.
     var fixLeftPanelWidthForIE = function () {
         // check IE8 and resolution > 993px
-        if ($.browser.msie && $.browser.version == '8.0') {
+        if ($.browser.msie && $.browser.version === '8.0') {
             if (screen.width > 993) {
                 $this.DOMInstance.divLeftPanel.addClass('width-ie8-20');
                 $this.DOMInstance.divRightPanel.addClass('width-ie8-80');
@@ -163,3 +161,7 @@ Apollo.CMS.LayoutHelper = function () {
     };
 };
 var layoutHelper = new Apollo.CMS.LayoutHelper();
+
+$(document).ready(function () {
+    layoutHelper.InitPage();
+});

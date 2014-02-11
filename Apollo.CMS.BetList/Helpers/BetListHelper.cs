@@ -90,16 +90,25 @@ namespace Apollo.CMS.BetList.Helpers
                 BetListHTMLFactory factory = new BetListHTMLFactory();
                 BetListHTMLBuilder builder = factory.CreateBuilder();
                 ITicketHelper ticketHelper = new TicketHelper { IsShowOddsWithChoice = true };
-                string line = "<div class='line'></div>";
+                ITicket ticket = null;
+                string openTag = "<div{0}>";
+                string closeTag = "</div><div class='line'></div>";
+                string openCssClass = string.Empty;
+                bool isHandicap = false;
 
                 for (int i = 0; i < tickets.Count; i++)
                 {
                     if (i == tickets.Count - 1)
                     {
-                        line = "<div></div>";
+                        closeTag = "</div><div></div>";
                     }
 
-                    builder.AddChoice(tickets[i], ticketHelper, null, string.Empty, line, false);
+                    ticket = tickets[i];
+                    isHandicap = (ticket.BetTypeId == (int)BetTypes.Handicap) ||
+                                 (ticket.BetTypeId == (int)BetTypes._1st_Handicap) ||
+                                 (ticket.BetTypeId == (int)BetTypes._3_Way_Handicap);
+                    openCssClass = isHandicap ? " class=\"handicap\"" : string.Empty;
+                    builder.AddChoice(ticket, ticketHelper, null, string.Format(openTag, openCssClass), closeTag, false);
                 }
 
                 result = builder.GetBetList();

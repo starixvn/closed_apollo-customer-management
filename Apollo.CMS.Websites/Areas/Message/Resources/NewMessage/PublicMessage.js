@@ -1,4 +1,7 @@
 ﻿/* File Created: November 13, 2013 */
+
+/* global CMS, Validator, messages, hasViewMessageRight */
+
 $(document).ready(function () {
     var publicMessage = new Apollo.CMS.Message.PublicMessage();
 
@@ -90,11 +93,11 @@ Apollo.CMS.Message.PublicMessage = function () {
         var levels = $('input:checkbox:checked', $this.DOMInstance.divAgentLevels);
         var selectedRadio = $('input:radio:checked', $this.DOMInstance.divAgentLevels);
         var isValid = true;
+        var errorMsg = '';
 
         label.tipsy('hide');
         if (!contentEnValue) {
-            var errorMsg = $this.DOMInstance.txtContentEn.attr('data-val-required');
-
+            errorMsg = $this.DOMInstance.txtContentEn.attr('data-val-required');
             Validator.showTooltip(label, errorMsg, 'sw');
             $this.DOMInstance.txtContentEn.focus();
             isValid = false;
@@ -102,8 +105,7 @@ Apollo.CMS.Message.PublicMessage = function () {
 
         $this.DOMInstance.chkSuper.tipsy('hide');
         if (($this.DOMInstance.divAgentLevels.is(':visible')) && (levels.length === 0) && (selectedRadio.val() === 'HighLevelAgents')) {
-            var errorMsg = $this.DOMInstance.divAgentLevels.attr('data-val-required');
-
+            errorMsg = $this.DOMInstance.divAgentLevels.attr('data-val-required');
             Validator.showTooltip($this.DOMInstance.chkSuper, errorMsg, 'nw');
             isValid = false;
         }
@@ -210,7 +212,7 @@ Apollo.CMS.Message.PublicMessage = function () {
             beforeSend: function () {
                 CMS.loadingBox.show();
             },
-            success: function (result) {
+            success: function () {
                 CMS.showInfoMessage(messages.PostMessageSuccessfully);
                 setTimeout(function () {
                     if (hasViewMessageRight) {
@@ -228,4 +230,4 @@ Apollo.CMS.Message.PublicMessage = function () {
             }
         });
     };
-}
+};

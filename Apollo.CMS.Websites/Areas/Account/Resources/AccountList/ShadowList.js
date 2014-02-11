@@ -1,4 +1,7 @@
 ﻿/* File Created: December 18, 2013 */
+
+/* global CMS, tableHeaders, agentId, pageSize */
+
 $(document).ready(function () {
     var shadowList = new Apollo.CMS.Account.AccountList.ShadowList();
 
@@ -108,7 +111,7 @@ Apollo.CMS.Account.AccountList.ShadowList = function () {
     };
 
     // Handle paging at server side.
-    var handleChangingPage = function (pageIndex, itemsPerPage, data) {
+    var handleChangingPage = function (pageIndex, itemsPerPage) {
         parameters.PageSize = itemsPerPage;
         parameters.PageIndex = pageIndex;
         getData();

@@ -1,4 +1,7 @@
 ﻿/* File Created: December 18, 2013 */
+
+/* global CMS, tableHeaders, agentId, pageSize */
+
 $(document).ready(function () {
     var memberList = new Apollo.CMS.Account.AccountList.MemberList();
 
@@ -38,7 +41,7 @@ Apollo.CMS.Account.AccountList.MemberList = function () {
         parameters.IsOrderByAsc = true;
 
         $this.DOMInstance.txtUsername.on('keyup', function (event) {
-            if (event.keyCode == 13) {
+            if (event.keyCode === 13) {
                 $this.DOMInstance.btnSubmit.click();
             }
         });
@@ -136,7 +139,7 @@ Apollo.CMS.Account.AccountList.MemberList = function () {
     };
 
     // Handle paging at server side.
-    var handleChangingPage = function (pageIndex, itemsPerPage, data) {
+    var handleChangingPage = function (pageIndex, itemsPerPage) {
         parameters.PageSize = itemsPerPage;
         parameters.PageIndex = pageIndex;
         getData();

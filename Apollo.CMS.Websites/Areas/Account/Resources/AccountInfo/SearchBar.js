@@ -1,7 +1,6 @@
 ﻿/* File Created: December 5, 2013 */
-$(document).ready(function () {
-    searchBar.InitPage();
-});
+
+/* global CMS, Validator, layoutHelper */
 
 Namespace.Register("Apollo.CMS.Account.SearchBar");
 Apollo.CMS.Account.SearchBar = function () {
@@ -55,7 +54,7 @@ Apollo.CMS.Account.SearchBar = function () {
                                 label: item.Username,
                                 value: item.Username,
                                 id: item.CustId
-                            }
+                            };
                         });
 
                         return response(found);
@@ -70,23 +69,24 @@ Apollo.CMS.Account.SearchBar = function () {
 
         // Catch enter key of Search text-box.
         $this.DOMInstance.txtSearch.on('keyup', function (event) {
-            if (event.keyCode == 13) {
+            if (event.keyCode === 13) {
                 $this.DOMInstance.txtSearch.blur();
                 $this.DOMInstance.btnSearch.click();
             }
         });
 
-        $this.DOMInstance.txtSearch.on('focus', function (event) {
+        $this.DOMInstance.txtSearch.on('focus', function () {
             $this.DOMInstance.txtSearch.select();
         });
 
         $this.DOMInstance.btnSearch.on('click', function () {
-            var username = $this.DOMInstance.txtSearch.val();
+            var username = $.trim($this.DOMInstance.txtSearch.val());
 
             if (!username) {
                 var requiredErrorMsg = $this.DOMInstance.txtSearch.attr('data-val-required');
                 Validator.showTooltip($this.DOMInstance.txtSearch, requiredErrorMsg, 'nw');
             } else {
+                $this.DOMInstance.txtSearch.val(username);
                 $this.GetCustomer(isMember, null, username);
             }
         });
@@ -181,3 +181,7 @@ Apollo.CMS.Account.SearchBar = function () {
 
 // Expose to reuse at another page.
 var searchBar = new Apollo.CMS.Account.SearchBar();
+
+$(document).ready(function () {
+    searchBar.InitPage();
+});

@@ -1,12 +1,15 @@
 ﻿/* File Created: January 6, 2014 */
+
+/* global _, CMS, layoutHelper */
+
+/*jshint ignore:start */
+
 var layoutHelper = window.parent.layoutHelper;
 var CMS = window.parent.CMS;
 var Validator = window.parent.Validator;
 var searchBar = window.parent.searchBar;
 
-$(document).ready(function () {
-    pageLayout.InitPage();
-});
+/*jshint ignore:end */
 
 Namespace.Register("Apollo.CMS.PageLayoutHelper");
 Apollo.CMS.PageLayoutHelper = function () {
@@ -65,7 +68,7 @@ Apollo.CMS.PageLayoutHelper = function () {
 
         $('select').selectBoxIt();
         $(window).resize(lazyLayout);
-        
+
         // Make the click event on the page be the same through the iframe.
         $('html').on('click', function () {
             $('html', $(window.parent.document)).click();
@@ -91,7 +94,7 @@ Apollo.CMS.PageLayoutHelper = function () {
     };
     $this.ClosePopup = function () {
         $this.DOMInstance.divDialogPopup.dialog('close');
-    }
+    };
 
     // Cached DOM elements.
     $this.DOMInstance = {
@@ -106,3 +109,7 @@ Apollo.CMS.PageLayoutHelper = function () {
     };
 };
 var pageLayout = new Apollo.CMS.PageLayoutHelper();
+
+$(document).ready(function () {
+    pageLayout.InitPage();
+});

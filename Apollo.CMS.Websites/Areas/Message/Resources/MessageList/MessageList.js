@@ -1,5 +1,6 @@
-﻿Namespace.Register("Apollo.CMS.Message.MessageList");
+﻿/* global CMS, pageLayout, layoutHelper, minDate, today, hasHostRight, isRedirected */
 
+Namespace.Register("Apollo.CMS.Message.MessageList");
 Apollo.CMS.Message.MessageList = function () {
     var self = this;
 
@@ -62,7 +63,7 @@ Apollo.CMS.Message.MessageList = function () {
         _tables.txtContentKo = $("#ContentKo");
         _tables.txtContentTh = $("#ContentTh");
         _tables.txtContentVn = $("#ContentVn");
-    }
+    };
 
     self.InitPage = function () {
         cacheDOMElements();
@@ -79,8 +80,6 @@ Apollo.CMS.Message.MessageList = function () {
     };
 
     self.renderDatePicker = function () {
-        var dateFrom = null;
-
         _params.getListMessageParam.FromDate = today;
         _params.getListMessageParam.ToDate = today;
 
@@ -239,7 +238,6 @@ Apollo.CMS.Message.MessageList = function () {
             var messageLength = rs.length;
             var currentGroupId = 0;
             var currentItem = null;
-            var totalMergeRow = 1;
             var msgType = null;
             var msgSpecial = null;
 
@@ -354,7 +352,7 @@ Apollo.CMS.Message.MessageList = function () {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify(_params.updateMessageParam),
-            success: function (rs) {
+            success: function () {
                 pageLayout.ClosePopup();
                 CMS.showInfoMessage(updateSuccessInform);
                 self.getListMessage();
@@ -380,7 +378,7 @@ Apollo.CMS.Message.MessageList = function () {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 data: JSON.stringify(_params.removeMessageParam),
-                success: function (rs) {
+                success: function () {
                     self.getListMessage();
                 },
                 error: function (xhr, status, err) {

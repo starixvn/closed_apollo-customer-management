@@ -38,13 +38,13 @@ namespace Apollo.BetList.Extensions.Builders.ChoiceBuilders
 
             choice.Handicap = null;
 
-            if ("1" == ticket.BetTeam)
+            if (ticket.BetTeam == "1")
             {
                 teamName = choice.HomeName;
                 handicap = Formatter.FormatSignNumber((int)(ticket.Handicap2 - ticket.Handicap1));
                 isFavorite = ticket.Handicap1 > ticket.Handicap2;
             }
-            else if ("2" == ticket.BetTeam)
+            else if (ticket.BetTeam == "2")
             {
                 teamName = ticketHelper.GetTeamNameById(ticket.AwayId);
                 handicap = Formatter.FormatSignNumber((int)(ticket.Handicap1 - ticket.Handicap2));

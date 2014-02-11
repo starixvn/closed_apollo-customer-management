@@ -1,5 +1,5 @@
 
-var CMS = function ($) {
+var CMS = (function ($) {
 
     return {
         rootUrl: null,
@@ -87,7 +87,7 @@ var CMS = function ($) {
                 data = typeof data == 'string' ? data : $.param(data);
                 var downloadUrl = url + '?' + data;
                 var iframe = $('body iframe');
-                if (iframe.length == 0) {
+                if (iframe.length === 0) {
                     iframe = $('<iframe width="0" height="0" class="display-none"></iframe>');
                     iframe.appendTo('body');
                 }
@@ -135,7 +135,7 @@ var CMS = function ($) {
         }
     };
 
-} (jQuery);
+} (jQuery));
 
 $(document).ready(function () {
     CMS.initCoreValues();

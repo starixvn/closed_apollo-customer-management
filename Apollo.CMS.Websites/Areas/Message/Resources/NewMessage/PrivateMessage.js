@@ -1,4 +1,7 @@
 ﻿/* File Created: November 17, 2013 */
+
+/* global CMS, Validator, labels, messages, hasViewMessageRight, limitRows */
+
 $(document).ready(function () {
     var privateMessage = new Apollo.CMS.Message.PrivateMessage();
     
@@ -54,13 +57,13 @@ Apollo.CMS.Message.PrivateMessage = function () {
         });
 
         $this.DOMInstance.txtUserName.bind('keyup', function (event) {
-            if (event.keyCode == 13) {
+            if (event.keyCode === 13) {
                 $this.DOMInstance.btnAdd.click();
             }
         });
 
         $this.DOMInstance.btnAdd.bind('click', function () {
-            var isAgent = $this.DOMInstance.ddlMemberType.val() == 'true';
+            var isAgent = $this.DOMInstance.ddlMemberType.val() === 'true';
             var userName = $.trim($this.DOMInstance.txtUserName.val());
             var informUpline = $this.DOMInstance.chkInformUpline.is(':checked');
 
@@ -89,7 +92,7 @@ Apollo.CMS.Message.PrivateMessage = function () {
         }
 
         $this.DOMInstance.txtUserName.tipsy('hide');
-        if (params.RecipientList.length == 0) {
+        if (params.RecipientList.length === 0) {
             var requiredErrorMsg = $this.DOMInstance.txtUserName.attr('data-val-required');
             Validator.showTooltip($this.DOMInstance.txtUserName, requiredErrorMsg, 's');
             isValid = false;
@@ -114,8 +117,6 @@ Apollo.CMS.Message.PrivateMessage = function () {
 
                 Validator.showTooltip($this.DOMInstance.txtUserName, errorMsg, 's');
                 isValid = false;
-            } else {
-
             }
         } else {
             var errorMsg = $this.DOMInstance.txtUserName.attr('data-val-invalid-username');
@@ -165,7 +166,7 @@ Apollo.CMS.Message.PrivateMessage = function () {
             userId = member.AgentId;
         }
 
-        if (params.RecipientList.length == 0) {
+        if (params.RecipientList.length === 0) {
             $this.DOMInstance.tblMemberListBody.html('');
         }
 
@@ -197,7 +198,7 @@ Apollo.CMS.Message.PrivateMessage = function () {
 
             params.RecipientList.splice(index, 1);
 
-            if (params.RecipientList.length == 0) {
+            if (params.RecipientList.length === 0) {
                 $this.DOMInstance.tblMemberListBody.append('<tr><td colspan="5" class="text-center">{0}</td></tr>'.format(labels.NoMember));
             } else if (params.RecipientList.length == 19) {
                 $this.DOMInstance.ddlMemberType.removeAttr('disabled');
@@ -272,7 +273,7 @@ Apollo.CMS.Message.PrivateMessage = function () {
             beforeSend: function () {
                 CMS.loadingBox.show();
             },
-            success: function (result) {
+            success: function () {
                 CMS.showInfoMessage(messages.PostMessageSuccessfully);
                 setTimeout(function () {
                     if (hasViewMessageRight) {
@@ -290,4 +291,4 @@ Apollo.CMS.Message.PrivateMessage = function () {
             }
         });
     };
-}
+};

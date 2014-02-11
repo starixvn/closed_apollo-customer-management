@@ -1,4 +1,7 @@
 ﻿/* File Created: January 22, 2014 */
+
+/* global CMS, moment, numeral, pageLayout, searchBar, tableHeaders, detailTableHeaders, systemParlayDetailsTableHeaders */
+
 $(document).ready(function () {
     var memberBetList = new Apollo.CMS.BetList.MemberBetList();
 
@@ -33,7 +36,7 @@ Apollo.CMS.BetList.MemberBetList = function () {
             getData(refNo);
         });
         $this.DOMInstance.txtRefNo.on('keyup', function (event) {
-            if (event.keyCode == 13) {
+            if (event.keyCode === 13) {
                 $this.DOMInstance.btnSearch.click();
             }
         });
@@ -120,11 +123,11 @@ Apollo.CMS.BetList.MemberBetList = function () {
         gridOptions.columns = columns;
         gridOptions.bodyRows = bodyData;
         $this.DOMInstance.divBetList.removeClass('hide').fanexGrid(gridOptions);
-        handleGridEvents(data);
+        handleGridEvents();
     };
 
     // Handle events raised in the grid.
-    var handleGridEvents = function (data) {
+    var handleGridEvents = function () {
         $this.DOMInstance.divBetList.find('div.winloss-details').on('click', function () {
             var $obj = $(this);
             var transId = $obj.attr('data-ref-no');
@@ -157,6 +160,7 @@ Apollo.CMS.BetList.MemberBetList = function () {
             var divParlayTicket = divWrapper.children(':last');
 
             divParlayTicket.removeAttr('style');
+            divParlayTicket.addClass('parlay-details');
             divParlayTicket.html(parlaySubTicket);
         }
 
@@ -366,7 +370,7 @@ Apollo.CMS.BetList.MemberBetList = function () {
         }
 
         return formattedStr;
-    }
+    };
 
     // Count number of rows for each date group.
     var countRowsOfDateData = function (ticketList) {
@@ -377,7 +381,7 @@ Apollo.CMS.BetList.MemberBetList = function () {
         });
 
         return counter;
-    }
+    };
 
     // Global function using to get list of bets which are played from given IP.
     OpenIPInfo = function (ip) {
@@ -398,7 +402,7 @@ Apollo.CMS.BetList.MemberBetList = function () {
             RefNo: refNo,
             CustId: custId
         };
-        var title = $('#choice_{0}'.format(transId), $this.DOMInstance.divBetList).children('div:first').text();
+        var title = '{0} - {1}'.format(systemParlayDetailsTableHeaders.SystemParlay, transId);
 
         $.ajax({
             type: 'POST',

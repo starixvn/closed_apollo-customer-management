@@ -1,4 +1,8 @@
 ﻿/* File Created: January 10, 2014 */
+
+/* global CMS, moment, numeral, pageLayout, layoutHelper, tableHeaders, detailTableHeaders, systemParlayDetailsTableHeaders */
+/* global minDate, today, betListReportTitle, memberId, memberName, pageSize */
+
 $(document).ready(function () {
     var memberBetList = new Apollo.CMS.BetList.MemberBetList();
 
@@ -385,7 +389,7 @@ Apollo.CMS.BetList.MemberBetList = function () {
         });
 
         return counter;
-    }
+    };
 
     // Format number column.
     var formatNumberCol = function (firstNumber, isPercent, secondNumber, thirdNumber) {
@@ -424,7 +428,7 @@ Apollo.CMS.BetList.MemberBetList = function () {
         }
 
         return formattedStr;
-    }
+    };
 
     var exportBetList = function () {
         parameters.IsLoadNew = false;

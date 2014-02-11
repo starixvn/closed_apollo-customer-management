@@ -1,4 +1,7 @@
 ﻿/* File Created: December 5, 2013 */
+
+/* global CMS, searchBar */
+
 $(document).ready(function () {
     var accountInfo = new Apollo.CMS.Account.AccountInfo();
 
@@ -74,23 +77,23 @@ Apollo.CMS.Account.AccountInfo = function () {
 
     // Handle selecting tab event.
     var showTabContent = function () {
-        $('a[data-toggle="tab"]', '#leftContent').live('click', function (event) {
+        $('a[data-toggle="tab"]', '#leftContent').live('click', function () {
             var customerId = $('#hdnCustomerId').val();
             var tabId = $(this).attr('href');
             var tab = $(tabId);
-            var url = '';
+            var params = {};
 
             $.cookie('left-panel-current-tab', tabId, { path: '/' });
 
-            if (tab.children().length == 0) {
+            if (tab.children().length === 0) {
                 if (tabId === '#agent') {
-                    var params = {
+                    params = {
                         ParentId: customerId
                     };
 
                     getDownline(params, urls.GetDownlineAgents, tab);
                 } else if (tabId === '#member') {
-                    var params = {
+                    params = {
                         AgentId: customerId
                     };
 
@@ -142,4 +145,4 @@ Apollo.CMS.Account.AccountInfo = function () {
         bindEventHandlers();
         initFields();
     };
-}
+};

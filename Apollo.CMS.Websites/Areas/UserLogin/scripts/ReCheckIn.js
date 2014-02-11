@@ -19,14 +19,12 @@
                 type: "POST",
                 dataType: "json",
                 success: function (result) {
-                    if (result == "1") {
+                    if (result === "1") {
                         Recheckin.headlineMsgBox.showInfo(Recheckin.kickedOutMsg, { closeBtn: false });
                     }
-                    if (result == "-1") {
+                    if (result === "-1") {
                         window.location.href = Recheckin.root + "UserLogin/Common/Offline";
                     }
-                },
-                error: function (request, status, error) {
                 }
             });
         },
@@ -39,8 +37,7 @@
             }
             index.close();
         }
-    }
-
+    };
 } (jQuery);
 
 

@@ -1,4 +1,6 @@
 ﻿/* File Created: January 6, 2014 */
+/*jshint ignore:start */
+
 // String Format
 String.prototype.format = function () {
     var args = arguments;
@@ -27,3 +29,5 @@ Array.prototype.removeAll = function (criteria) {
         }
     }
 };
+
+/*jshint ignore:end */
