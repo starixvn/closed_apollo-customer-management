@@ -1,8 +1,9 @@
 ﻿/* File Created: December 18, 2013 */
 
-/* global CMS, tableHeaders, agentId, pageSize */
+/* global Apollo, CMS, Namespace, tableHeaders, agentId, pageSize */
 
 $(document).ready(function () {
+    "use strict";
     var shadowList = new Apollo.CMS.Account.AccountList.ShadowList();
 
     shadowList.InitPage();
@@ -10,6 +11,7 @@ $(document).ready(function () {
 
 Namespace.Register("Apollo.CMS.Account.AccountList.ShadowList");
 Apollo.CMS.Account.AccountList.ShadowList = function () {
+    "use strict";
     var $this = this;
     var urls = {
         ShadowSetting: CMS.resolveRootUrl('Account/ShadowSetting'), // Update later

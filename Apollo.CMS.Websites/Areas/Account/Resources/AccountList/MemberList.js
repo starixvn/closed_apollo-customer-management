@@ -1,8 +1,9 @@
 ﻿/* File Created: December 18, 2013 */
 
-/* global CMS, tableHeaders, agentId, pageSize */
+/* global Apollo, CMS, Namespace, tableHeaders, agentId, pageSize */
 
 $(document).ready(function () {
+    "use strict";
     var memberList = new Apollo.CMS.Account.AccountList.MemberList();
 
     memberList.InitPage();
@@ -10,6 +11,7 @@ $(document).ready(function () {
 
 Namespace.Register("Apollo.CMS.Account.AccountList.MemberList");
 Apollo.CMS.Account.AccountList.MemberList = function () {
+    "use strict";
     var $this = this;
     var urls = {
         MemberSetting: CMS.resolveRootUrl('Account/MemberSetting'), // Update later

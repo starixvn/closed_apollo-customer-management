@@ -1,9 +1,10 @@
 ﻿/* File Created: December 5, 2013 */
 
-/* global CMS, Validator, layoutHelper */
+/* global Apollo, CMS, Namespace, Validator, layoutHelper */
 
 Namespace.Register("Apollo.CMS.Account.SearchBar");
 Apollo.CMS.Account.SearchBar = function () {
+    "use strict";
     var $this = this;
     var rootUrl = $('#RootURL').val() || '/';
     var urls = {
@@ -183,5 +184,6 @@ Apollo.CMS.Account.SearchBar = function () {
 var searchBar = new Apollo.CMS.Account.SearchBar();
 
 $(document).ready(function () {
+    "use strict";
     searchBar.InitPage();
 });

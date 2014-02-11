@@ -1,8 +1,9 @@
 ﻿/* File Created: December 18, 2013 */
 
-/* global CMS, layoutHelper, tableHeaders, agentId, pageSize, hasMember, isSuper */
+/* global Apollo, CMS, Namespace, layoutHelper, tableHeaders, agentId, pageSize, hasMember, isSuper */
 
 $(document).ready(function () {
+    "use strict";
     var agentList = new Apollo.CMS.Account.AccountList.AgentList();
 
     agentList.InitPage();
@@ -10,6 +11,7 @@ $(document).ready(function () {
 
 Namespace.Register("Apollo.CMS.Account.AccountList.AgentList");
 Apollo.CMS.Account.AccountList.AgentList = function () {
+    "use strict";
     var $this = this;
     var contextMenuTimeout = null;
     var urls = {

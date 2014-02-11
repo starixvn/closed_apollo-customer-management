@@ -1,6 +1,6 @@
 ﻿/* File Created: January 6, 2014 */
 
-/* global _, CMS, layoutHelper */
+/* global _, Apollo, Namespace, layoutHelper */
 
 /*jshint ignore:start */
 
@@ -13,6 +13,7 @@ var searchBar = window.parent.searchBar;
 
 Namespace.Register("Apollo.CMS.PageLayoutHelper");
 Apollo.CMS.PageLayoutHelper = function () {
+    "use strict";
     var $this = this;
 
     // Query and save DOM elements.
@@ -111,5 +112,6 @@ Apollo.CMS.PageLayoutHelper = function () {
 var pageLayout = new Apollo.CMS.PageLayoutHelper();
 
 $(document).ready(function () {
+    "use strict";
     pageLayout.InitPage();
 });

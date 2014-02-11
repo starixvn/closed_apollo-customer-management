@@ -1,8 +1,9 @@
 ﻿/* File Created: November 13, 2013 */
 
-/* global CMS, Validator, messages, hasViewMessageRight */
+/* global Apollo, CMS, Namespace, Validator, messages, hasViewMessageRight */
 
 $(document).ready(function () {
+    "use strict";
     var publicMessage = new Apollo.CMS.Message.PublicMessage();
 
     publicMessage.InitPage();
@@ -10,6 +11,7 @@ $(document).ready(function () {
 
 Namespace.Register("Apollo.CMS.Message.PublicMessage");
 Apollo.CMS.Message.PublicMessage = function () {
+    "use strict";
     var $this = this;
     var urls = {
         AddNewMessage: CMS.resolveRootUrl('PublicMessage/AddNewMessage'),
@@ -117,6 +119,7 @@ Apollo.CMS.Message.PublicMessage = function () {
         var selectedRecipientName = $('option:selected', $this.DOMInstance.ddlRecipient).text();
         var selectedHighLevels = $('input[name=AgentLevel]:checked', $this.DOMInstance.divAgentLevels).val();
         var recipients = [];
+        var recipient = {};
 
         if (selectedRecipientId == 'null') {
             var childItems = $this.DOMInstance.ddlRecipient.children();
@@ -124,7 +127,7 @@ Apollo.CMS.Message.PublicMessage = function () {
 
             for (var index = 1; index < numOfChilds; index++) {
                 var item = childItems.eq(index);
-                var recipient = {
+                recipient = {
                     TargetId: item.val(),
                     TargetName: item.text()
                 };
@@ -135,7 +138,7 @@ Apollo.CMS.Message.PublicMessage = function () {
             var levels = $('input:checkbox:checked', $this.DOMInstance.divAgentLevels);
 
             for (var index = 0; index < levels.length; index++) {
-                var recipient = {
+                recipient = {
                     TargetId: selectedRecipientId,
                     TargetName: selectedRecipientName,
                     AgentLevel: $(levels[index]).attr('data-msg-target-id')
@@ -144,7 +147,7 @@ Apollo.CMS.Message.PublicMessage = function () {
                 recipients.push(recipient);
             }
         } else {
-            var recipient = {
+            recipient = {
                 TargetId: selectedRecipientId,
                 TargetName: selectedRecipientName
             };

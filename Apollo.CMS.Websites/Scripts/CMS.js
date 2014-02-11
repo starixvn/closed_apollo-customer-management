@@ -1,6 +1,6 @@
 
 var CMS = (function ($) {
-
+    "use strict";
     return {
         rootUrl: null,
         unauthorizedRequestError: null,
@@ -105,7 +105,6 @@ var CMS = (function ($) {
             window.location.replace(CMS.resolveRootUrl(url));
         },
         openWindow: function (url) {
-            var popH = $(window).height(), popW = $(window).width();
             var formatter = new Array(
                 'resizable=no',
                 'scrollbars=yes',
@@ -138,6 +137,7 @@ var CMS = (function ($) {
 } (jQuery));
 
 $(document).ready(function () {
+    "use strict";
     CMS.initCoreValues();
 
     CMS.headlineMsgBox = $.msgbox({

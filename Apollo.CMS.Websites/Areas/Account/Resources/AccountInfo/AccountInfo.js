@@ -1,8 +1,9 @@
 ﻿/* File Created: December 5, 2013 */
 
-/* global CMS, searchBar */
+/* global Apollo, CMS, Namespace, searchBar */
 
 $(document).ready(function () {
+    "use strict";
     var accountInfo = new Apollo.CMS.Account.AccountInfo();
 
     accountInfo.InitPage();
@@ -10,6 +11,7 @@ $(document).ready(function () {
 
 Namespace.Register("Apollo.CMS.Account.AccountInfo");
 Apollo.CMS.Account.AccountInfo = function () {
+    "use strict";
     var $this = this;
     var urls = {
         GetUplineAgents: CMS.resolveRootUrl('Account/AccountInfo/GetUplineAgents'),

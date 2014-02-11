@@ -61,8 +61,8 @@ namespace Apollo.BetList.Extensions.Builders.ChoiceBuilders
 
             choice.LeagueName = ticketHelper.GetLeagueNameById(ticket.LeagueId);
             choice.SportName = ticketHelper.GetSportNameById(ticket.SportTypeId);
-            choice.HomeName = ticketHelper.GetTeamNameById(ticket.HomeId);
-            choice.AwayName = ticketHelper.GetTeamNameById(ticket.AwayId);
+            choice.HomeName = ticketHelper.GetTeamNameById(ticket.HomeId).Trim();
+            choice.AwayName = ticketHelper.GetTeamNameById(ticket.AwayId).Trim();
             choice.BetTypeName = ticketHelper.GetBetTypeNameById(ticket.BetTypeId);
             choice.BetTeam = isBetHomeTeam ? choice.HomeName : choice.AwayName;
             choice.IsFavorite = isFavorite;

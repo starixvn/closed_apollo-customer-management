@@ -34,7 +34,11 @@ namespace Apollo.BetList.Extensions.Builders.OddsBuilders
             string oddsName = CacheRef.GetOddsTypeName(ConvertByBetType.OddsType(ticket.BetTypeId, oddsType));
 
             FormatOdds(ticket.Odds, ticket.BetTypeId, oddsType, rtfHelper);
-            rtfHelper.RTFRenderer.AddText(string.Format("\n {0}", oddsName), rtfHelper.OddsNameFont);
+
+            if (!string.IsNullOrEmpty(oddsName))
+            {
+                rtfHelper.RTFRenderer.AddText(string.Format("\n {0}", oddsName), rtfHelper.OddsNameFont);
+            }
 
             return rtfHelper.RTFRenderer.Render();
         }

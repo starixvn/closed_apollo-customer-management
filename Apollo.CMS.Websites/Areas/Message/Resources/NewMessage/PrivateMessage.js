@@ -1,8 +1,9 @@
 ﻿/* File Created: November 17, 2013 */
 
-/* global CMS, Validator, labels, messages, hasViewMessageRight, limitRows */
+/* global Apollo, CMS, Namespace, Validator, labels, messages, hasViewMessageRight, limitRows */
 
 $(document).ready(function () {
+    "use strict";
     var privateMessage = new Apollo.CMS.Message.PrivateMessage();
     
     privateMessage.InitPage();
@@ -102,6 +103,7 @@ Apollo.CMS.Message.PrivateMessage = function () {
     };
     var validateCustForm = function (member, isAgent) {
         var isValid = true;
+        var errorMsg = '';
 
         $this.DOMInstance.txtUserName.tipsy('hide');
         if (member) {
@@ -113,14 +115,12 @@ Apollo.CMS.Message.PrivateMessage = function () {
             });
 
             if (isDuplicated) {
-                var errorMsg = $this.DOMInstance.txtUserName.attr('data-val-existing');
-
+                errorMsg = $this.DOMInstance.txtUserName.attr('data-val-existing');
                 Validator.showTooltip($this.DOMInstance.txtUserName, errorMsg, 's');
                 isValid = false;
             }
         } else {
-            var errorMsg = $this.DOMInstance.txtUserName.attr('data-val-invalid-username');
-
+            errorMsg = $this.DOMInstance.txtUserName.attr('data-val-invalid-username');
             Validator.showTooltip($this.DOMInstance.txtUserName, errorMsg, 's');
             isValid = false;
         }

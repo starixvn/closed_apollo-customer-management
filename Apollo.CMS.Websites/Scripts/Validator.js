@@ -3,6 +3,7 @@
 /* global CMS, moment */
 
 var Validator = (function ($) {
+    "use strict";
     return {
         showTooltip: function ($obj, message, gravity) {
             if ($obj.is(':hidden')) {

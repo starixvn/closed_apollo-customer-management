@@ -148,8 +148,8 @@ namespace Apollo.CMS.BetList.Services.Implements
             string fileName = string.Format(
                                          ViewLang.BetListReportFileName,
                                          criteria.Username,
-                                         criteria.FromDate.ToShortFormatedDateWithSlash().Replace("/", string.Empty),
-                                         criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", string.Empty));
+                                         criteria.FromDate.ToShortFormatedDate().Replace("-", string.Empty),
+                                         criteria.ToDate.ToShortFormatedDate().Replace("-", string.Empty));
             string reportTitle = string.Format(
                                          ViewLang.BetListReportTitle,
                                          criteria.FromDate.ToShortFormatedDateWithSlash(),

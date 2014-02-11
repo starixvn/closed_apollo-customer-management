@@ -1,9 +1,10 @@
 ﻿/* File Created: January 10, 2014 */
 
-/* global CMS, moment, numeral, pageLayout, layoutHelper, tableHeaders, detailTableHeaders, systemParlayDetailsTableHeaders */
+/* global Apollo, CMS, Namespace, moment, numeral, pageLayout, layoutHelper, tableHeaders, detailTableHeaders, systemParlayDetailsTableHeaders */
 /* global minDate, today, betListReportTitle, memberId, memberName, pageSize */
 
 $(document).ready(function () {
+    "use strict";
     var memberBetList = new Apollo.CMS.BetList.MemberBetList();
 
     memberBetList.InitPage();
