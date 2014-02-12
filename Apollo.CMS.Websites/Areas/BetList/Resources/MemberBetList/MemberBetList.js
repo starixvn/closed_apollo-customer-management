@@ -475,7 +475,9 @@ Apollo.CMS.BetList.MemberBetList = function () {
                 }
             });
         } else {
-            divEvent.slideToggle();
+            divEvent.slideToggle(function () {
+                $this.DOMInstance.divBetList.fanexGrid('resizeGrid');
+            });
         }
     };
     showCombMP = function (transId, transIndex, refNo) {
