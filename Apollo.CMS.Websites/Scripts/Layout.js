@@ -1,4 +1,4 @@
-/* global moment, Apollo, CMS, Namespace, layoutHelper */
+/* global moment, Apollo, CMS, Namespace */
 
 Namespace.Register('Apollo.CMS.LayoutHelper');
 Apollo.CMS.LayoutHelper = function () {

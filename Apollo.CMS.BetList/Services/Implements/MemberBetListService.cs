@@ -229,10 +229,21 @@ namespace Apollo.CMS.BetList.Services.Implements
             NumberRTFHelper numberRTFHelper = GetTotalOddsRTFHelper(writer);
 
             decimal sumStake = Converter.ToDecimal(_ticketList.Sum(obj => obj.Stake));
-            decimal sumWinLoss = Converter.ToDecimal(_ticketList.Sum(obj => obj.WinLoss));
+            decimal sumWinLoss = 0;
             decimal sumComm = Converter.ToDecimal(_ticketList.Sum(obj => obj.PlayerComm));
-            decimal sumCompanyWinLoss = Converter.ToDecimal(_ticketList.Sum(obj => obj.CompanyWinLoss));
+            decimal sumCompanyWinLoss = 0;
             decimal sumCompanyComm = Converter.ToDecimal(_ticketList.Sum(obj => obj.CompanyComm));
+            string ticketStatus = string.Empty;
+
+            foreach (BetTicket ticket in _ticketList)
+            {
+                ticketStatus = ticket.Status.ToLower();
+                if (!BetStatus.Running.Equals(ticketStatus) && !BetStatus.Waiting.Equals(ticketStatus))
+                {
+                    sumWinLoss += Converter.ToDecimal(ticket.WinLoss);
+                    sumCompanyWinLoss += Converter.ToDecimal(ticket.CompanyWinLoss);
+                }
+            }
 
             var row = new object[]
             {

@@ -51,11 +51,15 @@ namespace Apollo.CMS.BetList.ViewModels.GeneralBetTicket
             {
                 this.BetItems.Add(item);
                 this.SumStake += item.Stake;
-                this.SumWinLoss += item.WinLoss;
                 this.SumComm += item.Comm;
                 this.SumCompanyShare += item.CompanyShare;
                 this.SumCompanyComm += item.CompanyComm;
-                this.SumCompanyWinLoss += item.CompanyWinLoss;
+
+                if (!item.IsRunning)
+                {
+                    this.SumWinLoss += item.WinLoss;
+                    this.SumCompanyWinLoss += item.CompanyWinLoss;
+                }
             }
         }
     }

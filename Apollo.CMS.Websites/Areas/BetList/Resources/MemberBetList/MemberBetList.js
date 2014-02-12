@@ -54,7 +54,7 @@ Apollo.CMS.BetList.MemberBetList = function () {
 
         layoutHelper.CreateDatepicker($this.DOMInstance.dpkToDate, null, null, function (selectedDate) {
             $this.DOMInstance.dpkFromDate.datepicker('option', 'maxDate', selectedDate);
-        }).datepicker('option', 'minDate', minDate).datepicker('option', 'maxDate', today);
+        }).datepicker('option', 'minDate', minDate);
 
         $this.DOMInstance.btnGenerate.on('click', function () {
             parameters.FromDate = $this.DOMInstance.dpkFromDate.val();

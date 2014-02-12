@@ -1,6 +1,6 @@
 ﻿/* File Created: January 6, 2014 */
 
-/* global _, Apollo, Namespace, layoutHelper */
+/* global _, Apollo, Namespace */
 
 /*jshint ignore:start */
 
