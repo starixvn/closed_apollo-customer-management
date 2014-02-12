@@ -463,7 +463,9 @@ Apollo.CMS.BetList.MemberBetList = function () {
                 success: function (result) {
                     result = '<br/>' + result;
                     divEvent.html(result);
-                    divEvent.slideDown();
+                    divEvent.slideDown(function () {
+                        $this.DOMInstance.divBetList.fanexGrid('resizeGrid');
+                    });
                 },
                 error: function (xhr, status, err) {
                     CMS.handleAjaxError(xhr, status, err);
