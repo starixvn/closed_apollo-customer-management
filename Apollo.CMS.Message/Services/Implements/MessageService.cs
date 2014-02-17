@@ -16,7 +16,7 @@ namespace Apollo.CMS.Message.Services.Implements
     using Apollo.CMS.Message.Models.MessageList;
     using Apollo.CMS.Message.Services.Interfaces;
     using Fanex.Common;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
     /// Message services.

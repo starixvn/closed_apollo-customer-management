@@ -15,7 +15,7 @@ namespace Apollo.CMS.Message.Services.Implements
     using Apollo.CMS.Message.Criteria.NewMessage;
     using Apollo.CMS.Message.Models.NewMessage;
     using Apollo.CMS.Message.Services.Interfaces;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.NAP.Framework.Command;
 
     /// <summary>
     /// New message service.
@@ -88,7 +88,7 @@ namespace Apollo.CMS.Message.Services.Implements
                         Id = item.TargetId,
                         IsAgent = item.IsAgent
                     });
-                    
+
                     foreach (var upline in uplines)
                     {
                         stringBuilder.AppendFormat(recipientNode, upline.TargetId, upline.TargetName, 1, agentLevel);

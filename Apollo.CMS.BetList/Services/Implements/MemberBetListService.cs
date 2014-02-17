@@ -24,13 +24,13 @@ namespace Apollo.CMS.BetList.Services.Implements
     using Apollo.CMS.BetList.ViewModels.MemberBetList;
     using Apollo.CMS.Core.Constants;
     using Apollo.CMS.Core.ExcelUtility;
-    using Apollo.CMS.Core.Extensions;
     using Apollo.CMS.Core.Models;
     using Apollo.CMS.Core.Resources;
     using Apollo.CMS.Core.Services;
     using Fanex.BetList.Core.Entities;
     using Fanex.BetList.Core.TicketHelper;
     using Fanex.Common;
+    using Fanex.NAP.Core.Web;
     using NPOI.SS.UserModel;
 
     /// <summary>
@@ -54,20 +54,20 @@ namespace Apollo.CMS.BetList.Services.Implements
         /// <summary>
         /// Gets the paged bet list.
         /// </summary>
-        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <param name="filter">The criteria that are used to query data.</param>
         /// <returns>The bet items of a page.</returns>
-        public BetList GetPagedBetList(MemberBetListFilter criteria)
+        public BetList GetPagedBetList(MemberBetListFilter filter)
         {
             BetList result = null;
 
-            if (criteria.IsLoadNew || _ticketList == null)
+            if (filter.IsLoadNew || _ticketList == null)
             {
-                GetBetTicket(criteria);
+                GetBetTicket(filter);
             }
 
             if (_ticketList.Any())
             {
-                result = SeparateBetListToPage(criteria);
+                result = SeparateBetListToPage(filter);
             }
 
             return result;
@@ -76,15 +76,15 @@ namespace Apollo.CMS.BetList.Services.Implements
         /// <summary>
         /// Gets the detailed win loss of the whole line.
         /// </summary>
-        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <param name="filter">The criteria that are used to query data.</param>
         /// <returns>The win loss list.</returns>
-        public IEnumerable<DetailedWinLossItem> GetDetailWinLossList(DetailedWinLossFilter criteria)
+        public IEnumerable<DetailedWinLossItem> GetDetailWinLossList(DetailedWinLossFilter filter)
         {
             BalanceUp balanceUp = this.BalanceUp;
             var detailedWinLossCriteria = new GetDetailedWinLossCriteria
             {
-                TransId = criteria.TransId,
-                IsBackupData = balanceUp.BalanceUpDay > criteria.TransDate
+                TransId = filter.TransId,
+                IsBackupData = balanceUp.BalanceUpDay > filter.TransDate
             };
             List<DetailedWinLossItem> result = null;
             IEnumerable<DetailedWinLoss> rawData = this.GetListData<DetailedWinLoss>(detailedWinLossCriteria);
@@ -141,20 +141,20 @@ namespace Apollo.CMS.BetList.Services.Implements
         /// <summary>
         /// Exports the member bet list report to Excel file.
         /// </summary>
-        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <param name="filter">The criteria that are used to query data.</param>
         /// <param name="templatePath">The template's path.</param>
-        public void ExportMemberBetList(MemberBetListFilter criteria, string templatePath)
+        public void ExportMemberBetList(MemberBetListFilter filter, string templatePath)
         {
             string fileName = string.Format(
                                          ViewLang.BetListReportFileName,
-                                         criteria.Username,
-                                         criteria.FromDate.ToShortFormatedDate().Replace("-", string.Empty),
-                                         criteria.ToDate.ToShortFormatedDate().Replace("-", string.Empty));
+                                         filter.Username,
+                                         filter.FromDate.ToShortFormatedDateForFileName(),
+                                         filter.ToDate.ToShortFormatedDateForFileName());
             string reportTitle = string.Format(
                                          ViewLang.BetListReportTitle,
-                                         criteria.FromDate.ToShortFormatedDateWithSlash(),
-                                         criteria.ToDate.ToShortFormatedDateWithSlash(),
-                                         criteria.Username);
+                                         filter.FromDate.ToShortFormatedDate(),
+                                         filter.ToDate.ToShortFormatedDate(),
+                                         filter.Username);
             var writer = new ExcelTemplateWriter(templatePath, fileName, fileName);
 
             writer.WriteRow(0, new { reportTitle });
@@ -162,7 +162,7 @@ namespace Apollo.CMS.BetList.Services.Implements
 
             if (_ticketList == null || _ticketList.Count == 0)
             {
-                GetBetTicket(criteria);
+                GetBetTicket(filter);
             }
 
             FillBetTickets(ref writer);
@@ -318,6 +318,21 @@ namespace Apollo.CMS.BetList.Services.Implements
         }
 
         /// <summary>
+        /// Gets the status column's fonts.
+        /// </summary>
+        /// <param name="writer">The writer that is used to get the font.</param>
+        /// <returns>StatusRTFHelper object.</returns>
+        private StatusRTFHelper GetStatusRTFHelper(ExcelTemplateWriter writer)
+        {
+            StatusRTFHelper statusFonts = new StatusRTFHelper();
+
+            statusFonts.StatusFont = writer.GetFont(7, 6);
+            statusFonts.IPFont = writer.GetFont(8, 6);
+
+            return statusFonts;
+        }
+
+        /// <summary>
         /// Gets the total odds row's fonts.
         /// </summary>
         /// <param name="writer">The writer that is used to get the font.</param>
@@ -389,31 +404,16 @@ namespace Apollo.CMS.BetList.Services.Implements
         }
 
         /// <summary>
-        /// Gets the status column's fonts.
-        /// </summary>
-        /// <param name="writer">The writer that is used to get the font.</param>
-        /// <returns>StatusRTFHelper object.</returns>
-        private StatusRTFHelper GetStatusRTFHelper(ExcelTemplateWriter writer)
-        {
-            StatusRTFHelper statusFonts = new StatusRTFHelper();
-
-            statusFonts.StatusFont = writer.GetFont(7, 6);
-            statusFonts.IPFont = writer.GetFont(8, 6);
-
-            return statusFonts;
-        }
-
-        /// <summary>
         /// Separate the bet list into pages.
         /// </summary>
-        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <param name="filter">The filter that is used to query data.</param>
         /// <returns>Formatted bet list.</returns>
-        private BetList SeparateBetListToPage(MemberBetListFilter criteria)
+        private BetList SeparateBetListToPage(MemberBetListFilter filter)
         {
             BetList result = null;
             List<BetTicket> pagedData = null;
-            int startIndex = criteria.PageIndex * criteria.PageSize;
-            int endIndex = startIndex + criteria.PageSize;
+            int startIndex = filter.PageIndex * filter.PageSize;
+            int endIndex = startIndex + filter.PageSize;
 
             endIndex = endIndex > _ticketList.Count ? _ticketList.Count : endIndex;
             pagedData = _ticketList.GetRange(startIndex, endIndex - startIndex);
@@ -426,37 +426,37 @@ namespace Apollo.CMS.BetList.Services.Implements
         /// <summary>
         /// Gets the bet ticket list.
         /// </summary>
-        /// <param name="criteria">The criteria that are used to query data.</param>
-        private void GetBetTicket(MemberBetListFilter criteria)
+        /// <param name="filter">The filter that is used to query data.</param>
+        private void GetBetTicket(MemberBetListFilter filter)
         {
             BalanceUp balanceUp = this.BalanceUp;
             var betListCriteria = new GetMemberBetListCriteria
             {
                 MoveBetsDay = balanceUp.MoveBetsDay,
-                CustId = criteria.CustId
+                CustId = filter.CustId
             };
 
             _ticketList = new List<BetTicket>();
 
-            if ((criteria.FromDate < balanceUp.BalanceUpDay) && (balanceUp.BalanceUpDay < criteria.ToDate))
+            if ((filter.FromDate < balanceUp.BalanceUpDay) && (balanceUp.BalanceUpDay < filter.ToDate))
             {
                 // Gets data from archive database.
-                betListCriteria.FromDate = criteria.FromDate;
+                betListCriteria.FromDate = filter.FromDate;
                 betListCriteria.ToDate = balanceUp.BalanceUpDay.AddDays(-1);
                 betListCriteria.IsBackupData = true;
                 _ticketList.AddRange(this.GetListData<BetTicket>(betListCriteria));
 
                 // Gets data from current using database.
                 betListCriteria.FromDate = balanceUp.BalanceUpDay;
-                betListCriteria.ToDate = criteria.ToDate;
+                betListCriteria.ToDate = filter.ToDate;
                 betListCriteria.IsBackupData = false;
                 _ticketList.AddRange(this.GetListData<BetTicket>(betListCriteria));
             }
             else
             {
-                betListCriteria.FromDate = criteria.FromDate;
-                betListCriteria.ToDate = criteria.ToDate;
-                betListCriteria.IsBackupData = balanceUp.BalanceUpDay > criteria.ToDate;
+                betListCriteria.FromDate = filter.FromDate;
+                betListCriteria.ToDate = filter.ToDate;
+                betListCriteria.IsBackupData = balanceUp.BalanceUpDay > filter.ToDate;
                 _ticketList.AddRange(this.GetListData<BetTicket>(betListCriteria));
                 _ticketList = _ticketList.OrderBy(obj => obj.TransId).ToList();
             }

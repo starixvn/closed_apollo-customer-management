@@ -7,7 +7,7 @@
 //   <change who="Jason.Ly" date="2014.1.10">Created</change>
 // </history>
 
-namespace Apollo.CMS.BetList.Criteria.MemberBetList
+namespace Apollo.CMS.BetList.ViewModels.MemberBetList
 {
     using System;
 

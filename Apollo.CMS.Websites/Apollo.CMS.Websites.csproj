@@ -62,10 +62,10 @@
     <Reference Include="Fanex.Logging">
       <HintPath>..\Dependencies\Fanex\Fanex.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.NAP.Core, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Fanex.NAP.Core">
       <HintPath>..\Dependencies\Fanex\Fanex.NAP.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.NAP.Framework, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Fanex.NAP.Framework">
       <HintPath>..\Dependencies\Fanex\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
     <Reference Include="JavaScriptEngineSwitcher.Core">

@@ -81,10 +81,10 @@
     <Compile Include="Controllers\BetListByRefNoController.cs" />
     <Compile Include="Controllers\MemberBetListController.cs" />
     <Compile Include="Criteria\BetListByRefNo\GetBetListByRefNoCriteria.cs" />
-    <Compile Include="Criteria\MemberBetList\DetailedWinLossFilter.cs" />
+    <Compile Include="ViewModels\MemberBetList\DetailedWinLossFilter.cs" />
     <Compile Include="Criteria\MemberBetList\GetParlaySubTicketsCriteria.cs" />
     <Compile Include="Criteria\MemberBetList\GetSystemParlayDetailsCriteria.cs" />
-    <Compile Include="Criteria\MemberBetList\MemberBetListFilter.cs" />
+    <Compile Include="ViewModels\MemberBetList\MemberBetListFilter.cs" />
     <Compile Include="Criteria\MemberBetList\GetMemberBetListCriteria.cs" />
     <Compile Include="Criteria\MemberBetList\GetDetailedWinLossCriteria.cs" />
     <Compile Include="Helpers\BetListHelper.cs" />

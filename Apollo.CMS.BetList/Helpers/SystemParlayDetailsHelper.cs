@@ -15,10 +15,10 @@ namespace Apollo.CMS.BetList.Helpers
     using Apollo.CMS.BetList.Contants;
     using Apollo.CMS.BetList.Models.GeneralBetTicket;
     using Apollo.CMS.BetList.ViewModels.GeneralBetTicket;
-    using Apollo.CMS.Core.Extensions;
     using Fanex.BetList.Core.App_GlobalResources;
     using Fanex.BetList.Core.TicketHelper;
     using Fanex.BetList.Core.Utils;
+    using Fanex.NAP.Core.Web;
 
     /// <summary>
     /// Class that helps to generate details table of system parlay.
@@ -53,7 +53,7 @@ namespace Apollo.CMS.BetList.Helpers
                     ticketList = systemParlayData.TicketList.Where(t => t.WinLossDate == date);
 
                     dailyTicketList = new SystemParlayDailyTicketList();
-                    dailyTicketList.WinLossDate = date.ToShortFormatedDateWithSlash();
+                    dailyTicketList.WinLossDate = date.ToShortFormatedDate();
                     dailyTicketList.TotalWinLoss = Formatter.HighlightNegativeNumber(ticketList.Sum(t => t.WinLoss));
                     dailyTicketList.TotalComm = Formatter.HighlightNegativeNumber(ticketList.Sum(t => t.PlayerComm));
 
@@ -129,7 +129,7 @@ namespace Apollo.CMS.BetList.Helpers
         {
             SystemParlayTicketItem ticket = new SystemParlayTicketItem();
 
-            ticket.WinLossDate = data.WinLossDate.ToShortFormatedDateWithSlash();
+            ticket.WinLossDate = data.WinLossDate.ToShortFormatedDate();
             ticket.WinLoss = Formatter.HighlightNegativeNumber(data.WinLoss);
             ticket.Comm = Formatter.HighlightNegativeNumber(data.PlayerComm);
             ticket.Odds = data.MOdds == 0 ? "-" : Formatter.DecFormat(data.MOdds, 2);

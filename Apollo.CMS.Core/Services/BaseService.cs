@@ -17,6 +17,7 @@ namespace Apollo.CMS.Core.Services
     using Apollo.CMS.Core.Web;
     using Fanex.Common.Helper;
     using Fanex.Data;
+    using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>

@@ -9,11 +9,10 @@
 
 namespace Apollo.CMS.Message.Services.Interfaces
 {
-    using System;
     using System.Collections.Generic;
     using Apollo.CMS.Message.Criteria.MessageList;
     using Apollo.CMS.Message.Models.MessageList;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.NAP.Framework.Command;
 
     public interface IMessageService
     {

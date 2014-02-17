@@ -13,6 +13,7 @@ namespace Apollo.CMS.BetList.Controllers
     using Apollo.CMS.BetList.Criteria.MemberBetList;
     using Apollo.CMS.BetList.Services.Implements;
     using Apollo.CMS.BetList.Services.Interfaces;
+    using Apollo.CMS.BetList.ViewModels.MemberBetList;
     using Apollo.CMS.Core.Configurations;
     using Apollo.CMS.Core.Controllers;
     using Fanex.NAP.Core.Business;
@@ -57,25 +58,25 @@ namespace Apollo.CMS.BetList.Controllers
         /// <summary>
         /// Gets the member bet list.
         /// </summary>
-        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <param name="filter">The criteria that are used to query data.</param>
         /// <returns>The JSON list contains bet list of member.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewBetList, Policy = Constant.Policy.Read)]
-        public JsonResult GetMemberBetList(MemberBetListFilter criteria)
+        public JsonResult GetMemberBetList(MemberBetListFilter filter)
         {
-            return Json(this._memberBetListService.GetPagedBetList(criteria));
+            return Json(this._memberBetListService.GetPagedBetList(filter));
         }
 
         /// <summary>
         /// Gets the detailed win loss of a whole line.
         /// </summary>
-        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <param name="filter">The criteria that are used to query data.</param>
         /// <returns>The JSON list contains win loss list of a ticket.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewBetList, Policy = Constant.Policy.Read)]
-        public JsonResult GetTicketDetail(DetailedWinLossFilter criteria)
+        public JsonResult GetTicketDetail(DetailedWinLossFilter filter)
         {
-            return Json(this._memberBetListService.GetDetailWinLossList(criteria));
+            return Json(this._memberBetListService.GetDetailWinLossList(filter));
         }
 
         /// <summary>
@@ -105,13 +106,13 @@ namespace Apollo.CMS.BetList.Controllers
         /// <summary>
         /// Exports the member bet list to Excel.
         /// </summary>
-        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <param name="filter">The criteria that are used to query data.</param>
         /// <returns>Excel file contains bet list of member.</returns>
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewBetList, Policy = Constant.Policy.Read)]
-        public ActionResult ExportMemberBetList(MemberBetListFilter criteria)
+        public ActionResult ExportMemberBetList(MemberBetListFilter filter)
         {
             string templateUrl = System.Web.HttpContext.Current.Server.MapPath(MemberBetListTemplateFilePath);
-            this._memberBetListService.ExportMemberBetList(criteria, templateUrl);
+            this._memberBetListService.ExportMemberBetList(filter, templateUrl);
 
             return new EmptyResult();
         }

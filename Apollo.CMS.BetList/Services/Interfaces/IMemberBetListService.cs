@@ -19,16 +19,16 @@ namespace Apollo.CMS.BetList.Services.Interfaces
         /// <summary>
         /// Gets the paged bet list.
         /// </summary>
-        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <param name="filter">The criteria that are used to query data.</param>
         /// <returns>The bet items of a page.</returns>
-        BetList GetPagedBetList(MemberBetListFilter criteria);
+        BetList GetPagedBetList(MemberBetListFilter filter);
 
         /// <summary>
         /// Gets the detailed win loss of the whole line.
         /// </summary>
-        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <param name="filter">The criteria that are used to query data.</param>
         /// <returns>The win loss list.</returns>
-        IEnumerable<DetailedWinLossItem> GetDetailWinLossList(DetailedWinLossFilter criteria);
+        IEnumerable<DetailedWinLossItem> GetDetailWinLossList(DetailedWinLossFilter filter);
 
         /// <summary>
         /// Gets the parlay sub tickets.
@@ -47,8 +47,8 @@ namespace Apollo.CMS.BetList.Services.Interfaces
         /// <summary>
         /// Exports the member bet list report to Excel file.
         /// </summary>
-        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <param name="filter">The criteria that are used to query data.</param>
         /// <param name="templatePath">The template's path.</param>
-        void ExportMemberBetList(MemberBetListFilter criteria, string templatePath);
+        void ExportMemberBetList(MemberBetListFilter filter, string templatePath);
     }
 }

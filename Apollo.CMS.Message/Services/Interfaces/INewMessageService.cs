@@ -12,7 +12,7 @@ namespace Apollo.CMS.Message.Services.Interfaces
     using System.Collections.Generic;
     using Apollo.CMS.Message.Criteria.NewMessage;
     using Apollo.CMS.Message.Models.NewMessage;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.NAP.Framework.Command;
 
     public interface INewMessageService
     {
