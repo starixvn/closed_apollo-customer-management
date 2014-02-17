@@ -7,7 +7,7 @@
 //   <change who="Jason.Ly" date="2013.11.13">Created</change>
 // </history>
 
-namespace Apollo.CMS.Message.Models.NewMessage
+namespace Apollo.CMS.Message.ViewModels.NewMessage
 {
     /// <summary>
     /// Recipient view model that is used to store recipient passed from user.

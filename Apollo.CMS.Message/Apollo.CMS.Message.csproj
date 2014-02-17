@@ -76,7 +76,7 @@
     <Compile Include="Criteria\MessageList\UpdateMessageCriteria.cs" />
     <Compile Include="Criteria\NewMessage\InsertMessageCriteria.cs" />
     <Compile Include="MessageAreaRegistration.cs" />
-    <Compile Include="Models\NewMessage\Recipient.cs" />
+    <Compile Include="ViewModels\NewMessage\Recipient.cs" />
     <Compile Include="Models\NewMessage\RecipientInfo.cs" />
     <Compile Include="Models\MessageList\Message.cs" />
     <Compile Include="Models\NewMessage\Site.cs" />
@@ -86,6 +86,7 @@
     <Compile Include="Services\Interfaces\INewMessageService.cs" />
     <Compile Include="Services\Implements\MessageService.cs" />
     <Compile Include="Services\Interfaces\IMessageService.cs" />
+    <Compile Include="ViewModels\NewMessage\InsertNewMessageForm.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Apollo.CMS.Core\Apollo.CMS.Core.csproj">

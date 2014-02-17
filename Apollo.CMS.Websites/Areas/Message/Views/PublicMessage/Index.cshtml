@@ -1,5 +1,5 @@
 ﻿@using Apollo.CMS.Core.Constants
-@model Apollo.CMS.Message.Criteria.NewMessage.InsertMessageCriteria
+@model Apollo.CMS.Message.ViewModels.NewMessage.InsertNewMessageForm
 @{
     ViewBag.Title = ViewLang.NewPublicMessage;
     Layout = "~/Views/Shared/_PageLayout.cshtml";
@@ -78,8 +78,8 @@
 <div class="filter-form public-filter">
     <div class="row">
         <div class="pull-left">
-            @Html.LabelFor(m => m.Recipient, ViewLang.Recipient, new { @class = "lbl-recipient" })
-            @Html.DropDownListFor(m => m.Recipient, (IEnumerable<SelectListItem>)ViewBag.Recipient)
+            @Html.LabelFor(m => m.RecipientList, ViewLang.Recipient, new { @class = "lbl-recipient" })
+            @Html.DropDownListFor(m => m.RecipientList, (IEnumerable<SelectListItem>)ViewBag.Recipient)
         </div>
         <div class="pull-left checkbox">
             <label>@Html.CheckBoxFor(m => m.IsSpecialMsg) @ViewLang.SpecialMessage</label>

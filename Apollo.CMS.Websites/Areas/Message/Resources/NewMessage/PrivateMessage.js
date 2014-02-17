@@ -1,16 +1,11 @@
 ﻿/* File Created: November 17, 2013 */
 
 /* global Apollo, CMS, Namespace, Validator, labels, messages, hasViewMessageRight, limitRows */
-
-$(document).ready(function () {
-    'use strict';
-    var privateMessage = new Apollo.CMS.Message.PrivateMessage();
-    
-    privateMessage.InitPage();
-});
+/* exported removeRow*/
 
 Namespace.Register('Apollo.CMS.Message.PrivateMessage');
 Apollo.CMS.Message.PrivateMessage = function () {
+    'use strict';
     var $this = this;
     var urls = {
         AddNewMessage: CMS.resolveRootUrl('PrivateMessage/AddNewMessage'),
@@ -109,7 +104,7 @@ Apollo.CMS.Message.PrivateMessage = function () {
         if (member) {
             var isDuplicated = false;
             $.each(params.RecipientList, function (index, obj) {
-                if ((member.UserName == obj.TargetName) && (isAgent == obj.IsAgent)) {
+                if ((member.UserName === obj.TargetName) && (isAgent === obj.IsAgent)) {
                     isDuplicated = true;
                 }
             });
@@ -156,7 +151,12 @@ Apollo.CMS.Message.PrivateMessage = function () {
     };
     var addRow = function (member, isAgent, informUpline) {
         var userId = member.CustId;
-        var rowFormat = '<tr><td class="text-center">{0}</td><td>{1}</td><td class="text-center">{2}</td><td class="text-center">{3}</td><td class="text-center">{4}</td></tr>';
+        var rowFormat = '<tr>' +
+                            '<td class="text-center">{0}</td>' +
+                            '<td>{1}</td><td class="text-center">{2}</td>' +
+                            '<td class="text-center">{3}</td>' +
+                            '<td class="text-center">{4}</td>' +
+                        '</tr>';
         var no = params.RecipientList.length + 1;
         var level = isAgent ? labels.Agent : labels.Member;
         var upline = informUpline ? '<span class="glyphicon glyphicon-ok" />' : '';
@@ -185,29 +185,6 @@ Apollo.CMS.Message.PrivateMessage = function () {
             $this.DOMInstance.btnAdd.attr('disabled', 'true');
         }
     };
-    removeRow = function (obj) {
-        var numOfEles = params.RecipientList.length;
-
-        if (numOfEles > 0) {
-            var index = $(obj).attr('data-index');
-            $this.DOMInstance.tblMemberListBody.children().eq(index).remove();
-            $this.DOMInstance.tblMemberListBody.children().each(function (eleIndex, eleValue) {
-                $('td:first-child', eleValue).text(eleIndex + 1);
-                $('td:last-child > a', eleValue).attr('data-index', eleIndex);
-            });
-
-            params.RecipientList.splice(index, 1);
-
-            if (params.RecipientList.length === 0) {
-                $this.DOMInstance.tblMemberListBody.append('<tr><td colspan="5" class="text-center">{0}</td></tr>'.format(labels.NoMember));
-            } else if (params.RecipientList.length == 19) {
-                $this.DOMInstance.ddlMemberType.removeAttr('disabled');
-                $this.DOMInstance.txtUserName.removeAttr('disabled');
-                $this.DOMInstance.chkInformUpline.removeAttr('disabled');
-                $this.DOMInstance.btnAdd.removeAttr('disabled');
-            }
-        }
-    };
 
     $this.DOMInstance = {
         txtContentEn: null,
@@ -231,6 +208,29 @@ Apollo.CMS.Message.PrivateMessage = function () {
     $this.InitPage = function () {
         cacheDOM();
         initFields();
+    };
+    $this.RemoveRecipient = function (obj) {
+        var numOfEles = params.RecipientList.length;
+
+        if (numOfEles > 0) {
+            var index = $(obj).attr('data-index');
+            $this.DOMInstance.tblMemberListBody.children().eq(index).remove();
+            $this.DOMInstance.tblMemberListBody.children().each(function (eleIndex, eleValue) {
+                $('td:first-child', eleValue).text(eleIndex + 1);
+                $('td:last-child > a', eleValue).attr('data-index', eleIndex);
+            });
+
+            params.RecipientList.splice(index, 1);
+
+            if (params.RecipientList.length === 0) {
+                $this.DOMInstance.tblMemberListBody.append('<tr><td colspan="5" class="text-center">{0}</td></tr>'.format(labels.NoMember));
+            } else if (params.RecipientList.length === 19) {
+                $this.DOMInstance.ddlMemberType.removeAttr('disabled');
+                $this.DOMInstance.txtUserName.removeAttr('disabled');
+                $this.DOMInstance.chkInformUpline.removeAttr('disabled');
+                $this.DOMInstance.btnAdd.removeAttr('disabled');
+            }
+        }
     };
     $this.GetRecipientInfo = function (isAgent, userName, informUpline) {
         var data = {
@@ -292,3 +292,15 @@ Apollo.CMS.Message.PrivateMessage = function () {
         });
     };
 };
+
+var privateMessage = new Apollo.CMS.Message.PrivateMessage();
+var removeRow = function (obj) {
+    'use strict';
+    privateMessage.RemoveRecipient(obj);
+};
+
+$(document).ready(function () {
+    'use strict';
+
+    privateMessage.InitPage();
+});

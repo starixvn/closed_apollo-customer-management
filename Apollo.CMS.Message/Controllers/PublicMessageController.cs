@@ -20,6 +20,7 @@ namespace Apollo.CMS.Message.Controllers
     using Apollo.CMS.Message.Models.NewMessage;
     using Apollo.CMS.Message.Services.Implements;
     using Apollo.CMS.Message.Services.Interfaces;
+    using Apollo.CMS.Message.ViewModels.NewMessage;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -56,7 +57,7 @@ namespace Apollo.CMS.Message.Controllers
             }).ToList();
 
             recipients.Insert(
-                           0, 
+                           0,
                            new SelectListItem
                            {
                                Text = ViewLang.All,
@@ -73,11 +74,11 @@ namespace Apollo.CMS.Message.Controllers
         /// <summary>
         /// Adds the new public message.
         /// </summary>
-        /// <param name="criteria">The criteria that contains the information of the new message.</param>
+        /// <param name="form">The criteria that contains the information of the new message.</param>
         /// <returns>Whether or not the new public message is added successfully or not.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.AddNewMessage, Policy = Constant.Policy.Host)]
-        public JsonResult AddNewMessage(InsertMessageCriteria criteria)
+        public JsonResult AddNewMessage(InsertNewMessageForm form)
         {
             if (!ModelState.IsValid)
             {
@@ -85,11 +86,11 @@ namespace Apollo.CMS.Message.Controllers
             }
             else
             {
-                criteria.UserLoginId = this.CurrentSession.UserId;
-                criteria.UserLoginName = this.CurrentSession.Username;
-                criteria.MsgType = (byte)MessageTypes.Public;
+                form.UserLoginId = this.CurrentSession.UserId;
+                form.UserLoginName = this.CurrentSession.Username;
+                form.MsgType = (byte)MessageTypes.Public;
 
-                return Json(this._newMessageService.InsertMessage(criteria));
+                return Json(this._newMessageService.InsertMessage(form));
             }
         }
     }

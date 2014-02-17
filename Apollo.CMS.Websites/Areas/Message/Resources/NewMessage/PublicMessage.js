@@ -36,7 +36,7 @@ Apollo.CMS.Message.PublicMessage = function () {
         $this.DOMInstance.txtContentKo = $('#ContentKo');
         $this.DOMInstance.txtContentTh = $('#ContentTh');
         $this.DOMInstance.txtContentVn = $('#ContentVn');
-        $this.DOMInstance.ddlRecipient = $('#Recipient');
+        $this.DOMInstance.ddlRecipient = $('#RecipientList');
         $this.DOMInstance.chkIsSpecialMsg = $('#IsSpecialMsg');
         $this.DOMInstance.btnSubmit = $('#btnSubmit');
         $this.DOMInstance.divEnglishLabel = $('#divEnglishLabel');
@@ -120,12 +120,13 @@ Apollo.CMS.Message.PublicMessage = function () {
         var selectedHighLevels = $('input[name=AgentLevel]:checked', $this.DOMInstance.divAgentLevels).val();
         var recipients = [];
         var recipient = {};
+        var index = null;
 
         if (selectedRecipientId == 'null') {
             var childItems = $this.DOMInstance.ddlRecipient.children();
             var numOfChilds = childItems.length;
 
-            for (var index = 1; index < numOfChilds; index++) {
+            for (index = 1; index < numOfChilds; index++) {
                 var item = childItems.eq(index);
                 recipient = {
                     TargetId: item.val(),
@@ -137,7 +138,7 @@ Apollo.CMS.Message.PublicMessage = function () {
         } else if ((selectedHighLevels === 'HighLevelAgents') && ($this.DOMInstance.divAgentLevels.is(':visible'))) {
             var levels = $('input:checkbox:checked', $this.DOMInstance.divAgentLevels);
 
-            for (var index = 0; index < levels.length; index++) {
+            for (index = 0; index < levels.length; index++) {
                 recipient = {
                     TargetId: selectedRecipientId,
                     TargetName: selectedRecipientName,
