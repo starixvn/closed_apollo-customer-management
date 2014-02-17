@@ -1,3 +1,4 @@
+/* jshint unused:false */
 
 var CMS = (function ($) {
     'use strict';
@@ -36,9 +37,9 @@ var CMS = (function ($) {
         },
         // Handles common error when making ajax request
         handleAjaxError: function (xhr, status, err) {
-            if (xhr.status == 403) {
+            if (xhr.status === 403) {
                 CMS.headlineMsgBox.showErr(CMS.unauthorizedRequestError, { sticky: true });
-            } else if (xhr.status == 404) {
+            } else if (xhr.status === 404) {
                 CMS.headlineMsgBox.showErr(CMS.resourceNotFound, { sticky: true });
             } else {
                 CMS.headlineMsgBox.showErr(CMS.internalError, { sticky: true });
@@ -84,7 +85,7 @@ var CMS = (function ($) {
             //url and data options required
             if (url && data) {
                 //data can be string of parameters or array/object
-                data = typeof data == 'string' ? data : $.param(data);
+                data = typeof data === 'string' ? data : $.param(data);
                 var downloadUrl = url + '?' + data;
                 var iframe = $('body iframe');
                 if (iframe.length === 0) {

@@ -14,14 +14,13 @@ namespace Apollo.CMS.Message.Controllers
     using Apollo.CMS.Core.Configurations;
     using Apollo.CMS.Core.Controllers;
     using Apollo.CMS.Core.Resources;
-    using Apollo.CMS.Core.Web;
     using Apollo.CMS.Message.Constants;
     using Apollo.CMS.Message.Criteria.NewMessage;
     using Apollo.CMS.Message.Services.Implements;
     using Apollo.CMS.Message.Services.Interfaces;
+    using Apollo.CMS.Message.ViewModels.NewMessage;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
-    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// New private message controller.
@@ -69,11 +68,11 @@ namespace Apollo.CMS.Message.Controllers
         /// <summary>
         /// Adds the new public message.
         /// </summary>
-        /// <param name="criteria">The criteria that contains the information of the new message.</param>
+        /// <param name="form">The criteria that contains the information of the new message.</param>
         /// <returns>Whether or not the new public message is added successfully or not.</returns>
         [HttpPost]
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.AddNewMessage, Policy = Constant.Policy.Host)]
-        public JsonResult AddNewMessage(InsertMessageCriteria criteria)
+        public JsonResult AddNewMessage(InsertNewMessageForm form)
         {
             if (!ModelState.IsValid)
             {
@@ -81,11 +80,11 @@ namespace Apollo.CMS.Message.Controllers
             }
             else
             {
-                criteria.UserLoginId = this.CurrentSession.UserId;
-                criteria.UserLoginName = this.CurrentSession.Username;
-                criteria.MsgType = (byte)MessageTypes.Private;
+                form.UserLoginId = this.CurrentSession.UserId;
+                form.UserLoginName = this.CurrentSession.Username;
+                form.MsgType = (byte)MessageTypes.Private;
 
-                return Json(this._newMessageService.InsertMessage(criteria));
+                return Json(this._newMessageService.InsertMessage(form));
             }
         }
 

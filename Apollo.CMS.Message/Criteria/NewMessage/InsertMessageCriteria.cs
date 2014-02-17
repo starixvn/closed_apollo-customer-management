@@ -9,10 +9,7 @@
 
 namespace Apollo.CMS.Message.Criteria.NewMessage
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using Apollo.CMS.Core.Resources;
-    using Apollo.CMS.Message.Models.NewMessage;
+    using Apollo.CMS.Message.ViewModels.NewMessage;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
@@ -20,6 +17,28 @@ namespace Apollo.CMS.Message.Criteria.NewMessage
     /// </summary>
     public class InsertMessageCriteria : CriteriaBase
     {
+        public InsertMessageCriteria()
+        {
+        }
+
+        public InsertMessageCriteria(InsertNewMessageForm form)
+        {
+            if (form != null)
+            {
+                this.MsgType = form.MsgType;
+                this.IsSpecialMsg = form.IsSpecialMsg;
+                this.UserLoginId = form.UserLoginId;
+                this.UserLoginName = form.UserLoginName;
+                this.ContentEn = form.ContentEn;
+                this.ContentCh = form.ContentCh;
+                this.ContentCs = form.ContentCs;
+                this.ContentTh = form.ContentTh;
+                this.ContentJp = form.ContentJp;
+                this.ContentKo = form.ContentKo;
+                this.ContentVn = form.ContentVn;
+            }
+        }
+
         public byte MsgType { get; set; }
 
         public bool IsSpecialMsg { get; set; }
@@ -30,7 +49,6 @@ namespace Apollo.CMS.Message.Criteria.NewMessage
 
         public string Recipient { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(ViewLang), ErrorMessageResourceName = "RequireEnglishContent")]
         public string ContentEn { get; set; }
 
         public string ContentCh { get; set; }
@@ -44,9 +62,6 @@ namespace Apollo.CMS.Message.Criteria.NewMessage
         public string ContentKo { get; set; }
 
         public string ContentVn { get; set; }
-
-        [SpParam(Ignored = true)]
-        public IEnumerable<Recipient> RecipientList { get; set; }
 
         /// <summary>
         /// Get Setting Key.

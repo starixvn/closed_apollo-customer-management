@@ -12,6 +12,7 @@ namespace Apollo.CMS.Message.Services.Interfaces
     using System.Collections.Generic;
     using Apollo.CMS.Message.Criteria.NewMessage;
     using Apollo.CMS.Message.Models.NewMessage;
+    using Apollo.CMS.Message.ViewModels.NewMessage;
     using Fanex.NAP.Framework.Command;
 
     public interface INewMessageService
@@ -40,8 +41,8 @@ namespace Apollo.CMS.Message.Services.Interfaces
         /// <summary>
         /// Inserts a new message.
         /// </summary>
-        /// <param name="criteria">The criteria contains new message's values.</param>
+        /// <param name="form">The form contains new message's values.</param>
         /// <returns>CommandResult object indicates whether the new message is added successfully or not.</returns>
-        ICommandResult InsertMessage(InsertMessageCriteria criteria);
+        ICommandResult InsertMessage(InsertNewMessageForm form);
     }
 }

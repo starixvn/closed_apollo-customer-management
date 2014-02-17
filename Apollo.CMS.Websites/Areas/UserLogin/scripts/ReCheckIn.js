@@ -1,5 +1,5 @@
 ﻿var Recheckin = (function ($) {
-
+    'use strict';
     return {
         time: null,
         root: null,
@@ -15,15 +15,15 @@
         reCheckin: function () {
 
             $.ajax({
-                url: Recheckin.root + "UserLogin/Login/ReCheckLogin",
-                type: "POST",
-                dataType: "json",
+                url: Recheckin.root + 'UserLogin/Login/ReCheckLogin',
+                type: 'POST',
+                dataType: 'json',
                 success: function (result) {
-                    if (result === "1") {
+                    if (result === '1') {
                         Recheckin.headlineMsgBox.showInfo(Recheckin.kickedOutMsg, { closeBtn: false });
                     }
                     if (result === "-1") {
-                        window.location.href = Recheckin.root + "UserLogin/Common/Offline";
+                        window.location.href = Recheckin.root + 'UserLogin/Common/Offline';
                     }
                 }
             });
@@ -31,7 +31,7 @@
 
         closeBrowser: function () {
             var index = window;
-            while (index != index.parent) // Jump out
+            while (index !== index.parent) // Jump out
             {
                 index = index.parent;
             }
@@ -41,8 +41,9 @@
 } (jQuery));
 
 $(document).ready(function () {
-    Recheckin.init();
+    'use strict';
 
+    Recheckin.init();
     Recheckin.headlineMsgBox = $.msgbox({
         message: '',
         //containerId: 'msg-bar',
@@ -54,7 +55,7 @@ $(document).ready(function () {
         duration: 2000,
         useAnimation: false,
         beforeClose: function () {
-            window.location.href = Recheckin.root + "UserLogin/Login/LogOut";
+            window.location.href = Recheckin.root + 'UserLogin/Login/LogOut';
         }
     });
     

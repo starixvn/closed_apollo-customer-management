@@ -2,16 +2,11 @@
 
 /* global Apollo, CMS, Namespace, moment, numeral, pageLayout, layoutHelper, tableHeaders, detailTableHeaders, systemParlayDetailsTableHeaders */
 /* global minDate, today, betListReportTitle, memberId, memberName, pageSize */
-
-$(document).ready(function () {
-    'use strict';
-    var memberBetList = new Apollo.CMS.BetList.MemberBetList();
-
-    memberBetList.InitPage();
-});
+/* exported memberBetList, OpenIPInfo, showMP, showCombMPDetail, showCombMP */
 
 Namespace.Register('Apollo.CMS.BetList.MemberBetList');
 Apollo.CMS.BetList.MemberBetList = function () {
+    'use strict';
     var $this = this;
     var pageRanges = [10, 50, 100, 200, 500];
     var urls = {
@@ -39,7 +34,8 @@ Apollo.CMS.BetList.MemberBetList = function () {
         $this.DOMInstance.btnGenerate = $('#btnGenerate', $this.DOMInstance.divFilterForm);
         $this.DOMInstance.divBetList = $('#divBetList');
         $this.DOMInstance.divDetailedWinLossList = $('#divDetailedWinLossList');
-        $this.DOMInstance.divSystemParlayDetails = $('#divSystemParlayDetails');
+        $this.DOMInstance.divSystemParlayDetailsWrapper = $('#divSystemParlayDetailsWrapper');
+        $this.DOMInstance.divPopup = $('#divPopup');
     };
 
     // Initialize fields and handle events.
@@ -221,7 +217,7 @@ Apollo.CMS.BetList.MemberBetList = function () {
     };
 
     // Handle paging at server side.
-    var handleChangingPage = function (pageIndex, itemsPerPage, data) {
+    var handleChangingPage = function (pageIndex, itemsPerPage) {
         parameters.PageSize = itemsPerPage;
         parameters.PageIndex = pageIndex;
         parameters.IsLoadNew = false;
@@ -273,7 +269,9 @@ Apollo.CMS.BetList.MemberBetList = function () {
                 {
                     Columns: [{ Name: 'ColAgent', Value: item.Username },
                               { Name: 'ColShare', Value: formatNumberCol(item.PositionTaking, true, item.WinLoss, null) },
-                              { Name: 'ColComm', Value: !item.IsSuper ? formatNumberCol(item.Discount, true, item.Comm, null) : formatNumberCol('N/A', false, item.Comm, null)}]
+                              { Name: 'ColComm', Value: !item.IsSuper ?
+                                                        formatNumberCol(item.Discount, true, item.Comm, null) :
+                                                        formatNumberCol('N/A', false, item.Comm, null)}]
                 };
 
                 bodyData.push(row);
@@ -299,6 +297,7 @@ Apollo.CMS.BetList.MemberBetList = function () {
             gridHeight: 600
         };
 
+        $this.DOMInstance.divSystemParlayDetails = $('#divSystemParlayDetails', $this.DOMInstance.divPopup);
         $this.DOMInstance.divSystemParlayDetails.addClass('hide');
 
         // Configure grid's columns.
@@ -331,8 +330,10 @@ Apollo.CMS.BetList.MemberBetList = function () {
                             row.Columns.push(
                                 { Name: 'ColOdds', Value: ticket.Odds, MergeRowNumber: ticket.EventNames.length },
                                 { Name: 'ColStake', Value: ticket.Stake, MergeRowNumber: ticket.EventNames.length },
-                                { Name: 'ColWinLoss', Value: formatNumberCol(ticket.WinLoss, false, ticket.Comm, null), MergeRowNumber: ticket.EventNames.length },
-                                { Name: 'ColStatus', Value: statusFormat.format(ticket.Status), MergeRowNumber: ticket.EventNames.length });
+                                { Name: 'ColWinLoss', Value: formatNumberCol(ticket.WinLoss, false, ticket.Comm, null),
+                                  MergeRowNumber: ticket.EventNames.length },
+                                { Name: 'ColStatus', Value: statusFormat.format(ticket.Status),
+                                  MergeRowNumber: ticket.EventNames.length });
 
                             if (ticketIndex === 0) {
                                 row.Columns.unshift({ Name: 'ColDate', Value: dailyTicketList.WinLossDate, MergeRowNumber: dateRowCounter });
@@ -436,13 +437,8 @@ Apollo.CMS.BetList.MemberBetList = function () {
         CMS.downloadFile(urls.ExportMemberBetList, parameters);
     };
 
-    // Global function using to get list of bets which are played from given IP.
-    OpenIPInfo = function (ip) {
-        return false;
-    };
-
-    // Global function using to get sub-items of mix parlay ticket.
-    showMP = function (transId, refNo) {
+    // Get Parlay sub-tickets.
+    $this.GetParlaySubTickets = function (transId, refNo) {
         var divEvent = $('#divEvent_{0}'.format(transId), $this.DOMInstance.divBetList);
 
         if (divEvent.children().length === 0) {
@@ -480,12 +476,9 @@ Apollo.CMS.BetList.MemberBetList = function () {
             });
         }
     };
-    showCombMP = function (transId, transIndex, refNo) {
-        showMP('{0}{1}'.format(transId, transIndex), refNo);
-    };
 
-    // Global function using to get system parlay details.
-    showCombMPDetail = function (refNo, winLossDate, transId, betId, custId) {
+    // Gets details of a System parlay ticket.
+    $this.GetSystemParlayDetails = function (refNo, winLossDate, transId, betId, custId) {
         var params = {
             RefNo: refNo,
             CustId: custId
@@ -502,7 +495,7 @@ Apollo.CMS.BetList.MemberBetList = function () {
                 CMS.loadingBox.show();
             },
             success: function (result) {
-                pageLayout.Popup(title, $this.DOMInstance.divSystemParlayDetails, { resizable: false }, true);
+                pageLayout.Popup(title, $this.DOMInstance.divSystemParlayDetailsWrapper, { resizable: false }, true);
                 renderSystemParlayDetailsTable(result);
             },
             error: function (xhr, status, err) {
@@ -521,10 +514,44 @@ Apollo.CMS.BetList.MemberBetList = function () {
         btnGenerate: null,
         divBetList: null,
         divDetailedWinLossList: null,
-        divSystemParlayDetails: null
+        divSystemParlayDetailsWrapper: null,
+        divSystemParlayDetails: null,
+        divPopup: null
     };
     $this.InitPage = function () {
         cacheDOM();
         initFields();
     };
+};
+
+var memberBetList = new Apollo.CMS.BetList.MemberBetList();
+
+$(document).ready(function () {
+    'use strict';
+
+    memberBetList.InitPage();
+});
+
+// Global function using to get list of bets which are played from given IP.
+var OpenIPInfo = function () {
+    'use strict';
+    return false;
+};
+
+// Global function using to get sub-items of mix parlay ticket.
+var showMP = function (transId, refNo) {
+    'use strict';
+    memberBetList.GetParlaySubTickets(transId, refNo);
+};
+
+// Global function using to get system parlay details.
+var showCombMPDetail = function (refNo, winLossDate, transId, betId, custId) {
+    'use strict';
+    memberBetList.GetSystemParlayDetails(refNo, winLossDate, transId, betId, custId);
+};
+
+// Global function using to get list of sub-tickets of a System Parlay ticket.
+var showCombMP = function (transId, transIndex, refNo) {
+    'use strict';
+    showMP('{0}{1}'.format(transId, transIndex), refNo);
 };

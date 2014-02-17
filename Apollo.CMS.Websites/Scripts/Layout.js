@@ -125,7 +125,6 @@ Apollo.CMS.LayoutHelper = function () {
     // Initialize page.
     $this.InitPage = function () {
         cacheDOM();
-        fixLeftPanelWidthForIE();
         bindEventHandlers();
     };
     $this.ExpandLeftPanel = function () {

@@ -12,7 +12,7 @@ Apollo.CMS.Account.TreeView = function () {
     self.SearchCustomer = function (el) {
         var agentId = $(el).attr("data-agent-id");
         var username = $(el).attr("data-agent-username");
-        $("#account-treeview span").each(function (index) {
+        $("#account-treeview span").each(function () {
             var $this = $(this);
             if ($this.hasClass("nodeactived")) {
                 $this.removeClass("nodeactived");

@@ -15,6 +15,7 @@ namespace Apollo.CMS.Message.Services.Implements
     using Apollo.CMS.Message.Criteria.NewMessage;
     using Apollo.CMS.Message.Models.NewMessage;
     using Apollo.CMS.Message.Services.Interfaces;
+    using Apollo.CMS.Message.ViewModels.NewMessage;
     using Fanex.NAP.Framework.Command;
 
     /// <summary>
@@ -55,11 +56,13 @@ namespace Apollo.CMS.Message.Services.Implements
         /// <summary>
         /// Inserts a new message.
         /// </summary>
-        /// <param name="criteria">The criteria contains new message's values.</param>
+        /// <param name="form">The form contains new message's values.</param>
         /// <returns>CommandResult object indicates whether the new message is added successfully or not.</returns>
-        public ICommandResult InsertMessage(InsertMessageCriteria criteria)
+        public ICommandResult InsertMessage(InsertNewMessageForm form)
         {
-            criteria.Recipient = ConvertRecipientListToXml(criteria.RecipientList);
+            var criteria = new InsertMessageCriteria(form);
+
+            criteria.Recipient = ConvertRecipientListToXml(form.RecipientList);
 
             return UpdateData(criteria);
         }
