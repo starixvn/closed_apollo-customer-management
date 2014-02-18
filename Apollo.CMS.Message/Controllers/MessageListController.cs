@@ -5,17 +5,20 @@
 // -----------------------------------------------------------------------
 // <history>
 //   <change who="Franklin.Nguyen" date="2013.11.12">Created</change>
+//   <change who="Jason.Ly" date="2014.2.18">Refactor code</change>
 // </history>
 
 namespace Apollo.CMS.Message.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Web.Mvc;
     using Apollo.CMS.Core.Configurations;
     using Apollo.CMS.Core.Controllers;
     using Apollo.CMS.Message.Criteria.MessageList;
     using Apollo.CMS.Message.Services.Implements;
     using Apollo.CMS.Message.Services.Interfaces;
+    using Apollo.CMS.Message.ViewModels.MessageList;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -59,7 +62,8 @@ namespace Apollo.CMS.Message.Controllers
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewMessageList, Policy = Constant.Policy.Read)]
         public JsonResult GetMessageList(GetMessageListCriteria getMessageListCriteria)
         {
-            var result = this._messageService.GetListMessage(getMessageListCriteria);
+            IEnumerable<MessageInfo> result = this._messageService.GetMessageList(getMessageListCriteria);
+
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -72,8 +76,9 @@ namespace Apollo.CMS.Message.Controllers
         [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewMessageList, Policy = Constant.Policy.Host)]
         public ActionResult GetMessageById(GetMessageByIdCriteria getMessageByIdCriteria)
         {
-            var result = this._messageService.GetMessageById(getMessageByIdCriteria);
-            return PartialView("EditMessage", result);
+            MessageDetails result = this._messageService.GetMessageById(getMessageByIdCriteria);
+
+            return PartialView("~/Areas/Message/Views/MessageList/EditMessage.cshtml", result);
         }
 
         /// <summary>
@@ -87,8 +92,8 @@ namespace Apollo.CMS.Message.Controllers
         {
             updateMessageCriteria.UserLoginName = this.CurrentSession.Username;
             updateMessageCriteria.UserLoginId = this.CurrentSession.UserId;
-            this._messageService.UpdateMessage(updateMessageCriteria);
-            return Json(new { success = true });
+
+            return Json(this._messageService.UpdateMessage(updateMessageCriteria));
         }
 
         /// <summary>
@@ -101,8 +106,8 @@ namespace Apollo.CMS.Message.Controllers
         public ActionResult DeleteMessage(DeleteMessageCriteria deleteMessageCriteria)
         {
             deleteMessageCriteria.UserLoginId = this.CurrentSession.UserId;
-            this._messageService.DeleteMessage(deleteMessageCriteria);
-            return Json(new { success = true });
+
+            return Json(this._messageService.DeleteMessage(deleteMessageCriteria));
         }
     }
 }

@@ -10,14 +10,14 @@
 @section HeadLine {
     <h5 class="row title">@ViewLang.MessageList</h5>
 }
-<div class="row filter-form clearfix message-list resizable-form" id="message-list" data-original-width="862">
+<div class="row filter-form clearfix message-list resizable-form" id="divMsgFilterForm" data-original-width="862">
     <div class="filter-row clearfix">
         <div class="filter-item">
             <div class="lbl lbl-large">
                 <label>@ViewLang.TopNewMessages</label>
             </div>
             <div class="txt width-auto">
-                <select id="ddlTopNewMessage" class="topMessage">
+                <select id="ddlTopNewMessage" class="top-message">
                     <option value="100">100</option>
                     <option value="200">200</option>
                     <option value="500">500</option>
@@ -29,7 +29,7 @@
                 <label>@ViewLang.From</label>
             </div>
             <div class="txt width-auto">
-                <input type="text" id="dateFrom" data-val-required="@Messages.RequiredFieldError" data-val-date="@Messages.InvalidDateError" data-val-date-from="@string.Empty"/>
+                <input type="text" id="dpkFromDate" />
             </div>
         </div>
         <div class="filter-item dateTo">
@@ -37,10 +37,9 @@
                 <label>@ViewLang.To</label>
             </div>
             <div class="txt width-auto">
-                <input type="text" id="dateTo" data-val-required="@Messages.RequiredFieldError" data-val-date="@Messages.InvalidDateError" data-val-date-to="@Messages.DateRangeError"/>
+                <input type="text" id="dpkToDate" />
             </div>
         </div>
-        
     </div>
     <div class="filter-row clearfix">
         <div class="filter-item">
@@ -48,8 +47,8 @@
                 <label>@ViewLang.MessageType</label>
             </div>
             <div class="txt width-auto">
-                <select id="ddlMessageType" class="messageType">
-                    <option value="All">@ViewLang.AllTypes</option>
+                <select id="ddlMessageType" class="message-type">
+                    <option value="null">@ViewLang.AllTypes</option>
                     <option value="3">@ViewLang.Public</option>
                     <option value="1">@ViewLang.Private</option>
                 </select>
@@ -61,43 +60,45 @@
             </div>
             <div class="txt width-auto">
                 <select id="ddlSpecial" class="sel-special">
-                    <option value="All">@ViewLang.All</option>
-                    <option value="1">@ViewLang.Yes</option>
-                    <option value="0">@ViewLang.No</option>
+                    <option value="null">@ViewLang.All</option>
+                    <option value="true">@ViewLang.Yes</option>
+                    <option value="false">@ViewLang.No</option>
                 </select>
             </div>
         </div>
         <div class="filter-item">
-            <input id="btnGetListMessage" type="button" class="btn btn-default btn-submit" value="@ViewLang.Submit"/>
+            <input id="btnSubmit" type="button" class="btn btn-default btn-submit" value="@ViewLang.Submit"/>
         </div>
     </div>
 </div>
 
-<div class="row gridMessageContainer display-none content-grid width-100percent" id="gridMessageContainer">
-    <div class="gridMessage freegrid resizable-grid" id="gridMessage"></div>
+<div class="row grid-message-container display-none content-grid width-100percent" id="divMessageContainer">
+    <div class="gridMessage freegrid resizable-grid" id="divMessage"></div>
 </div>
 <div id="editMessageContent"></div>
 @section Foot {
     @Scripts.Render("~/scripts/fanexGrid")
     @Scripts.Render("~/scripts/messageList")
     <script type="text/javascript">
-        var publicMessage = '@ViewLang.Public';
-        var privateMessage = '@ViewLang.Private';
-        var messageIsSpecial = '@ViewLang.Yes';
-        var messageNotSpecial = '@ViewLang.No';
-        var postedDate = '@ViewLang.PostedDate';
-        var messageEnglish = '@ViewLang.MessageEnglish';
-        var messageType = '@ViewLang.Type';
-        var isSpecial = '@ViewLang.IsSpecical';
-        var creator = '@ViewLang.Creator';
-        var recipient = '@ViewLang.Recipient';
-        var remove = '@ViewLang.Remove';
-        var updateSuccessInform = '@ViewLang.UpdateMessageSuccessInform';
-        var removeMessageConfirm = '@ViewLang.RemoveMessageConfirm';
-        var today = '@DateTime.Now.ToShortDateString()';
-        var minDate = '@ViewBag.MinDate';
+        var tableHeaders = {
+            postedDate: '@ViewLang.PostedDate',
+            messageEnglish: '@ViewLang.MessageEnglish',
+            type: '@ViewLang.Type',
+            isSpecial: '@ViewLang.IsSpecical',
+            creator: '@ViewLang.Creator',
+            recipient: '@ViewLang.Recipient',
+            remove: '@ViewLang.Remove',
+            edit: '@ViewLang.Edit'
+        };
+        var message = {
+            removeMessageConfirm: '@ViewLang.RemoveMessageConfirm',
+            updateSuccessInform: '@ViewLang.UpdateMessageSuccessInform',
+            editMessage: '@ViewLang.EditMessage'
+        };
         var hasHostRight = '@ViewBag.HasHostRight' == 'True';
         var isRedirected = '@ViewBag.IsRedirected' == 'True';
+        var today = '@DateTime.Now.ToShortDateString()';
+        var minDate = '@ViewBag.MinDate';
     </script>
 }
 

@@ -5,17 +5,17 @@
 // -----------------------------------------------------------------------
 // <history>
 //   <change who="Franklin.Nguyen" date="2013.11.13">Created</change>
+//   <change who="Jason.Ly" date="2014.2.18">Refactor code</change>
 // </history>
 
 namespace Apollo.CMS.Message.Services.Implements
 {
     using System.Collections.Generic;
-    using System.Linq;
     using Apollo.CMS.Core.Services;
     using Apollo.CMS.Message.Criteria.MessageList;
     using Apollo.CMS.Message.Models.MessageList;
     using Apollo.CMS.Message.Services.Interfaces;
-    using Fanex.Common;
+    using Apollo.CMS.Message.ViewModels.MessageList;
     using Fanex.NAP.Framework.Command;
 
     /// <summary>
@@ -24,29 +24,24 @@ namespace Apollo.CMS.Message.Services.Implements
     public class MessageService : BaseService, IMessageService
     {
         /// <summary>
-        /// Gets the list message.
+        /// Gets the list of messages that satisfied the passed query conditions.
         /// </summary>
-        /// <param name="getMessageListCriteria">The get message list criteria.</param>
-        /// <returns>List message.</returns>
-        public List<Message> GetListMessage(GetMessageListCriteria getMessageListCriteria)
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>List of messages.</returns>
+        public IEnumerable<MessageInfo> GetMessageList(GetMessageListCriteria criteria)
         {
-            IEnumerable<Message> result = null;
+            IEnumerable<RawMessage> rawData = null;
+            var result = new List<MessageInfo>();
 
-            if (Converter.ToString2(getMessageListCriteria.MsgType) == "All")
+            criteria.ToDate = criteria.ToDate.AddDays(1).AddMilliseconds(-1);
+            rawData = GetListData<RawMessage>(criteria);
+
+            foreach (RawMessage rawItem in rawData)
             {
-                getMessageListCriteria.MsgType = null;
+                result.Add(new MessageInfo(rawItem));
             }
 
-            if (Converter.ToString2(getMessageListCriteria.Special) == "All")
-            {
-                getMessageListCriteria.Special = null;
-            }
-
-            getMessageListCriteria.ToDate = getMessageListCriteria.ToDate.AddDays(1).AddMilliseconds(-1);
-
-            result = GetListData<Message>(getMessageListCriteria);
-
-            return result.ToList();
+            return result;
         }
 
         /// <summary>
@@ -54,11 +49,11 @@ namespace Apollo.CMS.Message.Services.Implements
         /// </summary>
         /// <param name="getMessageByIdCriteria">The get message by identifier criteria.</param>
         /// <returns>The message.</returns>
-        public Message GetMessageById(GetMessageByIdCriteria getMessageByIdCriteria)
+        public MessageDetails GetMessageById(GetMessageByIdCriteria getMessageByIdCriteria)
         {
-            var result = new Message();
-            result = GetData<Message>(getMessageByIdCriteria);
-            return result;
+            RawMessage rawMessage = GetData<RawMessage>(getMessageByIdCriteria);
+
+            return new MessageDetails(rawMessage);
         }
 
         /// <summary>

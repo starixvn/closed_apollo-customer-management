@@ -76,9 +76,11 @@
     <Compile Include="Criteria\MessageList\UpdateMessageCriteria.cs" />
     <Compile Include="Criteria\NewMessage\InsertMessageCriteria.cs" />
     <Compile Include="MessageAreaRegistration.cs" />
+    <Compile Include="ViewModels\MessageList\MessageDetails.cs" />
+    <Compile Include="ViewModels\MessageList\MessageInfo.cs" />
     <Compile Include="ViewModels\NewMessage\Recipient.cs" />
     <Compile Include="Models\NewMessage\RecipientInfo.cs" />
-    <Compile Include="Models\MessageList\Message.cs" />
+    <Compile Include="Models\MessageList\RawMessage.cs" />
     <Compile Include="Models\NewMessage\Site.cs" />
     <Compile Include="Models\NewMessage\Upline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,6 +96,7 @@
       <Name>Apollo.CMS.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

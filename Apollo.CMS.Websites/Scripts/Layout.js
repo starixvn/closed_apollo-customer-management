@@ -58,7 +58,7 @@ Apollo.CMS.LayoutHelper = function () {
 
     // Change behavior of links
     var catchLinkEvents = function () {
-        $('a[href]:not([href^="#"]):not([data-is-logout])').live('click', function () {
+        $('a[href]:not([href^="#"]):not([href^="javascript:;"]):not([data-is-logout])').live('click', function () {
             var linkHref = this.href;
             var $parent = $(this).closest('ul');
             

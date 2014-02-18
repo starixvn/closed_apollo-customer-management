@@ -1,10 +1,11 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="Message.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="RawMessage.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
 // <history>
 //   <change who="Franklin.Nguyen" date="2013.11.13">Created</change>
+//   <change who="Jason.Ly" date="2014.2.18">Change class name</change>
 // </history>
 
 namespace Apollo.CMS.Message.Models.MessageList
@@ -16,7 +17,7 @@ namespace Apollo.CMS.Message.Models.MessageList
     /// <summary>
     /// Message model.
     /// </summary>
-    public class Message
+    public class RawMessage
     {
         public DateTime? PostTime { get; set; }
 
@@ -24,7 +25,6 @@ namespace Apollo.CMS.Message.Models.MessageList
 
         public string ContentCs { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(ViewLang), ErrorMessageResourceName = "RequireEnglishContent")]
         public string ContentEn { get; set; }
 
         public string ContentJp { get; set; }
