@@ -11,6 +11,7 @@
 namespace Apollo.CMS.Message.Services.Implements
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Apollo.CMS.Core.Services;
     using Apollo.CMS.Message.Criteria.MessageList;
     using Apollo.CMS.Message.Models.MessageList;
@@ -31,14 +32,14 @@ namespace Apollo.CMS.Message.Services.Implements
         public IEnumerable<MessageInfo> GetMessageList(GetMessageListCriteria criteria)
         {
             IEnumerable<RawMessage> rawData = null;
-            var result = new List<MessageInfo>();
+            IEnumerable<MessageInfo> result = null;
 
             criteria.ToDate = criteria.ToDate.AddDays(1).AddMilliseconds(-1);
             rawData = GetListData<RawMessage>(criteria);
 
-            foreach (RawMessage rawItem in rawData)
+            if (rawData != null && rawData.Any())
             {
-                result.Add(new MessageInfo(rawItem));
+                result = rawData.Select(obj => new MessageInfo(obj));
             }
 
             return result;

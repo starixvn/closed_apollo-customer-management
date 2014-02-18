@@ -7,7 +7,7 @@
 //   <change who="Terry.Nguyen" date="2013.12.6">Created</change>
 // </history>
 
-namespace Apollo.CMS.Account.Models.TreeView
+namespace Apollo.CMS.Account.ViewModels.TreeView
 {
     using System;
     using System.Collections.Generic;

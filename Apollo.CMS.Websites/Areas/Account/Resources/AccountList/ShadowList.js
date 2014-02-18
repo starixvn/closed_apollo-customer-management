@@ -67,15 +67,17 @@ Apollo.CMS.Account.AccountList.ShadowList = function () {
 
         if (data && data.length > 0) {
             var row = null;
+            var editFormat = '<div class="icon-edit-link" data-cust-id="{0}" title="{1}"/>';
+            var statusFormat = '<span class="{0}">{1}</span>';
 
             $.each(data, function (index, item) {
                 row =
                 {
                     Columns: [{ Name: 'ColNo', Value: index + 1 },
-                              { Name: 'ColEdit', Value: '<div class="icon-edit-link" data-cust-id="{0}" title="{1}"/>'.format(item.Id, tableHeaders.ShadowPermission) },
+                              { Name: 'ColEdit', Value: editFormat.format(item.Id, tableHeaders.ShadowPermission) },
                               { Name: 'ColShadow', Value: item.Username },
                               { Name: 'ColRegisterDate', Value: item.CreatedDate },
-                              { Name: 'ColStatus', Value: '<span class="{0}">{1}</span>'.format(item.ActualStatus.toLowerCase().replace(/\./g, ''), item.ActualStatus)}]
+                              { Name: 'ColStatus', Value: statusFormat.format(item.Status.toLowerCase().replace(/\./g, ''), item.Status)}]
                 };
                 bodyData.push(row);
             });
@@ -85,8 +87,9 @@ Apollo.CMS.Account.AccountList.ShadowList = function () {
         {
             columns: [{ HeaderText: tableHeaders.No, Width: 70, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.Edit, Width: 70, Name: 'ColEdit', HeaderAlign: 'center', CellAlign: 'center' },
-                      { HeaderText: tableHeaders.Shadow, Width: 200, Name: 'ColShadow', HeaderAlign: 'center', CellAlign: 'left', Sort: true, SortDirection: parameters.IsOrderByAsc ? 'asc' : 'desc' },
-                      { HeaderText: tableHeaders.RegisterDate, Width: 190, Name: 'ColRegisterDate', HeaderAlign: 'center', CellAlign: 'center', FormatDateTime: CMS.commonConstants.MomentDateTimeFormat, Timezone: CMS.serverTimezone },
+                      { HeaderText: tableHeaders.Shadow, Width: 200, Name: 'ColShadow', HeaderAlign: 'center', CellAlign: 'left', Sort: true,
+                        SortDirection: parameters.IsOrderByAsc ? 'asc' : 'desc' },
+                      { HeaderText: tableHeaders.RegisterDate, Width: 190, Name: 'ColRegisterDate', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.Status, Width: 100, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'center'}],
             showFooter: true,
             showNumberColumn: true,

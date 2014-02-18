@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="Agent.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="RawAgentInfo.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,13 +9,10 @@
 
 namespace Apollo.CMS.Account.Models.AccountList
 {
-    using System.Web.Script.Serialization;
-    using Apollo.CMS.Core.Helpers;
-
     /// <summary>
     /// Agent model.
     /// </summary>
-    public class Agent
+    public class RawAgentInfo
     {
         public int AgentId { get; set; }
 
@@ -23,16 +20,12 @@ namespace Apollo.CMS.Account.Models.AccountList
 
         public short? AgentLevel { get; set; }
 
-        [ScriptIgnore]
         public byte? BetStatus { get; set; }
 
-        [ScriptIgnore]
         public byte? UplineStatus { get; set; }
 
-        [ScriptIgnore]
         public byte? UplineBetStatus { get; set; }
 
-        [ScriptIgnore]
         public byte? Status { get; set; }
 
         public int? NumberOfAgent { get; set; }
@@ -42,21 +35,5 @@ namespace Apollo.CMS.Account.Models.AccountList
         public int? NumberOfShadow { get; set; }
 
         public string Currency { get; set; }
-
-        public string ActualStatus
-        {
-            get
-            {
-                return StatusHelper.GetStatus(this.Status, this.UplineStatus);
-            }
-        }
-
-        public string ActualBetStatus
-        {
-            get
-            {
-                return StatusHelper.GetStatus(this.BetStatus, this.UplineBetStatus);
-            }
-        }
     }
 }

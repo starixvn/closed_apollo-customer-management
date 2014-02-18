@@ -10,9 +10,11 @@
 namespace Apollo.CMS.Account.Services.Implements
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Apollo.CMS.Account.Criteria.AccountList;
     using Apollo.CMS.Account.Models.AccountList;
     using Apollo.CMS.Account.Services.Interfaces;
+    using Apollo.CMS.Account.ViewModels.AccountList;
     using Apollo.CMS.Core.Services;
 
     /// <summary>
@@ -35,12 +37,17 @@ namespace Apollo.CMS.Account.Services.Implements
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>List of direct down line agent list.</returns>
-        public IEnumerable<Agent> GetAgentList(GetAgentListCriteria criteria)
+        public IEnumerable<AgentInfo> GetAgentList(GetAgentListCriteria criteria)
         {
             int totalItems;
-            IEnumerable<Agent> agentList = this.GetListData<Agent>(criteria, out totalItems);
+            IEnumerable<RawAgentInfo> rawData = this.GetListData<RawAgentInfo>(criteria, out totalItems);
+            IEnumerable<AgentInfo> agentList = null;
 
-            criteria.TotalItems = totalItems;
+            if (rawData != null && rawData.Any())
+            {
+                agentList = rawData.Select(obj => new AgentInfo(obj));
+                criteria.TotalItems = totalItems;
+            }
 
             return agentList;
         }
@@ -50,12 +57,17 @@ namespace Apollo.CMS.Account.Services.Implements
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>List of direct members.</returns>
-        public IEnumerable<Member> GetMemberList(GetMemberListCriteria criteria)
+        public IEnumerable<MemberInfo> GetMemberList(GetMemberListCriteria criteria)
         {
             int totalItems;
-            IEnumerable<Member> memberList = this.GetListData<Member>(criteria, out totalItems);
+            IEnumerable<RawMemberInfo> rawData = this.GetListData<RawMemberInfo>(criteria, out totalItems);
+            IEnumerable<MemberInfo> memberList = null;
 
-            criteria.TotalItems = totalItems;
+            if (rawData != null && rawData.Any())
+            {
+                memberList = rawData.Select(obj => new MemberInfo(obj));
+                criteria.TotalItems = totalItems;
+            }
 
             return memberList;
         }
@@ -65,12 +77,17 @@ namespace Apollo.CMS.Account.Services.Implements
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>List of shadows.</returns>
-        public IEnumerable<Shadow> GetShadowList(GetShadowListCriteria criteria)
+        public IEnumerable<ShadowInfo> GetShadowList(GetShadowListCriteria criteria)
         {
             int totalItems;
-            IEnumerable<Shadow> shadowList = this.GetListData<Shadow>(criteria, out totalItems);
+            IEnumerable<RawShadowInfo> rawData = this.GetListData<RawShadowInfo>(criteria, out totalItems);
+            IEnumerable<ShadowInfo> shadowList = null;
 
-            criteria.TotalItems = totalItems;
+            if (rawData != null && rawData.Any())
+            {
+                shadowList = rawData.Select(obj => new ShadowInfo(obj));
+                criteria.TotalItems = totalItems;
+            }
 
             return shadowList;
         }

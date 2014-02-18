@@ -12,6 +12,7 @@ namespace Apollo.CMS.Account.Services.Interfaces
     using System.Collections.Generic;
     using Apollo.CMS.Account.Criteria.AccountList;
     using Apollo.CMS.Account.Models.AccountList;
+    using Apollo.CMS.Account.ViewModels.AccountList;
 
     public interface IAccountListService
     {
@@ -27,20 +28,20 @@ namespace Apollo.CMS.Account.Services.Interfaces
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>List of direct down line agent list.</returns>
-        IEnumerable<Agent> GetAgentList(GetAgentListCriteria criteria);
+        IEnumerable<AgentInfo> GetAgentList(GetAgentListCriteria criteria);
 
         /// <summary>
         /// Gets member list of a specific agent.
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>List of direct members.</returns>
-        IEnumerable<Member> GetMemberList(GetMemberListCriteria criteria);
+        IEnumerable<MemberInfo> GetMemberList(GetMemberListCriteria criteria);
 
         /// <summary>
         /// Gets shadow list of a specific agent.
         /// </summary>
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>List of shadows.</returns>
-        IEnumerable<Shadow> GetShadowList(GetShadowListCriteria criteria);
+        IEnumerable<ShadowInfo> GetShadowList(GetShadowListCriteria criteria);
     }
 }

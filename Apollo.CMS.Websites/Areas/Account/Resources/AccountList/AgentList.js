@@ -131,7 +131,8 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
         columns = [{ HeaderText: tableHeaders.No, Width: 70, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
                    { HeaderText: tableHeaders.Edit, Width: 70, Name: 'ColEdit', HeaderAlign: 'center', CellAlign: 'center' },
                    { HeaderText: tableHeaders.Username, Width: 180, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left',
-                     Sort: true, SortDirection: parameters.IsOrderByAsc ? 'asc' : 'desc' },
+                       Sort: true, SortDirection: parameters.IsOrderByAsc ? 'asc' : 'desc'
+                   },
                    { HeaderText: tableHeaders.Downline, Width: 100, Name: 'ColDownline', HeaderAlign: 'center', CellAlign: 'center' },
                    { HeaderText: tableHeaders.Shadow, Width: 100, Name: 'ColShadow', HeaderAlign: 'center', CellAlign: 'center' },
                    { HeaderText: tableHeaders.Status, Width: 100, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'center' },
@@ -147,23 +148,34 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
 
         if (data && data.length > 0) {
             var row = null;
+            var editFormat = '<div class="icon-edit-link" data-agent-id="{0}"/>';
+            var downlineFormat = '<span class="link downline" data-agent-id="{0}" data-agent-level="{1}">{2}</span>';
+            var shadowFormat = '<span class="link shadow" data-agent-id="{0}" data-agent-level="{1}">{2}</span>';
+            var memberFormat = '<span class="link member" data-agent-id="{0}" data-agent-level="{1}">{2}</span>';
+            var statusFormat = '<span class="{0}">{1}</span>';
+            var downlineCol = null;
+            var shadowCol = null;
+            var memberCol = null;
 
             $.each(data, function (index, item) {
+                downlineCol = item.NumberOfAgent > 0 ? downlineFormat.format(item.AgentId, item.AgentLevel, item.NumberOfAgent) : '0';
+                shadowCol = item.NumberOfShadow > 0 ? shadowFormat.format(item.AgentId, item.AgentLevel, item.NumberOfShadow) : '0';
                 row =
                 {
                     Columns: [{ Name: 'ColNo', Value: index + 1 },
-                              { Name: 'ColEdit', Value: '<div class="icon-edit-link" data-agent-id="{0}"/>'.format(item.AgentId) },
+                              { Name: 'ColEdit', Value: editFormat.format(item.AgentId) },
                               { Name: 'ColUsername', Value: item.Username },
-                              { Name: 'ColDownline', Value: item.NumberOfAgent > 0 ? '<span class="link downline" data-agent-id="{0}" data-agent-level="{1}">{2}</span>'.format(item.AgentId, item.AgentLevel, item.NumberOfAgent) : '0' },
-                              { Name: 'ColShadow', Value: item.NumberOfShadow > 0 ? '<span class="link shadow" data-agent-id="{0}" data-agent-level="{1}">{2}</span>'.format(item.AgentId, item.AgentLevel, item.NumberOfShadow) : '0' },
-                              { Name: 'ColStatus', Value: '<span class="{0}">{1}</span>'.format(item.ActualStatus.toLowerCase().replace(/\./g, ''), item.ActualStatus) },
-                              { Name: 'ColBetStatus', Value: '<span class="{0}">{1}</span>'.format(item.ActualBetStatus.toLowerCase().replace(/\./g, ''), item.ActualBetStatus)}]
+                              { Name: 'ColDownline', Value: downlineCol },
+                              { Name: 'ColShadow', Value: shadowCol },
+                              { Name: 'ColStatus', Value: statusFormat.format(item.Status.toLowerCase().replace(/\./g, ''), item.Status) },
+                              { Name: 'ColBetStatus', Value: statusFormat.format(item.BetStatus.toLowerCase().replace(/\./g, ''), item.BetStatus)}]
                 };
 
                 if (isSuper) {
                     row.Columns.push({ Name: 'ColCurrency', Value: item.Currency });
                 } else if (hasMember) {
-                    row.Columns.splice(4, 0, { Name: 'ColMember', Value: item.NumberOfMember > 0 ? '<span class="link member" data-agent-id="{0}" data-agent-level="{1}">{2}</span>'.format(item.AgentId, item.AgentLevel, item.NumberOfMember) : '0' });
+                    memberCol = item.NumberOfMember > 0 ? memberFormat.format(item.AgentId, item.AgentLevel, item.NumberOfMember) : '0';
+                    row.Columns.splice(4, 0, { Name: 'ColMember', Value: memberCol });
                 }
 
                 bodyData.push(row);

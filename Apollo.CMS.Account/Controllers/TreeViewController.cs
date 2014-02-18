@@ -16,6 +16,7 @@ namespace Apollo.CMS.Account.Controllers
     using Apollo.CMS.Account.Criteria.TreeView;
     using Apollo.CMS.Account.Models.TreeView;
     using Apollo.CMS.Account.Services.Implements;
+    using Apollo.CMS.Account.ViewModels.TreeView;
     using Apollo.CMS.Core.Controllers;
 
     /// <summary>

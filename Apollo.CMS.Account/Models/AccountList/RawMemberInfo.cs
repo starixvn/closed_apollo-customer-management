@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="Shadow.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="RawMemberInfo.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -9,30 +9,27 @@
 
 namespace Apollo.CMS.Account.Models.AccountList
 {
-    using System;
-    using System.Web.Script.Serialization;
-    using Apollo.CMS.Core.Helpers;
-
     /// <summary>
-    /// Show model.
+    /// Member model.
     /// </summary>
-    public class Shadow
+    public class RawMemberInfo
     {
-        public int Id { get; set; }
+        public int CustId { get; set; }
 
         public string Username { get; set; }
 
-        public DateTime? CreatedDate { get; set; }
-
-        [ScriptIgnore]
         public byte? Status { get; set; }
 
-        public string ActualStatus
-        {
-            get
-            {
-                return StatusHelper.GetShadowStatus(this.Status);
-            }
-        }
+        public byte? BetStatus { get; set; }
+
+        public int AgentId { get; set; }
+
+        public string UGroup { get; set; }
+
+        public byte? UplineStatus { get; set; }
+
+        public byte? UplineBetStatus { get; set; }
+
+        public decimal? CashBalance { get; set; }
     }
 }

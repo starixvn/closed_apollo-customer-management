@@ -91,16 +91,18 @@ Apollo.CMS.Account.AccountList.MemberList = function () {
 
         if (data && data.length > 0) {
             var row = null;
+            var editFormat = '<div class="icon-edit-link" data-cust-id="{0}" title="{1}"/>';
+            var statusFormat = '<span class="{0}">{1}</span>';
 
             $.each(data, function (index, item) {
                 row =
                 {
                     Columns: [{ Name: 'ColNo', Value: index + 1 },
-                              { Name: 'ColEdit', Value: '<div class="icon-edit-link" data-cust-id="{0}" title="{1}"/>'.format(item.CustId, tableHeaders.BetAndCommSetting) },
+                              { Name: 'ColEdit', Value: editFormat.format(item.CustId, tableHeaders.BetAndCommSetting) },
                               { Name: 'ColUsername', Value: item.Username },
-                              { Name: 'ColStatus', Value: '<span class="{0}">{1}</span>'.format(item.ActualStatus.toLowerCase().replace(/\./g, ''), item.ActualStatus) },
-                              { Name: 'ColBetStatus', Value: '<span class="{0}">{1}</span>'.format(item.ActualBetStatus.toLowerCase().replace(/\./g, ''), item.ActualBetStatus) },
-                              { Name: 'ColCommGroup', Value: item.ActualUserGroup },
+                              { Name: 'ColStatus', Value: statusFormat.format(item.Status.toLowerCase().replace(/\./g, ''), item.Status) },
+                              { Name: 'ColBetStatus', Value: statusFormat.format(item.BetStatus.toLowerCase().replace(/\./g, ''), item.BetStatus) },
+                              { Name: 'ColCommGroup', Value: item.UserGroup },
                               { Name: 'ColSportCredit', Value: item.CashBalance}]
                 };
                 bodyData.push(row);
@@ -116,7 +118,8 @@ Apollo.CMS.Account.AccountList.MemberList = function () {
                       { HeaderText: tableHeaders.Status, Width: 100, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.BetStatus, Width: 100, Name: 'ColBetStatus', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.CommGroup, Width: 100, Name: 'ColCommGroup', HeaderAlign: 'center', CellAlign: 'center' },
-                      { HeaderText: tableHeaders.SportCredit, Width: 150, Name: 'ColSportCredit', HeaderAlign: 'center', CellAlign: 'right', FormatNumber: CMS.commonConstants.DecimalFormat}],
+                      { HeaderText: tableHeaders.SportCredit, Width: 150, Name: 'ColSportCredit', HeaderAlign: 'center', CellAlign: 'right',
+                        FormatNumber: CMS.commonConstants.DecimalFormat}],
             showDistinctRow: false,
             showHighlightRow: false,
             showFooter: true,

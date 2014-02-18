@@ -50,11 +50,11 @@
      $(function () { 
         if(success == true)
         {
-            AccReport.popUp.show('@Messages.ChangedProfile', null, 1);
+            CMS.showInfoMessage('@Messages.ChangedProfile');
         }
         else if(message != '')
         {
-            AccReport.popUp.show(message);
+            CMS.showErrorMessage(message);
         }
 
         $("#btnSave").on("click",function(){
@@ -62,7 +62,7 @@
             if(email != "" 
             && !re.test(email))
             {
-                AccReport.popUp.show('@Messages.InvalidEmail', "Email");
+                CMS.showErrorMessage('@Messages.InvalidEmail');
                 return false;
             }
         });
