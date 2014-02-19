@@ -14,6 +14,7 @@ namespace Apollo.CMS.BetList.Models.GeneralBetTicket
     /// <summary>
     /// Bet ticket model.
     /// </summary>
+    [Serializable]
     public class BetTicket
     {
         public long? TransId { get; set; }

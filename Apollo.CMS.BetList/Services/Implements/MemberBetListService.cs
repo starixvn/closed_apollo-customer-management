@@ -27,6 +27,7 @@ namespace Apollo.CMS.BetList.Services.Implements
     using Apollo.CMS.Core.Models;
     using Apollo.CMS.Core.Resources;
     using Apollo.CMS.Core.Services;
+    using Apollo.CMS.Core.Web;
     using Fanex.BetList.Core.Entities;
     using Fanex.BetList.Core.TicketHelper;
     using Fanex.Common;
@@ -38,7 +39,8 @@ namespace Apollo.CMS.BetList.Services.Implements
     /// </summary>
     public class MemberBetListService : BaseService, IMemberBetListService
     {
-        private static List<BetTicket> _ticketList;
+        private static string _ticketListSessionKey = "Apollo.CMS.BetList.MemberBetList";
+
         private readonly IMemberBetListRepository _memberBetListRepository;
 
         public MemberBetListService() :
@@ -59,15 +61,11 @@ namespace Apollo.CMS.BetList.Services.Implements
         public BetList GetPagedBetList(MemberBetListFilter filter)
         {
             BetList result = null;
+            List<BetTicket> ticketList = GetBetTicket(filter);
 
-            if (filter.IsLoadNew || _ticketList == null)
+            if (ticketList != null && ticketList.Any())
             {
-                GetBetTicket(filter);
-            }
-
-            if (_ticketList.Any())
-            {
-                result = SeparateBetListToPage(filter);
+                result = SeparateBetListToPage(filter, ticketList);
             }
 
             return result;
@@ -145,40 +143,41 @@ namespace Apollo.CMS.BetList.Services.Implements
         /// <param name="templatePath">The template's path.</param>
         public void ExportMemberBetList(MemberBetListFilter filter, string templatePath)
         {
-            string fileName = string.Format(
-                                         ViewLang.BetListReportFileName,
-                                         filter.Username,
-                                         filter.FromDate.ToShortFormatedDateForFileName(),
-                                         filter.ToDate.ToShortFormatedDateForFileName());
-            string reportTitle = string.Format(
-                                         ViewLang.BetListReportTitle,
-                                         filter.FromDate.ToShortFormatedDate(),
-                                         filter.ToDate.ToShortFormatedDate(),
-                                         filter.Username);
-            var writer = new ExcelTemplateWriter(templatePath, fileName, fileName);
+            List<BetTicket> ticketList = GetBetTicket(filter);
 
-            writer.WriteRow(0, new { reportTitle });
-            writer.CopyRows(1, 2);
-
-            if (_ticketList == null || _ticketList.Count == 0)
+            if (ticketList != null && ticketList.Any())
             {
-                GetBetTicket(filter);
-            }
+                string fileName = string.Format(
+                                             ViewLang.BetListReportFileName,
+                                             filter.Username,
+                                             filter.FromDate.ToShortFormatedDateForFileName(),
+                                             filter.ToDate.ToShortFormatedDateForFileName());
+                string reportTitle = string.Format(
+                                             ViewLang.BetListReportTitle,
+                                             filter.FromDate.ToShortFormatedDate(),
+                                             filter.ToDate.ToShortFormatedDate(),
+                                             filter.Username);
+                var writer = new ExcelTemplateWriter(templatePath, fileName, fileName);
 
-            FillBetTickets(ref writer);
-            FillTotalRow(ref writer);
-            writer.CopyRows(6, 1);
-            writer.SyncColumnsWidth(9);
-            writer.AutosizeColumns(9);
-            writer.AutosizeRows(3);
-            writer.Render();
+                writer.WriteRow(0, new { reportTitle });
+                writer.CopyRows(1, 2);
+
+                FillBetTickets(ticketList, ref writer);
+                FillTotalRow(ticketList, ref writer);
+                writer.CopyRows(6, 1);
+                writer.SyncColumnsWidth(9);
+                writer.AutosizeColumns(9);
+                writer.AutosizeRows(3);
+                writer.Render();
+            }
         }
 
         /// <summary>
         /// Fills the bet tickets.
         /// </summary>
+        /// <param name="ticketList">Ticket list that was got from DB.</param>
         /// <param name="writer">The writer using to write data.</param>
-        private void FillBetTickets(ref ExcelTemplateWriter writer)
+        private void FillBetTickets(List<BetTicket> ticketList, ref ExcelTemplateWriter writer)
         {
             BetListExcelGenerator excelGenerator = new BetListExcelGenerator();
             ITicketHelper ticketHelper = new TicketHelper();
@@ -193,7 +192,7 @@ namespace Apollo.CMS.BetList.Services.Implements
                 NegativeFont = oddsRTFHelper.NegativeFont
             };
 
-            List<ITicket> tickets = BetListHelper.Map(_ticketList);
+            List<ITicket> tickets = BetListHelper.Map(ticketList);
             ITicket ticket = null;
 
             for (int index = 0; index < tickets.Count; index++)
@@ -223,19 +222,20 @@ namespace Apollo.CMS.BetList.Services.Implements
         /// <summary>
         /// Fills the total row.
         /// </summary>
+        /// <param name="ticketList">Ticket list that was got from DB.</param>
         /// <param name="writer">The writer using to write data.</param>
-        private void FillTotalRow(ref ExcelTemplateWriter writer)
+        private void FillTotalRow(List<BetTicket> ticketList, ref ExcelTemplateWriter writer)
         {
             NumberRTFHelper numberRTFHelper = GetTotalOddsRTFHelper(writer);
 
-            decimal sumStake = Converter.ToDecimal(_ticketList.Sum(obj => obj.Stake));
+            decimal sumStake = Converter.ToDecimal(ticketList.Sum(obj => obj.Stake));
             decimal sumWinLoss = 0;
-            decimal sumComm = Converter.ToDecimal(_ticketList.Sum(obj => obj.PlayerComm));
+            decimal sumComm = Converter.ToDecimal(ticketList.Sum(obj => obj.PlayerComm));
             decimal sumCompanyWinLoss = 0;
-            decimal sumCompanyComm = Converter.ToDecimal(_ticketList.Sum(obj => obj.CompanyComm));
+            decimal sumCompanyComm = Converter.ToDecimal(ticketList.Sum(obj => obj.CompanyComm));
             string ticketStatus = string.Empty;
 
-            foreach (BetTicket ticket in _ticketList)
+            foreach (BetTicket ticket in ticketList)
             {
                 ticketStatus = ticket.Status.ToLower();
                 if (!BetStatus.Running.Equals(ticketStatus) && !BetStatus.Waiting.Equals(ticketStatus))
@@ -249,7 +249,7 @@ namespace Apollo.CMS.BetList.Services.Implements
             {
                 string.Empty,
                 string.Empty,
-                _ticketList.Count,
+                ticketList.Count,
                 string.Empty,
                 sumStake,
                 FormatWinLoss(sumWinLoss, sumComm, numberRTFHelper),
@@ -407,18 +407,19 @@ namespace Apollo.CMS.BetList.Services.Implements
         /// Separate the bet list into pages.
         /// </summary>
         /// <param name="filter">The filter that is used to query data.</param>
+        /// <param name="ticketList">Ticket list that was got from DB.</param>
         /// <returns>Formatted bet list.</returns>
-        private BetList SeparateBetListToPage(MemberBetListFilter filter)
+        private BetList SeparateBetListToPage(MemberBetListFilter filter, List<BetTicket> ticketList)
         {
             BetList result = null;
             List<BetTicket> pagedData = null;
             int startIndex = filter.PageIndex * filter.PageSize;
             int endIndex = startIndex + filter.PageSize;
 
-            endIndex = endIndex > _ticketList.Count ? _ticketList.Count : endIndex;
-            pagedData = _ticketList.GetRange(startIndex, endIndex - startIndex);
+            endIndex = endIndex > ticketList.Count ? ticketList.Count : endIndex;
+            pagedData = ticketList.GetRange(startIndex, endIndex - startIndex);
             result = BetListHelper.ConvertToBetList(pagedData);
-            result.TotalItems = _ticketList.Count;
+            result.TotalItems = ticketList.Count;
 
             return result;
         }
@@ -427,39 +428,57 @@ namespace Apollo.CMS.BetList.Services.Implements
         /// Gets the bet ticket list.
         /// </summary>
         /// <param name="filter">The filter that is used to query data.</param>
-        private void GetBetTicket(MemberBetListFilter filter)
+        /// <returns>List of bet tickets.</returns>
+        private List<BetTicket> GetBetTicket(MemberBetListFilter filter)
         {
-            BalanceUp balanceUp = this.BalanceUp;
-            var betListCriteria = new GetMemberBetListCriteria
+            List<BetTicket> ticketList = null;
+
+            if (!filter.IsLoadNew)
             {
-                MoveBetsDay = balanceUp.MoveBetsDay,
-                CustId = filter.CustId
-            };
-
-            _ticketList = new List<BetTicket>();
-
-            if ((filter.FromDate < balanceUp.BalanceUpDay) && (balanceUp.BalanceUpDay < filter.ToDate))
-            {
-                // Gets data from archive database.
-                betListCriteria.FromDate = filter.FromDate;
-                betListCriteria.ToDate = balanceUp.BalanceUpDay.AddDays(-1);
-                betListCriteria.IsBackupData = true;
-                _ticketList.AddRange(this.GetListData<BetTicket>(betListCriteria));
-
-                // Gets data from current using database.
-                betListCriteria.FromDate = balanceUp.BalanceUpDay;
-                betListCriteria.ToDate = filter.ToDate;
-                betListCriteria.IsBackupData = false;
-                _ticketList.AddRange(this.GetListData<BetTicket>(betListCriteria));
+                ticketList = SessionManager.Get<List<BetTicket>>(_ticketListSessionKey);
             }
-            else
+
+            if (ticketList == null)
             {
-                betListCriteria.FromDate = filter.FromDate;
-                betListCriteria.ToDate = filter.ToDate;
-                betListCriteria.IsBackupData = balanceUp.BalanceUpDay > filter.ToDate;
-                _ticketList.AddRange(this.GetListData<BetTicket>(betListCriteria));
-                _ticketList = _ticketList.OrderBy(obj => obj.TransId).ToList();
+                BalanceUp balanceUp = this.BalanceUp;
+                var betListCriteria = new GetMemberBetListCriteria
+                {
+                    MoveBetsDay = balanceUp.MoveBetsDay,
+                    CustId = filter.CustId
+                };
+
+                ticketList = new List<BetTicket>();
+
+                if ((filter.FromDate < balanceUp.BalanceUpDay) && (balanceUp.BalanceUpDay < filter.ToDate))
+                {
+                    // Gets data from archive database.
+                    betListCriteria.FromDate = filter.FromDate;
+                    betListCriteria.ToDate = balanceUp.BalanceUpDay.AddDays(-1);
+                    betListCriteria.IsBackupData = true;
+                    ticketList.AddRange(this.GetListData<BetTicket>(betListCriteria));
+
+                    // Gets data from current using database.
+                    betListCriteria.FromDate = balanceUp.BalanceUpDay;
+                    betListCriteria.ToDate = filter.ToDate;
+                    betListCriteria.IsBackupData = false;
+                    ticketList.AddRange(this.GetListData<BetTicket>(betListCriteria));
+                }
+                else
+                {
+                    betListCriteria.FromDate = filter.FromDate;
+                    betListCriteria.ToDate = filter.ToDate;
+                    betListCriteria.IsBackupData = balanceUp.BalanceUpDay > filter.ToDate;
+                    ticketList.AddRange(this.GetListData<BetTicket>(betListCriteria));
+                    ticketList = ticketList.OrderBy(obj => obj.TransId).ToList();
+                }
+
+                if (ticketList.Any())
+                {
+                    SessionManager.Set<List<BetTicket>>(_ticketListSessionKey, ticketList);
+                }
             }
+
+            return ticketList;
         }
     }
 }
