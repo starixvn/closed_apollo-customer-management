@@ -1,0 +1,19 @@
+﻿@using Apollo.CMS.Core.Constants
+@using Fanex.Common
+@model Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting.BetAndCommSettingFilter
+@{
+    ViewBag.Title = ViewLang.BetAndCommSetting;
+    Layout = "~/Views/Shared/_PageLayout.cshtml";
+}
+@section Head {
+    @Styles.Render("~/site/betAndCommSetting")
+}
+@section HeadLine {
+    <h5 class="row title">@ViewBag.Title - @Model.Username</h5>
+}
+
+
+
+@section Foot {
+    @Scripts.Render("~/scripts/betAndCommSetting")
+}

@@ -1,4 +1,5 @@
 ﻿@using Apollo.CMS.Account.Models.AccountInfo
+@using Apollo.CMS.Account.ViewModels.AccountInfo
 @using Apollo.CMS.Core.Constants
 @using Apollo.CMS.Core.Helpers
 @using Apollo.CMS.Core.Services
@@ -89,6 +90,8 @@
 
     if (hasCustomerSettingPermission)
     {
+        var customerInfo = new CustomerInfo(customer);
+
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <!-- Nav tabs -->
@@ -97,7 +100,7 @@
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    @{ Html.RenderPartial("Setting"); }
+                    @{ Html.RenderPartial("Setting", customerInfo); }
                 </div>
             </div>
         </div>

@@ -14,7 +14,7 @@ Apollo.CMS.Account.AccountList.MemberList = function () {
     'use strict';
     var $this = this;
     var urls = {
-        MemberSetting: CMS.resolveRootUrl('Account/MemberSetting'), // Update later
+        MemberSetting: CMS.resolveRootUrl('CustomerSetting/BetAndCommSetting?CustId={0}&UplineId={1}&Username={2}&IsMember=True'),
         GetMemberList: CMS.resolveRootUrl('Account/AccountList/GetMemberList')
     };
     var parameters = {
@@ -91,14 +91,16 @@ Apollo.CMS.Account.AccountList.MemberList = function () {
 
         if (data && data.length > 0) {
             var row = null;
-            var editFormat = '<div class="icon-edit-link" data-cust-id="{0}" title="{1}"/>';
+            var editFormat = '<div><a href="{0}" class="icon-edit-link" title="{1}"/></div>';
             var statusFormat = '<span class="{0}">{1}</span>';
+            var link = null;
 
             $.each(data, function (index, item) {
+                link = urls.MemberSetting.format(item.CustId, parameters.AgentId, item.Username);
                 row =
                 {
                     Columns: [{ Name: 'ColNo', Value: index + 1 },
-                              { Name: 'ColEdit', Value: editFormat.format(item.CustId, tableHeaders.BetAndCommSetting) },
+                              { Name: 'ColEdit', Value: editFormat.format(link, tableHeaders.BetAndCommSetting) },
                               { Name: 'ColUsername', Value: item.Username },
                               { Name: 'ColStatus', Value: statusFormat.format(item.Status.toLowerCase().replace(/\./g, ''), item.Status) },
                               { Name: 'ColBetStatus', Value: statusFormat.format(item.BetStatus.toLowerCase().replace(/\./g, ''), item.BetStatus) },
@@ -114,12 +116,14 @@ Apollo.CMS.Account.AccountList.MemberList = function () {
             columns: [{ HeaderText: tableHeaders.No, Width: 70, Name: 'ColNo', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.Edit, Width: 70, Name: 'ColEdit', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.Username, Width: 180, Name: 'ColUsername', HeaderAlign: 'center', CellAlign: 'left',
-                        Sort: true, SortDirection: parameters.IsOrderByAsc ? 'asc' : 'desc' },
+                          Sort: true, SortDirection: parameters.IsOrderByAsc ? 'asc' : 'desc'
+                      },
                       { HeaderText: tableHeaders.Status, Width: 100, Name: 'ColStatus', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.BetStatus, Width: 100, Name: 'ColBetStatus', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.CommGroup, Width: 100, Name: 'ColCommGroup', HeaderAlign: 'center', CellAlign: 'center' },
                       { HeaderText: tableHeaders.SportCredit, Width: 150, Name: 'ColSportCredit', HeaderAlign: 'center', CellAlign: 'right',
-                        FormatNumber: CMS.commonConstants.DecimalFormat}],
+                          FormatNumber: CMS.commonConstants.DecimalFormat
+                      }],
             showDistinctRow: false,
             showHighlightRow: false,
             showFooter: true,

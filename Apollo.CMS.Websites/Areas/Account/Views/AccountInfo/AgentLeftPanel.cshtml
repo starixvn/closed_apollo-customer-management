@@ -1,4 +1,5 @@
 ﻿@using Apollo.CMS.Account.Models.AccountInfo
+@using Apollo.CMS.Account.ViewModels.AccountInfo
 @using Apollo.CMS.Core.Constants
 @using Apollo.CMS.Core.Helpers
 @using Apollo.CMS.Core.Services
@@ -138,7 +139,13 @@ else if (customer.AgentId != 0)
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
-                @{ Html.RenderPartial("Setting"); }
+                <!-- Hide Setting tab when logged in user does not have permission on setting function -->
+                @if (hasCustomerSettingPermission)
+                {
+                    var customerInfo = new CustomerInfo(customer);
+
+                    Html.RenderPartial("Setting", customerInfo);
+                }
                 <div class="tab-pane @activeClass" id="agent">
                     <!-- Automatically load agent list when setting tab is hidden -->
                     @if (!hasCustomerSettingPermission)

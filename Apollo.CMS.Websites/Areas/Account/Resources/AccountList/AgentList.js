@@ -148,7 +148,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
 
         if (data && data.length > 0) {
             var row = null;
-            var editFormat = '<div class="icon-edit-link" data-agent-id="{0}"/>';
+            var editFormat = '<div class="icon-edit-link" data-agent-id="{0}" data-username="{1}"/>';
             var downlineFormat = '<span class="link downline" data-agent-id="{0}" data-agent-level="{1}">{2}</span>';
             var shadowFormat = '<span class="link shadow" data-agent-id="{0}" data-agent-level="{1}">{2}</span>';
             var memberFormat = '<span class="link member" data-agent-id="{0}" data-agent-level="{1}">{2}</span>';
@@ -163,7 +163,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
                 row =
                 {
                     Columns: [{ Name: 'ColNo', Value: index + 1 },
-                              { Name: 'ColEdit', Value: editFormat.format(item.AgentId) },
+                              { Name: 'ColEdit', Value: editFormat.format(item.AgentId, item.Username) },
                               { Name: 'ColUsername', Value: item.Username },
                               { Name: 'ColDownline', Value: downlineCol },
                               { Name: 'ColShadow', Value: shadowCol },
@@ -194,6 +194,7 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
 
         $('div.icon-edit-link', $this.DOMInstance.divAgentList).on('click', function () {
             var cell = $(this);
+            var currentUsername = cell.attr('data-username');
             var currentAgentId = cell.attr('data-agent-id');
             var contextAgentId = $this.DOMInstance.linkContextMenuItem.attr('data-agent-id');
             var cellPosition = cell.offset();
@@ -203,6 +204,15 @@ Apollo.CMS.Account.AccountList.AgentList = function () {
             if (currentAgentId !== contextAgentId) {
                 contextMenuTimeout = setTimeout(hideContextMenu, 3000);
                 $this.DOMInstance.linkContextMenuItem.attr('data-agent-id', currentAgentId);
+
+                $this.DOMInstance.linkContextMenuItem.each(function () {
+                    var link = $(this).attr('data-url');
+
+                    if (link) {
+                        $(this).attr('href', link.format(currentAgentId, parameters.AgentId, currentUsername));
+                    }
+                });
+
                 $this.DOMInstance.ulContextMenu.hide().slideDown('fast').offset({
                     top: cellPosition.top + cell.height() + 5,
                     left: cellPosition.left - contextMenuWidth / 2

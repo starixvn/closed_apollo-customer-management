@@ -27,13 +27,10 @@ namespace Apollo.CMS.Websites
         {
             RegisterCommonBundles(bundles);
             RegisterLoginBundles(bundles);
-            RegisterMessageListBundles(bundles);
-            RegisterNewMessageBundles(bundles);
-            RegisterAccountInfoBundles(bundles);
-            RegisterTreeviewBundles(bundles);
-            RegisterAccountListBundles(bundles);
-            RegisterMemberBetListBundles(bundles);
-            RegisterBetListByRefNoBundles(bundles);
+            RegisterMessageBundles(bundles);
+            RegisterAccountBundles(bundles);
+            RegisterBetListBundles(bundles);
+            RegisterSettingBundles(bundles);
 
             bundles.FileSetOrderList.Clear();
         }
@@ -111,10 +108,10 @@ namespace Apollo.CMS.Websites
         }
 
         /// <summary>
-        /// Registers bundles for message list function.
+        /// Registers bundles for message function.
         /// </summary>
         /// <param name="bundles">The bundles collection.</param>
-        private static void RegisterMessageListBundles(BundleCollection bundles)
+        private static void RegisterMessageBundles(BundleCollection bundles)
         {
             bundles.AddAndInclude(
                 "~/site/messageList",
@@ -132,14 +129,7 @@ namespace Apollo.CMS.Websites
             bundles.Add(new ScriptBundle("~/scripts/fanexGrid").Include(
                 "~/scripts/lib/Fanex.Grid/Fanex.Grid.js",
                 "~/scripts/lib/Fanex.Grid/Fanex.Pagination.js"));
-        }
 
-        /// <summary>
-        /// Registers bundles for new message page.
-        /// </summary>
-        /// <param name="bundles">The bundle collection.</param>
-        private static void RegisterNewMessageBundles(BundleCollection bundles)
-        {
             bundles.AddAndInclude(
                 "~/site/newMessage",
                 "~/areas/message/resources/newmessage/newMessage.less");
@@ -155,7 +145,7 @@ namespace Apollo.CMS.Websites
         /// Registers bundles for left panel.
         /// </summary>
         /// <param name="bundles">The bundle collection.</param>
-        private static void RegisterAccountInfoBundles(BundleCollection bundles)
+        private static void RegisterAccountBundles(BundleCollection bundles)
         {
             bundles.AddAndInclude(
                 "~/site/accountInfo",
@@ -166,14 +156,7 @@ namespace Apollo.CMS.Websites
 
             bundles.Add(new ScriptBundle("~/scripts/leftPanel").Include(
                 "~/Areas/Account/Resources/AccountInfo/AccountInfo.js"));
-        }
 
-        /// <summary>
-        /// Registers the tree view bundles.
-        /// </summary>
-        /// <param name="bundles">The bundles collection.</param>
-        private static void RegisterTreeviewBundles(BundleCollection bundles)
-        {
             bundles.AddAndInclude(
                 "~/site/treeView",
                 "~/Areas/Account/Resources/TreeView/treeview.css");
@@ -182,14 +165,7 @@ namespace Apollo.CMS.Websites
                 "~/Areas/Account/Resources/TreeView/jquery.treeview.js",
                 "~/Areas/Account/Resources/TreeView/jquery.treeview.async.js",
                 "~/Areas/Account/Resources/TreeView/treeview.js"));
-        }
 
-        /// <summary>
-        /// Registers bundles for account list function.
-        /// </summary>
-        /// <param name="bundles">The bundles collection.</param>
-        private static void RegisterAccountListBundles(BundleCollection bundles)
-        {
             bundles.AddAndInclude(
                 "~/site/accountList",
                 "~/Areas/Account/Resources/AccountList/accountList.less");
@@ -205,10 +181,10 @@ namespace Apollo.CMS.Websites
         }
 
         /// <summary>
-        /// Registers bundles for member's bet list function.
+        /// Registers bundles for bet list functions.
         /// </summary>
         /// <param name="bundles">The bundles collection.</param>
-        private static void RegisterMemberBetListBundles(BundleCollection bundles)
+        private static void RegisterBetListBundles(BundleCollection bundles)
         {
             bundles.AddAndInclude(
                 "~/site/memberBetList",
@@ -217,20 +193,26 @@ namespace Apollo.CMS.Websites
 
             bundles.Add(new ScriptBundle("~/scripts/memberBetList").Include(
                 "~/Areas/BetList/Resources/MemberBetList/MemberBetList.js"));
-        }
 
-        /// <summary>
-        /// Registers bundles for member's bet list function.
-        /// </summary>
-        /// <param name="bundles">The bundles collection.</param>
-        private static void RegisterBetListByRefNoBundles(BundleCollection bundles)
-        {
             bundles.AddAndInclude(
                 "~/site/betListByRefNo",
                 "~/Areas/BetList/Resources/BetListByRefNo/betListByRefNo.less",
                 "~/content/site/betList.less");
             bundles.Add(new ScriptBundle("~/scripts/betListByRefNo").Include(
                 "~/Areas/BetList/Resources/BetListByRefNo/BetListByRefNo.js"));
+        }
+
+        /// <summary>
+        /// Registers bundles for setting functions.
+        /// </summary>
+        /// <param name="bundles">The bundles collection.</param>
+        private static void RegisterSettingBundles(BundleCollection bundles)
+        {
+            bundles.AddAndInclude(
+                "~/site/betAndCommSetting",
+                "~/Areas/CustomerSetting/Resources/BetAndCommSetting/betAndCommSetting.less");
+            bundles.Add(new ScriptBundle("~/scripts/betAndCommSetting").Include(
+                "~/Areas/CustomerSetting/Resources/BetAndCommSetting/betAndCommSetting.js"));
         }
     }
 

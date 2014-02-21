@@ -85,6 +85,7 @@
     <Compile Include="Models\AccountList\NavigationPath.cs" />
     <Compile Include="Models\AccountList\RawShadowInfo.cs" />
     <Compile Include="Models\TreeView\TreeViewModel.cs" />
+    <Compile Include="ViewModels\AccountInfo\CustomerInfo.cs" />
     <Compile Include="ViewModels\AccountList\AgentInfo.cs" />
     <Compile Include="ViewModels\AccountList\MemberInfo.cs" />
     <Compile Include="ViewModels\AccountList\ShadowInfo.cs" />

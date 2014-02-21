@@ -210,6 +210,7 @@
     <Content Include="Areas\Account\Resources\TreeView\jquery.treeview.async.js" />
     <Content Include="Areas\Account\Resources\TreeView\jquery.treeview.js" />
     <Content Include="Areas\Account\Resources\TreeView\treeview.js" />
+    <Content Include="Areas\CustomerSetting\Resources\BetAndCommSetting\betAndCommSetting.js" />
     <Content Include="Areas\Message\Resources\MessageList\message.less" />
     <Content Include="Areas\Message\Resources\MessageList\MessageList.js" />
     <Content Include="Areas\Message\Resources\NewMessage\PrivateMessage.js" />
@@ -293,6 +294,9 @@
     <Content Include="Areas\BetList\Views\BetListByRefNo\Index.cshtml" />
     <Content Include="Areas\BetList\Resources\BetListByRefNo\betListByRefNo.less" />
     <Content Include="Areas\BetList\ExcelTemplates\MemberBetList.xls" />
+    <Content Include="Areas\CustomerSetting\Views\Web.config" />
+    <Content Include="Areas\CustomerSetting\Views\BetAndCommSetting\Index.cshtml" />
+    <Content Include="Areas\CustomerSetting\Resources\BetAndCommSetting\betAndCommSetting.less" />
     <None Include="Noesis.Javascript\Noesis.Javascript.x64.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -458,6 +462,10 @@
     <ProjectReference Include="..\Apollo.CMS.Core\Apollo.CMS.Core.csproj">
       <Project>{FCD8A1C1-0EFB-4AFD-B8D4-98B56125235B}</Project>
       <Name>Apollo.CMS.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Apollo.CMS.CustomerSetting\Apollo.CMS.CustomerSetting.csproj">
+      <Project>{E46C7D49-0BC8-4830-97AF-DF47CF669906}</Project>
+      <Name>Apollo.CMS.CustomerSetting</Name>
     </ProjectReference>
     <ProjectReference Include="..\Apollo.CMS.Message\Apollo.CMS.Message.csproj">
       <Project>{F3C19221-A817-434E-9791-E67078104BA8}</Project>

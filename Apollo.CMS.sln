@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apollo.CMS.BetList", "Apoll
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apollo.BetList.Extensions", "Apollo.BetList.Extensions\Apollo.BetList.Extensions.csproj", "{60591496-4FC0-462B-A1C1-923E76A26002}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apollo.CMS.CustomerSetting", "Apollo.CMS.CustomerSetting\Apollo.CMS.CustomerSetting.csproj", "{E46C7D49-0BC8-4830-97AF-DF47CF669906}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{60591496-4FC0-462B-A1C1-923E76A26002}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60591496-4FC0-462B-A1C1-923E76A26002}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60591496-4FC0-462B-A1C1-923E76A26002}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E46C7D49-0BC8-4830-97AF-DF47CF669906}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E46C7D49-0BC8-4830-97AF-DF47CF669906}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E46C7D49-0BC8-4830-97AF-DF47CF669906}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E46C7D49-0BC8-4830-97AF-DF47CF669906}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

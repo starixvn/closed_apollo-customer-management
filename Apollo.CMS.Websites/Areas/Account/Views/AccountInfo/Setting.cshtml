@@ -1,16 +1,16 @@
-﻿@{
-    var hasCustomerSettingPermission = (bool)ViewBag.HasEditSettingPermission;
+﻿@model Apollo.CMS.Account.ViewModels.AccountInfo.CustomerInfo
+@{
+    var parameters = new RouteValueDictionary(Model);
 
-    if (hasCustomerSettingPermission)
-    {
-        <div class="tab-pane active" id="setting">
-            <ul class="super-menu list-unstyled">
-                <li><a href="#"><span class="icon-row-right"></span>@ViewLang.ShareSetting</a></li>
-                <li><a href="#"><span class="icon-row-right"></span>@ViewLang.BetAndCommSetting</a></li>
-                <li><a href="#"><span class="icon-row-right"></span>@ViewLang.ShareHierarchy</a></li>
-                <li><a href="#"><span class="icon-row-right"></span>@ViewLang.CommHierarchy</a></li>
-                <li><a href="#"><span class="icon-row-right"></span>@ViewLang.UserLog</a></li>
-            </ul>
-        </div>
-    }
+    parameters.Add("Area", "CustomerSetting");
+
+    <div class="tab-pane active" id="setting">
+        <ul class="super-menu list-unstyled">
+            <li><a href="#"><span class="icon-row-right"></span>@ViewLang.ShareSetting</a></li>
+            <li><a href="@Url.Action("Index", "BetAndCommSetting", parameters)"><span class="icon-row-right"></span>@ViewLang.BetAndCommSetting</a></li>
+            <li><a href="#"><span class="icon-row-right"></span>@ViewLang.ShareHierarchy</a></li>
+            <li><a href="#"><span class="icon-row-right"></span>@ViewLang.CommHierarchy</a></li>
+            <li><a href="#"><span class="icon-row-right"></span>@ViewLang.UserLog</a></li>
+        </ul>
+    </div>
 }
