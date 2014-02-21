@@ -91,7 +91,7 @@ Apollo.CMS.Account.AccountList.MemberList = function () {
 
         if (data && data.length > 0) {
             var row = null;
-            var editFormat = '<div><a href="{0}" class="icon-edit-link" title="{1}"/></div>';
+            var editFormat = '<a href="{0}" class="icon-edit-link" title="{1}"></a>';
             var statusFormat = '<span class="{0}">{1}</span>';
             var link = null;
 

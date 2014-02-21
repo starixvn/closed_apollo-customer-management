@@ -71,6 +71,7 @@
     <Compile Include="ViewModels\BetAndCommSetting\AgentCommissionItem.cs" />
     <Compile Include="ViewModels\BetAndCommSetting\BetAndCommSettingFilter.cs" />
     <Compile Include="ViewModels\BetAndCommSetting\MemberCommissionItem.cs" />
+    <Compile Include="ViewModels\BetAndCommSetting\SportBetLimitItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Apollo.CMS.Core\Apollo.CMS.Core.csproj">

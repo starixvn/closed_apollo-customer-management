@@ -450,4 +450,82 @@
   <data name="BetListReportFileName" xml:space="preserve">
     <value>BetList-{0}-From-{1}-To-{2}</value>
   </data>
+  <data name="Baseball" xml:space="preserve">
+    <value>Baseball</value>
+  </data>
+  <data name="Basketball" xml:space="preserve">
+    <value>Basketball</value>
+  </data>
+  <data name="BetLimit" xml:space="preserve">
+    <value>Bet Limit</value>
+  </data>
+  <data name="Commission" xml:space="preserve">
+    <value>Commission</value>
+  </data>
+  <data name="CommissionLine" xml:space="preserve">
+    <value>Commission Line</value>
+  </data>
+  <data name="Football" xml:space="preserve">
+    <value>Football</value>
+  </data>
+  <data name="Golf" xml:space="preserve">
+    <value>Golf</value>
+  </data>
+  <data name="HDP" xml:space="preserve">
+    <value>HDP</value>
+  </data>
+  <data name="Line" xml:space="preserve">
+    <value>Line</value>
+  </data>
+  <data name="LineA" xml:space="preserve">
+    <value>Line A</value>
+  </data>
+  <data name="LineB" xml:space="preserve">
+    <value>Line B</value>
+  </data>
+  <data name="LineC" xml:space="preserve">
+    <value>Line C</value>
+  </data>
+  <data name="LineD" xml:space="preserve">
+    <value>Line D</value>
+  </data>
+  <data name="MemberCommission" xml:space="preserve">
+    <value>Member Commission</value>
+  </data>
+  <data name="MinSingleBet" xml:space="preserve">
+    <value>Min Single Bet</value>
+  </data>
+  <data name="MixSportsParlay" xml:space="preserve">
+    <value>Mix Sports Parlay</value>
+  </data>
+  <data name="MotorSports" xml:space="preserve">
+    <value>Motor Sports</value>
+  </data>
+  <data name="OE" xml:space="preserve">
+    <value>OE</value>
+  </data>
+  <data name="OthersComm" xml:space="preserve">
+    <value>Others Comm</value>
+  </data>
+  <data name="OtherSports" xml:space="preserve">
+    <value>Other Sports</value>
+  </data>
+  <data name="OU" xml:space="preserve">
+    <value>OU</value>
+  </data>
+  <data name="SingleBet" xml:space="preserve">
+    <value>Single Bet</value>
+  </data>
+  <data name="SingleGame" xml:space="preserve">
+    <value>Single Game</value>
+  </data>
+  <data name="Soccer" xml:space="preserve">
+    <value>Soccer</value>
+  </data>
+  <data name="Tennis" xml:space="preserve">
+    <value>Tennis</value>
+  </data>
+  <data name="_1x2Comm" xml:space="preserve">
+    <value>1x2 Comm</value>
+  </data>
 </root>

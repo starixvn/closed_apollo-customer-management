@@ -1,9 +1,11 @@
-﻿@using Apollo.CMS.Core.Constants
-@using Fanex.Common
-@model Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting.BetAndCommSettingFilter
+﻿@using Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting
+@model BetAndCommSettingFilter
 @{
+    var parameters = new RouteValueDictionary(Model);
+
     ViewBag.Title = ViewLang.BetAndCommSetting;
     Layout = "~/Views/Shared/_PageLayout.cshtml";
+    parameters.Add("Area", "CustomerSetting");
 }
 @section Head {
     @Styles.Render("~/site/betAndCommSetting")
@@ -11,9 +13,13 @@
 @section HeadLine {
     <h5 class="row title">@ViewBag.Title - @Model.Username</h5>
 }
-
-
-
+<div class="setting-form">
+    @Html.Action("CommSetting", "BetAndCommSetting", parameters)
+    @Html.Action("BetLimitSetting", "BetAndCommSetting", parameters)
+    <div>
+        <input type="button" id="btnSubmit" class="btn btn-primary" value="@ViewLang.Submit" />
+    </div>
+</div>
 @section Foot {
     @Scripts.Render("~/scripts/betAndCommSetting")
 }

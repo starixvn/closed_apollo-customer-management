@@ -115,11 +115,29 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The discount must be greater than {0} and less than {1}.
+        /// </summary>
+        public static string DiscountRangeError {
+            get {
+                return ResourceManager.GetString("DiscountRangeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Username is already exists!.
         /// </summary>
         public static string ExistingUserNameError {
             get {
                 return ResourceManager.GetString("ExistingUserNameError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value must be greater than {0}.
+        /// </summary>
+        public static string GreaterThanError {
+            get {
+                return ResourceManager.GetString("GreaterThanError", resourceCulture);
             }
         }
         

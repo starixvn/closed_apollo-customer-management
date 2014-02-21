@@ -1,0 +1,70 @@
+﻿@using Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting
+@model MemberCommissionItem
+<div class="commission">
+    <div class="row commission-title">@ViewLang.Commission</div>
+    <div class="row">
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 group-title">@ViewLang.CommissionLine</div>
+            <div class="col-xs-8 col-sm-8 col-md-8 group-title">@ViewLang.MemberCommission</div>
+        </div>
+        <div class="row commission-row">
+            <div class="col-xs-4 col-sm-4 col-md-4 commission-line">
+                <div class="col-xs-6 col-sm-6 col-md-6 label-col">
+                    <label for="ddlLine">@string.Format("{0}:", ViewLang.Line)</label>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 input-col">
+                    <select id="ddlLine">
+                        <option value="a">A</option>
+                        <option value="b">B</option>
+                        <option value="c">C</option>
+                        <option value="d">D</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-8 col-sm-8 col-md-8">
+                <div class="row commission-row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 label-col">
+                        <label for="txtHandicap">@string.Format("{0}, {1}, {2} (%)", ViewLang.HDP, ViewLang.OU, ViewLang.OE)</label>
+                     </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 input-col">
+                        <input type="text"
+                               id="txtHandicap"
+                               class="text-field"
+                               value="@Model.HandicapComm"
+                               data-greater-error="@Messages.GreaterThanError"
+                               data-greater-value="0"/>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 range-col">[0]</div>
+                </div>
+                <div class="row commission-row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 label-col">
+                        <label for="txt1x2Comm">@string.Format("{0} (%)", ViewLang._1x2Comm)</label>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 input-col">
+                        <input type="text"
+                               id="txt1x2Comm"
+                               class="text-field"
+                               value="@Model._1x2Comm"
+                               data-greater-error="@Messages.GreaterThanError"
+                               data-greater-value="0"/>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 range-col">[0]</div>
+                </div>
+                <div class="row commission-row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 label-col">
+                        <label for="txtOthersComm">@string.Format("{0} (%)", ViewLang.OthersComm)</label>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 input-col">
+                        <input type="text"
+                               id="txtOthersComm"
+                               class="text-field"
+                               value="@Model.OtherComm"
+                               data-greater-error="@Messages.GreaterThanError"
+                               data-greater-value="0"/>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 range-col">[0]</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

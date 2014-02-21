@@ -61,6 +61,15 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 1x2 Comm.
+        /// </summary>
+        public static string _1x2Comm {
+            get {
+                return ResourceManager.GetString("_1x2Comm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Account Status.
         /// </summary>
         public static string AccountStatus {
@@ -151,11 +160,38 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Baseball.
+        /// </summary>
+        public static string Baseball {
+            get {
+                return ResourceManager.GetString("Baseball", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Basketball.
+        /// </summary>
+        public static string Basketball {
+            get {
+                return ResourceManager.GetString("Basketball", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bet and Comm Setting.
         /// </summary>
         public static string BetAndCommSetting {
             get {
                 return ResourceManager.GetString("BetAndCommSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bet Limit.
+        /// </summary>
+        public static string BetLimit {
+            get {
+                return ResourceManager.GetString("BetLimit", resourceCulture);
             }
         }
         
@@ -277,6 +313,24 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Commission.
+        /// </summary>
+        public static string Commission {
+            get {
+                return ResourceManager.GetString("Commission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Commission Line.
+        /// </summary>
+        public static string CommissionLine {
+            get {
+                return ResourceManager.GetString("CommissionLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company Comm.
         /// </summary>
         public static string CompanyComm {
@@ -394,6 +448,15 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Football.
+        /// </summary>
+        public static string Football {
+            get {
+                return ResourceManager.GetString("Football", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to From.
         /// </summary>
         public static string From {
@@ -408,6 +471,24 @@ namespace Apollo.CMS.Core.Resources {
         public static string Generate {
             get {
                 return ResourceManager.GetString("Generate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Golf.
+        /// </summary>
+        public static string Golf {
+            get {
+                return ResourceManager.GetString("Golf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HDP.
+        /// </summary>
+        public static string HDP {
+            get {
+                return ResourceManager.GetString("HDP", resourceCulture);
             }
         }
         
@@ -475,6 +556,51 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Line.
+        /// </summary>
+        public static string Line {
+            get {
+                return ResourceManager.GetString("Line", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line A.
+        /// </summary>
+        public static string LineA {
+            get {
+                return ResourceManager.GetString("LineA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line B.
+        /// </summary>
+        public static string LineB {
+            get {
+                return ResourceManager.GetString("LineB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line C.
+        /// </summary>
+        public static string LineC {
+            get {
+                return ResourceManager.GetString("LineC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line D.
+        /// </summary>
+        public static string LineD {
+            get {
+                return ResourceManager.GetString("LineD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Locked.
         /// </summary>
         public static string Locked {
@@ -538,6 +664,15 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Member Commission.
+        /// </summary>
+        public static string MemberCommission {
+            get {
+                return ResourceManager.GetString("MemberCommission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Member List.
         /// </summary>
         public static string MemberList {
@@ -579,6 +714,33 @@ namespace Apollo.CMS.Core.Resources {
         public static string MessageType {
             get {
                 return ResourceManager.GetString("MessageType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Min Single Bet.
+        /// </summary>
+        public static string MinSingleBet {
+            get {
+                return ResourceManager.GetString("MinSingleBet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mix Sports Parlay.
+        /// </summary>
+        public static string MixSportsParlay {
+            get {
+                return ResourceManager.GetString("MixSportsParlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Motor Sports.
+        /// </summary>
+        public static string MotorSports {
+            get {
+                return ResourceManager.GetString("MotorSports", resourceCulture);
             }
         }
         
@@ -646,11 +808,47 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OE.
+        /// </summary>
+        public static string OE {
+            get {
+                return ResourceManager.GetString("OE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Other Language.
         /// </summary>
         public static string OtherLanguage {
             get {
                 return ResourceManager.GetString("OtherLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Others Comm.
+        /// </summary>
+        public static string OthersComm {
+            get {
+                return ResourceManager.GetString("OthersComm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other Sports.
+        /// </summary>
+        public static string OtherSports {
+            get {
+                return ResourceManager.GetString("OtherSports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OU.
+        /// </summary>
+        public static string OU {
+            get {
+                return ResourceManager.GetString("OU", resourceCulture);
             }
         }
         
@@ -826,6 +1024,33 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Single Bet.
+        /// </summary>
+        public static string SingleBet {
+            get {
+                return ResourceManager.GetString("SingleBet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Single Game.
+        /// </summary>
+        public static string SingleGame {
+            get {
+                return ResourceManager.GetString("SingleGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Soccer.
+        /// </summary>
+        public static string Soccer {
+            get {
+                return ResourceManager.GetString("Soccer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Special.
         /// </summary>
         public static string Special {
@@ -912,6 +1137,15 @@ namespace Apollo.CMS.Core.Resources {
         public static string SystemParlay {
             get {
                 return ResourceManager.GetString("SystemParlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tennis.
+        /// </summary>
+        public static string Tennis {
+            get {
+                return ResourceManager.GetString("Tennis", resourceCulture);
             }
         }
         

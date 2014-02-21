@@ -1,0 +1,101 @@
+﻿@using Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting
+@model AgentCommissionItem
+<div class="commission">
+    <div class="row commission-title">@ViewLang.Commission</div>
+    <div class="row">
+        <div class="row commission-row">
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <div class="col-xs-4 col-sm-4 col-md-4 label-col">
+                    <label for="txtLineA">@string.Format("{0} (%):", ViewLang.LineA)</label>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 input-col">
+                    <input type="text"
+                           id="txtLineA"
+                           class="text-field"
+                           value="@Model.DiscountA"
+                           data-range-error="@Messages.DiscountRangeError"
+                           data-range-min="0"
+                           data-rang-max="@Model.Upline.DiscountA"/>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 range-col">[0 - @Model.Upline.DiscountA]</div>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <div class="col-xs-4 col-sm-4 col-md-4 label-col">
+                    <label for="txtLineC">@string.Format("{0} (%):", ViewLang.LineC)</label>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 input-col">
+                    <input type="text"
+                           id="txtLineC"
+                           class="text-field"
+                           value="@Model.DiscountC"
+                           data-range-error="@Messages.DiscountRangeError"
+                           data-range-min="0"
+                           data-rang-max="@Model.Upline.DiscountC"/>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 range-col">[0 - @Model.Upline.DiscountC]</div>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <div class="col-xs-4 col-sm-4 col-md-4 label-col">
+                    <label for="txt1x2Comm">@string.Format("{0} (%):", ViewLang._1x2Comm)</label>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 input-col">
+                    <input type="text"
+                           id="txt1x2Comm"
+                           class="text-field"
+                           value="@Model._1x2Comm"
+                           data-range-error="@Messages.DiscountRangeError"
+                           data-range-min="0"
+                           data-rang-max="@Model.Upline._1x2Comm"/>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 range-col">[0]</div>
+            </div>
+        </div>
+        <div class="row commission-row">
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <div class="col-xs-4 col-sm-4 col-md-4 label-col">
+                    <label for="txtLineB">@string.Format("{0} (%):", ViewLang.LineB)</label>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 input-col">
+                    <input type="text"
+                           id="txtLineB"
+                           class="text-field"
+                           value="@Model.DiscountB"
+                           data-range-error="@Messages.DiscountRangeError"
+                           data-range-min="0"
+                           data-rang-max="@Model.Upline.DiscountB"/>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 range-col">[0 - @Model.Upline.DiscountB]</div>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <div class="col-xs-4 col-sm-4 col-md-4 label-col">
+                    <label for="txtLineD">@string.Format("{0} (%):", ViewLang.LineD)</label>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 input-col">
+                    <input type="text"
+                           id="txtLineD"
+                           class="text-field"
+                           value="@Model.DiscountD"
+                           data-range-error="@Messages.DiscountRangeError"
+                           data-range-min="0"
+                           data-rang-max="@Model.Upline.DiscountD"/>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 range-col">[0]</div>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <div class="col-xs-4 col-sm-4 col-md-4 label-col">
+                    <label for="txtOthersComm">@string.Format("{0} (%):", ViewLang.OthersComm)</label>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 input-col">
+                    <input type="text"
+                           id="txtOthersComm"
+                           class="text-field"
+                           value="@Model.OtherComm"
+                           data-range-error="@Messages.DiscountRangeError"
+                           data-range-min="0"
+                           data-rang-max="@Model.Upline.OtherComm"/>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 range-col">[0]</div>
+            </div>
+        </div>
+    </div>
+</div>

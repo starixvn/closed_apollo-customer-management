@@ -1,3 +1,54 @@
-body
-{
+@import "../../../../Content/site/variables.less";
+
+.setting-form {
+    margin-bottom: 5px;
+
+    .commission {
+        border: 1px solid @table-border;
+
+        .commission-title {
+            background: @table-header-bg;
+            color: @table-header-color;
+            border: 1px solid #C7E1F2;
+            text-align: center;
+            height: 26px;
+            padding-top: 3px;
+        }
+
+        .commission-row {
+            padding: 5px 0;
+
+            .label-col {
+                text-align: right;
+                height: 26px;
+
+                label {
+                    margin-top: 4px;
+                    padding-right: 3px;
+                    font-weight: normal;
+                }
+            }
+
+            .input-col {
+                .text-field {
+                    width: 105px;
+                    text-align: right;
+                }
+            }
+
+            .range-col {
+                padding-top: 3px;
+                height: 26px;
+            }
+        }
+
+        .group-title {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .commission-line {
+            vertical-align: middle;
+        }
+    }
 }

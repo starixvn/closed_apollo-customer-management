@@ -297,6 +297,9 @@
     <Content Include="Areas\CustomerSetting\Views\Web.config" />
     <Content Include="Areas\CustomerSetting\Views\BetAndCommSetting\Index.cshtml" />
     <Content Include="Areas\CustomerSetting\Resources\BetAndCommSetting\betAndCommSetting.less" />
+    <Content Include="Areas\CustomerSetting\Views\BetAndCommSetting\MemberCommSetting.cshtml" />
+    <Content Include="Areas\CustomerSetting\Views\BetAndCommSetting\AgentCommSetting.cshtml" />
+    <Content Include="Areas\CustomerSetting\Views\BetAndCommSetting\BetLimitSetting.cshtml" />
     <None Include="Noesis.Javascript\Noesis.Javascript.x64.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
