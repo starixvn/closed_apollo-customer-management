@@ -2,50 +2,58 @@
 @{
     var betLimits = (IEnumerable<SportBetLimitItem>)ViewBag.BetLimits;
 }
-<div class="commission">
-    <div class="row commission-title">@ViewLang.BetLimit</div>
+<div class="row commission">
+    <div class="row commission-title">@ViewLang.BetLimit <span class="icon-info"></span></div>
     <div class="row">
-        <div class="col-xs-3 col-sm-3 col-md-3"></div>
-        <div class="col-xs-3 col-sm-3 col-md-3 group-title">@ViewLang.SingleGame</div>
-        <div class="col-xs-3 col-sm-3 col-md-3 group-title">@ViewLang.SingleBet</div>
-        <div class="col-xs-3 col-sm-3 col-md-3 group-title">@ViewLang.MinSingleBet</div>
+        <div class="col-xs-2 col-sm-2 col-md-2 group-title">
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-10">
+            <div class="col-xs-4 col-sm-4 col-md-4 group-title">@ViewLang.SingleGame</div>
+            <div class="col-xs-4 col-sm-4 col-md-4 group-title">@ViewLang.SingleBet</div>
+            <div class="col-xs-4 col-sm-4 col-md-4 group-title">@ViewLang.MinSingleBet</div>
+        </div>
     </div>
     <div class="row">
         @foreach (SportBetLimitItem item in betLimits)
         {
-            <div class="row commission-row">
-                <div class="col-xs-3 col-sm-3 col-md-3">@item.SportName</div>
-                <div class="col-xs-3 col-sm-3 col-md-3">
-                    <div class="col-xs-6 col-sm-6 col-md-6 input-col">
-                        <input type="text"
+            <div class="row commission-row bet-setting">
+                <div class="col-xs-2 col-sm-2 col-md-2 label-col text-left">@item.SportName <span class="icon-coppy"></span></div>
+                <div class="col-xs-10 col-sm-10 col-md-10">
+                    <div class="col-xs-4 col-sm-4 col-md-4 line-right">
+                        <div class="col-xs-7 col-sm-7 col-md-7 input-col">
+                            <input type="text"
                                class="text-field"
                                value="@item.SingleGame"
                                data-range-error="@Messages.DiscountRangeError"
                                data-range-min="@item.MinOfSingleGame"
                                data-rang-max="@item.MaxOfSingleGame"/>
+                        </div>
+                        <div class="col-xs-5 col-sm-5 col-md-5 range-col">
+                            [@item.MinOfSingleGame - @item.MaxOfSingleGame]</div>
                     </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 range-col">[@item.MinOfSingleGame - @item.MaxOfSingleGame]</div>
-                </div>
-                <div class="col-xs-3 col-sm-3 col-md-3">
-                    <div class="col-xs-6 col-sm-6 col-md-6 input-col">
-                        <input type="text"
+                    <div class="col-xs-4 col-sm-4 col-md-4 line-right">
+                        <div class="col-xs-7 col-sm-7 col-md-7 input-col">
+                            <input type="text"
                                class="text-field"
                                value="@item.SingleBet"
                                data-range-error="@Messages.DiscountRangeError"
                                data-range-min="@item.MinOfSingleBet"
                                data-rang-max="@item.MaxOfSingleBet"/>
+                        </div>
+                        <div class="col-xs-5 col-sm-5 col-md-5 range-col">
+                            [@item.MinOfSingleBet - @item.MaxOfSingleBet]</div>
                     </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 range-col">[@item.MinOfSingleBet - @item.MaxOfSingleBet]</div>
-                </div>
-                <div class="col-xs-3 col-sm-3 col-md-3">
-                    <div class="col-xs-6 col-sm-6 col-md-6 input-col">
-                        <input type="text"
+                    <div class="col-xs-4 col-sm-4 col-md-4">
+                        <div class="col-xs-7 col-sm-7 col-md-7 input-col">
+                            <input type="text"
                                class="text-field"
                                value="@item.MinSingleBet"
                                data-greater-error="@Messages.GreaterThanError"
                                data-greater-value="@item.MinOfMinSingleBet"/>
+                        </div>
+                        <div class="col-xs-5 col-sm-5 col-md-5 range-col">
+                            [@item.MinOfSingleGame - @item.MaxOfSingleGame]</div>
                     </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 range-col">[@item.MinOfSingleGame - @item.MaxOfSingleGame]</div>
                 </div>
             </div>
         }

@@ -1,4 +1,5 @@
 @import "../../../../Content/site/variables.less";
+@import "../../../../Content/site/mixins.less";
 
 .setting-form {
     margin-bottom: 5px;
@@ -13,14 +14,25 @@
             text-align: center;
             height: 26px;
             padding-top: 3px;
+            position: relative;
+
+            .icon-info {
+                position: absolute;
+                top: 6px;
+                right: 3px;
+            }
         }
 
         .commission-row {
-            padding: 5px 0;
+            padding: 0;
+            border-bottom: 1px solid #fff;
+             background-color: #fff;
 
             .label-col {
                 text-align: right;
-                height: 26px;
+                height: 28px;
+                background-color: #EAEBF0;
+                padding: 1px 4px;
 
                 label {
                     margin-top: 4px;
@@ -31,24 +43,107 @@
 
             .input-col {
                 .text-field {
-                    width: 105px;
+                    height: 20px;
                     text-align: right;
+                    margin: 4px 3%;
+                    color: @text-color;
+                    .border-radius(0);
                 }
             }
 
             .range-col {
-                padding-top: 3px;
+                padding-top: 5px;
                 height: 26px;
+                background-color: #fff;
+            }
+
+            &.bet-setting {
+                border-bottom: none;
+
+                .label-col {
+                   text-align: left;
+                   border-bottom: 1px solid #fff;
+                   height: 28px;
+                   padding: 5px;
+                   position: relative;
+
+                   .icon-coppy {
+                        position: absolute;
+                        right: 7px;
+                        top: 7px;
+                   }
+                }
+
+                .input-col .text-field {
+                    width: 94%;
+                }
+
+                .line-right {
+                    border-right: 1px solid #e5e5e5;
+                }
             }
         }
 
         .group-title {
             text-align: center;
             font-weight: bold;
+            background-color: #EAEBF0;
+            height: 30px;
+            padding: 5px 0;
+            border: 1px solid #fff;
+            border-width: 1px 0 1px 1px;
         }
 
         .commission-line {
             vertical-align: middle;
+            background-color: #EAEBF0;
+            height: 86px;
+            text-align: center;
+            line-height: 22px;
+            padding: 32px;
+
+            label {
+                font-weight: normal;
+            }
         }
+
+        .line-left {
+            border-left: 1px solid #fff;
+        }
+
+        &.member {
+            border-bottom: none;
+
+            .commission-row {
+                .input-col .text-field {
+                    width: 94%;
+                }
+            }
+        }
+
+        &.agent {
+             border-bottom: none;
+        }
+    }
+
+    .action {
+        margin-top: 10px;
+    }
+}
+
+/* Customize selectbox */
+.selectboxit-container {
+    .selectboxit {
+        border: 1px solid @border-color;
+    }
+
+    span, .selectboxit-options a {
+        height: 22px;
+    }
+
+    .selectboxit-text {
+        font-size: @font-size - 1;
+        line-height: 20px;
+        color: @text-color;
     }
 }

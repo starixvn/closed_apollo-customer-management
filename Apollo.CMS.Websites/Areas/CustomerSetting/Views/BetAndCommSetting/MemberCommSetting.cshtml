@@ -1,7 +1,7 @@
 ﻿@using Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting
 @model MemberCommissionItem
-<div class="commission">
-    <div class="row commission-title">@ViewLang.Commission</div>
+<div class="row commission member">
+    <div class="row commission-title">@ViewLang.Commission <span class="icon-info"></span></div>
     <div class="row">
         <div class="row">
             <div class="col-xs-4 col-sm-4 col-md-4 group-title">@ViewLang.CommissionLine</div>
@@ -9,23 +9,19 @@
         </div>
         <div class="row commission-row">
             <div class="col-xs-4 col-sm-4 col-md-4 commission-line">
-                <div class="col-xs-6 col-sm-6 col-md-6 label-col">
-                    <label for="ddlLine">@string.Format("{0}:", ViewLang.Line)</label>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 input-col">
-                    <select id="ddlLine">
-                        <option value="a">A</option>
-                        <option value="b">B</option>
-                        <option value="c">C</option>
-                        <option value="d">D</option>
-                    </select>
-                </div>
+                <label for="ddlLine">@string.Format("{0}:", ViewLang.Line)</label>
+                <select id="ddlLine">
+                    <option value="a">A</option>
+                    <option value="b">B</option>
+                    <option value="c">C</option>
+                    <option value="d">D</option>
+                </select>
             </div>
-            <div class="col-xs-8 col-sm-8 col-md-8">
+            <div class="col-xs-8 col-sm-8 col-md-8 line-left">
                 <div class="row commission-row">
                     <div class="col-xs-6 col-sm-6 col-md-6 label-col">
                         <label for="txtHandicap">@string.Format("{0}, {1}, {2} (%)", ViewLang.HDP, ViewLang.OU, ViewLang.OE)</label>
-                     </div>
+                    </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 input-col">
                         <input type="text"
                                id="txtHandicap"
@@ -34,7 +30,8 @@
                                data-greater-error="@Messages.GreaterThanError"
                                data-greater-value="0"/>
                     </div>
-                    <div class="col-xs-4 col-sm-4 col-md-4 range-col">[0]</div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 range-col">
+                        [0]</div>
                 </div>
                 <div class="row commission-row">
                     <div class="col-xs-6 col-sm-6 col-md-6 label-col">
@@ -48,7 +45,8 @@
                                data-greater-error="@Messages.GreaterThanError"
                                data-greater-value="0"/>
                     </div>
-                    <div class="col-xs-4 col-sm-4 col-md-4 range-col">[0]</div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 range-col">
+                        [0]</div>
                 </div>
                 <div class="row commission-row">
                     <div class="col-xs-6 col-sm-6 col-md-6 label-col">
@@ -62,7 +60,8 @@
                                data-greater-error="@Messages.GreaterThanError"
                                data-greater-value="0"/>
                     </div>
-                    <div class="col-xs-4 col-sm-4 col-md-4 range-col">[0]</div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 range-col">
+                        [0]</div>
                 </div>
             </div>
         </div>

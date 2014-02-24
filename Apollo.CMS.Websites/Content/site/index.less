@@ -60,6 +60,14 @@ input[type="text"] {
         outline: none;
         color: @button-color;
     }
+
+    /* Button */
+
+    &.btn-primary {
+        background-color: @primary-color;
+        padding: 2px 27px 3px;
+        margin-bottom: 20px;
+    }
 }
 
 /* Icon */
@@ -185,6 +193,24 @@ input[type="text"] {
 .icon-edit-link {
     .icon;
     background-position: -298px -24px;
+}
+
+.icon-info {
+    .icon;
+    background-position: -457px -26px;
+
+    &:hover {
+        background-position: -457px -4px;
+    }
+}
+
+.icon-coppy {
+    .icon;
+    background-position: -477px -26px;
+
+    &:hover {
+        background-position: -477px -4px;
+    }
 }
 
 /* Mixins */
