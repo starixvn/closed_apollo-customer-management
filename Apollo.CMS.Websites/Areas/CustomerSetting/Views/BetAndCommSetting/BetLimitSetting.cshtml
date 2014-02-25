@@ -32,37 +32,39 @@
                     <div class="col-xs-4 col-sm-4 col-md-4 line-right">
                         <div class="col-xs-7 col-sm-7 col-md-7 input-col">
                             <input type="text"
-                               class="text-field"
+                               class="text-field single-game"
                                value="@item.SingleGame"
                                maxlength="14"
                                @disable
-                               data-range-error="@Messages.DiscountRangeError"
+                               data-val-number="@Messages.InvalidValue"
+                               data-val-range="@Messages.ValueRangeError"
                                data-range-min="@item.MinOfSingleGame"
-                               data-rang-max="@item.MaxOfSingleGame"/>
+                               data-range-max="@item.MaxOfSingleGame"/>
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-5 range-col">[@item.MinOfSingleGame - @item.MaxOfSingleGame]</div>
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 line-right">
                         <div class="col-xs-7 col-sm-7 col-md-7 input-col">
                             <input type="text"
-                               class="text-field"
+                               class="text-field single-bet"
                                value="@item.SingleBet"
                                maxlength="14"
                                @disable
-                               data-range-error="@Messages.DiscountRangeError"
+                               data-val-number="@Messages.InvalidValue"
+                               data-val-range="@Messages.ValueRangeError"
                                data-range-min="@item.MinOfSingleBet"
-                               data-rang-max="@item.MaxOfSingleBet"/>
+                               data-range-max="@item.MaxOfSingleBet"/>
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-5 range-col">[@item.MinOfSingleBet - @item.MaxOfSingleBet]</div>
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4">
                         <div class="col-xs-7 col-sm-7 col-md-7 input-col">
                             <input type="text"
-                               class="text-field"
+                               class="text-field min-single-bet"
                                value="@item.MinSingleBet"
                                maxlength="14"
                                @disable
-                               data-greater-error="@Messages.GreaterThanError"
+                               data-val-greater="@Messages.GreaterThanError"
                                data-greater-value="@item.MinOfMinSingleBet"/>
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-5 range-col">>=@item.MinOfMinSingleBet</div>

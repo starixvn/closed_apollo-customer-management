@@ -19,9 +19,10 @@
                            value="@Model.DiscountA"
                            maxlength="14"
                            @disable
-                           data-range-error="@Messages.DiscountRangeError"
+                           data-val-number="@Messages.InvalidValue"
+                           data-val-range="@Messages.ValueRangeError"
                            data-range-min="0"
-                           data-rang-max="@Model.UplineMinDiscountA"/>
+                           data-range-max="@Model.UplineMinDiscountA"/>
                     <div class="col-xs-5 col-sm-5 col-md-5 range-col">[0 - @Model.UplineMinDiscountA]</div>
                 </div>
             </div>
@@ -36,9 +37,10 @@
                            value="@Model.DiscountC"
                            maxlength="14"
                            @disable
-                           data-range-error="@Messages.DiscountRangeError"
+                           data-val-number="@Messages.InvalidValue"
+                           data-val-range="@Messages.ValueRangeError"
                            data-range-min="0"
-                           data-rang-max="@Model.UplineMinDiscountC"/>
+                           data-range-max="@Model.UplineMinDiscountC"/>
                     <div class="col-xs-5 col-sm-5 col-md-5 range-col">[0 - @Model.UplineMinDiscountC]</div>
                 </div>
             </div>
@@ -53,9 +55,10 @@
                            value="@Model.Discount1x2"
                            maxlength="14"
                            disabled="disabled"
-                           data-range-error="@Messages.DiscountRangeError"
+                           data-val-number="@Messages.InvalidValue"
+                           data-val-range="@Messages.ValueRangeError"
                            data-range-min="0"
-                           data-rang-max="@Model.UplineMinDiscount1x2"/>
+                           data-range-max="@Model.UplineMinDiscount1x2"/>
                     <div class="col-xs-5 col-sm-5 col-md-5 range-col">[0]</div>
                 </div>
             </div>
@@ -72,9 +75,10 @@
                            value="@Model.DiscountB"
                            maxlength="14"
                            @disable
-                           data-range-error="@Messages.DiscountRangeError"
+                           data-val-number="@Messages.InvalidValue"
+                           data-val-range="@Messages.ValueRangeError"
                            data-range-min="0"
-                           data-rang-max="@Model.UplineMinDiscountB"/>
+                           data-range-max="@Model.UplineMinDiscountB"/>
                     <div class="col-xs-5 col-sm-5 col-md-5 range-col">[0 - @Model.UplineMinDiscountB]</div>
                 </div>
             </div>
@@ -89,9 +93,10 @@
                            value="@Model.DiscountD"
                            maxlength="14"
                            disabled="disabled"
-                           data-range-error="@Messages.DiscountRangeError"
+                           data-val-number="@Messages.InvalidValue"
+                           data-val-range="@Messages.ValueRangeError"
                            data-range-min="0"
-                           data-rang-max="@Model.UplineMinDiscountD"/>
+                           data-range-max="@Model.UplineMinDiscountD"/>
                     <div class="col-xs-5 col-sm-5 col-md-5 range-col">[0]</div>
                 </div>
             </div>
@@ -106,9 +111,10 @@
                            value="@Model.DiscountOthers"
                            maxlength="14"
                            disabled="disabled"
-                           data-range-error="@Messages.DiscountRangeError"
+                           data-val-number="@Messages.InvalidValue"
+                           data-val-range="@Messages.ValueRangeError"
                            data-range-min="@Model.DiscountOthers"
-                           data-rang-max="@Model.UplineMinDiscountOthers"/>
+                           data-range-max="@Model.UplineMinDiscountOthers"/>
                     <div class="col-xs-5 col-sm-5 col-md-5 range-col">[0]</div>
                 </div>
             </div>

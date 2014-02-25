@@ -115,15 +115,6 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The discount must be greater than {0} and less than {1}.
-        /// </summary>
-        public static string DiscountRangeError {
-            get {
-                return ResourceManager.GetString("DiscountRangeError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Username is already exists!.
         /// </summary>
         public static string ExistingUserNameError {
@@ -183,6 +174,15 @@ namespace Apollo.CMS.Core.Resources {
         public static string InvalidUserName {
             get {
                 return ResourceManager.GetString("InvalidUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid value!.
+        /// </summary>
+        public static string InvalidValue {
+            get {
+                return ResourceManager.GetString("InvalidValue", resourceCulture);
             }
         }
         
@@ -336,6 +336,15 @@ namespace Apollo.CMS.Core.Resources {
         public static string UnAuthorizedRequestError {
             get {
                 return ResourceManager.GetString("UnAuthorizedRequestError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value must be greater than {0} and less than {1}!.
+        /// </summary>
+        public static string ValueRangeError {
+            get {
+                return ResourceManager.GetString("ValueRangeError", resourceCulture);
             }
         }
         
