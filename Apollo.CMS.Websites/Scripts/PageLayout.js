@@ -1,6 +1,6 @@
 ﻿/* File Created: January 6, 2014 */
 
-/* global _, Apollo, Namespace */
+/* global _, numeral, Apollo, CMS, Namespace */
 
 /*jshint ignore:start */
 
@@ -95,6 +95,56 @@ Apollo.CMS.PageLayoutHelper = function () {
     };
     $this.ClosePopup = function () {
         $this.DOMInstance.divDialogPopup.dialog('close');
+    };
+
+    // Mark an input as number field. This function needs to be used for keypress event.
+    $this.MarkAsNumberField = function (event) {
+        var value = $.trim($(this).val());
+        var decimalPos = value.indexOf('.');
+        var minusPos = value.indexOf('-');
+
+        // Allow decimal character if there is no decimal character has been input yet
+        // and some digits have already been input before the decimal character.
+        if ((event.data.decimals > 0) && (event.keyCode === 46) && (decimalPos < 0) && (value.length > 0)) {
+            return;
+        }
+
+        // Allow only one minus character at the begining of the value.
+        if (event.data.allowNegative && (event.keyCode === 45) && (minusPos < 0) && (value.length === 0)) {
+            return;
+        }
+
+        // Allow digits.
+        if ((48 <= event.keyCode) && (event.keyCode <= 57)) {
+            // Check whether the number of digits after the decimal meets the requrement or not.
+            if ((decimalPos < 0) ||
+                ((decimalPos >= 0) && (value.length - decimalPos <= event.data.decimals))) {
+                return;
+            }
+        }
+
+        return false;
+    };
+
+    // Format number fields. This function is used with keyUp event.
+    $this.FormatNumberField = function (event) {
+        var value = $.trim($(this).val());
+        var rawValue = value.replace(/,/g, '');
+        var decimalPos = rawValue.indexOf('.');
+
+        rawValue = rawValue === '' ? '0' : rawValue;
+        console.log(event.ctrlKey); console.log(event.keyCode);
+
+        if (decimalPos < 0) {
+            value = numeral(rawValue).format(CMS.commonConstants.NumberFormat);
+        }
+
+        if ((48 <= event.keyCode && event.keyCode <= 57) ||
+            (96 <= event.keyCode && event.keyCode <= 105) ||
+            (event.keyCode === 45 || event.keyCode === 46) ||
+            (event.keyCode === 109 || event.keyCode === 110)) {
+            $(this).val(value);
+        }
     };
 
     // Cached DOM elements.

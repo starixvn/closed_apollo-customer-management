@@ -98,4 +98,13 @@
       <Mapping DataField="AComm" ObjectProperty="CompanyComm"/>
     </Setting>
   </Function>
+  <Function Name="BetAndCommSetting">
+    <Setting Key="Age_Agent_GetDiscountForUpdate" SpName="Age_Agent_GetDiscountForUpdate" DbName="SVRCUST.CustDB.aplweb" />
+    <Setting Key="Age_Customer_GetDiscountForUpdate" SpName="Age_Customer_GetDiscountForUpdate" DbName="SVRCUST.CustDB.aplweb" />
+    <Setting Key="Age_Agent_GetBetLimitForUpdate" SpName="Age_Agent_GetBetLimitForUpdate" DbName="SVRCUST.CustDB.aplweb" />
+    <Setting Key="Age_Customer_GetBetLimitForUpdate" SpName="Age_Customer_GetBetLimitForUpdate" DbName="SVRCUST.CustDB.aplweb" />
+    <Setting Key="Age_Customer_UpdateSetting" SpName="Age_Customer_UpdateSetting_xtest" DbName="SVRCUST.CustDB.aplweb" />
+    <Setting Key="Age_Agent_UpdateSetting" SpName="Age_Agent_UpdateSetting_xtest" DbName="SVRCUST.CustDB.aplweb" />
+    <Setting Key="Acc_Customer_GetGroupByCustId" SpName="Acc_Customer_GetGroupByCustId" DbName="SVRCSD.RepDB.aplWeb" />
+  </Function>
 </Functions>

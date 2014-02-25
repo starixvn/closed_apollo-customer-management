@@ -9,7 +9,30 @@
 
 namespace Apollo.CMS.CustomerSetting.Services.Interfaces
 {
+    using System.Collections.Generic;
+    using Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting;
+
     public interface IBetAndCommSettingService
     {
+        /// <summary>
+        /// Gets the member discount information.
+        /// </summary>
+        /// <param name="filter">The filters that are passed from user.</param>
+        /// <returns>MemberDiscountItem object.</returns>
+        MemberDiscountItem GetMemberDiscount(BetAndCommSettingFilter filter);
+
+        /// <summary>
+        /// Gets the agent discount information.
+        /// </summary>
+        /// <param name="filter">The filters that are passed from user.</param>
+        /// <returns>AgentDiscountItem object.</returns>
+        AgentDiscountItem GetAgentDiscount(BetAndCommSettingFilter filter);
+
+        /// <summary>
+        /// Gets the bet limits.
+        /// </summary>
+        /// <param name="filter">The filters that are passed from user.</param>
+        /// <returns>List of BetLimitItem objects.</returns>
+        IEnumerable<BetLimitItem> GetBetLimits(BetAndCommSettingFilter filter);
     }
 }

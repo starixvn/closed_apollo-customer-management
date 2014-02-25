@@ -1,6 +1,7 @@
 ﻿@using Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting
 @model BetAndCommSettingFilter
 @{
+    var hasEditSettingRight = (bool)ViewBag.HasEditSettingPermission;
     var parameters = new RouteValueDictionary(Model);
 
     ViewBag.Title = ViewLang.BetAndCommSetting;
@@ -16,10 +17,16 @@
 <div class="setting-form">
     @Html.Action("CommSetting", "BetAndCommSetting", parameters)
     @Html.Action("BetLimitSetting", "BetAndCommSetting", parameters)
-    <div class="row action">
-        <input type="button" id="btnSubmit" class="btn btn-primary" value="@ViewLang.Submit" />
-    </div>
+    @if (hasEditSettingRight)
+    {
+        <div class="row action">
+            <input type="button" id="btnSubmit" class="btn btn-primary" value="@ViewLang.Submit" />
+        </div>
+    }
 </div>
 @section Foot {
     @Scripts.Render("~/scripts/betAndCommSetting")
+    <script type="text/javascript">
+        var hasEditSettingRight = '@hasEditSettingRight' === 'True';
+    </script>
 }

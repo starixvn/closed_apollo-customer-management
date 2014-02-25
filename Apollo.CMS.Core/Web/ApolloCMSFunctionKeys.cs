@@ -7,7 +7,7 @@
 // </summary>
 //
 // <history>
-// Lasted generated date: 1/13/2014 1:04:34 PM
+// Lasted generated date: 2/25/2014 10:05:40 AM
 // </history>
 
 using System.Diagnostics.CodeAnalysis;
@@ -30,7 +30,7 @@ public static class ApolloCMSFunctionKeys
 
         public const string AssignSiteToUser = "AssignSiteToUser";
 
-        public const string EditSetting = "EditSetting";
+        public const string CustomerSetting = "CustomerSetting";
 
         public const string LoginAgentSite = "LoginAgentSite";
 
@@ -49,6 +49,8 @@ public static class ApolloCMSFunctionKeys
         public const string SearchAccount = "SearchAccount";
 
         public const string SystemConfiguration = "SystemConfiguration";
+
+        public const string Transaction = "Transaction";
 
         public const string ViewBetList = "ViewBetList";
 

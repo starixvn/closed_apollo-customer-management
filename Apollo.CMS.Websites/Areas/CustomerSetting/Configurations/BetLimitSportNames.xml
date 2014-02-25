@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<BettingLimitSportNames>
+  <Name sportId="1" betTypeId="1" name="Soccer" resourceKey="Soccer">
+  </Name>
+  <Name sportId="2" betTypeId="1" name="Basketball" resourceKey="Basketball">
+  </Name>
+  <Name sportId="3" betTypeId="1" name="Football" resourceKey="Football">
+  </Name>
+  <Name sportId="5" betTypeId="1" name="Tennis" resourceKey="Tennis">
+  </Name>
+  <Name sportId="8" betTypeId="1" name="Baseball" resourceKey="Baseball">
+  </Name>
+  <Name sportId="10" betTypeId="1" name="Golf" resourceKey="Golf">
+  </Name>
+  <Name sportId="11" betTypeId="1" name="Moto Sports" resourceKey="MotorSports">
+  </Name>
+  <Name sportId="99" betTypeId="1" name="Other Sports" resourceKey="OtherSports">
+  </Name>
+  <Name sportId="99" betTypeId="9" name="Mix Sports Parlay" resourceKey="MixSportsParlay">
+  </Name>
+</BettingLimitSportNames>

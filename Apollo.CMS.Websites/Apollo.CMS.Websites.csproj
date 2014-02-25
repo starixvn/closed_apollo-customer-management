@@ -210,7 +210,8 @@
     <Content Include="Areas\Account\Resources\TreeView\jquery.treeview.async.js" />
     <Content Include="Areas\Account\Resources\TreeView\jquery.treeview.js" />
     <Content Include="Areas\Account\Resources\TreeView\treeview.js" />
-    <Content Include="Areas\CustomerSetting\Resources\BetAndCommSetting\betAndCommSetting.js" />
+    <Content Include="Areas\CustomerSetting\Configurations\BetLimitSportNames.xml" />
+    <Content Include="Areas\CustomerSetting\Resources\BetAndCommSetting\BetAndCommSetting.js" />
     <Content Include="Areas\Message\Resources\MessageList\message.less" />
     <Content Include="Areas\Message\Resources\MessageList\MessageList.js" />
     <Content Include="Areas\Message\Resources\NewMessage\PrivateMessage.js" />

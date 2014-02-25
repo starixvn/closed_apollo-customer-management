@@ -133,7 +133,7 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value must be greater than {0}.
+        ///   Looks up a localized string similar to The value must be greater than or equal to {0}.
         /// </summary>
         public static string GreaterThanError {
             get {
@@ -183,6 +183,15 @@ namespace Apollo.CMS.Core.Resources {
         public static string InvalidUserName {
             get {
                 return ResourceManager.GetString("InvalidUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value must be less than or equal to {0}.
+        /// </summary>
+        public static string LessThanError {
+            get {
+                return ResourceManager.GetString("LessThanError", resourceCulture);
             }
         }
         

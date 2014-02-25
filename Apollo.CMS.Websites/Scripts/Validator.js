@@ -26,30 +26,16 @@ var Validator = (function ($) {
                 $(this).removeAttr('original-title');
             });
         },
-        validateRequiredFields: function (form, gravity) {
+        validateRequiredFields: function (form, gravity, getFirstError) {
             var errorCounter = 0;
+
             $('[data-val-required]', form).each(function () {
-                var eleObj = $(this);
-                var errMsg = eleObj.attr('data-val-required');
-                var value = $.trim(eleObj.val());
+                if (!getFirstError || (getFirstError && errorCounter === 0)) {
+                    var eleObj = $(this);
+                    var errMsg = eleObj.attr('data-val-required');
+                    var value = $.trim(eleObj.val());
 
-                if (errMsg && !value) {
-                    Validator.showTooltip(eleObj, errMsg, gravity);
-                    errorCounter++;
-                }
-            });
-
-            return errorCounter;
-        },
-        validateNumberFields: function (form, gravity) {
-            var errorCounter = 0;
-            $('[data-val-number]', form).each(function () {
-                var eleObj = $(this);
-                if (!eleObj.attr('original-title')) {
-                    var errMsg = eleObj.attr('data-val-number');
-                    var value = $.trim(eleObj.val().replace(/,/g, ''));
-
-                    if (errMsg && (!$.isNumeric(value))) {
+                    if (errMsg && !value) {
                         Validator.showTooltip(eleObj, errMsg, gravity);
                         errorCounter++;
                     }
@@ -58,17 +44,42 @@ var Validator = (function ($) {
 
             return errorCounter;
         },
-        validateDateFields: function (form, gravity) {
+        validateNumberFields: function (form, gravity, getFirstError) {
             var errorCounter = 0;
-            $('[data-val-date]', form).each(function () {
-                var eleObj = $(this);
-                if (!eleObj.attr('original-title')) {
-                    var errMsg = eleObj.attr('data-val-date');
-                    var value = $.trim(eleObj.val());
 
-                    if (errMsg && (value !== '') && !moment(value, CMS.commonConstants.MomentDateFormat).isValid()) {
-                        Validator.showTooltip(eleObj, errMsg, gravity);
-                        errorCounter++;
+            $('[data-val-number]', form).each(function () {
+                if (!getFirstError || (getFirstError && errorCounter === 0)) {
+                    var eleObj = $(this);
+
+                    if (!eleObj.attr('original-title')) {
+                        var errMsg = eleObj.attr('data-val-number');
+                        var value = $.trim(eleObj.val().replace(/,/g, ''));
+
+                        if (errMsg && (!$.isNumeric(value))) {
+                            Validator.showTooltip(eleObj, errMsg, gravity);
+                            errorCounter++;
+                        }
+                    }
+                }
+            });
+
+            return errorCounter;
+        },
+        validateDateFields: function (form, gravity, getFirstError) {
+            var errorCounter = 0;
+
+            $('[data-val-date]', form).each(function () {
+                if (!getFirstError || (getFirstError && errorCounter === 0)) {
+                    var eleObj = $(this);
+
+                    if (!eleObj.attr('original-title')) {
+                        var errMsg = eleObj.attr('data-val-date');
+                        var value = $.trim(eleObj.val());
+
+                        if (errMsg && (value !== '') && !moment(value, CMS.commonConstants.MomentDateFormat).isValid()) {
+                            Validator.showTooltip(eleObj, errMsg, gravity);
+                            errorCounter++;
+                        }
                     }
                 }
             });

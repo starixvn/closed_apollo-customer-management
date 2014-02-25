@@ -1,8 +1,12 @@
 ﻿@using Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting
-@model MemberCommissionItem
+@model MemberDiscountItem
+@{
+    var hasEditSettingRight = (bool)ViewBag.HasEditSettingPermission;
+    var disable = hasEditSettingRight ? string.Empty : "disabled";
+}
 <div class="row commission member">
-    <div class="row commission-title">@ViewLang.Commission <span class="icon-info"></span></div>
-    <div class="row">
+    <div class="row commission-title">@ViewLang.Commission <span id="spnCommissionInfo" class="icon-info"></span></div>
+    <div class="row" id="divCommission">
         <div class="row">
             <div class="col-xs-4 col-sm-4 col-md-4 group-title">@ViewLang.CommissionLine</div>
             <div class="col-xs-8 col-sm-8 col-md-8 group-title">@ViewLang.MemberCommission</div>
@@ -10,28 +14,30 @@
         <div class="row commission-row">
             <div class="col-xs-4 col-sm-4 col-md-4 commission-line">
                 <label for="ddlLine">@string.Format("{0}:", ViewLang.Line)</label>
-                <select id="ddlLine">
-                    <option value="a">A</option>
-                    <option value="b">B</option>
-                    <option value="c">C</option>
-                    <option value="d">D</option>
+                <select id="ddlLine" @disable>
+                    <option value="a" @("a" == Model.Group ? "selected" : string.Empty)>A</option>
+                    <option value="b" @("b" == Model.Group ? "selected" : string.Empty)>B</option>
+                    <option value="c" @("c" == Model.Group ? "selected" : string.Empty)>C</option>
+                    <option value="d" @("d" == Model.Group ? "selected" : string.Empty)>D</option>
                 </select>
             </div>
             <div class="col-xs-8 col-sm-8 col-md-8 line-left">
                 <div class="row commission-row">
                     <div class="col-xs-6 col-sm-6 col-md-6 label-col">
-                        <label for="txtHandicap">@string.Format("{0}, {1}, {2} (%)", ViewLang.HDP, ViewLang.OU, ViewLang.OE)</label>
+                        <label for="txtGroupComm">@string.Format("{0}, {1}, {2} (%)", ViewLang.HDP, ViewLang.OU, ViewLang.OE)</label>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 input-col">
                         <input type="text"
-                               id="txtHandicap"
+                               id="txtGroupComm"
                                class="text-field"
-                               value="@Model.HandicapComm"
-                               data-greater-error="@Messages.GreaterThanError"
-                               data-greater-value="0"/>
+                               value="@Model.DiscountGroup"
+                               maxlength="14"
+                               @disable
+                               data-range-error="@Messages.DiscountRangeError"
+                               data-range-min="0"
+                               data-rang-max="@Model.UplineMinDiscountGroup"/>
                     </div>
-                    <div class="col-xs-3 col-sm-3 col-md-3 range-col">
-                        [0]</div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 range-col">[0 - @Model.UplineMinDiscountGroup]</div>
                 </div>
                 <div class="row commission-row">
                     <div class="col-xs-6 col-sm-6 col-md-6 label-col">
@@ -41,12 +47,14 @@
                         <input type="text"
                                id="txt1x2Comm"
                                class="text-field"
-                               value="@Model._1x2Comm"
-                               data-greater-error="@Messages.GreaterThanError"
-                               data-greater-value="0"/>
+                               value="@Model.Discount1x2"
+                               maxlength="14"
+                               disabled="disabled"
+                               data-range-error="@Messages.DiscountRangeError"
+                               data-range-min="0"
+                               data-rang-max="@Model.UplineMinDiscount1x2"/>
                     </div>
-                    <div class="col-xs-4 col-sm-4 col-md-4 range-col">
-                        [0]</div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 range-col">[0]</div>
                 </div>
                 <div class="row commission-row">
                     <div class="col-xs-6 col-sm-6 col-md-6 label-col">
@@ -56,12 +64,14 @@
                         <input type="text"
                                id="txtOthersComm"
                                class="text-field"
-                               value="@Model.OtherComm"
-                               data-greater-error="@Messages.GreaterThanError"
-                               data-greater-value="0"/>
+                               value="@Model.DiscountOthers"
+                               maxlength="14"
+                               disabled="disabled"
+                               data-range-error="@Messages.DiscountRangeError"
+                               data-range-min="0"
+                               data-rang-max="@Model.UplineMinDiscountOthers"/>
                     </div>
-                    <div class="col-xs-4 col-sm-4 col-md-4 range-col">
-                        [0]</div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 range-col">[0]</div>
                 </div>
             </div>
         </div>

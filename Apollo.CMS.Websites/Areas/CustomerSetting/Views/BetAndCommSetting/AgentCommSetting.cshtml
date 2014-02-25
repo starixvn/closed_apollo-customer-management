@@ -1,8 +1,12 @@
 ﻿@using Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting
-@model AgentCommissionItem
+@model AgentDiscountItem
+@{
+    var hasEditSettingRight = (bool)ViewBag.HasEditSettingPermission;
+    var disable = hasEditSettingRight ? string.Empty : "disabled";
+}
 <div class="row commission agent">
-    <div class="row commission-title">@ViewLang.Commission <span class="icon-info"></span></div>
-    <div class="row">
+    <div class="row commission-title">@ViewLang.Commission <span id="spnCommissionInfo" class="icon-info"></span></div>
+    <div class="row" id="divCommission">
         <div class="row commission-row">
             <div class="col-xs-4 col-sm-4 col-md-4">
                 <div class="col-xs-6 col-sm-6 col-md-6 label-col">
@@ -13,11 +17,12 @@
                            id="txtLineA"
                            class="col-xs-6 col-sm-6 col-md-6 text-field"
                            value="@Model.DiscountA"
+                           maxlength="14"
+                           @disable
                            data-range-error="@Messages.DiscountRangeError"
                            data-range-min="0"
-                           data-rang-max="@Model.Upline.DiscountA"/>
-                    <div class="col-xs-5 col-sm-5 col-md-5 range-col">
-                        [0 - @Model.Upline.DiscountA]</div>
+                           data-rang-max="@Model.UplineMinDiscountA"/>
+                    <div class="col-xs-5 col-sm-5 col-md-5 range-col">[0 - @Model.UplineMinDiscountA]</div>
                 </div>
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4">
@@ -29,11 +34,12 @@
                            id="txtLineC"
                            class="col-xs-6 col-sm-6 col-md-6 text-field"
                            value="@Model.DiscountC"
+                           maxlength="14"
+                           @disable
                            data-range-error="@Messages.DiscountRangeError"
                            data-range-min="0"
-                           data-rang-max="@Model.Upline.DiscountC"/>
-                    <div class="col-xs-5 col-sm-5 col-md-5 range-col">
-                        [0 - @Model.Upline.DiscountC]</div>
+                           data-rang-max="@Model.UplineMinDiscountC"/>
+                    <div class="col-xs-5 col-sm-5 col-md-5 range-col">[0 - @Model.UplineMinDiscountC]</div>
                 </div>
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4">
@@ -44,12 +50,13 @@
                     <input type="text"
                            id="txt1x2Comm"
                            class="col-xs-6 col-sm-6 col-md-6 text-field"
-                           value="@Model._1x2Comm"
+                           value="@Model.Discount1x2"
+                           maxlength="14"
+                           disabled="disabled"
                            data-range-error="@Messages.DiscountRangeError"
                            data-range-min="0"
-                           data-rang-max="@Model.Upline._1x2Comm"/>
-                    <div class="col-xs-5 col-sm-5 col-md-5 range-col">
-                        [0]</div>
+                           data-rang-max="@Model.UplineMinDiscount1x2"/>
+                    <div class="col-xs-5 col-sm-5 col-md-5 range-col">[0]</div>
                 </div>
             </div>
         </div>
@@ -63,11 +70,12 @@
                            id="txtLineB"
                            class="col-xs-6 col-sm-6 col-md-6 text-field"
                            value="@Model.DiscountB"
+                           maxlength="14"
+                           @disable
                            data-range-error="@Messages.DiscountRangeError"
                            data-range-min="0"
-                           data-rang-max="@Model.Upline.DiscountB"/>
-                    <div class="col-xs-5 col-sm-5 col-md-5 range-col">
-                        [0 - @Model.Upline.DiscountB]</div>
+                           data-rang-max="@Model.UplineMinDiscountB"/>
+                    <div class="col-xs-5 col-sm-5 col-md-5 range-col">[0 - @Model.UplineMinDiscountB]</div>
                 </div>
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4">
@@ -79,11 +87,12 @@
                            id="txtLineD"
                            class="col-xs-6 col-sm-6 col-md-6 text-field"
                            value="@Model.DiscountD"
+                           maxlength="14"
+                           disabled="disabled"
                            data-range-error="@Messages.DiscountRangeError"
                            data-range-min="0"
-                           data-rang-max="@Model.Upline.DiscountD"/>
-                    <div class="col-xs-5 col-sm-5 col-md-5 range-col">
-                        [0]</div>
+                           data-rang-max="@Model.UplineMinDiscountD"/>
+                    <div class="col-xs-5 col-sm-5 col-md-5 range-col">[0]</div>
                 </div>
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4">
@@ -94,12 +103,13 @@
                     <input type="text"
                            id="txtOthersComm"
                            class="col-xs-6 col-sm-6 col-md-6 text-field"
-                           value="@Model.OtherComm"
+                           value="@Model.DiscountOthers"
+                           maxlength="14"
+                           disabled="disabled"
                            data-range-error="@Messages.DiscountRangeError"
-                           data-range-min="0"
-                           data-rang-max="@Model.Upline.OtherComm"/>
-                    <div class="col-xs-5 col-sm-5 col-md-5 range-col">
-                        [0]</div>
+                           data-range-min="@Model.DiscountOthers"
+                           data-rang-max="@Model.UplineMinDiscountOthers"/>
+                    <div class="col-xs-5 col-sm-5 col-md-5 range-col">[0]</div>
                 </div>
             </div>
         </div>
