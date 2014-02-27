@@ -5,8 +5,16 @@
     var betLimits = (IEnumerable<BetLimitItem>)ViewBag.BetLimits;
     var hasEditSettingRight = (bool)ViewBag.HasEditSettingPermission;
     var disable = hasEditSettingRight ? string.Empty : "disabled";
-    var rangeFormat = (Model.IsMember || Model.Level > (int)HighLevelAgents.MainShareholder) ? "[{0} - {1}]" : ">={0}";
-    var minSingleBetRangeFormat = (Model.IsMember || Model.Level > (int)HighLevelAgents.MainShareholder) ? ">={0}" : string.Empty;
+    var rangeFormat = "[{0} - {1}]";
+    var rangeValidationFormat = "data-val-range=\"" + Messages.ValueRangeError + "\" data-range-min={2} data-range-max={3}";
+    var minSingleBetRangeFormat = ">={0}";
+
+    if (!Model.IsMember && Model.Level < (int)HighLevelAgents.Shareholder)
+    {
+        rangeFormat = ">={0}";
+        rangeValidationFormat = "data-val-greater=\"" + Messages.GreaterThanError + "\" data-greater-value={2}";
+        minSingleBetRangeFormat = string.Empty;
+    }
 }
 <div class="row commission">
     <div class="row commission-title">@ViewLang.BetLimit <span id="spnBetLimitInfo" class="icon-info"></span></div>
@@ -41,9 +49,7 @@
                                maxlength="14"
                                @disable
                                data-val-number="@Messages.InvalidValue"
-                               data-val-range="@Messages.ValueRangeError"
-                               data-range-min="@item.MinOfSingleGame"
-                               data-range-max="@item.MaxOfSingleGame"
+                               @Html.Raw(string.Format(rangeValidationFormat, "{0}", "{1}", item.MinOfSingleGame, item.MaxOfSingleGame))
                                data-greater-error="@Messages.GreaterThanError"/>
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-5 range-col">@string.Format(rangeFormat, item.MinOfSingleGame, item.MaxOfSingleGame)</div>
@@ -56,9 +62,7 @@
                                maxlength="14"
                                @disable
                                data-val-number="@Messages.InvalidValue"
-                               data-val-range="@Messages.ValueRangeError"
-                               data-range-min="@item.MinOfSingleBet"
-                               data-range-max="@item.MaxOfSingleBet"
+                               @Html.Raw(string.Format(rangeValidationFormat, "{0}", "{1}", item.MinOfSingleBet, item.MaxOfSingleBet))
                                data-greater-error="@Messages.GreaterThanError"/>
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-5 range-col">@string.Format(rangeFormat, item.MinOfSingleBet, item.MaxOfSingleBet)</div>

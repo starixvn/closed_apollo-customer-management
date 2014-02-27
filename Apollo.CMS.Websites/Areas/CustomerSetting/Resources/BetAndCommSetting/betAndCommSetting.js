@@ -1,5 +1,5 @@
 ﻿/* File Created: February 21, 2014 */
-/* global numeral, Apollo, CMS, Namespace, pageLayout, layoutHelper, Validator, hasEditSettingRight, custId, uplineId, isMember, updateMessage */
+/* global numeral, Apollo, CMS, Namespace, pageLayout, Validator, hasEditSettingRight, custId, uplineId, isMember, updateMessage */
 
 $(document).ready(function () {
     'use strict';
@@ -285,10 +285,12 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
 
         if (rawSingleBetValue < rawMinSingleBetValue) {
             Validator.showTooltip(txtSingleBet, singleBetError.format(minSingleBetValue), 's');
+            hasError = true;
         }
 
         if (rawSingleGameValue < rawSingleBetValue) {
             Validator.showTooltip(txtSingleGame, singleGameError.format(singleBetValue), 's');
+            hasError = true;
         }
 
         return hasError;
@@ -342,6 +344,15 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
         $obj.val(value);
     };
 
+    // Format input value in commission field after loosing focus.
+    var formatBetLimitValue = function ($obj) {
+        var value = $obj.val();
+        var rawValue = value.replace(/,/g, '');
+
+        value = numeral(rawValue).format(CMS.commonConstants.NumberFormat);
+        $obj.val(value);
+    };
+
     // Initialize fields and handle events.
     var initFields = function () {
         if (!hasEditSettingRight) {
@@ -372,6 +383,7 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
         }).on('blur', function () {
             var $obj = $(this);
 
+            formatBetLimitValue($obj);
             validateBetLimitField($obj);
         }).on('keypress', { decimals: 0 }, pageLayout.MarkAsNumberField).on('keyup', pageLayout.FormatNumberField);
 
@@ -412,8 +424,6 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
         if (parameters.BetLimits.length > 0 ||
             parameters.Discounts.length > 0 ||
             parameters.Group !== null) {
-            console.log(parameters);
-
             $.ajax({
                 type: 'POST',
                 url: urls.UpdateBetAndComm,
@@ -426,7 +436,7 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
                 success: function (result) {
                     if (result.Code === 0) {
                         CMS.showInfoMessage(updateMessage);
-                        layoutHelper.DOMInstance.ifrMainContent.attr('src', layoutHelper.DOMInstance.ifrMainContent.attr('src'));
+                        location.reload();
                     } else {
                         CMS.headlineMsgBox.showErr(result.Message);
                     }
