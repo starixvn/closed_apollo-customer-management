@@ -5,7 +5,10 @@
     var disable = hasEditSettingRight ? string.Empty : "disabled";
 }
 <div class="row commission agent">
-    <div class="row commission-title">@ViewLang.Commission <span id="spnCommissionInfo" class="icon-info"></span></div>
+    <div class="row commission-title">
+        @ViewLang.Commission
+        <span id="spnCommissionInfo" class="icon-info" title="@ViewLang.CommissionSettingInstructions"></span>
+    </div>
     <div class="row" id="divCommission">
         <input type="hidden" id="hdnSportType" value="@Model.SportType"/>
         <input type="hidden" id="hdnBetType" value="@Model.BetType"/>

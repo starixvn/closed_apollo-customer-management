@@ -26,6 +26,7 @@ namespace Apollo.CMS.CustomerSetting.Services.Implements
     /// </summary>
     public class BetAndCommSettingService : BaseService, IBetAndCommSettingService
     {
+        private const int SuperId = 1;
         private readonly IBetAndCommSettingRepository _repository;
 
         public BetAndCommSettingService() :
@@ -126,7 +127,7 @@ namespace Apollo.CMS.CustomerSetting.Services.Implements
                 criteria = new UpdateCustomerSettingCriteria
                 {
                     AdminId = filter.AdminId,
-                    ActorAgentId = 1, ////filter.AdminId,
+                    ActorAgentId = SuperId,
                     CustId = filter.CustId,
                     UGroup = filter.GetActualGroup(),
                     BetLimit = filter.ConvertBetLimits(),
@@ -140,7 +141,7 @@ namespace Apollo.CMS.CustomerSetting.Services.Implements
                 criteria = new UpdateAgentSettingCriteria
                 {
                     AdminId = filter.AdminId,
-                    ActorAgentId = 1, ////filter.AdminId,
+                    ActorAgentId = SuperId,
                     AgentId = filter.CustId,
                     BetLimit = filter.ConvertBetLimits(),
                     Discount = filter.ConvertDiscounts(),

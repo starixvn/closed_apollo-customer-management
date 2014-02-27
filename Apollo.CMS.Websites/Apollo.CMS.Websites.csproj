@@ -301,6 +301,12 @@
     <Content Include="Areas\CustomerSetting\Views\BetAndCommSetting\MemberCommSetting.cshtml" />
     <Content Include="Areas\CustomerSetting\Views\BetAndCommSetting\AgentCommSetting.cshtml" />
     <Content Include="Areas\CustomerSetting\Views\BetAndCommSetting\BetLimitSetting.cshtml" />
+    <Content Include="Areas\CustomerSetting\Views\BetAndCommSetting\AgentCommInstructions.cshtml" />
+    <Content Include="Areas\CustomerSetting\Views\BetAndCommSetting\MainShareholderCommInstructions.cshtml" />
+    <Content Include="Areas\CustomerSetting\Views\BetAndCommSetting\MainShareholderBetLimitInstructions.cshtml" />
+    <Content Include="Areas\CustomerSetting\Views\BetAndCommSetting\AgentBetLimitInstructions.cshtml" />
+    <Content Include="Areas\CustomerSetting\Views\BetAndCommSetting\MemberCommInstructions.cshtml" />
+    <Content Include="Areas\CustomerSetting\Views\BetAndCommSetting\MemberBetLimitInstructions.cshtml" />
     <None Include="Noesis.Javascript\Noesis.Javascript.x64.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

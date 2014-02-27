@@ -196,6 +196,15 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bet Limit Instructions.
+        /// </summary>
+        public static string BetLimitInstruction {
+            get {
+                return ResourceManager.GetString("BetLimitInstruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bet List.
         /// </summary>
         public static string BetList {
@@ -327,6 +336,15 @@ namespace Apollo.CMS.Core.Resources {
         public static string CommissionLine {
             get {
                 return ResourceManager.GetString("CommissionLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Commission Setting Instructions.
+        /// </summary>
+        public static string CommissionSettingInstructions {
+            get {
+                return ResourceManager.GetString("CommissionSettingInstructions", resourceCulture);
             }
         }
         

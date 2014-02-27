@@ -5,7 +5,10 @@
     var disable = hasEditSettingRight ? string.Empty : "disabled";
 }
 <div class="row commission member">
-    <div class="row commission-title">@ViewLang.Commission <span id="spnCommissionInfo" class="icon-info"></span></div>
+    <div class="row commission-title">
+        @ViewLang.Commission
+        <span id="spnCommissionInfo" class="icon-info"  title="@ViewLang.CommissionSettingInstructions"></span>
+    </div>
     <div class="row" id="divCommission">
         <div class="row">
             <div class="col-xs-4 col-sm-4 col-md-4 group-title">@ViewLang.CommissionLine</div>

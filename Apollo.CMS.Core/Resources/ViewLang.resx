@@ -528,4 +528,10 @@
   <data name="_1x2Comm" xml:space="preserve">
     <value>1x2 Comm</value>
   </data>
+  <data name="BetLimitInstruction" xml:space="preserve">
+    <value>Bet Limit Instructions</value>
+  </data>
+  <data name="CommissionSettingInstructions" xml:space="preserve">
+    <value>Commission Setting Instructions</value>
+  </data>
 </root>

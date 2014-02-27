@@ -1,5 +1,5 @@
 ﻿/* File Created: February 21, 2014 */
-/* global numeral, Apollo, CMS, Namespace, pageLayout, Validator, hasEditSettingRight, custId, uplineId, isMember, updateMessage */
+/* global numeral, Apollo, CMS, Namespace, pageLayout, Validator, hasEditSettingRight, filter, messages */
 
 $(document).ready(function () {
     'use strict';
@@ -53,10 +53,12 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
     var cacheDOM = function () {
         $this.DOMInstance.divCommission = $('#divCommission');
         $this.DOMInstance.spnCommissionInfo = $('#spnCommissionInfo');
+        $this.DOMInstance.divCommInstructions = $('#divCommInstructions');
         $this.DOMInstance.ddlLine = $this.DOMInstance.divCommission.find('#ddlLine');
         $this.DOMInstance.divGroupCommRange = $this.DOMInstance.divCommission.find('#divGroupCommRange');
         $this.DOMInstance.divBetLimit = $('#divBetLimit');
         $this.DOMInstance.spnBetLimitInfo = $('#spnBetLimitInfo');
+        $this.DOMInstance.divBetLimitInstructions = $('#divBetLimitInstructions');
         $this.DOMInstance.btnSubmit = $('#btnSubmit');
     };
 
@@ -114,7 +116,7 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
         var betType;
 
         // Get group commission.
-        if (!isMember) {
+        if (!filter.isMember) {
             lineA = $this.DOMInstance.divCommission.find('#txtLineA').val();
             lineB = $this.DOMInstance.divCommission.find('#txtLineB').val();
             lineC = $this.DOMInstance.divCommission.find('#txtLineC').val();
@@ -168,7 +170,7 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
     };
 
     var getCommRanges = function () {
-        if (isMember) {
+        if (filter.isMember) {
             var lineA = $this.DOMInstance.divCommission.find('#hdnMaxDiscountA').val();
             var lineB = $this.DOMInstance.divCommission.find('#hdnMaxDiscountB').val();
             var lineC = $this.DOMInstance.divCommission.find('#hdnMaxDiscountC').val();
@@ -355,8 +357,17 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
 
     // Initialize fields and handle events.
     var initFields = function () {
+        $this.DOMInstance.spnCommissionInfo.on('click', function () {
+            pageLayout.ClosePopup();
+            pageLayout.Popup(messages.commissionSettingInstructions, $this.DOMInstance.divCommInstructions.html(), {}, false);
+        });
+
+        $this.DOMInstance.spnBetLimitInfo.on('click', function () {
+            console.log($this.DOMInstance.divBetLimitInstructions.html());
+            pageLayout.Popup(messages.betLimitInstruction, $this.DOMInstance.divBetLimitInstructions.html(), {}, false);
+        });
+
         if (!hasEditSettingRight) {
-            //@@TODO: Show/hide popup here.
             return;
         }
 
@@ -417,9 +428,9 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
         parameters.BetLimits = getChangedBetLimits();
         parameters.Discounts = getChangedCommissions();
         parameters.Group = getChangedGroup();
-        parameters.CustId = custId;
-        parameters.UplineId = uplineId;
-        parameters.IsMember = isMember;
+        parameters.CustId = filter.custId;
+        parameters.UplineId = filter.uplineId;
+        parameters.IsMember = filter.isMember;
 
         if (parameters.BetLimits.length > 0 ||
             parameters.Discounts.length > 0 ||
@@ -435,8 +446,8 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
                 },
                 success: function (result) {
                     if (result.Code === 0) {
-                        CMS.showInfoMessage(updateMessage);
-                        location.reload();
+                        CMS.showInfoMessage(messages.updateMessage);
+                        //location.reload(true);
                     } else {
                         CMS.headlineMsgBox.showErr(result.Message);
                     }
@@ -454,10 +465,12 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
     $this.DOMInstance = {
         divCommission: null,
         spnCommissionInfo: null,
+        divCommInstructions: null,
         ddlLine: null,
         divGroupCommRange: null,
         divBetLimit: null,
         spnBetLimitInfo: null,
+        divBetLimitInstructions: null,
         btnSubmit: null
     };
     $this.InitPage = function () {
