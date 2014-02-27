@@ -20,6 +20,12 @@
                     <option value="c" @("c" == Model.Group ? "selected" : string.Empty)>C</option>
                     <option value="d" @("d" == Model.Group ? "selected" : string.Empty)>D</option>
                 </select>
+                <input type="hidden" id="hdnSportType" value="@Model.SportType"/>
+                <input type="hidden" id="hdnBetType" value="@Model.BetType"/>
+                <input type="hidden" id="hdnMaxDiscountA" value="@Model.UplineMinDiscountA"/>
+                <input type="hidden" id="hdnMaxDiscountB" value="@Model.UplineMinDiscountB"/>
+                <input type="hidden" id="hdnMaxDiscountC" value="@Model.UplineMinDiscountC"/>
+                <input type="hidden" id="hdnMaxDiscountD" value="@Model.UplineMinDiscountD"/>
             </div>
             <div class="col-xs-8 col-sm-8 col-md-8 line-left">
                 <div class="row commission-row">
@@ -38,7 +44,7 @@
                                data-range-min="0"
                                data-range-max="@Model.UplineMinDiscountGroup"/>
                     </div>
-                    <div class="col-xs-3 col-sm-3 col-md-3 range-col">[0 - @Model.UplineMinDiscountGroup]</div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 range-col" id="divGroupCommRange">[0 - @Model.UplineMinDiscountGroup]</div>
                 </div>
                 <div class="row commission-row">
                     <div class="col-xs-6 col-sm-6 col-md-6 label-col">
@@ -55,6 +61,8 @@
                                data-val-range="@Messages.ValueRangeError"
                                data-range-min="0"
                                data-range-max="@Model.UplineMinDiscount1x2"/>
+                        <input type="hidden" id="hdnSportTyp1x2" value="@Model.SportType1x2"/>
+                        <input type="hidden" id="hdnBetType1x2" value="@Model.BetType1x2"/>
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 range-col">[0]</div>
                 </div>
@@ -73,6 +81,8 @@
                                data-val-range="@Messages.ValueRangeError"
                                data-range-min="0"
                                data-range-max="@Model.UplineMinDiscountOthers"/>
+                        <input type="hidden" id="hdnSportTypeOthers" value="@Model.SportTypeOthers"/>
+                        <input type="hidden" id="hdnBetTypeOthers" value="@Model.BetTypeOthers"/>
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 range-col">[0]</div>
                 </div>

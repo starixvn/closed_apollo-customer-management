@@ -88,6 +88,9 @@
     <Compile Include="ViewModels\BetAndCommSetting\BetAndCommSettingFilter.cs" />
     <Compile Include="ViewModels\BetAndCommSetting\MemberDiscountItem.cs" />
     <Compile Include="ViewModels\BetAndCommSetting\BetLimitItem.cs" />
+    <Compile Include="ViewModels\BetAndCommSetting\UpdateBetAndCommFilter.cs" />
+    <Compile Include="ViewModels\BetAndCommSetting\UpdatedbetLimitItem.cs" />
+    <Compile Include="ViewModels\BetAndCommSetting\UpdatedCommItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Apollo.CMS.Core\Apollo.CMS.Core.csproj">

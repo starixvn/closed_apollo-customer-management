@@ -1,8 +1,12 @@
-﻿@using Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting
+﻿@using Apollo.CMS.Core.Constants
+@using Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting
+@model BetAndCommSettingFilter
 @{
     var betLimits = (IEnumerable<BetLimitItem>)ViewBag.BetLimits;
     var hasEditSettingRight = (bool)ViewBag.HasEditSettingPermission;
     var disable = hasEditSettingRight ? string.Empty : "disabled";
+    var rangeFormat = (Model.IsMember || Model.Level > (int)HighLevelAgents.MainShareholder) ? "[{0} - {1}]" : ">={0}";
+    var minSingleBetRangeFormat = (Model.IsMember || Model.Level > (int)HighLevelAgents.MainShareholder) ? ">={0}" : string.Empty;
 }
 <div class="row commission">
     <div class="row commission-title">@ViewLang.BetLimit <span id="spnBetLimitInfo" class="icon-info"></span></div>
@@ -39,9 +43,10 @@
                                data-val-number="@Messages.InvalidValue"
                                data-val-range="@Messages.ValueRangeError"
                                data-range-min="@item.MinOfSingleGame"
-                               data-range-max="@item.MaxOfSingleGame"/>
+                               data-range-max="@item.MaxOfSingleGame"
+                               data-greater-error="@Messages.GreaterThanError"/>
                         </div>
-                        <div class="col-xs-5 col-sm-5 col-md-5 range-col">[@item.MinOfSingleGame - @item.MaxOfSingleGame]</div>
+                        <div class="col-xs-5 col-sm-5 col-md-5 range-col">@string.Format(rangeFormat, item.MinOfSingleGame, item.MaxOfSingleGame)</div>
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 line-right">
                         <div class="col-xs-7 col-sm-7 col-md-7 input-col">
@@ -53,9 +58,10 @@
                                data-val-number="@Messages.InvalidValue"
                                data-val-range="@Messages.ValueRangeError"
                                data-range-min="@item.MinOfSingleBet"
-                               data-range-max="@item.MaxOfSingleBet"/>
+                               data-range-max="@item.MaxOfSingleBet"
+                               data-greater-error="@Messages.GreaterThanError"/>
                         </div>
-                        <div class="col-xs-5 col-sm-5 col-md-5 range-col">[@item.MinOfSingleBet - @item.MaxOfSingleBet]</div>
+                        <div class="col-xs-5 col-sm-5 col-md-5 range-col">@string.Format(rangeFormat, item.MinOfSingleBet, item.MaxOfSingleBet)</div>
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4">
                         <div class="col-xs-7 col-sm-7 col-md-7 input-col">
@@ -64,10 +70,11 @@
                                value="@item.MinSingleBet"
                                maxlength="14"
                                @disable
+                               data-val-number="@Messages.InvalidValue"
                                data-val-greater="@Messages.GreaterThanError"
                                data-greater-value="@item.MinOfMinSingleBet"/>
                         </div>
-                        <div class="col-xs-5 col-sm-5 col-md-5 range-col">>=@item.MinOfMinSingleBet</div>
+                        <div class="col-xs-5 col-sm-5 col-md-5 range-col">@string.Format(minSingleBetRangeFormat, item.MinOfMinSingleBet)</div>
                     </div>
                 </div>
             </div>

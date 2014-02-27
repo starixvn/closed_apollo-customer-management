@@ -39,6 +39,10 @@ namespace Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting
                         this.Group = GetActualGroup(group);
                         this.DiscountGroup = (discountInfo.Discount * 100).ToString(SettingConstants.DecimalFormat);
                         this.UplineMinDiscountGroup = (GetUplineGroupComm(discountInfo) * 100).ToString(SettingConstants.DecimalFormat);
+                        this.UplineMinDiscountA = (Converter.ToDecimal(discountInfo.UplineMinDiscountD) * 100).ToString(SettingConstants.DecimalFormat);
+                        this.UplineMinDiscountB = (Converter.ToDecimal(discountInfo.UplineMinDiscountC) * 100).ToString(SettingConstants.DecimalFormat);
+                        this.UplineMinDiscountC = (Converter.ToDecimal(discountInfo.UplineMinDiscountB) * 100).ToString(SettingConstants.DecimalFormat);
+                        this.UplineMinDiscountD = (Converter.ToDecimal(discountInfo.UplineMinDiscountA) * 100).ToString(SettingConstants.DecimalFormat);
                     }
                 }
 
@@ -48,6 +52,8 @@ namespace Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting
 
                     if (discountInfo != null)
                     {
+                        this.SportType1x2 = discountInfo.SportType;
+                        this.BetType1x2 = discountInfo.BetType;
                         this.Discount1x2 = (discountInfo.Discount * 100).ToString(SettingConstants.DecimalFormat);
                         this.UplineMinDiscount1x2 = (Converter.ToDecimal(discountInfo.UplineMinDiscountA) * 100).ToString(SettingConstants.DecimalFormat);
                     }
@@ -59,6 +65,8 @@ namespace Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting
 
                     if (discountInfo != null)
                     {
+                        this.SportTypeOthers = discountInfo.SportType;
+                        this.BetTypeOthers = discountInfo.BetType;
                         this.DiscountOthers = (discountInfo.Discount * 100).ToString(SettingConstants.DecimalFormat);
                         this.UplineMinDiscountOthers = (Converter.ToDecimal(discountInfo.UplineMinDiscountA) * 100).ToString(SettingConstants.DecimalFormat);
                     }
@@ -70,6 +78,14 @@ namespace Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting
 
         public short BetType { get; set; }
 
+        public short SportType1x2 { get; set; }
+
+        public short BetType1x2 { get; set; }
+
+        public short SportTypeOthers { get; set; }
+
+        public short BetTypeOthers { get; set; }
+
         public string DiscountGroup { get; set; }
 
         public string Discount1x2 { get; set; }
@@ -77,6 +93,14 @@ namespace Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting
         public string DiscountOthers { get; set; }
 
         public string UplineMinDiscountGroup { get; set; }
+
+        public string UplineMinDiscountA { get; set; }
+
+        public string UplineMinDiscountB { get; set; }
+
+        public string UplineMinDiscountC { get; set; }
+
+        public string UplineMinDiscountD { get; set; }
 
         public string UplineMinDiscount1x2 { get; set; }
 

@@ -28,5 +28,9 @@
     @Scripts.Render("~/scripts/betAndCommSetting")
     <script type="text/javascript">
         var hasEditSettingRight = '@hasEditSettingRight' === 'True';
+        var custId = '@Model.CustId';
+        var uplineId = '@Model.UplineId';
+        var isMember = '@Model.IsMember' === 'True';
+        var updateMessage = '@Messages.UpdateSettingsSuccessfully';
     </script>
 }

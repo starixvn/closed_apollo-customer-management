@@ -18,6 +18,7 @@ namespace Apollo.CMS.CustomerSetting.Services.Implements
     using Apollo.CMS.CustomerSetting.Repositories.Interfaces;
     using Apollo.CMS.CustomerSetting.Services.Interfaces;
     using Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting;
+    using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
@@ -109,6 +110,46 @@ namespace Apollo.CMS.CustomerSetting.Services.Implements
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Updates the bet and commission setting.
+        /// </summary>
+        /// <param name="filter">The filter contains updated data.</param>
+        /// <returns>ICommandResult object shows that the update process is successful or not.</returns>
+        public ICommandResult UpdateBetAndCommSetting(UpdateBetAndCommFilter filter)
+        {
+            ICriteria criteria = null;
+
+            if (filter.IsMember)
+            {
+                criteria = new UpdateCustomerSettingCriteria
+                {
+                    AdminId = filter.AdminId,
+                    ActorAgentId = 1, ////filter.AdminId,
+                    CustId = filter.CustId,
+                    UGroup = filter.GetActualGroup(),
+                    BetLimit = filter.ConvertBetLimits(),
+                    Discount = filter.ConvertDiscounts(),
+                    PositionTaking = string.Empty,
+                    AllowUpdateMinBet = true
+                };
+            }
+            else
+            {
+                criteria = new UpdateAgentSettingCriteria
+                {
+                    AdminId = filter.AdminId,
+                    ActorAgentId = 1, ////filter.AdminId,
+                    AgentId = filter.CustId,
+                    BetLimit = filter.ConvertBetLimits(),
+                    Discount = filter.ConvertDiscounts(),
+                    PositionTaking = string.Empty,
+                    AllowUpdateMinBet = true
+                };
+            }
+
+            return this.UpdateData(criteria);
         }
     }
 }

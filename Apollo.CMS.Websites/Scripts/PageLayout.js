@@ -97,15 +97,55 @@ Apollo.CMS.PageLayoutHelper = function () {
         $this.DOMInstance.divDialogPopup.dialog('close');
     };
 
+    // Get and set caret.
+    $this.GetCaret = function (element) {
+        var position = 0;
+        var ctrl = element.get(0);
+        var ctrlSelStart = ctrl.selectionStart;
+        var selection = document.selection;
+        var selRange = null;
+
+        if (ctrlSelStart || ctrlSelStart === '0') {
+            position = ctrlSelStart;
+        } else if (selection) {
+            ctrl.focus();
+            selRange = selection.createRange();
+            selRange.moveStart('character', -ctrl.value.length);
+            position = selRange.text.length;
+        }
+
+        return position;
+    };
+
+    $this.SetCaret = function (element, position) {
+        var ctrl = element.get(0);
+        var selRange = null;
+
+        if (ctrl.setSelectionRange) {
+            ctrl.focus();
+            ctrl.setSelectionRange(position, position);
+        } else if (ctrl.createTextRange) {
+            selRange = ctrl.createTextRange();
+            selRange.collapse(true);
+            selRange.moveEnd('character', position);
+            selRange.moveStart('character', position);
+            selRange.select();
+        }
+    };
+
     // Mark an input as number field. This function needs to be used for keypress event.
     $this.MarkAsNumberField = function (event) {
         var value = $.trim($(this).val());
         var decimalPos = value.indexOf('.');
         var minusPos = value.indexOf('-');
+        var cursorPos = $this.GetCaret($(this)); //$(this).prop("selectionStart");
 
         // Allow decimal character if there is no decimal character has been input yet
         // and some digits have already been input before the decimal character.
-        if ((event.data.decimals > 0) && (event.keyCode === 46) && (decimalPos < 0) && (value.length > 0)) {
+        if ((event.data.decimals > 0) &&
+            (event.keyCode === 46) &&
+            ((decimalPos < 0) || (decimalPos > 0 && cursorPos <= decimalPos)) &&
+            (value.length > 0)) {
             return;
         }
 
@@ -118,6 +158,7 @@ Apollo.CMS.PageLayoutHelper = function () {
         if ((48 <= event.keyCode) && (event.keyCode <= 57)) {
             // Check whether the number of digits after the decimal meets the requrement or not.
             if ((decimalPos < 0) ||
+                (decimalPos > 0 && cursorPos <= decimalPos) ||
                 ((decimalPos >= 0) && (value.length - decimalPos <= event.data.decimals))) {
                 return;
             }
@@ -131,19 +172,24 @@ Apollo.CMS.PageLayoutHelper = function () {
         var value = $.trim($(this).val());
         var rawValue = value.replace(/,/g, '');
         var decimalPos = rawValue.indexOf('.');
+        var cursorPos = $this.GetCaret($(this));
+        var cursorLastPos = cursorPos === value.length;
 
         rawValue = rawValue === '' ? '0' : rawValue;
-        console.log(event.ctrlKey); console.log(event.keyCode);
 
         if (decimalPos < 0) {
             value = numeral(rawValue).format(CMS.commonConstants.NumberFormat);
+        } else if (decimalPos < rawValue.length - 1) {
+            value = numeral(rawValue).format('0,0.0[000]');
         }
 
         if ((48 <= event.keyCode && event.keyCode <= 57) ||
             (96 <= event.keyCode && event.keyCode <= 105) ||
             (event.keyCode === 45 || event.keyCode === 46) ||
             (event.keyCode === 109 || event.keyCode === 110)) {
+            cursorPos = cursorLastPos ? value.length : cursorPos;
             $(this).val(value);
+            $this.SetCaret($(this), cursorPos);
         }
     };
 

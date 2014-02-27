@@ -12,7 +12,6 @@ namespace Apollo.CMS.CustomerSetting.Controllers
     using System.Collections.Generic;
     using System.Web.Mvc;
     using Apollo.CMS.Core.Controllers;
-    using Apollo.CMS.CustomerSetting.Models.BetAndCommSetting;
     using Apollo.CMS.CustomerSetting.Services.Implements;
     using Apollo.CMS.CustomerSetting.Services.Interfaces;
     using Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting;
@@ -86,6 +85,20 @@ namespace Apollo.CMS.CustomerSetting.Controllers
             ViewBag.BetLimits = betLimitList;
 
             return PartialView(filter);
+        }
+
+        /// <summary>
+        /// Redirect Commission Setting partial view.
+        /// </summary>
+        /// <param name="filter">Filter passed from user.</param>
+        /// <returns>Partial view represents Bet Limit Setting session.</returns>
+        [HttpPost]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.CustomerSetting, Policy = Constant.Policy.Host)]
+        public JsonResult UpdateCommAndBetLimit(UpdateBetAndCommFilter filter)
+        {
+            filter.AdminId = this.CurrentSession.UserId;
+
+            return Json(this._betAndCommSettingService.UpdateBetAndCommSetting(filter));
         }
     }
 }

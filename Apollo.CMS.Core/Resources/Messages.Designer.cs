@@ -124,7 +124,7 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value must be greater than or equal to {0}.
+        ///   Looks up a localized string similar to The value must be greater than or equal to {0}!.
         /// </summary>
         public static string GreaterThanError {
             get {
@@ -187,7 +187,7 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value must be less than or equal to {0}.
+        ///   Looks up a localized string similar to The value must be less than or equal to {0}!.
         /// </summary>
         public static string LessThanError {
             get {
@@ -340,7 +340,16 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value must be greater than {0} and less than {1}!.
+        ///   Looks up a localized string similar to Update settings successfully!.
+        /// </summary>
+        public static string UpdateSettingsSuccessfully {
+            get {
+                return ResourceManager.GetString("UpdateSettingsSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value must not be less than {0} or greater than {1}!.
         /// </summary>
         public static string ValueRangeError {
             get {

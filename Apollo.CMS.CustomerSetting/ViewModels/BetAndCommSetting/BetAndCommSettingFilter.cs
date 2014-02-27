@@ -18,6 +18,8 @@ namespace Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting
 
         public int UplineId { get; set; }
 
+        public int Level { get; set; }
+
         public string Username { get; set; }
 
         public bool IsMember { get; set; }

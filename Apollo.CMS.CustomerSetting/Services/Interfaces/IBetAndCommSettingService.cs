@@ -11,6 +11,7 @@ namespace Apollo.CMS.CustomerSetting.Services.Interfaces
 {
     using System.Collections.Generic;
     using Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting;
+    using Fanex.NAP.Framework.Command;
 
     public interface IBetAndCommSettingService
     {
@@ -34,5 +35,12 @@ namespace Apollo.CMS.CustomerSetting.Services.Interfaces
         /// <param name="filter">The filters that are passed from user.</param>
         /// <returns>List of BetLimitItem objects.</returns>
         IEnumerable<BetLimitItem> GetBetLimits(BetAndCommSettingFilter filter);
+
+        /// <summary>
+        /// Updates the bet and commission setting.
+        /// </summary>
+        /// <param name="filter">The filter contains updated data.</param>
+        /// <returns>ICommandResult object shows that the update process is successful or not.</returns>
+        ICommandResult UpdateBetAndCommSetting(UpdateBetAndCommFilter filter);
     }
 }

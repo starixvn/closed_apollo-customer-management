@@ -65,7 +65,22 @@ var Validator = (function ($) {
 
             return errorCounter;
         },
-        validateNumberRange: function (form, gravity, getFirstError) {
+        validateNumber: function ($obj, gravity) {
+            var errMsg = $obj.attr('data-val-number');
+            var isError = false;
+
+            if (errMsg) {
+                var value = $.trim($obj.val().replace(/,/g, ''));
+
+                if (!$.isNumeric(value)) {
+                    Validator.showTooltip($obj, errMsg, gravity);
+                    isError = true;
+                }
+            }
+
+            return isError;
+        },
+        validateNumberRangeFields: function (form, gravity, getFirstError) {
             var errorCounter = 0;
 
             if (Validator.validateNumberFields(form, gravity) === 0) {
@@ -80,14 +95,15 @@ var Validator = (function ($) {
                             var value = eleObj.val();
 
                             if (errMsg && minValue && maxValue && value) {
-                                minValue = $.trim(minValue.replace(/,/g, ''));
-                                minValue = parseFloat(minValue);
-                                maxValue = $.trim(maxValue.replace(/,/g, ''));
-                                maxValue = parseFloat(maxValue);
-                                value = $.trim(value.replace(/,/g, ''));
-                                value = parseFloat(value);
+                                var rawMinValue = $.trim(minValue.replace(/,/g, ''));
+                                var rawMaxValue = $.trim(maxValue.replace(/,/g, ''));
+                                var rawValue = $.trim(value.replace(/,/g, ''));
 
-                                if (value < minValue || value > maxValue) {
+                                rawMinValue = parseFloat(rawMinValue);
+                                rawMaxValue = parseFloat(rawMaxValue);
+                                rawValue = parseFloat(rawValue);
+
+                                if (rawValue < rawMinValue || rawValue > rawMaxValue) {
                                     Validator.showTooltip(eleObj, errMsg.format(minValue, maxValue), gravity);
                                     errorCounter++;
                                 }
@@ -99,7 +115,34 @@ var Validator = (function ($) {
 
             return errorCounter;
         },
-        validateNumberGreaterThan: function (form, gravity, getFirstError) {
+        validateNumberRange: function ($obj, gravity) {
+            var errMsg = $obj.attr('data-val-range');
+            var isError = Validator.validateNumber($obj, gravity);
+
+            if (errMsg && !isError) {
+                var minValue = $obj.attr('data-range-min');
+                var maxValue = $obj.attr('data-range-max');
+                var value = $obj.val();
+
+                if (minValue && maxValue && value) {
+                    var rawMinValue = $.trim(minValue.replace(/,/g, ''));
+                    var rawMaxValue = $.trim(maxValue.replace(/,/g, ''));
+                    var rawValue = $.trim(value.replace(/,/g, ''));
+
+                    rawMinValue = parseFloat(rawMinValue);
+                    rawMaxValue = parseFloat(rawMaxValue);
+                    rawValue = parseFloat(rawValue);
+
+                    if (rawValue < rawMinValue || rawValue > rawMaxValue) {
+                        Validator.showTooltip($obj, errMsg.format(minValue, maxValue), gravity);
+                        isError = true;
+                    }
+                }
+            }
+
+            return isError;
+        },
+        validateNumberGreaterThanFields: function (form, gravity, getFirstError) {
             var errorCounter = 0;
 
             if (Validator.validateNumberFields(form, gravity) === 0) {
@@ -129,6 +172,30 @@ var Validator = (function ($) {
             }
 
             return errorCounter;
+        },
+        validateNumberGreaterThan: function ($obj, gravity) {
+            var errMsg = $obj.attr('data-val-greater');
+            var isError = Validator.validateNumber($obj, gravity);
+
+            if (errMsg && !isError) {
+                var minValue = $obj.attr('data-greater-value');
+                var value = $obj.val();
+
+                if (minValue && value) {
+                    var rawMinValue = $.trim(minValue.replace(/,/g, ''));
+                    var rawValue = $.trim(value.replace(/,/g, ''));
+
+                    rawMinValue = parseFloat(rawMinValue);
+                    rawValue = parseFloat(rawValue);
+
+                    if (rawValue < rawMinValue) {
+                        Validator.showTooltip($obj, errMsg.format(minValue), gravity);
+                        isError = true;
+                    }
+                }
+            }
+
+            return isError;
         },
         validateDateFields: function (form, gravity, getFirstError) {
             var errorCounter = 0;

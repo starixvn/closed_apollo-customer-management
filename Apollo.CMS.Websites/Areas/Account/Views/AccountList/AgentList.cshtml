@@ -5,6 +5,7 @@
     var pageSize = (int)ViewBag.PageSize;
     var isSuper = agentLevel == (int)HighLevelAgents.Super;
     var hasMember = agentLevel > (int)HighLevelAgents.MainShareholder;
+    var betAndCommLink = "~/CustomerSetting/BetAndCommSetting?CustId={0}&UplineId={1}&Username={2}&Level={3}";
     
     ViewBag.Title = ViewLang.AgentList;
     Layout = "~/Views/Shared/_PageLayout.cshtml";
@@ -75,7 +76,7 @@
     {
         <li><a href="#">@ViewLang.MemberShareSetting</a></li>
     }
-    <li><a href="#" data-url="@Url.Content("~/CustomerSetting/BetAndCommSetting?CustId={0}&UplineId={1}&Username={2}")">@ViewLang.BetAndCommSetting</a></li>
+    <li><a href="#" data-url="@Url.Content(betAndCommLink)">@ViewLang.BetAndCommSetting</a></li>
 </ul>
 
 @section Foot {

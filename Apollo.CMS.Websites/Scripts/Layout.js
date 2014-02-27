@@ -61,7 +61,7 @@ Apollo.CMS.LayoutHelper = function () {
         $('a[href]:not([href^="#"]):not([href^="javascript:;"]):not([data-is-logout])').live('click', function () {
             var linkHref = this.href;
             var $parent = $(this).closest('ul');
-            
+
             $this.ResetMenuState();
             if ($parent.hasClass('subMenu')) {
                 $parent = $parent.parent();

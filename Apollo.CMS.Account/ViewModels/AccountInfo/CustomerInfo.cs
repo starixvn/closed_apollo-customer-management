@@ -10,6 +10,7 @@
 namespace Apollo.CMS.Account.ViewModels.AccountInfo
 {
     using Apollo.CMS.Account.Models.AccountInfo;
+    using Fanex.Common;
 
     /// <summary>
     /// Common information of a customer.
@@ -25,6 +26,7 @@ namespace Apollo.CMS.Account.ViewModels.AccountInfo
             if (agent != null)
             {
                 this.CustId = agent.AgentId;
+                this.Level = Converter.ToInt(agent.AgentLevel);
                 this.UplineId = agent.ParentId;
                 this.Username = agent.Username;
             }
@@ -42,6 +44,8 @@ namespace Apollo.CMS.Account.ViewModels.AccountInfo
         }
 
         public int CustId { get; set; }
+
+        public int Level { get; set; }
 
         public int? UplineId { get; set; }
 

@@ -27,11 +27,9 @@ namespace Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting
             if (discountList != null)
             {
                 AgentDiscountInfo discountInfo = null;
-
                 if (discountList.Length > 0)
                 {
                     discountInfo = discountList[0];
-
                     if (discountInfo != null)
                     {
                         this.SportType = discountInfo.SportType;
@@ -50,9 +48,10 @@ namespace Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting
                 if (discountList.Length > 1)
                 {
                     discountInfo = discountList[1];
-
                     if (discountInfo != null)
                     {
+                        this.SportType1x2 = discountInfo.SportType;
+                        this.BetType1x2 = discountInfo.BetType;
                         this.Discount1x2 = (discountInfo.DiscountA * 100).ToString(SettingConstants.DecimalFormat);
                         this.UplineMinDiscount1x2 = (Converter.ToDecimal(discountInfo.UplineMinDiscountA) * 100).ToString(SettingConstants.DecimalFormat);
                     }
@@ -61,9 +60,10 @@ namespace Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting
                 if (discountList.Length > 2)
                 {
                     discountInfo = discountList[2];
-
                     if (discountInfo != null)
                     {
+                        this.SportTypeOthers = discountInfo.SportType;
+                        this.BetTypeOthers = discountInfo.BetType;
                         this.DiscountOthers = (discountInfo.DiscountA * 100).ToString(SettingConstants.DecimalFormat);
                         this.UplineMinDiscountOthers = (Converter.ToDecimal(discountInfo.UplineMinDiscountA) * 100).ToString(SettingConstants.DecimalFormat);
                     }
@@ -74,6 +74,14 @@ namespace Apollo.CMS.CustomerSetting.ViewModels.BetAndCommSetting
         public short SportType { get; set; }
 
         public short BetType { get; set; }
+
+        public short SportType1x2 { get; set; }
+
+        public short BetType1x2 { get; set; }
+
+        public short SportTypeOthers { get; set; }
+
+        public short BetTypeOthers { get; set; }
 
         public string DiscountA { get; set; }
 
