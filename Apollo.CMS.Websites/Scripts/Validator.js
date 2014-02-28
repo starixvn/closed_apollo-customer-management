@@ -18,7 +18,10 @@ var Validator = (function ($) {
                 opacity: 0.97
             });
             $obj.tipsy('show');
-            $obj.focus();
+            // FireFox will not re-focus to the control until blur event finshes.
+            setTimeout(function () {
+                $obj.focus();
+            }, 0);
         },
         clearErrorMessages: function (form) {
             form.find('[original-title]').each(function () {

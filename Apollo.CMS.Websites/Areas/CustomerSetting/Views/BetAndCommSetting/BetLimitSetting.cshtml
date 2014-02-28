@@ -40,7 +40,7 @@
                     @item.SportTypeName
                     @if (item.IsSpecialSport && hasEditSettingRight)
                     {
-                        <span class="icon-copy"></span>
+                        <span class="icon-copy" title="@string.Format(Messages.CopyBetLimitMessage, item.SportTypeName)"></span>
                     }
                 </div>
                 <div class="col-xs-10 col-sm-10 col-md-10">

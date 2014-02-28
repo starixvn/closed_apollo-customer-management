@@ -21,7 +21,7 @@ namespace Apollo.CMS.CustomerSetting.Constants
     /// </summary>
     public static class SettingConstants
     {
-        public const string DecimalFormat = "#,##0.##";
+        public const string DecimalFormat = "#,##0.00";
 
         static SettingConstants()
         {

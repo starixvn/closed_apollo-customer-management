@@ -106,6 +106,15 @@ namespace Apollo.CMS.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy all below bet settings from {0}.
+        /// </summary>
+        public static string CopyBetLimitMessage {
+            get {
+                return ResourceManager.GetString("CopyBetLimitMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [To] value must be greater than or equal to [From].
         /// </summary>
         public static string DateRangeError {
@@ -201,6 +210,15 @@ namespace Apollo.CMS.Core.Resources {
         public static string NewPasswordCannotEmpty {
             get {
                 return ResourceManager.GetString("NewPasswordCannotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is no changes!.
+        /// </summary>
+        public static string NoChangeMessage {
+            get {
+                return ResourceManager.GetString("NoChangeMessage", resourceCulture);
             }
         }
         
@@ -336,6 +354,15 @@ namespace Apollo.CMS.Core.Resources {
         public static string UnAuthorizedRequestError {
             get {
                 return ResourceManager.GetString("UnAuthorizedRequestError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to update these settings?.
+        /// </summary>
+        public static string UpdateSettingsConfirmMessage {
+            get {
+                return ResourceManager.GetString("UpdateSettingsConfirmMessage", resourceCulture);
             }
         }
         

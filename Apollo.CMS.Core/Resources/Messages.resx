@@ -132,6 +132,9 @@
   <data name="ConfirmPasswordCannotEmpty" xml:space="preserve">
     <value>Confirm password cannot be empty.</value>
   </data>
+  <data name="CopyBetLimitMessage" xml:space="preserve">
+    <value>Copy all below bet settings from {0}</value>
+  </data>
   <data name="DateRangeError" xml:space="preserve">
     <value>[To] value must be greater than or equal to [From]</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="NewPasswordCannotEmpty" xml:space="preserve">
     <value>New password cannot be empty.</value>
+  </data>
+  <data name="NoChangeMessage" xml:space="preserve">
+    <value>There is no changes!</value>
   </data>
   <data name="NoInformationAvailable" xml:space="preserve">
     <value>No information available.</value>
@@ -209,6 +215,9 @@
   </data>
   <data name="UnAuthorizedRequestError" xml:space="preserve">
     <value>Unauthorized request rejected!</value>
+  </data>
+  <data name="UpdateSettingsConfirmMessage" xml:space="preserve">
+    <value>Are you sure you want to update these settings?</value>
   </data>
   <data name="UpdateSettingsSuccessfully" xml:space="preserve">
     <value>Update settings successfully!</value>

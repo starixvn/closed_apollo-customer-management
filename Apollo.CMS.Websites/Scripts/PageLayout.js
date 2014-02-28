@@ -138,14 +138,25 @@ Apollo.CMS.PageLayoutHelper = function () {
         var value = $.trim($(this).val());
         var decimalPos = value.indexOf('.');
         var minusPos = value.indexOf('-');
-        var cursorPos = $this.GetCaret($(this)); //$(this).prop("selectionStart");
+        var cursorPos = $this.GetCaret($(this));
+        var keyCode = event.which; //event.charCode || event.keyCode;
+
+        // Allow ctrl, shilf, alt, tab, enter, backspace, delete, home, end, escape, left, right, up, down keys.
+        console.log(event.keyCode);
+        console.log(event.ctrlKey || event.shiftKey || event.altKey);
+        if (event.ctrlKey || event.shilfKey || event.altkey ||
+            (event.keyCode >= 35 && event.keyCode <= 40) ||
+            ($.inArray(event.keyCode, [46, 8, 9, 27, 13, 190]) !== -1)) {
+            return;
+        }
 
         // Allow decimal character if there is no decimal character has been input yet
         // and some digits have already been input before the decimal character.
         if ((event.data.decimals > 0) &&
-            (event.keyCode === 46) &&
+            (keyCode === 46) &&
             ((decimalPos < 0) || (decimalPos > 0 && cursorPos <= decimalPos)) &&
             (value.length > 0)) {
+            //event.preventDefault();
             return;
         }
 
@@ -155,7 +166,7 @@ Apollo.CMS.PageLayoutHelper = function () {
         }
 
         // Allow digits.
-        if ((48 <= event.keyCode) && (event.keyCode <= 57)) {
+        if ((48 <= keyCode) && (keyCode <= 57)) {
             // Check whether the number of digits after the decimal meets the requrement or not.
             if ((decimalPos < 0) ||
                 (decimalPos > 0 && cursorPos <= decimalPos) ||

@@ -435,30 +435,34 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
         if (parameters.BetLimits.length > 0 ||
             parameters.Discounts.length > 0 ||
             parameters.Group !== null) {
-            $.ajax({
-                type: 'POST',
-                url: urls.UpdateBetAndComm,
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                data: JSON.stringify(parameters),
-                beforeSend: function () {
-                    CMS.loadingBox.show();
-                },
-                success: function (result) {
-                    if (result.Code === 0) {
-                        CMS.showInfoMessage(messages.updateMessage);
-                        //location.reload(true);
-                    } else {
-                        CMS.headlineMsgBox.showErr(result.Message);
+            CMS.headlineMsgBox.confirm(messages.updateSettingConfirmMsg, function () {
+                $.ajax({
+                    type: 'POST',
+                    url: urls.UpdateBetAndComm,
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    data: JSON.stringify(parameters),
+                    beforeSend: function () {
+                        CMS.loadingBox.show();
+                    },
+                    success: function (result) {
+                        if (result.Code === 0) {
+                            CMS.showInfoMessage(messages.updateMessage);
+                            window.location.href = window.location.href;
+                        } else {
+                            CMS.headlineMsgBox.showErr(result.Message);
+                        }
+                    },
+                    error: function (xhr, status, err) {
+                        CMS.handleAjaxError(xhr, status, err);
+                    },
+                    complete: function () {
+                        CMS.loadingBox.close();
                     }
-                },
-                error: function (xhr, status, err) {
-                    CMS.handleAjaxError(xhr, status, err);
-                },
-                complete: function () {
-                    CMS.loadingBox.close();
-                }
+                });
             });
+        } else {
+            CMS.showInfoMessage(messages.noChange);
         }
     };
 
