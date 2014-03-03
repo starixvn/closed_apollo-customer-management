@@ -977,6 +977,26 @@ input[type="text"] {
         .mainContent {
             .container-content {
                 padding: 1% 20px 0;
+
+                .message {
+                    &.error {
+                        background: url(img/icon-error-message.png) no-repeat;
+                        color: #db2c2c;
+                        padding: 3px 15px 4px 30px;
+                        display: inline-block;
+                        margin: 15px 0 0;
+                        clear: both;
+                    }
+
+                    &.success {
+                        background: url(img/icon-success-message.png) no-repeat;
+                        color: @text-color;
+                        padding: 3px 15px 4px 30px;
+                        display: inline-block;
+                        margin: 15px 0 0;
+                        clear: both;
+                    }
+                }
             }
         }
     }
