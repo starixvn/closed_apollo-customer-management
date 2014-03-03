@@ -142,7 +142,7 @@
     <value>Username is already exists!</value>
   </data>
   <data name="GreaterThanError" xml:space="preserve">
-    <value>The value must be greater than or equal to {0}!</value>
+    <value>Must be &gt;= {0}!</value>
   </data>
   <data name="InternalError" xml:space="preserve">
     <value>Internal error!</value>
@@ -163,13 +163,13 @@
     <value>Invalid value!</value>
   </data>
   <data name="LessThanError" xml:space="preserve">
-    <value>The value must be less than or equal to {0}!</value>
+    <value>Must be &lt;= {0}!</value>
   </data>
   <data name="NewPasswordCannotEmpty" xml:space="preserve">
     <value>New password cannot be empty.</value>
   </data>
   <data name="NoChangeMessage" xml:space="preserve">
-    <value>There is no changes!</value>
+    <value>There is no change!</value>
   </data>
   <data name="NoInformationAvailable" xml:space="preserve">
     <value>No information available.</value>
@@ -223,7 +223,7 @@
     <value>Update settings successfully!</value>
   </data>
   <data name="ValueRangeError" xml:space="preserve">
-    <value>The value must not be less than {0} or greater than {1}!</value>
+    <value>Must be in the range of [{0} - {1}]!</value>
   </data>
   <data name="WelcomeMessage" xml:space="preserve">
     <value>Welcome to Customer Management System</value>

@@ -6,13 +6,13 @@
     var hasEditSettingRight = (bool)ViewBag.HasEditSettingPermission;
     var disable = hasEditSettingRight ? string.Empty : "disabled";
     var rangeFormat = "[{0} - {1}]";
-    var rangeValidationFormat = "data-val-range=\"" + Messages.ValueRangeError + "\" data-range-min={2} data-range-max={3}";
+    var rangeValidationFormat = "data-val-range=\"" + Messages.InvalidValue + "\" data-range-min={2} data-range-max={3}";
     var minSingleBetRangeFormat = ">={0}";
 
     if (!Model.IsMember && Model.Level < (int)HighLevelAgents.Shareholder)
     {
         rangeFormat = ">={0}";
-        rangeValidationFormat = "data-val-greater=\"" + Messages.GreaterThanError + "\" data-greater-value={2}";
+        rangeValidationFormat = "data-val-greater=\"" + Messages.InvalidValue + "\" data-greater-value={2}";
         minSingleBetRangeFormat = string.Empty;
     }
 }
@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-xs-10 col-sm-10 col-md-10">
                     <div class="col-xs-4 col-sm-4 col-md-4 line-right">
-                        <div class="col-xs-7 col-sm-7 col-md-7 input-col">
+                        <div class="col-xs-5 col-sm-5 col-md-5 input-col">
                             <input type="text"
                                class="text-field single-game"
                                value="@item.SingleGame"
@@ -55,10 +55,10 @@
                                @Html.Raw(string.Format(rangeValidationFormat, "{0}", "{1}", item.MinOfSingleGame, item.MaxOfSingleGame))
                                data-greater-error="@Messages.GreaterThanError"/>
                         </div>
-                        <div class="col-xs-5 col-sm-5 col-md-5 range-col">@string.Format(rangeFormat, item.MinOfSingleGame, item.MaxOfSingleGame)</div>
+                        <div class="col-xs-7 col-sm-7 col-md-7 range-col">@string.Format(rangeFormat, item.MinOfSingleGame, item.MaxOfSingleGame)</div>
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 line-right">
-                        <div class="col-xs-7 col-sm-7 col-md-7 input-col">
+                        <div class="col-xs-5 col-sm-5 col-md-5 input-col">
                             <input type="text"
                                class="text-field single-bet"
                                value="@item.SingleBet"
@@ -68,20 +68,20 @@
                                @Html.Raw(string.Format(rangeValidationFormat, "{0}", "{1}", item.MinOfSingleBet, item.MaxOfSingleBet))
                                data-greater-error="@Messages.GreaterThanError"/>
                         </div>
-                        <div class="col-xs-5 col-sm-5 col-md-5 range-col">@string.Format(rangeFormat, item.MinOfSingleBet, item.MaxOfSingleBet)</div>
+                        <div class="col-xs-7 col-sm-7 col-md-7 range-col">@string.Format(rangeFormat, item.MinOfSingleBet, item.MaxOfSingleBet)</div>
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4">
-                        <div class="col-xs-7 col-sm-7 col-md-7 input-col">
+                        <div class="col-xs-5 col-sm-5 col-md-5 input-col">
                             <input type="text"
                                class="text-field min-single-bet"
                                value="@item.MinSingleBet"
                                maxlength="14"
                                @disable
                                data-val-number="@Messages.InvalidValue"
-                               data-val-greater="@Messages.GreaterThanError"
+                               data-val-greater="@Messages.InvalidValue"
                                data-greater-value="@item.MinOfMinSingleBet"/>
                         </div>
-                        <div class="col-xs-5 col-sm-5 col-md-5 range-col">@string.Format(minSingleBetRangeFormat, item.MinOfMinSingleBet)</div>
+                        <div class="col-xs-7 col-sm-7 col-md-7 range-col">@string.Format(minSingleBetRangeFormat, item.MinOfMinSingleBet)</div>
                     </div>
                 </div>
             </div>

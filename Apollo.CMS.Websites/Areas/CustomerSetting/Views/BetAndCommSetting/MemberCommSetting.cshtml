@@ -10,10 +10,6 @@
         <span id="spnCommissionInfo" class="icon-info"  title="@ViewLang.CommissionSettingInstructions"></span>
     </div>
     <div class="row" id="divCommission">
-        <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4 group-title">@ViewLang.CommissionLine</div>
-            <div class="col-xs-8 col-sm-8 col-md-8 group-title">@ViewLang.MemberCommission</div>
-        </div>
         <div class="row commission-row">
             <div class="col-xs-4 col-sm-4 col-md-4 commission-line">
                 <label for="ddlLine">@string.Format("{0}:", ViewLang.Line)</label>
@@ -28,7 +24,7 @@
                 <input type="hidden" id="hdnMaxDiscountA" value="@Model.UplineMinDiscountA"/>
                 <input type="hidden" id="hdnMaxDiscountB" value="@Model.UplineMinDiscountB"/>
                 <input type="hidden" id="hdnMaxDiscountC" value="@Model.UplineMinDiscountC"/>
-                <input type="hidden" id="hdnMaxDiscountD" value="@Model.UplineMinDiscountD"/>
+                <input type="hidden" id="hdnMaxDiscountD" value="0"/>
             </div>
             <div class="col-xs-8 col-sm-8 col-md-8 line-left">
                 <div class="row commission-row">
@@ -43,7 +39,7 @@
                                maxlength="14"
                                @disable
                                data-val-number="@Messages.InvalidValue"
-                               data-val-range="@Messages.ValueRangeError"
+                               data-val-range="@Messages.InvalidValue"
                                data-range-min="0"
                                data-range-max="@Model.UplineMinDiscountGroup"/>
                     </div>
@@ -61,7 +57,7 @@
                                maxlength="14"
                                disabled="disabled"
                                data-val-number="@Messages.InvalidValue"
-                               data-val-range="@Messages.ValueRangeError"
+                               data-val-range="@Messages.InvalidValue"
                                data-range-min="0"
                                data-range-max="@Model.UplineMinDiscount1x2"/>
                         <input type="hidden" id="hdnSportTyp1x2" value="@Model.SportType1x2"/>
@@ -81,7 +77,7 @@
                                maxlength="14"
                                disabled="disabled"
                                data-val-number="@Messages.InvalidValue"
-                               data-val-range="@Messages.ValueRangeError"
+                               data-val-range="@Messages.InvalidValue"
                                data-range-min="0"
                                data-range-max="@Model.UplineMinDiscountOthers"/>
                         <input type="hidden" id="hdnSportTypeOthers" value="@Model.SportTypeOthers"/>

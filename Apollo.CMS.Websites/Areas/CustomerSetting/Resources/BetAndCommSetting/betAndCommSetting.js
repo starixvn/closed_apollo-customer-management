@@ -285,13 +285,15 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
         var rawSingleBetValue = parseNumber(singleBetValue);
         var rawMinSingleBetValue = parseNumber(minSingleBetValue);
 
+        var msg = '{0} ({1})';
+
         if (rawSingleBetValue < rawMinSingleBetValue) {
-            Validator.showTooltip(txtSingleBet, singleBetError.format(minSingleBetValue), 's');
+            Validator.showTooltip(txtSingleBet, singleBetError.format(msg.format(filter.minSingleBet, minSingleBetValue)), 's');
             hasError = true;
         }
 
         if (rawSingleGameValue < rawSingleBetValue) {
-            Validator.showTooltip(txtSingleGame, singleGameError.format(singleBetValue), 's');
+            Validator.showTooltip(txtSingleGame, singleGameError.format(msg.format(filter.singleBet, singleBetValue)), 's');
             hasError = true;
         }
 
@@ -359,12 +361,12 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
     var initFields = function () {
         $this.DOMInstance.spnCommissionInfo.on('click', function () {
             pageLayout.ClosePopup();
-            pageLayout.Popup(messages.commissionSettingInstructions, $this.DOMInstance.divCommInstructions.html(), {}, false);
+            pageLayout.Popup(messages.commissionSettingInstructions, $this.DOMInstance.divCommInstructions.html(), {}, true);
         });
 
         $this.DOMInstance.spnBetLimitInfo.on('click', function () {
             console.log($this.DOMInstance.divBetLimitInstructions.html());
-            pageLayout.Popup(messages.betLimitInstruction, $this.DOMInstance.divBetLimitInstructions.html(), {}, false);
+            pageLayout.Popup(messages.betLimitInstruction, $this.DOMInstance.divBetLimitInstructions.html(), {}, true);
         });
 
         if (!hasEditSettingRight) {

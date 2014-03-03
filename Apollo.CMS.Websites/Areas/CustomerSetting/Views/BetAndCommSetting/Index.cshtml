@@ -49,7 +49,9 @@
         var filter = {
             custId: '@Model.CustId',
             uplineId: '@Model.UplineId',
-            isMember: '@Model.IsMember' === 'True'
+            isMember: '@Model.IsMember' === 'True',
+            minSingleBet: '@ViewLang.MinSingleBet',
+            singleBet: '@ViewLang.SingleBet'
         };
         var messages = {
             updateMessage: '@Messages.UpdateSettingsSuccessfully',
