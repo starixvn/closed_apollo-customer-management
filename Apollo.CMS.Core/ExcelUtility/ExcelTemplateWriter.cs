@@ -126,7 +126,7 @@ namespace Apollo.CMS.Core.ExcelUtility
 
                 foreach (ICell cell in currentRow.Cells)
                 {
-                    if (cell.CellType == CellType.STRING)
+                    if (cell.CellType == CellType.String)
                     {
                         totalLineBreaks = Math.Max(totalLineBreaks, Count(cell.StringCellValue, BreakLine));
                     }

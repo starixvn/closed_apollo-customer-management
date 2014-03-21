@@ -166,7 +166,6 @@ namespace Apollo.CMS.BetList.Services.Implements
                 FillTotalRow(ticketList, ref writer);
                 writer.CopyRows(6, 1);
                 writer.SyncColumnsWidth(9);
-                writer.AutosizeColumns(9);
                 writer.AutosizeRows(3);
                 writer.Render();
             }

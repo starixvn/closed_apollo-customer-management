@@ -13,7 +13,7 @@ var CMS = (function ($) {
         loadingBox: null,
         datePickerButtonUrl: null,
         serverTimezone: null,
-        pageRanges: [10, 50, 100, 200, 500],
+        pageRanges: [50, 100, 200, 500],
 
         commonConstants: {
             DateFormat: 'mm/dd/yy',

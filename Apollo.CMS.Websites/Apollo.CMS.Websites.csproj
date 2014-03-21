@@ -246,9 +246,12 @@
     <Content Include="Content\site\img\icon-breadcrumb.png" />
     <Content Include="Content\site\img\icon-cal-orange.jpg" />
     <Content Include="Content\site\img\icon-cal.jpg" />
+    <Content Include="Content\site\img\icon-detail.png" />
+    <Content Include="Content\site\img\icon-error-message.png" />
     <Content Include="Content\site\img\icon-row-left.png" />
     <Content Include="Content\site\img\icon-row-right.png" />
     <Content Include="Content\site\img\icon-search.png" />
+    <Content Include="Content\site\img\icon-success-message.png" />
     <Content Include="Content\site\img\icons.png" />
     <Content Include="Content\lib\jquery-ui\images\ui-bg_flat_60_4264ac_40x100.png" />
     <Content Include="Content\lib\jquery-ui\images\ui-bg_flat_75_5476bb_40x100.png" />

@@ -57,11 +57,11 @@ namespace Apollo.BetList.Extensions.Builders.OddsBuilders
             }
             else if (oddsVal < 0)
             {
-                textRender.RTFRenderer.AddText(string.Format(Formatter.DECIMAL_FORMAT3, oddsVal), textRender.NegativeFont);
+                textRender.RTFRenderer.AddText(string.Format(Formatter.DECIMALFORMAT3, oddsVal), textRender.NegativeFont);
             }
             else
             {
-                textRender.RTFRenderer.AddText(string.Format(Formatter.DECIMAL_FORMAT3, oddsVal), textRender.PositiveFont);
+                textRender.RTFRenderer.AddText(string.Format(Formatter.DECIMALFORMAT3, oddsVal), textRender.PositiveFont);
             }
         }
     }
