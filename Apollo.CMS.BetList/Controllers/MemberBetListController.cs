@@ -46,7 +46,7 @@ namespace Apollo.CMS.BetList.Controllers
         /// <param name="username">Customer's username.</param>
         /// <returns>Index view.</returns>
         [HttpGet]
-        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewBetList, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.BetListByCustomer, Policy = Constant.Policy.Read)]
         public ActionResult Index(int custId, string username)
         {
             ViewBag.CustId = custId;
@@ -61,7 +61,7 @@ namespace Apollo.CMS.BetList.Controllers
         /// <param name="filter">The criteria that are used to query data.</param>
         /// <returns>The JSON list contains bet list of member.</returns>
         [HttpPost]
-        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewBetList, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.BetListByCustomer, Policy = Constant.Policy.Read)]
         public JsonResult GetMemberBetList(MemberBetListFilter filter)
         {
             return Json(this._memberBetListService.GetPagedBetList(filter));
@@ -73,7 +73,7 @@ namespace Apollo.CMS.BetList.Controllers
         /// <param name="filter">The criteria that are used to query data.</param>
         /// <returns>The JSON list contains win loss list of a ticket.</returns>
         [HttpPost]
-        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewBetList, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.BetListByCustomer, Policy = Constant.Policy.Read)]
         public JsonResult GetTicketDetail(DetailedWinLossFilter filter)
         {
             return Json(this._memberBetListService.GetDetailWinLossList(filter));
@@ -85,7 +85,7 @@ namespace Apollo.CMS.BetList.Controllers
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>The JSON list contains sub-tickets of a parlay ticket.</returns>
         [HttpPost]
-        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewBetList, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.BetListByCustomer, Policy = Constant.Policy.Read)]
         public JsonResult GetMixParlayByRefNo(GetParlaySubTicketsCriteria criteria)
         {
             return Json(this._memberBetListService.GetParlaySubTickets(criteria));
@@ -97,7 +97,7 @@ namespace Apollo.CMS.BetList.Controllers
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>The JSON list contains system parlay details.</returns>
         [HttpPost]
-        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewBetList, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.BetListByCustomer, Policy = Constant.Policy.Read)]
         public JsonResult GetSystemParlayDetails(GetSystemParlayDetailsCriteria criteria)
         {
             return Json(this._memberBetListService.GetSystemParlayDetails(criteria));
@@ -108,7 +108,7 @@ namespace Apollo.CMS.BetList.Controllers
         /// </summary>
         /// <param name="filter">The criteria that are used to query data.</param>
         /// <returns>Excel file contains bet list of member.</returns>
-        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewBetList, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.BetListByCustomer, Policy = Constant.Policy.Read)]
         public ActionResult ExportMemberBetList(MemberBetListFilter filter)
         {
             string templateUrl = System.Web.HttpContext.Current.Server.MapPath(MemberBetListTemplateFilePath);

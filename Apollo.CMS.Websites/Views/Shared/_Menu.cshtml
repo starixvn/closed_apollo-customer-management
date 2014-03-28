@@ -14,18 +14,21 @@
         if (lvl1MenuItemList.Any())
         {
             <li id="@menuItem.Id">
-                <a href="javascript:;">@menuItem.Name</a>
+                <a href="#">@menuItem.Name</a>
                 <ul class="list-unstyled subMenu">
                 @foreach (var subMenuItem in lvl1MenuItemList)
                 {
-                        <li id="@subMenuItem.Id"><a href="@Url.Content(subMenuItem.GetValidUrl())">@subMenuItem.Name</a></li>
+                    <li id="@subMenuItem.Id"><a href="@Url.Content(subMenuItem.GetValidUrl())">@subMenuItem.Name</a></li>
                 }
                 </ul>
             </li>
         }
         else
         {
-            <li id="@menuItem.Id"><a href="@Url.Content(menuItem.GetValidUrl())">@menuItem.Name</a></li>
+            string url = Url.Content(menuItem.GetValidUrl());
+            url = url == "/" ? "#" : url;
+
+            <li id="@menuItem.Id"><a href="@url">@menuItem.Name</a></li>
         }
     }
 </ul>

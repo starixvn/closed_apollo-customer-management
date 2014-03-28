@@ -1,6 +1,7 @@
 ﻿/* File Created: January 22, 2014 */
 
-/* global Apollo, CMS, Namespace, moment, numeral, pageLayout, searchBar, tableHeaders, detailTableHeaders, systemParlayDetailsTableHeaders */
+/* global Apollo, CMS, Namespace, moment, numeral, pageLayout, searchBar */
+/* global tableHeaders, detailTableHeaders, systemParlayDetailsTableHeaders, hasSearchAccountPermission */
 /* exported betListByRefNo, OpenIPInfo, showMP, showCombMPDetail, showCombMP */
 
 Namespace.Register('Apollo.CMS.BetList.BetListByRefNo');
@@ -9,8 +10,8 @@ Apollo.CMS.BetList.BetListByRefNo = function () {
     var $this = this;
     var urls = {
         BetListByRefNo: CMS.resolveRootUrl('BetList/BetListByRefNo/GetBetListByRefNo'),
-        GetSystemParlayDetails: CMS.resolveRootUrl('BetList/MemberBetList/GetSystemParlayDetails'),
-        TicketDetail: CMS.resolveRootUrl('BetList/MemberBetList/GetTicketDetail')
+        GetSystemParlayDetails: CMS.resolveRootUrl('BetList/BetListByRefNo/GetSystemParlayDetails'),
+        TicketDetail: CMS.resolveRootUrl('BetList/BetListByRefNo/GetTicketDetail')
     };
 
     // Cache DOM elements
@@ -81,10 +82,11 @@ Apollo.CMS.BetList.BetListByRefNo = function () {
 
         // Element formats.
         var transTimeColFormat = '<div class="trans-time">{0}</div>';
-        var usernameFormat = '<div id="divUsername" class="link" data-cust-id="{0}">{1}</div>';
+        var usernameFormat = '<div {0} data-cust-id="{1}">{2}</div>';
         var choiceColFormat = '<div id="choice_{0}" class="choice {1}">{2}</div>';
         var oddColFormat = '<div class="odds">{0}</div>';
         var detailColFormat = '<div class="winloss-details detail-icon" data-ref-no="{0}" data-trans-date="{1}" />';
+        var usernameClass = hasSearchAccountPermission ? 'class="link username"' : '';
 
         $this.DOMInstance.divBetList.addClass('hide');
 
@@ -104,7 +106,7 @@ Apollo.CMS.BetList.BetListByRefNo = function () {
         if (data && data.Ticket) {
             var row = {
                 Columns: [{ Name: 'ColTransTime', Value: transTimeColFormat.format(data.Ticket.TransTimeCol) },
-                          { Name: 'ColMember', Value: usernameFormat.format(data.Ticket.CustId, data.Ticket.Username) },
+                          { Name: 'ColMember', Value: usernameFormat.format(usernameClass, data.Ticket.CustId, data.Ticket.Username) },
                           { Name: 'ColChoice', Value: choiceColFormat.format(data.Ticket.TransId, data.Ticket.IsHandicap ? 'handicap' : '', getChoice(data)) },
                           { Name: 'ColOdds', Value: oddColFormat.format(data.Ticket.OddsCol) },
                           { Name: 'ColStake', Value: formatNumberCol(data.Ticket.Stake, false, null, null) },
@@ -136,7 +138,7 @@ Apollo.CMS.BetList.BetListByRefNo = function () {
             getTicketData(transId, transDate);
         });
 
-        $this.DOMInstance.divBetList.find('#divUsername').on('click', function () {
+        $this.DOMInstance.divBetList.find('.username').on('click', function () {
             var $obj = $(this);
             var custId = $obj.attr('data-cust-id');
             var username = $.trim($obj.text());

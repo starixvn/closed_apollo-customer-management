@@ -11,8 +11,10 @@ namespace Apollo.CMS.BetList.Controllers
 {
     using System.Web.Mvc;
     using Apollo.CMS.BetList.Criteria.BetListByRefNo;
+    using Apollo.CMS.BetList.Criteria.MemberBetList;
     using Apollo.CMS.BetList.Services.Implements;
     using Apollo.CMS.BetList.Services.Interfaces;
+    using Apollo.CMS.BetList.ViewModels.MemberBetList;
     using Apollo.CMS.Core.Controllers;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
@@ -23,15 +25,18 @@ namespace Apollo.CMS.BetList.Controllers
     public class BetListByRefNoController : BaseController
     {
         private readonly IBetListByRefNoService _betListByRefNoService;
+        private readonly IMemberBetListService _memberBetListService;
 
         public BetListByRefNoController() :
-            this(null)
+            this(null, null)
         {
         }
 
-        public BetListByRefNoController(IBetListByRefNoService betListByRefNoService)
+        public BetListByRefNoController(IBetListByRefNoService betListByRefNoService, IMemberBetListService memberBetListService)
         {
             this._betListByRefNoService = betListByRefNoService ?? new BetListByRefNoService();
+            this._memberBetListService = memberBetListService ?? new MemberBetListService();
+            ViewBag.HasSearchAccountPermission = this.HasRight(ApolloCMSFunctionKeys.SearchAccount, Constant.Policy.Read);
         }
 
         /// <summary>
@@ -39,7 +44,7 @@ namespace Apollo.CMS.BetList.Controllers
         /// </summary>
         /// <returns>Index view.</returns>
         [HttpGet]
-        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewBetList, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.BetListByRef, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             return View();
@@ -51,10 +56,34 @@ namespace Apollo.CMS.BetList.Controllers
         /// <param name="criteria">The criteria that are used to query data.</param>
         /// <returns>The JSON list contains bet list of member.</returns>
         [HttpPost]
-        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.ViewBetList, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.BetListByRef, Policy = Constant.Policy.Read)]
         public JsonResult GetBetListByRefNo(GetBetListByRefNoCriteria criteria)
         {
             return Json(this._betListByRefNoService.GetBetListByRefNo(criteria));
+        }
+
+        /// <summary>
+        /// Gets the detailed win loss of a whole line.
+        /// </summary>
+        /// <param name="filter">The criteria that are used to query data.</param>
+        /// <returns>The JSON list contains win loss list of a ticket.</returns>
+        [HttpPost]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.BetListByRef, Policy = Constant.Policy.Read)]
+        public JsonResult GetTicketDetail(DetailedWinLossFilter filter)
+        {
+            return Json(this._memberBetListService.GetDetailWinLossList(filter));
+        }
+
+        /// <summary>
+        /// Gets system parlay details.
+        /// </summary>
+        /// <param name="criteria">The criteria that are used to query data.</param>
+        /// <returns>The JSON list contains system parlay details.</returns>
+        [HttpPost]
+        [NapAuth(FunctionKey = ApolloCMSFunctionKeys.BetListByRef, Policy = Constant.Policy.Read)]
+        public JsonResult GetSystemParlayDetails(GetSystemParlayDetailsCriteria criteria)
+        {
+            return Json(this._memberBetListService.GetSystemParlayDetails(criteria));
         }
     }
 }

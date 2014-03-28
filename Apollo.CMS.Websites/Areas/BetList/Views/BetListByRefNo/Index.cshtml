@@ -80,9 +80,6 @@
             Total: '@ViewLang.Total',
             Outstanding: '@ViewLang.Outstanding'
         };
-        var today = '@DateTime.Now.ToShortDateString()';
-        var minDate = '@ViewBag.StartDate';
-        var memberId = @Converter.ToInt(ViewBag.CustId);
-        var pageSize = @Converter.ToInt(ViewBag.PageSize);
+        var hasSearchAccountPermission = '@ViewBag.HasSearchAccountPermission' == 'True';
     </script>
 }
