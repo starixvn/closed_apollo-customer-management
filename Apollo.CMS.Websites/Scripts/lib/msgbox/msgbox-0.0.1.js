@@ -129,10 +129,10 @@
                 });
             }
 
-//            if (_this.options.draggable) {
-//                _this.dragObject = new dragObject($this.attr('id'), $this.attr('id'));
-//                $this.css({ cursor: 'move' });
-//            }
+            // if (_this.options.draggable) {
+            //     _this.dragObject = new dragObject($this.attr('id'), $this.attr('id'));
+            //     $this.css({ cursor: 'move' });
+            // }
         },
 
         show: function (msg, options) {
@@ -265,9 +265,9 @@
             $this.find('.ok').click(function () {
                 _this.close();
                 if ($.isFunction(callback)) callback.apply($this.get(0), []);
-            });
+            }).focus();
 
-            $this.find('.cancel').click(function () { _this.close(); }).focus();
+            $this.find('.cancel').click(function () { _this.close(); });
         },
 
         prompt: function (msg, defaultValue, callback, options) {

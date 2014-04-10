@@ -49,6 +49,12 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
         }
     };
 
+    // Used for checking the validation state of fields.
+    var validationState = {
+        commission: false,
+        betLimit: false
+    };
+
     // Cache DOM elements
     var cacheDOM = function () {
         $this.DOMInstance.divCommission = $('#divCommission');
@@ -248,20 +254,35 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
 
     // Validate commission form.
     var validateCommField = function ($obj) {
-        $obj.tipsy('hide');
-        $obj.removeAttr('original-title');
+        var hasError = false;
 
-        return Validator.validateNumberRange($obj, 's');
+        if (validationState.commission && $obj.attr('original-title')) {
+            $obj.tipsy('hide').removeAttr('original-title');
+            validationState.commission = false;
+        }
+
+        if (!validationState.commission) {
+            hasError = Validator.validateNumberRange($obj, 's');
+            validationState.commission = hasError;
+        }
+
+        return hasError;
     };
 
     // Validate bet limit form.
     var validateBetLimitField = function ($obj) {
         var hasError = false;
 
-        $obj.tipsy('hide');
-        $obj.removeAttr('original-title');
-        hasError = Validator.validateNumberRange($obj, 's');
-        hasError = hasError || Validator.validateNumberGreaterThan($obj, 's');
+        if (validationState.betLimit && $obj.attr('original-title')) {
+            $obj.tipsy('hide').removeAttr('original-title');
+            validationState.betLimit = false;
+        }
+
+        if (!validationState.betLimit) {
+            hasError = Validator.validateNumberRange($obj, 's');
+            hasError = hasError || Validator.validateNumberGreaterThan($obj, 's');
+            validationState.betLimit = hasError;
+        }
 
         return hasError;
     };
@@ -296,6 +317,8 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
             Validator.showTooltip(txtSingleGame, singleGameError.format(msg.format(filter.singleBet, singleBetValue)), 's');
             hasError = true;
         }
+
+        validationState.betLimit = hasError;
 
         return hasError;
     };
@@ -401,16 +424,19 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
         }).on('keypress', { decimals: 0 }, pageLayout.MarkAsNumberField).on('keyup', pageLayout.FormatNumberField);
 
         $this.DOMInstance.divBetLimit.find('span.icon-copy').on('click', function () {
-            var currentRow = $(this).closest('div.bet-setting');
-            var nextRows = currentRow.nextAll();
-            var settings = {
-                singleGame: currentRow.find('input.single-game').val(),
-                singleBet: currentRow.find('input.single-bet').val(),
-                minSingleBet: currentRow.find('input.min-single-bet').val()
-            };
+            console.log(validationState.commission);
+            if (!validationState.commission) {
+                var currentRow = $(this).closest('div.bet-setting');
+                var nextRows = currentRow.nextAll();
+                var settings = {
+                    singleGame: currentRow.find('input.single-game').val(),
+                    singleBet: currentRow.find('input.single-bet').val(),
+                    minSingleBet: currentRow.find('input.min-single-bet').val()
+                };
 
-            copyBetLimitSetting(nextRows, settings);
-            validateBetLimitForm();
+                copyBetLimitSetting(nextRows, settings);
+                validateBetLimitForm();
+            }
         });
 
         $this.DOMInstance.btnSubmit.on('click', function () {

@@ -142,8 +142,6 @@ Apollo.CMS.PageLayoutHelper = function () {
         var keyCode = event.which; //event.charCode || event.keyCode;
 
         // Allow ctrl, shilf, alt, tab, enter, backspace, delete, home, end, escape, left, right, up, down keys.
-        console.log(event.keyCode);
-        console.log(event.ctrlKey || event.shiftKey || event.altKey);
         if (event.ctrlKey || event.shilfKey || event.altkey ||
             (event.keyCode >= 35 && event.keyCode <= 40) ||
             ($.inArray(event.keyCode, [46, 8, 9, 27, 13, 190]) !== -1)) {
