@@ -86,6 +86,9 @@ namespace Apollo.CMS.Websites
 
             bundles.Add(new ScriptBundle("~/scripts/pageLayoutJS").Include(
                 "~/scripts/PageLayout.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/crypto").Include(
+                "~/Scripts/lib/Crypto/CryptoJS.js"));
         }
 
         /// <summary>
@@ -99,10 +102,7 @@ namespace Apollo.CMS.Websites
                 "~/Areas/UserLogin/themes/login.less");
 
             bundles.Add(new ScriptBundle("~/scripts/loginJS").Include(
-                "~/scripts/lib/jQuery/jquery-1.8.2.js",
-                "~/scripts/lib/jQuery/jquery.validate*",
-                "~/scripts/lib/jQuery/jquery.cookie.js",
-                "~/content/bootstrap/js/bootstrap.js",
+                "~/Scripts/lib/Crypto/CryptoJS.js",
                 "~/Areas/UserLogin/scripts/login.js"));
             bundles.FileSetOrderList.Clear();
         }

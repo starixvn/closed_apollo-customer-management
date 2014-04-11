@@ -9,7 +9,6 @@
 
 namespace Apollo.CMS.Websites.Areas.UserLogin.Controllers
 {
-    using System.Configuration;
     using System.Web.Mvc;
     using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Web;

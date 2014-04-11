@@ -36,7 +36,7 @@ namespace Apollo.CMS.Websites.Areas.UserLogin.Controllers
         private IMenuItemService _menuItemService;
         private ICurrentSession _currentSession;
 
-        #endregion
+        #endregion members
 
         #region ctors
 
@@ -55,7 +55,7 @@ namespace Apollo.CMS.Websites.Areas.UserLogin.Controllers
             _currentSession = currentSession ?? new CurrentSession();
         }
 
-        #endregion
+        #endregion ctors
 
         /// <summary>
         /// Redirect to index view.
@@ -65,20 +65,19 @@ namespace Apollo.CMS.Websites.Areas.UserLogin.Controllers
         /// <param name="time">Passed time.</param>
         /// <returns>Action result.</returns>
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reused with NAP framework.")]
-        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1123:DoNotPlaceRegionsWithinElements", Justification = "Reused with NAP framework.")]
         [AllowAnonymous]
         [HttpGet]
         public ActionResult Index(string userId, string onuserId, string time)
         {
+            string currentTime = _userService.UserSSOGetTime();
+
             userId = Cryptography.CfsDeCrypt(userId.Replace(" ", "+"));
             onuserId = Cryptography.CfsDeCrypt(onuserId.Replace(" ", "+"));
             time = Cryptography.CfsDeCrypt(time.Replace(" ", "+"));
-            string currentTime = _userService.UserSSOGetTime();
+
             var expiration = Convert.ToDateTime(currentTime) - Convert.ToDateTime(time);
             if (expiration.TotalSeconds <= _timeExipration)
             {
-                #region do SSO check-in
-
                 var criteria = new UserSSOCheckInUserCriteria
                 {
                     UserId = Convert.ToInt32(userId),
@@ -96,13 +95,9 @@ namespace Apollo.CMS.Websites.Areas.UserLogin.Controllers
 
                 _userService.UserSSOCheckIn(ref criteria);
 
-                #endregion
-
                 if (criteria.OnUserId != 0)
                 {
                     var user = _userService.GetById(criteria.UserId) as User;
-
-                    #region saves user session & auth info
 
                     _currentSession.UserId = user.Id;
                     _currentSession.Username = user.Username;
@@ -124,8 +119,6 @@ namespace Apollo.CMS.Websites.Areas.UserLogin.Controllers
                     }
 
                     CreateAuthInfo(user);
-
-                    #endregion
 
                     return Redirect(FormsAuthentication.DefaultUrl);
                 }
@@ -169,6 +162,6 @@ namespace Apollo.CMS.Websites.Areas.UserLogin.Controllers
             Response.Cookies.Add(authCookie);
         }
 
-        #endregion
+        #endregion utilities
     }
 }

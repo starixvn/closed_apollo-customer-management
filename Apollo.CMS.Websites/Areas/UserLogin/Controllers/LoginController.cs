@@ -5,6 +5,7 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Edward.Nguyen" date="2012.8.28">Add properties _currentContext</change>
+//   <change who="Jason.Ly" date="2014.4.11">Encrypt passed password.</change>
 // </history>
 
 namespace Apollo.CMS.Websites.Areas.UserLogin.Controllers
@@ -13,13 +14,13 @@ namespace Apollo.CMS.Websites.Areas.UserLogin.Controllers
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using System.Security.Cryptography;
+    using System.Text;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
     using Apollo.CMS.Core.Web;
-    using Fanex.Common;
     using Fanex.Common.Extensions;
-    using Fanex.Logging;
     using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Criteria.User;
     using Fanex.NAP.Core.Model;
@@ -36,14 +37,17 @@ namespace Apollo.CMS.Websites.Areas.UserLogin.Controllers
     {
         #region members
 
+        private const string LoginFormToken = "_SecureLoginFormToken";
+
         private IUserService _userService;
         private IGroupService _groupService;
         private ISiteService _siteService;
         private IMenuItemService _menuItemService;
         private ICurrentSession _currentSession;
         private IMaintenanceService _maintenanceService;
+        private HashAlgorithm _hashAlgorithm;
 
-        #endregion
+        #endregion members
 
         #region ctors
 
@@ -66,9 +70,32 @@ namespace Apollo.CMS.Websites.Areas.UserLogin.Controllers
             _menuItemService = menuItemService ?? new MenuItemService();
             _currentSession = currentSession ?? new CurrentSession();
             _maintenanceService = maintenanceService ?? new MaintenanceService();
+            _hashAlgorithm = new SHA256Managed();
         }
 
-        #endregion
+        #endregion ctors
+
+        #region Properties
+
+        public string FormToken
+        {
+            get
+            {
+                if (Session[LoginFormToken] == null)
+                {
+                    return string.Empty;
+                }
+
+                return Session[LoginFormToken].ToString();
+            }
+
+            set
+            {
+                Session[LoginFormToken] = value;
+            }
+        }
+
+        #endregion Properties
 
         #region sign in
 
@@ -92,6 +119,8 @@ namespace Apollo.CMS.Websites.Areas.UserLogin.Controllers
                 return RedirectToAction("Offline", "Common");
             }
 
+            GenerateToken();
+
             return View();
         }
 
@@ -100,150 +129,126 @@ namespace Apollo.CMS.Websites.Areas.UserLogin.Controllers
         /// </summary>
         /// <param name="username">Entered user name.</param>
         /// <param name="password">Entered password.</param>
+        /// <param name="loginToken">Login token.</param>
         /// <returns>Action result.</returns>
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reused with NAP framework.")]
-        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1123:DoNotPlaceRegionsWithinElements", Justification = "Reused with NAP framework.")]
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Index(string username, string password)
+        public ActionResult Index(string username, string password, string loginToken)
         {
-            if (!username.IsNullOrTrimEmpty() && !password.IsNullOrTrimEmpty())
+            if (!username.IsNullOrTrimEmpty() && !password.IsNullOrTrimEmpty() && CheckValidToken(loginToken))
             {
                 var user = _userService.GetByUsername(username.Trim()) as User;
 
-                try
+                if (user != null)
                 {
-                    if (user != null)
+                    string hashPassword = GetHash(user.Password + loginToken);
+
+                    if (password == hashPassword)
                     {
-                        password = Cryptography.CfsEnCode(password);
+                        var group = user.Group == null ? null : _groupService.GetById(user.Group.Id);
+                        var siteLevelList = _siteService.GetSiteLevelByUser(user.Id, Environment); // gets all sites of logging-in user
 
-                        if (password == user.Password)
+                        if ((group == null || group.IsActive) && siteLevelList.Where(x => x.IsActive).Any())
                         {
-                            var group = user.Group == null ? null : _groupService.GetById(user.Group.Id);
-                            var siteLevelList = _siteService.GetSiteLevelByUser(user.Id, Environment); // gets all sites of logging-in user
-
-                            if ((group == null || group.IsActive) && siteLevelList.Where(x => x.IsActive).Any())
+                            var criteria = new UserCheckInUserCriteria
                             {
-                                #region allows user login
+                                UserId = user.Id,
+                                SiteId = this.SiteId,
+                                NetSessionId = Session.SessionID,
+                                Ip = CurrentContext.IP,
+                                LoginDate = DateTime.Now,
+                                BrowserName = CurrentContext.BrowserName,
+                                CountryCode = CurrentContext.CountryCode,
+                                Domain = CurrentContext.DomainName,
+                                Platform = CurrentContext.Platform
+                            };
 
-                                #region check-in user
-                                var criteria = new UserCheckInUserCriteria
+                            _userService.UserCheckIn(ref criteria);
+
+                            _currentSession.Level = _userService.GetUserSiteLevel(user.Id, this.SiteId);
+                            _currentSession.UserId = user.Id;
+                            _currentSession.Username = username;
+                            _currentSession.OnUserId = criteria.OnUserId;
+                            _currentSession.SessionId = Session.SessionID.ToString();
+
+                            AppSession.CurrentUser = user;
+
+                            // current site is not NAP Hub
+                            if (this.SiteId != 0)
+                            {
+                                CreateUserMenu(user);
+                            }
+
+                            CreateAuthInfo(user);
+
+                            // if the user login directly, not through NAP Hub
+                            if (this.IsSiteLogin)
+                            {
+                                bool userIsActiveOnThisSite = false;
+
+                                foreach (var siteLevel in siteLevelList)
                                 {
-                                    UserId = user.Id,
-                                    SiteId = this.SiteId,
-                                    NetSessionId = Session.SessionID,
-                                    Ip = CurrentContext.IP,
-                                    LoginDate = DateTime.Now,
-                                    BrowserName = CurrentContext.BrowserName,
-                                    CountryCode = CurrentContext.CountryCode,
-                                    Domain = CurrentContext.DomainName,
-                                    Platform = CurrentContext.Platform
-                                };
-
-                                _userService.UserCheckIn(ref criteria);
-                                #endregion
-
-                                #region saves user session
-                                _currentSession.Level = _userService.GetUserSiteLevel(user.Id, this.SiteId);
-                                _currentSession.UserId = user.Id;
-                                _currentSession.Username = username;
-                                _currentSession.OnUserId = criteria.OnUserId;
-                                _currentSession.SessionId = Session.SessionID.ToString();
-
-                                AppSession.CurrentUser = user;
-
-                                // current site is not NAP Hub
-                                if (this.SiteId != 0)
-                                {
-                                    CreateUserMenu(user);
+                                    if (siteLevel.Site.Id == this.SiteId && siteLevel.IsActive)
+                                    {
+                                        userIsActiveOnThisSite = true;
+                                    }
                                 }
 
-                                CreateAuthInfo(user);
-                                #endregion
-
-                                #region redirects user
-                                // if the user login directly, not through NAP Hub
-                                if (this.IsSiteLogin)
+                                if (userIsActiveOnThisSite)
                                 {
-                                    #region checks if logging-in user is active on this site
-                                    bool userIsActiveOnThisSite = false;
-
-                                    foreach (var siteLevel in siteLevelList)
-                                    {
-                                        if (siteLevel.Site.Id == this.SiteId && siteLevel.IsActive)
-                                        {
-                                            userIsActiveOnThisSite = true;
-                                        }
-                                    }
-                                    #endregion
-
-                                    if (userIsActiveOnThisSite)
-                                    {
-                                        return Redirect(FormsAuthentication.DefaultUrl);
-                                    }
-                                    else
-                                    {
-                                        DoSignOut();
-                                        ViewBag.Message = ViewResources.Your_account_was_suspended;
-                                    }
+                                    return Redirect(FormsAuthentication.DefaultUrl);
                                 }
                                 else
                                 {
-                                    // user has access to multiple sites
-                                    if (siteLevelList.Where(s => s.IsActive).Count() > 1)
-                                    {
-                                        return RedirectToAction("Site", "UserSite");
-                                    }
-
-                                    #region user has acces to one site
-
-                                    var site = siteLevelList.Where(s => s.IsActive).First().Site;
-
-                                    var listSiteUrl = _siteService.GetSiteUrlBySiteId(site.Id, this.Environment).Where(u => u.IsActive).ToList();
-
-                                    if (listSiteUrl.Count() > 1)
-                                    {
-                                        return RedirectToAction("Site", "UserSite");
-                                    }
-
-                                    return RedirectToAction("Forward", "UserSite", new { id = listSiteUrl.First().SiteUrlId });
-
-                                    #endregion
+                                    DoSignOut();
+                                    ViewBag.Message = ViewResources.Your_account_was_suspended;
                                 }
-                                #endregion
-
-                                #endregion
                             }
                             else
                             {
-                                // user account was suspended on all sites
-                                if (siteLevelList.Count() > 0)
+                                // user has access to multiple sites
+                                if (siteLevelList.Where(s => s.IsActive).Count() > 1)
                                 {
-                                    ViewBag.Message = ViewResources.Your_account_was_suspended;
+                                    return RedirectToAction("Site", "UserSite");
                                 }
-                                else
+
+                                var site = siteLevelList.Where(s => s.IsActive).First().Site;
+
+                                var listSiteUrl = _siteService.GetSiteUrlBySiteId(site.Id, this.Environment).Where(u => u.IsActive).ToList();
+
+                                if (listSiteUrl.Count() > 1)
                                 {
-                                    // logging-in user belongs to no site
-                                    ViewBag.Message = ViewResources.You_have_no_authorization;
+                                    return RedirectToAction("Site", "UserSite");
                                 }
+
+                                return RedirectToAction("Forward", "UserSite", new { id = listSiteUrl.First().SiteUrlId });
                             }
                         }
                         else
                         {
-                            // wrong password
-                            ViewBag.Message = ViewResources.Invalid_Username_or_Password;
+                            // user account was suspended on all sites
+                            if (siteLevelList.Count() > 0)
+                            {
+                                ViewBag.Message = ViewResources.Your_account_was_suspended;
+                            }
+                            else
+                            {
+                                // logging-in user belongs to no site
+                                ViewBag.Message = ViewResources.You_have_no_authorization;
+                            }
                         }
                     }
                     else
                     {
-                        // user doesn't exist
+                        // wrong password
                         ViewBag.Message = ViewResources.Invalid_Username_or_Password;
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    LogService.Error(ex.Message, ex);
-                    ////throw ex;
+                    // user doesn't exist
+                    ViewBag.Message = ViewResources.Invalid_Username_or_Password;
                 }
             }
             else
@@ -251,10 +256,12 @@ namespace Apollo.CMS.Websites.Areas.UserLogin.Controllers
                 ViewBag.Message = "Invalid input!";
             }
 
+            GenerateToken();
+
             return View();
         }
 
-        #endregion
+        #endregion sign in
 
         #region re check in
 
@@ -290,7 +297,7 @@ namespace Apollo.CMS.Websites.Areas.UserLogin.Controllers
             return Json(criteria.IsKickedOut ? "1" : "0");
         }
 
-        #endregion
+        #endregion re check in
 
         #region sign out
 
@@ -318,7 +325,7 @@ namespace Apollo.CMS.Websites.Areas.UserLogin.Controllers
             _currentSession.ClearAll();
         }
 
-        #endregion
+        #endregion sign out
 
         #region helpers
 
@@ -370,6 +377,94 @@ namespace Apollo.CMS.Websites.Areas.UserLogin.Controllers
             Response.Cookies.Add(authCookie);
         }
 
-        #endregion
+        /// <summary>
+        /// Adds the login token to cookie.
+        /// </summary>
+        /// <param name="loginToken">The login token.</param>
+        private void AddTokenToCookie(string loginToken)
+        {
+            // Create the non-persistent secure form token cookie
+            var responseCookie = new HttpCookie(LoginFormToken)
+            {
+                // Set the HttpOnly property to prevent the cookie from
+                // being accessed by client side script
+                HttpOnly = true,
+
+                // Add login token to the cookie value
+                Value = loginToken
+            };
+
+            // If we are using SSL, the cookie should be set to secure to
+            // prevent it from being sent over HTTP connections
+            if (FormsAuthentication.RequireSSL && Request.IsSecureConnection)
+            {
+                responseCookie.Secure = true;
+            }
+
+            // Add the cookie to the response
+            Response.Cookies.Set(responseCookie);
+        }
+
+        /// <summary>
+        /// Generates the token for login form.
+        /// </summary>
+        private void GenerateToken()
+        {
+            string loginToken = Guid.NewGuid().ToString("N");
+
+            FormToken = loginToken;
+            ViewBag.LoginToken = loginToken;
+            AddTokenToCookie(loginToken);
+        }
+
+        /// <summary>
+        /// Checks if the token is valid or not.
+        /// </summary>
+        /// <param name="loginToken">The login token.</param>
+        /// <returns>Boolean value indicates if the login token is valid or not.</returns>
+        private bool CheckValidToken(string loginToken)
+        {
+            return !string.IsNullOrWhiteSpace(loginToken)
+                && FormToken == loginToken
+                && Request.Cookies[LoginFormToken] != null
+                && loginToken == Request.Cookies[LoginFormToken].Value;
+        }
+
+        /// <summary>
+        /// Gets the hash value of input.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <returns>Hash value of input.</returns>
+        private string GetHash(string input)
+        {
+            var encrypted = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(input))
+            {
+                var hashData = _hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+                encrypted = BitConverter.ToString(hashData).Replace("-", string.Empty).ToLower();
+            }
+
+            return encrypted;
+        }
+
+        /// <summary>
+        /// Clears the token.
+        /// </summary>
+        private void ClearToken()
+        {
+            Session.Remove(LoginFormToken);
+
+            if (Request.Cookies[LoginFormToken] != null)
+            {
+                HttpCookie cookie = new HttpCookie(LoginFormToken);
+
+                cookie.Expires = DateTime.Now.AddDays(-1d);
+                Response.Cookies.Add(cookie);
+            }
+        }
+
+        #endregion helpers
     }
 }

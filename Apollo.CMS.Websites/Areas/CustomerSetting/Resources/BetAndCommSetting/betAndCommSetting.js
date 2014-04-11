@@ -289,36 +289,38 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
 
     // Validate a row of bet limit session.
     var validateBetLimitRow = function ($row) {
-        var hasError = false;
+        var hasError = validationState.betLimit;
 
-        var txtSingleGame = $row.find('input.single-game');
-        var txtSingleBet = $row.find('input.single-bet');
-        var txtMinSingleBet = $row.find('input.min-single-bet');
+        if (!hasError) {
+            var txtSingleGame = $row.find('input.single-game');
+            var txtSingleBet = $row.find('input.single-bet');
+            var txtMinSingleBet = $row.find('input.min-single-bet');
 
-        var singleGameError = txtSingleGame.attr('data-greater-error');
-        var singleBetError = txtSingleBet.attr('data-greater-error');
+            var singleGameError = txtSingleGame.attr('data-greater-error');
+            var singleBetError = txtSingleBet.attr('data-greater-error');
 
-        var singleGameValue = txtSingleGame.val();
-        var singleBetValue = txtSingleBet.val();
-        var minSingleBetValue = txtMinSingleBet.val();
+            var singleGameValue = txtSingleGame.val();
+            var singleBetValue = txtSingleBet.val();
+            var minSingleBetValue = txtMinSingleBet.val();
 
-        var rawSingleGameValue = parseNumber(singleGameValue);
-        var rawSingleBetValue = parseNumber(singleBetValue);
-        var rawMinSingleBetValue = parseNumber(minSingleBetValue);
+            var rawSingleGameValue = parseNumber(singleGameValue);
+            var rawSingleBetValue = parseNumber(singleBetValue);
+            var rawMinSingleBetValue = parseNumber(minSingleBetValue);
 
-        var msg = '{0} ({1})';
+            var msg = '{0} ({1})';
 
-        if (rawSingleBetValue < rawMinSingleBetValue) {
-            Validator.showTooltip(txtSingleBet, singleBetError.format(msg.format(filter.minSingleBet, minSingleBetValue)), 's');
-            hasError = true;
+            if (rawSingleBetValue < rawMinSingleBetValue) {
+                Validator.showTooltip(txtSingleBet, singleBetError.format(msg.format(filter.minSingleBet, minSingleBetValue)), 's');
+                hasError = true;
+            }
+
+            if (rawSingleGameValue < rawSingleBetValue) {
+                Validator.showTooltip(txtSingleGame, singleGameError.format(msg.format(filter.singleBet, singleBetValue)), 's');
+                hasError = true;
+            }
+
+            validationState.betLimit = hasError;
         }
-
-        if (rawSingleGameValue < rawSingleBetValue) {
-            Validator.showTooltip(txtSingleGame, singleGameError.format(msg.format(filter.singleBet, singleBetValue)), 's');
-            hasError = true;
-        }
-
-        validationState.betLimit = hasError;
 
         return hasError;
     };
@@ -327,8 +329,10 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
     var validateCommForm = function () {
         var hasError = false;
 
-        Validator.clearErrorMessages($this.DOMInstance.divCommission);
+        validationState.betLimit = false;
         $this.DOMInstance.divCommission.find('input.text-field').each(function () {
+            $(this).tipsy('hide').removeAttr('original-title');
+
             if (!hasError) {
                 hasError = validateCommField($(this));
             }
@@ -341,8 +345,10 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
     var validateBetLimitForm = function () {
         var hasError = false;
 
-        Validator.clearErrorMessages($this.DOMInstance.divBetLimit);
+        validationState.betLimit = false;
         $this.DOMInstance.divBetLimit.find('input.text-field').each(function () {
+            $(this).tipsy('hide').removeAttr('original-title');
+
             if (!hasError) {
                 hasError = validateBetLimitField($(this));
             }
@@ -388,7 +394,6 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
         });
 
         $this.DOMInstance.spnBetLimitInfo.on('click', function () {
-            console.log($this.DOMInstance.divBetLimitInstructions.html());
             pageLayout.Popup(messages.betLimitInstruction, $this.DOMInstance.divBetLimitInstructions.html(), {}, true);
         });
 
@@ -424,7 +429,6 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
         }).on('keypress', { decimals: 0 }, pageLayout.MarkAsNumberField).on('keyup', pageLayout.FormatNumberField);
 
         $this.DOMInstance.divBetLimit.find('span.icon-copy').on('click', function () {
-            console.log(validationState.commission);
             if (!validationState.commission) {
                 var currentRow = $(this).closest('div.bet-setting');
                 var nextRows = currentRow.nextAll();
@@ -440,9 +444,10 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
         });
 
         $this.DOMInstance.btnSubmit.on('click', function () {
-            var isValid = !validateCommForm() && !validateBetLimitForm();
+            validateCommForm();
+            validateBetLimitForm();
 
-            if (isValid) {
+            if (!validationState.commission && !validationState.betLimit) {
                 updateSettings();
             }
         });

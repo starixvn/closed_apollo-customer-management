@@ -121,7 +121,7 @@ body {
 
 /* --- NOT SUPPORTED BROWSERS --- */
 
-#not-supported-browser-panel {
+.not-supported-browser {
     position: absolute;
     right: 0;
     top: 0;
@@ -131,19 +131,19 @@ body {
     padding: 20px;
     z-index: 9999;
     display: none;
-}
 
-#not-supported-browser-panel a {
-    font-size: 1.6em;
-    text-decoration: none;
-    color: #222;
-    background-color: #E8DCAD;
-    padding: 0 10px;
-}
+    a {
+        font-size: 1.6em;
+        text-decoration: none;
+        color: #222;
+        background-color: #E8DCAD;
+        padding: 0 10px;
 
-#not-supported-browser-panel a:hover {
-    background-color: #0c0;
-    color: #fff;
+        &:hover {
+            background-color: #0c0;
+            color: #fff;
+        }
+    }
 }
 
 @media (max-width: 750px) {
