@@ -6,8 +6,8 @@ var msg, innerMsg, username, password, btnSubmit;
 
 function shake(target, times, duration) {
     for (var i = times, j = 0; i >= 0; i--) {
-        setTimeout(target + ".style.left = '-" + i + "0px'", j++ * duration);
-        setTimeout(target + ".style.left = '" + i + "0px'", j++ * duration);
+        setTimeout(target + '.style.left = "-' + i + '0px"', j++ * duration);
+        setTimeout(target + '.style.left = "' + i + '0px"', j++ * duration);
     }
 }
 
@@ -16,9 +16,9 @@ function shake(target, times, duration) {
 function getIeVersion() {
     var version = -1; // Return value assumes failure.
 
-    if (window.navigator.userAgent.indexOf("MSIE") > 0) {
+    if (window.navigator.userAgent.indexOf('MSIE') > 0) {
         var usrAgent = navigator.userAgent;
-        var reg = new RegExp("MSIE ([0-9]{1,}[.0-9]{0,})");
+        var reg = new RegExp('MSIE ([0-9]{1,}[.0-9]{0,})');
 
         if (reg.exec(usrAgent) != null) {
             version = parseFloat(RegExp.$1);
@@ -34,7 +34,7 @@ function checkBrowser() {
     if (msieVersion !== -1 && msieVersion < 8.0) {
         var warnPnl = document.getElementById('divWarningPanel');
 
-        if (warnPnl.style.display === "" || warnPnl.style.display === 'none') {
+        if (warnPnl.style.display === '' || warnPnl.style.display === 'none') {
             warnPnl.style.display = 'block';
         }
     }
@@ -98,15 +98,15 @@ document.forms[0].onsubmit = function () {
     username.value = username.value.trim();
 
     if (username.value.length === 0) {
-        username.className += " err";
+        username.className += ' err';
         isValid = false;
         shake('txtUsername', 5, 100);
     } else {
-        username.className = username.className.replace("err", "");
+        username.className = username.className.replace('err', '');
     }
 
     if (password.value.length === 0) {
-        password.className += " err";
+        password.className += ' err';
 
         isValid = false;
         shake('txtPassword', 5, 100);
@@ -115,7 +115,7 @@ document.forms[0].onsubmit = function () {
         var encryptedPwd = CryptoJS.CfsEnCode(password.value);
         var hashPwd = '';
 
-        password.className = password.className.replace("err", "");
+        password.className = password.className.replace('err', '');
         hashPwd = CryptoJS.SHA256(encryptedPwd + loginToken);
         document.getElementById('hdnPassword').value = hashPwd;
     }
@@ -125,5 +125,5 @@ document.forms[0].onsubmit = function () {
 
 /* jshint freeze: false */
 String.prototype.trim = function () {
-    return this.replace(/^\s*/, "").replace(/\s*$/, "");
+    return this.replace(/^\s*/, '').replace(/\s*$/, '');
 };

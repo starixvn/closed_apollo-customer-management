@@ -149,6 +149,8 @@ namespace Apollo.CMS.Websites.Areas.UserLogin.Controllers
                         var group = user.Group == null ? null : _groupService.GetById(user.Group.Id);
                         var siteLevelList = _siteService.GetSiteLevelByUser(user.Id, Environment); // gets all sites of logging-in user
 
+                        ClearToken();
+
                         if ((group == null || group.IsActive) && siteLevelList.Where(x => x.IsActive).Any())
                         {
                             var criteria = new UserCheckInUserCriteria
