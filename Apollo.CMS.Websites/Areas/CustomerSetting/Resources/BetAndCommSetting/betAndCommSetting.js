@@ -224,7 +224,9 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
         $.each(newCommissions, function (index, item) {
             backupItem = backup.Discounts[index];
 
-            if (item.DiscountA !== backupItem.DiscountA) {
+            if (item.DiscountA !== backupItem.DiscountA ||
+                item.DiscountB !== backupItem.DiscountB ||
+                item.DiscountC !== backupItem.DiscountC) {
                 changedCommissions.push(item);
             }
         });
@@ -329,7 +331,7 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
     var validateCommForm = function () {
         var hasError = false;
 
-        validationState.betLimit = false;
+        validationState.commission = false;
         $this.DOMInstance.divCommission.find('input.text-field').each(function () {
             $(this).tipsy('hide').removeAttr('original-title');
 

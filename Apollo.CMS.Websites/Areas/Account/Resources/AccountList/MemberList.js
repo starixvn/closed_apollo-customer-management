@@ -140,7 +140,7 @@ Apollo.CMS.Account.AccountList.MemberList = function () {
             sortOption: {
                 serverSortFunction: handleSorting
             },
-            gridExpandHeight: 250,
+            gridExpandHeight: 200,
             bodyRowHeight: 30,
             bodyRows: bodyData
         };

@@ -109,7 +109,7 @@ Apollo.CMS.Account.AccountList.ShadowList = function () {
             },
             bodyRows: bodyData,
             bodyRowHeight: 30,
-            gridExpandHeight: 250
+            gridExpandHeight: 200
         };
 
         $this.DOMInstance.divShadowList.removeClass('hide').fanexGrid(gridOptions);

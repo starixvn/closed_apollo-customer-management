@@ -118,7 +118,7 @@ Apollo.CMS.Message.MessageList = function () {
 
     var renderMessageList = function (data) {
         var gridOptions = {
-            gridExpandHeight: 150,
+            gridExpandHeight: 160,
             bodyRowHeight: 30,
             showDistinctRow: false
         };
