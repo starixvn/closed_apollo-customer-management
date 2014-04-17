@@ -483,7 +483,9 @@ Apollo.CMS.CustomerSetting.BetAndCommSetting = function () {
                     success: function (result) {
                         if (result.Code === 0) {
                             CMS.showInfoMessage(messages.updateMessage);
-                            window.location.href = window.location.href;
+                            setTimeout(function () {
+                                window.location.href = window.location.href;
+                            }, 3000); // Delay the reloading page to 3s due to the replication of DB
                         } else {
                             CMS.headlineMsgBox.showErr(result.Message);
                         }
