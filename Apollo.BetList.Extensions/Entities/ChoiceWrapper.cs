@@ -32,9 +32,13 @@ namespace Apollo.BetList.Extensions.Entities
 
         public string[] HomeFirstLastGoal { get; set; }
 
+        public string[] Home1HFirstLastGoal { get; set; }
+
         public string AwayName { get; set; }
 
         public string[] AwayFirstLastGoal { get; set; }
+
+        public string[] Away1HFirstLastGoal { get; set; }
 
         public string SportName { get; set; }
 

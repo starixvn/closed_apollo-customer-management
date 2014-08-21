@@ -534,4 +534,7 @@
   <data name="CommissionSettingInstructions" xml:space="preserve">
     <value>Commission Setting Instructions</value>
   </data>
+  <data name="TotalLosingTicket" xml:space="preserve">
+    <value>Total Losing Ticket</value>
+  </data>
 </root>

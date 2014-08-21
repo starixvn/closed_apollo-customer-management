@@ -15,6 +15,7 @@ namespace Apollo.CMS.BetList.Helpers
     using Apollo.CMS.BetList.Contants;
     using Apollo.CMS.BetList.Models.GeneralBetTicket;
     using Apollo.CMS.BetList.ViewModels.GeneralBetTicket;
+    using Apollo.CMS.Core.Resources;
     using Fanex.BetList.Core.App_GlobalResources;
     using Fanex.BetList.Core.TicketHelper;
     using Fanex.BetList.Core.Utils;
@@ -150,7 +151,7 @@ namespace Apollo.CMS.BetList.Helpers
             }
             else
             {
-                ticket.EventNames.Add(CoreLang.TotalLosingTicket);
+                ticket.EventNames.Add(ViewLang.TotalLosingTicket);
             }
 
             return ticket;

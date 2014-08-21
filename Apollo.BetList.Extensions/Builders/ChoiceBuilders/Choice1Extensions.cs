@@ -9,6 +9,7 @@
 
 namespace Apollo.BetList.Extensions.Builders.ChoiceBuilders
 {
+    using System.Diagnostics.CodeAnalysis;
     using Apollo.BetList.Extensions.Entities;
     using Apollo.BetList.Extensions.RTFHelpers;
     using Fanex.BetList.Core.Builder.ChoiceBuilder;
@@ -23,6 +24,8 @@ namespace Apollo.BetList.Extensions.Builders.ChoiceBuilders
     {
         protected const string FirstGoal = "(F)";
         protected const string LastGoal = "(L)";
+        protected const string Bet1HFirstGoal = "(1F)";
+        protected const string Bet1HLastGoal = "(1L)";
 
         /// <summary>
         /// Builds the choice column of bet type Handicap to Excel format.
@@ -70,11 +73,27 @@ namespace Apollo.BetList.Extensions.Builders.ChoiceBuilders
             choice.Odds = GetHandicapOdds(ticket, ticketHelper);
             choice.LiveScore = string.Format("[{0}-{1}]", ticket.LiveHomeScore, ticket.LiveAwayScore);
             choice.HomeFirstLastGoal = new string[2] { null, null };
+            choice.Home1HFirstLastGoal = new string[2] { null, null };
             choice.AwayFirstLastGoal = new string[2] { null, null };
+            choice.Away1HFirstLastGoal = new string[2] { null, null };
             choice.IsShowMatch = true;
 
             choice.HomeName = string.Format("{0}{1}", choice.HomeName, ticket.IsNeutral ? " (N)" : string.Empty);
-            this.GetFGLG(ticket.EventStatus, choice.HomeFirstLastGoal, choice.AwayFirstLastGoal);
+
+            if (ticket.EventStatus != null)
+            {
+                string[] eventStatus = ticket.EventStatus.Split(';');
+
+                if (eventStatus.Length == 1)
+                {
+                    this.GetFGLG(eventStatus[0], choice.HomeFirstLastGoal, choice.AwayFirstLastGoal, FirstGoal, LastGoal);
+                }
+                else if (eventStatus.Length == 2)
+                {
+                    this.GetFGLG(eventStatus[0], choice.Home1HFirstLastGoal, choice.Away1HFirstLastGoal, Bet1HFirstGoal, Bet1HLastGoal);
+                    this.GetFGLG(eventStatus[1], choice.HomeFirstLastGoal, choice.AwayFirstLastGoal, FirstGoal, LastGoal);
+                }
+            }
 
             return choice;
         }
@@ -85,6 +104,7 @@ namespace Apollo.BetList.Extensions.Builders.ChoiceBuilders
         /// <param name="choice">Choice wrapper.</param>
         /// <param name="ticket">The ticket data.</param>
         /// <param name="rtfHelper">The RTF helper.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]
         protected void BuildRTFChoice(ChoiceWrapper choice, ITicket ticket, ref ChoiceRTFHelper rtfHelper)
         {
             rtfHelper.RTFRenderer.AddText(choice.BetTeam, choice.IsFavorite ? rtfHelper.FavoriteFont : rtfHelper.UnderdogFont);
@@ -118,6 +138,16 @@ namespace Apollo.BetList.Extensions.Builders.ChoiceBuilders
                     rtfHelper.RTFRenderer.AddText(string.Format(" {0}", choice.HomeFirstLastGoal[1]), rtfHelper.LastGoalFont);
                 }
 
+                if (!string.IsNullOrEmpty(choice.Home1HFirstLastGoal[0]))
+                {
+                    rtfHelper.RTFRenderer.AddText(string.Format(" {0}", choice.Home1HFirstLastGoal[0]), rtfHelper.FirstGoalFont);
+                }
+
+                if (!string.IsNullOrEmpty(choice.Home1HFirstLastGoal[1]))
+                {
+                    rtfHelper.RTFRenderer.AddText(string.Format(" {0}", choice.Home1HFirstLastGoal[1]), rtfHelper.LastGoalFont);
+                }
+
                 rtfHelper.RTFRenderer.AddText(" -vs- ", rtfHelper.VsFont);
                 rtfHelper.RTFRenderer.AddText(choice.AwayName, rtfHelper.AwayTeamFont);
                 if (!string.IsNullOrEmpty(choice.AwayFirstLastGoal[0]))
@@ -128,6 +158,16 @@ namespace Apollo.BetList.Extensions.Builders.ChoiceBuilders
                 if (!string.IsNullOrEmpty(choice.AwayFirstLastGoal[1]))
                 {
                     rtfHelper.RTFRenderer.AddText(string.Format(" {0}", choice.AwayFirstLastGoal[1]), rtfHelper.LastGoalFont);
+                }
+
+                if (!string.IsNullOrEmpty(choice.Away1HFirstLastGoal[0]))
+                {
+                    rtfHelper.RTFRenderer.AddText(string.Format(" {0}", choice.Away1HFirstLastGoal[0]), rtfHelper.FirstGoalFont);
+                }
+
+                if (!string.IsNullOrEmpty(choice.Away1HFirstLastGoal[1]))
+                {
+                    rtfHelper.RTFRenderer.AddText(string.Format(" {0}", choice.Away1HFirstLastGoal[1]), rtfHelper.LastGoalFont);
                 }
 
                 rtfHelper.RTFRenderer.AddText("\n", rtfHelper.AwayTeamFont);
@@ -143,31 +183,33 @@ namespace Apollo.BetList.Extensions.Builders.ChoiceBuilders
         /// <param name="betStatus">The bet status.</param>
         /// <param name="homeFGLG">The home First Goal/Last Goal string.</param>
         /// <param name="awayFGLG">The away First Goal/Last Goal string.</param>
-        private void GetFGLG(string betStatus, string[] homeFGLG, string[] awayFGLG)
+        /// <param name="firstGoalLabel">The label for First Goal.</param>
+        /// <param name="lastGoalLabel">The label for Last Goal.</param>
+        private void GetFGLG(string betStatus, string[] homeFGLG, string[] awayFGLG, string firstGoalLabel, string lastGoalLabel)
         {
             if (betStatus != null)
             {
-                // Format: FL:1-2
+                // Format: FL:1-2 or 1FL:1-2
                 string[] args = betStatus.Split(new char[] { ':', '-' });
 
                 if (args.Length == 3)
                 {
                     if (args[1] == "1")
                     {
-                        homeFGLG[0] = FirstGoal;
+                        homeFGLG[0] = firstGoalLabel;
                     }
                     else if (args[1] == "2")
                     {
-                        awayFGLG[0] = FirstGoal;
+                        awayFGLG[0] = firstGoalLabel;
                     }
 
                     if (args[2] == "1")
                     {
-                        homeFGLG[1] = LastGoal;
+                        homeFGLG[1] = lastGoalLabel;
                     }
                     else if (args[2] == "2")
                     {
-                        awayFGLG[1] = LastGoal;
+                        awayFGLG[1] = lastGoalLabel;
                     }
                 }
             }

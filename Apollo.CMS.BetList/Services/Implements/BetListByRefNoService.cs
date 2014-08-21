@@ -47,10 +47,13 @@ namespace Apollo.CMS.BetList.Services.Implements
         public BetListByRefNoItem GetBetListByRefNo(GetBetListByRefNoCriteria criteria)
         {
             var result = new BetListByRefNoItem();
-            IEnumerable<BetTicket> rawData = this.GetListData<BetTicket>(criteria);
+            List<BetTicket> rawData = this.GetListData<BetTicket>(criteria).ToList();
 
             if (rawData.Any())
             {
+                //// Fix ticket 7-Over, 4-Over
+                MemberBetListService.FixTotalGoalBetteam(rawData);
+
                 BetTicket mainTickets = rawData.ElementAt(0);
                 BetList tickets = BetListHelper.ConvertToBetList(rawData);
 

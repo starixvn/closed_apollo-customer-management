@@ -30,7 +30,7 @@ namespace Apollo.BetList.Extensions.Builders.ChoiceBuilders
         public override IRichTextString BuildRTF(ITicket ticket, ITicketHelper ticketHelper, ChoiceRTFHelper rtfHelper)
         {
             ChoiceWrapper choice = BuildChoiceWrapper(ticket, ticketHelper);
-            string yesNo = ticket.BetTeam.Contains("y") ? CoreBetList.lblYes : CoreBetList.lblNo;
+            string yesNo = ticket.BetTeam.Contains("y") ? CoreLang.lblYes : CoreLang.lblNo;
 
             choice.Handicap = null;
             choice.BetTeam = string.Format("{0} {1}", choice.BetTeam, yesNo.ToUpper());

@@ -5,14 +5,17 @@
 // -----------------------------------------------------------------------
 // <history>
 //   <change who="Jason.Ly" date="2014.01.10">Created</change>
+//   <change who="Ken.Nguyen" date="2014.08.21">Change betteam for bettype 6, 126</change>
 // </history>
 
 namespace Apollo.CMS.BetList.Services.Implements
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Apollo.BetList.Extensions;
     using Apollo.BetList.Extensions.RTFHelpers;
+    using Apollo.CMS.BetList.Constants;
     using Apollo.CMS.BetList.Criteria.MemberBetList;
     using Apollo.CMS.BetList.Helpers;
     using Apollo.CMS.BetList.Models.GeneralBetTicket;
@@ -51,6 +54,28 @@ namespace Apollo.CMS.BetList.Services.Implements
         public MemberBetListService(IMemberBetListRepository memberBetListRepository)
         {
             this._memberBetListRepository = memberBetListRepository ?? new MemberBetListRepository();
+        }
+
+        /// <summary>
+        /// Fix: Bet type 6, 126 (Total Goal, 1H Total Goal) change bet team to new format.
+        /// </summary>
+        /// <param name="tickets">Ticket list to be changed.</param>
+        public static void FixTotalGoalBetteam(List<BetTicket> tickets)
+        {
+            foreach (var ticket in tickets)
+            {
+                if (ticket.BetType == (int)BetTypes._1H_Total_Goal || ticket.BetType == (int)BetTypes.Total_Goal)
+                {
+                    if (ticket.BetTeam == "4-over")
+                    {
+                        ticket.BetTeam = "4&over";
+                    }
+                    else if (ticket.BetTeam == "7-over")
+                    {
+                        ticket.BetTeam = "7&over";
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -428,6 +453,7 @@ namespace Apollo.CMS.BetList.Services.Implements
         /// </summary>
         /// <param name="filter">The filter that is used to query data.</param>
         /// <returns>List of bet tickets.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Need to review here.")]
         private List<BetTicket> GetBetTicket(MemberBetListFilter filter)
         {
             List<BetTicket> ticketList = null;
@@ -473,6 +499,9 @@ namespace Apollo.CMS.BetList.Services.Implements
 
                 if (ticketList.Any())
                 {
+                    //// Fix ticket 7-Over, 4-Over
+                    FixTotalGoalBetteam(ticketList);
+
                     SessionManager.Set<List<BetTicket>>(_ticketListSessionKey, ticketList);
                 }
             }

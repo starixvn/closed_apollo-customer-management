@@ -280,6 +280,16 @@ namespace Apollo.CMS.BetList.Constants
         Draw_NoDraw = 123,
 
         /// <summary>
+        /// Hard code for 1H Total Goal.
+        /// </summary>
+        _1H_Total_Goal = 126,
+
+        /// <summary>
+        /// Hard code for 1H First Goal/Last Goal.
+        /// </summary>
+        _1H_First_Goal_Last_Goal = 127,
+
+        /// <summary>
         /// Hard code for P2P.
         /// </summary>
         P2P = 1000,

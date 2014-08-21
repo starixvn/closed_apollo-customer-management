@@ -40,9 +40,6 @@
     <Reference Include="Fanex.BetList.Core">
       <HintPath>..\Dependencies\Fanex\Fanex.BetList.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.BetList.Core.TicketHelper">
-      <HintPath>..\Dependencies\Fanex\Fanex.BetList.Core.TicketHelper.dll</HintPath>
-    </Reference>
     <Reference Include="NPOI">
       <HintPath>..\Dependencies\Others\NPOI.dll</HintPath>
     </Reference>
@@ -86,6 +83,8 @@
     <Compile Include="Builders\ChoiceBuilders\Choice7Extensions.cs" />
     <Compile Include="Builders\ChoiceBuilders\Choice8Extensions.cs" />
     <Compile Include="Builders\ChoiceBuilders\Choice9Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice126Extensions.cs" />
+    <Compile Include="Builders\ChoiceBuilders\Choice127Extensions.cs" />
     <Compile Include="Builders\OddsBuilders\Odds1Extensions.cs" />
     <Compile Include="Builders\OddsBuilders\Odds29Extensions.cs" />
     <Compile Include="Builders\StatusBuilder\Status1Extensions.cs" />
