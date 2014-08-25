@@ -186,10 +186,22 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ApolloCMSSPNames.xml">
+    <Content Include="App_Data\local\ApolloCMSSPNames.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\NAPFrameworkSpNames.xml">
+    <Content Include="App_Data\local\NAPFrameworkSpNames.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\prod\ApolloCMSSPNames.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\prod\NAPFrameworkSpNames.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\uat\ApolloCMSSPNames.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\uat\NAPFrameworkSpNames.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\Account\Resources\AccountList\ShadowList.js" />
@@ -303,6 +315,33 @@
     <Content Include="Areas\CustomerSetting\Views\BetAndCommSetting\AgentBetLimitInstructions.cshtml" />
     <Content Include="Areas\CustomerSetting\Views\BetAndCommSetting\MemberCommInstructions.cshtml" />
     <Content Include="Areas\CustomerSetting\Views\BetAndCommSetting\MemberBetLimitInstructions.cshtml" />
+    <Content Include="Web.ConnectionString.local.config">
+      <DependentUpon>Web.ConnectionString.config</DependentUpon>
+    </Content>
+    <Content Include="Web.ConnectionString.uat.config">
+      <DependentUpon>Web.ConnectionString.config</DependentUpon>
+    </Content>
+    <Content Include="Web.ConnectionString.prod.config">
+      <DependentUpon>Web.ConnectionString.config</DependentUpon>
+    </Content>
+    <Content Include="Web.local.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.uat.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.prod.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.AppSettings.local.config">
+      <DependentUpon>Web.AppSettings.config</DependentUpon>
+    </Content>
+    <Content Include="Web.AppSettings.prod.config">
+      <DependentUpon>Web.AppSettings.config</DependentUpon>
+    </Content>
+    <Content Include="Web.AppSettings.uat.config">
+      <DependentUpon>Web.AppSettings.config</DependentUpon>
+    </Content>
     <None Include="Noesis.Javascript\Noesis.Javascript.x64.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

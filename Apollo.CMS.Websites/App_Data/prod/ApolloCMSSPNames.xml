@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Functions>
+  <Function Name="Common">
+    <Setting Key="Age_SelBalanceUpDay" SpName="Age_SelBalanceUpDay" DbName="SVRCSD.RepDB.aplWeb" />
+  </Function>
+  <Function Name="NewMessage">
+    <Setting Key="Acc_Msg_GetRecipientInfo" SpName="Acc_Msg_GetRecipientInfo" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_Msg_GetUplineById" SpName="Acc_Msg_GetUplineById" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_Msg_InsertMessage" SpName="Acc_Msg_InsertMessage" DbName="SVRMSG.MsgDB.aplweb" />
+    <Setting Key="Acc_Msg_GetAllSite" SpName="Acc_Msg_GetAllSite" DbName="SVRMSG.MsgDB.aplweb" />
+  </Function>
+  <Function Name="MessageList">
+    <Setting Key="Acc_Msg_GetListMessage" SpName="Acc_Msg_GetListMessage" DbName="SVRMSG.MsgDB.aplweb">
+      <Mapping DataField="Content_ch" ObjectProperty="ContentCh"/>
+      <Mapping DataField="Content_cs" ObjectProperty="ContentCs"/>
+      <Mapping DataField="Content_en" ObjectProperty="ContentEn"/>
+      <Mapping DataField="Content_jp" ObjectProperty="ContentJp"/>
+      <Mapping DataField="Content_ko" ObjectProperty="ContentKo"/>
+      <Mapping DataField="Content_th" ObjectProperty="ContentTh"/>
+      <Mapping DataField="Content_vn" ObjectProperty="ContentVn"/>
+      <Mapping DataField="CreatorName" ObjectProperty="Creator"/>
+    </Setting>
+    <Setting Key="Acc_Msg_GetMessageById" SpName="Acc_Msg_GetMessageById" DbName="SVRMSG.MsgDB.aplweb">
+      <Mapping DataField="Content_ch" ObjectProperty="ContentCh"/>
+      <Mapping DataField="Content_cs" ObjectProperty="ContentCs"/>
+      <Mapping DataField="Content_en" ObjectProperty="ContentEn"/>
+      <Mapping DataField="Content_jp" ObjectProperty="ContentJp"/>
+      <Mapping DataField="Content_ko" ObjectProperty="ContentKo"/>
+      <Mapping DataField="Content_th" ObjectProperty="ContentTh"/>
+      <Mapping DataField="Content_vn" ObjectProperty="ContentVn"/>
+    </Setting>
+    <Setting Key="Acc_Msg_UpdateMessage" SpName="Acc_Msg_UpdateMessage" DbName="SVRMSG.MsgDB.aplweb" />
+    <Setting Key="Acc_Msg_DeleteMessage" SpName="Acc_Msg_DeleteMessage" DbName="SVRMSG.MsgDB.aplweb" />
+  </Function>
+  <Function name="TreeView">
+    <Setting Key="Acc_Agent_GetHierarchyById" SpName="Acc_Agent_GetHierarchyById" DbName="SVRCSD.RepDB.aplWeb" />    
+  </Function>
+  <Function Name="AccountInfo">
+    <Setting Key="Acc_Agent_SuggestByUsername" SpName="Acc_Agent_SuggestByUsername" DbName="SVRCSD.RepDB.aplWeb">
+      <Mapping DataField="AgentId" ObjectProperty="CustId"/>
+    </Setting>
+    <Setting Key="Acc_Customer_GetByUsername" SpName="Acc_Customer_GetByUsername" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_Agent_GetInfo" SpName="Acc_Agent_GetInfo" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_Customer_GetInfo" SpName="Acc_Customer_GetInfo" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_Agent_GetAgentUplinePath" SpName="Acc_Agent_GetAgentUplinePath" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_Agent_GetAgentByParentId" SpName="Acc_Agent_GetAgentByParentId" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_Customer_GetCustomerByAgentId" SpName="Acc_Customer_GetCustomerByAgentId" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_Agent_GetAgentDownline" SpName="Acc_Agent_GetAgentDownline" DbName="SVRCSD.RepDB.aplWeb" />
+  </Function>
+  <Function Name="AccountList">
+    <Setting Key="Acc_Agent_GetByAgent" SpName="Acc_Agent_GetByAgent" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_Customer_GetByAgent" SpName="Acc_Customer_GetByAgent" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_AgentUser_GetByAgent" SpName="Acc_AgentUser_GetByAgent" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_Agent_GetNavigatePath" SpName="Acc_Agent_GetNavigatePath" DbName="SVRCSD.RepDB.aplWeb" />
+  </Function>
+  <Function Name="MemberBetList">
+    <Setting Key="Acc_BetList_GetByCustomer" SpName="Acc_BetList_GetByCustomer" DbName="SVRCSD.RepDB.aplWeb">
+      <Mapping DataField="Winlost" ObjectProperty="WinLoss"/>
+      <Mapping DataField="Actual_Stake" ObjectProperty="ActualStake"/>
+      <Mapping DataField="APositionTaking" ObjectProperty="CompanyPositionTaking"/>
+      <Mapping DataField="ADiscount" ObjectProperty="CompanyDiscount"/>
+      <Mapping DataField="AWinlost" ObjectProperty="CompanyWinLoss"/>
+      <Mapping DataField="AComm" ObjectProperty="CompanyComm"/>
+    </Setting>
+    <Setting Key="Acc_BetList_GetByCustomer_Old" SpName="Acc_BetList_GetByCustomer_Old" DbName="SVRCSD.ArchiveDB.aplWeb">
+      <Mapping DataField="Winlost" ObjectProperty="WinLoss"/>
+      <Mapping DataField="Actual_Stake" ObjectProperty="ActualStake"/>
+      <Mapping DataField="APositionTaking" ObjectProperty="CompanyPositionTaking"/>
+      <Mapping DataField="ADiscount" ObjectProperty="CompanyDiscount"/>
+      <Mapping DataField="AWinlost" ObjectProperty="CompanyWinLoss"/>
+      <Mapping DataField="AComm" ObjectProperty="CompanyComm"/>
+    </Setting>
+    <Setting Key="Acc_BetList_GetDetailByTransId" SpName="Acc_BetList_GetDetailByTransId" DbName="SVRCSD.RepDB.aplWeb">
+      <Mapping DataField="APositionTaking" ObjectProperty="PositionTaking"/>
+      <Mapping DataField="ADiscount" ObjectProperty="Discount"/>
+      <Mapping DataField="AWinlost" ObjectProperty="WinLoss"/>
+      <Mapping DataField="AComm" ObjectProperty="Comm"/>
+    </Setting>
+    <Setting Key="Acc_BetList_GetDetailByTransId_Old" SpName="Acc_BetList_GetDetailByTransId_Old" DbName="SVRCSD.ArchiveDB.aplWeb">
+      <Mapping DataField="APositionTaking" ObjectProperty="PositionTaking"/>
+      <Mapping DataField="ADiscount" ObjectProperty="Discount"/>
+      <Mapping DataField="AWinlost" ObjectProperty="WinLoss"/>
+      <Mapping DataField="AComm" ObjectProperty="Comm"/>
+    </Setting>
+    <Setting Key="Acc_BetList_GetMixParlayByRefNo" SpName="Acc_BetList_GetMixParlayByRefNo" DbName="SVRCSD.RepDB.aplWeb" />
+    <Setting Key="Acc_BetList_GetDetailSystemParlayByRefNo" SpName="Acc_BetList_GetDetailSystemParlayByRefNo" DbName="SVRCSD.RepDB.aplWeb">
+      <Mapping DataField="Winlost" ObjectProperty="WinLoss"/>
+      <Mapping DataField="WinlostDate" ObjectProperty="WinLossDate"/>
+    </Setting>
+  </Function>
+  <Function Name="BetListByRefNo">
+    <Setting Key="Acc_BetList_GetByTransId" SpName="Acc_BetList_GetByTransId" DbName="SVRCSD.RepDB.aplWeb">
+      <Mapping DataField="Winlost" ObjectProperty="WinLoss"/>
+      <Mapping DataField="Actual_Stake" ObjectProperty="ActualStake"/>
+      <Mapping DataField="APositionTaking" ObjectProperty="CompanyPositionTaking"/>
+      <Mapping DataField="ADiscount" ObjectProperty="CompanyDiscount"/>
+      <Mapping DataField="AWinlost" ObjectProperty="CompanyWinLoss"/>
+      <Mapping DataField="AComm" ObjectProperty="CompanyComm"/>
+    </Setting>
+  </Function>
+  <Function Name="BetAndCommSetting">
+    <Setting Key="Age_Agent_GetDiscountForUpdate" SpName="Age_Agent_GetDiscountForUpdate" DbName="SVRCUST.CustDB.aplweb" />
+    <Setting Key="Age_Customer_GetDiscountForUpdate" SpName="Age_Customer_GetDiscountForUpdate" DbName="SVRCUST.CustDB.aplweb" />
+    <Setting Key="Age_Agent_GetBetLimitForUpdate" SpName="Age_Agent_GetBetLimitForUpdate" DbName="SVRCUST.CustDB.aplweb" />
+    <Setting Key="Age_Customer_GetBetLimitForUpdate" SpName="Age_Customer_GetBetLimitForUpdate" DbName="SVRCUST.CustDB.aplweb" />
+    <Setting Key="Age_Customer_UpdateSetting" SpName="Age_Customer_UpdateSetting" DbName="SVRCUST.CustDB.aplweb" />
+    <Setting Key="Age_Agent_UpdateSetting" SpName="Age_Agent_UpdateSetting" DbName="SVRCUST.CustDB.aplweb" />
+    <Setting Key="Acc_Customer_GetGroupByCustId" SpName="Acc_Customer_GetGroupByCustId" DbName="SVRCSD.RepDB.aplWeb" />
+  </Function>
+</Functions>
