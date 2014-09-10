@@ -234,9 +234,9 @@ namespace Apollo.CMS.BetList.Services.Implements
                     excelGenerator.BuildChoice(ticket, ticketHelper, choiceRTFHelper),
                     excelGenerator.BuildOdds(ticket, oddsRTFHelper),
                     ticket.Stake,
-                    FormatWinLoss(ticket.Winlost, ticket.Comm, numberRTFHelper),
+                    FormatWinLoss(ticket.Winlost, ticket.Comm, ticket.Status, numberRTFHelper),
                     excelGenerator.BuildStatus(ticket, ticketHelper, statusRTFHelper, true),
-                    FormatCompanyShare(ticket.SuperPositionTaking, ticket.SuperWinlost, numberRTFHelper),
+                    FormatCompanyShare(ticket.SuperPositionTaking, ticket.SuperWinlost, ticket.Status, numberRTFHelper),
                     FormatCompanyComm(ViewLang.NA, ticket.SuperComm, numberRTFHelper)
                 };
                 writer.WriteRow(3, row);
@@ -276,7 +276,7 @@ namespace Apollo.CMS.BetList.Services.Implements
                 ticketList.Count,
                 string.Empty,
                 sumStake,
-                FormatWinLoss(sumWinLoss, sumComm, numberRTFHelper),
+                FormatWinLoss(sumWinLoss, sumComm, string.Empty, numberRTFHelper),
                 string.Empty,
                 sumCompanyWinLoss,
                 sumCompanyComm
@@ -376,15 +376,26 @@ namespace Apollo.CMS.BetList.Services.Implements
         /// </summary>
         /// <param name="winLoss">The win loss value.</param>
         /// <param name="comm">The commission value.</param>
+        /// <param name="status">The status value.</param>
         /// <param name="rtfHelper">The RTF helper.</param>
         /// <returns>IRichTextString object.</returns>
-        private IRichTextString FormatWinLoss(decimal winLoss, decimal comm, NumberRTFHelper rtfHelper)
+        private IRichTextString FormatWinLoss(decimal winLoss, decimal comm, string status, NumberRTFHelper rtfHelper)
         {
-            IFont winLossFont = winLoss < 0 ? rtfHelper.NegativeFont : rtfHelper.PositiveFont;
+            bool isRunning = BetStatus.Running.Equals(status.ToLower()) || BetStatus.Waiting.Equals(status.ToLower());
+
+            IFont winLossFont = (winLoss < 0 && !isRunning) ? rtfHelper.NegativeFont : rtfHelper.PositiveFont;
             IFont commFont = comm < 0 ? rtfHelper.NegativeFont : rtfHelper.PositiveFont;
 
             rtfHelper.RTFRenderer.Clear();
-            rtfHelper.RTFRenderer.AddText(winLoss.Format(2), winLossFont);
+            if (!isRunning)
+            {
+                rtfHelper.RTFRenderer.AddText(winLoss.Format(2), winLossFont);
+            }
+            else
+            {
+                rtfHelper.RTFRenderer.AddText("-  ", winLossFont);
+            }
+            
             rtfHelper.RTFRenderer.AddText(string.Format("\n{0}", comm.Format(2)), commFont);
 
             return rtfHelper.RTFRenderer.Render();
@@ -395,16 +406,22 @@ namespace Apollo.CMS.BetList.Services.Implements
         /// </summary>
         /// <param name="share">The share value.</param>
         /// <param name="winLoss">The win loss value.</param>
+        /// <param name="status">The status value.</param>
         /// <param name="rtfHelper">The RTF helper.</param>
         /// <returns>IRichTextString object.</returns>
-        private IRichTextString FormatCompanyShare(decimal share, decimal winLoss, NumberRTFHelper rtfHelper)
+        private IRichTextString FormatCompanyShare(decimal share, decimal winLoss, string status, NumberRTFHelper rtfHelper)
         {
+            bool isRunning = BetStatus.Running.Equals(status.ToLower()) || BetStatus.Waiting.Equals(status.ToLower());
+
             IFont shareFont = share < 0 ? rtfHelper.NegativeFont : rtfHelper.PositiveFont;
             IFont winLossFont = winLoss < 0 ? rtfHelper.NegativeFont : rtfHelper.PositiveFont;
 
             rtfHelper.RTFRenderer.Clear();
             rtfHelper.RTFRenderer.AddText(string.Format("{0}%\n", (share * 100).Format(2)), shareFont);
-            rtfHelper.RTFRenderer.AddText(winLoss.Format(2), winLossFont);
+            if (!isRunning)
+            {
+                rtfHelper.RTFRenderer.AddText(winLoss.Format(2), winLossFont);
+            }
 
             return rtfHelper.RTFRenderer.Render();
         }

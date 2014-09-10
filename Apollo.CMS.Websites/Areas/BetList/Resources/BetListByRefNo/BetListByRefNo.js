@@ -116,7 +116,7 @@ Apollo.CMS.BetList.BetListByRefNo = function () {
                                                                 data.Ticket.CompanyShare, true,
                                                                 data.Ticket.IsRunning ? null : data.Ticket.CompanyWinLoss,
                                                                 null) },
-                          { Name: 'ColCompanyShare', Value: formatNumberCol('N/A', true, data.Ticket.CompanyComm, null) },
+                          { Name: 'ColCompanyComm', Value: formatNumberCol('N/A', true, data.Ticket.CompanyComm, null) },
                           { Name: 'ColDetails', Value: detailColFormat.format(data.Ticket.TransId, data.Ticket.TransDate)}]
             };
             bodyData.push(row);

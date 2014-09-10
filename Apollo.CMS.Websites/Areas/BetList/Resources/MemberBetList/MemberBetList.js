@@ -183,7 +183,7 @@ Apollo.CMS.BetList.MemberBetList = function () {
                               { Name: 'ColWinLoss', Value: formatNumberCol(item.IsRunning ? '-  ' : item.WinLoss, false, item.Comm, null) },
                               { Name: 'ColStatus', Value: item.StatusCol },
                               { Name: 'ColCompanyShare', Value: formatNumberCol(item.CompanyShare, true, item.IsRunning ? null : item.CompanyWinLoss, null) },
-                              { Name: 'ColCompanyShare', Value: formatNumberCol('N/A', true, item.CompanyComm, null) },
+                              { Name: 'ColCompanyComm', Value: formatNumberCol('N/A', true, item.CompanyComm, null) },
                               { Name: 'ColDetails', Value: detailColFormat.format(item.TransId, item.TransDate)}]
                 };
 
